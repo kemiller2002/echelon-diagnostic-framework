@@ -14,6 +14,8 @@ Diagnostic Calibration is optional. It is not required for every EDF use.
 
 Different analyses may diverge because they declared different System Contexts, not because they disagree about evidence.
 
+Different analytical lenses are valuable only if they contribute distinct, evidence-supported improvements to diagnosis, calibration, or synthesis.
+
 ## Purpose
 
 Diagnostic Calibration is used to:
@@ -43,27 +45,29 @@ Avoid Diagnostic Calibration when:
 - The origin and control point are obvious
 - Speed matters more than cross-disciplinary confidence
 
-## Diagnostic Perspectives
+## Analytical Lenses
 
-Use diagnostic perspectives rather than personas.
+Prefer "Analytical Lens" over "Diagnostic Personality."
+
+"Diagnostic Perspective" may remain as a transitional user-facing term, but it should be understood as an Analytical Lens applied during validation.
 
 The default set is:
 
-- Systems Engineer
-- Operations Executive
-- Independent Investigator
-- Physician
-- Attorney
+- Systems Lens
+- Operations / Governance Lens
+- Independent Investigation Lens
+- Differential Diagnosis Lens
+- Legal / Evidentiary Lens
 
-These are not roles that must always be filled by five different people. They are default viewpoints for surfacing different diagnostic assumptions, evidence priorities, and control preferences.
+These are not role silos and they do not own portions of the system. Each lens examines the entire declared System Context using a different reasoning model.
 
 ## Process
 
 ### Stage 1: Independent EDF
 
-Each perspective completes an EDF independently for the same system and outcome.
+Each analytical lens completes an EDF independently for the same system and outcome.
 
-Each perspective begins by declaring:
+Each lens begins by declaring:
 
 - Primary System
 - Context
@@ -73,7 +77,7 @@ The goal is to preserve initial disciplinary signal before group convergence beg
 
 ### Stage 2: Cross Review
 
-Each perspective reviews the others.
+Each lens reviews the others.
 
 Review questions:
 
@@ -85,7 +89,7 @@ Review questions:
 
 ### Stage 3: Self Calibration
 
-Each perspective updates its own analysis after cross review.
+Each lens updates its own analysis after cross review.
 
 At minimum, update:
 
@@ -112,7 +116,7 @@ The synthesist should compare declared System Contexts before treating divergenc
 
 ### Synthesist Comparison Table
 
-Use a simple comparison table when perspectives differ:
+Use a simple comparison table when lenses differ:
 
 | Perspective | Primary System | Context | Focus |
 |-------------|----------------|---------|-------|
@@ -122,6 +126,14 @@ Use a simple comparison table when perspectives differ:
 | Physician | Risk Assessment Process | Launch Authorization | Diagnostic Quality |
 | Attorney | Launch Authorization | NASA Governance | Standard of Care |
 
+## Evaluating Lenses
+
+Analytical lenses are part of validation methodology, not permanent framework doctrine.
+
+They should be retained only if they produce distinct, evidence-supported improvements to diagnosis, calibration, or synthesis.
+
+See [../framework-engineering/analytical-lens-evaluation.md](../framework-engineering/analytical-lens-evaluation.md).
+
 ## Metrics
 
 These metrics are optional but useful in repeated or high-stakes use.
@@ -130,8 +142,8 @@ These metrics are optional but useful in repeated or high-stakes use.
 |--------|---------|
 | Calibration Delta | Measures how much an analysis changed after review |
 | Confidence Shift | Tracks how confidence moved up or down |
-| Consensus Index | Estimates how much the perspectives converged |
-| Perspective Contribution | Captures which perspectives added distinctive value |
+| Consensus Index | Estimates how much the lenses converged |
+| Perspective Contribution | Captures which lenses added distinctive value |
 
 These do not need mathematical precision in the working draft. They are tracking devices for diagnostic improvement.
 

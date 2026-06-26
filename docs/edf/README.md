@@ -24,6 +24,10 @@ EDF keeps that idea practical by requiring a structured diagnostic sequence and 
 
 EDF also evolves under constitutional rules that define what the framework refuses to compromise on. See [constitution.md](constitution.md).
 
+Constitutional principles include Reality First, Version Integrity, and Evidence Isolation.
+
+Evidence Isolation protects longitudinal validation from hindsight contamination by ensuring every Validation Run uses only its declared Evidence Package.
+
 ## v0.3 Update
 
 EDF v0.3 introduces System Context as the opening frame for every analysis.
@@ -96,6 +100,34 @@ See [operating-cycle.md](operating-cycle.md) for the full handoff.
 | [templates/edf-0-quick-card.md](templates/edf-0-quick-card.md) | Rapid template |
 | [templates/edf-1-standard.md](templates/edf-1-standard.md) | Standard template |
 | [templates/edf-2-complex.md](templates/edf-2-complex.md) | Complex template |
+
+## Validation Findings
+
+EDF v0.3 remains frozen. These notes record validation findings, deferred insights, and research questions without changing the specification.
+
+- [validation/case-001R1-challenger.md](validation/case-001R1-challenger.md)
+- [validation/case-002R1-apollo-13.md](validation/case-002R1-apollo-13.md)
+- [validation/case-003R1-boeing-737-max.md](validation/case-003R1-boeing-737-max.md)
+- [validation/case-008R1-pixar.md](validation/case-008R1-pixar.md)
+- [validation/case-009R1-toyota-production-system.md](validation/case-009R1-toyota-production-system.md)
+- [validation/case-002-apollo-13.md](validation/case-002-apollo-13.md)
+- [validation/case-003-boeing-737-max.md](validation/case-003-boeing-737-max.md)
+- [validation/case-004-apollo-11.md](validation/case-004-apollo-11.md)
+- [validation/evidence-ledger.md](validation/evidence-ledger.md)
+- [validation/reproducibility-findings.md](validation/reproducibility-findings.md)
+- [validation/topology-findings.md](validation/topology-findings.md)
+
+Validation methodology is tracked separately in [../framework-engineering/validation-protocol.md](../framework-engineering/validation-protocol.md).
+
+## Next Validation Roadmap
+
+Remaining priority validation cases:
+
+1. Equifax data breach - cybersecurity and software governance
+2. Medical diagnostic case - clinical reasoning and differential diagnosis
+3. Three Mile Island - human factors and interpretation under stress
+4. Hyatt Regency walkway collapse - design change, approval, and responsibility transfer
+5. Simple EDF-0 case - everyday troubleshooting and under-five-minute usability
 
 ## Starting Point
 

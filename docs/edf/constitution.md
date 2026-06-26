@@ -108,3 +108,59 @@ Overconfidence is.
 The purpose of EDF is not certainty.
 
 The purpose is the most responsible understanding possible with the evidence available.
+
+## Article XII - Evidence Isolation
+
+The integrity of a Validation Run depends upon analyzing only the evidence declared within its Framework Configuration Record.
+
+No analyst may intentionally or unintentionally incorporate information outside the declared Evidence Package.
+
+Longitudinal Reference Cases require multiple analyses of the same system using different historical evidence states.
+
+If later evidence contaminates earlier analyses, the experiment is no longer valid.
+
+Evidence Isolation prevents hindsight bias and preserves the integrity of evidence evolution experiments.
+
+Every Validation Run shall be conducted using only the evidence contained within its declared Evidence Package.
+
+Evidence discovered after the Evidence Package's defined state shall not influence that Validation Run.
+
+When additional evidence becomes available, a new Evidence Package and a new Framework Configuration Record shall be created rather than modifying previous analyses.
+
+### Requirements
+
+- Evidence Packages are immutable after an FCR is frozen.
+- Historical analyses must respect the historical evidence state.
+- Analysts must explicitly identify when information falls outside the current Evidence Package.
+- New evidence always produces a new Validation Run.
+- Previous Validation Runs remain archived and unchanged.
+
+### Relationship To Configuration Integrity
+
+Configuration Integrity freezes the analytical environment.
+
+Evidence Isolation freezes the available knowledge.
+
+Both are required for reproducibility.
+
+### Relationship To Reality First
+
+Reality First requires frameworks to change when reality changes.
+
+Evidence Isolation specifies how that change must occur:
+
+```text
+Reality changes
+↓
+New Evidence Package
+↓
+New Framework Configuration Record
+↓
+New Validation Run
+```
+
+Never through retroactive modification.
+
+### Constitutional Test
+
+If a Validation Run cannot be reproduced using only its declared Evidence Package, then the run violates the Constitution.
