@@ -88,6 +88,7 @@ See [operating-cycle.md](operating-cycle.md) for the full handoff.
 | Document | Purpose |
 |----------|---------|
 | [specification.md](specification.md) | Authoritative EDF v0.3 specification |
+| [specification-v1-draft.md](specification-v1-draft.md) | Current draft architectural specification for EDF 1.0 |
 | [constitution.md](constitution.md) | Governance rules for how EDF evolves and what it refuses to compromise on |
 | [diagnostic-calibration.md](diagnostic-calibration.md) | Optional collaborative protocol for calibrating multiple EDF analyses |
 | [principles.md](principles.md) | Guiding principles and design constraints |
@@ -114,10 +115,26 @@ EDF v0.3 remains frozen. These notes record validation findings, deferred insigh
 - [validation/case-003-boeing-737-max.md](validation/case-003-boeing-737-max.md)
 - [validation/case-004-apollo-11.md](validation/case-004-apollo-11.md)
 - [validation/evidence-ledger.md](validation/evidence-ledger.md)
+- [validation/ablation/README.md](validation/ablation/README.md)
+- [validation/ablation/ablation-002-propagation-refinement.md](validation/ablation/ablation-002-propagation-refinement.md)
 - [validation/reproducibility-findings.md](validation/reproducibility-findings.md)
 - [validation/topology-findings.md](validation/topology-findings.md)
 
 Validation methodology is tracked separately in [../framework-engineering/validation-protocol.md](../framework-engineering/validation-protocol.md).
+
+## Comparative Validation
+
+EDF is not intended to replace RCA, FMEA, or Fault Tree Analysis.
+
+EDF aims to diagnose complex systems and identify high-leverage control points.
+
+Specialized methods may remain superior for speed, prospective risk analysis, or technical reliability modeling.
+
+- [validation/comparative/README.md](validation/comparative/README.md)
+- [validation/comparative/CFCV-001-rca-five-whys.md](validation/comparative/CFCV-001-rca-five-whys.md)
+- [validation/comparative/CFCV-002-fmea.md](validation/comparative/CFCV-002-fmea.md)
+- [validation/comparative/CFCV-003-fault-tree-analysis.md](validation/comparative/CFCV-003-fault-tree-analysis.md)
+- [validation/comparative/comparative-gap-analysis.md](validation/comparative/comparative-gap-analysis.md)
 
 ## Next Validation Roadmap
 

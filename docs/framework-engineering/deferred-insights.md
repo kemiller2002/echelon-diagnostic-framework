@@ -96,6 +96,39 @@ Use Chernobyl to test Diagnostic Stability and evidence-sensitive framework beha
 Status:
 Planned.
 
+### DI-EDF-009 FTA Inside Technical Branches
+
+Observation:
+Fault Tree Analysis is stronger than EDF for formal technical failure logic and minimum cut sets.
+
+Potential implication:
+EDF may recommend using FTA inside technical branches of an Origin Network when detailed reliability analysis is needed.
+
+Status:
+Deferred / under investigation.
+
+### DI-EDF-010 Progressive EDF Grammar
+
+Observation:
+EDF's learning curve may be reduced by defining different grammar depth by mode.
+
+Potential implication:
+EDF-0 may use only Manifestation, Likely Origin, and Control Point, while higher modes add System Context, Origin Network, Propagation, Calibration, and Framework Engineering artifacts.
+
+Status:
+Deferred / under investigation.
+
+### DI-EDF-011 EDF Visualization
+
+Observation:
+RCA, FMEA, and FTA have familiar visual or tabular forms. EDF currently relies heavily on text.
+
+Potential implication:
+EDF may need an Origin Network notation and Propagation visualization to improve communication and reproducibility.
+
+Status:
+Deferred / under investigation.
+
 ## Research Questions
 
 ### RQ-001 Diagnostic Topology / System Behavior
@@ -163,3 +196,14 @@ Framework Configuration Records should include Research Question Set versions.
 
 Status:
 Deferred / planned.
+
+### RQ-011 EDF Control Point Prioritization Vs FMEA Risk Prioritization
+
+Observation:
+FMEA has mature prospective risk prioritization. EDF identifies control points but does not yet have an evidence-backed prioritization method.
+
+Potential implication:
+EDF may need an optional leverage-prioritization method, or it may explicitly pair with FMEA when prospective risk prioritization is required.
+
+Status:
+Deferred / under investigation.

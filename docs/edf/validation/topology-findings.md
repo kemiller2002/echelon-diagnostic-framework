@@ -57,6 +57,8 @@ Do not add system behavior or diagnostic topology to EDF yet.
 
 Chernobyl is planned as a Longitudinal Reference Case and should not initially be forced into an existing topology. Its primary purpose is to test evidence evolution and Diagnostic Stability.
 
+CFCV-003 suggests Origin Networks should not be treated as equivalent to Fault Trees. Fault Trees are stronger for formal technical fault logic. Origin Networks appear broader and better suited for sociotechnical origins, but this remains under investigation.
+
 ## Hypothesis
 
 System behavior or diagnostic topology may be a property derived from a completed EDF analysis, not an input field required at the beginning.
