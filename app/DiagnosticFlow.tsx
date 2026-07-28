@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { KeyboardEvent, useId, useState } from "react";
 
 const stages = [
   { verb: "Define", label: "System context", question: "Within what declared context is this diagnosis valid?", output: "Primary system · Context · Focus", mistake: "Treating scope as self-evident" },
@@ -14,17 +14,31 @@ const stages = [
 
 export default function DiagnosticFlow() {
   const [active, setActive] = useState(0);
+  const tabId = useId();
   const stage = stages[active];
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let next = index;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % stages.length;
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index - 1 + stages.length) % stages.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = stages.length - 1;
+    if (next !== index) {
+      event.preventDefault();
+      setActive(next);
+      document.getElementById(`${tabId}-tab-${next}`)?.focus();
+    }
+  }
   return (
     <div className="flow-shell">
       <div className="flow-rail" role="tablist" aria-label="EDF diagnostic stages">
         {stages.map((item, index) => (
-          <button key={item.label} role="tab" aria-selected={active === index} onClick={() => setActive(index)}>
+          <button id={`${tabId}-tab-${index}`} key={item.label} role="tab" aria-selected={active === index} aria-controls={`${tabId}-panel`} tabIndex={active === index ? 0 : -1} onClick={() => setActive(index)} onKeyDown={(event) => handleKeyDown(event, index)}>
             <span>{String(index + 1).padStart(2, "0")}</span>{item.label}
           </button>
         ))}
       </div>
-      <div className="flow-detail" role="tabpanel">
+      <div id={`${tabId}-panel`} className="flow-detail" role="tabpanel" aria-labelledby={`${tabId}-tab-${active}`} tabIndex={0}>
         <p className="eyebrow">{stage.verb}</p>
         <h3>{stage.label}</h3>
         <blockquote>{stage.question}</blockquote>

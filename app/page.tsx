@@ -74,6 +74,12 @@ export default function Home() {
             <div><strong>v0.3</strong><span>current frozen specification</span></div>
           </div>
           <p className="disclosure"><b>Known limitation.</b> Current reproducibility results are very high across six cases, but remain provisional until tested with independent human analysts. Speed, learning curve, visualization, and quantitative metrics are active gaps.</p>
+          <div className="source-links" aria-label="Primary research sources">
+            <p>Trace the claims</p>
+            <a href="https://github.com/kevinmiller/Echelon-diagnostic-framework/blob/main/docs/edf/specification.md">Specification v0.3 <span>↗</span></a>
+            <a href="https://github.com/kevinmiller/Echelon-diagnostic-framework/blob/main/docs/edf/validation/reproducibility-findings.md">Reproducibility findings <span>↗</span></a>
+            <a href="https://github.com/kevinmiller/Echelon-diagnostic-framework/blob/main/docs/edf/validation/evidence-ledger.md">Evidence ledger <span>↗</span></a>
+          </div>
         </section>
 
         <section id="applications" className="applications band">
