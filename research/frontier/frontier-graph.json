@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "nodes": [
+    {"id":"EDF-v0.3","type":"origin"},{"id":"VP-v1.1","type":"origin"},{"id":"IFVS-001","type":"origin"},{"id":"LRC-001","type":"origin"},
+    {"id":"RFR-001","type":"opportunity"},{"id":"RFR-002","type":"opportunity"},{"id":"RFR-003","type":"opportunity"},{"id":"RFR-004","type":"opportunity"},{"id":"RFR-005","type":"opportunity"},{"id":"RFR-006","type":"opportunity"},{"id":"RFR-007","type":"opportunity"},{"id":"RFR-008","type":"opportunity"},{"id":"RFR-009","type":"opportunity"},{"id":"RFR-010","type":"opportunity"}
+  ],
+  "edges": [
+    {"from":"IFVS-001","to":"RFR-001","relation":"originates"},
+    {"from":"LRC-001","to":"RFR-002","relation":"originates"},
+    {"from":"EDF-v0.3","to":"RFR-003","relation":"evaluated_by"},
+    {"from":"EDF-v0.3","to":"RFR-004","relation":"evaluated_by"},
+    {"from":"VP-v1.1","to":"RFR-005","relation":"evaluated_by"},
+    {"from":"EDF-v0.3","to":"RFR-006","relation":"evaluated_by"},
+    {"from":"RFR-001","to":"RFR-003","relation":"supports"},
+    {"from":"RFR-001","to":"RFR-005","relation":"prerequisite"},
+    {"from":"RFR-001","to":"RFR-010","relation":"prerequisite"},
+    {"from":"RFR-002","to":"RFR-008","relation":"supports"},
+    {"from":"RFR-002","to":"RFR-010","relation":"supports"},
+    {"from":"RFR-006","to":"RFR-003","relation":"supports"},
+    {"from":"RFR-007","to":"RFR-008","relation":"prerequisite"},
+    {"from":"RFR-009","to":"RFR-001","relation":"replication_support"}
+  ]
+}
+
