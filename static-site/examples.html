@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDF Examples — From everyday problems to complex systems</title>
+  <meta name="description" content="Worked Echelon Diagnostic Framework examples across operations, software, product, organizations, and successful systems.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="/"><span>EDF</span><small>Echelon Diagnostic Framework</small></a><nav aria-label="Primary navigation"><a href="/learn.html">Learn</a><a aria-current="page" href="/examples.html">Examples</a><a href="/evidence.html">Evidence</a><a href="/start.html">Start</a></nav><a class="header-cta" href="/start.html">Start a diagnosis <span>↗</span></a></header>
+  <main>
+    <section class="page-hero compact">
+      <p class="eyebrow">EXAMPLE LIBRARY</p><h1>One grammar. Very different systems.</h1>
+      <p class="lede">These cases are designed to teach transfer: the ability to recognize the same diagnostic structure in a broken lunch rush, a software incident, weak product adoption, and a system that worked exceptionally well.</p>
+      <div class="legend"><span><i class="dot validated"></i>Repository validation case</span><span><i class="dot teaching"></i>Illustrative teaching case</span></div>
+    </section>
+
+    <section class="example-feature band">
+      <div class="case-heading"><div><span class="case-tag validated-tag">VALIDATION CASE · EDF–2</span><h2>Challenger: the nearest failure was not the strongest control.</h2></div><p>The seal failure explains the physical mechanism. It does not explain why the launch system converted known concern into permission to proceed.</p></div>
+      <div class="causal-chain"><article><small>OUTCOME</small><h3>Vehicle and crew lost after launch</h3></article><b>←</b><article><small>PROPAGATION</small><h3>Cold → reduced seal performance → breach → structural loss</h3></article><b>←</b><article><small>ORIGIN NETWORK</small><h3>Seal vulnerability · normalized risk · schedule pressure · fragmented authority</h3></article></div>
+      <div class="case-conclusion"><div><small>CONTROL POINT</small><strong>Engineering authority in the launch decision</strong></div><p>Redesigning the seal matters. But authority can interrupt future hazardous launches even when the technical risk is not yet fully understood.</p></div>
+    </section>
+
+    <section class="section case-library">
+      <div class="section-intro"><div><p class="eyebrow">ILLUSTRATIVE TEACHING CASES</p><h2>Practice seeing beyond the symptom.</h2></div><p>These are invented, plausible cases—not research findings. Each is intentionally concise so a new reader can see one important EDF move.</p></div>
+
+      <article class="worked-case">
+        <header><span class="case-tag teaching-tag">OPERATIONS · EDF–1</span><h2>The restaurant with “careless servers”</h2><p class="case-hook">Wrong-side orders doubled on Friday nights. The manager’s first proposal was retraining.</p></header>
+        <div class="case-fields"><div><b>Observable outcome</b><p>18 of 126 peak-period orders had a side-item correction, up from a four-week average of 7.</p></div><div><b>Competing origins</b><p>Server entry error; kitchen screen truncation; menu-code ambiguity; rushed handoff at the expo station.</p></div><div><b>Discriminating evidence</b><p>Tickets were entered correctly. Errors clustered on items whose modifier text wrapped off the kitchen display.</p></div><div><b>Propagation</b><p>Long modifier → hidden text → cook sees default side → expo lacks a verbal confirmation → wrong plate reaches table.</p></div></div>
+        <div class="control-answer"><span>BETTER CONTROL</span><strong>Reformat modifier display and add an expo check for affected items.</strong><p>Retraining servers would target the people nearest the complaint, not the path producing it.</p></div>
+      </article>
+
+      <article class="worked-case">
+        <header><span class="case-tag teaching-tag">SOFTWARE · EDF–1</span><h2>The release that “made the API slow”</h2><p class="case-hook">Latency rose 40 minutes after deployment—but only for one customer segment.</p></header>
+        <div class="case-fields"><div><b>Observable outcome</b><p>Enterprise search p95 latency rose from 480 ms to 2.8 s; standard accounts were unchanged.</p></div><div><b>Origin network</b><p>New permission expansion; larger enterprise role graphs; cold cache after release; retry policy amplified load.</p></div><div><b>Contradiction</b><p>A simple code regression should have affected both account types. It did not.</p></div><div><b>Propagation</b><p>Permission expansion → larger query → cold cache → timeout → retry → queue growth → higher latency.</p></div></div>
+        <div class="control-answer"><span>FIRST RESPONSIBLE ACTION</span><strong>Disable expansion for enterprise accounts and watch queue depth.</strong><p>The action is reversible and tests the modeled path. A rollback of the entire release is broader than the evidence requires.</p></div>
+      </article>
+
+      <article class="worked-case">
+        <header><span class="case-tag teaching-tag">PRODUCT · EDF–1</span><h2>The feature customers “didn’t want”</h2><p class="case-hook">Only 9% of eligible teams used a new planning feature in its first month.</p></header>
+        <div class="case-fields"><div><b>Outcome, not story</b><p>9% created a plan; 72% of creators returned the following week. Low adoption and low value are not the same claim.</p></div><div><b>Origin candidates</b><p>Poor discoverability; unclear permissions; weak need; import friction; rollout reached the wrong role.</p></div><div><b>Evidence</b><p>Most admins never saw the entry point. Users who created a first plan showed strong repeat use.</p></div><div><b>Unknown</b><p>Whether repeat use reflects durable value or novelty cannot yet be established.</p></div></div>
+        <div class="control-answer"><span>CONTROL POINT</span><strong>Test role-appropriate discovery before changing the feature.</strong><p>“Low adoption” is a manifestation. Removing the feature would be a decision made before diagnosing access to it.</p></div>
+      </article>
+
+      <article class="worked-case">
+        <header><span class="case-tag teaching-tag">PEOPLE SYSTEMS · EDF–2</span><h2>The hiring pipeline that “lacked candidates”</h2><p class="case-hook">A critical role stayed open for 94 days while the organization blamed the market.</p></header>
+        <div class="case-fields"><div><b>System context</b><p>Primary system: technical hiring pipeline. Context: compensation policy and executive approval. Focus: time to accepted offer.</p></div><div><b>Origin network</b><p>Narrow requirements; below-market band; six interviews; interview rescheduling; approval only after final round.</p></div><div><b>Propagation</b><p>Small pool → slow scheduling → candidate attrition → late compensation exception → declined offer → restart.</p></div><div><b>Control distribution</b><p>Recruiting can source; hiring managers can simplify; compensation can set bands; executives control exceptions.</p></div></div>
+        <div class="control-answer"><span>HIGHEST LEVERAGE</span><strong>Pre-approve a realistic band and reduce interview handoffs.</strong><p>More sourcing adds people to a pipeline designed to lose them.</p></div>
+      </article>
+
+      <article class="worked-case">
+        <header><span class="case-tag teaching-tag">SUPPLY CHAIN · EDF–2</span><h2>The warehouse with recurring stockouts</h2><p class="case-hook">The item was physically available upstream, yet stores repeatedly showed zero on hand.</p></header>
+        <div class="case-fields"><div><b>Manifestations</b><p>Store stockouts, emergency transfers, excess regional inventory, and high forecast error in the dashboard.</p></div><div><b>Origin network</b><p>Case-pack rounding; stale lead times; promotion data delay; manual overrides; incentive to minimize store inventory.</p></div><div><b>Propagation</b><p>Late promotion signal → low forecast → rounded-down order → store shortage → emergency transfer → distorted history.</p></div><div><b>Feedback loop</b><p>The emergency response contaminates the demand history used for the next forecast.</p></div></div>
+        <div class="control-answer"><span>SYSTEM CONTROL</span><strong>Protect promotion signals and separate emergency transfers from demand history.</strong><p>The strongest intervention changes both the forward path and the feedback loop.</p></div>
+      </article>
+
+      <article class="worked-case success-case">
+        <header><span class="case-tag teaching-tag">SUCCESS · EDF–2</span><h2>The neighborhood festival that ran unusually well</h2><p class="case-hook">Ten thousand visitors, severe weather, no safety incidents, and rapid recovery.</p></header>
+        <div class="case-fields"><div><b>Outcome</b><p>The event reopened safely 47 minutes after a weather suspension and retained 83% of scheduled programming.</p></div><div><b>Success network</b><p>Clear incident roles; rehearsed weather protocol; trusted local communication; modular vendor layout; empowered zone leads.</p></div><div><b>Propagation</b><p>Early alert → shared trigger → distributed shutdown → verified sheltering → zone-by-zone inspection → controlled reopening.</p></div><div><b>Counterfactual</b><p>Without delegated zone authority, the central team would have become a bottleneck during both closure and restart.</p></div></div>
+        <div class="control-answer"><span>PRESERVE</span><strong>Keep rehearsals and distributed decision authority.</strong><p>Success is not self-explanatory. EDF identifies the conditions that should survive budget pressure and staff turnover.</p></div>
+      </article>
+    </section>
+
+    <section class="band compare-strip">
+      <p class="eyebrow">WHAT TRANSFERS</p><h2>The visible problem changes. The reasoning discipline does not.</h2>
+      <div class="three-grid"><article><span>01</span><h3>Describe before explaining</h3><p>Every case starts with an outcome that does not smuggle in its cause.</p></article><article><span>02</span><h3>Model the path</h3><p>Origins matter because of how the system carries their effects forward.</p></article><article><span>03</span><h3>Intervene at leverage</h3><p>The best control is chosen, not assumed to be nearest the symptom or earliest cause.</p></article></div>
+      <a class="button primary" href="/start.html">Try EDF on your system →</a>
+    </section>
+  </main>
+  <footer><div class="brand"><span>EDF</span><small>Echelon Diagnostic Framework</small></div><p>Examples are for learning; evidence states are identified explicitly.</p><div class="footer-links"><a href="/">Home</a><a href="/learn.html">Learn</a><a href="/evidence.html">Evidence</a><a href="/start.html">Start</a></div></footer>
+</body></html>

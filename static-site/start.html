@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start an EDF Diagnosis — A guided worksheet</title>
+  <meta name="description" content="Use this guided worksheet to create your first Echelon Diagnostic Framework diagnosis.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="/"><span>EDF</span><small>Echelon Diagnostic Framework</small></a><nav aria-label="Primary navigation"><a href="/learn.html">Learn</a><a href="/examples.html">Examples</a><a href="/evidence.html">Evidence</a><a aria-current="page" href="/start.html">Start</a></nav><a class="header-cta" href="#worksheet">Use the worksheet <span>↓</span></a></header>
+  <main>
+    <section class="page-hero compact"><p class="eyebrow">YOUR FIRST DIAGNOSIS</p><h1>Bring one real outcome.</h1><p class="lede">Choose something current, bounded, and safe to examine: a recurring support escalation, a delayed handoff, an adoption drop, or a process that works unusually well. Your goal is not a perfect answer. It is a more responsible next move.</p></section>
+    <section class="band prep">
+      <div><p class="eyebrow">BEFORE YOU BEGIN</p><h2>Use facts you can inspect.</h2></div><div class="prep-list"><p><span>GOOD FIRST CASE</span> Local, recent, observable, and connected to an action you can test.</p><p><span>WAIT OR ESCALATE</span> High-consequence safety, legal, clinical, or personnel decisions need appropriate experts and governance.</p><p><span>TIMEBOX</span> Give an EDF–0 pass 15 minutes. Expand only if the uncertainty earns more effort.</p></div>
+    </section>
+    <section id="worksheet" class="section worksheet">
+      <div class="worksheet-head"><p class="eyebrow">EDF–0 WORKSHEET</p><h2>Write the diagnosis in six passes.</h2><p>Use short, concrete sentences. If you discover that an earlier field was wrong, revise it. That is the framework working.</p></div>
+      <article><span>01</span><div><h3>System context</h3><p>What system are you primarily analyzing? What larger system materially shapes it? What narrow aspect is in focus?</p><blockquote>“Mobile checkout, within our direct-to-consumer storefront, focused on payment completion after Tuesday’s release.”</blockquote></div><aside><b>Avoid</b> Naming the whole company or a boundary so narrow that it excludes obvious influences.</aside></article>
+      <article><span>02</span><div><h3>Outcome and manifestations</h3><p>What happened? What observable signals show it? Include a time, count, rate, comparison, or direct observation when possible.</p><blockquote>“Payment completion fell from 71% to 54%. Failures are concentrated on mobile app version 8.4.”</blockquote></div><aside><b>Avoid</b> “The new SDK broke checkout.” That is already an explanation.</aside></article>
+      <article><span>03</span><div><h3>Origin network and propagation</h3><p>List at least two plausible contributors. For each, trace how its effect could reach the outcome.</p><blockquote>“SDK timeout → automatic retry → duplicate request lock → failed payment. Competing read: issuer outage → authorization failure.”</blockquote></div><aside><b>Ask</b> What else could produce the same manifestation?</aside></article>
+      <article><span>04</span><div><h3>Evidence, contradiction, and confidence</h3><p>What supports each path? What contradicts it? What source produced the evidence? What remains unknown?</p><blockquote>“Logs show retry locks only on 8.4. Issuer failures are stable. Medium–high confidence; device-specific behavior remains unknown.”</blockquote></div><aside><b>Ask</b> What single observation would most change your mind?</aside></article>
+      <article><span>05</span><div><h3>Control points and ranking</h3><p>List candidate interventions. Rank them by influence, controllability, cost, reversibility, speed, and confidence.</p><blockquote>“1. Disable automatic retry. 2. Roll back SDK. 3. Change lock behavior. Retry disable ranks first: fast, reversible, and specific to the modeled path.”</blockquote></div><aside><b>Avoid</b> Automatically choosing the earliest cause or the most visible symptom.</aside></article>
+      <article><span>06</span><div><h3>Sufficiency and next responsible action</h3><p>Do you know enough to act, investigate, or reframe? State what will happen next and what result would support the model.</p><blockquote>“Sufficient to disable retry for 10% of traffic. If lock errors and abandonment fall together, expand; otherwise restore and investigate.”</blockquote></div><aside><b>Finish with</b> An owner, a bounded action, and a verification signal.</aside></article>
+    </section>
+    <section class="band finish-panel">
+      <div><p class="eyebrow">THE HANDOFF</p><h2>Diagnosis is not the decision.</h2><p>EDF clarifies reality and identifies leverage. Your decision process still has to evaluate options, tradeoffs, ethics, resources, and risk. After execution, return to EDF and ask whether the system changed as expected.</p></div>
+      <div class="cycle"><span>UNDERSTAND</span><b>→</b><span>DECIDE</span><b>→</b><span>COMMIT</span><b>→</b><span>EXECUTE</span><b>→</b><span>UNDERSTAND AGAIN</span></div>
+      <a class="button primary" href="https://github.com/kemiller2002/Echelon-diagnostic-framework/blob/main/docs/edf/templates/edf-0-quick-card.md">Download the Markdown template ↗</a>
+    </section>
+  </main>
+  <footer><div class="brand"><span>EDF</span><small>Echelon Diagnostic Framework</small></div><p>Use the smallest diagnosis that supports responsible action.</p><div class="footer-links"><a href="/">Home</a><a href="/learn.html">Learn</a><a href="/examples.html">Examples</a><a href="/evidence.html">Evidence</a></div></footer>
+</body></html>
