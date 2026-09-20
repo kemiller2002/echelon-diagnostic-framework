@@ -22,7 +22,7 @@ The protocol measures these separately:
 6. Stability across models/evaluators
 7. Cost, latency, retries, and invalid-run rate
 
-No single score may be labeled "reproducibility" unless it is an independent replication measure.
+No single score may be labeled simply "reproducibility." The report must state whether it measures execution reconstructability, within-condition repeatability, cross-executor reproducibility, or cross-case replication/generalization, and must name the conditions held constant and changed.
 
 ## Preconditions
 
@@ -79,11 +79,15 @@ Specialized methods such as RCA, FMEA, or FTA may be added only when the task is
 
 ## Independence
 
-Analytical Lenses remain useful for generating distinct reasoning perspectives, but multiple lenses from one model or agent are not independent replications.
+Analytical Lenses remain useful for generating distinct reasoning perspectives, but multiple lenses from one model or agent are not independent executors.
 
-For computational replication, use at least three materially distinct model families and at least two providers when available.
+For cross-executor computational reproducibility, use materially distinct model families and providers when available and preregister what counts as a changed execution condition.
 
-For human reproducibility research, use a separately approved human-participant protocol.
+For cross-case replication/generalization, use held-out evidence packages rather than additional generations of the same case.
+
+For human cross-executor research, use a separately approved human-participant protocol.
+
+Execution reconstructability should be tested first: another operator must be able to rerun the exact declared inputs, versions, and scoring procedure before stronger independence claims are attempted.
 
 ## Blinding and evaluation
 

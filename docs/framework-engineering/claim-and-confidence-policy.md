@@ -23,6 +23,27 @@ EDF research must keep these concepts separate:
 
 Evidence for an earlier item does not establish a later item.
 
+## Terminology Across Disciplines
+
+"Reproducibility" and "replicability" do not have one universal scientific definition.
+
+- The U.S. National Academies' 2019 report uses **reproducibility** for recomputing results with the same data, code, methods, and analysis conditions, and **replicability** for a new study addressing the same question with new data.
+- NIST metrology terminology distinguishes **repeatability** under the same measurement conditions from **reproducibility** under changed conditions.
+
+Sources:
+
+- [National Academies, Reproducibility and Replicability in Science](https://nap.nationalacademies.org/catalog/25303/reproducibility-and-replicability-in-science)
+- [NIST TN 1297 terminology](https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-d1-terminology)
+
+EDF therefore uses qualified operational terms rather than assuming its vocabulary is universal:
+
+- **execution reconstructability** - the preserved artifacts are sufficient to rerun the declared computational procedure;
+- **within-condition repeatability** - materially comparable results under explicitly same conditions;
+- **cross-executor reproducibility** - materially comparable results under declared changed executor conditions, such as another model family or analyst;
+- **cross-case replication/generalization** - a result persists on newly sampled cases or evidence packages relevant to the same research question.
+
+Every quantitative claim must state which construct and changed/held-constant conditions it measures.
+
 ## Claim states
 
 Current claims use one of these states:
