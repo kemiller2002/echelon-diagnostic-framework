@@ -9,5 +9,6 @@ test("EDF repository integrity", () => {
   assert.ok(result.summary.evidenceRecords >= 6);
   assert.ok(result.summary.theoryRecords >= 3);
   assert.equal(result.summary.repsChecked, 1);
+  assert.equal(result.summary.frozenV03FilesChecked, 9);
   assert.ok(result.summary.checkedLinkFiles > 20);
 });

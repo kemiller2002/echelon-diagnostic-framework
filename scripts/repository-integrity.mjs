@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const allowedStates = new Set(["internal-demonstration","suggestive","unsupported","contradicted","falsified","superseded","planned"]);
 const allowedPublicStates = new Set(["internal","suggestive","unsupported","open"]);
@@ -91,8 +92,26 @@ export function validateRepository(root = process.cwd()) {
 
   if (!fs.existsSync(path.join(root, "research/journal/JR-EDF-2026-002.md"))) errors.push("Missing current research journal.");
 
+  const releaseManifestPath = path.join(root, "docs/edf/releases/v0.3/manifest.json");
+  let frozenFilesChecked = 0;
+  if (!fs.existsSync(releaseManifestPath)) errors.push("Missing v0.3 release manifest.");
+  else {
+    try {
+      const manifest = JSON.parse(fs.readFileSync(releaseManifestPath, "utf8"));
+      for (const item of manifest.files ?? []) {
+        const full = path.join(root, item.snapshotPath);
+        if (!fs.existsSync(full)) { errors.push("Missing frozen v0.3 artifact: " + item.snapshotPath); continue; }
+        const bytes = fs.readFileSync(full);
+        const prefix = Buffer.from("blob " + bytes.length + "\0");
+        const sha = crypto.createHash("sha1").update(prefix).update(bytes).digest("hex");
+        if (sha !== item.gitBlobSha) errors.push("Frozen v0.3 artifact hash drift: " + item.snapshotPath);
+        frozenFilesChecked++;
+      }
+    } catch (e) { errors.push("Cannot validate v0.3 release manifest: " + e.message); }
+  }
+
   const linkFiles = [
-    ...walk(path.join(root, "docs"), f => f.endsWith(".md")),
+    ...walk(path.join(root, "docs"), f => f.endsWith(".md") && !f.includes(path.join("docs", "edf", "releases"))),
     ...walk(path.join(root, "research"), f => f.endsWith(".md")),
     ...walk(path.join(root, "static-site"), f => f.endsWith(".html"))
   ];
@@ -136,6 +155,7 @@ export function validateRepository(root = process.cwd()) {
       evidenceRecords: evidenceIds.size,
       theoryRecords: theoryIds.size,
       repsChecked: fs.existsSync(repPath) ? 1 : 0,
+      frozenV03FilesChecked: frozenFilesChecked,
       checkedLinkFiles: linkFiles.length,
       requiredWebsiteFiles: required.length
     }
