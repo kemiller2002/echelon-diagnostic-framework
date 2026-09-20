@@ -12,7 +12,7 @@ Understand -> Decide -> Commit -> Execute -> Understand
 
 | Stage | Purpose | Primary Framework |
 |-------|---------|-------------------|
-| Understand | Build confidence in reality | EDF, optionally with Diagnostic Calibration |
+| Understand | Make the current diagnostic model and its evidence explicit | EDF, optionally with cross-analysis review |
 | Decide | Evaluate options and choose a path | Clarity |
 | Commit | Assign resources, ownership, authority, and priority | Operating discipline |
 | Execute | Change reality | Delivery / operations |
@@ -24,7 +24,7 @@ Understand -> Decide -> Commit -> Execute -> Understand
 
 Use EDF to define the system, describe the outcome, identify manifestations, build the origin network, trace propagation, evaluate evidence, and rank control points.
 
-When a case is complex, high-stakes, disputed, cross-disciplinary, or ambiguous, Diagnostic Calibration can be used as an optional protocol to compare and synthesize multiple EDF analyses before moving into Clarity.
+When a case is complex, high-stakes, disputed, cross-disciplinary, or ambiguous, Diagnostic Calibration can be used as an experimental cross-analysis protocol. Its use should not be interpreted as validated confidence improvement.
 
 Primary question:
 
@@ -79,10 +79,10 @@ This keeps the handoff between diagnosis and action concrete.
 | System and boundary | Clarifies what decision scope actually exists |
 | Outcome and manifestations | Defines what is really happening |
 | Origin network and propagation | Clarifies what must be addressed |
-| Ranked control points | Identifies where action has leverage |
-| Confidence and unknowns | Shows what risk remains |
+| Ranked control points | Identifies candidate intervention priorities and their rationale |
+| Confidence and unknowns | Shows remaining epistemic uncertainty relevant to the decision |
 
-If Diagnostic Calibration is used, Clarity should consume the calibrated synthesis rather than a single unreviewed EDF.
+If Diagnostic Calibration is used, Clarity should consume the cross-reviewed synthesis while preserving unresolved disagreement rather than treating convergence as proof.
 
 See [diagnostic-calibration.md](diagnostic-calibration.md).
 

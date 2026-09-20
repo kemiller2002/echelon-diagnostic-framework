@@ -8,6 +8,7 @@ EDF is a working diagnostic grammar for making system diagnoses explicit enough 
 - `docs/edf/README.md` - current framework orientation and evidence boundary.
 - `research/registries/hypothesis-registry.json` - current claim states.
 - `research/registries/evidence-registry.json` - current evidence records.
+- `research/registries/theory-registry.json` - current theory boundary.
 - `docs/framework-engineering/claim-and-confidence-policy.md` - rules for interpreting and promoting claims.
 - `docs/framework-engineering/validation-protocol-v1.2.md` - protocol for future controlled validation.
 - `static-site/` - canonical public website source.

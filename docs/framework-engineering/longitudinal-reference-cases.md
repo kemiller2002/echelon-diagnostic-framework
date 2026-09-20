@@ -4,167 +4,106 @@ Status: Working draft
 
 ## Purpose
 
-A Longitudinal Reference Case examines the same system or event under multiple frozen Evidence Packages.
+A Longitudinal Reference Case examines the same historical or synthetic system under multiple frozen Evidence Packages.
 
-Its purpose is to test whether a framework evolves appropriately as evidence changes over time.
+Its purpose is to test whether an analysis updates appropriately as the *available evidence* changes.
 
-Traditional Validation Cases ask:
-
-> Can the framework explain this system?
-
-Longitudinal Reference Cases ask:
-
-> Does the framework update its understanding proportionally and responsibly as better evidence becomes available?
+It does not assume that later evidence is always better, nor that the underlying historical reality changed.
 
 ## Core Idea
 
-The same event may be analyzed multiple times using different Evidence Packages.
+The same event is analyzed multiple times with different declared evidence states.
 
-Each run receives its own Framework Configuration Record.
+Each run receives its own Framework Configuration Record and immutable execution bundle.
 
-The framework version, Validation Protocol version, Analytical Lens Set version, and Research Question Set should remain constant unless the experiment intentionally changes them.
+Unless intentionally manipulated, keep constant:
 
-The independent variable is the Evidence Package.
+- EDF version;
+- Validation Protocol version;
+- prompt condition;
+- model/provider/version;
+- evaluator configuration;
+- Research Question Set.
+
+The intended independent variable is the Evidence Package. Model prior knowledge is a contamination risk and must be tested rather than assumed away.
 
 ## Example: Chernobyl
 
-Chernobyl should become the first Longitudinal Reference Case.
+Chernobyl remains a candidate first longitudinal historical case:
 
-Proposed structure:
+- Run A: FCR-0100 / EP-013A / evidence reasonably available in 1986.
+- Run B: FCR-0101 / EP-013B / INSAG-7 evidence state.
+- Run C: FCR-0102 / EP-013C / later historical evidence state.
 
-### LRC-001 - Chernobyl
+Historical model priors can leak later facts into earlier runs, so the design should include explicit leakage canaries and a synthetic longitudinal case with known ground truth.
 
-Run A:
+## Candidate Construct: Diagnostic Stability
 
-- FCR-0100
-- Evidence Package: EP-013A
-- Evidence State: Evidence reasonably available in 1986
+Diagnostic Stability is a proposed construct for describing how much an analysis changes across evidence states.
 
-Run B:
+The desired behavior is a hypothesis:
 
-- FCR-0101
-- Evidence Package: EP-013B
-- Evidence State: INSAG-7 revised understanding
+- facts supported in every package remain stable;
+- newly supported information changes the parts of the diagnosis it bears on;
+- unsupported later facts do not leak into earlier evidence states;
+- confidence changes have explicit evidence reasons;
+- control-point changes can be traced to changed evidence.
 
-Run C:
+The repository has not yet validated a quantitative Diagnostic Stability metric.
 
-- FCR-0102
-- Evidence Package: EP-013C
-- Evidence State: Modern historical understanding
+## Candidate Comparison Dimensions
 
-## Why Chernobyl Fits
+Future longitudinal work may compare:
 
-Chernobyl is especially valuable because the official understanding evolved over time.
+- System Context
+- Manifestations
+- Origin Network
+- Propagation
+- Control Points
+- Confidence rationale
+- Diagnostic Sufficiency
+- Interpretation changes
+- evidence leakage
 
-Early explanations emphasized operator error.
-
-Later investigations and analyses gave greater weight to reactor design flaws, safety culture, regulatory weakness, procedural issues, and organizational/governmental context.
-
-This makes it a strong test of whether EDF and Framework Engineering can handle evidence evolution without defending the first diagnosis.
-
-## Diagnostic Stability
-
-Diagnostic Stability is the degree to which an analysis remains appropriately stable while incorporating newly available evidence.
-
-A good framework should be neither rigid nor unstable.
-
-Bad behavior:
-
-- Conclusions do not change when important new evidence appears.
-- Conclusions change completely when new evidence only modestly shifts understanding.
-
-Good behavior:
-
-- Stable elements remain stable.
-- New evidence changes the parts of the analysis it actually affects.
-- Confidence improves or shifts in proportion to the evidence.
-- Control points become more accurate as evidence improves.
-
-## Diagnostic Stability Measures
-
-Compare each run across evidence packages using:
-
-- System Context Stability
-- Manifestation Stability
-- Origin Network Stability
-- Control Point Stability
-- Confidence Stability
-- Diagnostic Sufficiency Stability
-- Interpretation Shift
+Do not aggregate these into a single score until construct validity and weighting are established.
 
 ## Experimental Design
 
-For a Longitudinal Reference Case:
-
 1. Define the Longitudinal Reference Case.
-2. Define the Research Question Set.
-3. Define each Evidence Package.
-4. Create and freeze one Framework Configuration Record per run.
-5. Run the analysis separately for each Evidence Package.
-6. Compare results across runs.
-7. Measure Diagnostic Stability.
-8. Log Deferred Insights and ECR candidates.
-9. Do not retroactively alter earlier runs.
+2. Freeze the Research Question Set.
+3. Freeze and hash each Evidence Package.
+4. Create one FCR per run.
+5. Freeze prompts, models, evaluators, scoring, randomization, and stop rules.
+6. Execute each evidence state in isolated sessions.
+7. Preserve every attempted run, including failures.
+8. Run leakage checks.
+9. Compare changes under the preregistered analysis plan.
+10. Preserve earlier runs unchanged.
 
 ## Research Question Sets
 
-A Research Question Set defines the questions being answered during a validation run.
+A Research Question Set freezes what each run is trying to answer.
 
-Research questions must be frozen as part of the Framework Configuration Record.
+Example RQS-001:
 
-This prevents accidental comparison of analyses that are answering different questions.
-
-Example:
-
-### RQS-001
-
-- How did the system produce the observed outcome?
-- What origins were visible given the evidence available at the time?
-- What control points would have been identifiable at the time?
-- How does the analysis change as new evidence packages become available?
+- How did the system produce the observed outcome given only the declared evidence?
+- Which origins are supported at this evidence state?
+- Which control points are supportable at this evidence state?
+- Which conclusions should remain unchanged?
+- Which conclusions should change if the next evidence package is introduced?
 
 ## Evidence Packages
 
-An Evidence Package defines the evidence available to a validation run.
+Changing the allowed evidence requires a new Evidence Package and a new FCR.
 
-Evidence Packages must be versioned.
-
-Changing the available evidence requires a new Evidence Package and a new FCR.
-
-## Configuration Requirements
-
-Each Longitudinal Reference Case run must record:
-
-- Framework Configuration Record ID
-- EDF version
-- Validation Protocol version
-- Framework Engineering version
-- Analytical Lens Set version
-- Research Question Set version
-- Evidence Package ID and version
-- Validation Case ID and version
+Evidence Isolation is necessary but insufficient: a computational run also needs controls against model-prior leakage and complete execution provenance.
 
 ## Relationship To Framework Engineering
 
-Longitudinal Reference Cases test Framework Engineering itself.
+Longitudinal Reference Cases are experiments on framework behavior, not proof of framework capability by design alone.
 
-They help determine whether frameworks:
-
-- Update responsibly as evidence improves
-- Preserve stable conclusions when appropriate
-- Avoid defending outdated conclusions
-- Maintain traceability across evidence changes
-
-## Relationship To EDF
-
-Longitudinal Reference Cases do not modify EDF directly.
-
-They provide evidence that may later support ECRs or Deferred Insights.
+The first completed controlled study should update HY-EDF-006.
 
 ## Caution
 
-Do not treat later evidence as if it were available during earlier runs.
-
-Each run must respect the evidence state defined by its Evidence Package.
-
-This is essential for avoiding hindsight bias.
+Do not describe evidence-sensitive updating as a demonstrated EDF strength until a completed longitudinal study passes preregistered leakage and stability criteria.

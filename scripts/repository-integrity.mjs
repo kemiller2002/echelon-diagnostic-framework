@@ -4,6 +4,7 @@ import path from "node:path";
 const allowedStates = new Set(["internal-demonstration","suggestive","unsupported","contradicted","falsified","superseded","planned"]);
 const allowedPublicStates = new Set(["internal","suggestive","unsupported","open"]);
 const allowedConfidence = new Set(["Low","Low-Medium","Medium","Medium-High","High"]);
+const allowedTheoryStates = new Set(["working","unestablished","deferred","rejected","superseded"]);
 
 function walk(root, predicate) {
   const out = [];
@@ -35,10 +36,12 @@ export function validateRepository(root = process.cwd()) {
   const errors = [];
   const hypothesisPath = path.join(root, "research/registries/hypothesis-registry.json");
   const evidencePath = path.join(root, "research/registries/evidence-registry.json");
+  const theoryPath = path.join(root, "research/registries/theory-registry.json");
 
-  let hreg, ereg;
+  let hreg, ereg, treg;
   try { hreg = JSON.parse(fs.readFileSync(hypothesisPath, "utf8")); } catch (e) { errors.push("Cannot parse hypothesis registry: " + e.message); }
   try { ereg = JSON.parse(fs.readFileSync(evidencePath, "utf8")); } catch (e) { errors.push("Cannot parse evidence registry: " + e.message); }
+  try { treg = JSON.parse(fs.readFileSync(theoryPath, "utf8")); } catch (e) { errors.push("Cannot parse theory registry: " + e.message); }
 
   const evidenceIds = new Set();
   if (ereg) {
@@ -64,6 +67,29 @@ export function validateRepository(root = process.cwd()) {
       for (const id of hy.evidence ?? []) if (!evidenceIds.has(id)) errors.push("Unknown evidence reference: " + hy.id + " -> " + id);
     }
   }
+
+  const theoryIds = new Set();
+  if (treg) {
+    for (const th of treg.theories ?? []) {
+      if (theoryIds.has(th.id)) errors.push("Duplicate theory ID: " + th.id);
+      theoryIds.add(th.id);
+      if (!allowedTheoryStates.has(th.state)) errors.push("Invalid theory state: " + th.id + " -> " + th.state);
+      if (!allowedConfidence.has(th.confidence)) errors.push("Invalid theory confidence: " + th.id + " -> " + th.confidence);
+      for (const id of [...(th.supportedBy ?? []), ...(th.challengedBy ?? [])]) {
+        if (!hypothesisIds.has(id)) errors.push("Unknown hypothesis reference: " + th.id + " -> " + id);
+      }
+    }
+  }
+
+  const repPath = path.join(root, "research/packages/RP-EDF-2026-002.md");
+  if (!fs.existsSync(repPath)) errors.push("Missing current REP: research/packages/RP-EDF-2026-002.md");
+  else {
+    const repText = fs.readFileSync(repPath, "utf8");
+    const headings = ["Research State Snapshot","Executive Summary","Original Objective","Scope","Repository Context","Current Understanding","Key Discoveries","Evidence Registry","Hypothesis Registry","Failed Assumptions","Open Questions","Recommended Next Research","Research Backlog","Suggested Specialized Research Agents","Parallel Research Opportunities","Risks","Cross-Discipline Opportunities","Knowledge Relationships","Theory Impact Assessment","Research Quality Metrics","Research Debt","Repository Updates","Website Updates","AI Consumption Notes","Handoff Instructions","Research Journal","Appendix","Completion Checklist"];
+    for (const heading of headings) if (!repText.includes("# " + heading) && !repText.includes("## " + heading)) errors.push("Current REP missing section: " + heading);
+  }
+
+  if (!fs.existsSync(path.join(root, "research/journal/JR-EDF-2026-002.md"))) errors.push("Missing current research journal.");
 
   const linkFiles = [
     ...walk(path.join(root, "docs"), f => f.endsWith(".md")),
@@ -108,6 +134,8 @@ export function validateRepository(root = process.cwd()) {
     summary: {
       hypotheses: hypothesisIds.size,
       evidenceRecords: evidenceIds.size,
+      theoryRecords: theoryIds.size,
+      repsChecked: fs.existsSync(repPath) ? 1 : 0,
       checkedLinkFiles: linkFiles.length,
       requiredWebsiteFiles: required.length
     }

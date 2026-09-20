@@ -4,36 +4,23 @@ Status: Working draft
 
 ## Purpose
 
-Analytical Lens Evaluation defines how the validation process measures whether each lens contributes enough value to remain part of Diagnostic Calibration.
+Analytical Lens Evaluation defines how future validation work should determine whether a lens contributes enough distinct value to justify its cost and complexity.
 
-The goal is not to include more lenses.
-
-The goal is to identify the smallest complementary set of lenses that consistently improves understanding while minimizing redundancy.
+The current five-lens set is a research configuration, not a validated optimum.
 
 ## Core Principle
 
 Analytical lenses are not sacred.
 
-Each lens must earn its place through evidence.
+A lens should remain in a default validation configuration only if controlled evidence shows that it contributes material, non-redundant information or exposes useful disagreement.
 
-A lens should remain in the validation protocol only if it improves at least one of:
-
-- Diagnostic completeness
-- Origin-network quality
-- Control-point selection
-- Confidence calibration
-- Synthesis quality
-- Blind-spot reduction
+Multiple lenses produced by one model, agent, or research process are not independent replications.
 
 ## Analytical Lens
 
-An Analytical Lens is a reasoning model applied to the entire declared System Context.
+An Analytical Lens is a reasoning prompt applied to the complete declared System Context.
 
-It is defined by how it reasons, not by what domain it is allowed to analyze.
-
-Each lens studies the complete system.
-
-Examples:
+Examples in the current research configuration:
 
 - Systems Lens
 - Operations / Governance Lens
@@ -41,116 +28,42 @@ Examples:
 - Differential Diagnosis Lens
 - Legal / Evidentiary Lens
 
-## Current Default Lenses
+These names describe intended reasoning emphasis. They do not establish that the lenses actually produce statistically or semantically distinct information.
 
-The current default lenses are:
+## Candidate Evaluation Dimensions
 
-### 1. Systems Lens
+Future studies may evaluate:
 
-Formerly represented by the Systems Engineer perspective.
+- **Novel contribution:** material findings not present in matched peer outputs.
+- **Synthesis survival:** findings retained under a frozen synthesis rule.
+- **Cross-review effect:** evidence-supported revisions triggered by another lens.
+- **Control-point contribution:** candidate controls that survive blinded utility review.
+- **Missed material:** important keyed findings omitted by the lens.
+- **Redundancy:** semantic overlap with other lenses.
+- **Cost:** added tokens, latency, review burden, and evaluator complexity.
 
-Focus:
-Architecture, interfaces, feedback, propagation, controls, resilience.
+These are candidate constructs, not validated metrics. No "score" should be published until the unit, denominator, rubric, evaluator reliability, and decision threshold are defined.
 
-### 2. Operations / Governance Lens
+## Retention Test
 
-Formerly represented by the Operations Executive perspective.
+A lens earns default status only if, across preregistered held-out cases, it demonstrates incremental value relative to a smaller lens set under a frozen evaluation procedure.
 
-Focus:
-Incentives, governance, authority, priority, resource allocation, organizational design.
+A lens may be modified, merged, or removed if it:
 
-### 3. Independent Investigation Lens
-
-Formerly represented by the Independent Investigator perspective.
-
-Focus:
-Evidence quality, competing hypotheses, confidence, missing evidence, causal reasoning.
-
-### 4. Differential Diagnosis Lens
-
-Formerly represented by the Physician perspective.
-
-Focus:
-Symptoms, progression, differential diagnosis, stabilization, uncertainty, reassessment.
-
-### 5. Legal / Evidentiary Lens
-
-Formerly represented by the Attorney perspective.
-
-Focus:
-Burden of proof, causation, standards, documentation, accountability, defensibility.
-
-## Evaluation Metrics
-
-For each Validation Case, evaluate each lens using the following metrics:
-
-### Novelty Score
-
-How many useful observations did only this lens identify?
-
-### Adoption Score
-
-How many of this lens's observations or control points survived synthesis?
-
-### Calibration Impact
-
-How much did this lens improve other lenses during Diagnostic Calibration?
-
-### Calibration Receptiveness
-
-How much did this lens improve after reviewing others?
-
-### Control Point Contribution
-
-How many accepted high-leverage control points originated from this lens?
-
-### Blind Spot Index
-
-How often did this lens miss findings that most other lenses identified?
-
-### Redundancy Score
-
-How much does this lens overlap with another lens?
-
-High overlap is not automatically bad, but persistent high overlap may suggest consolidation.
-
-## Lens Retention Criteria
-
-A lens should remain in the default validation set if it:
-
-- Contributes unique useful observations across multiple Validation Cases
-- Improves synthesis
-- Improves control-point selection
-- Reduces blind spots
-- Does not create excessive redundancy
-- Justifies the added complexity of including it
-
-## Lens Modification Or Removal
-
-A lens may be modified, merged, replaced, or removed if evidence shows that it:
-
-- Contributes little unique value
-- Repeatedly duplicates another lens
-- Introduces noise without improving synthesis
-- Systematically misses important findings
-- Weakens Diagnostic Calibration
+- adds little material information;
+- primarily restates another lens;
+- increases unsupported claims;
+- increases cost without corresponding value;
+- makes synthesis less reliable.
 
 ## Research Question
 
 ### RQ-002
 
-What is the minimum set of analytical lenses that consistently produces the most complete understanding of a system?
-
-## Caution
-
-Do not add or remove lenses based on intuition alone.
-
-Lens changes require evidence from multiple Validation Cases and must satisfy Concept Burden.
+What is the smallest set of reasoning perspectives that contributes material, non-redundant diagnostic information under controlled evaluation?
 
 ## Relationship To EDF
 
-Analytical Lens Evaluation does not modify EDF.
+Analytical lenses are part of research methodology and optional Diagnostic Calibration. They are not core EDF concepts.
 
-EDF provides the diagnostic grammar.
-
-Analytical lenses are part of the validation and Diagnostic Calibration process used to evaluate and improve EDF.
+Changes to the lens set do not modify the EDF grammar.

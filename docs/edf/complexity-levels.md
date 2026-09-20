@@ -1,27 +1,29 @@
 # EDF Complexity Levels
 
-Status: Working draft
+Status: Working draft for EDF v0.3
 
-EDF should scale with the problem. Start small and expand only when the situation requires it.
+EDF v0.3 keeps the same required diagnostic fields across levels. The level changes depth, evidence burden, and collaboration, not the underlying grammar.
+
+The alternative progressive grammar described in the v1.0 draft remains a candidate design and is not part of v0.3.
 
 ## Selection Guide
 
-| Level | Use When | Typical Output |
-|-------|----------|----------------|
-| EDF-0 | Simple, local, low-dispute issue | Quick read with explicit boundary and next action |
-| EDF-1 | Several plausible causes or moderate consequences | Evidence-backed diagnosis with ranked control points |
-| EDF-2 | Multiple interacting systems, stakeholders, or disputed causes | Full origin network and propagation model |
+| Level | Use When | Depth |
+|---|---|---|
+| EDF-0 | Simple, local, low-consequence, low-dispute issue | Concise pass through every required field |
+| EDF-1 | Several plausible origins or moderate consequence | More explicit alternatives, evidence, and ranking rationale |
+| EDF-2 | Multiple interacting systems, stakeholders, disputed origins, or higher consequence | Full network/propagation detail and stronger evidence burden |
 
-## EDF-0 Rapid
+## Common Required Fields
 
-Use EDF-0 when the problem is simple enough that a fast, responsible diagnosis is possible.
+Every v0.3 level includes:
 
-Required fields:
-
-- System
-- System Boundary
+- System Context
+  - Primary System
+  - Context
+  - Focus
 - Outcome
-- Manifestation
+- Manifestation(s)
 - Origin Network
 - Propagation
 - Evidence
@@ -32,102 +34,82 @@ Required fields:
 - Unknowns
 - Next Responsible Action
 
+Depth should be proportional to the contemplated action.
+
+## EDF-0 Rapid
+
+Use EDF-0 for a concise diagnosis when the next action is bounded and reversible.
+
 Example:
 
 ```text
-System: Conference room lighting
-System Boundary: Fixture, bulb, wall switch, and room power supply
-Outcome: Room lights did not turn on during use
-Manifestation: No light when switch is activated
-Origin Network: Burned-out bulb
+Primary System: Conference room lighting
+Context: Office facility
+Focus: Failure to illuminate
+Outcome: Room lights did not turn on
+Manifestation: No illumination when the switch was activated
+Origin Network: Burned-out bulb is the leading explanation
 Propagation: Failed bulb prevented illumination when power was applied
-Evidence: Bulb filament visibly failed; replacement restored function
-Control Points: Replace bulb; stock spare bulbs
-Control Point Ranking: Replace bulb first due to high influence, high controllability, low cost, high confidence
-Confidence: High
-Diagnostic Sufficiency: Yes
-Unknowns: None material
+Evidence: Replacement bulb restored lighting
+Control Points: Replace bulb; keep a spare
+Ranking: Replace bulb first; direct, low-cost, reversible
+Confidence: High qualitative confidence
+Diagnostic Sufficiency: Yes for replacement
+Unknowns: None material to this action
 Next Responsible Action: Replace bulb
 ```
 
 ## EDF-1 Standard
 
-Use EDF-1 when several explanations are plausible, when consequences matter, or when you need to show why one explanation is stronger than another.
-
-Required fields:
-
-- System
-- System Boundary
-- Outcome
-- Manifestation
-- Origin Network
-- Propagation
-- Evidence
-- Control Points
-- Control Point Ranking
-- Confidence
-- Diagnostic Sufficiency
-- Unknowns
-- Next Responsible Action
+Use EDF-1 when several explanations remain plausible or the consequence warrants a more explicit evidence record.
 
 Example:
 
 ```text
-System: Residential cooling system
-System Boundary: Thermostat, condenser, capacitor, compressor, and power supply
-Outcome: House temperature remained above target during cooling demand
+Primary System: Residential cooling system
+Context: Home electrical/HVAC environment
+Focus: Failure to start cooling
+Outcome: Indoor temperature remained above target
 Manifestation: Thermostat calls for cooling; outdoor unit hums but does not start
-Origin Network: Failed capacitor; possible thermostat fault considered and deprioritized
-Propagation: Capacitor failure prevented normal motor startup, which blocked cooling delivery
-Evidence: Measured capacitor out of range; thermostat calling for cooling; symptoms match startup failure
-Control Points: Replace capacitor; verify compressor operation; inspect thermostat signal if issue persists
-Control Point Ranking: Replace capacitor first due to highest influence and confidence at low cost
-Confidence: Medium
-Diagnostic Sufficiency: Yes
+Origin Network: Failed capacitor is leading; thermostat/compressor remain alternatives
+Propagation: Capacitor failure could prevent motor startup and cooling delivery
+Evidence: Capacitor measured out of range; thermostat is calling for cooling
+Control Points: Replace capacitor; verify compressor; inspect signal if issue persists
+Ranking: Replace capacitor first as the least costly direct test of the leading path
+Confidence: Medium qualitative confidence
+Diagnostic Sufficiency: Yes for a bounded replacement-and-verify action
 Unknowns: Compressor condition until startup is restored
 Next Responsible Action: Replace capacitor and verify startup
 ```
 
 ## EDF-2 Complex
 
-Use EDF-2 when outcomes emerge from interacting technical, organizational, and human factors.
+Use EDF-2 when origins interact across technical, human, organizational, environmental, regulatory, or informational systems.
 
 Common triggers:
 
-- Multiple teams or institutions are involved
-- The propagation path is long
-- Causes are disputed
-- Control is distributed across layers
-- Regulatory, governance, or training assumptions matter
+- multiple teams or institutions;
+- long or branching propagation paths;
+- disputed explanations;
+- distributed control;
+- high consequence;
+- material evidence gaps;
+- need for cross-analysis review.
 
-Required fields:
-
-- System
-- System Boundary
-- Outcome
-- Manifestation
-- Origin Network
-- Propagation
-- Evidence
-- Control Points
-- Control Point Ranking
-- Confidence
-- Diagnostic Sufficiency
-- Unknowns
-- Next Responsible Action
+EDF-2 does not require complexity for its own sake. A complex case may still have a small supported origin network.
 
 ## Escalation Triggers
 
-Move up a level when one or more of these are true:
-
 | Trigger | Why it matters | Likely move |
-|---------|----------------|-------------|
-| Origin is uncertain | Quick diagnosis is not defensible | EDF-0 -> EDF-1 |
-| Multiple causes seem active | Single-origin framing is weak | EDF-0/1 -> EDF-2 |
-| Control differs from origin | More system modeling is needed | EDF-1 -> EDF-2 |
-| Stakeholders dispute the explanation | Evidence and ranking must be explicit | EDF-0 -> EDF-1 or EDF-2 |
-| Consequences are high | Higher rigor is justified | EDF-0 -> EDF-1/2 |
+|---|---|---|
+| Leading origin is uncertain | More discriminating evidence is needed | EDF-0 -> EDF-1 |
+| Multiple supported contributors interact | Network representation becomes useful | EDF-0/1 -> EDF-2 |
+| Control differs materially from origin | More propagation/control analysis is useful | EDF-1 -> EDF-2 |
+| Stakeholders dispute evidence or scope | Assumptions and evidence need more explicit treatment | EDF-0 -> EDF-1/2 |
+| Consequences are high or action is irreversible | Stronger evidence burden is justified | increase depth regardless of label |
 
 ## Working Rule
 
-Default to the smallest EDF level that reaches diagnostic sufficiency.
+Use the smallest depth that supports the next responsible action.
+
+Do not escalate solely because a case sounds important, and do not remain at EDF-0 when a material unknown could reverse a high-consequence action.

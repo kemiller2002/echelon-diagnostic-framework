@@ -39,6 +39,7 @@ Current claim state is maintained in:
 - [validation/evidence-ledger.md](validation/evidence-ledger.md)
 - [../../research/registries/hypothesis-registry.json](../../research/registries/hypothesis-registry.json)
 - [../../research/registries/evidence-registry.json](../../research/registries/evidence-registry.json)
+- [../../research/registries/theory-registry.json](../../research/registries/theory-registry.json)
 
 ## Core Promise
 

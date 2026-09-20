@@ -7,5 +7,7 @@ test("EDF repository integrity", () => {
   assert.deepEqual(result.errors, [], result.errors.join("\n"));
   assert.ok(result.summary.hypotheses >= 10);
   assert.ok(result.summary.evidenceRecords >= 6);
+  assert.ok(result.summary.theoryRecords >= 3);
+  assert.equal(result.summary.repsChecked, 1);
   assert.ok(result.summary.checkedLinkFiles > 20);
 });
