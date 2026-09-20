@@ -2,47 +2,49 @@
 
 Status: Working draft
 
-EDF should stay practical. It should improve understanding without turning diagnosis into heavyweight theory.
+EDF should stay practical. It should improve the inspectability of diagnostic reasoning without turning diagnosis into heavyweight theory.
 
 ## Principles
 
 ### Reality Precedes Decisions
 
-EDF exists to establish a defensible understanding of reality before decisions are evaluated.
+EDF is designed to make the current diagnostic model explicit before options are evaluated.
 
-Clarity comes after EDF, not before it.
+Clarity comes after EDF in the intended operating cycle, but a complete diagnosis is not required for every action. The evidence burden should be proportionate to consequence, reversibility, and uncertainty.
 
-### Complex Outcomes Rarely Have A Single Root Cause
+### Do Not Assume A Single Root Cause
 
-Complex outcomes rarely have a single root cause. They emerge from an origin network.
+Complex systems can produce outcomes through interacting contributors.
 
-EDF should default away from single-cause stories when multiple interacting contributors are more faithful to the system.
+EDF therefore resists premature single-cause stories when an origin network better fits the evidence. This is a modeling heuristic, not a universal empirical claim that every complex outcome has multiple causes.
 
-### Leverage Is A Better Optimization Target Than Blame
+### Leverage Is A More Useful Diagnostic Target Than Blame
 
-A useful diagnosis is not mainly about assigning fault.
+Origins and useful control points can differ.
 
-It is about finding where intervention can most effectively influence future outcomes.
+EDF asks where intervention may influence future outcomes rather than assuming that blame, the earliest cause, or the nearest manifestation identifies the best action.
 
-Origins and control points are often different.
+The framework does not currently possess a validated quantitative measure of leverage.
 
-### Decision Quality Depends On Understanding Quality
+### Decision Quality Is Constrained By Understanding, Not Determined By It
 
-The quality of a decision cannot exceed the quality of the understanding on which it is based.
+Poor understanding can make a decision fragile, but strong diagnosis does not guarantee a good decision. Values, incentives, execution quality, uncertainty, luck, and changing conditions also matter.
 
-Weak understanding produces fragile decisions even when the decision process itself is disciplined.
+EDF supplies diagnostic input to decision-making; it does not prove decision quality.
 
 ### Every Analysis Is Context-Bound
 
-Every EDF analysis is valid only within its declared System Context.
+Every EDF analysis declares its System Context.
 
-This makes scope explicit and makes different professional analyses comparable without requiring artificial agreement.
+This makes scope inspectable and can help distinguish genuine disagreement from different framing. Whether System Context improves semantic agreement beyond matched structure remains an empirical hypothesis.
 
-### Diagnosis Should Stop At Sufficiency
+### Diagnosis Stops At Action-Relative Sufficiency
 
-Diagnosis is sufficient when additional investigation is unlikely to materially change the next responsible action.
+Diagnostic Sufficiency asks whether the current model is adequate for the next responsible action.
 
-EDF should reduce analysis paralysis, not justify it.
+A reversible, low-consequence test can justify action under greater uncertainty than an irreversible or high-consequence intervention.
+
+Sufficiency is not certainty and is not a declaration that the diagnosis is complete.
 
 ### Every Concept Must Improve One Of The Five Verbs
 
@@ -54,36 +56,38 @@ Every EDF concept should improve:
 - Influence
 - Validate
 
-If a concept does not improve one of those verbs, it does not belong in EDF.
+This is a design filter, not an empirical proof rule. Concepts that pass it still carry Concept Burden.
 
 ### No Sacred Concepts
 
 No concept in EDF is permanent.
 
-Every concept must justify its continued existence through evidence and practical value.
+Every concept must justify continued use through clearer reasoning, practical value, or evidence. Elegance and familiarity are insufficient.
 
 ### The Framework Exists To Serve Reality
 
-EDF exists to improve understanding of reality, not to defend itself.
-
-If the framework stops improving understanding, the framework should change.
+When evidence conflicts with EDF, the model or framework should change rather than reinterpret evidence to protect the framework.
 
 ## Working Constraints
 
-- Declare the System Context explicitly.
+- Declare System Context explicitly.
 - Keep outcomes factual rather than interpretive.
 - Treat manifestations as observable signals.
 - Separate evidence from inference.
-- Keep the analysis proportional to the problem.
-- Prefer ranked control points over unstructured recommendations.
+- Record material competing explanations.
+- Keep analysis proportional to the contemplated action.
+- Treat control-point ranking as a transparent heuristic until validated.
+- Make reconsideration triggers visible when practical.
 
 ## Anti-Patterns
 
 | Anti-pattern | Why it is weak |
-|--------------|----------------|
-| Undeclared system context | Makes the analysis hard to compare or validate |
+|---|---|
+| Undeclared system context | Makes scope hard to inspect or compare |
 | Interpretive outcomes | Blends observation with explanation too early |
-| Single-cause storytelling | Hides interacting contributors |
-| Blame-first analysis | Often misses leverage |
-| Unranked controls | Does not clarify where action should start |
-| Endless decomposition | Delays responsible action without material gain |
+| Forced single-cause storytelling | Can hide interacting contributors |
+| Mandatory multi-cause storytelling | Can invent complexity the evidence does not support |
+| Blame-first analysis | Can miss controllable leverage |
+| False-precision ranking | Implies validated weights that EDF does not have |
+| Confidence as probability | Current labels are qualitative, not calibrated probabilities |
+| Endless decomposition | Delays action without demonstrating additional value |

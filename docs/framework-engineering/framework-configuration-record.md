@@ -6,7 +6,7 @@ Status: Working draft
 
 The Framework Configuration Record (FCR) defines the complete, immutable configuration under which a Validation Case is conducted.
 
-Its purpose is to ensure reproducibility, traceability, and configuration integrity.
+Its purpose is to support reproducibility, traceability, and configuration integrity. An FCR alone cannot make a run reproducible; raw execution provenance and scoring artifacts are also required.
 
 Every Validation Case begins by creating and freezing an FCR.
 
@@ -14,7 +14,9 @@ No analysis may begin until the FCR has been frozen.
 
 ## Core Principle
 
-The FCR is the single source of truth for every experiment.
+The FCR is the source of truth for the experiment's declared configuration.
+
+It is not the complete execution record. Validation Protocol v1.2 requires an immutable run bundle for prompts, evidence hashes, model/evaluator versions, raw outputs, failures, timing, cost, and scoring provenance.
 
 Every conclusion, Engineering Change Request, Deferred Insight, and framework evolution must be traceable to one or more Framework Configuration Records.
 
@@ -166,7 +168,7 @@ Framework reproducibility depends on configuration reproducibility.
 
 Two analyses cannot be meaningfully compared unless they identify the complete Framework Configuration Record used to produce them.
 
-Therefore, the FCR is a prerequisite for RC-7.
+Therefore, the FCR is a prerequisite for reproducibility, but it is not evidence that reproducibility has been achieved.
 
 ## Constitutional Principle
 

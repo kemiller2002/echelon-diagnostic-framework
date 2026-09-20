@@ -150,7 +150,7 @@ Reality First requires frameworks to change when reality changes.
 Evidence Isolation specifies how that change must occur:
 
 ```text
-Reality changes
+Available evidence changes
 ↓
 New Evidence Package
 ↓
@@ -163,4 +163,6 @@ Never through retroactive modification.
 
 ### Constitutional Test
 
-If a Validation Run cannot be reproduced using only its declared Evidence Package, then the run violates the Constitution.
+Evidence Isolation is necessary but not sufficient for reproducibility.
+
+A Validation Run violates this article if it incorporates evidence outside its declared Evidence Package. Reproducing the run also requires the frozen configuration and execution provenance defined by Framework Engineering.

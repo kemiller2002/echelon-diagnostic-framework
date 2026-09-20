@@ -2,56 +2,37 @@
 
 Status: Working draft
 
-Diagnostic Calibration is the collaborative protocol for comparing, challenging, refining, and synthesizing multiple EDF analyses of the same system.
+Diagnostic Calibration is a proposed collaborative protocol for comparing, challenging, refining, and synthesizing multiple EDF analyses of the same system.
 
 EDF is the diagnostic language.
 
-Diagnostic Calibration is the collaborative protocol.
+Diagnostic Calibration is the comparison protocol.
 
-Clarity is the decision framework that consumes calibrated understanding.
+Clarity is the decision framework that may consume the resulting understanding.
 
-Diagnostic Calibration is optional. It is not required for every EDF use.
+## Evidence Boundary
 
-Different analyses may diverge because they declared different System Contexts, not because they disagree about evidence.
+The repository does not yet establish that Diagnostic Calibration improves diagnostic accuracy, confidence calibration, or decision outcomes.
 
-Different analytical lenses are valuable only if they contribute distinct, evidence-supported improvements to diagnosis, calibration, or synthesis.
+Its current justified value is procedural: it makes differences between analyses explicit and creates a place to record what changed after cross-review.
 
-## Purpose
+Named Analytical Lenses are reasoning prompts. When one model, agent, or research process produces several lenses, those outputs are not independent replications.
 
-Diagnostic Calibration is used to:
+## Intended Uses
 
-- Improve diagnostic confidence
-- Reduce blind spots
-- Preserve useful disciplinary differences
-- Calibrate disagreement rather than eliminate it
+Diagnostic Calibration may be useful when:
 
-Principle:
+- the situation is complex;
+- the stakes are high;
+- origins are disputed;
+- several disciplines or reasoning modes are relevant;
+- the cost of an unchallenged blind spot is significant.
 
-> Multiple perspectives are diagnostic instruments.
-
-## When To Use It
-
-Use Diagnostic Calibration when:
-
-- The situation is complex
-- The stakes are high
-- Causes are disputed
-- Multiple disciplines are involved
-- The cost of being wrong is significant
-
-Avoid Diagnostic Calibration when:
-
-- The issue is simple
-- The origin and control point are obvious
-- Speed matters more than cross-disciplinary confidence
+It is usually unnecessary when the issue is simple, evidence is direct, and a safe reversible test is available.
 
 ## Analytical Lenses
 
-Prefer "Analytical Lens" over "Diagnostic Personality."
-
-"Diagnostic Perspective" may remain as a transitional user-facing term, but it should be understood as an Analytical Lens applied during validation.
-
-The default set is:
+The current default lens set is:
 
 - Systems Lens
 - Operations / Governance Lens
@@ -59,111 +40,66 @@ The default set is:
 - Differential Diagnosis Lens
 - Legal / Evidentiary Lens
 
-These are not role silos and they do not own portions of the system. Each lens examines the entire declared System Context using a different reasoning model.
+These labels are research instruments, not permanent EDF doctrine.
+
+A lens should be retained only if controlled work shows that it contributes distinctive, evidence-supported information rather than merely producing differently worded versions of the same analysis.
 
 ## Process
 
-### Stage 1: Independent EDF
+### Stage 1: Separate Analyses
 
-Each analytical lens completes an EDF independently for the same system and outcome.
+Produce EDF analyses under the same declared evidence and configuration.
 
-Each lens begins by declaring:
-
-- Primary System
-- Context
-- Focus
-
-The goal is to preserve initial disciplinary signal before group convergence begins.
+If independence matters to the research question, use materially independent execution sources rather than multiple prompts from one source.
 
 ### Stage 2: Cross Review
 
-Each lens reviews the others.
+Compare:
 
-Review questions:
+- System Context
+- evidence used
+- important origins
+- propagation paths
+- contradictions
+- control points
+- unknowns
+- confidence rationale
 
-- What did I learn?
-- What evidence changed my confidence?
-- What origin did I overlook?
-- What control point deserves more attention?
-- Did someone declare the System Context better?
+### Stage 3: Revision Record
 
-### Stage 3: Self Calibration
+Each analysis records:
 
-Each lens updates its own analysis after cross review.
+- what changed;
+- what evidence caused the change;
+- what remained disputed;
+- what new uncertainty appeared.
 
-At minimum, update:
-
-- Confidence
-- Origin network
-- Control point ranking
-- Unknowns
-
-The goal is not forced agreement. The goal is improved diagnostic quality.
+Do not treat convergence by itself as evidence of correctness.
 
 ### Stage 4: Synthesis
 
-Produce a synthesized result that includes:
+A synthesis may record:
 
-- Consensus areas
-- Divergence areas
-- Evidence gaps
-- Highest-leverage control points
-- Diagnostic sufficiency
+- areas of agreement;
+- areas of disagreement;
+- evidence gaps;
+- candidate control points;
+- diagnostic sufficiency for a specified next action.
 
-This synthesis can then be handed to Clarity for decision evaluation.
+The synthesist should distinguish differences caused by scope from differences caused by evidence interpretation.
 
-The synthesist should compare declared System Contexts before treating divergence as substantive disagreement.
+## Descriptive Tracking Fields
 
-### Synthesist Comparison Table
+Historical documents used terms such as Calibration Delta, Confidence Shift, Consensus Index, and Perspective Contribution.
 
-Use a simple comparison table when lenses differ:
-
-| Perspective | Primary System | Context | Focus |
-|-------------|----------------|---------|-------|
-| Systems Engineer | Solid Rocket Booster | Space Shuttle Program | Mechanical Reliability |
-| Operations Executive | Launch Authorization Process | NASA Shuttle Program | Governance |
-| Independent Investigator | Launch Decision Process | NASA Shuttle Program | Evidence and Causation |
-| Physician | Risk Assessment Process | Launch Authorization | Diagnostic Quality |
-| Attorney | Launch Authorization | NASA Governance | Standard of Care |
-
-## Evaluating Lenses
-
-Analytical lenses are part of validation methodology, not permanent framework doctrine.
-
-They should be retained only if they produce distinct, evidence-supported improvements to diagnosis, calibration, or synthesis.
-
-See [../framework-engineering/analytical-lens-evaluation.md](../framework-engineering/analytical-lens-evaluation.md).
-
-## Metrics
-
-These metrics are optional but useful in repeated or high-stakes use.
-
-| Metric | Purpose |
-|--------|---------|
-| Calibration Delta | Measures how much an analysis changed after review |
-| Confidence Shift | Tracks how confidence moved up or down |
-| Consensus Index | Estimates how much the lenses converged |
-| Perspective Contribution | Captures which lenses added distinctive value |
-
-These do not need mathematical precision in the working draft. They are tracking devices for diagnostic improvement.
+Until definitions, denominators, and reliability are validated, these are descriptive tracking ideas only. They must not be reported as quantitative scientific metrics.
 
 ## Relationship To EDF And Clarity
 
-EDF creates the diagnostic grammar.
+EDF makes a diagnostic model explicit.
 
-Diagnostic Calibration improves confidence in the diagnostic model.
+Diagnostic Calibration may expose disagreement and missing evidence across analyses.
 
-Clarity uses the calibrated understanding to evaluate decisions.
+Clarity evaluates options and tradeoffs after the organization decides the diagnostic model is sufficient for the decision being contemplated.
 
-## Practical Output
-
-A practical calibration output can be short:
-
-- Shared or explicitly compared System Context
-- Shared factual outcome
-- Calibrated origin network
-- Ranked control points
-- Remaining disagreements
-- Evidence gaps
-- Diagnostic sufficiency
-- Next responsible action for Clarity to evaluate
+See [../framework-engineering/analytical-lens-evaluation.md](../framework-engineering/analytical-lens-evaluation.md) and [../framework-engineering/claim-and-confidence-policy.md](../framework-engineering/claim-and-confidence-policy.md).
