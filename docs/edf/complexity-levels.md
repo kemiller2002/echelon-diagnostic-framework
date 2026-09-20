@@ -1,10 +1,10 @@
 # EDF Complexity Levels
 
-Status: Working draft for EDF v0.3
+Status: Current interpretation guidance
 
-EDF v0.3 keeps the same required diagnostic fields across levels. The level changes depth, evidence burden, and collaboration, not the underlying grammar.
+The byte-for-byte v0.3 document is preserved at [releases/v0.3/complexity-levels.md](releases/v0.3/complexity-levels.md).
 
-The alternative progressive grammar described in the v1.0 draft remains a candidate design and is not part of v0.3.
+The frozen v0.3 baseline used the same required diagnostic fields across levels. This current guidance preserves that interpretation while adding later evidence-bound clarifications. The alternative progressive grammar described in the v1.0 draft remains a candidate design and is not part of frozen v0.3.
 
 ## Selection Guide
 

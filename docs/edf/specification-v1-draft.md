@@ -2,6 +2,8 @@
 
 Status: Working draft
 
+> Research boundary: this document is a candidate architecture, not a validated successor to v0.3. Its mode changes and comparative method statements are design hypotheses until controlled evidence supports promotion. Current claim states live in `research/registries/hypothesis-registry.json`.
+
 ## Defining Statement
 
 EDF is a diagnostic grammar for understanding complex systems.
@@ -314,25 +316,19 @@ Framework Engineering artifacts may accompany EDF-3 investigations, but they rem
 
 ### RCA / Five Whys
 
-RCA and Five Whys are faster and easier for simple causal explanations.
-
-EDF is more useful when outcomes emerge from multiple interacting origins.
+Design hypothesis: RCA and Five Whys may be a better fit when a rapid simple causal chain is sufficient, while EDF is intended for cases where interacting origins and scope uncertainty matter.
 
 ### FMEA
 
-FMEA is stronger for prospective failure prevention and risk prioritization.
+Design hypothesis: FMEA is purpose-built for prospective failure/risk analysis. EDF is intended for retrospective system diagnosis and candidate control-point identification.
 
-EDF is stronger for retrospective diagnosis and high-leverage system understanding.
-
-They are complementary.
+Their practical complementarity has not yet been established by a matched controlled performance study.
 
 ### Fault Tree Analysis
 
-FTA is stronger for formal technical failure logic.
+Design hypothesis: FTA is purpose-built for formal technical fault logic, while EDF is intended to represent a broader sociotechnical diagnosis.
 
-EDF is broader and better suited for sociotechnical diagnosis.
-
-For highly technical reliability analysis, FTA may be used inside the technical branch of an EDF Origin Network.
+For a technical reliability problem, an FTA may be used alongside or within an EDF investigation. The integration pattern remains to be validated.
 
 ## When To Use EDF
 

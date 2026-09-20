@@ -1,6 +1,8 @@
 # EDF Operating Cycle
 
-Status: Working draft
+Status: Current interpretation guidance
+
+The v0.3-era operating-cycle artifact is preserved at [releases/v0.3/operating-cycle.md](releases/v0.3/operating-cycle.md).
 
 EDF is one part of a broader operating loop:
 

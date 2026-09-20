@@ -1,6 +1,8 @@
 # EDF Principles
 
-Status: Working draft
+Status: Current interpretation guidance
+
+The byte-for-byte v0.3-era principles are preserved at [releases/v0.3/principles.md](releases/v0.3/principles.md).
 
 EDF should stay practical. It should improve the inspectability of diagnostic reasoning without turning diagnosis into heavyweight theory.
 

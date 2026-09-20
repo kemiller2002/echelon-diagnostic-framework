@@ -1,6 +1,8 @@
 # Diagnostic Calibration
 
-Status: Working draft
+Status: Current interpretation guidance
+
+The v0.3-era calibration artifact is preserved at [releases/v0.3/diagnostic-calibration.md](releases/v0.3/diagnostic-calibration.md).
 
 Diagnostic Calibration is a proposed collaborative protocol for comparing, challenging, refining, and synthesizing multiple EDF analyses of the same system.
 

@@ -1,8 +1,10 @@
 # EDF Model
 
-Status: Working draft
+Status: Current interpretation guidance
 
-This page defines the core EDF concepts used in Specification v0.3.
+The byte-for-byte v0.3 version is preserved at [releases/v0.3/model.md](releases/v0.3/model.md).
+
+This page contains post-v0.3 interpretive clarifications identified by later research. It does not retroactively change the frozen v0.3 artifact.
 
 ## Core Concepts
 
