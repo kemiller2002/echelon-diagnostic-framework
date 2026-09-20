@@ -1,47 +1,73 @@
 # Evidence Ledger
 
-Status: Working draft
+Status: Current human-readable projection
+Updated: 2026-09-20
 
 Purpose:
-The Evidence Ledger tracks claims about EDF, Framework Engineering, Validation Protocol, Analytical Lenses, and emerging research hypotheses.
+Track the current evidence state of important EDF hypotheses without allowing historical summaries to outrank later contradictory evidence.
 
-## Evidence Table
+Canonical machine-readable sources:
 
-| Claim | Supporting Evidence | Opposing Evidence | Confidence | Status |
+- `research/registries/hypothesis-registry.json`
+- `research/registries/evidence-registry.json`
+- `docs/framework-engineering/claim-and-confidence-policy.md`
+
+## Current Claim State
+
+| Hypothesis | Current state | Confidence | What the evidence actually supports | Key limitation |
 |---|---|---|---|---|
-| System Context improves cross-lens agreement | Challenger R1, Boeing R1, Pixar, Toyota | None so far | High | Supported |
-| Validation Protocol v1.1 improves structural agreement | Challenger R1, Apollo 13 R1, Boeing R1, Apollo 11 R1 | More cases needed | High | Provisionally supported |
-| EDF can analyze failure and success using the same grammar | Challenger, Boeing, Apollo 11, Pixar, Toyota | None so far | High | Supported |
-| EDF improves control-point identification versus natural analysis | Challenger R1, Boeing R1, Voyagier, Restaurant | Needs quantitative scoring | Medium-High | Provisionally supported |
-| RC-7 Reproducibility is measurable | Challenger R1, Apollo 13 R1, Boeing R1, Apollo 11 R1, Pixar, Toyota | Need independent human analysts later | Medium-High | Provisionally supported |
-| EDF scales down to everyday operational problems | Restaurant case | More simple cases needed | Medium | Under investigation |
-| Diagnostic topology may be a useful derived concept | Apollo 13, Boeing, Apollo 11, Mars Climate Orbiter, Pixar, Toyota | Not enough cases; risk of overfitting | Medium | Deferred |
-| Sustained excellence may reflect adaptive learning behavior | Pixar, Toyota, Apollo 11 | Needs more success cases | Medium | Deferred |
-| Analytical Lenses provide distinct value | Challenger R1, Boeing R1, Pixar, Toyota | Lens overlap not yet quantified | Medium | Under investigation |
-| EDF v0.3 struggles with evolving diagnostic state | Apollo 13 R1 | Needs additional dynamic cases | Medium | Deferred |
-| Origin Networks may naturally organize into layers | Boeing R1, Toyota, Pixar | Not formalized or tested enough | Medium | Deferred |
-| Framework Engineering needs longitudinal validation to test evidence evolution | Chernobyl planning discussion | Not yet tested | Medium | Planned |
-| Diagnostic Stability may be required to evaluate framework behavior over time | Chernobyl planning discussion | Not yet tested | Medium | Deferred |
-| Research Question Sets may be necessary for reproducible validation | Chernobyl planning discussion | Not yet tested | Medium | Deferred |
-| Chernobyl is suitable as a Longitudinal Reference Case | Historical interpretation shifted from early operator-error emphasis toward later design/safety-culture/systemic explanations | Not yet analyzed through EDF | Medium-High | Planned |
-| Evidence Packages are necessary for longitudinal validation | Chernobyl requires separation of 1986, INSAG-7, and modern evidence states | Not yet tested | Medium | Planned |
-| Research Question Sets are needed for comparable longitudinal runs | Chernobyl planning revealed that different research questions would invalidate comparison | Not yet tested | Medium | Planned |
-| EDF provides unique value beyond RCA/Five Whys for complex sociotechnical cases | CFCV-001 | RCA superior for speed and simplicity | Medium-High | Supported |
-| EDF and FMEA are complementary rather than competitive | CFCV-002 | Not yet tested across multiple cases | Medium | Provisionally Supported |
-| EDF and FTA are complementary rather than competitive | CFCV-003 | FTA superior for technical fault logic | Medium | Provisionally Supported |
-| EDF should not try to replace specialized technical reliability methods | CFCV-002, CFCV-003 | None so far | Medium-High | Supported |
-| EDF's likely differentiation includes System Context, Origin Networks, broad Control Points, and evidence evolution through Framework Engineering | CFCV-001, CFCV-002, CFCV-003 | Needs additional methods comparison | Medium-High | Supported |
-| EDF's main current weaknesses are speed, learning curve, visualization, and quantitative metrics | Comparative Gap Analysis | Needs user testing | Medium | Under investigation |
-| Independent analyst validation is required before EDF can claim reproducibility | IFVS-001 study design | Not yet run with real analysts | High | Planned |
-| IDARs provide traceable raw validation artifacts | IFVS-001 design | Not yet tested | Medium | Planned |
-| DARs provide structured agreement evidence for RC-7 | IFVS-001 design | Not yet tested | Medium | Planned |
-| EDF may function as a cross-disciplinary diagnostic grammar if IDAs from different backgrounds produce comparable structures | IFVS-001 simulated results | Needs real participants | Medium | Under investigation |
-| Origin Network and Propagation are distinct EDF concepts | Ablation 002; Chernobyl; Retail POS outage; Equifax; Toyota | Needs independent analyst validation | Medium-High | Supported |
-| Propagation improves EDF by modeling system behavior rather than contributor structure | Ablation 002 | Needs additional cases | Medium | Provisionally Supported |
+| HY-EDF-001 - EDF can organize failure and success narratives through a common field structure | Internal demonstration | Medium-High | Repository-authored cases repeatedly populate the same diagnostic grammar | Shared research process; descriptive applicability is not explanatory validity |
+| HY-EDF-002 - System Context improves semantic scope agreement beyond matched headings | Suggestive | Low-Medium | R1 cases are more explicitly scoped | No randomized ablation or matched-heading control |
+| HY-EDF-003 - VP v1.1 improves cross-executor reproducibility | Unsupported | Low | v1.1 changed the protocol and produced internally similar structures | No controlled v1.0 comparison and no independent executor study |
+| HY-EDF-004 - EDF improves control-point quality versus natural analysis | Suggestive | Low | Current cases often surface system-level controls | No blinded baseline scoring or intervention utility key |
+| HY-EDF-005 - EDF produces materially comparable semantic diagnoses under independent executor conditions | Unsupported | Low | No completed evidence | Independent-human and controlled multi-model studies are absent; historical R1 execution is also not fully reconstructable |
+| HY-EDF-006 - EDF updates proportionally as evidence changes | Unsupported | Low | Architecture and evidence packages exist | LRC-001 has not produced controlled completed runs |
+| HY-EDF-007 - Origin Network and Propagation are usefully distinct | Suggestive | Medium | One ablation plus repeated authored usage | Single direct ablation; no independent replication |
+| HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Open / unsupported | Low | No completed test | This is the primary next benchmark |
+| HY-EDF-009 - Diagnostic topologies generalize | Suggestive | Low | Recurring patterns appear in selected cases | No held-out coding or external replication |
+| HY-EDF-010 - EDF-0 is fast and learnable for routine use | Unsupported | Low | Teaching examples show intended use only | No time-on-task or usability evidence |
 
-## Notes
+## Interpretation Rules
 
-- Evidence Ledger does not modify EDF.
-- Evidence Ledger supports Constitutional Review.
-- Claims should be revised when future Validation Cases produce contradictory evidence.
-- Confidence should remain provisional until external or independent analyst testing occurs.
+- "Internal demonstration" means demonstrated inside this repository's authored/generated corpus only.
+- "Suggestive" means evidence is directionally supportive but credible alternatives remain.
+- "Unsupported" does not mean false. It means the current repository does not contain completed evidence capable of establishing the claim.
+- High confidence may be appropriate for a narrow methodological negative claim, such as the absence of raw run bundles, while positive performance claims remain unsupported.
+- Historical percentages are not current evidence of reproducibility because their raw outputs, denominators, prompts, evaluator versions, and scoring calculations are not preserved.
+
+## Historical Claim Corrections
+
+The following older formulations are superseded in current summaries:
+
+- "Very High reproducibility" -> historical internal structural agreement; not enough preserved execution provenance for full computational reconstruction.
+- "VP v1.1 improves reproducibility" -> unsupported causal claim pending a controlled protocol comparison.
+- "System Context improves cross-lens agreement" at High confidence -> suggestive pending a matched-heading ablation.
+- "EDF improves control-point identification" at Medium-High confidence -> suggestive pending blinded baseline scoring.
+- "Evidence evolution is a differentiation/strength" -> architectural capability only, empirical performance unsupported.
+
+Historical source documents remain preserved for traceability.
+
+## Promotion Gate
+
+A claim may move to a stronger state only when the new REP identifies:
+
+1. the exact hypothesis ID;
+2. the evidence IDs;
+3. the frozen run configuration;
+4. raw outputs;
+5. executable scoring;
+6. failed/invalid-run accounting;
+7. competing explanations;
+8. the preregistered promotion and falsification rules.
+
+## Next Evidence Priority
+
+The highest-information computational test is the Multi-Model EDF Structural-Value Benchmark in `research/analysis/non-human-next-experiments.md`.
+
+It must compare:
+
+- natural analysis;
+- matched neutral structure;
+- EDF;
+
+with blind evaluation, multiple model families, immutable run bundles, negative-run retention, and cost instrumentation.

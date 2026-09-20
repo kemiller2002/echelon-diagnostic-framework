@@ -1,94 +1,71 @@
 # EDF Public Website Architecture
 
-Status: Maintainer guide  
-Last reviewed: 2026-07-28
+Status: Maintainer guide
+Last reviewed: 2026-09-20
 
 ## Purpose
 
-The public site is an educational interface to EDF, not a marketing funnel or
-a substitute for the source research. It helps a new visitor recognize
-premature certainty, understand EDF's diagnostic grammar, and inspect the
-evidence state behind public claims.
+The public site is the educational interface to EDF. It must teach the working grammar without presenting research hypotheses as established performance.
+
+## Canonical implementation
+
+`static-site/` is the only website implementation.
+
+- HTML is semantic and progressively readable without JavaScript.
+- `static-site/styles.css` is the single design stylesheet.
+- `public/og.png` is copied into the deployment artifact by the Pages workflow.
+- GitHub Pages deploys `static-site/` directly.
+- No application framework or client runtime is required.
+
+The prior Next.js/vinext/Cloudflare implementation was removed in September 2026 because it was not part of the deployed system and created a second, drifting source of truth.
+
+## Claim architecture
+
+Public performance claims are downstream projections of:
+
+- `research/registries/hypothesis-registry.json`;
+- `research/registries/evidence-registry.json`;
+- `docs/framework-engineering/claim-and-confidence-policy.md`.
+
+Material claim elements use:
+
+- `data-claim-id`
+- `data-claim-state`
+
+The repository validator checks those attributes against the current hypothesis registry.
+
+Public wording may be weaker than the registry. It may not be stronger.
+
+Historical case pages may retain historical wording for traceability, but current summary pages and the website must reflect later contradictory evidence.
 
 ## Information architecture
 
-The current release is a focused, single-route learning path:
+1. Home: problem framing, grammar, examples, bounded evidence claims.
+2. Learn: field distinctions and diagnostic sequence.
+3. Examples: validation examples clearly separated from invented teaching cases.
+4. Evidence: current claim states, limitations, and source links.
+5. Start: guided EDF-0 worksheet.
 
-1. Establish the problem: organizations often act before they understand.
-2. Contrast default problem-solving with EDF.
-3. Teach the seven public-facing diagnostic moves interactively.
-4. Demonstrate origin-versus-control-point reasoning with Challenger.
-5. Separate supported, provisional, and open claims.
-6. Show application domains without promising validated outcomes.
-7. Give the visitor a small, responsible first action.
+## Accessibility
 
-This sequence favors five-minute comprehension over a large documentation
-tree. Future routes should be added only when their content justifies
-independent navigation, beginning with `/framework`, `/examples`, and
-`/research`.
-
-## Claim and evidence policy
-
-Public copy must preserve these boundaries:
-
-`Observation → Evidence → Hypothesis → Interpretation → Theory → Public claim`
-
-Claims should link to the frozen specification, validation findings, or
-evidence ledger. Provisional findings must remain visibly provisional.
-Limitations should appear beside the claims they qualify. A new validation
-result does not silently change a frozen EDF specification.
-
-## Component and technical architecture
-
-- `app/page.tsx` owns the narrative order and server-rendered content.
-- `app/DiagnosticFlow.tsx` is the only client component. It implements the
-  interactive diagnostic grammar with accessible tabs and keyboard navigation.
-- `app/globals.css` owns the compact design system, responsive behavior,
-  automatic dark mode, reduced-motion handling, and print rules.
-- `app/layout.tsx` owns canonical metadata and host-derived social metadata.
-
-Keep JavaScript limited to interactions that materially improve learning.
-Prefer semantic HTML and CSS over visual dependencies.
-
-## Design rationale
-
-The visual language uses warm paper, near-black green, evidence orange, and a
-high-visibility chartreuse accent. Monospace labels signal method, state, and
-traceability; sans-serif text carries explanatory prose; italic serif text
-marks reflective questions. Borders and numbered sequences make reasoning
-inspectable without implying false certainty.
-
-## Accessibility decisions
-
-- The learning sequence remains meaningful without JavaScript.
-- The diagnostic flow supports Arrow keys, Home, End, Tab, and pointer input.
-- Focusable controls expose selected state and panel relationships.
+- Content remains usable without JavaScript.
+- Navigation and headings use semantic HTML.
 - Layouts collapse to one column on narrow screens.
 - Motion respects `prefers-reduced-motion`.
-- Color is never the only carrier of evidence status.
-- Research content has print-specific presentation.
+- Color is not the sole carrier of evidence state.
+- Research content remains printable.
 
-## Search, sharing, and maintenance
+## Deployment gate
 
-Metadata leads with the framework's purpose. Social metadata uses the request
-host so preview URLs remain correct across deployments. Future research and
-example routes should use descriptive titles and direct links to source
-artifacts.
+Before Pages deployment, CI must pass:
 
-Before changing a public claim, compare it against the frozen specification,
-evidence ledger, and reproducibility findings. Test the production build after
-content or component changes. Review interactions with keyboard-only input and
-at a narrow viewport. Preserve the existing hosting project identifier.
+```bash
+node --test
+node scripts/validate-repository.mjs
+```
 
-## Roadmap
+The validator checks broken local references and public claim drift in addition to registry integrity.
 
-1. Expand the framework into stage-level reference pages.
-2. Publish complete, source-linked worked examples.
-3. Build a research index for accepted, rejected, and open hypotheses.
-4. Add application guides only as domain evidence matures.
-5. Test comprehension and usability with independent human participants.
-6. Revisit information architecture after real navigation evidence exists.
+## Change rule
 
-The highest-priority unresolved risk is empirical: current evidence is produced
-within the research program and has not yet been validated with independent
-human analysts.
+A public evidence claim must not be edited in isolation. Update the hypothesis/evidence registries first, then the human-readable ledger, then the public projection.

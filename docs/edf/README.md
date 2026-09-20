@@ -2,9 +2,9 @@
 
 Status: Working draft, Specification v0.3
 
-EDF is a systems understanding framework with a diagnostic grammar.
+EDF is a systems-understanding framework with a diagnostic grammar.
 
-Its job is to explain how a system produced an outcome and to identify the highest-leverage opportunities for changing future outcomes.
+Its job is to make a diagnosis explicit enough to challenge: what was observed, what interacting origins may explain it, how effects propagated, what evidence supports the model, where intervention may have leverage, and whether the model is sufficient for the next responsible action.
 
 EDF answers:
 
@@ -14,37 +14,42 @@ Clarity answers:
 
 > What should we do?
 
-EDF establishes confidence in reality before Clarity evaluates decisions.
+## Evidence Boundary
+
+The framework is coherent enough to use as a working diagnostic grammar. Its performance claims are much less mature.
+
+The current research record supports:
+
+- internal demonstration that the same field structure can organize varied repository-authored failure and success narratives;
+- suggestive evidence that Origin Network and Propagation are usefully distinct;
+- a set of explicit hypotheses about System Context, control points, evidence evolution, and reproducibility.
+
+The current research record does **not** establish:
+
+- cross-executor reproducibility and historical execution reconstructability;
+- causal improvement from System Context;
+- better control points than matched alternatives;
+- evidence-sensitive updating;
+- superiority to natural analysis or matched neutral structure;
+- validated quantitative confidence;
+- routine-use speed or learnability.
+
+Current claim state is maintained in:
+
+- [validation/evidence-ledger.md](validation/evidence-ledger.md)
+- [../../research/registries/hypothesis-registry.json](../../research/registries/hypothesis-registry.json)
+- [../../research/registries/evidence-registry.json](../../research/registries/evidence-registry.json)
+- [../../research/registries/theory-registry.json](../../research/registries/theory-registry.json)
 
 ## Core Promise
 
-Complex outcomes rarely have a single root cause. They emerge from an origin network.
+Complex outcomes can involve interacting contributors, and the most useful intervention point may differ from the nearest manifestation or earliest origin.
 
-EDF keeps that idea practical by requiring a structured diagnostic sequence and a small set of concepts that improve understanding and action.
-
-EDF also evolves under constitutional rules that define what the framework refuses to compromise on. See [constitution.md](constitution.md).
-
-Constitutional principles include Reality First, Version Integrity, and Evidence Isolation.
-
-Evidence Isolation protects longitudinal validation from hindsight contamination by ensuring every Validation Run uses only its declared Evidence Package.
-
-## v0.3 Update
-
-EDF v0.3 introduces System Context as the opening frame for every analysis.
-
-Under the constitution's version integrity rule, this is a subsequent version rather than a retroactive redefinition of v0.2.
-
-System Context has three fields:
-
-- Primary System
-- Context
-- Focus
-
-These fields make different professional analyses more comparable without forcing agreement.
+EDF makes that model explicit. Whether EDF improves performance over simpler structured alternatives is an open empirical question, not an established fact.
 
 ## v0.3 Workflow
 
-Every EDF analysis should follow this sequence:
+Every EDF analysis follows this sequence:
 
 1. Define the System Context
    - Primary System
@@ -61,8 +66,6 @@ Every EDF analysis should follow this sequence:
 
 ## The Five Verbs
 
-EDF uses five verbs as its design test:
-
 - Define
 - Observe
 - Explain
@@ -73,85 +76,55 @@ Design rule:
 
 > If a new concept does not improve one of the five verbs, it does not belong in EDF.
 
+## Version Integrity
+
+The v0.3 specification remains the current frozen working baseline.
+
+A byte-for-byte reconstruction bundle for the v0.3 specification, model, principles, complexity guidance, operating cycle, calibration document, and templates is preserved under [releases/v0.3/](releases/v0.3/). Its manifest records the original Git blob hashes and CI verifies them on every change.
+
+Root supporting documents may contain later interpretation guidance and link back to their frozen snapshots. They must not be used to retroactively strengthen v0.3 validation results.
+
+The v1.0 document is a draft candidate architecture. It is not evidence that proposed changes improve EDF, and it must not be promoted solely because it is more complete or elegant.
+
 ## Relationship To Clarity
 
-EDF and Clarity are adjacent but different.
+- EDF expresses the diagnostic model.
+- Diagnostic Calibration may compare multiple analyses.
+- Clarity evaluates options, tradeoffs, and decisions once the understanding is sufficient for the contemplated action.
 
-- EDF builds understanding of the system, the outcome, the origin network, and control points.
-- Diagnostic Calibration optionally improves confidence in that diagnostic model when multiple analyses need to be compared and synthesized.
-- Clarity evaluates options, tradeoffs, and decisions once the understanding is good enough.
+Diagnostic Sufficiency is action-relative. It is not a certificate that the diagnosis is true or complete.
 
-See [operating-cycle.md](operating-cycle.md) for the full handoff.
-
-## In This Section
+## Documents
 
 | Document | Purpose |
-|----------|---------|
-| [specification.md](specification.md) | Authoritative EDF v0.3 specification |
-| [specification-v1-draft.md](specification-v1-draft.md) | Current draft architectural specification for EDF 1.0 |
-| [constitution.md](constitution.md) | Governance rules for how EDF evolves and what it refuses to compromise on |
-| [diagnostic-calibration.md](diagnostic-calibration.md) | Optional collaborative protocol for calibrating multiple EDF analyses |
-| [principles.md](principles.md) | Guiding principles and design constraints |
-| [model.md](model.md) | Definitions of the core EDF concepts |
-| [complexity-levels.md](complexity-levels.md) | EDF-0, EDF-1, and EDF-2 usage guidance |
-| [operating-cycle.md](operating-cycle.md) | How EDF fits into the broader operating loop |
-| [examples/challenger.md](examples/challenger.md) | Concise failure example |
-| [examples/apollo-11.md](examples/apollo-11.md) | Concise success example |
-| [examples/boeing-737-max.md](examples/boeing-737-max.md) | Concise complex systems example |
-| [templates/edf-0-quick-card.md](templates/edf-0-quick-card.md) | Rapid template |
-| [templates/edf-1-standard.md](templates/edf-1-standard.md) | Standard template |
-| [templates/edf-2-complex.md](templates/edf-2-complex.md) | Complex template |
+|---|---|
+| [specification.md](specification.md) | Frozen EDF v0.3 working baseline |
+| [specification-v1-draft.md](specification-v1-draft.md) | Candidate v1.0 architecture, not yet promoted |
+| [constitution.md](constitution.md) | Governance principles |
+| [model.md](model.md) | Core concept definitions |
+| [complexity-levels.md](complexity-levels.md) | EDF-0, EDF-1, EDF-2 guidance |
+| [operating-cycle.md](operating-cycle.md) | EDF in the broader operating loop |
+| [diagnostic-calibration.md](diagnostic-calibration.md) | Optional multi-analysis comparison protocol |
+| [../framework-engineering/claim-and-confidence-policy.md](../framework-engineering/claim-and-confidence-policy.md) | Current research claim policy |
+| [../framework-engineering/validation-protocol-v1.2.md](../framework-engineering/validation-protocol-v1.2.md) | Future validation protocol |
 
-## Validation Findings
+## Current Research Priority
 
-EDF v0.3 remains frozen. These notes record validation findings, deferred insights, and research questions without changing the specification.
+The highest-information next computational experiment is the Multi-Model EDF Structural-Value Benchmark.
 
-- [validation/case-001R1-challenger.md](validation/case-001R1-challenger.md)
-- [validation/case-002R1-apollo-13.md](validation/case-002R1-apollo-13.md)
-- [validation/case-003R1-boeing-737-max.md](validation/case-003R1-boeing-737-max.md)
-- [validation/case-008R1-pixar.md](validation/case-008R1-pixar.md)
-- [validation/case-009R1-toyota-production-system.md](validation/case-009R1-toyota-production-system.md)
-- [validation/case-002-apollo-13.md](validation/case-002-apollo-13.md)
-- [validation/case-003-boeing-737-max.md](validation/case-003-boeing-737-max.md)
-- [validation/case-004-apollo-11.md](validation/case-004-apollo-11.md)
-- [validation/evidence-ledger.md](validation/evidence-ledger.md)
-- [validation/ablation/README.md](validation/ablation/README.md)
-- [validation/ablation/ablation-002-propagation-refinement.md](validation/ablation/ablation-002-propagation-refinement.md)
-- [validation/reproducibility-findings.md](validation/reproducibility-findings.md)
-- [validation/topology-findings.md](validation/topology-findings.md)
+It is designed to distinguish EDF-specific semantic value from:
 
-Validation methodology is tracked separately in [../framework-engineering/validation-protocol.md](../framework-engineering/validation-protocol.md).
+- generic structure;
+- prompt length;
+- model choice;
+- evaluator affinity.
 
-## Comparative Validation
+The required design is in `research/analysis/non-human-next-experiments.md`.
 
-EDF is not intended to replace RCA, FMEA, or Fault Tree Analysis.
-
-EDF aims to diagnose complex systems and identify high-leverage control points.
-
-Specialized methods may remain superior for speed, prospective risk analysis, or technical reliability modeling.
-
-- [validation/comparative/README.md](validation/comparative/README.md)
-- [validation/comparative/CFCV-001-rca-five-whys.md](validation/comparative/CFCV-001-rca-five-whys.md)
-- [validation/comparative/CFCV-002-fmea.md](validation/comparative/CFCV-002-fmea.md)
-- [validation/comparative/CFCV-003-fault-tree-analysis.md](validation/comparative/CFCV-003-fault-tree-analysis.md)
-- [validation/comparative/comparative-gap-analysis.md](validation/comparative/comparative-gap-analysis.md)
-
-## Next Validation Roadmap
-
-Remaining priority validation cases:
-
-1. Equifax data breach - cybersecurity and software governance
-2. Medical diagnostic case - clinical reasoning and differential diagnosis
-3. Three Mile Island - human factors and interpretation under stress
-4. Hyatt Regency walkway collapse - design change, approval, and responsibility transfer
-5. Simple EDF-0 case - everyday troubleshooting and under-five-minute usability
+Independent-human reproducibility remains important, but it should not be confused with computational replication and requires its own participant protocol.
 
 ## Starting Point
 
-Use the smallest EDF level that reaches diagnostic sufficiency:
+Use the smallest EDF level that reaches action-relative diagnostic sufficiency.
 
-- [EDF-0](complexity-levels.md#edf-0-rapid)
-- [EDF-1](complexity-levels.md#edf-1-standard)
-- [EDF-2](complexity-levels.md#edf-2-complex)
-
-Use [diagnostic-calibration.md](diagnostic-calibration.md) only when the situation benefits from comparing and synthesizing multiple EDF analyses.
+Treat confidence labels as qualitative unless a validated quantitative calibration method is explicitly used.

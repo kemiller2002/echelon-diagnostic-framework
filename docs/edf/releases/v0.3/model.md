@@ -1,10 +1,8 @@
 # EDF Model
 
-Status: Current interpretation guidance
+Status: Working draft
 
-The byte-for-byte v0.3 version is preserved at [releases/v0.3/model.md](releases/v0.3/model.md).
-
-This page contains post-v0.3 interpretive clarifications identified by later research. It does not retroactively change the frozen v0.3 artifact.
+This page defines the core EDF concepts used in Specification v0.3.
 
 ## Core Concepts
 
@@ -86,9 +84,9 @@ Guiding question:
 
 ### Origin Network
 
-The origin network is the set of contributing origins currently supported by the diagnostic model.
+The origin network is the set of interacting contributing origins that produced the outcome.
 
-EDF uses a network representation so interacting contributors can be expressed when the evidence supports them. It should not invent multiple causes merely because a case is complex.
+Complex outcomes rarely reduce cleanly to one root cause. EDF therefore treats the origin network as the default model for non-trivial cases.
 
 Guiding question:
 
@@ -116,9 +114,9 @@ Guiding question:
 
 ### Confidence
 
-Confidence is a qualitative statement about how strongly the current evidence supports the diagnostic model.
+Confidence is the stated level of certainty in the current diagnosis.
 
-In EDF v0.3 these labels are not calibrated probabilities. Confidence should reflect evidence quality, consistency, competing explanations, and unresolved uncertainty.
+Confidence should reflect evidence quality, consistency, and unresolved uncertainty.
 
 Suggested labels:
 
@@ -130,7 +128,7 @@ Suggested labels:
 
 A control point is a place where intervention can meaningfully influence future outcomes.
 
-Control points may differ from origins. EDF therefore asks analysts to compare candidate intervention points rather than assuming the earliest origin or nearest manifestation is the best place to act. "Leverage" is currently a heuristic judgment, not a validated quantitative metric.
+Control points may differ from origins. The most important control point is often not the earliest cause, but the place with the best leverage.
 
 Guiding question:
 
@@ -138,7 +136,7 @@ Guiding question:
 
 ### Diagnostic Sufficiency
 
-Diagnostic sufficiency is the action-relative threshold at which the current understanding is good enough to support the next responsible action, given its consequence, reversibility, and material unknowns.
+Diagnostic sufficiency is the threshold at which the current understanding is good enough to support the next responsible action.
 
 Guiding question:
 
@@ -155,7 +153,7 @@ Guiding question:
 | Origin Network -> Propagation | Interacting causes move through the system |
 | Evidence -> Confidence | Evidence quality constrains certainty |
 | Control Points -> Next Responsible Action | Ranked control points shape what should be acted on |
-| Confidence + consequence + reversibility + unknowns -> Diagnostic Sufficiency | Sufficiency is relative to the next action, not a claim of complete truth |
+| Confidence -> Diagnostic Sufficiency | Certainty helps determine whether action is responsible |
 
 ## Minimal Diagnostic Grammar
 

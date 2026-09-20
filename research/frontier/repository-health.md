@@ -1,66 +1,53 @@
 # Repository Health Assessment
 
-Analysis date: 2026-07-28
+Analysis date: 2026-09-20
+Status: Current
 
-## Scope and counting rules
+## Executive assessment
 
-The corpus contains 53 Markdown documents under `docs/`. Of these, 42 are treated as substantive research or governance artifacts; 11 navigation pages, templates, or short public examples are supporting artifacts. No artifact declares `status: accepted`; most say `Working draft`. “Validated finding” below therefore means supported inside the repository, not externally validated.
+EDF is healthier as a research repository than it was at the July review because its current claim state is now explicit, machine-readable, and enforced against public copy.
 
-## Metrics
+The framework remains empirically immature. The upgrade improves research integrity; it does not manufacture new evidence of diagnostic performance.
+
+## Current measurable state
 
 | Metric | Result | Interpretation |
 |---|---:|---|
-| Markdown artifacts reviewed | 53 | Complete `docs/` corpus |
-| Substantive research/governance artifacts | 42 | Excludes navigation-only and user templates |
-| Repository-supported claims | 10 | Supported or provisionally supported in the evidence ledger |
-| Externally validated findings | 0 | No completed independent-human study |
-| Open frontier records | 10 | All records are Open |
-| Average confidence | 0.61 | Qualitative labels normalized; lowered for non-independent evidence |
-| Validation cases with R1 analyses | 6 | Challenger, Apollo 13, Boeing, Apollo 11, Pixar, Toyota |
-| Independent validation studies completed | 0 | IFVS-001 is a design only |
-| Longitudinal studies completed | 0 | LRC-001 is planned |
-| Comparative method studies | 3 | RCA/Five Whys, FMEA, FTA; single principal use case |
-| Ablation studies | 1 completed artifact | Propagation refinement |
-| Critical/high contradictions | 3 | Reproducibility, version semantics, evidence evolution |
-| Semantic duplicate opportunity rate | 58% | 24 raw themes consolidated into 10 RFRs |
-| Average research depth | 2.6 / 5 | Strong concepts/cases; weak controlled/external evidence |
-| Knowledge graph connectivity | 0.42 | 19 dependency/evidence edges across 20 principal nodes |
-| Repository maturity | Emerging / internally coherent | Not ready for empirical performance claims |
+| Current hypotheses | 10 | Canonical registry |
+| Current evidence records | 7 | Canonical registry, including external methodology cross-check |
+| Current theory records | 3 | Working theory boundary |
+| Cross-executor performance studies completed | 0 | Largest evidence gap |
+| Controlled matched-structure benchmarks completed | 0 | EDF-specific incremental value unresolved |
+| Current confirmatory protocol | v1.2 | Requires raw run bundles and matched controls |
+| Integrity tests | 1/1 pass | Repository-level check, not framework-performance evidence |
+| Markdown/HTML files checked for local links | 101 | Automated repository validation |
+| Required website files checked | 7 | Canonical static site |
+| Duplicate deployed web stacks | 0 | Removed |
+| Public claim cards registry-linked | Yes | Drift is mechanically checked |
+| Frozen v0.3 artifacts hash-verified | 9 | Historical baseline cannot silently drift |
 
-## Research by discipline
+## Highest-confidence findings
 
-| Discipline | Coverage | Gap |
-|---|---|---|
-| Systems engineering | High | External replication |
-| Operations/governance | High | Field outcomes and economic measures |
-| Evidence/causal reasoning | Medium-high | Blinding and calibration metrics |
-| Reliability engineering | Medium | Formal FTA/FMEA integration trials |
-| Human factors | Low-medium | Dedicated stress/interface cases |
-| Medicine | Low | No clinical case validation |
-| Cybersecurity | Low | No completed security case |
-| Statistics/measurement | Low | No power analysis, reliability coefficients, or uncertainty intervals |
-| Accessibility | Very low | No study |
-| Economics | Very low | No cost-effectiveness analysis |
+- Historical R1 outputs do not constitute independent reproducibility.
+- Historical exact agreement percentages cannot be recomputed from preserved artifacts.
+- An FCR is necessary but insufficient for reconstructing computational execution.
+- The public site must not outrank later contradictory research.
+- Generic structured prompting is a credible alternative explanation for much of the apparent EDF benefit.
 
-## Coverage
+## Largest remaining unknown
 
-- Internal case coverage: moderate.
-- Failure/success diversity: good.
-- Independent-participant coverage: absent.
-- Longitudinal evidence coverage: absent.
-- Simple-case/EDF-0 coverage: minimal.
-- Experimental coverage: low.
-- Quantitative measurement coverage: low.
+Whether EDF-specific semantics add measurable value beyond a matched neutral structured prompt.
 
-## Largest evidence gaps
+## Research health recommendation
 
-1. No real independent analysts.
-2. No randomized or counterbalanced method comparison.
-3. No completed evidence-evolution experiment.
-4. No predictive validation of control points.
-5. No validated scoring rubric for agreement, confidence, or diagnostic sufficiency.
+Freeze conceptual expansion and execute the Multi-Model EDF Structural-Value Benchmark under Validation Protocol v1.2.
 
-## Health recommendation
+If matched neutral structure is non-inferior, simplify the theory rather than redefining success after the fact.
 
-Freeze new core concepts. Invest the next research cycle in independent analysts, longitudinal execution, quantitative measurement, and simple-case usability. Update this health report when RFR-001 or RFR-002 changes status.
+If EDF outperforms both natural and matched-structure controls across independent model families and blinded evaluators, promote only the specific hypotheses measured by that experiment.
 
+## Engineering health recommendation
+
+Keep the repository static-site-first and dependency-light.
+
+Do not reintroduce an application framework unless a tested product requirement cannot be satisfied by semantic HTML/CSS and the cost is justified.
