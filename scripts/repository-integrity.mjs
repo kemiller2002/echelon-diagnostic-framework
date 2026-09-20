@@ -146,7 +146,7 @@ export function validateRepository(root = process.cwd()) {
   for (const rel of legacy) if (fs.existsSync(path.join(root, rel))) errors.push("Stale duplicate web stack remains: " + rel);
 
   const repro = fs.readFileSync(path.join(root, "docs/edf/validation/reproducibility-findings.md"), "utf8");
-  if (!repro.includes("No completed independent reproducibility result exists")) errors.push("Current reproducibility boundary is missing.");
+  if (!repro.includes("No completed cross-executor reproducibility result exists") || !repro.includes("execution reconstructability")) errors.push("Current qualified reproducibility boundary is missing.");
 
   return {
     errors,
