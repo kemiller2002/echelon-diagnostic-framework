@@ -18,9 +18,9 @@ Canonical machine-readable sources:
 |---|---|---|---|---|
 | HY-EDF-001 - EDF can organize failure and success narratives through a common field structure | Internal demonstration | Medium-High | Repository-authored cases repeatedly populate the same diagnostic grammar | Shared research process; descriptive applicability is not explanatory validity |
 | HY-EDF-002 - System Context improves semantic scope agreement beyond matched headings | Suggestive | Low-Medium | R1 cases are more explicitly scoped | No randomized ablation or matched-heading control |
-| HY-EDF-003 - VP v1.1 improves independent reproducibility | Unsupported | Low | v1.1 changed the protocol and produced internally similar structures | No controlled v1.0 comparison and no independent replication |
+| HY-EDF-003 - VP v1.1 improves cross-executor reproducibility | Unsupported | Low | v1.1 changed the protocol and produced internally similar structures | No controlled v1.0 comparison and no independent executor study |
 | HY-EDF-004 - EDF improves control-point quality versus natural analysis | Suggestive | Low | Current cases often surface system-level controls | No blinded baseline scoring or intervention utility key |
-| HY-EDF-005 - EDF is independently reproducible | Unsupported | Low | No completed evidence | Independent-human and controlled multi-model studies are absent |
+| HY-EDF-005 - EDF produces materially comparable semantic diagnoses under independent executor conditions | Unsupported | Low | No completed evidence | Independent-human and controlled multi-model studies are absent; historical R1 execution is also not fully reconstructable |
 | HY-EDF-006 - EDF updates proportionally as evidence changes | Unsupported | Low | Architecture and evidence packages exist | LRC-001 has not produced controlled completed runs |
 | HY-EDF-007 - Origin Network and Propagation are usefully distinct | Suggestive | Medium | One ablation plus repeated authored usage | Single direct ablation; no independent replication |
 | HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Open / unsupported | Low | No completed test | This is the primary next benchmark |
@@ -39,7 +39,7 @@ Canonical machine-readable sources:
 
 The following older formulations are superseded in current summaries:
 
-- "Very High reproducibility" -> historical internal structural agreement, non-recomputable.
+- "Very High reproducibility" -> historical internal structural agreement; not enough preserved execution provenance for full computational reconstruction.
 - "VP v1.1 improves reproducibility" -> unsupported causal claim pending a controlled protocol comparison.
 - "System Context improves cross-lens agreement" at High confidence -> suggestive pending a matched-heading ablation.
 - "EDF improves control-point identification" at Medium-High confidence -> suggestive pending blinded baseline scoring.

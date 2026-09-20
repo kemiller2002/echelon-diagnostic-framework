@@ -14,9 +14,9 @@ The framework remains empirically immature. The upgrade improves research integr
 | Metric | Result | Interpretation |
 |---|---:|---|
 | Current hypotheses | 10 | Canonical registry |
-| Current evidence records | 6 | Canonical registry |
+| Current evidence records | 7 | Canonical registry, including external methodology cross-check |
 | Current theory records | 3 | Working theory boundary |
-| Independent performance replications completed | 0 | Largest evidence gap |
+| Cross-executor performance studies completed | 0 | Largest evidence gap |
 | Controlled matched-structure benchmarks completed | 0 | EDF-specific incremental value unresolved |
 | Current confirmatory protocol | v1.2 | Requires raw run bundles and matched controls |
 | Integrity tests | 1/1 pass | Repository-level check, not framework-performance evidence |
@@ -24,6 +24,7 @@ The framework remains empirically immature. The upgrade improves research integr
 | Required website files checked | 7 | Canonical static site |
 | Duplicate deployed web stacks | 0 | Removed |
 | Public claim cards registry-linked | Yes | Drift is mechanically checked |
+| Frozen v0.3 artifacts hash-verified | 9 | Historical baseline cannot silently drift |
 
 ## Highest-confidence findings
 

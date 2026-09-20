@@ -26,7 +26,7 @@ The current research record supports:
 
 The current research record does **not** establish:
 
-- independent reproducibility;
+- cross-executor reproducibility and historical execution reconstructability;
 - causal improvement from System Context;
 - better control points than matched alternatives;
 - evidence-sensitive updating;
@@ -78,7 +78,11 @@ Design rule:
 
 ## Version Integrity
 
-The v0.3 specification is preserved as the current frozen working baseline.
+The v0.3 specification remains the current frozen working baseline.
+
+A byte-for-byte reconstruction bundle for the v0.3 specification, model, principles, complexity guidance, operating cycle, calibration document, and templates is preserved under [releases/v0.3/](releases/v0.3/). Its manifest records the original Git blob hashes and CI verifies them on every change.
+
+Root supporting documents may contain later interpretation guidance and link back to their frozen snapshots. They must not be used to retroactively strengthen v0.3 validation results.
 
 The v1.0 document is a draft candidate architecture. It is not evidence that proposed changes improve EDF, and it must not be promoted solely because it is more complete or elegant.
 

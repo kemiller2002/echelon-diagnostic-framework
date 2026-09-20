@@ -5,6 +5,7 @@ EDF is a working diagnostic grammar for making system diagnoses explicit enough 
 ## Repository source of truth
 
 - `docs/edf/specification.md` - frozen v0.3 working baseline.
+- `docs/edf/releases/v0.3/` - hash-verified byte-for-byte reconstruction bundle for v0.3 supporting artifacts.
 - `docs/edf/README.md` - current framework orientation and evidence boundary.
 - `research/registries/hypothesis-registry.json` - current claim states.
 - `research/registries/evidence-registry.json` - current evidence records.
@@ -19,7 +20,7 @@ Historical validation artifacts remain in place for traceability. Their original
 
 The repository currently supports EDF as a coherent working representational grammar inside its own research corpus.
 
-It does not yet establish independent reproducibility, incremental value over matched neutral structure, evidence-sensitive updating, better intervention quality, or routine-use speed/learnability.
+It does not yet establish cross-executor reproducibility, incremental value over matched neutral structure, evidence-sensitive updating, better intervention quality, or routine-use speed/learnability. Historical R1 runs also lack enough preserved execution detail for full computational reconstruction.
 
 See `docs/edf/validation/evidence-ledger.md` for the current claim state.
 
