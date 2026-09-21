@@ -1,0 +1,93 @@
+{
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "SYN-001",
+      "requiredFindings": [
+        "legacy adapter omitted region-header mapping",
+        "missing region header caused routing failures",
+        "disabling adapter restored service"
+      ],
+      "forbiddenClaims": [
+        "database failure caused incident",
+        "CPU increase was primary cause",
+        "PDF rendering ticket caused incident"
+      ],
+      "uncertainty": "low",
+      "preferredAction": "restore or fix region-header mapping at legacy adapter boundary"
+    },
+    {
+      "id": "SYN-002",
+      "requiredFindings": [
+        "sensor drift under high humidity contributed",
+        "restart retry defect contributed",
+        "neither defect alone was sufficient in comparisons"
+      ],
+      "forbiddenClaims": [
+        "sensor drift alone caused excursion",
+        "firmware defect alone caused excursion",
+        "alert suppression initiated the excursion"
+      ],
+      "uncertainty": "medium",
+      "preferredAction": "correct sensor calibration behavior and restart logic; alerting is a secondary mitigation"
+    },
+    {
+      "id": "SYN-003",
+      "requiredFindings": [
+        "bad model affected one segment",
+        "limited exposure reduced blast radius",
+        "monitoring and release halt prevented expansion",
+        "feature flag enabled targeted rollback"
+      ],
+      "forbiddenClaims": [
+        "integration tests guaranteed model correctness",
+        "deployment was failure-free"
+      ],
+      "uncertainty": "low",
+      "preferredAction": "retain staged exposure, segment monitoring, automated stop, and targeted rollback controls"
+    },
+    {
+      "id": "SYN-004",
+      "requiredFindings": [
+        "evidence does not distinguish database wait from deserialization retry as primary driver",
+        "both changes were reverted together",
+        "additional discriminating evidence is required"
+      ],
+      "forbiddenClaims": [
+        "database index rebuild was proven primary cause",
+        "consumer library was proven primary cause"
+      ],
+      "uncertainty": "high",
+      "preferredAction": "reproduce with one-change-at-a-time rollback or collect traces separating wait categories"
+    },
+    {
+      "id": "SYN-005",
+      "requiredFindings": [
+        "downstream rate-limit reduction produced 429 retries",
+        "retries increased latency",
+        "cache hit-rate decline was downstream effect of retry cache bypass",
+        "restoring rate limit ended incident"
+      ],
+      "forbiddenClaims": [
+        "cache degradation caused latency incident"
+      ],
+      "uncertainty": "low",
+      "preferredAction": "address downstream rate-limit/retry interaction rather than treating cache as primary control"
+    },
+    {
+      "id": "SYN-006",
+      "requiredFindings": [
+        "positional mapper shifted fields",
+        "validator surfaced but did not originate corruption",
+        "retries did not change failure",
+        "named-field mapping fixed sample"
+      ],
+      "forbiddenClaims": [
+        "validator was root cause",
+        "partner violated stated additive-field contract"
+      ],
+      "uncertainty": "low",
+      "preferredAction": "replace positional mapping and strengthen mapper contract tests"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ EDF is a working diagnostic grammar for making system diagnoses explicit enough 
 - `research/registries/theory-registry.json` - current theory boundary.
 - `docs/framework-engineering/claim-and-confidence-policy.md` - rules for interpreting and promoting claims.
 - `docs/framework-engineering/validation-protocol-v1.2.md` - protocol for future controlled validation.
+- `research/experiments/EX-EDF-001/` - preregistered structural-value benchmark for HY-EDF-008.
 - `static-site/` - canonical public website source.
 
 Historical validation artifacts remain in place for traceability. Their original confidence language does not override the current registries.
@@ -22,7 +23,9 @@ The repository currently supports EDF as a coherent working representational gra
 
 It does not yet establish cross-executor reproducibility, incremental value over matched neutral structure, evidence-sensitive updating, better intervention quality, or routine-use speed/learnability. Historical R1 runs also lack enough preserved execution detail for full computational reconstruction.
 
-See `docs/edf/validation/evidence-ledger.md` for the current claim state.
+`EX-EDF-001` is the next confirmatory test of EDF-specific incremental value. Its cases, hidden ground truth, prompts, scoring rules, success criteria, and falsification criteria are preregistered. Confirmatory execution is intentionally blocked until exact analyzer and evaluator provider/model/version/configuration bindings are frozen. The repository does not treat unbound or simulated executors as independent evidence.
+
+See `docs/edf/validation/evidence-ledger.md` for the current claim state and `research/experiments/EX-EDF-001/README.md` for the benchmark.
 
 ## Validation
 
@@ -33,9 +36,10 @@ Run the integrity suite with Node 22 or newer:
 ```bash
 node --test
 node scripts/validate-repository.mjs
+node scripts/edf-benchmark.mjs validate
 ```
 
-The checks validate registry referential integrity, evidence paths, internal links, public-claim synchronization, canonical site structure, and removal of stale duplicate web stacks.
+The checks validate registry referential integrity, evidence paths, internal links, public-claim synchronization, canonical site structure, removal of stale duplicate web stacks, benchmark preregistration integrity, frozen experiment hashes, and confirmatory executor readiness rules.
 
 GitHub Actions runs the same checks on pushes and pull requests. GitHub Pages deploys only after the integrity suite passes.
 

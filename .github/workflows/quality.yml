@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: "22"
       - name: Run integrity tests
-        run: node --test
-      - name: Run repository validator
-        run: node scripts/validate-repository.mjs
+        run: |
+          node --test
+          node scripts/validate-repository.mjs
+          node scripts/edf-benchmark.mjs validate
