@@ -44,6 +44,9 @@ if(expected && expected!==provider) throw new Error(`${slot} requires provider f
 if(ready(binding) && !has('--replace')) throw new Error(`${slot} is already bound. Use --replace only before confirmatory execution and record the reason.`);
 
 const slug=providerSlug(provider);
+const e1=matrix.evaluators.find(x=>x.slot==='E1'), e2=matrix.evaluators.find(x=>x.slot==='E2');
+const otherEvaluator=slot==='E1'?e2:slot==='E2'?e1:null;
+if(otherEvaluator&&ready(otherEvaluator)&&otherEvaluator.provider===provider) throw new Error(`${slot} must use a different provider family from ${otherEvaluator.slot}.`);
 const configDir=path.join(EXP,'executor-configs');
 fs.mkdirSync(configDir,{recursive:true});
 const configRel=`research/experiments/EX-EDF-001/executor-configs/${slot}.json`;
@@ -53,11 +56,11 @@ if(fs.existsSync(configPath) && !has('--replace')) throw new Error(configRel+' a
 const command=['node','{REPO_ROOT}/scripts/edf-provider-adapter.mjs','--provider',slug,'--model',model,'--max-output-tokens','2200'];
 if(slug==='anthropic') command.push('--anthropic-version','2023-06-01');
 const config={
-  version:'1.0.0',
+  configSchemaVersion:'1.0.0',
   slot,
   provider,
   model,
-  versionDescription:version,
+  version,
   command,
   timeoutMs:180000,
   fileDependenciesGitBlobSha:{[ADAPTER_REL]:gitBlobShaFile(ADAPTER)},
@@ -73,7 +76,6 @@ binding.version=version;
 binding.executorConfigPath=configRel;
 binding.executorConfigSha256=configHash;
 
-const e1=matrix.evaluators.find(x=>x.slot==='E1'), e2=matrix.evaluators.find(x=>x.slot==='E2');
 if(ready(e1)&&ready(e2)&&e1.provider===e2.provider) throw new Error('E1 and E2 must use different provider families.');
 
 const analyzersReady=matrix.analyzers.length===3&&matrix.analyzers.every(ready);
