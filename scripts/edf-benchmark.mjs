@@ -13,6 +13,7 @@ function readJson(p){ return JSON.parse(fs.readFileSync(p,'utf8')); }
 function sha256Bytes(b){ return crypto.createHash('sha256').update(b).digest('hex'); }
 function sha256File(p){ return sha256Bytes(fs.readFileSync(p)); }
 function sha256Text(s){ return sha256Bytes(Buffer.from(s,'utf8')); }
+function gitBlobShaFile(p){ const b=fs.readFileSync(p); const prefix=Buffer.from(`blob ${b.length}\\0`); return crypto.createHash('sha1').update(prefix).update(b).digest('hex'); }
 function ensureDir(p){ fs.mkdirSync(p,{recursive:true}); }
 function now(){ return new Date().toISOString(); }
 function safeId(s){ return s.replace(/[^A-Za-z0-9._-]+/g,'-'); }
@@ -58,6 +59,9 @@ export function validateBenchmark(root=process.cwd()){
   for(const [rel,expected] of Object.entries(frozen?.sha256??{})){
     const full=path.join(root,rel); if(!fs.existsSync(full)) errors.push('Missing frozen artifact: '+rel); else if(sha256File(full)!==expected) errors.push('Frozen benchmark artifact hash drift: '+rel);
   }
+  for(const [rel,expected] of Object.entries(frozen?.gitBlobSha??{})){
+    const full=path.join(root,rel); if(!fs.existsSync(full)) errors.push('Missing frozen code artifact: '+rel); else if(gitBlobShaFile(full)!==expected) errors.push('Frozen benchmark code blob drift: '+rel);
+  }
   const analyzers=matrix?.analyzers??[], evaluators=matrix?.evaluators??[];
   const analyzerReady=analyzers.length===3 && analyzers.every(executorReady);
   const evalReady=evaluators.filter(x=>x.slot==='E1'||x.slot==='E2').length===2 && evaluators.filter(x=>x.slot==='E1'||x.slot==='E2').every(executorReady);
@@ -66,7 +70,7 @@ export function validateBenchmark(root=process.cwd()){
   if(!declaredReady && analyzerReady&&evalReady) errors.push('Executor bindings are complete but matrix status is not confirmatory-ready.');
   const seed=randomization?.seed; if(typeof seed!=='string'||seed.length<10) errors.push('Randomization seed missing.');
   let analyzerRuns=0; if(fs.existsSync(path.join(root,'research/experiments/EX-EDF-001/runs'))) analyzerRuns=fs.readdirSync(path.join(root,'research/experiments/EX-EDF-001/runs')).filter(x=>x.endsWith('.json')).length;
-  return {errors,summary:{experimentId:'EX-EDF-001',cases:ids.length,conditions:conditions.length,frozenArtifacts:Object.keys(frozen?.sha256??{}).length,executorMatrixReady:declaredReady&&analyzerReady&&evalReady,analyzerRuns}};
+  return {errors,summary:{experimentId:'EX-EDF-001',cases:ids.length,conditions:conditions.length,frozenArtifacts:Object.keys(frozen?.sha256??{}).length+Object.keys(frozen?.gitBlobSha??{}).length,executorMatrixReady:declaredReady&&analyzerReady&&evalReady,analyzerRuns}};
 }
 
 function composeAnalyzerPrompt(condition,caseObj){
@@ -75,23 +79,36 @@ function composeAnalyzerPrompt(condition,caseObj){
   return `${prompts[condition]}\n\n## Case evidence\n${JSON.stringify({id:caseObj.id,title:caseObj.title,domain:caseObj.domain,evidence:caseObj.evidence},null,2)}\n\n## Common output contract\n${JSON.stringify(contract,null,2)}\n`;
 }
 
-function loadExecutorConfig(rel){
+function loadExecutorConfig(rel,binding){
   const full=path.resolve(ROOT,rel); const cfg=readJson(full);
   if(!Array.isArray(cfg.command) || cfg.command.length<1) throw new Error('Executor config command must be a non-empty string array.');
+  for(const key of ['provider','model','version']) if(cfg[key]!==binding[key]) throw new Error(`Executor config ${key} does not match frozen binding for ${binding.slot}.`);
+  for(const [depRel,expected] of Object.entries(cfg.fileDependenciesGitBlobSha??{})){
+    const dep=path.resolve(ROOT,depRel);
+    if(!fs.existsSync(dep)) throw new Error('Executor dependency missing: '+depRel);
+    if(gitBlobShaFile(dep)!==expected) throw new Error('Executor dependency blob drift: '+depRel);
+  }
   return {full,cfg};
 }
 
 function findSlot(matrix,slot,kind){ return (kind==='analyzer'?matrix.analyzers:matrix.evaluators).find(x=>x.slot===slot); }
 
+function parseAdapterMetadata(stderr){
+  const line=(stderr??'').split(/\r?\n/).find(x=>x.startsWith('EDF_ADAPTER_META '));
+  if(!line) return null;
+  try{return JSON.parse(line.slice('EDF_ADAPTER_META '.length));}catch{return {parseError:true,raw:line};}
+}
+
 function executeCommand(binding,input,attemptId){
-  const {full,cfg}=loadExecutorConfig(binding.executorConfigPath);
+  const {full,cfg}=loadExecutorConfig(binding.executorConfigPath,binding);
   const actualHash=sha256File(full); if(actualHash!==binding.executorConfigSha256) throw new Error(`Executor config hash mismatch for ${binding.slot}`);
   const cwd=fs.mkdtempSync(path.join(os.tmpdir(),'edf-exec-'));
   const env={...process.env,...(cfg.env??{})};
+  const command=cfg.command.map(x=>x.replaceAll('{REPO_ROOT}',ROOT));
   const started=Date.now();
-  const r=spawnSync(cfg.command[0],cfg.command.slice(1),{cwd,input,encoding:'utf8',env,maxBuffer:10*1024*1024,timeout:cfg.timeoutMs??180000});
-  const ended=Date.now();
-  return {attemptId,startedAt:new Date(started).toISOString(),endedAt:new Date(ended).toISOString(),latencyMs:ended-started,exitCode:r.status,signal:r.signal,stdout:r.stdout??'',stderr:r.stderr??'',error:r.error?String(r.error):null,executorConfigPath:binding.executorConfigPath,executorConfigSha256:actualHash,provider:binding.provider,model:binding.model,version:binding.version};
+  const r=spawnSync(command[0],command.slice(1),{cwd,input,encoding:'utf8',env,maxBuffer:10*1024*1024,timeout:cfg.timeoutMs??180000});
+  const ended=Date.now(); const stderr=r.stderr??''; const adapterMetadata=parseAdapterMetadata(stderr);
+  return {attemptId,startedAt:new Date(started).toISOString(),endedAt:new Date(ended).toISOString(),latencyMs:ended-started,exitCode:r.status,signal:r.signal,stdout:r.stdout??'',stderr,error:r.error?String(r.error):null,adapterMetadata,executorConfigPath:binding.executorConfigPath,executorConfigSha256:actualHash,provider:binding.provider,model:binding.model,version:binding.version};
 }
 
 function validateAnalyzerOutput(text){
