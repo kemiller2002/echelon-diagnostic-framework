@@ -82,7 +82,7 @@ export function validateRepository(root = process.cwd()) {
     }
   }
 
-  const repPath = path.join(root, "research/packages/RP-EDF-2026-002.md");
+  const repPath = path.join(root, "research/packages/RP-EDF-2026-003.md");
   if (!fs.existsSync(repPath)) errors.push("Missing current REP: research/packages/RP-EDF-2026-002.md");
   else {
     const repText = fs.readFileSync(repPath, "utf8");
@@ -90,7 +90,7 @@ export function validateRepository(root = process.cwd()) {
     for (const heading of headings) if (!repText.includes("# " + heading) && !repText.includes("## " + heading)) errors.push("Current REP missing section: " + heading);
   }
 
-  if (!fs.existsSync(path.join(root, "research/journal/JR-EDF-2026-002.md"))) errors.push("Missing current research journal.");
+  if (!fs.existsSync(path.join(root, "research/journal/JR-EDF-2026-003.md"))) errors.push("Missing current research journal.");
 
   const releaseManifestPath = path.join(root, "docs/edf/releases/v0.3/manifest.json");
   let frozenFilesChecked = 0;
