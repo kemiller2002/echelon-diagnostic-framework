@@ -1,0 +1,244 @@
+{
+  "summary": "Three refrigerated containers breached the product temperature limit during a six-hour transfer because two conditions coincided: humidity-dependent sensor calibration drift (+1.5 C upward, only above 88% RH, with 73 minutes of such humidity during the transfer) and a firmware retry defect that made the compressor controller ignore every second restart command after a communications timeout. Comparison runs isolate each factor and show neither alone produced a breach, so the mechanism is a conjunction: drifted readings misrepresented the thermal state while degraded restart behavior halved effective cooling recovery. A 45-minute alert suppression window after first acknowledgement did not cause the breach but extended operator response after the limit had already been crossed, lengthening exposure. Highest-leverage control points are the two conjunction members; the alerting rule is an exposure-duration control, not a breach-prevention control.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer.",
+      "type": "outcome",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "Sensor calibration drifted upward by about 1.5 C, but only under the condition of relative humidity above 88%.",
+      "type": "contributor",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C3",
+      "statement": "The humidity precondition for drift was actually met during the transfer, for 73 minutes.",
+      "type": "condition",
+      "confidence": "high",
+      "evidence": ["E5", "E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "A firmware retry defect caused the compressor controller to ignore every second restart command following a communications timeout.",
+      "type": "contributor",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "statement": "Neither sensor drift nor the firmware retry defect was individually sufficient to cause a limit breach; the breach required their conjunction.",
+      "type": "mechanism",
+      "confidence": "high",
+      "evidence": ["E6", "E7"]
+    },
+    {
+      "id": "C6",
+      "statement": "Upward drift of measured temperature degraded the fidelity of the control and monitoring signal relative to true product temperature during the high-humidity window.",
+      "type": "mechanism",
+      "confidence": "medium",
+      "evidence": ["E2", "E5", "E7"]
+    },
+    {
+      "id": "C7",
+      "statement": "Ignoring every second restart command reduced effective compressor recovery capacity after timeout events, slowing return to setpoint.",
+      "type": "mechanism",
+      "confidence": "medium",
+      "evidence": ["E3", "E6"]
+    },
+    {
+      "id": "C8",
+      "statement": "The alerting rule suppressed repeated temperature alerts for 45 minutes following the first acknowledgement.",
+      "type": "contributor",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C9",
+      "statement": "Alert suppression acted only after the limit was already crossed, extending operator response time and therefore exposure duration rather than initiating the breach.",
+      "type": "mechanism",
+      "confidence": "high",
+      "evidence": ["E8", "E4"]
+    },
+    {
+      "id": "C10",
+      "statement": "The breach is best characterized as a conjunction failure in the sense-and-recover loop, with a separate downstream failure in the notify-and-respond loop.",
+      "type": "diagnosis",
+      "confidence": "medium",
+      "evidence": ["E5", "E6", "E7", "E8"]
+    },
+    {
+      "id": "C11",
+      "statement": "The observed limit exceedance is a symptom of degraded thermal control, not itself the causal mechanism.",
+      "type": "framing",
+      "confidence": "medium",
+      "evidence": ["E1", "E6", "E7"]
+    }
+  ],
+  "relationships": [
+    {"from": "E5", "to": "C2", "type": "precedes", "note": "High humidity is the stated activating condition for drift.", "confidence": "high"},
+    {"from": "C3", "to": "C6", "type": "contributes-to", "note": "Drift becomes active only inside the humidity window.", "confidence": "high"},
+    {"from": "C2", "to": "C6", "type": "contributes-to", "note": "Upward offset degrades signal fidelity.", "confidence": "medium"},
+    {"from": "C4", "to": "C7", "type": "contributes-to", "note": "Dropped alternate restarts reduce recovery attempts.", "confidence": "medium"},
+    {"from": "C6", "to": "C1", "type": "contributes-to", "note": "Degraded signal only produces breach in combination.", "confidence": "medium"},
+    {"from": "C7", "to": "C1", "type": "contributes-to", "note": "Degraded recovery only produces breach in combination.", "confidence": "medium"},
+    {"from": "C6", "to": "C7", "type": "mediates", "note": "Misread temperature shapes when and how restart cycles are demanded.", "confidence": "low"},
+    {"from": "E6", "to": "C5", "type": "supports", "note": "Firmware defect alone with calibrated sensors stayed within limit.", "confidence": "high"},
+    {"from": "E7", "to": "C5", "type": "supports", "note": "Sensor drift alone with corrected restart logic stayed within limit.", "confidence": "high"},
+    {"from": "C5", "to": "C10", "type": "supports", "note": "Conjunction requirement defines the diagnosis.", "confidence": "high"},
+    {"from": "C1", "to": "C9", "type": "precedes", "note": "Crossing occurred before the suppressed-alert response gap.", "confidence": "high"},
+    {"from": "C8", "to": "C9", "type": "contributes-to", "note": "Suppression window produced the delayed response.", "confidence": "high"},
+    {"from": "C9", "to": "C10", "type": "supports", "note": "Separates exposure-extension path from breach-initiation path.", "confidence": "medium"},
+    {"from": "E8", "to": "C9", "type": "supports", "note": "Direct statement of post-crossing response extension.", "confidence": "high"},
+    {"from": "C7", "to": "C11", "type": "supports", "note": "Control degradation underlies the observed exceedance.", "confidence": "low"},
+    {"from": "C8", "to": "C1", "type": "unknown", "note": "No evidence that suppression affected whether the limit was crossed.", "confidence": "low"}
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "No evidence gives the magnitude, duration, or peak of the excursion, so severity of product impact cannot be assessed.",
+      "impact": "Limits prioritization between breach prevention and exposure shortening.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "statement": "The trigger and frequency of the communications timeouts that precede the ignored restarts is unstated; the defect's activation cause is unresolved.",
+      "impact": "A shared upstream cause of timeouts, possibly environmental, remains an untested alternative.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "statement": "Whether the drift also corrupted the closed-loop control setpoint behavior, or only the displayed and alerted readings, is not stated.",
+      "impact": "Determines whether recalibration fixes control or only visibility.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "The comparison runs' conditions are not described; equivalence of humidity exposure, load, and transfer duration is assumed but unverified.",
+      "impact": "If conditions differed, the sufficiency conclusions from the comparisons weaken.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "It is unresolved whether all three containers failed through the same pathway or whether container-specific factors differed.",
+      "impact": "Affects whether a single fix covers all observed failures.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "statement": "The relationship between the 73-minute humidity window and the timing of the crossing is not established; temporal alignment is inferred, not evidenced.",
+      "impact": "Weakens the sequencing portion of the propagation trace.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U7",
+      "statement": "Nothing states why humidity exceeded 88%, or whether that condition is routine or exceptional for this transfer type.",
+      "impact": "Unknown recurrence rate for the activating condition.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U8",
+      "statement": "The first acknowledgement that started the suppression window is unexplained: who acknowledged, on what information, and whether the drifted reading influenced that judgement.",
+      "impact": "A link between drift and the alerting failure would make the two loops less independent than diagnosed.",
+      "confidence": "low"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "statement": "Correct the compressor restart retry logic so no restart command is dropped after a communications timeout.",
+      "leverage": "high",
+      "rationale": "A comparison run with corrected restart logic stayed within limit despite unchanged sensor drift, so removing this member breaks the conjunction.",
+      "evidence": ["E7", "E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "statement": "Eliminate the humidity-dependent calibration error, by compensation or by sensors whose accuracy is unaffected above 88% RH.",
+      "leverage": "high",
+      "rationale": "A comparison run with calibrated sensors stayed within limit despite the unchanged firmware defect, so removing this member also breaks the conjunction.",
+      "evidence": ["E6", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "statement": "Change the alert suppression rule so that an unresolved limit exceedance continues to escalate rather than being silenced for 45 minutes after acknowledgement.",
+      "leverage": "medium",
+      "rationale": "Acts on exposure duration after crossing, not on the crossing itself; valuable but not breach-preventing.",
+      "evidence": ["E4", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "A4",
+      "statement": "Monitor relative humidity as a leading indicator and treat sustained periods above 88% as a degraded-measurement state until sensors are corrected.",
+      "leverage": "medium",
+      "rationale": "Targets the stated activating condition for drift; interim control while A2 is implemented.",
+      "evidence": ["E2", "E5"],
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "statement": "Instrument and review communications timeout events on the controller to establish what triggers the retry path.",
+      "leverage": "low",
+      "rationale": "Mainly visibility, addressing unresolved U2 rather than changing the outcome directly.",
+      "evidence": ["E3"],
+      "confidence": "low"
+    },
+    {
+      "id": "A6",
+      "statement": "Record the conditions of comparison runs so sufficiency conclusions can be re-verified rather than assumed.",
+      "leverage": "low",
+      "rationale": "Strengthens the evidentiary basis of the diagnosis; does not itself alter the failure path.",
+      "evidence": ["E6", "E7"],
+      "confidence": "low"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "statement": "If restart logic had been correct while sensor drift persisted, would the limit still have been exceeded?",
+      "expected": "No. The comparison run with corrected restart logic and unchanged drift stayed within limit.",
+      "evidence": ["E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "statement": "If sensors had been calibrated while the firmware defect persisted, would the limit still have been exceeded?",
+      "expected": "No. The comparison run with the same defect and calibrated sensors stayed within limit.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "statement": "If humidity had never exceeded 88%, would the drift contributor have been active?",
+      "expected": "No, on the stated conditionality of the drift; the conjunction would likely not have formed. Not directly tested by any comparison run.",
+      "evidence": ["E2", "E5"],
+      "confidence": "medium"
+    },
+    {
+      "id": "CF4",
+      "statement": "If the alerting rule had not suppressed repeated alerts, would the limit have been crossed?",
+      "expected": "Yes. Suppression acted after the crossing, so it extends exposure rather than preventing the breach. This is why the alerting rule is ranked as lower leverage despite being the easiest thing to change.",
+      "evidence": ["E8", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "CF5",
+      "statement": "If only the alerting rule were fixed and both technical contributors left in place, would future transfers be safe?",
+      "expected": "No. The breach mechanism would remain intact; only response time would improve. This challenges any control-point selection centered on alerting.",
+      "evidence": ["E6", "E7", "E8"],
+      "confidence": "medium"
+    },
+    {
+      "id": "CF6",
+      "statement": "If the comparison runs had differed materially in humidity exposure or transfer conditions, would the conjunction conclusion survive?",
+      "expected": "Possibly not; a run without a high-humidity window would not exercise the drift contributor, and the single-factor sufficiency conclusions would be weakened rather than refuted.",
+      "evidence": ["E6", "E7", "E5"],
+      "confidence": "low"
+    }
+  ]
+}
