@@ -1,7 +1,7 @@
 # Evidence Ledger
 
 Status: Current human-readable projection
-Updated: 2026-09-20
+Updated: 2026-09-21
 
 Purpose:
 Track the current evidence state of important EDF hypotheses without allowing historical summaries to outrank later contradictory evidence.
@@ -23,7 +23,7 @@ Canonical machine-readable sources:
 | HY-EDF-005 - EDF produces materially comparable semantic diagnoses under independent executor conditions | Unsupported | Low | No completed evidence | Independent-human and controlled multi-model studies are absent; historical R1 execution is also not fully reconstructable |
 | HY-EDF-006 - EDF updates proportionally as evidence changes | Unsupported | Low | Architecture and evidence packages exist | LRC-001 has not produced controlled completed runs |
 | HY-EDF-007 - Origin Network and Propagation are usefully distinct | Suggestive | Medium | One ablation plus repeated authored usage | Single direct ablation; no independent replication |
-| HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Open / unsupported | Low | No completed test | This is the primary next benchmark |
+| HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Open / unsupported | Low | EX-EDF-001 is preregistered and its experiment artifacts are frozen; no performance result exists | Confirmatory execution is blocked until real independent analyzer/evaluator bindings are frozen |
 | HY-EDF-009 - Diagnostic topologies generalize | Suggestive | Low | Recurring patterns appear in selected cases | No held-out coding or external replication |
 | HY-EDF-010 - EDF-0 is fast and learnable for routine use | Unsupported | Low | Teaching examples show intended use only | No time-on-task or usability evidence |
 
@@ -62,7 +62,7 @@ A claim may move to a stronger state only when the new REP identifies:
 
 ## Next Evidence Priority
 
-The highest-information computational test is the Multi-Model EDF Structural-Value Benchmark in `research/analysis/non-human-next-experiments.md`.
+The highest-information computational test is now implemented as `research/experiments/EX-EDF-001/`, based on the benchmark proposed in `research/analysis/non-human-next-experiments.md`.
 
 It must compare:
 
@@ -71,3 +71,5 @@ It must compare:
 - EDF;
 
 with blind evaluation, multiple model families, immutable run bundles, negative-run retention, and cost instrumentation.
+
+Its existence is recorded as EV-EDF-008, which is procedural evidence only. HY-EDF-008 remains unsupported until the preregistered analyzer and evaluator runs are completed and reviewed.
