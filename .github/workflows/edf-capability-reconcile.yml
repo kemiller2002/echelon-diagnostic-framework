@@ -1,0 +1,80 @@
+name: Temporary EDF capability reconciliation
+
+on:
+  push:
+    branches:
+      - "chore/echelon-capabilities-2026-09-21"
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: "chore/echelon-capabilities-2026-09-21"
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Start ROS work
+        shell: bash
+        env:
+          ROS_ACTOR: agent:chatgpt
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          export ROS_BASE_REF=origin/main
+          work_id="EDF-UPGRADE-2026-09-21"
+          ./ros add "Reconcile EDF with current Echelon capabilities and ROS research rules" \
+            --id "$work_id" \
+            --tag edf,tooling,ordo,ros \
+            --priority high \
+            --source agent-discovery \
+            --source-reference "public-repository-upgrade-2026-09-21"
+          ready_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          ./ros work backlog-transition --id "$work_id" --action ready --occurred-at "$ready_at"
+          sleep 1
+          start_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          ./ros work start --id "$work_id" --occurred-at "$start_at" --type mechanical --actor agent:chatgpt
+
+      - name: Rebuild ROS registries
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros registry build
+          ./ros registry check
+
+      - name: Complete ROS work and validate
+        shell: bash
+        env:
+          ROS_ACTOR: agent:chatgpt
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          export ROS_BASE_REF=origin/main
+          done_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          ./ros work complete --id "EDF-UPGRADE-2026-09-21" --occurred-at "$done_at" --actor agent:chatgpt
+          ./ros validate
+          node scripts/repository-integrity.mjs
+          node --test
+
+      - name: Commit reconciled EDF state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Echelon Upgrade Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git reset ".github/workflows/edf-capability-reconcile.yml"
+          if git diff --cached --quiet; then
+            echo "No reconciliation state changed."
+            exit 0
+          fi
+          git commit -m "chore: reconcile EDF capability and research state"
+          git push origin HEAD:"chore/echelon-capabilities-2026-09-21"
