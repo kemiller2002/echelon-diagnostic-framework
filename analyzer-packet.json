@@ -1,0 +1,503 @@
+{
+  "schemaVersion": "1.0.0",
+  "experiment": "EX-EDF-001",
+  "role": "analyzer-execution-only",
+  "slot": "A1",
+  "provider": "OpenAI",
+  "branch": "experiment/edf-a1-openai-manual",
+  "canonicalCommit": "e068b9c1ae97bb3a430588563e84bf4d34e2c431",
+  "source": {
+    "canonicalCommit": "e068b9c1ae97bb3a430588563e84bf4d34e2c431",
+    "casesBlobSha": "b313f5ec9ffbaae3f86b42885ca9bb91900878e2",
+    "promptsBlobSha": "496fcdd7cb4a212b8ef51f2fc2534f8782912b8a",
+    "outputContractBlobSha": "9a13be772c0aa3ad01da59218bbdc9452e0d3732",
+    "randomizationBlobSha": "f959c7d37a43065e2e515150225b381d644fe381"
+  },
+  "isolation": {
+    "allowedRepositoryInputs": [
+      "analyzer-packet.json",
+      "RUN-EXPERIMENT.md",
+      "scripts/edf-manual-agent-run.mjs"
+    ],
+    "forbidden": [
+      "ground truth",
+      "evaluation rubric",
+      "preregistration success/falsification thresholds",
+      "other branches",
+      "git history",
+      "issues",
+      "pull requests",
+      "web/search",
+      "prior conversation/memory",
+      "other repository files"
+    ],
+    "note": "Canonical hidden artifacts remain in Git for repository integrity but are outside the allowed execution surface. Use sparse working-tree isolation and never access Git history."
+  },
+  "randomizationSeed": "edf-structural-value-2026-09-21-v1",
+  "prompts": {
+    "natural": "# Natural analysis condition\n\nAnalyze the supplied case using only the evidence items included in the case package.\n\nDo not use outside facts, prior knowledge about similarly named systems, or unstated assumptions. When the evidence does not resolve an issue, preserve the uncertainty and state what evidence would resolve it.\n\nReturn only JSON conforming to the common output contract supplied after this instruction. Keep the response within the declared output budget.\n",
+    "matched-neutral": "# Matched neutral structure condition\n\nAnalyze the supplied case using only the evidence items included in the case package.\n\nWork through seven neutral questions before producing the final JSON:\n\n1. What operating context, boundaries, actors, and constraints matter to the observed outcome?\n2. Which observations are most diagnostic, which are weak, and which may be misleading correlations or downstream effects?\n3. What evidence-supported relationships among observations best explain the outcome, including interaction when the evidence requires it?\n4. What plausible competing explanations remain, and what evidence argues for or against each one?\n5. What remains unresolved, and what specific additional observation would discriminate between the live alternatives?\n6. What candidate actions could change the outcome, which mechanism would each action affect, and why should one be prioritized over another?\n7. What counterfactual change would most strongly challenge the explanation or action choice?\n\nDo not use outside facts, prior knowledge about similarly named systems, or unstated assumptions. Do not force multiple causes when one explanation fits the evidence. Do not force a single cause when interaction is required. Distinguish observation from inference and direct evidence from interpretation.\n\nReturn only JSON conforming to the common output contract supplied after this instruction. Keep the response within the declared output budget.\n",
+    "edf": "# Structured diagnostic condition\n\nAnalyze the supplied case using only the evidence items included in the case package.\n\nUse this diagnostic reasoning grammar internally:\n\n1. Establish relevant system context: boundaries, actors, constraints, and operating conditions.\n2. State the observed failure or success mechanism without confusing symptoms with causes.\n3. Build an evidence-supported contributor network. A single supported contributor is valid; do not invent complexity.\n4. Trace propagation from contributors through intermediate mechanisms to the outcome.\n5. Identify candidate control points where intervention could alter the outcome, distinguishing leverage from mere visibility.\n6. Preserve negative knowledge: unresolved alternatives, missing evidence, and confidence limits.\n7. Use counterfactuals to challenge the diagnosis and control-point selection.\n\nDo not use outside facts, prior knowledge about similarly named systems, or unstated assumptions. Treat confidence labels qualitatively rather than as probabilities.\n\nFor evaluator blinding, do not name the framework or these internal field labels in the final response.\n\nReturn only JSON conforming to the common output contract supplied after this instruction. Keep the response within the declared output budget.\n"
+  },
+  "outputContract": {
+    "version": "1.0.0",
+    "requiredTopLevelFields": [
+      "summary",
+      "claims",
+      "relationships",
+      "uncertainties",
+      "actions",
+      "counterfactuals"
+    ],
+    "constraints": {
+      "maxClaims": 12,
+      "maxRelationships": 16,
+      "maxUncertainties": 8,
+      "maxActions": 6,
+      "maxCounterfactuals": 6,
+      "confidenceEnum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "relationshipEnum": [
+        "supports",
+        "contributes-to",
+        "precedes",
+        "mediates",
+        "prevents",
+        "unknown"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "SYN-001",
+      "title": "Beacon Billing Cutover",
+      "domain": "software operations",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "At 09:00 the invoice service began routing legacy-client traffic through a newly enabled adapter configuration."
+        },
+        {
+          "id": "E2",
+          "text": "At 09:02 invoice creation errors increased from below 0.2% to 38%."
+        },
+        {
+          "id": "E3",
+          "text": "Ninety-seven percent of sampled failed requests lacked the region header required by the routing function."
+        },
+        {
+          "id": "E4",
+          "text": "The legacy-client adapter configuration omitted the region-header mapping; the modern-client adapter retained it."
+        },
+        {
+          "id": "E5",
+          "text": "Database error rate, saturation, and replication lag stayed within the previous week normal range."
+        },
+        {
+          "id": "E6",
+          "text": "Disabling the new legacy-client adapter configuration at 09:19 returned invoice creation errors below 0.2% within three minutes."
+        },
+        {
+          "id": "E7",
+          "text": "Application CPU rose from 51% to 65% during the incident."
+        },
+        {
+          "id": "E8",
+          "text": "A customer-support ticket about a PDF rendering defect was opened at 08:54."
+        }
+      ]
+    },
+    {
+      "id": "SYN-002",
+      "title": "Northstar Cold Chain",
+      "domain": "physical operations",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer."
+        },
+        {
+          "id": "E2",
+          "text": "Temperature sensor calibration drifted upward by about 1.5 C only when relative humidity exceeded 88%."
+        },
+        {
+          "id": "E3",
+          "text": "A firmware retry defect caused the compressor controller to ignore every second restart command after a communications timeout."
+        },
+        {
+          "id": "E4",
+          "text": "The alerting rule suppressed repeated temperature alerts for 45 minutes after the first acknowledgement."
+        },
+        {
+          "id": "E5",
+          "text": "Humidity exceeded 88% for 73 minutes during the transfer."
+        },
+        {
+          "id": "E6",
+          "text": "Containers with the same firmware defect but calibrated sensors did not exceed the product limit in a comparison run."
+        },
+        {
+          "id": "E7",
+          "text": "Containers with the same sensor drift but corrected restart logic also stayed within the product limit in a comparison run."
+        },
+        {
+          "id": "E8",
+          "text": "The delayed alert extended operator response after the temperature had already crossed the product limit."
+        }
+      ]
+    },
+    {
+      "id": "SYN-003",
+      "title": "Orchid Deployment",
+      "domain": "software delivery",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "A new recommendation model produced incorrect results for one low-volume customer segment after deployment."
+        },
+        {
+          "id": "E2",
+          "text": "The release process initially exposed the model to 2% of traffic behind a feature flag."
+        },
+        {
+          "id": "E3",
+          "text": "Segment-level quality monitoring detected a 14-point precision drop six minutes after exposure."
+        },
+        {
+          "id": "E4",
+          "text": "The automated release rule halted expansion when any segment dropped more than 5 points."
+        },
+        {
+          "id": "E5",
+          "text": "The feature flag was disabled for the affected segment while the previous model continued serving all other traffic."
+        },
+        {
+          "id": "E6",
+          "text": "Total affected requests were 312; no other customer segment showed a measurable quality drop."
+        },
+        {
+          "id": "E7",
+          "text": "The deployment artifact passed all pre-release integration tests."
+        },
+        {
+          "id": "E8",
+          "text": "The team had practiced rollback of the feature flag in the previous month."
+        }
+      ]
+    },
+    {
+      "id": "SYN-004",
+      "title": "Harbor Queue Stall",
+      "domain": "distributed systems",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Queue depth rose steadily for 27 minutes while request arrival rate stayed within the normal range."
+        },
+        {
+          "id": "E2",
+          "text": "Consumer throughput fell by roughly 40% during the same interval."
+        },
+        {
+          "id": "E3",
+          "text": "Two changes occurred within the preceding hour: a consumer-library upgrade and a database index rebuild."
+        },
+        {
+          "id": "E4",
+          "text": "Consumer logs contain both increased lock-wait messages and increased message-deserialization warnings."
+        },
+        {
+          "id": "E5",
+          "text": "Available telemetry does not separate processing time spent waiting on the database from time spent retrying deserialization."
+        },
+        {
+          "id": "E6",
+          "text": "After both the library upgrade and the index rebuild were reverted, throughput returned to normal."
+        },
+        {
+          "id": "E7",
+          "text": "No run exists in which only one of the two changes was reverted."
+        },
+        {
+          "id": "E8",
+          "text": "No trace samples were retained from the incident window."
+        }
+      ]
+    },
+    {
+      "id": "SYN-005",
+      "title": "Juniper Search Latency",
+      "domain": "service reliability",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Median search latency doubled at 14:10 and recovered at 14:43."
+        },
+        {
+          "id": "E2",
+          "text": "Cache hit rate fell from 91% to 76% during the same window."
+        },
+        {
+          "id": "E3",
+          "text": "The cache service itself reported normal latency and no increase in errors."
+        },
+        {
+          "id": "E4",
+          "text": "At 14:08 a downstream catalog API reduced the per-client rate limit by 35%."
+        },
+        {
+          "id": "E5",
+          "text": "Search requests receiving downstream 429 responses retried twice with exponential backoff."
+        },
+        {
+          "id": "E6",
+          "text": "Requests without downstream 429 responses did not show increased latency, regardless of cache hit or miss."
+        },
+        {
+          "id": "E7",
+          "text": "The cache hit-rate decline was caused by retry requests using a cache-bypass header."
+        },
+        {
+          "id": "E8",
+          "text": "Restoring the previous downstream rate limit at 14:41 ended the 429 spike; search latency normalized two minutes later."
+        }
+      ]
+    },
+    {
+      "id": "SYN-006",
+      "title": "Atlas Data Import",
+      "domain": "data processing",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "A nightly import rejected 18% of partner records after a partner added an optional addressLine3 field."
+        },
+        {
+          "id": "E2",
+          "text": "The ingestion parser accepted the new field and wrote it into the intermediate event."
+        },
+        {
+          "id": "E3",
+          "text": "A downstream mapper used positional field indexes and shifted postalCode into the country slot when addressLine3 was present."
+        },
+        {
+          "id": "E4",
+          "text": "The validation service rejected the malformed country value and generated the majority of visible error messages."
+        },
+        {
+          "id": "E5",
+          "text": "Operators repeatedly retried rejected records; retries produced the same validation failures."
+        },
+        {
+          "id": "E6",
+          "text": "The partner contract allowed additive optional fields, but the mapper contract test covered only the original field positions."
+        },
+        {
+          "id": "E7",
+          "text": "Changing the validation service to accept the malformed country value would allow incorrect address data into fulfillment."
+        },
+        {
+          "id": "E8",
+          "text": "A mapper change from positional indexing to named-field mapping corrected the failing sample without changing the partner payload or validator."
+        }
+      ]
+    }
+  ],
+  "runPlan": [
+    {
+      "sequence": 1,
+      "runId": "SYN-001-A1-matched-neutral-r1",
+      "caseId": "SYN-001",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 2,
+      "runId": "SYN-001-A1-edf-r1",
+      "caseId": "SYN-001",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 3,
+      "runId": "SYN-001-A1-natural-r1",
+      "caseId": "SYN-001",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 4,
+      "runId": "SYN-002-A1-natural-r1",
+      "caseId": "SYN-002",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 5,
+      "runId": "SYN-002-A1-edf-r1",
+      "caseId": "SYN-002",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 6,
+      "runId": "SYN-002-A1-matched-neutral-r1",
+      "caseId": "SYN-002",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 7,
+      "runId": "SYN-003-A1-natural-r1",
+      "caseId": "SYN-003",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 8,
+      "runId": "SYN-003-A1-edf-r1",
+      "caseId": "SYN-003",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 9,
+      "runId": "SYN-003-A1-matched-neutral-r1",
+      "caseId": "SYN-003",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 10,
+      "runId": "SYN-004-A1-matched-neutral-r1",
+      "caseId": "SYN-004",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 11,
+      "runId": "SYN-004-A1-natural-r1",
+      "caseId": "SYN-004",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 12,
+      "runId": "SYN-004-A1-edf-r1",
+      "caseId": "SYN-004",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 13,
+      "runId": "SYN-005-A1-natural-r1",
+      "caseId": "SYN-005",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 14,
+      "runId": "SYN-005-A1-matched-neutral-r1",
+      "caseId": "SYN-005",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 15,
+      "runId": "SYN-005-A1-edf-r1",
+      "caseId": "SYN-005",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 16,
+      "runId": "SYN-006-A1-matched-neutral-r1",
+      "caseId": "SYN-006",
+      "condition": "matched-neutral",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 17,
+      "runId": "SYN-006-A1-natural-r1",
+      "caseId": "SYN-006",
+      "condition": "natural",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 18,
+      "runId": "SYN-006-A1-edf-r1",
+      "caseId": "SYN-006",
+      "condition": "edf",
+      "replicate": 1,
+      "phase": "primary"
+    },
+    {
+      "sequence": 19,
+      "runId": "SYN-001-A1-matched-neutral-r2",
+      "caseId": "SYN-001",
+      "condition": "matched-neutral",
+      "replicate": 2,
+      "phase": "repeatability"
+    },
+    {
+      "sequence": 20,
+      "runId": "SYN-001-A1-edf-r2",
+      "caseId": "SYN-001",
+      "condition": "edf",
+      "replicate": 2,
+      "phase": "repeatability"
+    },
+    {
+      "sequence": 21,
+      "runId": "SYN-001-A1-natural-r2",
+      "caseId": "SYN-001",
+      "condition": "natural",
+      "replicate": 2,
+      "phase": "repeatability"
+    },
+    {
+      "sequence": 22,
+      "runId": "SYN-004-A1-matched-neutral-r2",
+      "caseId": "SYN-004",
+      "condition": "matched-neutral",
+      "replicate": 2,
+      "phase": "repeatability"
+    },
+    {
+      "sequence": 23,
+      "runId": "SYN-004-A1-natural-r2",
+      "caseId": "SYN-004",
+      "condition": "natural",
+      "replicate": 2,
+      "phase": "repeatability"
+    },
+    {
+      "sequence": 24,
+      "runId": "SYN-004-A1-edf-r2",
+      "caseId": "SYN-004",
+      "condition": "edf",
+      "replicate": 2,
+      "phase": "repeatability"
+    }
+  ]
+}
