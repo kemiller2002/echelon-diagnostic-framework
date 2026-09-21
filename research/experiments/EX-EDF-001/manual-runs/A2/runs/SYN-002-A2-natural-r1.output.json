@@ -1,0 +1,213 @@
+{
+  "summary": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer (E1). The evidence points to a conjunctive cause: sensor calibration drift that appeared only above 88% relative humidity (E2), a condition present for 73 minutes of the transfer (E5), combined with a firmware retry defect that made the compressor controller ignore every second restart command after a communications timeout (E3). Two comparison runs isolate the factors: the firmware defect alone with calibrated sensors stayed within limit (E6), and the sensor drift alone with corrected restart logic stayed within limit (E7). Neither factor is sufficient on its own within this evidence; together they coincide with the exceedance. A separate alerting rule suppressed repeat temperature alerts for 45 minutes after first acknowledgement (E4), which extended operator response after the limit had already been crossed (E8) — an exposure-duration factor, not a cause of the crossing. The package does not state the direction in which drift biased control decisions, whether a communications timeout actually occurred during the transfer, or whether all three containers shared both conditions; those gaps are preserved below.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer.",
+      "confidence": "high",
+      "basis": ["E1"]
+    },
+    {
+      "id": "C2",
+      "text": "Sensor calibration drifted upward by about 1.5 C, but only while relative humidity exceeded 88%.",
+      "confidence": "high",
+      "basis": ["E2"]
+    },
+    {
+      "id": "C3",
+      "text": "The humidity-triggering condition for drift was present during the transfer, for 73 minutes.",
+      "confidence": "high",
+      "basis": ["E2", "E5"]
+    },
+    {
+      "id": "C4",
+      "text": "A firmware retry defect caused the compressor controller to ignore every second restart command following a communications timeout.",
+      "confidence": "high",
+      "basis": ["E3"]
+    },
+    {
+      "id": "C5",
+      "text": "The firmware defect alone was not sufficient to produce a product-limit exceedance, since containers with the defect and calibrated sensors stayed within limit.",
+      "confidence": "medium",
+      "basis": ["E6"]
+    },
+    {
+      "id": "C6",
+      "text": "The sensor drift alone was not sufficient to produce a product-limit exceedance, since containers with the drift and corrected restart logic stayed within limit.",
+      "confidence": "medium",
+      "basis": ["E7"]
+    },
+    {
+      "id": "C7",
+      "text": "The exceedance is best explained as a conjunction of sensor drift and the firmware retry defect, with neither factor sufficient alone.",
+      "confidence": "medium",
+      "basis": ["E1", "E2", "E3", "E5", "E6", "E7"]
+    },
+    {
+      "id": "C8",
+      "text": "High relative humidity acted as the enabling condition that activated the sensor drift; without it the drift is not stated to occur.",
+      "confidence": "medium",
+      "basis": ["E2", "E5"]
+    },
+    {
+      "id": "C9",
+      "text": "The 45-minute alert suppression window delayed repeat notification after the first acknowledgement.",
+      "confidence": "high",
+      "basis": ["E4"]
+    },
+    {
+      "id": "C10",
+      "text": "The delayed alert extended operator response only after the product limit had already been crossed, so it affected excursion duration rather than excursion onset.",
+      "confidence": "high",
+      "basis": ["E4", "E8"]
+    },
+    {
+      "id": "C11",
+      "text": "The comparison runs function as single-variable controls, which is what licenses the conjunctive reading rather than a single-root-cause reading.",
+      "confidence": "medium",
+      "basis": ["E6", "E7"]
+    },
+    {
+      "id": "C12",
+      "text": "The evidence does not establish the mechanism by which drift plus the retry defect produced the exceedance, only that their co-occurrence tracks it.",
+      "confidence": "medium",
+      "basis": ["E2", "E3", "E6", "E7"]
+    }
+  ],
+  "relationships": [
+    {"from": "E5", "to": "C2", "type": "contributes-to", "confidence": "high", "note": "Humidity above 88% for 73 minutes supplies the stated trigger condition for drift."},
+    {"from": "C8", "to": "C2", "type": "mediates", "confidence": "medium", "note": "Drift is expressed only through the humidity condition."},
+    {"from": "C2", "to": "C1", "type": "contributes-to", "confidence": "medium", "note": "Necessary but not sufficient per E7."},
+    {"from": "C4", "to": "C1", "type": "contributes-to", "confidence": "medium", "note": "Necessary but not sufficient per E6."},
+    {"from": "C2", "to": "C7", "type": "supports", "confidence": "medium"},
+    {"from": "C4", "to": "C7", "type": "supports", "confidence": "medium"},
+    {"from": "E6", "to": "C5", "type": "supports", "confidence": "high"},
+    {"from": "E7", "to": "C6", "type": "supports", "confidence": "high"},
+    {"from": "C5", "to": "C7", "type": "supports", "confidence": "medium"},
+    {"from": "C6", "to": "C7", "type": "supports", "confidence": "medium"},
+    {"from": "C11", "to": "C7", "type": "supports", "confidence": "medium"},
+    {"from": "C1", "to": "C10", "type": "precedes", "confidence": "high", "note": "E8 places the limit crossing before the delayed operator response."},
+    {"from": "C9", "to": "C10", "type": "contributes-to", "confidence": "high"},
+    {"from": "C10", "to": "C1", "type": "unknown", "confidence": "low", "note": "No evidence that alert suppression influenced whether the limit was crossed; its stated effect is post-crossing."},
+    {"from": "C7", "to": "C12", "type": "unknown", "confidence": "low", "note": "Co-occurrence is established; the intervening physical mechanism is not."},
+    {"from": "E3", "to": "C4", "type": "supports", "confidence": "high"}
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "The direction of the control error is unresolved: a sensor reading about 1.5 C high could either mask or exaggerate the true product temperature, and the package does not say whether E1's exceedance was measured or actual.",
+      "resolvedBy": "Paired readings from the drifted sensor and an independent reference probe on the same container during the transfer."
+    },
+    {
+      "id": "U2",
+      "text": "It is not stated that a communications timeout actually occurred during the six-hour transfer, so the firmware defect's precondition (E3) may or may not have been triggered.",
+      "resolvedBy": "Controller communication logs for the transfer showing timeout events and subsequent restart commands issued versus executed."
+    },
+    {
+      "id": "U3",
+      "text": "Whether all three containers in E1 had both the sensor drift and the firmware defect is not stated.",
+      "resolvedBy": "Per-container configuration and calibration records for the three affected units."
+    },
+    {
+      "id": "U4",
+      "text": "The temporal relationship between the 73-minute humidity window (E5) and the limit crossings (E1) is unspecified; overlap is assumed, not shown.",
+      "resolvedBy": "A time-aligned trace of humidity, product temperature and compressor state across the transfer."
+    },
+    {
+      "id": "U5",
+      "text": "The comparison runs (E6, E7) are not described with respect to humidity exposure, route, load or duration, so their status as valid controls for this transfer is uncertain.",
+      "resolvedBy": "Run conditions for the comparison runs, especially whether humidity exceeded 88% and for how long."
+    },
+    {
+      "id": "U6",
+      "text": "The magnitude of the exceedance and how far it depended on 1.5 C specifically is unknown, so it is unclear whether a smaller drift would still have combined with the firmware defect to cross the limit.",
+      "resolvedBy": "Recorded peak product temperatures and the numeric product limit for the affected containers."
+    },
+    {
+      "id": "U7",
+      "text": "Whether the first acknowledgement that started the 45-minute suppression window (E4) occurred before or after the limit crossing is not stated; E8 places only the extended response after it.",
+      "resolvedBy": "Alert and acknowledgement timestamps alongside the limit-crossing timestamps."
+    },
+    {
+      "id": "U8",
+      "text": "No evidence addresses product impact, so whether the exceedance caused loss or harm cannot be determined from this package.",
+      "resolvedBy": "Product stability or disposition data for the affected loads."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "text": "Correct the firmware retry logic so that no restart command is dropped after a communications timeout; this removes one of the two conjoined factors and E6 indicates the remaining factor alone did not breach the limit.",
+      "confidence": "medium",
+      "basis": ["E3", "E6"]
+    },
+    {
+      "id": "A2",
+      "text": "Recalibrate or humidity-compensate the temperature sensors so drift does not appear above 88% relative humidity; E7 indicates the firmware defect alone did not breach the limit.",
+      "confidence": "medium",
+      "basis": ["E2", "E7"]
+    },
+    {
+      "id": "A3",
+      "text": "Change the alerting rule so that continued or worsening temperature excursions re-alert inside the 45-minute suppression window, which addresses the extended response in E8 without claiming it caused the crossing.",
+      "confidence": "medium",
+      "basis": ["E4", "E8"]
+    },
+    {
+      "id": "A4",
+      "text": "Retrieve per-container records for the three affected units to confirm which had both factors present, resolving U3 before generalising the conjunctive finding.",
+      "confidence": "high",
+      "basis": ["E1", "E6", "E7"]
+    },
+    {
+      "id": "A5",
+      "text": "Pull time-aligned humidity, temperature, communications-timeout and compressor-state traces for the transfer to test the assumed overlap and the untriggered-defect possibility (U2, U4).",
+      "confidence": "high",
+      "basis": ["E3", "E5"]
+    },
+    {
+      "id": "A6",
+      "text": "Document the humidity conditions of the comparison runs so E6 and E7 can be relied on as controls rather than accepted as stated (U5).",
+      "confidence": "medium",
+      "basis": ["E6", "E7"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "text": "With calibrated sensors and the firmware defect still present, the product limit would not have been exceeded.",
+      "confidence": "medium",
+      "basis": ["E6"]
+    },
+    {
+      "id": "CF2",
+      "text": "With corrected restart logic and the sensor drift still present, the product limit would not have been exceeded.",
+      "confidence": "medium",
+      "basis": ["E7"]
+    },
+    {
+      "id": "CF3",
+      "text": "Had relative humidity stayed at or below 88% throughout, the drift condition stated in E2 would not have been active, and the conjunction required for the exceedance would not have formed.",
+      "confidence": "medium",
+      "basis": ["E2", "E5", "E7"]
+    },
+    {
+      "id": "CF4",
+      "text": "Had the alerting rule not suppressed repeat alerts, the limit would still have been crossed, but the operator response would have begun sooner and the excursion would likely have been shorter.",
+      "confidence": "medium",
+      "basis": ["E4", "E8"]
+    },
+    {
+      "id": "CF5",
+      "text": "Had no communications timeout occurred, the firmware defect's stated trigger would have been absent; the evidence does not settle whether the exceedance would then have been avoided, because it does not confirm a timeout occurred in the first place.",
+      "confidence": "low",
+      "basis": ["E3"]
+    },
+    {
+      "id": "CF6",
+      "text": "Had the drift been smaller than about 1.5 C with the firmware defect still present, the outcome is undetermined by this package, since no dose-response evidence is supplied.",
+      "confidence": "low",
+      "basis": ["E2", "E6", "E7"]
+    }
+  ]
+}
