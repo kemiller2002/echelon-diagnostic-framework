@@ -1,0 +1,337 @@
+{
+  "summary": "A new recommendation model was released behind a feature flag to 2% of traffic. It produced incorrect results for one low-volume customer segment, which pre-release integration tests did not catch. Segment-level quality monitoring detected a 14-point precision drop six minutes after exposure, an automated rule stopped expansion because the drop exceeded the 5-point threshold, and the flag was disabled for that segment while the prior model kept serving everyone else. Total blast radius was 312 requests with no measurable quality drop in any other segment. The dominant story here is not the defect but the containment system: staged exposure, segment-resolution detection, an automated halt rule, and a rehearsed flag rollback converted a latent model defect into a small, bounded incident. The evidence available describes the release and containment mechanics, not the internal cause of the segment-specific defect, so the underlying fault remains unexplained.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The deployed recommendation model contained a defect whose effect was confined to one low-volume customer segment.",
+      "confidence": "high",
+      "evidence": ["E1", "E6"]
+    },
+    {
+      "id": "C2",
+      "statement": "Pre-release integration testing did not exercise the condition that triggered the defect, since the artifact passed all such tests yet failed in production.",
+      "confidence": "high",
+      "evidence": ["E7", "E1"]
+    },
+    {
+      "id": "C3",
+      "statement": "Exposure was deliberately limited: the release began at 2% of traffic behind a feature flag rather than full rollout.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "Monitoring was instrumented at segment granularity, not only in aggregate, which is what made a low-volume segment's degradation visible.",
+      "confidence": "high",
+      "evidence": ["E3", "E6"]
+    },
+    {
+      "id": "C5",
+      "statement": "Detection latency was approximately six minutes from exposure.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C6",
+      "statement": "The observed 14-point precision drop exceeded the automated halt threshold of 5 points by a wide margin, so the rule fired unambiguously rather than at the edge of its sensitivity.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C7",
+      "statement": "Expansion of the rollout was stopped automatically by rule, not by human judgment during the incident.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C8",
+      "statement": "Remediation was surgical: the flag was disabled only for the affected segment while the previous model continued serving all other traffic.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C9",
+      "statement": "A known-good fallback (the previous model) remained live and serving throughout, so disabling the flag restored correct behavior without a service gap.",
+      "confidence": "medium",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C10",
+      "statement": "The rollback action had been rehearsed the previous month, so the response used a practiced rather than improvised procedure.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C11",
+      "statement": "Customer impact was bounded to 312 requests, a magnitude consistent with a low-volume segment at 2% exposure for a short detection-plus-response window.",
+      "confidence": "high",
+      "evidence": ["E6", "E2", "E3"]
+    },
+    {
+      "id": "C12",
+      "statement": "The outcome is best characterized as a successful containment of a real defect, not as an averted defect or a clean release.",
+      "confidence": "high",
+      "evidence": ["E1", "E6", "E5"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "C2",
+      "to": "C1",
+      "type": "contributes-to",
+      "rationale": "A test suite that did not cover the triggering condition allowed a segment-specific defect to reach production traffic.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R2",
+      "from": "C1",
+      "to": "C11",
+      "type": "contributes-to",
+      "rationale": "The defect is the source of the incorrect results counted in the affected request total.",
+      "confidence": "high"
+    },
+    {
+      "id": "R3",
+      "from": "C3",
+      "to": "C11",
+      "type": "prevents",
+      "rationale": "Capping exposure at 2% bounded how many requests could reach the defective model before detection.",
+      "confidence": "high"
+    },
+    {
+      "id": "R4",
+      "from": "C4",
+      "to": "C5",
+      "type": "mediates",
+      "rationale": "Segment-level measurement is the mechanism by which a low-volume degradation became observable within minutes.",
+      "confidence": "high"
+    },
+    {
+      "id": "R5",
+      "from": "C1",
+      "to": "C6",
+      "type": "precedes",
+      "rationale": "The defect produced the precision drop that the threshold then evaluated.",
+      "confidence": "high"
+    },
+    {
+      "id": "R6",
+      "from": "C6",
+      "to": "C7",
+      "type": "contributes-to",
+      "rationale": "The magnitude of the drop crossed the configured threshold, which is the condition that triggers the halt.",
+      "confidence": "high"
+    },
+    {
+      "id": "R7",
+      "from": "C7",
+      "to": "C11",
+      "type": "prevents",
+      "rationale": "Halting expansion stopped exposure from growing beyond 2%, capping further accumulation of affected requests.",
+      "confidence": "high"
+    },
+    {
+      "id": "R8",
+      "from": "C5",
+      "to": "C11",
+      "type": "contributes-to",
+      "rationale": "Short detection latency is a direct multiplier on the number of requests served incorrectly.",
+      "confidence": "high"
+    },
+    {
+      "id": "R9",
+      "from": "C10",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Prior rehearsal of the flag rollback supports fast, correct execution of the disable action.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R10",
+      "from": "C8",
+      "to": "C11",
+      "type": "prevents",
+      "rationale": "Disabling the flag for the segment terminated the exposure window and therefore the accrual of affected requests.",
+      "confidence": "high"
+    },
+    {
+      "id": "R11",
+      "from": "C9",
+      "to": "C8",
+      "type": "mediates",
+      "rationale": "A live previous model is what makes flag disablement a safe remediation rather than an outage.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R12",
+      "from": "C3",
+      "to": "C8",
+      "type": "mediates",
+      "rationale": "The feature flag is both the exposure control and the remediation lever; it is the same mechanism used in each direction.",
+      "confidence": "high"
+    },
+    {
+      "id": "R13",
+      "from": "C4",
+      "to": "C6",
+      "type": "supports",
+      "rationale": "A segment-scoped threshold rule is only actionable given segment-scoped measurement.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R14",
+      "from": "C8",
+      "to": "C12",
+      "type": "contributes-to",
+      "rationale": "Segment-scoped remediation preserved service for unaffected traffic, which is what makes the outcome a containment rather than a broad rollback.",
+      "confidence": "high"
+    },
+    {
+      "id": "R15",
+      "from": "C11",
+      "to": "C12",
+      "type": "supports",
+      "rationale": "The small bounded impact is the observable evidence for characterizing the outcome as contained.",
+      "confidence": "high"
+    },
+    {
+      "id": "R16",
+      "from": "C2",
+      "to": "C12",
+      "type": "unknown",
+      "rationale": "Whether the testing gap is a systemic coverage weakness or a one-off untestable condition is not established, so its bearing on future outcomes is undetermined.",
+      "confidence": "low"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "The technical cause of the segment-specific incorrect results is entirely unexplained. Nothing distinguishes a data/feature-distribution issue, a training-population gap, a serving-path or encoding bug, or a segment-specific configuration error.",
+      "impact": "high"
+    },
+    {
+      "id": "U2",
+      "statement": "Why the segment is low-volume and whether that property is causally related to the defect, rather than incidental, is unknown. A defect correlated with rare inputs and a defect that merely happened to land in a small segment have different implications.",
+      "impact": "high"
+    },
+    {
+      "id": "U3",
+      "statement": "It is not stated whether the segment-level disable was performed automatically by the same release rule or by a human operator after the halt. Only the expansion halt is described as automated.",
+      "impact": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "Total elapsed time from exposure to flag disablement is unknown; only the six-minute detection point is given. The remediation portion of the exposure window cannot be separated from the detection portion.",
+      "impact": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "Whether the 5-point threshold is well calibrated is untested by this case. A 14-point drop would have tripped a much looser threshold too, so the rule's sensitivity to subtler regressions remains unvalidated.",
+      "impact": "medium"
+    },
+    {
+      "id": "U6",
+      "statement": "Whether segments other than the affected one had sufficient traffic at 2% exposure to produce a statistically meaningful quality reading is not established, so 'no other segment showed a measurable drop' may partly reflect limited observability rather than confirmed absence of harm.",
+      "impact": "medium"
+    },
+    {
+      "id": "U7",
+      "statement": "The downstream consequence of the 312 incorrect responses is not described. Request count is a proxy for harm, not a measure of it, and severity per affected request is unknown.",
+      "impact": "medium"
+    },
+    {
+      "id": "U8",
+      "statement": "It is not stated whether the pre-release integration tests included any segment-resolved quality evaluation, or only functional/integration correctness. This determines whether the gap is a missing test type or a missing test case.",
+      "impact": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "statement": "Diagnose the defect itself before any redeployment. The containment worked, but nothing in the available record explains why this segment produced incorrect results, and the model cannot be safely re-exposed on the strength of a good rollback alone.",
+      "leverage": "high",
+      "confidence": "high",
+      "rationale": "Addresses the only unexplained node in the chain; all other controls acted as designed."
+    },
+    {
+      "id": "A2",
+      "statement": "Extend pre-release evaluation to include segment-resolved quality checks, mirroring in testing the granularity that monitoring already has in production.",
+      "leverage": "high",
+      "confidence": "medium",
+      "rationale": "Targets the one contributor that let the defect reach live traffic; the asymmetry between segment-aware monitoring and segment-blind testing is visible in the evidence, though the exact test composition is not."
+    },
+    {
+      "id": "A3",
+      "statement": "Preserve the staged-exposure plus segment-scoped-flag design as a standard release control, since the same mechanism served as both the exposure limiter and the remediation lever.",
+      "leverage": "high",
+      "confidence": "high",
+      "rationale": "This is the highest-leverage control in the system and it is already in place; the action is protecting it from erosion rather than adding something new."
+    },
+    {
+      "id": "A4",
+      "statement": "Validate whether the 5-point halt threshold catches regressions far smaller than the 14-point drop seen here, and whether low-volume segments can accumulate a reliable signal at 2% exposure.",
+      "leverage": "medium",
+      "confidence": "medium",
+      "rationale": "This incident exercised the rule only in an easy regime; the rule's behavior near its threshold and at low sample counts is untested."
+    },
+    {
+      "id": "A5",
+      "statement": "Continue periodic rehearsal of the rollback path, and extend rehearsal to the segment-scoped disable specifically, not only the general flag rollback.",
+      "leverage": "medium",
+      "confidence": "medium",
+      "rationale": "Rehearsal preceded a clean execution here; keeping the practiced state is cheap, but the rehearsed scope and the executed scope may not have been identical."
+    },
+    {
+      "id": "A6",
+      "statement": "Treat request count as an incomplete impact measure and record per-request severity for the affected segment before judging this incident low-consequence.",
+      "leverage": "medium",
+      "confidence": "medium",
+      "rationale": "Improves the fidelity of future severity judgments; this is largely a visibility improvement rather than a control over the failure mechanism."
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "F1",
+      "statement": "Had monitoring been aggregate-only rather than segment-level, a quality drop confined to one low-volume segment would likely have been diluted below any aggregate threshold, the halt rule would not have fired, and the rollout would have continued expanding.",
+      "confidence": "medium",
+      "challenges": "C4",
+      "implication": "Segment-resolution monitoring, not the threshold rule, is the load-bearing detection control."
+    },
+    {
+      "id": "F2",
+      "statement": "Had the release gone to full traffic immediately instead of 2%, affected requests would have exceeded 312 by a large factor even with identical detection latency and response.",
+      "confidence": "high",
+      "challenges": "C3",
+      "implication": "Staged exposure caps blast radius independently of how fast detection works."
+    },
+    {
+      "id": "F3",
+      "statement": "Had the flag not supported segment-scoped disablement, remediation would have required rolling back the entire 2% exposure, which would still have resolved the defect but discarded the release's signal for unaffected segments.",
+      "confidence": "medium",
+      "challenges": "C8",
+      "implication": "Segment-scoped control adds precision, but is not what prevented harm; coarser rollback would also have stopped the damage."
+    },
+    {
+      "id": "F4",
+      "statement": "Had the precision drop been 6 points rather than 14, the rule would still have fired, but the margin over threshold would have been narrow enough that measurement noise at low volume could plausibly have delayed or suppressed the trigger.",
+      "confidence": "low",
+      "challenges": "C6",
+      "implication": "The clean firing here reflects a large signal, not demonstrated rule robustness."
+    },
+    {
+      "id": "F5",
+      "statement": "Had the team not rehearsed the rollback, the flag disable would presumably still have been available, but execution would likely have been slower, extending the exposure window and the affected-request count.",
+      "confidence": "low",
+      "challenges": "C10",
+      "implication": "Rehearsal shortens response time; it is not what made rollback possible, so its contribution is real but secondary to the flag mechanism itself."
+    },
+    {
+      "id": "F6",
+      "statement": "Had the previous model not remained live for all other traffic, disabling the flag would have removed serving capacity rather than restoring a known-good path, turning a quality incident into an availability one.",
+      "confidence": "medium",
+      "challenges": "C9",
+      "implication": "The safety of the rollback depends on a maintained fallback, an assumption easy to erode once the new model is fully promoted."
+    }
+  ]
+}
