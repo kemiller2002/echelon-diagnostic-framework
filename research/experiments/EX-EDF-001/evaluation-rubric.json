@@ -1,0 +1,71 @@
+{
+  "id": "RUBRIC-STRUCTURAL-VALUE-1",
+  "version": "1.0.0",
+  "blinding": "Evaluator receives anonymous output, case evidence, hidden ground truth, and this rubric. It does not receive condition or analyzer identity.",
+  "dimensions": [
+    {
+      "id": "diagnostic-accuracy",
+      "weight": 20,
+      "anchors": {
+        "0": "Contradicts or misses the central explanation.",
+        "1": "Mostly incorrect or symptom-level.",
+        "2": "Partially correct but materially incomplete.",
+        "3": "Substantially correct with minor omissions.",
+        "4": "Matches the evidence-supported explanation and important boundaries."
+      }
+    },
+    {
+      "id": "causal-fidelity",
+      "weight": 20,
+      "anchors": {
+        "0": "Causal relationships are unsupported or reversed.",
+        "1": "Major causal errors.",
+        "2": "Mixed correct and incorrect relationships.",
+        "3": "Core causal path is correct with minor issues.",
+        "4": "Correctly represents supported relationship direction, interaction, mediation, and downstream effects without inventing structure."
+      }
+    },
+    {
+      "id": "evidence-discipline",
+      "weight": 20,
+      "anchors": {
+        "0": "Relies heavily on unsupported or outside claims.",
+        "1": "Several material unsupported claims.",
+        "2": "Some unsupported claims or weak evidence mapping.",
+        "3": "Mostly evidence-grounded with minor overreach.",
+        "4": "Material claims are grounded in allowed evidence and misleading evidence is handled appropriately."
+      }
+    },
+    {
+      "id": "uncertainty-calibration",
+      "weight": 20,
+      "anchors": {
+        "0": "Claims certainty where evidence is unresolved.",
+        "1": "Major uncertainty is hidden.",
+        "2": "Acknowledges uncertainty but preserves alternatives weakly.",
+        "3": "Appropriate uncertainty with useful missing-evidence notes.",
+        "4": "Calibrates confidence to evidence, preserves live alternatives, and identifies discriminating evidence when needed."
+      }
+    },
+    {
+      "id": "action-quality",
+      "weight": 20,
+      "anchors": {
+        "0": "Actions are harmful, irrelevant, or symptom-only.",
+        "1": "Weakly connected to explanation.",
+        "2": "Plausible but poorly prioritized.",
+        "3": "Targets supported mechanisms with reasonable leverage.",
+        "4": "Targets the strongest evidence-supported mechanisms with useful leverage without weakening protective controls or exceeding the evidence."
+      }
+    }
+  ],
+  "scoreFormula": "sum(dimension score * 5), yielding 0..100",
+  "secondaryFlags": [
+    "outside-evidence-use",
+    "forbidden-claim",
+    "missed-required-finding",
+    "harmful-action",
+    "condition-identification"
+  ],
+  "adjudication": "If E1 and E2 total semantic scores differ by 20 or more points, E3 is required and final score is median(E1,E2,E3). Otherwise final score is mean(E1,E2)."
+}

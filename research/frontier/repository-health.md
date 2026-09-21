@@ -1,6 +1,6 @@
 # Repository Health Assessment
 
-Analysis date: 2026-09-20
+Analysis date: 2026-09-21
 Status: Current
 
 ## Executive assessment
@@ -14,12 +14,16 @@ The framework remains empirically immature. The upgrade improves research integr
 | Metric | Result | Interpretation |
 |---|---:|---|
 | Current hypotheses | 10 | Canonical registry |
-| Current evidence records | 7 | Canonical registry, including external methodology cross-check |
+| Current evidence records | 8 | Canonical registry; EV-EDF-008 is procedural benchmark evidence, not performance evidence |
 | Current theory records | 3 | Working theory boundary |
 | Cross-executor performance studies completed | 0 | Largest evidence gap |
 | Controlled matched-structure benchmarks completed | 0 | EDF-specific incremental value unresolved |
+| Preregistered matched-structure benchmarks | 1 | EX-EDF-001 is frozen but not yet executed |
+| EX-EDF-001 synthetic held-out cases | 6 | Hidden-ground-truth design |
+| EX-EDF-001 frozen artifacts | 7 | SHA-256 checked in CI |
+| EX-EDF-001 analyzer runs | 0 | Confirmatory execution correctly blocked pending executor binding |
 | Current confirmatory protocol | v1.2 | Requires raw run bundles and matched controls |
-| Integrity tests | 1/1 pass | Repository-level check, not framework-performance evidence |
+| Integrity tests | 3/3 pass | Repository + benchmark checks, not framework-performance evidence |
 | Markdown/HTML files checked for local links | 101 | Automated repository validation |
 | Required website files checked | 7 | Canonical static site |
 | Duplicate deployed web stacks | 0 | Removed |
@@ -40,7 +44,7 @@ Whether EDF-specific semantics add measurable value beyond a matched neutral str
 
 ## Research health recommendation
 
-Freeze conceptual expansion and execute the Multi-Model EDF Structural-Value Benchmark under Validation Protocol v1.2.
+Conceptual expansion remains frozen. EX-EDF-001 is now preregistered and should be executed under Validation Protocol v1.2 once real independent analyzer/evaluator bindings are frozen.
 
 If matched neutral structure is non-inferior, simplify the theory rather than redefining success after the fact.
 

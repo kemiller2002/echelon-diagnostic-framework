@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "seed": "edf-structural-value-2026-09-21-v1",
+  "unit": "case x analyzer-executor x condition",
+  "procedure": [
+    "For each analyzer executor and case, order the three primary conditions by ascending SHA-256(seed|executorSlot|caseId|condition).",
+    "Anonymous output label is the first 12 hex characters of SHA-256(seed|runId|blind).",
+    "Evaluator presentation order is ascending SHA-256(seed|evaluatorSlot|anonymousLabel|order)."
+  ],
+  "repeatabilitySubsample": {
+    "cases": [
+      "SYN-001",
+      "SYN-004"
+    ],
+    "replicatesPerConditionPerExecutor": 2,
+    "note": "Primary run plus one additional attempt under the same declared generation settings."
+  }
+}
