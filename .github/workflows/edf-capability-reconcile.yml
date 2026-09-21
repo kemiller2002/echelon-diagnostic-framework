@@ -22,6 +22,18 @@ jobs:
         with:
           node-version: "22"
 
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Upgrade to ROS 3.1.4 from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/kemiller2002/repository-operating-system.git "$RUNNER_TEMP/ros-source"
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- \
+            --root "$GITHUB_WORKSPACE" init
+
       - name: Start ROS work
         shell: bash
         env:
@@ -31,24 +43,24 @@ jobs:
           git fetch origin main
           export ROS_BASE_REF=origin/main
           work_id="EDF-UPGRADE-2026-09-21"
-          ./ros add "Reconcile EDF with current Echelon capabilities and ROS research rules" \
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" work capture --title "Reconcile EDF with current Echelon capabilities and ROS research rules" --occurred-at "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
             --id "$work_id" \
             --tag edf,tooling,ordo,ros \
             --priority high \
             --source agent-discovery \
             --source-reference "public-repository-upgrade-2026-09-21"
           ready_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          ./ros work backlog-transition --id "$work_id" --action ready --occurred-at "$ready_at"
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" work backlog-transition --id "$work_id" --action ready --occurred-at "$ready_at"
           sleep 1
           start_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          ./ros work start --id "$work_id" --occurred-at "$start_at" --type mechanical --actor agent:chatgpt
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" work start --id "$work_id" --occurred-at "$start_at" --type mechanical --actor agent:chatgpt
 
       - name: Rebuild ROS registries
         shell: bash
         run: |
           set -euo pipefail
-          ./ros registry build
-          ./ros registry check
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" registry build
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" registry check
 
       - name: Complete ROS work and validate
         shell: bash
@@ -59,8 +71,8 @@ jobs:
           git fetch origin main
           export ROS_BASE_REF=origin/main
           done_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          ./ros work complete --id "EDF-UPGRADE-2026-09-21" --occurred-at "$done_at" --actor agent:chatgpt
-          ./ros validate
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" work complete --id "EDF-UPGRADE-2026-09-21" --occurred-at "$done_at" --actor agent:chatgpt
+          dotnet run --project "$RUNNER_TEMP/ros-source/src/Ros.Cli/Ros.Cli.fsproj" -c Release -- --root "$GITHUB_WORKSPACE" validate
           node scripts/repository-integrity.mjs
           node --test
 
