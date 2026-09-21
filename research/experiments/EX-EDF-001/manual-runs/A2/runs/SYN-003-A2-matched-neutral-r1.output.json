@@ -1,0 +1,290 @@
+{
+  "summary": "A new recommendation model carried a defect affecting exactly one low-volume customer segment (E1) that pre-release integration tests did not surface (E7). The observed outcome has two parts that the evidence separates cleanly: a defect escaped to production, and its impact stayed at 312 requests in one segment (E6). The escape is best explained by a coverage gap in pre-release validation — the artifact passed all integration tests yet produced incorrect segment-level results, so the tests did not exercise the property that failed. The containment is best explained by an interaction rather than any single control: limited 2% exposure (E2) bounded the population, segment-level rather than aggregate quality monitoring (E3) made a 14-point drop visible in a low-volume slice, and an automated 5-point halt rule (E4) converted that signal into a stop before expansion. Remove any one of the three and the evidence no longer accounts for the observed scale. The per-segment flag disable (E5) ended exposure while preserving service for all other traffic. No evidence in the package identifies the defect's technical root cause, and no evidence establishes that prior rollback practice (E8) affected this incident's timeline.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The deployed model produced incorrect results confined to a single low-volume customer segment; no other segment showed a measurable quality drop.",
+      "basis": "observation",
+      "evidence": ["E1", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Pre-release integration tests did not cover the property that failed, since the artifact passed all of them while carrying a segment-specific quality defect.",
+      "basis": "inference",
+      "evidence": ["E1", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Quality monitoring was instrumented at segment granularity, not only in aggregate, because a 14-point precision drop was attributed to a specific segment.",
+      "basis": "inference",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "Detection was fast relative to exposure: the drop was identified six minutes after the model began serving traffic.",
+      "basis": "observation",
+      "evidence": ["E2", "E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "The observed 14-point drop exceeded the automated halt threshold of 5 points by a wide margin, so the rule's firing condition was unambiguously met.",
+      "basis": "inference",
+      "evidence": ["E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Expansion beyond 2% never occurred, which is why total affected requests remained at 312.",
+      "basis": "inference",
+      "evidence": ["E2", "E4", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C7",
+      "statement": "The feature flag supported segment-scoped disablement, allowing the affected segment to be cut over to the previous model while other traffic was unchanged.",
+      "basis": "inference",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "Containment required the joint operation of bounded exposure, segment-granular detection, and an automatic halt rule; no one of these alone accounts for the observed impact scale.",
+      "basis": "inference",
+      "evidence": ["E2", "E3", "E4", "E5", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C9",
+      "statement": "The technical root cause of the segment-specific incorrectness is not determined by the evidence package; nothing describes model inputs, training data, segment features, or serving configuration.",
+      "basis": "observation",
+      "evidence": ["E1", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "statement": "Prior rollback practice is recorded but no evidence links it to this incident's response speed or correctness; its causal contribution is unestablished.",
+      "basis": "observation",
+      "evidence": ["E5", "E8"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "E2",
+      "to": "E3",
+      "type": "precedes",
+      "rationale": "Exposure at 2% behind the flag is the event whose six-minute mark anchors the detected precision drop.",
+      "confidence": "high"
+    },
+    {
+      "id": "R2",
+      "from": "E7",
+      "to": "C1",
+      "type": "contributes-to",
+      "rationale": "Passing all pre-release integration tests allowed a defective artifact to reach production traffic; the gate did not test the failing property.",
+      "confidence": "high"
+    },
+    {
+      "id": "R3",
+      "from": "C3",
+      "to": "E3",
+      "type": "mediates",
+      "rationale": "Segment-level instrumentation is the mechanism by which a defect confined to a low-volume segment became an observable signal at all.",
+      "confidence": "high"
+    },
+    {
+      "id": "R4",
+      "from": "E3",
+      "to": "E4",
+      "type": "precedes",
+      "rationale": "The measured 14-point drop is the input that satisfies the rule's >5-point halt condition.",
+      "confidence": "high"
+    },
+    {
+      "id": "R5",
+      "from": "E4",
+      "to": "C6",
+      "type": "prevents",
+      "rationale": "The automated halt stopped expansion past 2%, preventing the affected population from growing.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R6",
+      "from": "E2",
+      "to": "E6",
+      "type": "contributes-to",
+      "rationale": "A 2% exposure ceiling bounds the maximum number of requests the defective model could serve during the window.",
+      "confidence": "high"
+    },
+    {
+      "id": "R7",
+      "from": "E5",
+      "to": "E6",
+      "type": "prevents",
+      "rationale": "Disabling the flag for the affected segment terminated accrual of further affected requests, fixing the total at 312.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R8",
+      "from": "C7",
+      "to": "E5",
+      "type": "mediates",
+      "rationale": "Segment-scoped flag control is the mechanism that permitted a targeted rollback without reverting unaffected traffic.",
+      "confidence": "high"
+    },
+    {
+      "id": "R9",
+      "from": "E2",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Bounded exposure is one of three jointly necessary elements of the containment explanation.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R10",
+      "from": "E3",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Segment-granular detection is the second jointly necessary element; aggregate monitoring would have diluted a one-segment drop inside a 2% slice.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R11",
+      "from": "E4",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "The automated halt rule is the third jointly necessary element, converting a detection signal into an enforced stop.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R12",
+      "from": "E8",
+      "to": "E5",
+      "type": "unknown",
+      "rationale": "Prior practice and the executed rollback both appear in evidence, but nothing connects practice to this rollback's timing, correctness, or occurrence.",
+      "confidence": "low"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "The technical cause of the segment-specific incorrectness is unknown, so it is unknown whether the same cause could affect other segments under different traffic or data conditions.",
+      "discriminatingObservation": "A root-cause analysis of the model's behavior on the affected segment's inputs, compared against segments that showed no drop.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "statement": "It is not established that the halt at 2% was caused by the automated rule firing rather than by a human acting on the same monitoring signal; both fit the evidence.",
+      "discriminatingObservation": "The release system's action log showing whether the expansion block was issued by the automated rule or by an operator.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "statement": "Whether the affected segment's presence in the 2% slice was designed or incidental is unknown, which determines whether early detection is repeatable or fortunate.",
+      "discriminatingObservation": "The flag's traffic-allocation configuration, showing whether low-volume segments are deliberately sampled into early exposure.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "It is unknown whether every segment has monitoring coverage with enough volume at 2% to produce a statistically meaningful precision estimate within minutes.",
+      "discriminatingObservation": "Per-segment request volume within the 2% slice against the minimum sample size the precision metric requires to trigger the 5-point rule.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "The elapsed time between detection at six minutes and the flag being disabled is not given, so response latency cannot be assessed.",
+      "discriminatingObservation": "Timestamps for the halt decision and the flag-disable action.",
+      "confidence": "high"
+    },
+    {
+      "id": "U6",
+      "statement": "The downstream consequence of the 312 incorrect responses is not characterized; request count alone does not establish customer impact severity.",
+      "discriminatingObservation": "Outcome data for the 312 affected requests, such as user-visible errors, transactions, or complaints attributable to them.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Add segment-stratified quality evaluation to the pre-release gate, including low-volume segments, so a model must meet per-segment thresholds before any traffic exposure.",
+      "mechanismTargeted": "The test-coverage gap that let a defective artifact pass all integration tests (C2, R2).",
+      "priority": 1,
+      "rationale": "This is the only mechanism in the explanation that demonstrably failed. The release controls performed as designed; the validation gate did not. Fixing it shifts detection from post-exposure to pre-exposure, eliminating affected requests rather than bounding them.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Determine the technical root cause of the segment-specific incorrectness before redeploying the model.",
+      "mechanismTargeted": "The unknown defect mechanism (C9, U1).",
+      "priority": 2,
+      "rationale": "Without a root cause, it cannot be known whether the defect is genuinely confined to one segment or was merely detectable there first; this also supplies the specification A1 must test against.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Audit segment monitoring coverage and minimum-sample requirements at 2% exposure, and adjust early-stage traffic allocation so low-volume segments are deliberately represented.",
+      "mechanismTargeted": "The detection-granularity element of the containment interaction (C3, R3, R10), and its dependence on sampling luck (U3, U4).",
+      "priority": 3,
+      "rationale": "Containment depended on the affected segment being both sampled and measurable within the canary. If either condition was incidental, the same control set would not contain a similar defect in a different segment.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "action": "Confirm from release-system logs whether the automated rule or a human halted expansion, and record the halt-to-disable latency.",
+      "mechanismTargeted": "The halt mechanism's attribution (U2) and response latency (U5).",
+      "priority": 4,
+      "rationale": "The containment explanation credits automation; if a human closed the loop, the automated path is untested and the control is weaker than the incident suggests.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Preserve the current staged-exposure, segment-monitoring, and automated-halt configuration as a joint requirement rather than treating any one as individually sufficient.",
+      "mechanismTargeted": "The three-way containment interaction (C8, R9-R11).",
+      "priority": 5,
+      "rationale": "Because containment rests on interaction, removing or relaxing any single control — for example widening the initial exposure percentage or raising the halt threshold — degrades the outcome more than its individual contribution would suggest.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "Quality monitoring aggregated across all traffic instead of reporting per segment.",
+      "expectedEffect": "A 14-point drop in one low-volume segment inside a 2% slice would be diluted below the 5-point rule threshold, the halt would not fire, expansion would proceed, and affected requests would far exceed 312.",
+      "challengesWhich": "Most strongly tests the claim that segment-granular detection is a necessary element of containment (C3, C8, R10).",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "change": "The affected segment received no traffic within the 2% slice.",
+      "expectedEffect": "No drop would be detected at this stage; the release would expand on clean signals and the defect would surface later at higher exposure.",
+      "challengesWhich": "Tests whether early detection was a property of the release design or of incidental sampling (U3, A3).",
+      "confidence": "medium"
+    },
+    {
+      "id": "CF3",
+      "change": "The automated halt threshold was set at 20 points rather than 5.",
+      "expectedEffect": "The observed 14-point drop would not trigger a halt despite being detected, so detection alone would not have stopped expansion.",
+      "challengesWhich": "Tests the claim that detection and enforcement are separate necessary elements rather than one (C5, R4, R11).",
+      "confidence": "high"
+    },
+    {
+      "id": "CF4",
+      "change": "The feature flag could only be toggled globally, not per segment.",
+      "expectedEffect": "Ending the defect's exposure would have required reverting all canary traffic; impact on the affected segment would still end, but the rollback would be coarser and the outcome as described in E5 would not be reproducible.",
+      "challengesWhich": "Tests how much of the clean outcome depends on flag granularity rather than on detection (C7, R8).",
+      "confidence": "medium"
+    },
+    {
+      "id": "CF5",
+      "change": "Pre-release integration tests had included per-segment quality assertions.",
+      "expectedEffect": "The artifact would likely have failed the gate and never reached production, making all containment controls irrelevant to this incident and reducing affected requests to zero.",
+      "challengesWhich": "Tests whether the containment controls or the validation gap is the more consequential lever, supporting A1's priority over A5.",
+      "confidence": "high"
+    }
+  ]
+}
