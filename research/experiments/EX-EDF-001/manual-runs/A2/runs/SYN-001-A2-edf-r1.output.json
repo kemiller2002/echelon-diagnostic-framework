@@ -1,0 +1,219 @@
+{
+  "summary": "At 09:00 an invoice service began routing legacy-client traffic through a newly enabled adapter configuration that omitted the region-header mapping the routing function requires; within two minutes invoice creation errors rose from under 0.2% to 38%, and 97% of sampled failures lacked that header. Datastore health stayed normal, and disabling the configuration at 09:19 restored the baseline error rate within three minutes. The failure mechanism is a malformed request contract on the legacy path (a required routing input was never populated), not resource exhaustion or dependency degradation; the CPU rise is consistent with a symptom of failing/retried work rather than a cause, and an 08:54 PDF rendering ticket has no mechanistic link to the observed failure. The single supported contributor is the configuration divergence between the legacy-client and modern-client adapters, enabled in production without the omission being caught.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "A newly enabled legacy-client adapter configuration took effect on the invoice service's legacy traffic path at 09:00.",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Invoice creation errors rose from below 0.2% to 38% at 09:02, approximately two minutes after the configuration took effect.",
+      "evidence": ["E2", "E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "The proximate failure mode is that requests reached the routing function without the region header it requires, so they could not be routed successfully.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The legacy-client adapter configuration omitted the region-header mapping while the modern-client adapter retained it, so the omission is a divergence between two variants of the same configuration rather than a global removal.",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "The missing mapping in the legacy adapter is a sufficient explanation for requests arriving without the region header.",
+      "evidence": ["E4", "E3", "E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "The datastore layer did not contribute: error rate, saturation, and replication lag all stayed inside the prior week's normal range during the incident.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "Disabling the new legacy-client configuration at 09:19 returned errors below 0.2% within three minutes, showing the outcome is fully reversible by removing that configuration.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "The application CPU rise from 51% to 65% is a downstream symptom of the error-generating request volume, not a cause; no evidence indicates a saturation threshold was crossed, and CPU did not need to be reduced for recovery.",
+      "evidence": ["E7", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C9",
+      "statement": "The 08:54 PDF rendering ticket is unconnected to the invoice failure: it predates the change, involves a different function, and no evidence links it to the routing path.",
+      "evidence": ["E8", "E2", "E3"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C10",
+      "statement": "The impact was confined to the legacy-client path, since only that adapter lost the mapping while the modern adapter retained it.",
+      "evidence": ["E4", "E1"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C11",
+      "statement": "An enablement process allowed a configuration missing a field required by a downstream function to reach production traffic without being caught beforehand.",
+      "evidence": ["E1", "E4", "E2"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C12",
+      "statement": "Failure onset was fast (about two minutes) while mitigation took about nineteen minutes, so most of the impact duration lies between onset and the decision to disable rather than in the rollback itself, which took three minutes.",
+      "evidence": ["E1", "E2", "E6"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    {"from": "E1", "to": "C1", "type": "supports", "confidence": "high"},
+    {"from": "E2", "to": "C2", "type": "supports", "confidence": "high"},
+    {"from": "E4", "to": "C4", "type": "supports", "confidence": "high"},
+    {"from": "C4", "to": "C5", "type": "supports", "confidence": "high"},
+    {"from": "C11", "to": "C1", "type": "contributes-to", "confidence": "medium", "note": "Process gap permitted the divergent configuration to be enabled."},
+    {"from": "C1", "to": "C5", "type": "precedes", "confidence": "high"},
+    {"from": "C5", "to": "C3", "type": "contributes-to", "confidence": "high", "note": "Omitted mapping yields requests without the required header."},
+    {"from": "C3", "to": "C2", "type": "contributes-to", "confidence": "high", "note": "Unroutable requests surface as invoice creation errors."},
+    {"from": "C3", "to": "C2", "type": "mediates", "confidence": "high", "note": "The header-absence mechanism is the path from configuration change to error rate."},
+    {"from": "E3", "to": "C3", "type": "supports", "confidence": "high"},
+    {"from": "C2", "to": "C8", "type": "contributes-to", "confidence": "medium", "note": "Error and retry handling plausibly drives the modest CPU rise."},
+    {"from": "E5", "to": "C6", "type": "supports", "confidence": "high"},
+    {"from": "C6", "to": "C3", "type": "supports", "confidence": "medium", "note": "Normal datastore behavior removes the competing dependency explanation."},
+    {"from": "C7", "to": "C5", "type": "supports", "confidence": "high", "note": "Removing the configuration removes the outcome."},
+    {"from": "E8", "to": "C9", "type": "unknown", "confidence": "low", "note": "No evidence connects the rendering ticket to the routing failure."},
+    {"from": "C10", "to": "C2", "type": "prevents", "confidence": "low", "note": "Retention of the mapping on the modern path limited errors to a fraction of total traffic rather than all of it."}
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "issue": "The remaining three percent of sampled failures had the region header present; their failure mode is unexplained and may be a separate, smaller defect or ordinary baseline noise.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "issue": "No evidence states why the legacy adapter omitted the mapping — deliberate removal, incomplete translation of the modern configuration, or a defaulting behavior — so the origin of the divergence is unresolved.",
+      "confidence": "high"
+    },
+    {
+      "id": "U3",
+      "issue": "Legacy traffic share is unknown. A 38% overall error rate is consistent with either most legacy requests failing on a moderate legacy share or with a partial failure on a large share; blast-radius confinement is inferred, not measured.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "issue": "Nothing in the evidence describes the pre-enablement review, testing, or rollout process, so the specific control failure that let the divergence ship is inferred from outcome alone.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "issue": "It is not stated whether the header omission was detected by an alert, by the support channel, or by manual inspection, so the cause of the seventeen-minute gap before mitigation is unknown.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "issue": "The CPU rise is not decomposed by cause; a shared-cause reading (the new configuration independently raising CPU) cannot be excluded on this evidence, though it is not required to explain the errors.",
+      "confidence": "low"
+    },
+    {
+      "id": "U7",
+      "issue": "Business consequences of the failed invoice creations — duplicates, lost records, downstream retries, customer impact — are not described, so severity beyond the error rate cannot be judged.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U8",
+      "issue": "Whether the routing function is meant to reject header-less requests, or could reasonably default or derive the region, is unknown; this determines whether the fix belongs in the configuration, the routing function, or both.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Restore the region-header mapping to the legacy-client adapter configuration and re-enable it only after verifying the mapping is present on the live path.",
+      "effect": "alters-outcome",
+      "rationale": "Removes the one supported contributor; reversal already demonstrated that the configuration controls the outcome.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Before any adapter configuration is enabled, compare each variant against the set of fields the routing function requires and block enablement on a missing required mapping.",
+      "effect": "alters-outcome",
+      "rationale": "Attacks the divergence itself, so the same class of omission cannot reach production traffic on any adapter variant.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A3",
+      "action": "Make the routing function validate the required header at configuration load or first request and fail the enablement rather than failing each invoice, or define an explicit safe fallback.",
+      "effect": "alters-outcome",
+      "rationale": "Converts a high-volume runtime failure into a single, contained enablement failure.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "action": "Enable adapter configurations to a small traffic slice first with automatic rollback when the invoice error rate breaches a threshold.",
+      "effect": "alters-outcome",
+      "rationale": "The failure appeared within two minutes and reversal took three, so an automated slice-and-revert loop would cut both blast radius and duration.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Alert on invoice creation error rate correlated with recent configuration enablements, surfacing the offending change in the alert.",
+      "effect": "improves-detection-only",
+      "rationale": "Would shorten the seventeen minutes before mitigation but would not prevent the failure; the recovery lever remains A1-A4.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A6",
+      "action": "Keep unrelated concurrent signals, such as the PDF rendering ticket and the modest CPU rise, explicitly separated during triage instead of folding them into the incident narrative.",
+      "effect": "improves-detection-only",
+      "rationale": "Reduces misdirected investigation time; changes no causal factor.",
+      "confidence": "low"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "X1",
+      "probe": "If the legacy adapter configuration had included the region-header mapping, would the error spike have occurred?",
+      "assessment": "On this evidence, no. The mapping's presence on the modern adapter coincides with no reported failure there, and the routing function's requirement is the stated failure point.",
+      "confidence": "high"
+    },
+    {
+      "id": "X2",
+      "probe": "If the datastore had been the driver, what would the evidence look like?",
+      "assessment": "Datastore error rate, saturation, or replication lag would have departed from the prior week's range, and disabling an application-side configuration would not have restored service in three minutes. Neither holds, so the datastore explanation fails.",
+      "confidence": "high"
+    },
+    {
+      "id": "X3",
+      "probe": "If CPU load had been the driver, what would the evidence look like?",
+      "assessment": "Recovery would have required shedding or scaling load rather than disabling a configuration, and failures would not cluster on a single missing header. A rise to 65% is also not evidently a saturation point. The CPU-cause explanation is not supported.",
+      "confidence": "medium"
+    },
+    {
+      "id": "X4",
+      "probe": "If the PDF rendering defect were involved, what would the evidence look like?",
+      "assessment": "Failures would not be concentrated on a missing routing header, and disabling the adapter configuration would not have resolved them. The ticket also predates the change by six minutes without any error-rate movement in that window.",
+      "confidence": "medium"
+    },
+    {
+      "id": "X5",
+      "probe": "If only better alerting (A5) had been in place and nothing else changed, would the outcome have been acceptable?",
+      "assessment": "Partly. Onset and blast radius would be unchanged; only the seventeen-minute mitigation gap would shrink. This distinguishes the detection improvement from the interventions that remove the failure.",
+      "confidence": "medium"
+    },
+    {
+      "id": "X6",
+      "probe": "If the routing function tolerated a missing region header via a default (A3, fallback form), would this have been a full remedy?",
+      "assessment": "It would have prevented the error spike but could silently route to a wrong region, substituting an invisible correctness failure for a visible availability one. Absent evidence on region semantics, failing enablement loudly is the safer form of A3.",
+      "confidence": "low"
+    }
+  ]
+}
