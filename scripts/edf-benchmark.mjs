@@ -13,7 +13,7 @@ function readJson(p){ return JSON.parse(fs.readFileSync(p,'utf8')); }
 function sha256Bytes(b){ return crypto.createHash('sha256').update(b).digest('hex'); }
 function sha256File(p){ return sha256Bytes(fs.readFileSync(p)); }
 function sha256Text(s){ return sha256Bytes(Buffer.from(s,'utf8')); }
-function gitBlobShaFile(p){ const b=fs.readFileSync(p); const prefix=Buffer.from(`blob ${b.length}\\0`); return crypto.createHash('sha1').update(prefix).update(b).digest('hex'); }
+function gitBlobShaFile(p){ const b=fs.readFileSync(p); const prefix=Buffer.from(`blob ${b.length}\0`); return crypto.createHash('sha1').update(prefix).update(b).digest('hex'); }
 function ensureDir(p){ fs.mkdirSync(p,{recursive:true}); }
 function now(){ return new Date().toISOString(); }
 function safeId(s){ return s.replace(/[^A-Za-z0-9._-]+/g,'-'); }
