@@ -25,7 +25,7 @@ It does not yet establish cross-executor reproducibility, incremental value over
 
 `EX-EDF-001` is the next confirmatory test of EDF-specific incremental value. Its cases, hidden ground truth, prompts, scoring rules, success criteria, and falsification criteria are preregistered. Confirmatory execution is intentionally blocked until exact analyzer and evaluator provider/model/version/configuration bindings are frozen. The repository does not treat unbound or simulated executors as independent evidence.
 
-See `docs/edf/validation/evidence-ledger.md` for the current claim state and `research/experiments/EX-EDF-001/README.md` for the benchmark.
+See `docs/edf/validation/evidence-ledger.md` for the current claim state and `docs/edf/validation/ex-edf-001-structural-value-benchmark.md` for the benchmark.
 
 ## Validation
 
