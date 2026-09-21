@@ -1,0 +1,66 @@
+name: EDF OpenAI exploratory
+
+on:
+  push:
+    branches:
+      - experiment/edf-executor-adapters
+    paths:
+      - scripts/edf-openai-exploratory.mjs
+      - scripts/edf-provider-adapter.mjs
+      - research/experiments/EX-EDF-001/cases.json
+      - research/experiments/EX-EDF-001/ground-truth.json
+      - research/experiments/EX-EDF-001/prompts.json
+      - research/experiments/EX-EDF-001/output-contract.json
+      - research/experiments/EX-EDF-001/evaluation-rubric.json
+      - research/experiments/EX-EDF-001/randomization.json
+      - .github/workflows/edf-openai-exploratory.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-openai-exploratory:
+    runs-on: ubuntu-24.04
+    environment: edf-experiment
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify OpenAI credential
+        shell: bash
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::OPENAI_API_KEY is not configured for this job."
+            exit 3
+          fi
+          echo "OpenAI credential is present."
+
+      - name: Run OpenAI-only exploratory benchmark
+        run: node scripts/edf-openai-exploratory.mjs
+
+      - name: Upload raw exploratory bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: edf-openai-exploratory-2026-09-21
+          path: research/experiments/EX-EDF-001/exploratory/openai-only-2026-09-21/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Commit exploratory record
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/experiments/EX-EDF-001/exploratory/openai-only-2026-09-21/
+          if git diff --cached --quiet; then
+            echo "No exploratory result changes to commit."
+            exit 0
+          fi
+          git commit -m "Record OpenAI-only EDF exploratory run"
+          git push
