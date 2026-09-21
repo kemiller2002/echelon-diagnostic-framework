@@ -8,7 +8,7 @@ test("EX-EDF-001 benchmark is frozen and fail-closed before executor binding", (
   assert.equal(result.summary.experimentId, "EX-EDF-001");
   assert.equal(result.summary.cases, 6);
   assert.equal(result.summary.conditions, 3);
-  assert.equal(result.summary.frozenArtifacts, 7);
+  assert.equal(result.summary.frozenArtifacts, 8);
   assert.equal(result.summary.executorMatrixReady, false);
   assert.equal(result.summary.analyzerRuns, 0);
 });
