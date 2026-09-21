@@ -1,0 +1,73 @@
+{
+  "id": "EX-EDF-001",
+  "title": "Multi-Model EDF Structural-Value Benchmark",
+  "version": "1.0.0",
+  "status": "preregistered-pending-executors",
+  "date": "2026-09-21",
+  "baseCommit": "b27f5fff3f258e7b6d14bc9d800370bc778c54e7",
+  "protocol": "docs/framework-engineering/validation-protocol-v1.2.md",
+  "primaryHypothesis": "HY-EDF-008",
+  "primaryQuestion": "Does EDF add semantic diagnostic value beyond natural analysis and a matched neutral structure under evidence-isolated, blinded, multi-model conditions?",
+  "competingExplanation": "Generic structure, extra prompting, or serialization discipline explains any apparent benefit rather than EDF-specific semantics.",
+  "design": {
+    "analyzerExecutorSlots": 3,
+    "primaryCases": 6,
+    "conditions": [
+      "natural",
+      "matched-neutral",
+      "edf"
+    ],
+    "primaryAnalyzerRuns": 54,
+    "repeatabilityAdditionalRuns": 18,
+    "minimumEvaluatorFamilies": 2,
+    "blinded": true
+  },
+  "primaryOutcome": {
+    "name": "blinded semantic utility",
+    "range": "0..100",
+    "dimensions": [
+      "diagnostic-accuracy",
+      "causal-fidelity",
+      "evidence-discipline",
+      "uncertainty-calibration",
+      "action-quality"
+    ],
+    "unit": "paired case x analyzer-executor",
+    "comparison": "edf minus matched-neutral",
+    "margin": 5,
+    "marginRationale": "Five points equals one rubric-step improvement in one of the five equally weighted dimensions on average. It is fixed before execution."
+  },
+  "successCriteria": [
+    "Mean EDF minus matched-neutral across 18 paired primary units is at least +5 points.",
+    "A seeded paired-bootstrap 95% confidence interval for EDF minus matched-neutral has lower bound above 0.",
+    "At least two of three analyzer executor families have positive mean EDF minus matched-neutral differences.",
+    "EDF has no more than one additional materially flagged primary unit for outside-evidence use or forbidden claims than matched-neutral."
+  ],
+  "falsificationCriteria": [
+    "Matched-neutral is non-inferior to EDF within the fixed 5-point margin, or EDF paired bootstrap interval includes zero.",
+    "Any apparent EDF advantage depends on one executor family and disappears or reverses in the other two.",
+    "EDF introduces more than one additional materially flagged primary unit relative to matched-neutral."
+  ],
+  "naturalComparison": "Natural analysis is a secondary comparator. HY-EDF-008 is specifically about incremental value beyond matched neutral structure.",
+  "stopRules": [
+    "Stop and mark infrastructure failure if evidence isolation cannot be enforced for any analyzer executor.",
+    "Stop before confirmatory execution if executor-matrix.json is not confirmatory-ready.",
+    "Preserve failed attempts; never silently replace them.",
+    "Do not alter prompts, cases, rubric, ground truth, scoring code, or margins after the first confirmatory run. Any change creates a new experiment version."
+  ],
+  "analysisPlan": {
+    "primary": "Paired differences on evaluator-family-aggregated semantic utility by case x analyzer executor.",
+    "bootstrap": "10000 paired bootstrap resamples with deterministic seed derived from randomization seed plus |bootstrap.",
+    "secondary": [
+      "invalid-output rate",
+      "outside-evidence flag rate",
+      "forbidden-claim flag rate",
+      "latency",
+      "token count when available",
+      "cost when available",
+      "repeatability on SYN-001 and SYN-004"
+    ],
+    "evaluatorDisagreement": "If E1 and E2 differ by >=20 points, require E3 before inclusion."
+  },
+  "claimGate": "Only HY-EDF-008 may be directly advanced by this experiment. Other hypotheses require construct-matched evidence."
+}

@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "status": "unbound",
+  "analyzers": [
+    {
+      "slot": "A1",
+      "requiredProviderFamily": "OpenAI",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    },
+    {
+      "slot": "A2",
+      "requiredProviderFamily": "Anthropic",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    },
+    {
+      "slot": "A3",
+      "requiredProviderFamily": "Google",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    }
+  ],
+  "evaluators": [
+    {
+      "slot": "E1",
+      "requiredConstraint": "materially distinct evaluator family from at least one analyzer family",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    },
+    {
+      "slot": "E2",
+      "requiredConstraint": "different provider/model family from E1",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    },
+    {
+      "slot": "E3",
+      "requiredConstraint": "adjudicator only; must differ materially from E1 and E2 when used",
+      "provider": null,
+      "model": null,
+      "version": null,
+      "executorConfigPath": null,
+      "executorConfigSha256": null
+    }
+  ],
+  "confirmatoryReadyRule": "Set status to confirmatory-ready only after A1-A3 and E1-E2 have exact provider, model, version, executorConfigPath, and executorConfigSha256 values. E3 may remain unbound until adjudication is required."
+}

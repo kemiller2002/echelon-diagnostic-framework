@@ -121,7 +121,7 @@ Examples:
 
 ## v1.2 primary benchmark
 
-The first confirmatory use of v1.2 should be the Multi-Model EDF Structural-Value Benchmark.
+The first confirmatory use of v1.2 is implemented as `research/experiments/EX-EDF-001/`, the Multi-Model EDF Structural-Value Benchmark. Its design is preregistered, but no confirmatory execution has occurred yet.
 
 Primary question:
 

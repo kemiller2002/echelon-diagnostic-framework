@@ -1,0 +1,245 @@
+{
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "SYN-001",
+      "title": "Beacon Billing Cutover",
+      "domain": "software operations",
+      "purpose": "single-primary-cause",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "At 09:00 the invoice service began routing legacy-client traffic through a newly enabled adapter configuration."
+        },
+        {
+          "id": "E2",
+          "text": "At 09:02 invoice creation errors increased from below 0.2% to 38%."
+        },
+        {
+          "id": "E3",
+          "text": "Ninety-seven percent of sampled failed requests lacked the region header required by the routing function."
+        },
+        {
+          "id": "E4",
+          "text": "The legacy-client adapter configuration omitted the region-header mapping; the modern-client adapter retained it."
+        },
+        {
+          "id": "E5",
+          "text": "Database error rate, saturation, and replication lag stayed within the previous week normal range."
+        },
+        {
+          "id": "E6",
+          "text": "Disabling the new legacy-client adapter configuration at 09:19 returned invoice creation errors below 0.2% within three minutes."
+        },
+        {
+          "id": "E7",
+          "text": "Application CPU rose from 51% to 65% during the incident."
+        },
+        {
+          "id": "E8",
+          "text": "A customer-support ticket about a PDF rendering defect was opened at 08:54."
+        }
+      ]
+    },
+    {
+      "id": "SYN-002",
+      "title": "Northstar Cold Chain",
+      "domain": "physical operations",
+      "purpose": "interaction",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer."
+        },
+        {
+          "id": "E2",
+          "text": "Temperature sensor calibration drifted upward by about 1.5 C only when relative humidity exceeded 88%."
+        },
+        {
+          "id": "E3",
+          "text": "A firmware retry defect caused the compressor controller to ignore every second restart command after a communications timeout."
+        },
+        {
+          "id": "E4",
+          "text": "The alerting rule suppressed repeated temperature alerts for 45 minutes after the first acknowledgement."
+        },
+        {
+          "id": "E5",
+          "text": "Humidity exceeded 88% for 73 minutes during the transfer."
+        },
+        {
+          "id": "E6",
+          "text": "Containers with the same firmware defect but calibrated sensors did not exceed the product limit in a comparison run."
+        },
+        {
+          "id": "E7",
+          "text": "Containers with the same sensor drift but corrected restart logic also stayed within the product limit in a comparison run."
+        },
+        {
+          "id": "E8",
+          "text": "The delayed alert extended operator response after the temperature had already crossed the product limit."
+        }
+      ]
+    },
+    {
+      "id": "SYN-003",
+      "title": "Orchid Deployment",
+      "domain": "software delivery",
+      "purpose": "success-resilience",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "A new recommendation model produced incorrect results for one low-volume customer segment after deployment."
+        },
+        {
+          "id": "E2",
+          "text": "The release process initially exposed the model to 2% of traffic behind a feature flag."
+        },
+        {
+          "id": "E3",
+          "text": "Segment-level quality monitoring detected a 14-point precision drop six minutes after exposure."
+        },
+        {
+          "id": "E4",
+          "text": "The automated release rule halted expansion when any segment dropped more than 5 points."
+        },
+        {
+          "id": "E5",
+          "text": "The feature flag was disabled for the affected segment while the previous model continued serving all other traffic."
+        },
+        {
+          "id": "E6",
+          "text": "Total affected requests were 312; no other customer segment showed a measurable quality drop."
+        },
+        {
+          "id": "E7",
+          "text": "The deployment artifact passed all pre-release integration tests."
+        },
+        {
+          "id": "E8",
+          "text": "The team had practiced rollback of the feature flag in the previous month."
+        }
+      ]
+    },
+    {
+      "id": "SYN-004",
+      "title": "Harbor Queue Stall",
+      "domain": "distributed systems",
+      "purpose": "underdetermined",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Queue depth rose steadily for 27 minutes while request arrival rate stayed within the normal range."
+        },
+        {
+          "id": "E2",
+          "text": "Consumer throughput fell by roughly 40% during the same interval."
+        },
+        {
+          "id": "E3",
+          "text": "Two changes occurred within the preceding hour: a consumer-library upgrade and a database index rebuild."
+        },
+        {
+          "id": "E4",
+          "text": "Consumer logs contain both increased lock-wait messages and increased message-deserialization warnings."
+        },
+        {
+          "id": "E5",
+          "text": "Available telemetry does not separate processing time spent waiting on the database from time spent retrying deserialization."
+        },
+        {
+          "id": "E6",
+          "text": "After both the library upgrade and the index rebuild were reverted, throughput returned to normal."
+        },
+        {
+          "id": "E7",
+          "text": "No run exists in which only one of the two changes was reverted."
+        },
+        {
+          "id": "E8",
+          "text": "No trace samples were retained from the incident window."
+        }
+      ]
+    },
+    {
+      "id": "SYN-005",
+      "title": "Juniper Search Latency",
+      "domain": "service reliability",
+      "purpose": "misleading-correlation",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "Median search latency doubled at 14:10 and recovered at 14:43."
+        },
+        {
+          "id": "E2",
+          "text": "Cache hit rate fell from 91% to 76% during the same window."
+        },
+        {
+          "id": "E3",
+          "text": "The cache service itself reported normal latency and no increase in errors."
+        },
+        {
+          "id": "E4",
+          "text": "At 14:08 a downstream catalog API reduced the per-client rate limit by 35%."
+        },
+        {
+          "id": "E5",
+          "text": "Search requests receiving downstream 429 responses retried twice with exponential backoff."
+        },
+        {
+          "id": "E6",
+          "text": "Requests without downstream 429 responses did not show increased latency, regardless of cache hit or miss."
+        },
+        {
+          "id": "E7",
+          "text": "The cache hit-rate decline was caused by retry requests using a cache-bypass header."
+        },
+        {
+          "id": "E8",
+          "text": "Restoring the previous downstream rate limit at 14:41 ended the 429 spike; search latency normalized two minutes later."
+        }
+      ]
+    },
+    {
+      "id": "SYN-006",
+      "title": "Atlas Data Import",
+      "domain": "data processing",
+      "purpose": "upstream-control-point",
+      "evidence": [
+        {
+          "id": "E1",
+          "text": "A nightly import rejected 18% of partner records after a partner added an optional addressLine3 field."
+        },
+        {
+          "id": "E2",
+          "text": "The ingestion parser accepted the new field and wrote it into the intermediate event."
+        },
+        {
+          "id": "E3",
+          "text": "A downstream mapper used positional field indexes and shifted postalCode into the country slot when addressLine3 was present."
+        },
+        {
+          "id": "E4",
+          "text": "The validation service rejected the malformed country value and generated the majority of visible error messages."
+        },
+        {
+          "id": "E5",
+          "text": "Operators repeatedly retried rejected records; retries produced the same validation failures."
+        },
+        {
+          "id": "E6",
+          "text": "The partner contract allowed additive optional fields, but the mapper contract test covered only the original field positions."
+        },
+        {
+          "id": "E7",
+          "text": "Changing the validation service to accept the malformed country value would allow incorrect address data into fulfillment."
+        },
+        {
+          "id": "E8",
+          "text": "A mapper change from positional indexing to named-field mapping corrected the failing sample without changing the partner payload or validator."
+        }
+      ]
+    }
+  ]
+}

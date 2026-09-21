@@ -34,6 +34,7 @@ jobs:
         run: |
           node --test
           node scripts/validate-repository.mjs
+          node scripts/edf-benchmark.mjs validate
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
