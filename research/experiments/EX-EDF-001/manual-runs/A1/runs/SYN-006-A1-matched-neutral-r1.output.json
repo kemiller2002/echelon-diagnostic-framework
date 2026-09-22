@@ -1,0 +1,219 @@
+{
+  "version": "1.0.0",
+  "summary": "The evidence most strongly explains the 18% rejection rate as a mapper defect triggered when the permitted optional addressLine3 field was present. The parser handled the field, but positional indexing shifted postalCode into the country slot; validation then correctly rejected the malformed value. Named-field mapping corrected the failing sample, making the mapper change the priority action.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The observed outcome was an 18% rejection rate in a nightly partner-record import after addressLine3 was added.",
+      "type": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "The operating boundary includes partner payload ingestion, intermediate-event creation, downstream mapping, validation, and fulfillment.",
+      "type": "inference",
+      "evidence": ["E2", "E3", "E4", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "The partner was permitted to add optional fields, so the mere presence of addressLine3 was contract-compliant.",
+      "type": "observation",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The ingestion parser was not the demonstrated source of field loss or rejection because it accepted addressLine3 and preserved it in the intermediate event.",
+      "type": "inference",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "When addressLine3 was present, positional mapping shifted postalCode into the country slot.",
+      "type": "observation",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "The validation service produced most visible errors but acted downstream of the malformed mapping.",
+      "type": "inference",
+      "evidence": ["E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "Retries did not address the defect because identical records repeatedly reached the same deterministic validation failure.",
+      "type": "inference",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "The mapper contract test was insufficient for the allowed payload variation because it covered only the original positions.",
+      "type": "inference",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "statement": "Named-field mapping is the strongest supported remedy because it corrected the failing sample without partner or validator changes.",
+      "type": "inference",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "addressLine3 presence",
+      "to": "positional index shift",
+      "type": "contributes-to",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "from": "positional index shift",
+      "to": "postalCode placed in country slot",
+      "type": "contributes-to",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "from": "postalCode placed in country slot",
+      "to": "validation rejection",
+      "type": "contributes-to",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "from": "validation rejection",
+      "to": "majority of visible error messages",
+      "type": "contributes-to",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "from": "positional mapper defect",
+      "to": "observed record rejections",
+      "type": "mediates",
+      "evidence": ["E1", "E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "from": "original-position-only contract test",
+      "to": "failure to detect additive-field incompatibility",
+      "type": "contributes-to",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "from": "record retries",
+      "to": "successful import",
+      "type": "unknown",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "from": "named-field mapping",
+      "to": "failing-sample rejection",
+      "type": "prevents",
+      "evidence": ["E8"],
+      "confidence": "high"
+    },
+    {
+      "from": "validator relaxation",
+      "to": "incorrect address data entering fulfillment",
+      "type": "contributes-to",
+      "evidence": ["E7"],
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "question": "Did all rejected records contain addressLine3 and exhibit the same field shift?",
+      "whyItMatters": "The evidence establishes the mechanism for the failing sample and says validation generated most errors, but does not attribute every rejection to it.",
+      "discriminatingObservation": "Compare every rejected intermediate event with accepted events for addressLine3 presence and the postalCode-in-country pattern.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "question": "Were any minority validation errors caused by separate defects?",
+      "whyItMatters": "E4 attributes only the majority of visible errors to malformed country values.",
+      "discriminatingObservation": "Classify all rejection messages and inspect representative records from each non-country-error class.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "question": "Does named-field mapping correct the full affected population rather than only the failing sample?",
+      "whyItMatters": "E8 directly demonstrates correction of one sample, not the complete nightly batch.",
+      "discriminatingObservation": "Replay the rejected batch through the named-field mapper while holding the payloads and validator unchanged.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "priority": 1,
+      "action": "Replace positional indexing with named-field mapping.",
+      "mechanism": "Prevents optional-field insertion from shifting postalCode into the country slot.",
+      "evidence": ["E3", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "priority": 2,
+      "action": "Expand mapper contract tests to include allowed additive optional fields, including addressLine3.",
+      "mechanism": "Detects incompatibility between contract-compliant payload expansion and mapper behavior before import execution.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "priority": 3,
+      "action": "Replay the rejected batch after the mapper change and classify any remaining failures.",
+      "mechanism": "Tests whether the demonstrated mechanism accounts for all rejections and isolates minority causes.",
+      "evidence": ["E4", "E8"],
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "priority": 4,
+      "action": "Stop treating unchanged retries as a corrective response for these failures.",
+      "mechanism": "Avoids repeating deterministic failures without changing the malformed mapping.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "A5",
+      "priority": 5,
+      "action": "Do not relax country validation to accept the malformed value.",
+      "mechanism": "Preserves the barrier preventing incorrect address data from reaching fulfillment.",
+      "evidence": ["E7"],
+      "confidence": "high"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "With partner payloads and validation unchanged, named-field mapping fails to correct the affected records.",
+      "implication": "This would strongly challenge the positional-mapper explanation and the priority assigned to A1.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "change": "Rejected records lack addressLine3 or do not show postalCode in the country slot.",
+      "implication": "This would show that the demonstrated mechanism does not explain those rejections and would elevate competing causes.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "change": "The parser output is shown to omit or corrupt fields before mapping.",
+      "implication": "This would revive parser failure as a competing upstream explanation despite E2.",
+      "confidence": "medium"
+    }
+  ]
+}
