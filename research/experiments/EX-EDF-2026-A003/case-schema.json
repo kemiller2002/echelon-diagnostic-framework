@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "caseFile": {
+    "required": [
+      "id",
+      "construct",
+      "title",
+      "domain",
+      "entities",
+      "evidence",
+      "candidates",
+      "scoredItems"
+    ],
+    "evidenceItem": [
+      "id",
+      "stage",
+      "text"
+    ],
+    "candidates": {
+      "hypotheses": [
+        "id",
+        "text"
+      ],
+      "edges": [
+        "id",
+        "from",
+        "to",
+        "relation"
+      ],
+      "actions": [
+        "id",
+        "text"
+      ]
+    },
+    "scoredItem": [
+      "id",
+      "kind",
+      "candidateId",
+      "allowedAnswers",
+      "constructCritical"
+    ],
+    "forbiddenCaseFields": [
+      "authorFamily",
+      "groundTruth",
+      "expected",
+      "weight",
+      "evidenceRole"
+    ]
+  },
+  "truthFile": {
+    "required": [
+      "caseId",
+      "authorFamily",
+      "answers",
+      "hardness"
+    ],
+    "answer": [
+      "itemId",
+      "expected",
+      "weight",
+      "requiredEvidence",
+      "allowedEvidence"
+    ],
+    "hardness": [
+      "redHerringEvidenceIds",
+      "conflictingEvidencePairs",
+      "missingInformation",
+      "reasoningHops",
+      "harmfulActionCandidateIds"
+    ]
+  }
+}
