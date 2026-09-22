@@ -1,0 +1,145 @@
+{
+  "id": "AN-EDF-001-2F-RESULT",
+  "analysisRegistration": "AN-EDF-001-2F",
+  "sourceExperiment": "EX-EDF-001",
+  "date": "2026-09-22",
+  "status": "registered-analysis-not-fully-evaluable",
+  "analyzers": [
+    {
+      "slot": "A1",
+      "provider": "OpenAI",
+      "model": "gpt-5.6-sol",
+      "primaryRuns": 18,
+      "repeatabilityRuns": 6,
+      "validRuns": 24,
+      "invalidRuns": 0
+    },
+    {
+      "slot": "A2",
+      "provider": "Anthropic",
+      "model": "claude-opus-5",
+      "primaryRuns": 18,
+      "repeatabilityRuns": 6,
+      "validRuns": 24,
+      "invalidRuns": 0
+    }
+  ],
+  "evaluators": [
+    {
+      "slot": "E1",
+      "provider": "OpenAI",
+      "model": "gpt-5.6-terra",
+      "total": 36,
+      "valid": 36,
+      "invalid": 0
+    },
+    {
+      "slot": "E2",
+      "provider": "Anthropic",
+      "model": "claude-sonnet-5",
+      "total": 36,
+      "valid": 33,
+      "invalid": 3
+    }
+  ],
+  "primary": {
+    "registeredPairedUnits": 12,
+    "fullyScoredPairedUnits": 9,
+    "missingTwoEvaluatorPairs": 3,
+    "missingReason": "Three E2 outputs were terminal schema-invalid responses caused by Markdown code fences around otherwise JSON-looking payloads.",
+    "completeCaseMeanEdfMinusMatchedNeutral": 0.5555555556,
+    "completeCaseBootstrap95": {
+      "lower": 0,
+      "upper": 1.3888888889
+    },
+    "frozenMargin": 5,
+    "conservativeMinEvaluatorMeanDifference": 1.1111111111,
+    "conservativeMinEvaluatorBootstrap95": {
+      "lower": 0,
+      "upper": 2.7777777778
+    },
+    "analyzerFamilyCompleteCaseMeans": {
+      "A1": {
+        "n": 4,
+        "meanDifference": 0
+      },
+      "A2": {
+        "n": 5,
+        "meanDifference": 1
+      }
+    },
+    "materialFlaggedUnits": {
+      "edf": 1,
+      "matchedNeutral": 2
+    },
+    "highEvaluatorDisagreement": {
+      "threshold": 20,
+      "count": 2,
+      "validOverlap": 33,
+      "rate": 0.0606060606
+    }
+  },
+  "postHocFenceStripSensitivity": {
+    "classification": "post-hoc sensitivity only; not part of registered primary result",
+    "method": "Mechanically removed outer Markdown code fences from the three invalid E2 payloads without changing embedded JSON content.",
+    "pairedUnits": 12,
+    "meanEdfMinusMatchedNeutral": 0.2083333333,
+    "bootstrap95": {
+      "lower": -0.4166666667,
+      "upper": 0.8333333333
+    },
+    "conservativeMinEvaluatorMeanDifference": 0.4166666667,
+    "conservativeMinEvaluatorBootstrap95": {
+      "lower": -0.8333333333,
+      "upper": 1.6666666667
+    },
+    "analyzerFamilyMeans": {
+      "A1": -0.4166666667,
+      "A2": 0.8333333333
+    },
+    "evaluatorSpecificMeanDifferences": {
+      "E1": 0.8333333333,
+      "E2": -0.4166666667
+    },
+    "conditionMeanScores": {
+      "natural": 97.7083333333,
+      "edf": 97.0833333333,
+      "matchedNeutral": 96.875
+    }
+  },
+  "evaluatorCeiling": {
+    "E1": {
+      "meanScore": 94.8611111111,
+      "perfectScores": 19,
+      "totalValid": 36,
+      "minScore": 75,
+      "maxScore": 100
+    },
+    "E2": {
+      "meanScore": 99.696969697,
+      "perfectScores": 31,
+      "totalValid": 33,
+      "minScore": 95,
+      "maxScore": 100
+    },
+    "interpretation": "The case/rubric combination has a severe ceiling effect and weak discriminative power."
+  },
+  "repeatability": {
+    "additionalRuns": 12,
+    "validRuns": 12,
+    "exactByteIdenticalToPrimary": 0,
+    "limitation": "No blinded semantic scoring was performed on repeatability runs, so exact byte mismatch should not be treated as semantic instability."
+  },
+  "supportCriteria": {
+    "marginAtLeastFive": "not-met on complete cases; full registered statistic unavailable because 3 pairs lack two valid evaluator scores",
+    "bootstrapLowerAboveZero": "not-met",
+    "bothAnalyzerFamiliesPositive": "not-met on complete cases because A1 mean difference is 0.0",
+    "materialFlagConstraint": "met"
+  },
+  "conclusion": {
+    "hypothesis": "HY-EDF-008",
+    "result": "not-supported-by-this-benchmark",
+    "boundedInterpretation": "The available two-family evidence does not show material incremental semantic value for EDF over a strong matched-neutral structured prompt under these six synthetic cases. This does not establish that EDF has no value in other tasks or that individual EDF constructs lack value.",
+    "nextDesignImplication": "Use harder, less ceiling-prone cases and a more discriminating scoring design, then test EDF-specific constructs through targeted ablations rather than another whole-framework prompt comparison."
+  }
+}
