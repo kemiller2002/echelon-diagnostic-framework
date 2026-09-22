@@ -1,0 +1,349 @@
+{
+  "version": "1.0.0",
+  "caseId": "SYN-004",
+  "summary": "Within the incident window, consumer-side processing capacity fell about 40% while demand stayed normal, so the queue backed up (E1, E2): this is a supply-side degradation, not a load event. Two candidate causes were introduced in the preceding hour - a consumer-library upgrade and a database index rebuild (E3) - and consumer logs show elevated signatures for both (lock-wait and deserialization warnings, E4). The only controlled result available is a joint revert that restored throughput (E6), which establishes that the degradation was caused by the change set as a whole but cannot apportion it: no single-change revert exists (E7), telemetry does not separate database-wait time from deserialization-retry time (E5), and no traces were retained (E8). The evidence therefore supports a confident conclusion about the change set and an explicitly unresolved attribution between three live alternatives: index-rebuild lock contention alone, library-upgrade deserialization cost alone, or both contributing. Nothing in the package requires an interaction effect between the two changes, and nothing rules one out. The highest-value next step is a single-change revert (or single-change re-application) under load, which is the one observation that discriminates directly; instrumenting the two wait categories and restoring trace sampling make that test interpretable and protect against the same ambiguity recurring.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Queue depth rose for 27 minutes while arrival rate remained within its normal range.",
+      "basis": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Consumer throughput fell by roughly 40% over the same interval.",
+      "basis": "observation",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "The backlog is a consumer-capacity (supply-side) failure, not a demand surge; queue growth is a downstream effect of the throughput drop rather than an independent symptom.",
+      "basis": "inference",
+      "evidence": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "Two changes - a consumer-library upgrade and a database index rebuild - were introduced within the hour preceding the degradation.",
+      "basis": "observation",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Consumer logs show increases in two distinct stall signatures during the window: lock-wait messages and message-deserialization warnings.",
+      "basis": "observation",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Reverting both changes together restored throughput to normal.",
+      "basis": "observation",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "At least one of the two changes is causally responsible for the throughput loss; the joint revert establishes causation for the change set, not for either member individually.",
+      "basis": "inference",
+      "evidence": ["E6", "E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "Attribution between the two changes is unresolved by the available evidence: the two changes were never varied independently (E7), the two wait categories are not separated in telemetry (E5), and no traces survive (E8).",
+      "basis": "inference",
+      "evidence": ["E5", "E7", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "statement": "The co-occurrence of both log signatures (E4) is weak discriminating evidence: log-line counts are not time-weighted, so an increase in one signature does not establish that it consumed a meaningful share of processing time.",
+      "basis": "inference",
+      "evidence": ["E4", "E5"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C10",
+      "statement": "One of the two elevated signatures may be a secondary effect rather than a cause - for example, slower consumers holding database locks longer, or retry paths amplifying deserialization warnings - and the evidence cannot distinguish cause from consequence within the consumer.",
+      "basis": "inference",
+      "evidence": ["E4", "E5", "E8"],
+      "confidence": "low"
+    },
+    {
+      "id": "C11",
+      "statement": "The evidence does not require an interaction between the two changes; a single-change explanation fits E1-E6 as well as a two-cause explanation does, and the package contains no observation that isolates a combination-only effect.",
+      "basis": "inference",
+      "evidence": ["E4", "E6", "E7"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C12",
+      "statement": "The 27-minute duration and roughly 40% deficit are consistent with a sustained per-message cost increase in the consumer path rather than an intermittent or step-function outage.",
+      "basis": "inference",
+      "evidence": ["E1", "E2"],
+      "confidence": "low"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "C2",
+      "to": "C1",
+      "type": "contributes-to",
+      "rationale": "With arrival rate normal, reduced drain rate is sufficient to explain monotonic queue growth.",
+      "confidence": "high"
+    },
+    {
+      "id": "R2",
+      "from": "C1",
+      "to": "C3",
+      "type": "supports",
+      "rationale": "Backlog growth under normal arrivals points to the consumer side rather than to load.",
+      "confidence": "high"
+    },
+    {
+      "id": "R3",
+      "from": "C4",
+      "to": "C2",
+      "type": "precedes",
+      "rationale": "Both changes landed within the preceding hour; temporal order is established, mechanism is not.",
+      "confidence": "high"
+    },
+    {
+      "id": "R4",
+      "from": "C6",
+      "to": "C7",
+      "type": "supports",
+      "rationale": "Recovery on joint revert closes the causal loop for the change set as a unit.",
+      "confidence": "high"
+    },
+    {
+      "id": "R5",
+      "from": "E7",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Absence of a single-change revert run removes the only direct means of apportioning the effect.",
+      "confidence": "high"
+    },
+    {
+      "id": "R6",
+      "from": "E5",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Undifferentiated processing-time telemetry prevents attribution from the metrics themselves.",
+      "confidence": "high"
+    },
+    {
+      "id": "R7",
+      "from": "E8",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Loss of trace samples removes the per-message breakdown that would have apportioned time.",
+      "confidence": "high"
+    },
+    {
+      "id": "R8",
+      "from": "C5",
+      "to": "C7",
+      "type": "supports",
+      "rationale": "Both signatures rising is consistent with the change set being implicated, without selecting a member.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R9",
+      "from": "C9",
+      "to": "C8",
+      "type": "supports",
+      "rationale": "Because log volume is not time-weighted, E4 cannot break the tie that E5, E7 and E8 leave open.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R10",
+      "from": "C10",
+      "to": "C9",
+      "type": "supports",
+      "rationale": "If one signature is downstream of the slowdown, its increase is an effect and carries no attribution weight.",
+      "confidence": "low"
+    },
+    {
+      "id": "R11",
+      "from": "E5",
+      "to": "C10",
+      "type": "mediates",
+      "rationale": "The missing separation of database-wait from deserialization-retry time is exactly what would settle cause versus consequence inside the consumer.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R12",
+      "from": "C11",
+      "to": "C8",
+      "type": "supports",
+      "rationale": "Since no observation demands interaction, the alternative set stays at three and remains open rather than collapsing to a combined cause.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R13",
+      "from": "C3",
+      "to": "C12",
+      "type": "supports",
+      "rationale": "A supply-side per-message cost increase is the simplest reading of a sustained proportional throughput deficit.",
+      "confidence": "low"
+    },
+    {
+      "id": "R14",
+      "from": "C7",
+      "to": "C6",
+      "type": "unknown",
+      "rationale": "Whether recovery required both reverts or only one is not determined by any evidence item.",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "question": "Which change - the library upgrade, the index rebuild, or both - is responsible for the throughput loss?",
+      "whyItMatters": "Determines whether one change can be safely re-applied and which team owns the fix.",
+      "discriminatingObservation": "A controlled run under comparable load with exactly one change re-applied (or exactly one reverted): throughput returning to normal with only the library upgrade active exonerates it, and vice versa.",
+      "status": "open"
+    },
+    {
+      "id": "U2",
+      "question": "How was per-message processing time actually divided between database wait and deserialization retry?",
+      "whyItMatters": "Time share, not log-line count, identifies the dominant mechanism.",
+      "discriminatingObservation": "Instrumented timers or traces that attribute processing time to the two segments separately (directly addresses E5 and E8).",
+      "status": "open"
+    },
+    {
+      "id": "U3",
+      "question": "Is either elevated log signature a consequence of the slowdown rather than its cause?",
+      "whyItMatters": "Acting on a downstream symptom would leave the real mechanism in place.",
+      "discriminatingObservation": "Fine-grained ordering within the window - whether lock-wait or deserialization warnings rose first, and whether one rose only after throughput had already declined.",
+      "status": "open"
+    },
+    {
+      "id": "U4",
+      "question": "Do the two changes interact, such that each alone is harmless but the combination is not?",
+      "whyItMatters": "An interaction would invalidate a fix that addresses only one change.",
+      "discriminatingObservation": "Three-arm comparison - library-only, index-only, and both - showing degradation only in the combined arm.",
+      "status": "open"
+    },
+    {
+      "id": "U5",
+      "question": "Was the 40% deficit uniform across consumer instances or concentrated in a subset?",
+      "whyItMatters": "Concentration would point to a per-instance condition (for example, a specific lock or a specific message schema) rather than a global code-path change.",
+      "discriminatingObservation": "Per-instance throughput and per-instance log-signature rates across the window.",
+      "status": "open"
+    },
+    {
+      "id": "U6",
+      "question": "Did the index rebuild's contention window coincide exactly with the 27-minute degradation?",
+      "whyItMatters": "A rebuild that began or ended outside the degradation window would weaken or strengthen it as the explanation.",
+      "discriminatingObservation": "Rebuild start and completion timestamps compared against the throughput curve.",
+      "status": "open"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Re-apply exactly one change at a time in a load-bearing controlled run (library upgrade alone, then index rebuild alone), with a defined rollback trigger on throughput deficit.",
+      "targetsMechanism": "Attribution between the two candidate causes (U1, U4)",
+      "priority": 1,
+      "rationale": "This is the only step in the package's reach that directly supplies the missing observation behind E7; every other question stays unresolved without it. It is prioritized over instrumentation because it discriminates even if instrumentation proves incomplete.",
+      "expectedSignal": "Throughput deficit reappears in one arm and not the other (single cause), in both arms (independent dual cause), or in neither single arm while present in the combined arm (interaction).",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Add processing-time instrumentation that separates database-wait time from deserialization and retry time, per message and per consumer instance.",
+      "targetsMechanism": "The unmeasurable split identified in E5, feeding U2 and U3",
+      "priority": 2,
+      "rationale": "Without this, the A1 arms are judged only by aggregate throughput and would not show why an arm failed. Ranked below A1 because it explains rather than decides.",
+      "expectedSignal": "A time-share breakdown in which one segment accounts for the bulk of added per-message cost.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Restore and retain trace sampling for the consumer path, with retention long enough to survive incident triage.",
+      "targetsMechanism": "The evidence gap in E8; ordering and causality within the consumer (U3)",
+      "priority": 3,
+      "rationale": "Prevents recurrence of the same unresolvable attribution and supplies ordering that log counts cannot.",
+      "expectedSignal": "Per-message spans showing which segment expanded and in what order relative to the throughput decline.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "action": "Keep both changes reverted in production until A1 returns a result, rather than re-applying the change judged less suspicious.",
+      "targetsMechanism": "Exposure to the unattributed cause (C7, C8)",
+      "priority": 4,
+      "rationale": "The joint revert is the only configuration observed to be healthy (E6); re-applying either change on a hunch reintroduces an unbounded risk.",
+      "expectedSignal": "Throughput remains normal and queue depth stable in the reverted configuration.",
+      "confidence": "high"
+    },
+    {
+      "id": "A5",
+      "action": "Reconstruct per-instance and time-ordered views of the existing log signatures and the index-rebuild timeline from retained data.",
+      "targetsMechanism": "U3, U5, U6 - extracting remaining discrimination from evidence already collected",
+      "priority": 5,
+      "rationale": "Low cost and uses only data already in hand; may narrow the alternatives before the controlled run is scheduled, though it is unlikely to settle attribution on its own.",
+      "expectedSignal": "One signature clearly leading the throughput decline, or degradation confined to instances touching a specific path.",
+      "confidence": "low"
+    },
+    {
+      "id": "A6",
+      "action": "Define a change-isolation policy that prevents a consumer-library upgrade and a database schema or index operation from landing in the same window without independent revert capability.",
+      "targetsMechanism": "The confounding structure itself (E3, E7)",
+      "priority": 6,
+      "rationale": "Addresses the root reason this incident is undiagnosable rather than the incident; deferred because it does not resolve the current outage.",
+      "expectedSignal": "Future incidents present a single varied change, making single-revert tests available by default.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "X1",
+      "change": "A run exists in which only the library upgrade is reverted and throughput returns to normal.",
+      "challenges": "C8, C11, U1",
+      "consequence": "Attribution collapses to the library upgrade alone; the elevated lock-wait messages (E4) are reclassified as a downstream effect of slower consumers holding connections longer, and A1 is satisfied rather than required.",
+      "confidence": "high"
+    },
+    {
+      "id": "X2",
+      "change": "A run exists in which only the index rebuild is reverted and throughput returns to normal.",
+      "challenges": "C8, C11, U1",
+      "consequence": "Attribution collapses to database lock contention; the deserialization warnings become incidental noise from the upgrade, and the fix moves entirely to the database side.",
+      "confidence": "high"
+    },
+    {
+      "id": "X3",
+      "change": "Single-change runs each restore normal throughput, but the combination degrades it.",
+      "challenges": "C11 (that no interaction is required)",
+      "consequence": "A genuine interaction is established - neither change is individually sufficient - and any fix addressing only one change would be unsafe, promoting A6 from last priority to central.",
+      "confidence": "medium"
+    },
+    {
+      "id": "X4",
+      "change": "Arrival rate had in fact risen outside its normal range during the window.",
+      "challenges": "C3 (the supply-side framing)",
+      "consequence": "The backlog could be demand-driven with the change set incidental, and the joint-revert recovery (E6) would need re-reading as coincident with load subsiding; the entire causal chain would require rebuilding.",
+      "confidence": "high"
+    },
+    {
+      "id": "X5",
+      "change": "Throughput had not recovered after the joint revert.",
+      "challenges": "C7 (that the change set is causal)",
+      "consequence": "Both changes would be exonerated as sufficient causes and the search would move to an unobserved third factor inside the window, making trace and telemetry gaps (E5, E8) the dominant obstacle.",
+      "confidence": "high"
+    },
+    {
+      "id": "X6",
+      "change": "Time-resolved telemetry shows deserialization retry accounting for a negligible share of processing time despite the elevated warning count.",
+      "challenges": "C5's evidentiary weight and C9",
+      "consequence": "The library upgrade is effectively ruled out as the dominant mechanism without needing a revert run, confirming that log-line counts were a misleading correlate and shifting priority to the database path.",
+      "confidence": "medium"
+    }
+  ]
+}
