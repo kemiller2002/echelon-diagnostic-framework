@@ -10,3 +10,4 @@
 | WI-0001 | Author EX-EDF-2026-A003 case ST-002 (negative-knowledge) | complete | edf-002,case-authoring | high |
 | WI-0002 | Author EX-EDF-2026-A003 case ST-004 (control-points) | complete | edf-002,case-authoring | high |
 | WI-0003 | Author EX-EDF-2026-A003 case ST-006 (propagation) | complete | edf-002,case-authoring | high |
+| WI-0004 | Author EX-EDF-2026-A003 case ST-008 (evidence-revision) | complete | edf-002,case-authoring | high |
