@@ -1,0 +1,195 @@
+{
+  "version": "1.0.0",
+  "summary": "A newly deployed recommendation model caused a 14-point precision drop in one low-volume customer segment. Segment-level monitoring detected the issue six minutes after exposure, the automated release rule halted expansion, and the feature flag was disabled for the affected segment. The incident affected 312 requests, while the previous model continued serving other traffic and no measurable quality drop appeared in other segments. The evidence does not establish why pre-release integration tests failed to reveal the segment-specific problem.",
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "The new model produced incorrect results for one low-volume customer segment after deployment.",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "Initial exposure was limited to 2% of traffic by a feature flag.",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Segment-level monitoring detected a 14-point precision drop six minutes after exposure.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "The automated release rule halted expansion because the segment's decline exceeded the 5-point threshold.",
+      "evidence": ["E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "The affected segment was disabled through the feature flag while the previous model continued serving all other traffic.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "The incident affected 312 requests.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "No other customer segment showed a measurable quality drop.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "The artifact passed all pre-release integration tests, but those tests did not prevent the observed segment-specific production failure.",
+      "evidence": ["E1", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "The team had practiced feature-flag rollback during the preceding month.",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C6",
+      "type": "contributes-to",
+      "description": "The limited initial exposure contributed to bounding the number of affected requests, although the evidence does not quantify its independent effect."
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "supports",
+      "description": "The detected 14-point drop exceeded the rule's 5-point halt threshold."
+    },
+    {
+      "from": "C4",
+      "to": "C6",
+      "type": "prevents",
+      "description": "Halting expansion prevented further rollout exposure beyond the initial stage."
+    },
+    {
+      "from": "C3",
+      "to": "C5",
+      "type": "precedes",
+      "description": "Detection occurred before the affected segment's feature flag was disabled."
+    },
+    {
+      "from": "C5",
+      "to": "C7",
+      "type": "unknown",
+      "description": "The evidence reports both selective disablement and no measurable decline elsewhere, but does not establish that disablement caused the absence of declines in other segments."
+    },
+    {
+      "from": "C9",
+      "to": "C5",
+      "type": "unknown",
+      "description": "Rollback practice may have aided the response, but the evidence provides no response-time comparison or direct causal link."
+    },
+    {
+      "from": "C8",
+      "to": "C1",
+      "type": "precedes",
+      "description": "The artifact passed integration tests before the segment-specific production failure occurred."
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "The root cause of the incorrect results and precision drop is not identified.",
+      "confidence": "high",
+      "resolvingEvidence": "Segment-specific input, output, model, configuration, and execution traces for affected and unaffected requests."
+    },
+    {
+      "issue": "It is unknown why pre-release integration tests did not reveal the problem.",
+      "confidence": "high",
+      "resolvingEvidence": "The test cases, segment coverage, test datasets, assertions, and production-versus-test environment comparison."
+    },
+    {
+      "issue": "The elapsed time between detection and feature-flag disablement is not provided.",
+      "confidence": "high",
+      "resolvingEvidence": "Timestamped monitoring alerts, release-controller logs, and feature-flag audit records."
+    },
+    {
+      "issue": "The severity and customer consequences of the 312 incorrect requests are not described.",
+      "confidence": "high",
+      "resolvingEvidence": "Request-level impact analysis and records of resulting customer-visible outcomes."
+    },
+    {
+      "issue": "The evidence does not establish whether rollback practice improved the actual response.",
+      "confidence": "high",
+      "resolvingEvidence": "Exercise objectives and timings compared with incident response steps and timings."
+    },
+    {
+      "issue": "The evidence does not state whether the 14-point precision drop fully recovered after disablement.",
+      "confidence": "high",
+      "resolvingEvidence": "Post-disablement segment-level precision measurements."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Investigate the affected segment using request-level inputs, outputs, model behavior, and configuration differences.",
+      "basis": ["E1", "E3", "E6"],
+      "priority": "high"
+    },
+    {
+      "action": "Compare pre-release test coverage and datasets with the affected segment's production cases.",
+      "basis": ["E1", "E7"],
+      "priority": "high"
+    },
+    {
+      "action": "Verify and document post-disablement recovery for the affected segment.",
+      "basis": ["E3", "E5"],
+      "priority": "high"
+    },
+    {
+      "action": "Assess the customer-visible impact of the 312 affected requests.",
+      "basis": ["E6"],
+      "priority": "high"
+    },
+    {
+      "action": "Preserve the 2% staged exposure, segment-level monitoring, automated halt rule, and selective feature flag for future releases unless further evidence supports changes.",
+      "basis": ["E2", "E3", "E4", "E5", "E6"],
+      "priority": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If segment-level monitoring had not been present,",
+      "possibleOutcome": "the documented six-minute detection might not have occurred at that time.",
+      "confidence": "high",
+      "basis": ["E3"]
+    },
+    {
+      "condition": "If the automated rule had not halted expansion,",
+      "possibleOutcome": "the model could have expanded beyond the initial exposure despite the 14-point segment decline.",
+      "confidence": "high",
+      "basis": ["E2", "E3", "E4"]
+    },
+    {
+      "condition": "If the affected segment could not have been disabled independently,",
+      "possibleOutcome": "the response described in the evidence—disabling only that segment while retaining service elsewhere—would not have been available.",
+      "confidence": "high",
+      "basis": ["E5"]
+    },
+    {
+      "condition": "If pre-release tests had included a case capable of exposing this defect,",
+      "possibleOutcome": "the segment-specific failure might have been detected before deployment.",
+      "confidence": "medium",
+      "basis": ["E1", "E7"]
+    },
+    {
+      "condition": "If the team had not practiced rollback,",
+      "possibleOutcome": "the effect on response speed or correctness is unknown.",
+      "confidence": "low",
+      "basis": ["E8"]
+    }
+  ]
+}
