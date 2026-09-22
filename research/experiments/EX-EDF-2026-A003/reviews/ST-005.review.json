@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "caseId": "ST-005",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-sonnet-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Expected states trace cleanly to their requiredEvidence sets with genuine multi-hop combinations (e.g., S01 needs E02+E03+E08; S09's refutation needs the E08/E09 dissociation plus E10/E11 historical and cross-region controls). Temporal-order evidence (E03 vs E12) cleanly refutes S04/S10 without relying on causal speculation. Genuine absences (E14 lacks retry lineage for S11; E12 lacks cohort linkage for S12; E16 missing network telemetry for S05) are correctly encoded as 'unknown' rather than forced answers. Red herrings (E09 CPU correlation, E13 operator misattribution, E12 payment-error correlation) are plausible distractors resolved only through comparison evidence (E10, E11), not strawmen. Candidate hypothesis/edge/action wording uses neutral causal vocabulary without echoing evidence phrasing, so no lexical leakage. 11 of 16 scored items are construct-critical and require actual propagation-chain/mediation reasoning (sequence order, mediating queue vs. direct cause, feedback-loop overclaim in G7), well above the four-item bar. Weighting differentiates construct-critical items (mostly 3) from peripheral ones (mostly 2) but isn't purely mechanical (S09 is critical at weight 2), indicating deliberate calibration rather than arbitrary favoritism. Four reasoning hops plus three conflicting-evidence pairs give adequate difficulty for plausible generic-reasoner errors (e.g., mistaking DB-CPU correlation or payment-error timing for causation, or over-crediting the queue→retry feedback loop despite missing lineage)."
+}
