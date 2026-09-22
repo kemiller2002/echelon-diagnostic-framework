@@ -1,0 +1,173 @@
+{
+  "version": "1.0.0",
+  "summary": "The downstream catalog API's 35% rate-limit reduction triggered 429 responses. Search requests retried those responses twice with exponential backoff, increasing latency. The retries used a cache-bypass header, causing the concurrent cache hit-rate decline; the cache was not the demonstrated latency cause. Restoring the prior rate limit ended the 429 spike and was followed by latency recovery.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Median search latency doubled from 14:10 until 14:43.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "The downstream catalog API reduced its per-client rate limit by 35% at 14:08.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C3",
+      "statement": "The rate-limit reduction caused a spike in downstream 429 responses.",
+      "confidence": "high",
+      "evidence": ["E4", "E8"]
+    },
+    {
+      "id": "C4",
+      "statement": "Downstream 429 responses activated two retries with exponential backoff, producing the observed search-latency increase.",
+      "confidence": "high",
+      "evidence": ["E5", "E6", "E8"]
+    },
+    {
+      "id": "C5",
+      "statement": "The cache hit rate fell from 91% to 76% because retry requests used a cache-bypass header.",
+      "confidence": "high",
+      "evidence": ["E2", "E7"]
+    },
+    {
+      "id": "C6",
+      "statement": "The cache hit-rate decline was a propagated effect of retries, not a supported independent cause of increased latency.",
+      "confidence": "high",
+      "evidence": ["E3", "E6", "E7"]
+    },
+    {
+      "id": "C7",
+      "statement": "Restoring the previous downstream rate limit at 14:41 ended the 429 spike, and search latency normalized two minutes later.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C3",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C1",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C5",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "mediates",
+      "confidence": "high"
+    },
+    {
+      "from": "C2",
+      "to": "C1",
+      "type": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "C7",
+      "to": "C1",
+      "type": "prevents",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C4",
+      "type": "supports",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "statement": "The evidence does not specify why the downstream rate limit was reduced.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The evidence does not quantify the 429 volume, retry volume, or latency contribution of each retry and backoff.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The reason for the two-minute delay between ending the 429 spike and latency normalization is unresolved.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The evidence does not establish whether retry or cache-bypass behavior can be changed safely without other effects.",
+      "confidence": "high"
+    }
+  ],
+  "actions": [
+    {
+      "priority": 1,
+      "action": "Control or coordinate downstream per-client rate-limit changes affecting search traffic.",
+      "rationale": "The limit reduction is the earliest supported change in the causal chain, and restoring it ended the 429 spike.",
+      "leverage": "high",
+      "confidence": "high"
+    },
+    {
+      "priority": 2,
+      "action": "Review the retry policy for downstream 429 responses, including retry count and backoff behavior.",
+      "rationale": "Retries with backoff directly mediated the latency increase.",
+      "leverage": "high",
+      "confidence": "high"
+    },
+    {
+      "priority": 3,
+      "action": "Review whether retry requests need the cache-bypass header.",
+      "rationale": "The header caused the cache hit-rate decline, though changing it is not shown to remove the primary 429-driven latency mechanism.",
+      "leverage": "medium",
+      "confidence": "high"
+    },
+    {
+      "priority": 4,
+      "action": "Monitor downstream 429 responses alongside retry activation and latency.",
+      "rationale": "This improves detection and causal visibility but does not itself prevent the failure.",
+      "leverage": "low",
+      "confidence": "high"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the rate limit had not been reduced, the supported trigger for the 429 spike would be absent.",
+      "expected_result": "The retry-mediated latency increase would likely not occur.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If 429 responses did not activate retries with exponential backoff,",
+      "expected_result": "The observed latency increase should be substantially reduced or absent even if 429 responses continued.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If retry requests did not use the cache-bypass header,",
+      "expected_result": "The cache hit-rate decline should be reduced or absent, but the 429 and retry-backoff latency path could remain.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If cache degradation independently caused the latency increase,",
+      "expected_result": "Requests without downstream 429 responses, especially cache misses, should also show increased latency; E6 reports that they did not.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If the downstream rate limit were restored but 429 responses and latency remained elevated,",
+      "expected_result": "The rate-limit diagnosis would be weakened; E8 reports the opposite sequence.",
+      "confidence": "high"
+    }
+  ]
+}
