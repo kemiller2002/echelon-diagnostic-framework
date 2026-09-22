@@ -1,0 +1,744 @@
+{
+  "caseId": "ST-006",
+  "authorFamily": "Anthropic",
+  "construct": "propagation",
+  "hypothesis": "HY-EDF-2026-A013",
+  "chain": {
+    "origin": "ND-CB2291 changed the compactor tenant-shard hash, concentrating 41 of 44 large-tenant compaction jobs on pg-shard-3 (ND-PILEUP).",
+    "mediators": [
+      "ND-FSYNC: compaction concurrency of about 40 saturates the pg-shard-3 write-ahead-log volume.",
+      "ND-STARVE: transaction-mode pooling holds a server connection for the duration of a statement blocked on fsync, exhausting pgbouncer-3.",
+      "ND-GWTIMEOUT: edit-gateway session establishment times out without retrying."
+    ],
+    "downstreamEffect": "ND-RECONNECT: clients that cannot obtain a session token re-establish websockets every 3 seconds, producing the fanout reconnect storm and 5xx, which is the loudest and earliest-paged signal.",
+    "correlate": "ND-IDXLAT: the indexer read-ahead reduction in the same bundle raised indexer latency 11 minutes before the sweep. It co-moves with the fanout 5xx rate (r = 0.91) through the shared upstream bundle, not through any dependency path."
+  },
+  "answers": [
+    {
+      "itemId": "IT-H01",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18"
+      ],
+      "allowedEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18",
+        "EV-29",
+        "EV-23"
+      ],
+      "rationale": "CB-2291 changed compactor.tenant_shard_hash at 13:40 (EV-16); the 13:52 sweep put 41 of 44 large-tenant jobs on pg-shard-3 against a prior range of 9 to 12 (EV-17); and a staging replay against the production tenant catalogue reproduces 40 of 44 under the new hash versus 11 of 44 under the old one (EV-18). No single one of these establishes the concentration on its own."
+    },
+    {
+      "itemId": "IT-H02",
+      "expected": "refuted",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-13",
+        "EV-12"
+      ],
+      "allowedEvidence": [
+        "EV-13",
+        "EV-12",
+        "EV-11",
+        "EV-16"
+      ],
+      "rationale": "notify-fanout has no call path to search-indexer and the indexer serves reads from separate replica hardware (EV-13), so indexer read latency cannot reach fanout session handling. The high rank of the indexer signal comes from a correlation service with no dependency model (EV-12). The read-ahead change is real (EV-16, EV-11) but its effect terminates in the indexer."
+    },
+    {
+      "itemId": "IT-H03",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-19",
+        "EV-02"
+      ],
+      "allowedEvidence": [
+        "EV-19",
+        "EV-02",
+        "EV-27",
+        "EV-01"
+      ],
+      "rationale": "NP-77 matched the pool it replaced in instance type, node count, kernel version and network tier (EV-19), and the fanout tier absorbed the volume: it autoscaled 24 to 96 pods with no restart and no OOM kill (EV-02), with heap headroom never below 22% (EV-27). The upgrade's 13:45 timestamp is proximity, not capacity loss."
+    },
+    {
+      "itemId": "IT-H04",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-20",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-20",
+        "EV-14",
+        "EV-21",
+        "EV-10",
+        "EV-04"
+      ],
+      "rationale": "4.18.0 was at 100% of sessions from 09:10 and ran four and a half hours at baseline reconnect rates before onset (EV-20), and the 3-second re-establish behaviour is unchanged across the last six releases (EV-14), so 4.18.0 introduced nothing. The rollback at 14:52 post-dates the 14:44 recovery onset (EV-21, EV-10)."
+    },
+    {
+      "itemId": "IT-H05",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-26"
+      ],
+      "allowedEvidence": [
+        "EV-26",
+        "EV-16",
+        "EV-17",
+        "EV-23"
+      ],
+      "rationale": "The discriminating record is absent, not ambiguous: CB-2291 set compactor.job_log_sink to none before the sweep, so no job-level logs exist for 13:52 to 14:38, and the backfill scheduler holds only a 10:00 to 16:00 running state with no per-shard or per-job breakdown (EV-26). BF-118 writes through the same compaction path, so its contribution is neither demonstrable nor excludable from retained data."
+    },
+    {
+      "itemId": "IT-H06",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-22",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-22",
+        "EV-05",
+        "EV-17",
+        "EV-30"
+      ],
+      "rationale": "Every Corvid tenant resolves to pg-shard-7 under both hash functions and fleet-wide edit volume stayed inside its 30-day band (EV-22), while the starvation was specific to pgbouncer-3 and began abruptly at 14:05 rather than as steady-state growth (EV-05)."
+    },
+    {
+      "itemId": "IT-H07",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-30",
+        "EV-09",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-30",
+        "EV-09",
+        "EV-05",
+        "EV-23",
+        "EV-29",
+        "EV-06"
+      ],
+      "rationale": "pgbouncer-3 runs transaction-mode pooling in which a server connection is held for the full duration of its statement, so a statement blocked on a write-ahead-log flush occupies a pooled connection until the flush completes (EV-30). fsync p99 rose to 210ms with queue depth 61 (EV-09), and cl_waiting went 0 to 118 with checkout wait p95 past 2s over the same interval (EV-05). This is the mediator, distinct from the origin."
+    },
+    {
+      "itemId": "IT-E01",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18"
+      ],
+      "allowedEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18",
+        "EV-29"
+      ],
+      "rationale": "Direction and endpoints are right and causes is the correct relation: ND-CB2291 has no upstream driver in the candidate node list, so the mediates tie-break does not apply, and no other candidate node lies between the bundle and the job concentration. The shard-assignment replay (EV-18) establishes direct production of the concentration by the hash change (EV-16, EV-17)."
+    },
+    {
+      "itemId": "IT-E02",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-17",
+        "EV-29",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-17",
+        "EV-29",
+        "EV-09",
+        "EV-23",
+        "EV-18",
+        "EV-08"
+      ],
+      "rationale": "The concentration lies on the path between CB-2291 and the fsync saturation and transmits it, so mediates is correct rather than causes: ND-PILEUP has an identified upstream driver (ND-CB2291) in the candidate node list. Concurrency of about 40 predicts fsync p99 of 190 to 240ms (EV-29), matching the observed 210ms (EV-09), with 97% of write IOPS compaction-tagged (EV-23)."
+    },
+    {
+      "itemId": "IT-E03",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-09",
+        "EV-30",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-09",
+        "EV-30",
+        "EV-05",
+        "EV-23",
+        "EV-29"
+      ],
+      "rationale": "fsync saturation transmits the upstream effect into pool starvation through connection holding time (EV-30, EV-09, EV-05). ND-FSYNC has an identified upstream driver (ND-PILEUP), so mediates rather than causes is the correct relation under the tie-break."
+    },
+    {
+      "itemId": "IT-E04",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-05",
+        "EV-06",
+        "EV-30"
+      ],
+      "allowedEvidence": [
+        "EV-05",
+        "EV-06",
+        "EV-30",
+        "EV-07",
+        "EV-24",
+        "EV-03"
+      ],
+      "rationale": "Checkout waits reaching 11.4s (EV-05) against session-establishment calls that read and write shard state through pgbouncer-3 produce the 31% client-observed timeout rate (EV-06, EV-30). ND-STARVE has an identified upstream driver (ND-FSYNC), so mediates is the correct relation. EV-07 is the gateway's own green dashboard and must not be read as absence of timeouts."
+    },
+    {
+      "itemId": "IT-E05",
+      "expected": "relation-misstated",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-14",
+        "EV-06",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-14",
+        "EV-06",
+        "EV-05",
+        "EV-01",
+        "EV-10",
+        "EV-30",
+        "EV-03",
+        "EV-04"
+      ],
+      "rationale": "Endpoints and direction are right: failed session establishment does produce the reconnect storm, because a fanout session requires a gateway session token and a failed client re-establishes every 3 seconds (EV-14, EV-06, EV-01). But ND-GWTIMEOUT has an identified upstream driver in the candidate node list (ND-STARVE), so under the tie-break the supported relation is mediates, not causes. Answering supported treats the last link of the chain as if it were the origin."
+    },
+    {
+      "itemId": "IT-E06",
+      "expected": "relation-misstated",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-05",
+        "EV-06",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-05",
+        "EV-06",
+        "EV-14",
+        "EV-09",
+        "EV-30",
+        "EV-01"
+      ],
+      "rationale": "fsync saturation does reach the reconnect storm, but only through ND-STARVE and ND-GWTIMEOUT, both of which are candidate nodes lying on the path (EV-05, EV-06, EV-14). Under the glossary, causes requires that no other candidate node lie between the endpoints, and an indirect reach is contributes-to. The edge is therefore misstated rather than supported or unsupported."
+    },
+    {
+      "itemId": "IT-E07",
+      "expected": "relation-misstated",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-05",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-05",
+        "EV-14",
+        "EV-06",
+        "EV-09",
+        "EV-30",
+        "EV-01"
+      ],
+      "rationale": "This is the chain-flattening edge. The bundle is genuinely the origin and the reconnect storm is genuinely the downstream effect, but four candidate nodes lie between them (ND-PILEUP, ND-FSYNC, ND-STARVE, ND-GWTIMEOUT), so the supported relation is contributes-to and causes is misstated. A reasoner that identifies the correct root cause but collapses the chain into one link answers supported here."
+    },
+    {
+      "itemId": "IT-E08",
+      "expected": "direction-reversed",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-10",
+        "EV-05",
+        "EV-24"
+      ],
+      "allowedEvidence": [
+        "EV-10",
+        "EV-05",
+        "EV-24",
+        "EV-13",
+        "EV-01",
+        "EV-06",
+        "EV-04"
+      ],
+      "rationale": "The two endpoints are related but the arrow points the wrong way. Pool starvation began at 14:05 while the reconnect rate stayed within 1.2x baseline until 14:09 and first exceeded 3x baseline at 14:11, four to six minutes later (EV-05, EV-10). The storm also cannot load pgbouncer-3: fanout uses pgbouncer-5 (EV-05, EV-13) and the gateway sheds timed-out calls without re-issuing them to the database (EV-24)."
+    },
+    {
+      "itemId": "IT-E09",
+      "expected": "direction-reversed",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-24",
+        "EV-23",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-24",
+        "EV-23",
+        "EV-09",
+        "EV-05",
+        "EV-30",
+        "EV-06"
+      ],
+      "rationale": "This is the invented feedback loop. edit-gateway has run with retry_on_timeout false since 2025-11 and CB-2291 did not change it, so a timed-out session-establishment call is shed rather than re-issued (EV-24); 97% of shard-3 write IOPS in the window are attributed to compaction connections, leaving no room for gateway-driven amplification (EV-23). The supported relation between these endpoints runs the other way, from fsync saturation to gateway timeouts (EV-09, EV-05), so direction-reversed takes precedence over relation-misstated."
+    },
+    {
+      "itemId": "IT-E10",
+      "expected": "unsupported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-13",
+        "EV-12"
+      ],
+      "allowedEvidence": [
+        "EV-13",
+        "EV-12",
+        "EV-11",
+        "EV-16",
+        "EV-14"
+      ],
+      "rationale": "Both endpoints are real and their co-movement is the strongest in the metric set (r = 0.91 at lag 0), but the ranking service holds no dependency model (EV-12) and the dependency manifest shows no call path from fanout to the indexer, which reads from separate replica hardware (EV-13). The co-movement follows from the shared upstream bundle (EV-16). No relation of the stated kind holds in either direction, so this is unsupported rather than direction-reversed."
+    },
+    {
+      "itemId": "IT-E11",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-16",
+        "EV-11"
+      ],
+      "allowedEvidence": [
+        "EV-16",
+        "EV-11",
+        "EV-13"
+      ],
+      "rationale": "The bundle reduced indexer.read_ahead_pages from 64 to 8 at 13:40 (EV-16) and indexer read p99 rose from 80ms to 610ms at 13:41 (EV-11). ND-CB2291 has no upstream driver in the candidate list and no candidate node lies between, so causes is the correct relation."
+    },
+    {
+      "itemId": "IT-E12",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-11",
+        "EV-17",
+        "EV-13"
+      ],
+      "allowedEvidence": [
+        "EV-11",
+        "EV-17",
+        "EV-13",
+        "EV-16",
+        "EV-12"
+      ],
+      "rationale": "The indexer latency rise at 13:41 does precede the 13:52 sweep concentration (EV-11, EV-17), and the evidence establishes no causal relation between them: the indexer reads from separate replica hardware and shares only the upstream bundle (EV-13, EV-16). precedes is exactly the right weak relation here; answering unsupported denies a temporal ordering the evidence states, and answering relation-misstated promotes a correlate to a cause."
+    },
+    {
+      "itemId": "IT-E13",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-25"
+      ],
+      "allowedEvidence": [
+        "EV-25",
+        "EV-05",
+        "EV-11",
+        "EV-13",
+        "EV-30"
+      ],
+      "rationale": "Unlike the reconnect edge, this one is mechanically plausible: search-indexer writes index deltas through pgbouncer-3, so it could have occupied pool slots (EV-25). The discriminating data is genuinely absent rather than ambiguous: per-application pool attribution was only added on 2026-03-19 and pgbouncer-3 ran at log level error, so no per-client checkout records exist for the incident date (EV-25). Neither contributes-to nor unsupported can be asserted."
+    },
+    {
+      "itemId": "IT-E14",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-26"
+      ],
+      "allowedEvidence": [
+        "EV-26",
+        "EV-16",
+        "EV-17",
+        "EV-18"
+      ],
+      "rationale": "The same bundle that changed the hash also set compactor.job_log_sink to none before the sweep ran, so no job-level record of the 13:52 to 14:38 sweep exists, and the backfill scheduler retains only a coarse 10:00 to 16:00 running state (EV-26). The 41-of-44 count covers scheduled large-tenant jobs (EV-17) and does not settle whether BF-118 added volume on top. The absence is structural, so the edge is undetermined."
+    },
+    {
+      "itemId": "IT-E15",
+      "expected": "unsupported",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-20",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-20",
+        "EV-14",
+        "EV-21",
+        "EV-10",
+        "EV-01",
+        "EV-04"
+      ],
+      "rationale": "4.18.0 ran at 100% for four and a half hours at baseline reconnect rates before onset (EV-20) and the reconnect behaviour is unchanged across six releases (EV-14), so the client release produces no relation of the stated kind to the storm. The 14:52 rollback followed the 14:44 recovery onset (EV-21, EV-10), so the apparent remediation is sequence, not effect."
+    },
+    {
+      "itemId": "IT-E16",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-27",
+        "EV-28"
+      ],
+      "allowedEvidence": [
+        "EV-27",
+        "EV-28",
+        "EV-02"
+      ],
+      "rationale": "The limiter capped accepted reconnects at 12,000/s, shed 4.1% of attempts, and heap headroom never fell below 22%, with no pod restart or OOM kill (EV-27, EV-02). A comparable reconnect volume before the limiter shipped OOM-killed 61% of fanout pods in INC-3902 (EV-28). prevents is the correct relation and is unaffected by the causes/mediates tie-break."
+    },
+    {
+      "itemId": "IT-E17",
+      "expected": "unsupported",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-22",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-22",
+        "EV-05",
+        "EV-17",
+        "EV-30"
+      ],
+      "rationale": "Corvid tenants map to pg-shard-7 under both hash functions and fleet-wide edit volume stayed in band (EV-22), so the onboarding placed no additional demand on the pgbouncer-3 pool, whose starvation was abrupt rather than growth-driven (EV-05)."
+    },
+    {
+      "itemId": "IT-A01",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18"
+      ],
+      "allowedEvidence": [
+        "EV-16",
+        "EV-17",
+        "EV-18",
+        "EV-29",
+        "EV-09"
+      ],
+      "rationale": "This acts on the origin rather than on a mediator or the downstream effect. The replay shows the previous hash places 11 of 44 jobs on shard 3 against 40 under the new hash (EV-18, EV-16, EV-17), and re-running off-peak keeps compaction concurrency below the threshold where fsync degrades (EV-29)."
+    },
+    {
+      "itemId": "IT-A02",
+      "expected": "rejected",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-09",
+        "EV-30",
+        "EV-29"
+      ],
+      "allowedEvidence": [
+        "EV-09",
+        "EV-30",
+        "EV-29",
+        "EV-05",
+        "EV-23"
+      ],
+      "rationale": "Enlarging the pool relocates the queue rather than relieving it. Connections are held because statements are blocked on write-ahead-log flushes (EV-30, EV-09); admitting 400 concurrent statements to a volume already at queue depth 61 deepens device queueing at a concurrency the capacity review shows is already past the super-linear knee (EV-29, EV-23). It treats the mediator's symptom and leaves the origin untouched."
+    },
+    {
+      "itemId": "IT-A03",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-27",
+        "EV-28"
+      ],
+      "allowedEvidence": [
+        "EV-27",
+        "EV-28",
+        "EV-01",
+        "EV-02",
+        "EV-14",
+        "EV-03"
+      ],
+      "rationale": "This is the attractive but harmful option: it targets the loudest signal, the 5xx on /ws/subscribe (EV-01), and reads as restoring service to shed users. The limiter is the control that kept the fanout tier alive, capping accepted reconnects at 12,000/s and holding heap headroom above 22% (EV-27, EV-02). Removing it while clients re-establish every 3 seconds (EV-14) reproduces INC-3902, where an equivalent volume OOM-killed 61% of fanout pods and extended the outage by 38 minutes (EV-28). It also leaves every link of the actual chain in place."
+    },
+    {
+      "itemId": "IT-A04",
+      "expected": "acceptable",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-11",
+        "EV-13"
+      ],
+      "allowedEvidence": [
+        "EV-11",
+        "EV-13",
+        "EV-16",
+        "EV-12"
+      ],
+      "rationale": "The read-ahead reduction caused a real, user-visible indexer regression that persisted for over 80 minutes with indexing lag reaching 19 minutes (EV-11, EV-16), so reverting it is worth doing and carries no incident risk. It is not preferred, because the indexer is a correlate with no path to the fanout tier (EV-13, EV-12) and reverting it changes nothing in the chain. Answering preferred promotes the correlate; answering rejected confuses not-causal with not-worth-fixing."
+    },
+    {
+      "itemId": "IT-A05",
+      "expected": "rejected",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-14",
+        "EV-20",
+        "EV-05"
+      ],
+      "allowedEvidence": [
+        "EV-14",
+        "EV-20",
+        "EV-05",
+        "EV-10",
+        "EV-21",
+        "EV-06"
+      ],
+      "rationale": "Reducing retry frequency suppresses the visible reconnect count without touching pool starvation, gateway timeouts, fsync saturation or the hash change, and the sessions still fail. The re-establish behaviour is the specified response to a missing session token and is unchanged across six releases (EV-14, EV-20), and the reconnect volume is an effect rather than a driver of pgbouncer-3 load (EV-05, EV-10)."
+    },
+    {
+      "itemId": "IT-A06",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-25",
+        "EV-26"
+      ],
+      "allowedEvidence": [
+        "EV-25",
+        "EV-26",
+        "EV-05",
+        "EV-17"
+      ],
+      "rationale": "This closes the two genuine evidence gaps, the missing per-application pool attribution and the missing job-level compaction logs (EV-25, EV-26), and would make the two undetermined edges decidable next time. It is not preferred because it changes no link in the chain and does not prevent the next sweep from repeating the concentration."
+    },
+    {
+      "itemId": "IT-A07",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-09",
+        "EV-18",
+        "EV-23"
+      ],
+      "allowedEvidence": [
+        "EV-09",
+        "EV-18",
+        "EV-23",
+        "EV-29",
+        "EV-30",
+        "EV-16"
+      ],
+      "rationale": "An online split copies shard data by writing it, adding a large sustained write load to a volume already at queue depth 61 with fsync p99 at 210ms and 97% of its IOPS consumed by compaction (EV-09, EV-23), which worsens the mediator that is actively producing the outage. It is also not reversible inside the incident window, while the concentration is a hash-assignment artifact that the replay shows reverts cleanly (EV-18, EV-16). The action is attractive because shard 3 is correctly identified as the loaded component."
+    },
+    {
+      "itemId": "IT-A08",
+      "expected": "acceptable",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-29",
+        "EV-17"
+      ],
+      "allowedEvidence": [
+        "EV-29",
+        "EV-17",
+        "EV-09",
+        "EV-18"
+      ],
+      "rationale": "Capping per-shard concurrency at eight keeps compaction below the concurrency of about 15 at which fsync p99 begins to degrade super-linearly (EV-29), so it genuinely interrupts the mediator even while the hash remains wrong (EV-17). It is an interim measure rather than the preferred one because the misassignment at the origin persists."
+    },
+    {
+      "itemId": "IT-O01",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-08",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-08",
+        "EV-09",
+        "EV-23",
+        "EV-29",
+        "EV-30"
+      ],
+      "rationale": "Processor utilisation stayed between 38% and 44% inside its 90-day band with no movement in buffer cache hit ratio (EV-08), while block-device queue depth on the write-ahead-log volume went from 2 to 61 (EV-09). The apparent conflict between a healthy host and a saturated shard resolves as I/O queueing, not compute."
+    },
+    {
+      "itemId": "IT-O02",
+      "expected": "refuted",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-05",
+        "EV-24"
+      ],
+      "allowedEvidence": [
+        "EV-05",
+        "EV-24",
+        "EV-13",
+        "EV-10",
+        "EV-04"
+      ],
+      "rationale": "notify-fanout does not use pgbouncer-3 at all; it uses pgbouncer-5, whose checkout wait p95 stayed below 4ms all window (EV-05, EV-13), and the gateway sheds timed-out calls without re-issuing them (EV-24). The storm therefore added no demand to pgbouncer-3, and the starvation preceded it (EV-10)."
+    },
+    {
+      "itemId": "IT-C01",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-27",
+        "EV-28"
+      ],
+      "allowedEvidence": [
+        "EV-27",
+        "EV-28",
+        "EV-02",
+        "EV-13"
+      ],
+      "rationale": "The limiter bounded the outcome at the fanout tier, shedding 4.1% of reconnects and keeping every pod alive where a comparable volume previously OOM-killed 61% of them (EV-27, EV-02, EV-28). It sits downstream of every link in the chain and changed nothing upstream of the fanout tier (EV-13)."
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": [
+      "EV-12",
+      "EV-15",
+      "EV-19",
+      "EV-20",
+      "EV-22"
+    ],
+    "redHerringNotes": {
+      "EV-12": "Correlation ranking with no dependency model; promotes the correlate to top suspect.",
+      "EV-15": "Anomaly detector flags a 90-day-old garbage-collection sawtooth as a leak.",
+      "EV-19": "Node pool upgrade 26 minutes before the pager, same spec in every dimension.",
+      "EV-20": "Client release rolled back during the incident, at full rollout since 09:10.",
+      "EV-22": "Large tenant onboarding two days earlier, mapped to a different shard under both hashes."
+    },
+    "conflictingEvidencePairs": [
+      {
+        "a": "EV-06",
+        "b": "EV-07",
+        "conflict": "Client telemetry shows 31% gateway session-establishment timeouts while the gateway SLO dashboard reads green.",
+        "resolution": "The gateway dashboard counts only responses actually returned and never sees client-observed timeouts; EV-06 is the valid measurement."
+      },
+      {
+        "a": "EV-08",
+        "b": "EV-09",
+        "conflict": "pg-shard-3 host processor utilisation is flat and in band while the shard is clearly degraded.",
+        "resolution": "Degradation is write-ahead-log I/O queueing, not compute; queue depth rose from 2 to 61 with fsync p99 at 210ms."
+      },
+      {
+        "a": "EV-12",
+        "b": "EV-13",
+        "conflict": "The correlation service ranks search-indexer as the top upstream signal for fanout 5xx while the dependency manifest shows no path between them.",
+        "resolution": "Common upstream cause in CB-2291 produces lag-0 co-movement without any dependency edge; the manifest governs."
+      },
+      {
+        "a": "EV-20",
+        "b": "EV-21",
+        "conflict": "The incident update attributes recovery to the 14:52 client rollback while the timeline places recovery onset at 14:44.",
+        "resolution": "Recovery began six minutes after the compaction sweep completed at 14:38 and eight minutes before the rollback; the attribution is post hoc."
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "MI-01",
+        "description": "Per-application connection-pool attribution for pgbouncer-3 on 2026-03-11. The pgbouncer_pools_by_application scrape was added on 2026-03-19 and pgbouncer-3 ran at log level error, so no per-client checkout records were ever written for the incident window.",
+        "encodedIn": "EV-25",
+        "affectedItemIds": [
+          "IT-E13"
+        ],
+        "whyNotMerelyAmbiguous": "The records do not exist and cannot be reconstructed; the search-indexer delta-write path through pgbouncer-3 is real, so neither contribution nor non-contribution can be established."
+      },
+      {
+        "id": "MI-02",
+        "description": "Job-level compactor logs for the 13:52 to 14:38 sweep, and any per-shard or per-job breakdown of tenant backfill BF-118. CB-2291 set compactor.job_log_sink to none before the sweep dispatched, and the backfill scheduler retains only a coarse 10:00 to 16:00 running state.",
+        "encodedIn": "EV-26",
+        "affectedItemIds": [
+          "IT-H05",
+          "IT-E14"
+        ],
+        "whyNotMerelyAmbiguous": "The sink was disabled before the data would have been produced, so the volume BF-118 contributed to the sweep was never recorded anywhere."
+      }
+    ],
+    "reasoningHops": 6,
+    "reasoningChain": [
+      "Hop 1 (origin): CB-2291 changed compactor.tenant_shard_hash at 13:40 (EV-16); the 13:52 sweep assigned 41 of 44 large-tenant jobs to pg-shard-3 against a prior range of 9 to 12 (EV-17); a staging replay reproduces 40 of 44 under the new hash and 11 of 44 under the old (EV-18).",
+      "Hop 2 (mediator 1): the capacity review shows fsync p99 degrades super-linearly above a compaction concurrency of about 15, recording 190 to 240ms at concurrency 40 (EV-29); pg-shard-3 fsync p99 went 4ms to 210ms with queue depth 2 to 61 while processor utilisation stayed flat (EV-09, EV-08), and 97% of write IOPS were compaction-tagged (EV-23).",
+      "Hop 3 (mediator 2): transaction-mode pooling holds a server connection for the duration of a statement, so statements blocked on flush occupy the pool (EV-30); pgbouncer-3 cl_waiting went 0 to 118 and checkout wait p95 crossed 2s at 14:05, peaking at 11.4s (EV-05).",
+      "Hop 4 (downstream effect): starvation produced 31% edit-gateway session-establishment timeouts, invisible on the gateway's own dashboard (EV-06, EV-07); a fanout session requires a gateway token and a failed client re-establishes every 3 seconds (EV-14), yielding the 9,400/s reconnect storm and 18.6% 5xx that paged first (EV-01).",
+      "Hop 5 (direction): starvation at 14:05 preceded the reconnect rise, which stayed within 1.2x baseline until 14:09 and passed 3x at 14:11 (EV-05, EV-10); fanout uses pgbouncer-5 (EV-05, EV-13) and the gateway does not retry timed-out calls (EV-24), so no feedback edge runs from the storm back into the pool or the shard.",
+      "Hop 6 (correlate): the same bundle cut indexer read_ahead_pages, raising indexer read p99 at 13:41 (EV-16, EV-11); the top-ranked lag-0 correlation with fanout 5xx comes from a service with no dependency model (EV-12), and the manifest shows no path from fanout to the indexer, which reads from separate replica hardware (EV-13). The indexer is a common-cause correlate, not a link in the chain."
+    ],
+    "harmfulActionCandidateIds": [
+      "ACT-03",
+      "ACT-07"
+    ],
+    "harmfulActionNotes": {
+      "ACT-03": "Attractive because it directly addresses the loudest signal and reads as restoring shed users; it removes the control that prevented fanout pod OOM and reproduces INC-3902 while leaving the whole chain intact.",
+      "ACT-07": "Attractive because pg-shard-3 is correctly identified as the loaded component; an online split adds sustained write load to an already saturated write-ahead-log volume and is irreversible inside the incident window."
+    },
+    "constructTraps": {
+      "chainFlattening": [
+        "IT-E07",
+        "IT-E06",
+        "IT-E05"
+      ],
+      "directionReversal": [
+        "IT-E08",
+        "IT-E09",
+        "IT-O02"
+      ],
+      "correlatePromotedToCause": [
+        "IT-E10",
+        "IT-H02",
+        "IT-A04"
+      ],
+      "relationTypeDiscrimination": [
+        "IT-E02",
+        "IT-E03",
+        "IT-E04",
+        "IT-E12",
+        "IT-E16"
+      ],
+      "unsupportedEdgeInvention": [
+        "IT-E09",
+        "IT-E15",
+        "IT-E17"
+      ],
+      "absenceHandling": [
+        "IT-H05",
+        "IT-E13",
+        "IT-E14"
+      ]
+    },
+    "singleClueCheck": "No evidence item states the chain. EV-16 gives the change without any effect, EV-17 and EV-18 give the concentration without the downstream path, EV-09 gives shard saturation without its cause or its consequence, EV-05 and EV-06 give pool and gateway state without the origin, and EV-01 gives only the downstream effect. The preferred action requires EV-16, EV-17 and EV-18 together."
+  }
+}
