@@ -1,0 +1,73 @@
+{
+  "id": "AN-EDF-001-2F",
+  "title": "Two-Family Blinded Structural-Value Analysis",
+  "version": "1.0.0",
+  "status": "registered-post-generation-pre-evaluation",
+  "registeredAt": "2026-09-22",
+  "sourceExperiment": "EX-EDF-001",
+  "provenanceBoundary": {
+    "analyzerOutputsAlreadyGenerated": true,
+    "analyzerOutputsSemanticallyInspected": false,
+    "evaluatorScoringStarted": false,
+    "reason": "A third independent analyzer family is assumed unavailable under the no-API-cost execution constraint."
+  },
+  "analyzers": [
+    {
+      "slot": "A1",
+      "provider": "OpenAI",
+      "model": "gpt-5.6-sol",
+      "primaryRuns": 18
+    },
+    {
+      "slot": "A2",
+      "provider": "Anthropic",
+      "model": "claude-opus-5",
+      "primaryRuns": 18
+    }
+  ],
+  "primaryUnits": 12,
+  "conditions": [
+    "natural",
+    "matched-neutral",
+    "edf"
+  ],
+  "primaryComparison": "edf minus matched-neutral",
+  "margin": 5,
+  "evaluators": [
+    {
+      "slot": "E1",
+      "provider": "OpenAI",
+      "targetModel": "gpt-5.6-terra"
+    },
+    {
+      "slot": "E2",
+      "provider": "Anthropic",
+      "targetModel": "claude-sonnet-5"
+    }
+  ],
+  "evaluatorAggregation": {
+    "primary": "mean(E1,E2) for every unit with two valid evaluator scores",
+    "highDisagreementThreshold": 20,
+    "highDisagreementHandling": "retain the unit, flag it as high-disagreement, and do not adjudicate because E3 is unavailable",
+    "sensitivity": "repeat primary paired analysis using min(E1,E2) per anonymous output as a conservative evaluator aggregation"
+  },
+  "supportCriteria": [
+    "Mean EDF minus matched-neutral across 12 paired primary units is at least +5 points using mean(E1,E2).",
+    "A seeded 10000-resample paired-bootstrap 95% confidence interval for EDF minus matched-neutral has lower bound above 0 using mean(E1,E2).",
+    "Both analyzer families have positive mean EDF minus matched-neutral differences.",
+    "EDF has no more than one additional materially flagged primary unit for outside-evidence use or forbidden claims than matched-neutral."
+  ],
+  "robustnessChecks": [
+    "Report the number and rate of E1/E2 disagreements of 20 points or more.",
+    "Report the EDF-minus-matched-neutral result under conservative min(E1,E2) aggregation.",
+    "Report results separately by analyzer family and by case.",
+    "Keep natural analysis secondary and do not substitute it for the matched-neutral primary comparator.",
+    "Analyze the 12 repeatability runs separately from the 36 primary outputs."
+  ],
+  "interpretationBoundary": [
+    "This analysis cannot satisfy the original three-family confirmatory success criterion.",
+    "Passing all two-family criteria constitutes two-family supportive evidence only.",
+    "Failure to pass does not by itself prove EDF has no value; it means the available two-family evidence does not clear the frozen support bar.",
+    "EX-EDF-001 remains formally incomplete with respect to its original A3 requirement."
+  ]
+}
