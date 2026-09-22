@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "updated": "2026-09-20",
+  "version": "1.2.0",
+  "updated": "2026-09-22",
   "policy": "docs/framework-engineering/claim-and-confidence-policy.md",
   "hypotheses": [
     {
@@ -92,12 +92,13 @@
       "id": "HY-EDF-008",
       "statement": "EDF adds semantic value beyond a matched neutral structured prompt.",
       "state": "unsupported",
-      "confidence": "Low",
-      "publicState": "open",
+      "confidence": "Low-Medium",
+      "publicState": "unsupported",
       "evidence": [
-        "EV-EDF-006"
+        "EV-EDF-006",
+        "EV-EDF-009"
       ],
-      "boundary": "This is the primary question for the next controlled multi-model benchmark."
+      "boundary": "A blinded two-family benchmark did not show material incremental semantic value beyond a strong matched-neutral structured prompt on six synthetic cases. The registered two-family primary analysis was incomplete because 3 E2 responses were schema-invalid; complete-pair and post-hoc formatting sensitivities were both far below the frozen +5 margin. Severe evaluator ceiling effects limit discrimination. This does not rule out EDF value on harder cases or value from individual EDF constructs."
     },
     {
       "id": "HY-EDF-009",
