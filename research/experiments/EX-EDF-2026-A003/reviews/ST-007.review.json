@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "caseId": "ST-007",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-sonnet-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Expected states trace cleanly to their requiredEvidence within allowedEvidence sets, including genuine encoded absences (S10/S11/S12/S16 rely on E16/E17's explicit statement that retry counters, safety-check inputs, and lock graphs were not retained). Hypothesis and action wording stays neutral ('was the primary driver', 'take/defer/reject') without telegraphing correctness. No single evidence item collapses the chain: E08 alone links recon to primary locks but not to checkout timeouts, which requires E07 (trace sampling) and E12 (pause intervention) to close the loop across stages, consistent with the stated 4-hop reasoning depth. Deployment (H_DEP), fraud, and DNS distractors are genuinely plausible: the release rollout window nearly coincides with alert onset, and the fraud/DNS evidence is deliberately aggregate/absence-of-signal rather than dispositive. At least eight items are constructCritical and truly require revision across stages (H_DEP unknown->refuted at S01/S04; H_REC unknown->supported->supported-with-stronger-evidence at S02/S05/S07; paired actions A_ROLLBACK->A_PAUSE_RECON->A_LIMITED_TEST at S03/S06/S20), satisfying the evidence-revision construct. Red herrings (E04, E05, E11) and conflicting pairs (E02/E06, E09/E11, E04/E07) are correctly flagged in hardness metadata and matched by corresponding 'unknown' or 'refuted' expected answers rather than being ignored. Weights (1-3) track evidentiary strength/centrality rather than arbitrarily favoring one hypothesis family. One minor softness: A_ROUTE_REPLICA_S2 (S18) is easy to reject partly on technical grounds (replicas are typically not write targets) rather than purely on case evidence, slightly reducing its distractor plausibility, but this does not undermine overall validity."
+}
