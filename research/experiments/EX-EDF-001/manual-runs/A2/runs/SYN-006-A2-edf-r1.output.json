@@ -1,0 +1,225 @@
+{
+  "summary": "A nightly partner import began rejecting 18% of records after the partner added an optional addressLine3 field, which the partner contract permitted. The rejections are a downstream symptom, not the defect. The ingestion parser accepted the new field and carried it into the intermediate event; the downstream mapper then read fields by position rather than by name, so the extra field shifted postalCode into the country slot. The validation service did its job correctly by rejecting the resulting malformed country value, which is why nearly all visible errors surfaced there. Operator retries could not succeed because the same deterministic shift recurred on every attempt. The mapper's contract test covered only the original field positions, so a contract-legal additive change passed unnoticed into production. A mapper change from positional indexing to named-field mapping corrected a failing sample without touching the partner payload or the validator, confirming the mapper as the load-bearing defect and the primary point of leverage. Relaxing the validator is explicitly counter-indicated because it would admit incorrect address data into fulfillment.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The import pipeline spans a partner payload, an ingestion parser, an intermediate event, a downstream mapper, a validation service, and fulfillment, operating as a nightly batch.",
+      "confidence": "high",
+      "evidence": ["E1", "E2", "E3", "E4", "E7"]
+    },
+    {
+      "id": "C2",
+      "statement": "The triggering change was the partner adding an optional addressLine3 field, which the partner contract permitted as an additive optional field.",
+      "confidence": "high",
+      "evidence": ["E1", "E6"]
+    },
+    {
+      "id": "C3",
+      "statement": "The ingestion parser was not a contributor: it accepted the new field and propagated it faithfully into the intermediate event.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "The primary defect is the downstream mapper's use of positional field indexes, which is invalid under a contract that allows additive optional fields.",
+      "confidence": "high",
+      "evidence": ["E3", "E6", "E8"]
+    },
+    {
+      "id": "C5",
+      "statement": "The positional read caused a field shift that placed postalCode into the country slot whenever addressLine3 was present.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C6",
+      "statement": "The validation service behaved correctly; rejecting the malformed country value was the designed response, not a fault.",
+      "confidence": "high",
+      "evidence": ["E4", "E7"]
+    },
+    {
+      "id": "C7",
+      "statement": "Validation errors are the dominant visible symptom and misdirect attention toward the validator rather than the mapper.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C8",
+      "statement": "A secondary contributor is the mapper contract test, which covered only the original field positions and therefore could not detect a contract-legal additive change.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C9",
+      "statement": "Retrying rejected records is ineffective because the shift is deterministic given the same payload and mapper.",
+      "confidence": "high",
+      "evidence": ["E5", "E3"]
+    },
+    {
+      "id": "C10",
+      "statement": "Named-field mapping in the mapper resolves the failure at its origin, demonstrated by a corrected sample with no change to the partner payload or the validator.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C11",
+      "statement": "Loosening validation would convert a visible, contained failure into silent data corruption reaching fulfillment.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "C12",
+      "statement": "The 18% rejection rate is consistent with only a subset of records carrying the new optional field, though the evidence does not state the distribution.",
+      "confidence": "low",
+      "evidence": ["E1", "E3"]
+    }
+  ],
+  "relationships": [
+    { "from": "C2", "to": "C5", "type": "precedes", "confidence": "high", "rationale": "The added optional field is the precondition that exposes the positional read." },
+    { "from": "C4", "to": "C5", "type": "contributes-to", "confidence": "high", "rationale": "Positional indexing is the mechanism that converts an extra field into a misaligned read." },
+    { "from": "C3", "to": "C5", "type": "mediates", "confidence": "high", "rationale": "Faithful parser propagation delivers the extra field to the mapper without alteration." },
+    { "from": "C5", "to": "C6", "type": "contributes-to", "confidence": "high", "rationale": "The malformed country value is what the validator encounters and rejects." },
+    { "from": "C6", "to": "C7", "type": "contributes-to", "confidence": "high", "rationale": "Correct rejection generates the error volume that dominates observation." },
+    { "from": "C8", "to": "C4", "type": "contributes-to", "confidence": "high", "rationale": "Position-only test coverage allowed the invalid mapping assumption to persist undetected." },
+    { "from": "C2", "to": "C8", "type": "precedes", "confidence": "medium", "rationale": "The contract permitting additive fields defines the scenario the test failed to cover." },
+    { "from": "C5", "to": "C9", "type": "contributes-to", "confidence": "high", "rationale": "A deterministic shift reproduces identically on every retry." },
+    { "from": "C9", "to": "C7", "type": "contributes-to", "confidence": "medium", "rationale": "Repeated retries amplify the visible error volume without changing the outcome." },
+    { "from": "C10", "to": "C5", "type": "prevents", "confidence": "high", "rationale": "Named-field mapping removes positional dependence, so the shift cannot occur." },
+    { "from": "C10", "to": "C4", "type": "supports", "confidence": "high", "rationale": "Correcting the sample by changing only the mapper localizes the defect to the mapper." },
+    { "from": "C6", "to": "C11", "type": "prevents", "confidence": "high", "rationale": "Strict validation is the barrier currently keeping corrupt addresses out of fulfillment." },
+    { "from": "C7", "to": "C4", "type": "unknown", "confidence": "medium", "rationale": "Symptom visibility at the validator obscures rather than reveals the mapper defect; the diagnostic effect is directional but not causal." },
+    { "from": "C2", "to": "C12", "type": "precedes", "confidence": "low", "rationale": "Partial adoption of the optional field would explain a partial rejection rate, but adoption is not reported." },
+    { "from": "C3", "to": "C4", "type": "supports", "confidence": "medium", "rationale": "Correct parser behavior narrows the fault boundary to the mapper stage." },
+    { "from": "C8", "to": "C9", "type": "contributes-to", "confidence": "low", "rationale": "Absent a failing test signal, operators had no indication that retrying was futile." }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Why 18% rather than a higher or total rejection rate is unexplained; the evidence does not say what fraction of records carried addressLine3 or whether other factors gated the shift.",
+      "confidence": "low"
+    },
+    {
+      "id": "U2",
+      "statement": "It is unknown whether any consumer other than this mapper also relies on positional indexing and is silently affected.",
+      "confidence": "low"
+    },
+    {
+      "id": "U3",
+      "statement": "It is unknown whether any shifted records passed validation instead of being rejected and therefore reached fulfillment with wrong data.",
+      "confidence": "low"
+    },
+    {
+      "id": "U4",
+      "statement": "The named-field fix is confirmed only against a failing sample; its behavior across full nightly volume and all partner variants is unverified.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "A minority of errors did not originate at the validation service; their source and nature are not described.",
+      "confidence": "low"
+    },
+    {
+      "id": "U6",
+      "statement": "The disposition of the already-rejected records is unstated, including whether they are retained and reprocessable after a fix.",
+      "confidence": "low"
+    },
+    {
+      "id": "U7",
+      "statement": "Whether the partner gave advance notice of the additive field, and whether any notification path exists, is not in evidence.",
+      "confidence": "low"
+    },
+    {
+      "id": "U8",
+      "statement": "An alternative in which the intermediate event format itself is positionally ordered, making this a shared schema defect rather than a mapper-only defect, is not excluded by the evidence.",
+      "confidence": "low"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "statement": "Replace positional indexing in the downstream mapper with named-field mapping.",
+      "type": "control-point",
+      "leverage": "high",
+      "confidence": "high",
+      "rationale": "This is the demonstrated fix at the origin of the shift and requires no change to the partner or the validator."
+    },
+    {
+      "id": "A2",
+      "statement": "Extend mapper contract tests to include additive optional fields in any position, matching what the partner contract permits.",
+      "type": "control-point",
+      "leverage": "high",
+      "confidence": "high",
+      "rationale": "Closes the detection gap that let an invalid mapping assumption reach production."
+    },
+    {
+      "id": "A3",
+      "statement": "Do not relax the validation service to accept malformed country values.",
+      "type": "rejected-control-point",
+      "leverage": "low",
+      "confidence": "high",
+      "rationale": "It would suppress the symptom while admitting incorrect address data into fulfillment."
+    },
+    {
+      "id": "A4",
+      "statement": "Suspend blind operator retries and gate reprocessing on a confirmed mapper change.",
+      "type": "containment",
+      "leverage": "medium",
+      "confidence": "high",
+      "rationale": "Retries are deterministic no-ops here and add error noise without any path to success."
+    },
+    {
+      "id": "A5",
+      "statement": "Reprocess the rejected records once the mapper fix is in place, subject to confirming they were retained.",
+      "type": "recovery",
+      "leverage": "medium",
+      "confidence": "medium",
+      "rationale": "Restores the lost 18% only after the causal defect is removed; retention is unverified."
+    },
+    {
+      "id": "A6",
+      "statement": "Add detection for unrecognized or newly added partner fields at ingestion, reported as a signal rather than a rejection.",
+      "type": "visibility",
+      "leverage": "low",
+      "confidence": "medium",
+      "rationale": "Improves time-to-diagnosis for future additive changes but does not by itself prevent a shift."
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "X1",
+      "statement": "If the mapper had used named-field mapping from the start, the added optional field would have caused no shift and no rejections.",
+      "implication": "Confirms the mapper, not the partner change, as the load-bearing defect.",
+      "confidence": "high"
+    },
+    {
+      "id": "X2",
+      "statement": "If the validator had been relaxed to accept the malformed country value, rejections would have stopped while wrong addresses flowed into fulfillment.",
+      "implication": "Symptom suppression here is strictly worse than the visible failure; confirms the validator is a visibility surface, not a control point.",
+      "confidence": "high"
+    },
+    {
+      "id": "X3",
+      "statement": "If the partner reverted addressLine3, the rejections would cease but the positional defect would remain latent until the next additive field.",
+      "implication": "Partner-side rollback is mitigation, not resolution.",
+      "confidence": "high"
+    },
+    {
+      "id": "X4",
+      "statement": "If retries could succeed, the failure would be transient rather than structural.",
+      "implication": "Identical retry outcomes rule out load, timing, or transient causes.",
+      "confidence": "high"
+    },
+    {
+      "id": "X5",
+      "statement": "If the ingestion parser had rejected the unknown field, the shift would have been prevented but a contract-permitted change would have been wrongly refused.",
+      "implication": "Parser strictness is an available but contract-violating control point and should not be chosen.",
+      "confidence": "medium"
+    },
+    {
+      "id": "X6",
+      "statement": "If the mapper contract test had exercised an inserted optional field, the defect would have surfaced before the nightly run.",
+      "implication": "Supports test extension as the durable preventive control alongside the code fix.",
+      "confidence": "high"
+    }
+  ]
+}
