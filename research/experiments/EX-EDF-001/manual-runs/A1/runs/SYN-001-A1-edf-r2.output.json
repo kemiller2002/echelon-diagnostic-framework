@@ -1,0 +1,182 @@
+{
+  "version": "1.0.0",
+  "summary": "The newly enabled legacy-client adapter configuration is the strongly supported cause of the invoice creation error spike. It omitted the region-header mapping required by routing, and 97% of sampled failures lacked that header. Disabling the configuration restored the prior error rate. Database behavior remained normal; the CPU increase and earlier PDF defect ticket are not established causes.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Invoice creation errors rose from below 0.2% to 38% two minutes after legacy-client traffic began using the new adapter configuration.",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "C2",
+      "statement": "The new legacy-client adapter omitted the region-header mapping required by the routing function.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C3",
+      "statement": "Missing required region headers were the dominant observed failure mechanism.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C4",
+      "statement": "Enabling the new legacy-client adapter configuration caused the incident.",
+      "confidence": "high",
+      "evidence": ["E1", "E2", "E3", "E4", "E6"]
+    },
+    {
+      "id": "C5",
+      "statement": "Disabling the new configuration was an effective recovery control.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C6",
+      "statement": "The database is not supported as a contributor to the error spike.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C7",
+      "statement": "The application CPU increase is correlated with the incident but has no established causal role.",
+      "confidence": "medium",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "C8",
+      "statement": "The PDF rendering defect ticket is not supported as related to the invoice creation failures.",
+      "confidence": "medium",
+      "evidence": ["E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "E1",
+      "to": "C1",
+      "type": "precedes"
+    },
+    {
+      "from": "E2",
+      "to": "C4",
+      "type": "supports"
+    },
+    {
+      "from": "E4",
+      "to": "C2",
+      "type": "supports"
+    },
+    {
+      "from": "C2",
+      "to": "C3",
+      "type": "contributes-to"
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "mediates"
+    },
+    {
+      "from": "E6",
+      "to": "C4",
+      "type": "supports"
+    },
+    {
+      "from": "C5",
+      "to": "C1",
+      "type": "prevents"
+    },
+    {
+      "from": "E5",
+      "to": "C6",
+      "type": "supports"
+    },
+    {
+      "from": "C7",
+      "to": "C4",
+      "type": "unknown"
+    },
+    {
+      "from": "C8",
+      "to": "C4",
+      "type": "unknown"
+    }
+  ],
+  "uncertainties": [
+    {
+      "statement": "The evidence does not explain the remaining 3% of sampled failed requests that were not reported as lacking the region header.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The evidence does not show why the mapping was omitted or whether any validation should have detected the omission before enablement.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The direction of causality for the CPU increase is unresolved.",
+      "confidence": "high"
+    },
+    {
+      "statement": "No direct evidence connects the 08:54 PDF rendering defect ticket to the later invoice creation error spike.",
+      "confidence": "high"
+    }
+  ],
+  "actions": [
+    {
+      "priority": 1,
+      "action": "Keep the new legacy-client adapter configuration disabled until the region-header mapping is restored and verified.",
+      "expectedEffect": "Prevents recurrence through the demonstrated recovery control.",
+      "confidence": "high"
+    },
+    {
+      "priority": 2,
+      "action": "Restore the legacy-client region-header mapping to match the routing function's requirement.",
+      "expectedEffect": "Removes the directly supported failure mechanism.",
+      "confidence": "high"
+    },
+    {
+      "priority": 3,
+      "action": "Verify legacy-client requests contain the required region header before re-enabling the configuration.",
+      "expectedEffect": "Tests the proposed correction at the point of causal leverage.",
+      "confidence": "high"
+    },
+    {
+      "priority": 4,
+      "action": "Investigate the minority of failures not explained by missing region headers.",
+      "expectedEffect": "Determines whether an additional failure mechanism remains.",
+      "confidence": "medium"
+    },
+    {
+      "priority": 5,
+      "action": "Continue observing CPU and database indicators without treating them as primary remediation targets on current evidence.",
+      "expectedEffect": "Preserves visibility while focusing intervention on the supported cause.",
+      "confidence": "high"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the new legacy-client adapter were not causal, disabling it would not be expected to return errors below 0.2% within three minutes.",
+      "observedResult": "Errors returned below 0.2% after disablement.",
+      "implication": "Strengthens the causal diagnosis.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If missing region headers were not the dominant mechanism, they would not be expected in 97% of sampled failures.",
+      "observedResult": "They were absent in 97% of sampled failures.",
+      "implication": "Strengthens the identified mechanism while leaving a minority unexplained.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If the database were the primary cause, abnormal database error rate, saturation, or replication lag would be expected during the incident.",
+      "observedResult": "All remained within the previous week's normal range.",
+      "implication": "Weakens the database explanation.",
+      "confidence": "high"
+    },
+    {
+      "condition": "If the CPU rise were the primary cause, removing only the adapter configuration would not by itself be expected to produce rapid recovery unless it also removed the CPU-driving condition.",
+      "observedResult": "Rapid recovery followed adapter disablement, but post-disablement CPU data is absent.",
+      "implication": "The adapter remains the stronger control point; CPU causality remains unresolved.",
+      "confidence": "medium"
+    }
+  ]
+}
