@@ -1,0 +1,525 @@
+{
+  "caseId": "ST-002",
+  "authorFamily": "Anthropic",
+  "construct": "negative-knowledge",
+  "hypothesis": "HY-EDF-2026-A011",
+  "answers": [
+    {
+      "itemId": "SI-01",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-04",
+        "E-08",
+        "E-09",
+        "E-10"
+      ],
+      "allowedEvidence": [
+        "E-04",
+        "E-08",
+        "E-09",
+        "E-10",
+        "E-03",
+        "E-05",
+        "E-07",
+        "E-11",
+        "E-19"
+      ],
+      "rationale": "Losses fall only on merchant-days carrying more than one advice (E-04); for M-4412 the gateway received three equal-amount advices all answered 200 (E-08) while exactly one event was produced and one row exists (E-09); the key is merchant plus amount plus date with no advice identifier and a key hit returns 200 without producing (E-10). The branch's own silence (E-07) is uninstrumented silence and does not count against this."
+    },
+    {
+      "itemId": "SI-02",
+      "expected": "refuted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-06",
+        "E-09"
+      ],
+      "allowedEvidence": [
+        "E-06",
+        "E-09",
+        "E-02",
+        "E-15",
+        "E-04"
+      ],
+      "rationale": "settlement_rejected_total is exported unconditionally, sibling counters in the same registry moved and no scrape gaps exist, so a flat zero is a working instrument reporting absence (E-06), not silence. Independently, only one event was ever produced for the sample merchant-day (E-09), so the writer never received the missing advices. E-02 is an unverified opening claim."
+    },
+    {
+      "itemId": "SI-03",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-13",
+        "E-09"
+      ],
+      "allowedEvidence": [
+        "E-13",
+        "E-09",
+        "E-12",
+        "E-04"
+      ],
+      "rationale": "Losses occur on every day of the window including days with no rebalance events for the group (E-13), and the missing advices never reached the topic at all (E-09)."
+    },
+    {
+      "itemId": "SI-04",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-21",
+        "E-23"
+      ],
+      "allowedEvidence": [
+        "E-21",
+        "E-23",
+        "E-22",
+        "E-24",
+        "E-20",
+        "E-03"
+      ],
+      "rationale": "The only two channels that could settle whether CardNet transmitted for M-7781 and M-8003 are the vendor manifests, which are past portal retention with no copy held and no response to the request (E-21), and the gateway access log, which is past retention for exactly those dates (E-23). The route-level counter cannot be decomposed for that period (E-22). E-20 is a tier-1 statement that does not cover the instalment programme and cannot substitute. No evidence in the case discriminates transmission from post-receipt loss for these two advices."
+    },
+    {
+      "itemId": "SI-05",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-17",
+        "E-18"
+      ],
+      "allowedEvidence": [
+        "E-17",
+        "E-18",
+        "E-24",
+        "E-01"
+      ],
+      "rationale": "audit-trail structurally cannot see direct-session statements, so its zero DELETE count carries no information about ledger-vacuum (E-17). The job's own summary reports no row counts, its container logs are past retention, and the cumulative delete counter attributes no statement or time and was reset mid-window (E-18). Nothing in the case can distinguish removal from non-removal."
+    },
+    {
+      "itemId": "SI-06",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-14",
+        "E-09"
+      ],
+      "allowedEvidence": [
+        "E-14",
+        "E-09",
+        "E-01"
+      ],
+      "rationale": "The reconciliation job targets the primary and that configuration has not changed since April (E-14), and a direct query of the primary confirms the row genuinely does not exist (E-09)."
+    },
+    {
+      "itemId": "SI-07",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-05",
+        "E-08"
+      ],
+      "allowedEvidence": [
+        "E-05",
+        "E-08",
+        "E-03",
+        "E-04"
+      ],
+      "rationale": "Enrolment registers the merchant for instalment settlement in which a daily payout is delivered as several equal-amount advices (E-05), and the sample merchant-day shows exactly that shape (E-08)."
+    },
+    {
+      "itemId": "SI-08",
+      "expected": "supported",
+      "weight": 1.5,
+      "requiredEvidence": [
+        "E-10",
+        "E-09",
+        "E-08"
+      ],
+      "allowedEvidence": [
+        "E-10",
+        "E-09",
+        "E-08",
+        "E-04",
+        "E-05",
+        "E-11"
+      ],
+      "rationale": "The key omits the advice identifier and a hit short-circuits the produce (E-10); three advices were accepted but one event produced and one row written (E-09, E-08); the loss is therefore inside the ingress service, upstream of bus, writer and database."
+    },
+    {
+      "itemId": "SI-09",
+      "expected": "refuted",
+      "weight": 1.5,
+      "requiredEvidence": [
+        "E-06",
+        "E-15"
+      ],
+      "allowedEvidence": [
+        "E-06",
+        "E-15",
+        "E-09",
+        "E-02"
+      ],
+      "rationale": "The reject counter is a live instrument reading zero across the window (E-06) and the registry compatibility check passed at that deploy and every deploy since (E-15). Coincident timing with the flag rollout is not itself evidence of the edge."
+    },
+    {
+      "itemId": "SI-10",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-13"
+      ],
+      "allowedEvidence": [
+        "E-13",
+        "E-12",
+        "E-09"
+      ],
+      "rationale": "Rebalance activity is confined to one date while losses run across all nine days including dates with no rebalances at all (E-13, E-12)."
+    },
+    {
+      "itemId": "SI-11",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-17",
+        "E-18"
+      ],
+      "allowedEvidence": [
+        "E-17",
+        "E-18",
+        "E-01"
+      ],
+      "rationale": "Same blind spot as SI-05 stated as a relation: no channel in the case attributes any delete to the maintenance job or rules one out, so the edge is neither supported nor refuted and is not merely balanced between opposing findings."
+    },
+    {
+      "itemId": "SI-12",
+      "expected": "refuted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-16",
+        "E-07"
+      ],
+      "allowedEvidence": [
+        "E-16",
+        "E-07",
+        "E-11"
+      ],
+      "rationale": "The collector loss is confined to one date and is partial at roughly six percent, while the branch produces no span on any date of the window (E-16). Source review shows the branch opens no span at all (E-07), so collector behaviour cannot be the explanation for the missing spans."
+    },
+    {
+      "itemId": "SI-13",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-14"
+      ],
+      "allowedEvidence": [
+        "E-14",
+        "E-09",
+        "E-01"
+      ],
+      "rationale": "Reconciliation reads the primary by configuration (E-14), so replica lag cannot produce its missing-row reports; the primary itself lacks the rows (E-09)."
+    },
+    {
+      "itemId": "SI-14",
+      "expected": "supported",
+      "weight": 1.5,
+      "requiredEvidence": [
+        "E-19"
+      ],
+      "allowedEvidence": [
+        "E-19",
+        "E-10",
+        "E-08"
+      ],
+      "rationale": "Delivery is at-least-once with up to five retries until a 2xx is returned, and the signed integration records ingress duplicate suppression as the compensating control, with payouts released from ledger rows without a second uniqueness check (E-19)."
+    },
+    {
+      "itemId": "SI-15",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-07"
+      ],
+      "allowedEvidence": [
+        "E-07",
+        "E-11",
+        "E-16"
+      ],
+      "rationale": "Instrumenting the branch converts a channel-free path into an observable one (E-07, E-11) and is worth doing, but the mechanism is already established by E-04, E-08, E-09 and E-10, so it is not the first move."
+    },
+    {
+      "itemId": "SI-16",
+      "expected": "preferred",
+      "weight": 1.5,
+      "requiredEvidence": [
+        "E-10",
+        "E-19",
+        "E-08"
+      ],
+      "allowedEvidence": [
+        "E-10",
+        "E-19",
+        "E-08",
+        "E-04",
+        "E-05",
+        "E-09",
+        "E-23"
+      ],
+      "rationale": "Adding the advice identifier to the key removes the collision (E-10, E-08) while leaving the compensating control for at-least-once retry intact (E-19), and replay is scoped to advices that still exist rather than to a period the archive no longer covers (E-23)."
+    },
+    {
+      "itemId": "SI-17",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-19"
+      ],
+      "allowedEvidence": [
+        "E-19",
+        "E-10",
+        "E-08",
+        "E-04"
+      ],
+      "rationale": "Harmful attractor. Removing suppression does address the observed collision, but CardNet retries each advice up to five times until a 2xx is returned and payouts are released from ledger rows without a second uniqueness check (E-19), so every retry becomes a second payout. The mechanism-preserving fix is to narrow the key, not to remove the control."
+    },
+    {
+      "itemId": "SI-18",
+      "expected": "harmful",
+      "weight": 1.5,
+      "requiredEvidence": [
+        "E-23",
+        "E-22"
+      ],
+      "allowedEvidence": [
+        "E-23",
+        "E-22",
+        "E-01",
+        "E-24"
+      ],
+      "rationale": "Harmful attractor. The archive covers only part of the window and is already past retention for 31 August to 2 September (E-23), and route-level counts for that period cannot be decomposed (E-22). Rebuilding partitions to match an incomplete archive destroys correct rows for the uncovered days."
+    },
+    {
+      "itemId": "SI-19",
+      "expected": "rejected",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-06",
+        "E-15"
+      ],
+      "allowedEvidence": [
+        "E-06",
+        "E-15",
+        "E-09",
+        "E-02"
+      ],
+      "rationale": "Targets a path a live instrument shows was never exercised (E-06) and whose compatibility check passed throughout (E-15)."
+    },
+    {
+      "itemId": "SI-20",
+      "expected": "rejected",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-13"
+      ],
+      "allowedEvidence": [
+        "E-13",
+        "E-12"
+      ],
+      "rationale": "Targets an event confined to one date while losses span the whole window (E-13, E-12)."
+    },
+    {
+      "itemId": "SI-21",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-21",
+        "E-24"
+      ],
+      "allowedEvidence": [
+        "E-21",
+        "E-24",
+        "E-22",
+        "E-23",
+        "E-03"
+      ],
+      "rationale": "The two non-cohort advices are the residual the established mechanism does not cover (E-24, E-03), and the vendor manifest is the only channel that could still settle them (E-21). Holding those cases open rather than folding them into the cohort explanation is the correct handling of an unresolved remainder."
+    },
+    {
+      "itemId": "SI-22",
+      "expected": "observed-absent",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-06"
+      ],
+      "allowedEvidence": [
+        "E-06",
+        "E-15"
+      ],
+      "rationale": "The counter is registered at process start and exported on every scrape regardless of movement, sibling counters from the same registry advanced throughout, and the scrape target records no gaps. A covering channel operated and recorded none of the occurrences."
+    },
+    {
+      "itemId": "SI-23",
+      "expected": "not-observed",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-07",
+        "E-11"
+      ],
+      "allowedEvidence": [
+        "E-07",
+        "E-11",
+        "E-16"
+      ],
+      "rationale": "The branch emits only a debug record on a fleet running at info level, registers no counter and opens no span (E-07); idem_keys records keys rather than hits and carries no hit counter or timestamp (E-11). No channel ever covered these occurrences, so their non-appearance in logs, metrics and traces carries no information either way. This is the item that separates negative knowledge from absence."
+    },
+    {
+      "itemId": "SI-24",
+      "expected": "not-observed",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-17",
+        "E-18"
+      ],
+      "allowedEvidence": [
+        "E-17",
+        "E-18"
+      ],
+      "rationale": "The audit interceptor sits inside the application path and direct-session statements are never offered to it (E-17); the job summary reports no row counts and the cumulative table counter attributes no statement or time to anything it records (E-18). No channel ever captured individual direct-session deletes, so this is structural non-observation rather than a recorded zero."
+    },
+    {
+      "itemId": "SI-25",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E-23",
+        "E-21"
+      ],
+      "allowedEvidence": [
+        "E-23",
+        "E-21",
+        "E-22",
+        "E-24"
+      ],
+      "rationale": "Unlike SI-24 the covering channels did exist and did record at the time: the gateway access log captured every inbound request and CardNet held a transmission manifest. Both records are now past retention with no copy preserved (E-23, E-21) and the surviving aggregate counter cannot be decomposed (E-22). The case therefore does not establish presence, a recorded absence, or structural non-observation for these advices."
+    },
+    {
+      "itemId": "SI-26",
+      "expected": "present",
+      "weight": 1,
+      "requiredEvidence": [
+        "E-08"
+      ],
+      "allowedEvidence": [
+        "E-08",
+        "E-05",
+        "E-09"
+      ],
+      "rationale": "The preserved access-log excerpt records the second and third advices directly, with distinct advice identifiers and identical amounts."
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": [
+      "E-12",
+      "E-14",
+      "E-15",
+      "E-16",
+      "E-20"
+    ],
+    "redHerringNotes": {
+      "E-12": "Rebalance storm with runbook backing; confined to one date and to duplicate processing rather than loss.",
+      "E-14": "Replica lag with a plausible reporting story; reconciliation targets the primary.",
+      "E-15": "Dependency upgrade twenty minutes before the flag rollout, which invites pure temporal attribution.",
+      "E-16": "Collector memory exhaustion offered as a ready-made explanation for missing spans that the branch never emitted.",
+      "E-20": "Vendor statement that contradicts directly observed ingress and would, if taken at face value, retire the instalment mechanism."
+    },
+    "conflictingEvidencePairs": [
+      {
+        "evidenceIds": [
+          "E-02",
+          "E-06"
+        ],
+        "description": "The incident commander asserts schema rejection in the writer; the writer's unconditionally exported reject counter reads zero across the window with sibling counters moving. An assertion against a live instrument."
+      },
+      {
+        "evidenceIds": [
+          "E-08",
+          "E-20"
+        ],
+        "description": "The gateway recorded three advices of equal amount for one merchant on one date; CardNet support states the platform transmits one advice per merchant per settlement date."
+      },
+      {
+        "evidenceIds": [
+          "E-12",
+          "E-13"
+        ],
+        "description": "A documented rebalance storm on 4 September against a loss distribution that covers dates with no rebalance activity at all."
+      },
+      {
+        "evidenceIds": [
+          "E-16",
+          "E-07"
+        ],
+        "description": "Span loss on one date offered as the reason no duplicate-suppression spans exist, against source review showing the branch opens no span on any date."
+      },
+      {
+        "evidenceIds": [
+          "E-17",
+          "E-18"
+        ],
+        "description": "A zero delete count from the audit service against the design facts that the audit interceptor cannot see direct sessions and that every other delete-bearing record was either reset or aged out."
+      }
+    ],
+    "missingInformation": [
+      "CardNet transmission manifests for 2026-08-31 to 2026-09-08: past portal retention, no Marlowe copy, request CN-88397 unanswered.",
+      "edge-gw access-log entries for 2026-08-31 to 2026-09-02: past seven-day archive retention before the investigation opened.",
+      "Decomposition of gw_requests_total for the advice route before 2026-09-09: aggregated under route=\"other\" with eleven further routes and not separable after the fact.",
+      "Per-hit records of duplicate suppression: the branch emits a debug record below the fleet log level, registers no counter, opens no span, and idem_keys records keys rather than hits.",
+      "idem_keys rows covering the window: pruned to a fourteen-day horizon with no export taken.",
+      "Per-statement attribution of direct-session deletes on ledger.settlements: outside the audit interceptor, absent from the job summary, and lost from the cumulative counter by the 5 September failover.",
+      "ledger-vacuum container logs for the window: batch-namespace retention is 72 hours."
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": [
+      "Hop 1 (E-03, E-04, E-05): losses sit almost entirely inside the settlement_batch_v2 cohort and, within it, only on merchant-days carrying more than one advice; enrolment is what causes a merchant to receive several equal-amount advices in one day.",
+      "Hop 2 (E-08, E-09): for the one merchant-day whose gateway record survives, three equal-amount advices were accepted with 2xx responses, yet exactly one event reached the topic and exactly one row exists on the primary. The loss is therefore inside svc-settlement-api, upstream of the bus, the writer and the database.",
+      "Hop 3 (E-10): the idempotency key is merchant plus amount plus settlement date with the advice identifier persisted but excluded, and a key hit returns the stored 2xx without producing. That is precisely the behaviour hop 2 observed from outside.",
+      "Hop 4 (E-06, E-07, E-11, E-16, E-19): the silences in the case are not interchangeable. The writer's reject counter is a working instrument reading zero, which refutes the schema story; the suppression branch has no counter, no span and a below-level log, so its silence is consistent with the mechanism rather than against it; the collector outage explains neither. E-19 then bounds the remedy, because suppression is the compensating control for at-least-once retry."
+    ],
+    "harmfulActionCandidateIds": [
+      "A-03",
+      "A-04"
+    ],
+    "harmfulActionNotes": {
+      "A-03": "Directly removes the mechanism a generic reasoner has just identified, and thereby removes the only control against CardNet's at-least-once retries; each retry then becomes a second payout, since payouts are released from ledger rows without a further uniqueness check (E-19).",
+      "A-04": "Frames the gateway archive as a source of truth for the window when it covers only part of it and is past retention for the first three days (E-23, E-22); rebuilding partitions to match it destroys correct rows for the uncovered days."
+    },
+    "expectedUnknownItemIds": [
+      "SI-04",
+      "SI-05",
+      "SI-11",
+      "SI-25"
+    ],
+    "constructCriticalItemIds": [
+      "SI-01",
+      "SI-02",
+      "SI-04",
+      "SI-05",
+      "SI-09",
+      "SI-11",
+      "SI-12",
+      "SI-17",
+      "SI-22",
+      "SI-23",
+      "SI-24",
+      "SI-25"
+    ],
+    "constructPressureNotes": [
+      "Three silences of different epistemic kinds sit next to each other: a live counter reading zero (SI-22, observed absence and usable as evidence), an uninstrumented branch (SI-23, structural non-observation and not usable in either direction), and records that existed and were then aged out (SI-25, genuinely unknown).",
+      "SI-24 and SI-05 are deliberately split so that a reasoner must hold the observation state and the world state apart: it is established that direct-session deletes were never observed, and it remains undetermined whether they occurred.",
+      "SI-01 requires supporting a hypothesis whose own signal is unobservable, using independent evidence, rather than discounting it because its branch is silent.",
+      "SI-02 and SI-09 require the opposite move in the same case: a zero from a channel shown to be operating is real evidence, so a blanket refusal to reason from absence fails here too.",
+      "SI-17 punishes acting on the identified mechanism without carrying forward the control that absence of duplicates depends on."
+    ],
+    "singleClueCheck": "No evidence item states the mechanism, and none states the remedy. E-10 gives the key composition but not that same-amount same-day advices occur; E-08 gives the advice shape but not the key composition or the produce short-circuit; E-04 gives the distribution but neither. Placing A-02 and rejecting A-03 additionally requires E-19, which appears in none of those items.",
+    "lexicalLeakageCheck": "Hypotheses are six flat assertions of 28 to 34 words with no hedging or emphasis; actions are seven imperatives of 29 to 34 words; propositions are five noun phrases of the same shape. Every scored item offers the same four-value vocabulary for its kind and every vocabulary contains \"unknown\", so that answer is never the odd one out, never the only short option and never the only one available on some items."
+  }
+}
