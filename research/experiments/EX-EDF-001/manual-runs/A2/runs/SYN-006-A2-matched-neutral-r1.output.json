@@ -1,0 +1,347 @@
+{
+  "summary": "An additive optional field (addressLine3), permitted by the partner contract and accepted correctly by the ingestion parser, exposed a latent defect in the downstream mapper: positional field indexing. When addressLine3 is present, every field after it shifts by one slot, placing postalCode into the country slot. The validation service then correctly rejected the malformed country value, which is why ~18% of nightly records failed and why the most visible error messages point at validation. The evidence supports a single sufficient causal mechanism (positional mapping) with a triggering condition (the new field) and a contributing condition (a contract test that covered only the original field positions). Validation errors and repeated retries are downstream effects, not causes; retries could not succeed because the corruption is deterministic and occurs upstream of the validator. Changing the mapper to named-field mapping corrected the failing sample without touching the partner payload or the validator, confirming the causal locus. Relaxing validation would suppress the visible symptom while admitting incorrect address data into fulfillment, and is counter-indicated.",
+  "claims": [
+    {
+      "id": "C1",
+      "type": "observation",
+      "statement": "A nightly import rejected 18% of partner records after a partner added an optional addressLine3 field.",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "type": "observation",
+      "statement": "The ingestion parser accepted the new field and wrote it into the intermediate event.",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "type": "observation",
+      "statement": "The downstream mapper used positional field indexes and shifted postalCode into the country slot whenever addressLine3 was present.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "type": "inference",
+      "statement": "Positional indexing in the mapper is the defect that converts a contractually permitted additive change into corrupted field alignment; it is the proximate and sufficient cause of the rejections.",
+      "evidence": ["E3", "E6", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "type": "observation",
+      "statement": "The validation service rejected the malformed country value and generated the majority of visible error messages.",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "type": "inference",
+      "statement": "The validation errors are a downstream symptom of upstream corruption, not a fault in the validator; the validator behaved as intended by rejecting an invalid country value.",
+      "evidence": ["E4", "E7", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "type": "observation",
+      "statement": "Operators repeatedly retried rejected records and retries produced the same validation failures.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "type": "inference",
+      "statement": "The failure is deterministic and driven by payload shape rather than transient conditions such as load, timing, or infrastructure flakiness, because identical inputs reproduce identical failures.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "type": "observation",
+      "statement": "The partner contract allowed additive optional fields, but the mapper contract test covered only the original field positions.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "type": "inference",
+      "statement": "The coverage gap in the mapper contract test is a contributing condition that allowed the positional assumption to persist undetected; it is not the proximate cause of the rejections.",
+      "evidence": ["E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C11",
+      "type": "observation",
+      "statement": "Changing the validation service to accept the malformed country value would allow incorrect address data into fulfillment.",
+      "evidence": ["E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "type": "observation",
+      "statement": "A mapper change from positional indexing to named-field mapping corrected the failing sample without changing the partner payload or the validator.",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "C2",
+      "to": "C3",
+      "type": "precedes",
+      "rationale": "The parser wrote the new field into the intermediate event, which is the input the mapper then misindexed.",
+      "confidence": "high"
+    },
+    {
+      "id": "R2",
+      "from": "C3",
+      "to": "C1",
+      "type": "mediates",
+      "rationale": "The positional shift is the mechanism linking the partner's additive field to the observed rejection rate; without the shift the added field is inert.",
+      "confidence": "high"
+    },
+    {
+      "id": "R3",
+      "from": "C3",
+      "to": "C5",
+      "type": "contributes-to",
+      "rationale": "The shifted postalCode value in the country slot is exactly the malformed value the validator rejected.",
+      "confidence": "high"
+    },
+    {
+      "id": "R4",
+      "from": "C5",
+      "to": "C1",
+      "type": "contributes-to",
+      "rationale": "The validation rejections constitute the visible 18% rejection outcome.",
+      "confidence": "high"
+    },
+    {
+      "id": "R5",
+      "from": "C12",
+      "to": "C4",
+      "type": "supports",
+      "rationale": "An isolated mapper change fixed the sample, localizing causation to the mapper's indexing strategy.",
+      "confidence": "high"
+    },
+    {
+      "id": "R6",
+      "from": "C12",
+      "to": "C6",
+      "type": "supports",
+      "rationale": "The fix required no validator change, indicating the validator was not a causal contributor.",
+      "confidence": "high"
+    },
+    {
+      "id": "R7",
+      "from": "C2",
+      "to": "C6",
+      "type": "supports",
+      "rationale": "Correct parser behavior plus correct validator behavior narrows the fault to the intermediate mapping stage.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R8",
+      "from": "C7",
+      "to": "C8",
+      "type": "supports",
+      "rationale": "Identical outcomes on retry is direct evidence of determinism.",
+      "confidence": "high"
+    },
+    {
+      "id": "R9",
+      "from": "C8",
+      "to": "C4",
+      "type": "supports",
+      "rationale": "A deterministic, shape-dependent failure is consistent with a structural indexing defect and inconsistent with transient-resource explanations.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R10",
+      "from": "C1",
+      "to": "C7",
+      "type": "precedes",
+      "rationale": "Rejections occurred first and prompted the operator retries.",
+      "confidence": "high"
+    },
+    {
+      "id": "R11",
+      "from": "C9",
+      "to": "C10",
+      "type": "supports",
+      "rationale": "The stated test scope is the direct basis for inferring the detection gap.",
+      "confidence": "high"
+    },
+    {
+      "id": "R12",
+      "from": "C10",
+      "to": "C4",
+      "type": "contributes-to",
+      "rationale": "Absent coverage of alternate field positions, the positional assumption survived into production.",
+      "confidence": "medium"
+    },
+    {
+      "id": "R13",
+      "from": "C11",
+      "to": "C6",
+      "type": "supports",
+      "rationale": "That loosening the validator would admit bad data confirms the validator's rejection was appropriate rather than defective.",
+      "confidence": "high"
+    },
+    {
+      "id": "R14",
+      "from": "C8",
+      "to": "C7",
+      "type": "prevents",
+      "rationale": "Determinism is why retrying unchanged records can never succeed; retry as a remediation path is blocked by the mechanism.",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Whether the 18% rejection figure corresponds exactly to the subset of records containing addressLine3. The evidence does not state what share of the nightly volume carried the new field.",
+      "impact": "If the rejected share exceeds the addressLine3-bearing share, a second failure mode is present.",
+      "discriminator": "Compare the count of records containing addressLine3 in the same nightly batch against the count and identity of rejected records.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "statement": "Whether some rejections had causes other than the shifted country value. E4 states the malformed country produced the majority, not all, of the visible errors.",
+      "impact": "A residual rejection population would survive the mapper fix and require separate diagnosis.",
+      "discriminator": "Break down rejections by validator error code and field, and check whether the non-country remainder is nonzero and systematic.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "statement": "Whether any shifted records passed validation silently — for example where the displaced value happened to satisfy the country rule — and reached fulfillment with wrong address data.",
+      "impact": "Silent corruption is more damaging than visible rejection and would not appear in the error metrics at all.",
+      "discriminator": "Audit accepted records from the affected window for country/postalCode consistency and for missing or duplicated address components.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "Whether other downstream consumers of the intermediate event also rely on positional indexing.",
+      "impact": "Fixing only this mapper would leave equivalent latent defects elsewhere on the same trigger.",
+      "discriminator": "Inventory all consumers of the intermediate event and inspect each for positional versus named field access.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "Whether the named-field mapping fix generalizes beyond the single failing sample described in E8.",
+      "impact": "A sample-level fix may not cover all field orderings or all partners' payload variants.",
+      "discriminator": "Replay the full affected nightly batch, and payloads from other partners, through the corrected mapper and compare field-level output against expected values.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "statement": "Whether other partners have already added, or are about to add, optional fields that would trigger the same shift.",
+      "impact": "Determines the urgency and blast radius of the fix relative to a per-partner workaround.",
+      "discriminator": "Scan recent payload schemas per partner for fields beyond the original positions covered by the contract test.",
+      "confidence": "low"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Deploy the mapper change from positional indexing to named-field mapping.",
+      "targetsMechanism": "C3/C4 — eliminates the field shift that produces the malformed country value.",
+      "rationale": "This is the only intervention shown by the evidence to correct the failure at its source without altering the partner payload or weakening validation.",
+      "priority": 1,
+      "evidence": ["E3", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Reprocess the rejected records through the corrected mapper rather than retrying them unchanged, and stop the operator retry loop.",
+      "targetsMechanism": "C7/C8 — replaces a remediation path that the determinism of the defect makes futile.",
+      "rationale": "Retries consume operator effort and produce no recoveries because the corruption occurs before validation on every attempt.",
+      "priority": 2,
+      "evidence": ["E5", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Extend the mapper contract test to exercise additive optional fields at arbitrary positions, matching the partner contract's stated allowance.",
+      "targetsMechanism": "C9/C10 — closes the detection gap that let the positional assumption reach production.",
+      "rationale": "Without this, a future additive field reintroduces the same class of failure even after A1 fixes the current instance.",
+      "priority": 3,
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "A4",
+      "action": "Audit records accepted during the affected window for silently mis-mapped address fields.",
+      "targetsMechanism": "Addresses U3 — detects corruption that bypassed the validator rather than being rejected by it.",
+      "rationale": "The visible rejection count may understate data damage; accepted-but-shifted records would already be in fulfillment.",
+      "priority": 4,
+      "evidence": ["E3", "E7"],
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Inventory other consumers of the intermediate event for positional field access and convert them to named mapping.",
+      "targetsMechanism": "Addresses U4 — removes the same latent defect from components not yet triggered.",
+      "rationale": "The trigger is a permitted partner behavior, so any remaining positional consumer is a pending failure.",
+      "priority": 5,
+      "evidence": ["E2", "E3", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "A6",
+      "action": "Explicitly reject the option of relaxing the validation service to accept the malformed country value.",
+      "targetsMechanism": "C5/C11 — this action would suppress the symptom layer while leaving C3 intact.",
+      "rationale": "Counter-indicated: it removes the error messages but routes incorrect address data into fulfillment, converting a visible failure into a silent one.",
+      "priority": 6,
+      "evidence": ["E7", "E4"],
+      "confidence": "high"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "If the mapper had used named-field mapping before the partner added addressLine3.",
+      "expectedOutcome": "The additive field would have been ignored or carried through harmlessly and no rejections would have occurred.",
+      "challengesWhat": "Directly tests the core explanation; supported by E8, where named mapping corrected the sample with no other change.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "change": "If rejections persisted at a similar rate after the named-field mapper fix was applied to the full nightly batch.",
+      "expectedOutcome": "The single-mechanism explanation would be falsified and a second, independent failure mode would be implicated.",
+      "challengesWhat": "The strongest available challenge to both the explanation and the prioritization of A1; the sample-level scope of E8 is what leaves this open.",
+      "confidence": "medium"
+    },
+    {
+      "id": "CF3",
+      "change": "If the partner had never added addressLine3.",
+      "expectedOutcome": "The positional defect would have remained latent and the import would have continued passing.",
+      "challengesWhat": "Clarifies that the partner change is a permitted trigger rather than a fault, which is why remediation targeting the partner payload would be misdirected given E6.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF4",
+      "change": "If the validation service had been loosened to accept the malformed country value.",
+      "expectedOutcome": "The visible error volume would have dropped to near zero while incorrect address data flowed into fulfillment.",
+      "challengesWhat": "Shows that error-message volume is an unreliable success metric here, and argues against any action ranked by symptom suppression.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF5",
+      "change": "If operator retries had intermittently succeeded.",
+      "expectedOutcome": "A transient explanation — capacity, timing, or partial outage — would remain live and the mapper explanation would be incomplete.",
+      "challengesWhat": "This alternative is closed by E5, which reports identical failures on retry.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF6",
+      "change": "If the mapper contract test had covered field positions beyond the original set.",
+      "expectedOutcome": "The positional assumption would have failed in test when the additive field was introduced, preventing the production rejections.",
+      "challengesWhat": "Tests whether the coverage gap is genuinely contributory rather than incidental, and justifies A3 as prevention rather than cleanup.",
+      "confidence": "medium"
+    }
+  ]
+}
