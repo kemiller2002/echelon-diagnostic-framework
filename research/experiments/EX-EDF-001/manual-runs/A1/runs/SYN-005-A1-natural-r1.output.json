@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "summary": "The search-latency increase was caused by downstream catalog API rate limiting and the resulting 429-triggered retries with exponential backoff. Those retries used a cache-bypass header, which explains the concurrent cache hit-rate decline; the cache service itself showed no degradation. Restoring the previous downstream rate limit ended the 429 spike, followed two minutes later by latency recovery.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Median search latency doubled from 14:10 until 14:43.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "The downstream catalog API rate-limit reduction caused a spike in downstream 429 responses.",
+      "confidence": "high",
+      "evidence": ["E4", "E8"]
+    },
+    {
+      "id": "C3",
+      "statement": "Retries with exponential backoff following downstream 429 responses caused the increased search latency.",
+      "confidence": "high",
+      "evidence": ["E5", "E6", "E8"]
+    },
+    {
+      "id": "C4",
+      "statement": "The cache hit-rate decline was an effect of retry requests using a cache-bypass header, not evidence of cache-service degradation.",
+      "confidence": "high",
+      "evidence": ["E2", "E3", "E7"]
+    },
+    {
+      "id": "C5",
+      "statement": "Restoring the previous downstream rate limit ended the 429 spike and was followed by search-latency normalization two minutes later.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "source": "E4",
+      "type": "precedes",
+      "target": "C1"
+    },
+    {
+      "source": "E4",
+      "type": "contributes-to",
+      "target": "C2"
+    },
+    {
+      "source": "C2",
+      "type": "contributes-to",
+      "target": "C3"
+    },
+    {
+      "source": "E5",
+      "type": "mediates",
+      "target": "C3"
+    },
+    {
+      "source": "E6",
+      "type": "supports",
+      "target": "C3"
+    },
+    {
+      "source": "C3",
+      "type": "contributes-to",
+      "target": "C1"
+    },
+    {
+      "source": "E7",
+      "type": "supports",
+      "target": "C4"
+    },
+    {
+      "source": "E3",
+      "type": "supports",
+      "target": "C4"
+    },
+    {
+      "source": "E8",
+      "type": "supports",
+      "target": "C5"
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "The evidence does not quantify how many requests received 429 responses or how much latency each retry added.",
+      "confidence": "high",
+      "resolvingEvidence": "Per-request 429 counts, retry counts, and latency traces for the incident window."
+    },
+    {
+      "issue": "The evidence does not explain why the downstream catalog API rate limit was reduced.",
+      "confidence": "high",
+      "resolvingEvidence": "The downstream configuration change record or operator log for the 14:08 change."
+    },
+    {
+      "issue": "The evidence does not establish whether other factors contributed to the exact magnitude of the median-latency increase.",
+      "confidence": "medium",
+      "resolvingEvidence": "A complete latency breakdown by downstream response status, retry attempt, and request stage."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Prevent or tightly control uncoordinated reductions in the downstream per-client rate limit.",
+      "basis": ["E4", "E8"],
+      "priority": "high"
+    },
+    {
+      "action": "Alert on downstream 429 rates and correlate them with search latency and retry volume.",
+      "basis": ["E5", "E6", "E8"],
+      "priority": "high"
+    },
+    {
+      "action": "Review the two-retry exponential-backoff policy to limit latency amplification during sustained rate limiting.",
+      "basis": ["E5", "E6"],
+      "priority": "high"
+    },
+    {
+      "action": "Report retry-generated cache-bypass traffic separately so aggregate cache hit rate is not misinterpreted as cache-service degradation.",
+      "basis": ["E3", "E7"],
+      "priority": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the downstream rate limit had remained at its previous value,",
+      "expectedOutcome": "the evidenced 429 spike and associated retry-driven latency increase would likely not have occurred.",
+      "confidence": "high",
+      "evidence": ["E4", "E5", "E6", "E8"]
+    },
+    {
+      "condition": "If 429 responses had not triggered retries with exponential backoff,",
+      "expectedOutcome": "the observed latency increase would likely have been substantially reduced, though the evidence does not establish the remaining latency.",
+      "confidence": "high",
+      "evidence": ["E5", "E6"]
+    },
+    {
+      "condition": "If retry requests had not used the cache-bypass header,",
+      "expectedOutcome": "the cache hit-rate decline attributed to those retries would not have occurred.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "condition": "If the cache service had been the primary cause,",
+      "expectedOutcome": "requests without downstream 429 responses would be expected to show increased latency, but the evidence reports that they did not.",
+      "confidence": "high",
+      "evidence": ["E3", "E6"]
+    }
+  ]
+}
