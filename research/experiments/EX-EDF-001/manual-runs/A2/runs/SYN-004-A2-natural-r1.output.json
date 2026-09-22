@@ -1,0 +1,207 @@
+{
+  "summary": "Queue depth grew for 27 minutes without an increase in arrival rate, while consumer throughput fell ~40%, indicating a consumer-side slowdown rather than a load surge. Two candidate causes were introduced in the preceding hour (a consumer-library upgrade and a database index rebuild), and the logs contain signals consistent with each (lock-wait messages and deserialization warnings). The available evidence cannot attribute the stall to either change individually: the only recovery observation reverted both changes together, no single-revert run exists, telemetry does not separate database-wait time from deserialization-retry time, and no traces were retained. The supported conclusion is that one or both of the two changes caused the throughput loss, with the split between them unresolved.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "The backlog growth was caused by reduced consumer processing capacity, not by increased incoming load.",
+      "confidence": "high",
+      "basis": ["E1", "E2"]
+    },
+    {
+      "id": "C2",
+      "text": "Consumer throughput dropped roughly 40% over the same 27-minute window in which queue depth rose.",
+      "confidence": "high",
+      "basis": ["E1", "E2"]
+    },
+    {
+      "id": "C3",
+      "text": "Two changes in the preceding hour are temporally eligible as causes: a consumer-library upgrade and a database index rebuild.",
+      "confidence": "high",
+      "basis": ["E3"]
+    },
+    {
+      "id": "C4",
+      "text": "At least one of the two changes caused the throughput loss, since reverting both restored normal throughput.",
+      "confidence": "medium",
+      "basis": ["E6"]
+    },
+    {
+      "id": "C5",
+      "text": "The evidence does not determine whether the library upgrade, the index rebuild, or both together produced the slowdown.",
+      "confidence": "high",
+      "basis": ["E5", "E6", "E7", "E8"]
+    },
+    {
+      "id": "C6",
+      "text": "Increased lock-wait messages are consistent with database-side contention, which the index rebuild could plausibly produce.",
+      "confidence": "low",
+      "basis": ["E3", "E4"]
+    },
+    {
+      "id": "C7",
+      "text": "Increased deserialization warnings are consistent with a message-decoding regression, which the consumer-library upgrade could plausibly produce.",
+      "confidence": "low",
+      "basis": ["E3", "E4"]
+    },
+    {
+      "id": "C8",
+      "text": "Both log signals rose together, so neither signal on its own discriminates between the two candidate causes.",
+      "confidence": "medium",
+      "basis": ["E4", "E5"]
+    },
+    {
+      "id": "C9",
+      "text": "The instrumentation in place cannot apportion consumer processing time between database waiting and deserialization retries.",
+      "confidence": "high",
+      "basis": ["E5"]
+    },
+    {
+      "id": "C10",
+      "text": "No retained traces exist for the incident window, so after-the-fact per-request attribution is not possible from stored data.",
+      "confidence": "high",
+      "basis": ["E8"]
+    },
+    {
+      "id": "C11",
+      "text": "The joint revert is a confounded experiment: its outcome is equally consistent with a single-cause and a two-cause explanation.",
+      "confidence": "high",
+      "basis": ["E6", "E7"]
+    },
+    {
+      "id": "C12",
+      "text": "The evidence does not establish that the observed log warnings, rather than some unmeasured effect of the changes, are the mechanism of the slowdown.",
+      "confidence": "medium",
+      "basis": ["E4", "E5", "E8"]
+    }
+  ],
+  "relationships": [
+    {"from": "E1", "to": "C1", "type": "supports"},
+    {"from": "E2", "to": "C1", "type": "supports"},
+    {"from": "C2", "to": "C1", "type": "supports"},
+    {"from": "E3", "to": "C3", "type": "supports"},
+    {"from": "E6", "to": "C4", "type": "supports"},
+    {"from": "C3", "to": "C4", "type": "contributes-to"},
+    {"from": "C3", "to": "C2", "type": "precedes"},
+    {"from": "C2", "to": "C1", "type": "precedes"},
+    {"from": "E7", "to": "C11", "type": "supports"},
+    {"from": "C11", "to": "C5", "type": "contributes-to"},
+    {"from": "C9", "to": "C5", "type": "contributes-to"},
+    {"from": "C10", "to": "C5", "type": "contributes-to"},
+    {"from": "E4", "to": "C8", "type": "supports"},
+    {"from": "C8", "to": "C5", "type": "contributes-to"},
+    {"from": "C6", "to": "C2", "type": "unknown"},
+    {"from": "C7", "to": "C2", "type": "unknown"}
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "Whether the library upgrade, the index rebuild, or their combination caused the throughput loss.",
+      "resolvedBy": "A run in which exactly one change is reverted (or reapplied) while the other is held fixed, with throughput measured."
+    },
+    {
+      "id": "U2",
+      "text": "How consumer processing time divided between database waiting and deserialization retries.",
+      "resolvedBy": "Instrumentation that times database calls and deserialization paths separately within the consumer."
+    },
+    {
+      "id": "U3",
+      "text": "Whether the elevated lock-wait and deserialization messages were causally on the critical path or incidental correlates.",
+      "resolvedBy": "Per-message traces or profiles linking the warning events to the slow processing intervals."
+    },
+    {
+      "id": "U4",
+      "text": "Whether the two effects were additive, interacting, or whether one was entirely a side effect of the other.",
+      "resolvedBy": "A factorial test covering both single-change conditions plus the combined condition."
+    },
+    {
+      "id": "U5",
+      "text": "Whether an unlisted third factor coincident with the change window contributed.",
+      "resolvedBy": "A complete change and environment log for the incident window beyond the two changes named."
+    },
+    {
+      "id": "U6",
+      "text": "Whether the index rebuild's effect was transient (only during rebuild) or persistent after completion.",
+      "resolvedBy": "Rebuild start and completion timestamps compared against the throughput curve."
+    },
+    {
+      "id": "U7",
+      "text": "Whether deserialization warnings represented failed-and-retried work or logged-but-harmless conditions.",
+      "resolvedBy": "Retry and failure counters for the deserialization path, and the warning text semantics."
+    },
+    {
+      "id": "U8",
+      "text": "Whether recovery after the joint revert was caused by the revert or by independent resolution over time.",
+      "resolvedBy": "A control observation of throughput held under the changed configuration past the revert time."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "text": "Run a single-variable test: reapply one change alone in a controlled environment and measure throughput, then repeat for the other.",
+      "addresses": ["U1", "U4"],
+      "priority": "high"
+    },
+    {
+      "id": "A2",
+      "text": "Add separate timers for database call wait and deserialization/retry work in the consumer so the two costs can be apportioned.",
+      "addresses": ["U2", "U3"],
+      "priority": "high"
+    },
+    {
+      "id": "A3",
+      "text": "Enable and retain trace sampling covering the consumer path so a future incident window has per-request evidence.",
+      "addresses": ["U3", "U5"],
+      "priority": "medium"
+    },
+    {
+      "id": "A4",
+      "text": "Reconstruct an exact change timeline, including index-rebuild start and finish times, and align it to the throughput and queue-depth curves.",
+      "addresses": ["U5", "U6"],
+      "priority": "medium"
+    },
+    {
+      "id": "A5",
+      "text": "Instrument deserialization outcomes as counters (attempts, failures, retries) rather than warning text only.",
+      "addresses": ["U7"],
+      "priority": "medium"
+    },
+    {
+      "id": "A6",
+      "text": "Adopt a change policy that separates independent changes in time so recovery observations are not confounded.",
+      "addresses": ["U1", "U8"],
+      "priority": "low"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "K1",
+      "text": "If only the library upgrade had been reverted and throughput had recovered, the upgrade would be identified as sufficient cause and the index rebuild demoted.",
+      "confidence": "medium"
+    },
+    {
+      "id": "K2",
+      "text": "If only the index rebuild had been reverted and throughput had recovered, the rebuild would be identified as sufficient cause.",
+      "confidence": "medium"
+    },
+    {
+      "id": "K3",
+      "text": "If either single revert had left throughput depressed but both reverts restored it, a joint or interacting cause would be indicated.",
+      "confidence": "medium"
+    },
+    {
+      "id": "K4",
+      "text": "If telemetry had separated database wait from deserialization retry time, the dominant cost centre would be visible without any revert experiment.",
+      "confidence": "medium"
+    },
+    {
+      "id": "K5",
+      "text": "If arrival rate had risen instead of staying normal, the backlog could have been explained by load rather than by consumer degradation.",
+      "confidence": "high"
+    },
+    {
+      "id": "K6",
+      "text": "If only one of the two log signals had increased, that signal would have pointed to its corresponding change, though still without proof of mechanism.",
+      "confidence": "low"
+    }
+  ]
+}
