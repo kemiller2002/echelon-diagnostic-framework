@@ -1,0 +1,192 @@
+{
+  "version": "1.0.0",
+  "summary": "The downstream mapper caused the rejections by using positional indexes that became misaligned when the allowed optional addressLine3 field was present. This shifted postalCode into the country slot, and the validator correctly rejected the malformed value. Named-field mapping corrected the failing sample, making the mapper the strongest control point.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The import boundary includes the partner payload, ingestion parser, intermediate event, downstream mapper, validation service, and fulfillment output.",
+      "confidence": "high",
+      "evidence": ["E1", "E2", "E3", "E4", "E7"]
+    },
+    {
+      "id": "C2",
+      "statement": "The partner's addition of addressLine3 was permitted because the partner contract allowed additive optional fields.",
+      "confidence": "high",
+      "evidence": ["E1", "E6"]
+    },
+    {
+      "id": "C3",
+      "statement": "The ingestion parser was not the demonstrated source of corruption because it accepted addressLine3 and preserved it in the intermediate event.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "The mapper's positional indexing shifted postalCode into the country slot when addressLine3 was present.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "statement": "The validator exposed the malformed mapping by rejecting the country value; it generated most visible errors but was not the demonstrated source of malformed data.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C6",
+      "statement": "Retries did not alter the deterministic malformed mapping and therefore repeated the same failures.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C7",
+      "statement": "Mapper contract-test coverage contributed to the incident because it covered only the original field positions despite the contract permitting additive optional fields.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C8",
+      "statement": "Changing the mapper to named-field mapping is the strongest demonstrated corrective control because it corrected the failing sample without partner or validator changes.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C9",
+      "statement": "Relaxing validation is not a safe corrective control because it would permit incorrect address data to reach fulfillment.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C4",
+      "type": "precedes",
+      "statement": "The allowed optional field activated the mapper's positional-index defect."
+    },
+    {
+      "from": "C7",
+      "to": "C4",
+      "type": "contributes-to",
+      "statement": "Limited contract-test coverage failed to detect the positional mapping behavior."
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "contributes-to",
+      "statement": "The shifted value produced the malformed country value rejected by validation."
+    },
+    {
+      "from": "C5",
+      "to": "C6",
+      "type": "precedes",
+      "statement": "Validation rejection led operators to retry the rejected records."
+    },
+    {
+      "from": "C4",
+      "to": "C6",
+      "type": "mediates",
+      "statement": "The unchanged mapping defect caused retries to reproduce the failure."
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "supports",
+      "statement": "Correct parser acceptance and preservation localize the demonstrated corruption downstream at the mapper."
+    },
+    {
+      "from": "C8",
+      "to": "C4",
+      "type": "prevents",
+      "statement": "Named-field mapping prevents field-position shifts in the failing sample."
+    },
+    {
+      "from": "C9",
+      "to": "C8",
+      "type": "supports",
+      "statement": "The unsafe validator alternative strengthens selection of the mapper as the corrective control point."
+    }
+  ],
+  "uncertainties": [
+    {
+      "statement": "The evidence does not specify why only 18% of partner records were rejected or whether that percentage exactly matches records containing addressLine3.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The evidence demonstrates correction of the failing sample, but does not report results for the complete nightly import.",
+      "confidence": "high"
+    },
+    {
+      "statement": "The evidence does not establish whether other positional fields or optional additions could cause additional mapping errors.",
+      "confidence": "medium"
+    },
+    {
+      "statement": "The evidence does not state whether revised contract tests were implemented or whether they would cover all permitted additive fields.",
+      "confidence": "high"
+    }
+  ],
+  "actions": [
+    {
+      "priority": 1,
+      "action": "Replace positional indexing in the downstream mapper with named-field mapping.",
+      "leverage": "high",
+      "basis": ["E3", "E8"]
+    },
+    {
+      "priority": 2,
+      "action": "Extend mapper contract tests to cover permitted additive optional fields, including addressLine3.",
+      "leverage": "high",
+      "basis": ["E6"]
+    },
+    {
+      "priority": 3,
+      "action": "Verify the mapper correction across the rejected record set and the complete nightly import.",
+      "leverage": "medium",
+      "basis": ["E1", "E8"]
+    },
+    {
+      "priority": 4,
+      "action": "Do not relax country validation to admit the malformed value.",
+      "leverage": "protective",
+      "basis": ["E7"]
+    },
+    {
+      "priority": 5,
+      "action": "Avoid repeated retries until the deterministic mapping defect is corrected.",
+      "leverage": "low",
+      "basis": ["E5"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If addressLine3 were absent,",
+      "expected_result": "the documented positional shift would not be activated.",
+      "confidence": "high",
+      "basis": ["E3"]
+    },
+    {
+      "condition": "If the mapper used named-field mapping,",
+      "expected_result": "the failing sample would be corrected without changing the partner payload or validator.",
+      "confidence": "high",
+      "basis": ["E8"]
+    },
+    {
+      "condition": "If the validator accepted the malformed country value,",
+      "expected_result": "rejections would be hidden while incorrect address data could enter fulfillment.",
+      "confidence": "high",
+      "basis": ["E7"]
+    },
+    {
+      "condition": "If retries could resolve the incident without a data or code change,",
+      "expected_result": "some retry outcomes would differ; instead, the same validation failures recurred.",
+      "confidence": "high",
+      "basis": ["E5"]
+    },
+    {
+      "condition": "If the parser were the demonstrated source of the field loss or rejection,",
+      "expected_result": "it would not have accepted and written addressLine3 into the intermediate event.",
+      "confidence": "high",
+      "basis": ["E2"]
+    }
+  ]
+}
