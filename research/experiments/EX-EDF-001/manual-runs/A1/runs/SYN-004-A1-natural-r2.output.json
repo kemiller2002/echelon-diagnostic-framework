@@ -1,0 +1,160 @@
+{
+  "version": "1.0.0",
+  "summary": "The queue grew because consumer throughput fell while request arrivals remained normal. The incident coincided with both a consumer-library upgrade and a database index rebuild, and logs showed both deserialization warnings and database lock waits. Reverting both changes restored throughput, but the evidence cannot distinguish whether either change alone caused the degradation or whether both contributed.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Queue depth increased for 27 minutes.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "text": "The queue growth was associated with reduced consumer throughput rather than an abnormal increase in request arrivals.",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "C3",
+      "text": "Consumer throughput fell by roughly 40% during the queue-growth interval.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "text": "A consumer-library upgrade and a database index rebuild both preceded the incident.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "text": "Consumers experienced increased lock waits and increased message-deserialization warnings.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C6",
+      "text": "Reverting both preceding changes was followed by restoration of normal throughput.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C7",
+      "text": "The available evidence does not identify the consumer-library upgrade, the database index rebuild, or their combination as the unique cause.",
+      "confidence": "high",
+      "evidence": ["E5", "E6", "E7", "E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "source": "C3",
+      "target": "C1",
+      "type": "contributes-to",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "source": "consumer-library upgrade",
+      "target": "consumer throughput degradation",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "source": "database index rebuild",
+      "target": "consumer throughput degradation",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "source": "message-deserialization warnings",
+      "target": "consumer throughput degradation",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E4", "E5"]
+    },
+    {
+      "source": "database lock waits",
+      "target": "consumer throughput degradation",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E4", "E5"]
+    },
+    {
+      "source": "reversion of both changes",
+      "target": "restoration of normal throughput",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E6"]
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "Whether the consumer-library upgrade caused or contributed to the throughput loss.",
+      "reason": "There was no run reverting only that change, and telemetry did not isolate deserialization retry time.",
+      "evidence": ["E5", "E7"],
+      "resolvingEvidence": "A controlled run reverting only the library upgrade, or timing telemetry that isolates deserialization and retry work."
+    },
+    {
+      "issue": "Whether the database index rebuild caused or contributed to the throughput loss.",
+      "reason": "There was no run reverting only that change, and telemetry did not isolate database wait time.",
+      "evidence": ["E5", "E7"],
+      "resolvingEvidence": "A controlled run reverting only the index rebuild, or timing telemetry that isolates database lock waits."
+    },
+    {
+      "issue": "Whether both changes interacted to produce the degradation.",
+      "reason": "Both were present during the incident and reverted together.",
+      "evidence": ["E3", "E6", "E7"],
+      "resolvingEvidence": "Controlled runs covering each change independently and both changes together."
+    },
+    {
+      "issue": "The relative throughput impact of lock waiting versus deserialization retries.",
+      "reason": "Available telemetry combines these processing-time components.",
+      "evidence": ["E5"],
+      "resolvingEvidence": "Separate duration and retry metrics for database waits and deserialization."
+    },
+    {
+      "issue": "The request-level sequence of delays during the incident.",
+      "reason": "No trace samples were retained.",
+      "evidence": ["E8"],
+      "resolvingEvidence": "Retained traces spanning consumer processing, deserialization attempts, and database operations."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Run controlled tests with only the consumer-library change applied, only the index-rebuild change applied, both applied, and neither applied.",
+      "purpose": "Distinguish individual effects from an interaction."
+    },
+    {
+      "action": "Instrument database wait duration separately from deserialization retry duration and count.",
+      "purpose": "Attribute lost consumer throughput to the observed mechanisms."
+    },
+    {
+      "action": "Retain trace samples across consumer processing, deserialization, and database operations during future incidents or reproductions.",
+      "purpose": "Recover request-level causal ordering and timing."
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "Only the consumer-library upgrade is reverted and throughput returns to normal while the index rebuild remains.",
+      "implication": "This would support the library upgrade as a cause or necessary contributor, but would not by itself exclude interaction effects."
+    },
+    {
+      "condition": "Only the database index rebuild is reverted and throughput returns to normal while the library upgrade remains.",
+      "implication": "This would support the index rebuild as a cause or necessary contributor, but would not by itself exclude interaction effects."
+    },
+    {
+      "condition": "Each change alone preserves normal throughput, but applying both reproduces the degradation.",
+      "implication": "This would support an interaction between the two changes."
+    },
+    {
+      "condition": "Separately measured database wait time accounts for most of the processing slowdown.",
+      "implication": "This would support database lock waiting as the primary mediating mechanism."
+    },
+    {
+      "condition": "Separately measured deserialization retry time accounts for most of the processing slowdown.",
+      "implication": "This would support deserialization retries as the primary mediating mechanism."
+    }
+  ]
+}
