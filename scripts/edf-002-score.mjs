@@ -51,7 +51,7 @@ export function analyzeRuns(){
     const c=read(path.join(EXP,'cases',run.caseId+'.case.json'));
     const t=read(path.join(EXP,'cases',run.caseId+'.truth.json'));
     const o=read(path.join(dir,run.runId+'.output.json'));
-    rows.push({...run,critical:scoreOutput(c,t,o,true),whole:scoreOutput(c,t,o,false)});
+    rows.push({...run,construct:c.construct,authorFamily:t.authorFamily,critical:scoreOutput(c,t,o,true),whole:scoreOutput(c,t,o,false)});
   }
   const pairs=[];
   for(const caseId of new Set(rows.map(x=>x.caseId))) for(const analyzerSlot of new Set(rows.filter(x=>x.caseId===caseId).map(x=>x.analyzerSlot))){
