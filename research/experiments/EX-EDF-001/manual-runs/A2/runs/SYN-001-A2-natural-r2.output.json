@@ -1,0 +1,247 @@
+{
+  "summary": "At 09:00 the invoice service began routing legacy-client traffic through a newly enabled adapter configuration, and within two minutes invoice creation errors rose from below 0.2% to 38%. The legacy-client adapter configuration omitted the region-header mapping that the modern-client adapter retained, and 97% of sampled failed requests lacked the region header the routing function requires. Database error rate, saturation, and replication lag remained within the prior week's normal range, and disabling the new configuration at 09:19 restored errors to below 0.2% within three minutes. The evidence supports the missing region-header mapping in the legacy-client adapter configuration as the proximate cause; the concurrent CPU rise (51% to 65%) is consistent with elevated error/retry work rather than a cause, and the 08:54 PDF rendering ticket has no evidenced link to the invoice failures. The evidence does not state the mechanism by which a missing header produces an error, nor what accounts for the roughly 3% of sampled failures that did not lack the header.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "A new legacy-client adapter configuration began handling legacy-client invoice traffic at 09:00.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "text": "Invoice creation errors rose from below 0.2% to 38% at 09:02, two minutes after the configuration change.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C3",
+      "text": "The new legacy-client adapter configuration omitted a region-header mapping that the modern-client adapter configuration retained.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C4",
+      "text": "The routing function requires a region header, and 97% of sampled failed requests lacked it.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "text": "The omitted region-header mapping in the legacy-client adapter configuration is the proximate cause of the elevated invoice creation errors.",
+      "confidence": "high",
+      "evidence": ["E1", "E2", "E3", "E4", "E6"]
+    },
+    {
+      "id": "C6",
+      "text": "Disabling the new configuration at 09:19 returned errors below 0.2% within three minutes, giving a reversal test consistent with the configuration being causal.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C7",
+      "text": "The database was not a contributing cause: error rate, saturation, and replication lag stayed within the previous week's normal range.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C8",
+      "text": "The application CPU rise from 51% to 65% is better explained as a consequence of the failure traffic than as its cause; the evidence shows co-occurrence only and no saturation threshold.",
+      "confidence": "medium",
+      "evidence": ["E7", "E2", "E6"]
+    },
+    {
+      "id": "C9",
+      "text": "The 08:54 customer-support ticket about a PDF rendering defect has no evidenced connection to the invoice creation failures; it precedes the change and concerns a different function.",
+      "confidence": "medium",
+      "evidence": ["E8", "E1", "E2"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "C1",
+      "to": "C2",
+      "type": "precedes",
+      "confidence": "high",
+      "basis": "E1 at 09:00 precedes E2 at 09:02."
+    },
+    {
+      "id": "R2",
+      "from": "C3",
+      "to": "C4",
+      "type": "contributes-to",
+      "confidence": "high",
+      "basis": "An omitted header mapping in the active configuration matches the near-universal absence of the header in failed requests."
+    },
+    {
+      "id": "R3",
+      "from": "C4",
+      "to": "C2",
+      "type": "contributes-to",
+      "confidence": "high",
+      "basis": "Requests lacking a header the routing function requires align with the observed error surge."
+    },
+    {
+      "id": "R4",
+      "from": "C1",
+      "to": "C3",
+      "type": "mediates",
+      "confidence": "high",
+      "basis": "Enabling the configuration is what put the omission into the request path."
+    },
+    {
+      "id": "R5",
+      "from": "C3",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high",
+      "basis": "The omission is the stated defect in the causal claim."
+    },
+    {
+      "id": "R6",
+      "from": "C6",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high",
+      "basis": "Removing the configuration removed the effect within three minutes."
+    },
+    {
+      "id": "R7",
+      "from": "C7",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "medium",
+      "basis": "Ruling out the database narrows the candidate causes to the request path."
+    },
+    {
+      "id": "R8",
+      "from": "C2",
+      "to": "C8",
+      "type": "contributes-to",
+      "confidence": "low",
+      "basis": "Error and retry handling plausibly raises CPU, but the evidence does not establish the direction."
+    },
+    {
+      "id": "R9",
+      "from": "C8",
+      "to": "C5",
+      "type": "unknown",
+      "confidence": "low",
+      "basis": "No evidence links the CPU level to request failures in either direction."
+    },
+    {
+      "id": "R10",
+      "from": "C9",
+      "to": "C5",
+      "type": "unknown",
+      "confidence": "low",
+      "basis": "The PDF ticket and the invoice errors share no evidenced mechanism."
+    },
+    {
+      "id": "R11",
+      "from": "C3",
+      "to": "C6",
+      "type": "prevents",
+      "confidence": "medium",
+      "basis": "Disabling the configuration removed the omission and thereby stopped the failures."
+    },
+    {
+      "id": "R12",
+      "from": "C4",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high",
+      "basis": "The failure signature in sampled requests matches the hypothesized defect."
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "The evidence does not state the mechanism by which a missing region header produces an invoice creation error (rejection, lookup failure, timeout, or downstream error).",
+      "resolvedBy": "Routing-function code or specification showing its behavior when the region header is absent, plus error messages or status codes from failed requests."
+    },
+    {
+      "id": "U2",
+      "text": "Roughly 3% of sampled failed requests did have the region header; their failure is unexplained and may indicate a second fault.",
+      "resolvedBy": "Error classification of that 3% subset (status codes, stack traces, client type) compared against the 97% group."
+    },
+    {
+      "id": "U3",
+      "text": "The share of total invoice traffic that is legacy-client is unstated, so it is unclear whether a 38% error rate is consistent with all legacy-client requests failing or only some.",
+      "resolvedBy": "Traffic split by client type during 09:00-09:19 and the per-client-type error rate."
+    },
+    {
+      "id": "U4",
+      "text": "Whether the CPU rise was caused by the failures, contributed to them, or was independent is not established.",
+      "resolvedBy": "CPU time series aligned to the 09:02 onset and the 09:19-09:22 recovery, plus CPU behavior at comparable throughput without errors."
+    },
+    {
+      "id": "U5",
+      "text": "Why the region-header mapping was omitted from the legacy-client adapter configuration (authoring error, intentional removal, template divergence) is not evidenced.",
+      "resolvedBy": "Change history and review record for the legacy-client adapter configuration, with the diff against the modern-client configuration."
+    },
+    {
+      "id": "U6",
+      "text": "The 08:54 PDF rendering ticket is unexplained by this analysis; no evidence establishes it as related or unrelated beyond timing and subject matter.",
+      "resolvedBy": "The ticket's affected service and component, and whether comparable PDF tickets occur independently of adapter changes."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "text": "Keep the new legacy-client adapter configuration disabled until the region-header mapping is added and verified against the routing function's requirement.",
+      "confidence": "high",
+      "basis": ["E4", "E6"]
+    },
+    {
+      "id": "A2",
+      "text": "Diff the legacy-client and modern-client adapter configurations field by field to find any further mappings present in one and absent in the other.",
+      "confidence": "high",
+      "basis": ["E4"]
+    },
+    {
+      "id": "A3",
+      "text": "Add a pre-enablement check that every header the routing function requires is produced by an adapter configuration before it can take live traffic.",
+      "confidence": "medium",
+      "basis": ["E3", "E4"]
+    },
+    {
+      "id": "A4",
+      "text": "Investigate the approximately 3% of sampled failures that carried the region header, to confirm no second fault remains after the rollback.",
+      "confidence": "medium",
+      "basis": ["E3"]
+    },
+    {
+      "id": "A5",
+      "text": "Triage the 08:54 PDF rendering ticket separately rather than closing it as incident fallout, since no evidence ties it to the adapter change.",
+      "confidence": "low",
+      "basis": ["E8"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "text": "Had the legacy-client adapter configuration included the region-header mapping, the requests would have carried the header the routing function requires and the error surge would likely not have occurred.",
+      "confidence": "high",
+      "basis": ["E3", "E4", "E6"]
+    },
+    {
+      "id": "CF2",
+      "text": "Had the new configuration not been enabled at 09:00, invoice creation errors would likely have stayed near the prior sub-0.2% baseline.",
+      "confidence": "high",
+      "basis": ["E1", "E2", "E6"]
+    },
+    {
+      "id": "CF3",
+      "text": "Had the configuration been disabled sooner than 09:19, the elevated-error window would have been correspondingly shorter, since recovery followed within three minutes of disabling.",
+      "confidence": "medium",
+      "basis": ["E6"]
+    },
+    {
+      "id": "CF4",
+      "text": "Had application CPU remained at 51%, the errors would likely still have occurred, because the failure signature is a missing required header rather than resource exhaustion and the database showed no saturation.",
+      "confidence": "low",
+      "basis": ["E3", "E5", "E7"]
+    }
+  ]
+}
