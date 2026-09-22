@@ -1,0 +1,198 @@
+{
+  "summary": "Queue depth climbed for 27 minutes with arrival rate normal and consumer throughput down ~40%, so the stall is on the consumption side rather than a load surge. Two candidate causes were introduced in the preceding hour (a consumer-library upgrade and a database index rebuild), and consumer logs show symptoms consistent with each (lock waits and deserialization warnings). Because both changes were reverted together and no single-change revert exists, the evidence supports 'one or both of these changes degraded consumption' but cannot apportion blame between them. Missing per-phase timing telemetry and absent traces make the two mechanisms indistinguishable in the retained data.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "The backlog grew from reduced consumption, not from increased input: arrival rate stayed in the normal range while queue depth rose for 27 minutes.",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "C2",
+      "text": "Consumer throughput dropped roughly 40% over the same interval as the queue growth.",
+      "confidence": "high",
+      "evidence": ["E2", "E1"]
+    },
+    {
+      "id": "C3",
+      "text": "At least one of the two preceding changes (consumer-library upgrade, database index rebuild) is causally implicated, since reverting both restored throughput.",
+      "confidence": "medium",
+      "evidence": ["E3", "E6"]
+    },
+    {
+      "id": "C4",
+      "text": "The evidence does not determine which change caused the degradation, or whether both contributed; the joint revert confounds the two.",
+      "confidence": "high",
+      "evidence": ["E6", "E7"]
+    },
+    {
+      "id": "C5",
+      "text": "Two distinct degradation mechanisms are simultaneously visible in consumer logs: increased lock waiting and increased deserialization retries/warnings.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C6",
+      "text": "Lock-wait messages are the symptom class more naturally associated with the database index rebuild, and deserialization warnings with the consumer-library upgrade, but the case package supplies no evidence linking either symptom to either change.",
+      "confidence": "low",
+      "evidence": ["E4", "E3"]
+    },
+    {
+      "id": "C7",
+      "text": "Retained telemetry cannot attribute consumer processing time between database waiting and deserialization retrying.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C8",
+      "text": "No trace samples survive from the incident window, so the per-message time breakdown cannot be reconstructed after the fact.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C9",
+      "text": "Restoration of throughput after the joint revert is consistent with the changes being causal, but is also consistent with coincidental recovery; no control period is documented.",
+      "confidence": "low",
+      "evidence": ["E6", "E7"]
+    },
+    {
+      "id": "C10",
+      "text": "The incident is currently mitigated: throughput returned to normal after the revert.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    }
+  ],
+  "relationships": [
+    {"from": "C1", "to": "C2", "type": "supports", "confidence": "high", "rationale": "Normal arrival with falling throughput identifies the consumer side as the constrained stage."},
+    {"from": "C2", "to": "C1", "type": "contributes-to", "confidence": "high", "rationale": "A ~40% throughput drop mechanically produces steady queue growth at constant arrival."},
+    {"from": "E3", "to": "C1", "type": "precedes", "confidence": "high", "rationale": "Both changes landed within the hour before the observed stall."},
+    {"from": "C3", "to": "C2", "type": "contributes-to", "confidence": "medium", "rationale": "Revert-and-recover links the change set to the throughput loss."},
+    {"from": "C5", "to": "C2", "type": "mediates", "confidence": "medium", "rationale": "Lock waiting and deserialization retries are plausible time sinks between change and throughput loss, though their shares are unmeasured."},
+    {"from": "C7", "to": "C4", "type": "contributes-to", "confidence": "high", "rationale": "Without split processing-time telemetry, the competing mechanisms cannot be separated."},
+    {"from": "C8", "to": "C4", "type": "contributes-to", "confidence": "high", "rationale": "Absent traces remove the retrospective route to attribution."},
+    {"from": "E7", "to": "C4", "type": "contributes-to", "confidence": "high", "rationale": "The absence of a single-change revert run leaves the two interventions fully confounded."},
+    {"from": "C6", "to": "C4", "type": "unknown", "confidence": "low", "rationale": "Symptom-to-change mapping is an unsupported inference within this evidence set."},
+    {"from": "C10", "to": "C3", "type": "supports", "confidence": "medium", "rationale": "Recovery on revert is the only causal test present in the package."},
+    {"from": "C9", "to": "C3", "type": "prevents", "confidence": "low", "rationale": "Lack of a control weakens the inference that the changes, rather than time, explain recovery."}
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "Which of the two changes, or which combination, caused the throughput loss.",
+      "resolvedBy": "A staged re-application or single-change revert run: restore one change at a time and observe throughput and queue depth.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "text": "How consumer processing time divided between database lock waiting and deserialization retrying.",
+      "resolvedBy": "Per-phase timing instrumentation in the consumer that reports database-wait and deserialization time as separate metrics.",
+      "confidence": "high"
+    },
+    {
+      "id": "U3",
+      "text": "Whether the two logged symptom classes are independent effects or one drives the other (e.g. retries lengthening transactions and increasing lock contention).",
+      "resolvedBy": "Retained distributed traces or correlated per-message logs showing ordering of deserialization retries and lock acquisition.",
+      "confidence": "high"
+    },
+    {
+      "id": "U4",
+      "text": "Whether lock waits were caused by the index rebuild specifically, or by some other database activity in the window.",
+      "resolvedBy": "Database-side lock and maintenance-operation logs covering the incident window.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "text": "Whether the ~40% throughput drop is fully explained by these two symptom classes, or whether an unmeasured third factor contributed.",
+      "resolvedBy": "A time budget accounting for total consumer processing time across all phases during a reproduction.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "text": "Whether recovery after the joint revert was caused by the revert or coincided with an independent change in conditions.",
+      "resolvedBy": "A documented control interval, or reproduction of the degradation by re-applying the change set.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U7",
+      "text": "Whether the log message increases were proportionate to the throughput loss or merely present; magnitudes are not quantified in the evidence.",
+      "resolvedBy": "Message-rate counts for lock-wait and deserialization warnings, baseline versus incident window.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "text": "Re-apply the two changes one at a time in a non-production or shadow environment to break the confound and identify the responsible change.",
+      "priority": "high",
+      "addresses": ["U1", "U6"]
+    },
+    {
+      "id": "A2",
+      "text": "Add separate consumer metrics for database-wait time and deserialization time per message before any re-application.",
+      "priority": "high",
+      "addresses": ["U2", "U5"]
+    },
+    {
+      "id": "A3",
+      "text": "Restore and retain trace sampling with a retention window that outlives incident investigation.",
+      "priority": "high",
+      "addresses": ["U3", "U2"]
+    },
+    {
+      "id": "A4",
+      "text": "Collect database-side lock and maintenance logs for the incident window to test the index-rebuild hypothesis directly.",
+      "priority": "medium",
+      "addresses": ["U4"]
+    },
+    {
+      "id": "A5",
+      "text": "Quantify the baseline-versus-incident rates of both log message classes rather than relying on the qualitative 'increased'.",
+      "priority": "medium",
+      "addresses": ["U7"]
+    },
+    {
+      "id": "A6",
+      "text": "Adopt a change policy that separates consumer-library upgrades from database maintenance windows so future reverts are attributable.",
+      "priority": "medium",
+      "addresses": ["U1"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "F1",
+      "text": "If a run existed in which only the library upgrade was reverted, throughput behavior in that run would identify or exonerate the upgrade.",
+      "confidence": "high",
+      "basedOn": ["E6", "E7"]
+    },
+    {
+      "id": "F2",
+      "text": "If telemetry had separated database-wait from deserialization-retry time, the dominant mechanism could be identified without any revert experiment.",
+      "confidence": "high",
+      "basedOn": ["E5", "E4"]
+    },
+    {
+      "id": "F3",
+      "text": "If traces from the incident window had been retained, per-message time breakdowns could have been reconstructed retrospectively.",
+      "confidence": "high",
+      "basedOn": ["E8"]
+    },
+    {
+      "id": "F4",
+      "text": "If arrival rate had risen instead of staying normal, the backlog would be explainable as load rather than consumer degradation, and the two changes would not be implicated.",
+      "confidence": "medium",
+      "basedOn": ["E1", "E2"]
+    },
+    {
+      "id": "F5",
+      "text": "If throughput had not recovered after the joint revert, both changes would be largely exonerated and an unidentified third factor would be indicated.",
+      "confidence": "medium",
+      "basedOn": ["E6", "E3"]
+    },
+    {
+      "id": "F6",
+      "text": "If only one symptom class had appeared in the logs, the mapping from symptom to change would be less ambiguous even without additional telemetry.",
+      "confidence": "low",
+      "basedOn": ["E4", "E3"]
+    }
+  ]
+}
