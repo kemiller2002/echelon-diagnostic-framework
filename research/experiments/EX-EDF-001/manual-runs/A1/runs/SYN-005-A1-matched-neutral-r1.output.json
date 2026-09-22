@@ -1,0 +1,175 @@
+{
+  "version": "1.0.0",
+  "summary": "The downstream catalog API's 35% rate-limit reduction most strongly explains the latency incident. It produced 429 responses, which triggered two retries with exponential backoff. Only requests receiving 429s became slower. Those retries also used a cache-bypass header, making the cache hit-rate decline a downstream effect rather than an independent cache failure. Restoring the prior rate limit ended the 429 spike and was followed two minutes later by latency recovery.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Median search latency doubled from 14:10 until 14:43.",
+      "type": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "The catalog API reduced its per-client rate limit by 35% two minutes before the latency increase.",
+      "type": "observation",
+      "evidence": ["E1", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Downstream 429 responses triggered two retries with exponential backoff.",
+      "type": "observation",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The latency increase was confined to requests receiving downstream 429 responses.",
+      "type": "observation",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "The rate-limit reduction caused a 429 spike whose retry behavior increased search latency.",
+      "type": "inference",
+      "evidence": ["E4", "E5", "E6", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "The cache hit-rate decline was caused by retry requests using a cache-bypass header.",
+      "type": "observation",
+      "evidence": ["E2", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "The cache hit-rate decline was a downstream effect of retries, not an independent explanation for the latency increase.",
+      "type": "inference",
+      "evidence": ["E3", "E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "Restoring the previous rate limit ended the 429 spike, followed by latency normalization two minutes later.",
+      "type": "observation",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C5",
+      "relationship": "supports",
+      "evidence": ["E4", "E8"]
+    },
+    {
+      "from": "C3",
+      "to": "C5",
+      "relationship": "mediates",
+      "evidence": ["E5", "E6"]
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "relationship": "supports",
+      "evidence": ["E6"]
+    },
+    {
+      "from": "C5",
+      "to": "C1",
+      "relationship": "contributes-to",
+      "evidence": ["E5", "E6", "E8"]
+    },
+    {
+      "from": "C5",
+      "to": "C6",
+      "relationship": "contributes-to",
+      "evidence": ["E7"]
+    },
+    {
+      "from": "C6",
+      "to": "C7",
+      "relationship": "supports",
+      "evidence": ["E7"]
+    },
+    {
+      "from": "C8",
+      "to": "C5",
+      "relationship": "prevents",
+      "evidence": ["E8"]
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "The evidence does not quantify what share of requests received 429 responses or how much latency each retry and backoff added.",
+      "confidence": "high",
+      "discriminating_observation": "Measure per-request 429 incidence, retry count, backoff duration, and end-to-end latency during the incident window."
+    },
+    {
+      "id": "U2",
+      "statement": "A separate concurrent cause is not fully excluded, although unchanged latency for requests without 429s and recovery after rate-limit restoration argue strongly against one.",
+      "confidence": "low",
+      "discriminating_observation": "Compare latency over time for otherwise matched requests with and without downstream 429 responses while holding retry behavior constant."
+    },
+    {
+      "id": "U3",
+      "statement": "An independent cache-service problem is implausible because cache latency and errors remained normal and non-429 requests did not slow regardless of cache outcome.",
+      "confidence": "low",
+      "discriminating_observation": "Disable retries or their cache-bypass header during a controlled 429 episode and observe whether cache hit rate and latency still deteriorate."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "priority": 1,
+      "action": "Maintain or restore a downstream per-client rate limit that avoids the observed 429 spike.",
+      "mechanism": "Prevents 429-triggered retries and exponential backoff.",
+      "rationale": "This directly reverses the initiating change and already coincided with termination of the 429 spike and latency recovery.",
+      "evidence": ["E4", "E5", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "priority": 2,
+      "action": "Change search retry handling for downstream 429 responses to reduce retry count, backoff delay, or both.",
+      "mechanism": "Reduces latency amplification after a 429 occurs.",
+      "rationale": "This addresses the demonstrated mediator but may not eliminate the underlying 429s.",
+      "evidence": ["E5", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "priority": 3,
+      "action": "Reassess the cache-bypass behavior on retry requests.",
+      "mechanism": "Prevents retries from depressing the measured cache hit rate and potentially increasing downstream exposure.",
+      "rationale": "This targets a documented downstream effect; the evidence does not show that it is the primary latency mechanism.",
+      "evidence": ["E7"],
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "statement": "If requests without downstream 429 responses had shown the same latency increase, the 429-and-retry explanation would be substantially weakened.",
+      "challenges": ["C4", "C5", "A1", "A2"],
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "statement": "If restoring the previous rate limit had ended the 429 spike without subsequent latency recovery, the rate-limit restoration would be a weaker action choice and another latency mechanism would remain live.",
+      "challenges": ["C5", "C8", "A1"],
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "statement": "If latency had increased for cache misses without 429 responses, an independent cache-related explanation would become plausible.",
+      "challenges": ["C7"],
+      "confidence": "high"
+    }
+  ]
+}
