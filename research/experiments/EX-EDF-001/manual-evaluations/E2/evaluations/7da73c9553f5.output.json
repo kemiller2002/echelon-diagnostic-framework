@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "All four required findings are present and well-supported: the model defect isolated to one segment (C1), limited exposure bounding blast radius (C2, linked to C6), monitoring/automated halt preventing expansion (C3, C4), and the feature flag enabling targeted rollback of only the affected segment (C5). No forbidden claims appear; the analysis explicitly states integration tests did NOT prevent the production failure (C8) and fully documents the incident rather than claiming a failure-free deployment. Causal relationships are carefully qualified — e.g., C5→C7 and C9→C5 are correctly marked 'unknown' rather than asserting unsupported causation between the selective disablement and the absence of drops elsewhere, or between rollback practice and response quality. Every claim maps to specific evidence IDs with no outside-evidence use. Uncertainties are thorough and well-targeted (root cause, test-coverage gap, recovery confirmation, response timing, rollback-practice effect), each paired with concrete resolving evidence. Actions prioritize investigation into the causal gaps while explicitly recommending preservation of the staged exposure, segment monitoring, automated halt, and targeted flag controls — matching the preferred action without weakening protective mechanisms. Overall a tightly calibrated, evidence-disciplined analysis with no material gaps."
+}
