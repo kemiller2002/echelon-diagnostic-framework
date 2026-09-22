@@ -1,0 +1,189 @@
+{
+  "version": "1.0.0",
+  "summary": "The product-limit exceedance is best explained by an interaction between humidity-dependent sensor drift and defective compressor restart logic. Each defect alone was insufficient in comparison runs. Alert suppression delayed response only after the limit had already been crossed, so it extended rather than initiated the excursion.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Three refrigerated containers exceeded the product temperature limit during a six-hour transfer.",
+      "type": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Humidity exceeded 88% for 73 minutes, activating the documented condition under which sensor calibration drifted upward by about 1.5 C.",
+      "type": "inference",
+      "evidence": ["E2", "E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "The retry defect could cause every second compressor restart command following a communications timeout to be ignored.",
+      "type": "observation",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The sensor drift and restart defect together best explain the limit exceedance.",
+      "type": "inference",
+      "evidence": ["E2", "E3", "E5", "E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Neither documented defect was sufficient alone under the comparison-run conditions.",
+      "type": "inference",
+      "evidence": ["E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Alert suppression extended operator response after the product limit had already been crossed and therefore was downstream of the initial exceedance.",
+      "type": "inference",
+      "evidence": ["E4", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "The evidence does not establish whether the sensor drift reflected actual product temperature, distorted control input, distorted monitoring, or some combination.",
+      "type": "unresolved",
+      "evidence": ["E2", "E6", "E7"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "E5",
+      "to": "E2",
+      "relationship": "supports",
+      "explanation": "The recorded humidity crossed the stated threshold for drift."
+    },
+    {
+      "from": "E2",
+      "to": "C4",
+      "relationship": "contributes-to",
+      "explanation": "The humidity-dependent sensor error was one necessary component indicated by the comparisons."
+    },
+    {
+      "from": "E3",
+      "to": "C4",
+      "relationship": "contributes-to",
+      "explanation": "Ignored restart commands were the other necessary component indicated by the comparisons."
+    },
+    {
+      "from": "E6",
+      "to": "C5",
+      "relationship": "supports",
+      "explanation": "Correctly calibrated sensors prevented exceedance despite the firmware defect."
+    },
+    {
+      "from": "E7",
+      "to": "C5",
+      "relationship": "supports",
+      "explanation": "Corrected restart logic prevented exceedance despite sensor drift."
+    },
+    {
+      "from": "C4",
+      "to": "C1",
+      "relationship": "contributes-to",
+      "explanation": "The paired defects best account for the observed excursion."
+    },
+    {
+      "from": "C1",
+      "to": "E8",
+      "relationship": "precedes",
+      "explanation": "The limit crossing occurred before the alert-related response extension."
+    },
+    {
+      "from": "E4",
+      "to": "E8",
+      "relationship": "contributes-to",
+      "explanation": "The suppression window delayed repeated alerts and extended response."
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "question": "Did communications timeouts and ignored restart commands occur in each affected container during the transfer?",
+      "importance": "This would directly connect the known firmware defect to the observed event.",
+      "discriminating_observation": "Timestamped timeout, restart-command, controller-response, and compressor-state logs for each container.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "question": "Were the product temperatures independently above the limit, or were some readings inflated by sensor drift?",
+      "importance": "This distinguishes a physical excursion from measurement distortion.",
+      "discriminating_observation": "A humidity-insensitive, independently calibrated product-temperature record synchronized with the affected sensors.",
+      "confidence": "high"
+    },
+    {
+      "id": "U3",
+      "question": "How closely did the comparison runs match the six-hour transfer conditions apart from the corrected component?",
+      "importance": "Unmatched conditions could weaken the interaction inference.",
+      "discriminating_observation": "A controlled run matching the transfer while independently varying sensor calibration and restart logic.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "question": "Would faster operator response have reduced the duration or severity of the excursion?",
+      "importance": "The evidence proves delayed response but does not quantify its operational effect.",
+      "discriminating_observation": "A matched run or event reconstruction with alert suppression removed and response timing recorded.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Correct the compressor restart retry logic.",
+      "mechanism": "Prevents alternate restart commands from being ignored after communications timeouts.",
+      "priority": 1,
+      "rationale": "Directly removes one component of the supported interaction, and E7 shows that corrected restart logic prevented exceedance despite sensor drift.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Calibrate or replace sensors so humidity above 88% does not produce upward drift.",
+      "mechanism": "Removes the other component of the supported interaction.",
+      "priority": 2,
+      "rationale": "E6 shows that calibrated sensors prevented exceedance despite the firmware defect.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Revise the alert rule so acknowledgement does not suppress repeated excursion alerts for 45 minutes.",
+      "mechanism": "Shortens operator-response delay after a limit crossing.",
+      "priority": 3,
+      "rationale": "This addresses consequence duration rather than the initial crossing, so it follows the two preventive controls.",
+      "confidence": "high"
+    },
+    {
+      "id": "A4",
+      "action": "Capture synchronized humidity, independent temperature, timeout, restart-command, compressor-state, alert, and response records.",
+      "mechanism": "Tests the proposed causal sequence and resolves whether measured excursions were physical.",
+      "priority": 4,
+      "rationale": "It discriminates among the remaining live alternatives without assuming an unobserved sequence.",
+      "confidence": "high"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "The product limit is still exceeded in a matched run with both calibrated sensors and corrected restart logic.",
+      "implication": "This would strongly challenge the proposed interaction as a sufficient explanation and require another cause.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "change": "A matched run with corrected restart logic still exceeds the limit while sensor drift remains.",
+      "implication": "This would weaken the prioritization of the restart-logic correction and contradict E7 under matched conditions.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "change": "Independent temperature measurements remain within limits while affected sensors report exceedance.",
+      "implication": "This would shift the explanation toward measurement error rather than an actual product-temperature excursion.",
+      "confidence": "high"
+    }
+  ]
+}
