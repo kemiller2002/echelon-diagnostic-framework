@@ -1,0 +1,345 @@
+{
+  "version": "1.0.0",
+  "caseId": "SYN-001",
+  "summary": "A single configuration defect explains the outcome. At 09:00 legacy-client invoice traffic was cut over to a new adapter configuration (E1) that omitted the region-header mapping retained by the modern-client adapter (E4). Requests on that path therefore reached the routing function without the required region header, which 97% of sampled failures confirm (E3), and invoice creation errors rose from below 0.2% to 38% within two minutes (E2). Disabling the configuration at 09:19 returned errors to baseline within three minutes (E6), a removal-of-cause test consistent with the proposed mechanism. Competing explanations are weakly supported: the database layer stayed inside its prior-week normal range (E5); the CPU rise from 51% to 65% (E7) is small, concurrent with the error surge, and resolved with it, making it a downstream effect rather than a cause; the 08:54 PDF rendering ticket (E8) precedes the cutover but shares no evidenced pathway with invoice creation. The evidence does not require a second contributing cause or an interaction term. Remaining gaps are scope-related, not mechanism-related: the package does not state what fraction of total traffic is legacy-client, why roughly 62% of invoice creations still succeeded, or how the 3% of sampled failures that did carry the header failed.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "At 09:00 the invoice service began routing legacy-client traffic through a newly enabled adapter configuration.",
+      "type": "observation",
+      "basis": "direct evidence",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Invoice creation errors rose from below 0.2% to 38% at 09:02, within two minutes of the cutover.",
+      "type": "observation",
+      "basis": "direct evidence",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Ninety-seven percent of sampled failed requests lacked the region header that the routing function requires.",
+      "type": "observation",
+      "basis": "direct evidence",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The legacy-client adapter configuration omitted the region-header mapping while the modern-client adapter retained it.",
+      "type": "observation",
+      "basis": "direct evidence",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "The omitted region-header mapping is the mechanism that produced header-less requests, which the routing function then failed.",
+      "type": "inference",
+      "basis": "interpretation of E3 and E4 jointly; the configuration gap and the observed failure signature match on the same field",
+      "evidence": ["E3", "E4", "E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Disabling the new legacy-client adapter configuration at 09:19 removed the fault, with errors back below 0.2% within three minutes.",
+      "type": "observation",
+      "basis": "direct evidence; functions as a removal-of-cause test",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "The database tier did not contribute to the outcome: error rate, saturation, and replication lag all stayed within the prior-week normal range.",
+      "type": "inference",
+      "basis": "interpretation of E5 as an exclusion, not as positive evidence for any cause",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "The CPU rise from 51% to 65% is a downstream effect of elevated error and retry handling, not a cause of the failures.",
+      "type": "inference",
+      "basis": "interpretation; the rise is modest, concurrent with the error window, and no evidence shows CPU pressure before 09:00 or persisting after recovery",
+      "evidence": ["E7", "E2", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C9",
+      "statement": "The 08:54 PDF rendering ticket is a coincident, unrelated observation with no evidenced pathway to invoice creation failures.",
+      "type": "inference",
+      "basis": "interpretation; temporal proximity only, and the failure signature in E3 is a routing-header defect, not a rendering defect",
+      "evidence": ["E8", "E3"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C10",
+      "statement": "The blast radius was confined to the legacy-client path; the modern-client path retained the mapping and is not implicated.",
+      "type": "inference",
+      "basis": "interpretation of E4 together with the partial (38%, not near-total) error rate in E2",
+      "evidence": ["E4", "E2"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C11",
+      "statement": "One explanation is sufficient; the evidence does not require multiple causes or an interaction term.",
+      "type": "inference",
+      "basis": "interpretation; the single mechanism accounts for onset timing, failure signature, scope, and recovery on removal, and the remaining observations are excluded, downstream, or unrelated",
+      "evidence": ["E1", "E2", "E3", "E4", "E5", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "statement": "Roughly 19 minutes elapsed between onset and mitigation, indicating detection or rollback latency independent of the configuration defect itself.",
+      "type": "inference",
+      "basis": "interpretation of the interval between E2 and E6; the package gives no evidence on why the interval was that long",
+      "evidence": ["E2", "E6"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R1",
+      "from": "C1",
+      "to": "C2",
+      "type": "precedes",
+      "basis": "E1 at 09:00, E2 at 09:02; ordering is observed, causation is inferred separately",
+      "confidence": "high"
+    },
+    {
+      "id": "R2",
+      "from": "C4",
+      "to": "C3",
+      "type": "contributes-to",
+      "basis": "the omitted mapping is the only evidenced source of requests missing that specific header on the newly routed path",
+      "confidence": "high"
+    },
+    {
+      "id": "R3",
+      "from": "C1",
+      "to": "C3",
+      "type": "contributes-to",
+      "basis": "the cutover is the enabling condition that exposed live traffic to the defective configuration",
+      "confidence": "high"
+    },
+    {
+      "id": "R4",
+      "from": "C3",
+      "to": "C2",
+      "type": "contributes-to",
+      "basis": "the routing function requires the header, so header-less requests fail; 97% of sampled failures share this signature",
+      "confidence": "high"
+    },
+    {
+      "id": "R5",
+      "from": "C5",
+      "to": "C2",
+      "type": "mediates",
+      "basis": "the missing-mapping mechanism is the pathway linking the cutover to the error surge, not a separate cause alongside it",
+      "confidence": "high"
+    },
+    {
+      "id": "R6",
+      "from": "C6",
+      "to": "C5",
+      "type": "supports",
+      "basis": "removing the configuration removed the effect within three minutes, consistent with the proposed mechanism being operative",
+      "confidence": "high"
+    },
+    {
+      "id": "R7",
+      "from": "C7",
+      "to": "C11",
+      "type": "supports",
+      "basis": "excluding the database tier removes the most common competing infrastructure explanation",
+      "confidence": "high"
+    },
+    {
+      "id": "R8",
+      "from": "C2",
+      "to": "C8",
+      "type": "contributes-to",
+      "basis": "error and retry handling plausibly raises CPU; direction inferred from timing and magnitude, not directly measured",
+      "confidence": "medium"
+    },
+    {
+      "id": "R9",
+      "from": "C4",
+      "to": "C10",
+      "type": "contributes-to",
+      "basis": "the mapping was omitted only on the legacy adapter, confining exposure to that path",
+      "confidence": "medium"
+    },
+    {
+      "id": "R10",
+      "from": "C9",
+      "to": "C2",
+      "type": "unknown",
+      "basis": "no evidence connects the PDF rendering ticket to invoice creation; the relation is unestablished rather than ruled out by measurement",
+      "confidence": "low"
+    },
+    {
+      "id": "R11",
+      "from": "C10",
+      "to": "C2",
+      "type": "contributes-to",
+      "basis": "partial rather than total failure is consistent with only the legacy share of traffic being affected",
+      "confidence": "medium"
+    },
+    {
+      "id": "R12",
+      "from": "C12",
+      "to": "C2",
+      "type": "contributes-to",
+      "basis": "detection and rollback latency governs the duration of the elevated error rate, though not its onset",
+      "confidence": "medium"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "The 3% of sampled failed requests that did carry the region header are unexplained; they may represent a second minor failure mode or ordinary background error.",
+      "discriminatingObservation": "Error-code and stack breakdown for the header-carrying failures during 09:02-09:19, compared against the pre-incident baseline error mix.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "statement": "The legacy-client share of invoice creation traffic is not stated, so it cannot be confirmed that a 38% error rate equals near-total failure of the legacy path.",
+      "discriminatingObservation": "Request counts split by client type over the incident window, with per-path error rates.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "statement": "Whether the region-header mapping was omitted by editing error, by template or default inheritance, or by deliberate removal is unknown, and this determines which prevention control works.",
+      "discriminatingObservation": "Change record and diff for the legacy-client adapter configuration, including author, review trail, and whether the field was ever present.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "The causal direction of the CPU rise is inferred rather than measured; a pre-existing CPU trend could in principle have contributed.",
+      "discriminatingObservation": "CPU series from at least 30 minutes before 09:00 through 09:30, correlated with request and retry volume.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U5",
+      "statement": "It is unknown whether other required mappings are also missing from the legacy-client adapter configuration and would fail on re-enable.",
+      "discriminatingObservation": "Full field-by-field diff of the legacy-client adapter configuration against the modern-client adapter and against the routing function's required-field contract.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "statement": "The cause of the roughly 19-minute gap between onset and mitigation is not evidenced: alerting delay, diagnosis time, and rollback execution time cannot be separated.",
+      "discriminatingObservation": "Alert fire time, first responder acknowledgement time, and rollback initiation time for the incident.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U7",
+      "statement": "Whether the failed invoice creations were lost, queued, or retried successfully after rollback is not established, so customer-facing impact is unquantified.",
+      "discriminatingObservation": "Reconciliation of invoice records created between 09:02 and 09:22 against expected volume for that window.",
+      "confidence": "low"
+    },
+    {
+      "id": "U8",
+      "statement": "The PDF rendering ticket remains formally unresolved as unrelated rather than evidenced as unrelated.",
+      "discriminatingObservation": "The ticket's affected service and code path, checked for any shared dependency with invoice creation routing.",
+      "confidence": "low"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Add the region-header mapping to the legacy-client adapter configuration, mirroring the modern-client adapter, and verify the field against the routing function's required-field contract before any re-enable.",
+      "targetMechanism": "The omitted mapping (C5) that produces header-less requests.",
+      "priority": 1,
+      "rationale": "This is the only action that addresses the evidenced cause directly. The rollback in E6 restored service but left the legacy-client cutover unachieved, so the defect still blocks the original objective.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Re-enable the corrected legacy-client configuration progressively on a small traffic slice with an automatic error-rate abort, rather than as a full cutover.",
+      "targetMechanism": "Exposure breadth at the moment a configuration defect goes live (C1, C10).",
+      "priority": 2,
+      "rationale": "The failure reached 38% within two minutes, so exposure was effectively instantaneous and total for the affected path. Limiting the initial slice converts a similar future defect from an incident into a contained test result. Prioritized above broader prevention because it protects the immediate retry of this same change.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Diff every adapter configuration against the routing function's required-field contract and enforce that contract as a pre-deployment validation that rejects configurations missing required mappings.",
+      "targetMechanism": "The class of defect in which a required mapping is absent from a configuration and is not caught before traffic reaches it (C4, U5).",
+      "priority": 3,
+      "rationale": "The mapping was present on one adapter and absent on another, indicating no mechanical check enforces parity. This generalizes beyond the single field, but is ranked below A1 and A2 because it does not unblock the pending change and its correct design depends on U3.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "action": "Emit and alert on a distinct metric for routing rejections caused by a missing required header, separate from the aggregate invoice error rate.",
+      "targetMechanism": "Detection and diagnosis latency within the roughly 19-minute exposure window (C12, U6).",
+      "priority": 4,
+      "rationale": "The failure signature was highly specific and would have named its own cause immediately if surfaced. This shortens duration rather than preventing occurrence, so it ranks below actions that address the defect and its exposure.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Reconcile invoice records for the 09:02-09:22 window to determine whether failed creations were lost and require replay.",
+      "targetMechanism": "Residual customer-facing impact not addressed by the rollback (U7).",
+      "priority": 5,
+      "rationale": "Rollback restored the error rate but the evidence says nothing about the disposition of requests that failed while the defect was live. Low cost, and it bounds an otherwise open impact question.",
+      "confidence": "low"
+    },
+    {
+      "id": "A6",
+      "action": "Route the 08:54 PDF rendering ticket through normal support triage, tracked separately from this incident.",
+      "targetMechanism": "None in the causal chain; this prevents an unrelated observation from absorbing incident-response attention (C9).",
+      "priority": 6,
+      "rationale": "Included only to record that it was considered and set aside on evidentiary grounds, not overlooked.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "The legacy-client adapter configuration had included the region-header mapping at 09:00.",
+      "expectedUnderExplanation": "No error surge at 09:02, and the legacy-client cutover completes without incident.",
+      "challengeStrength": "high",
+      "ifViolated": "An error surge under a correctly mapped configuration would falsify the core mechanism (C5) and redirect attention to the routing function itself or to the cutover process independent of field mapping."
+    },
+    {
+      "id": "CF2",
+      "change": "Modern-client traffic had failed at the same 38% rate during the incident.",
+      "expectedUnderExplanation": "It did not; the modern adapter retained the mapping, so its path should be unaffected.",
+      "challengeStrength": "high",
+      "ifViolated": "Equal failure on the path that kept the mapping would refute the configuration-scoped explanation and point to a shared change in the routing function or invoice service affecting both paths."
+    },
+    {
+      "id": "CF3",
+      "change": "Errors had remained elevated after the 09:19 rollback.",
+      "expectedUnderExplanation": "They returned below 0.2% within three minutes, which is what the mechanism predicts.",
+      "challengeStrength": "high",
+      "ifViolated": "Persistence after removal would show the configuration was not sufficient for the outcome and would require a second, still-active cause or an interaction term the current explanation does not include."
+    },
+    {
+      "id": "CF4",
+      "change": "The sampled failed requests had carried the region header normally.",
+      "expectedUnderExplanation": "They did not; 97% lacked it, which is the observable link between the configuration gap and the failures.",
+      "challengeStrength": "high",
+      "ifViolated": "Header-carrying failures at scale would break the chain between C4 and C2 and make the timing coincidence with the cutover the only remaining support, which is far weaker."
+    },
+    {
+      "id": "CF5",
+      "change": "CPU had already been climbing toward 65% well before 09:00, or errors had begun rising before the cutover.",
+      "expectedUnderExplanation": "Neither is evidenced; the error surge follows the cutover by two minutes and CPU movement is confined to the incident window.",
+      "challengeStrength": "medium",
+      "ifViolated": "A pre-existing trend would reopen resource saturation as a candidate cause and would weaken the downstream-effect reading of E7 (C8), though it would not by itself explain the header-specific failure signature."
+    },
+    {
+      "id": "CF6",
+      "change": "The corrected configuration is re-enabled with the mapping restored and errors spike again.",
+      "expectedUnderExplanation": "Errors stay at baseline, confirming both the mechanism and the prioritization of A1.",
+      "challengeStrength": "high",
+      "ifViolated": "A repeat spike would show the omitted mapping was one of several defects in the configuration (U5), or that the defect lies in the cutover path rather than the field mapping, invalidating the action ordering."
+    }
+  ]
+}
