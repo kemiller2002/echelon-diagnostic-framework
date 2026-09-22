@@ -1,0 +1,200 @@
+{
+  "version": "1.0.0",
+  "summary": "The evidence strongly indicates that enabling the new legacy-client adapter configuration caused the invoice error spike because that configuration omitted the region-header mapping required by routing. The resulting missing headers explain nearly all sampled failures, and disabling the configuration restored the prior error rate. Database behavior argues against a database cause. The CPU rise is more plausibly a downstream effect or correlate than the primary cause, while the earlier PDF-rendering ticket appears unrelated.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Legacy-client traffic began using the new adapter configuration at 09:00.",
+      "type": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Invoice creation errors rose from below 0.2% to 38% two minutes after the cutover.",
+      "type": "observation",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "The new legacy-client adapter omitted a required region-header mapping.",
+      "type": "observation",
+      "evidence": ["E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The omitted mapping caused legacy requests to reach the routing function without the required region header, producing most observed invoice failures.",
+      "type": "inference",
+      "evidence": ["E1", "E2", "E3", "E4", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Disabling the new legacy-client adapter was followed by recovery to the prior error level within three minutes.",
+      "type": "observation",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "A database-origin explanation is poorly supported because database error rate, saturation, and replication lag remained normal.",
+      "type": "inference",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "The CPU increase is not established as causal and may be a downstream effect of the failing requests.",
+      "type": "inference",
+      "evidence": ["E7"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C8",
+      "statement": "The PDF-rendering ticket is weak evidence for the invoice failures because it preceded the cutover and concerns a different observed defect.",
+      "type": "inference",
+      "evidence": ["E1", "E8"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C1",
+      "to": "C2",
+      "relationship": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "relationship": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C2",
+      "relationship": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C2",
+      "relationship": "mediates",
+      "confidence": "high"
+    },
+    {
+      "from": "C5",
+      "to": "C4",
+      "relationship": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C2",
+      "relationship": "prevents",
+      "confidence": "medium",
+      "note": "Normal database indicators argue against attributing the error spike to database degradation."
+    },
+    {
+      "from": "C7",
+      "to": "C2",
+      "relationship": "unknown",
+      "confidence": "medium"
+    },
+    {
+      "from": "C8",
+      "to": "C2",
+      "relationship": "unknown",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Three percent of sampled failed requests did not fit the reported missing-header pattern.",
+      "liveAlternatives": [
+        "Sampling or classification variation",
+        "A secondary failure mechanism"
+      ],
+      "discriminatingObservation": "Inspect the complete failed-request set and classify each failure by header presence and exact routing error.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "statement": "The evidence does not show whether restoring only the region-header mapping would resolve the incident while the new adapter remains enabled.",
+      "liveAlternatives": [
+        "The missing mapping is sufficient to explain the failures",
+        "Another property of the new adapter also contributes"
+      ],
+      "discriminatingObservation": "Enable the adapter in a controlled setting with the region mapping restored and compare error rates with the prior baseline.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "statement": "The direction of the CPU relationship is unresolved.",
+      "liveAlternatives": [
+        "CPU rose as a consequence of failed processing",
+        "CPU independently contributed to failures",
+        "Both resulted from the adapter change"
+      ],
+      "discriminatingObservation": "Compare CPU and error timing by request class while independently varying adapter activation.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "priority": 1,
+      "action": "Keep the new legacy-client adapter configuration disabled until the required region-header mapping is restored and validated.",
+      "mechanism": "Prevents legacy requests from entering routing without the required header.",
+      "rationale": "Rollback already returned errors below 0.2%, and the mapping omission directly matches 97% of sampled failures.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "priority": 2,
+      "action": "Add and test the legacy adapter's region-header mapping before another cutover.",
+      "mechanism": "Supplies the routing function with its required input.",
+      "rationale": "This targets the most strongly supported causal link while preserving the possibility of enabling the adapter.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "priority": 3,
+      "action": "Validate required headers on legacy-client requests during staged activation and automatically halt or roll back on elevated invoice errors.",
+      "mechanism": "Detects the observed failure condition before broad exposure and limits its duration.",
+      "rationale": "The incident appeared within two minutes and recovered quickly after configuration rollback.",
+      "confidence": "high"
+    },
+    {
+      "id": "A4",
+      "priority": 4,
+      "action": "Investigate the minority of failures not explained by the sampled missing-header pattern.",
+      "mechanism": "Tests whether any secondary mechanism remains after the primary defect is corrected.",
+      "rationale": "The primary explanation covers 97%, not all, sampled failures.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "The new legacy-client adapter remains enabled with the region-header mapping restored, but invoice errors still rise to approximately 38%.",
+      "challenge": "This would strongly weaken the claim that the omitted mapping is sufficient and would favor another adapter-related or interacting cause.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "change": "Failed requests are found to contain valid region headers at rates comparable to successful requests.",
+      "challenge": "This would undermine the proposed missing-header mechanism.",
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "change": "Disabling the new adapter does not reduce invoice errors in a repeat observation.",
+      "challenge": "This would weaken the rollback evidence and the priority assigned to adapter remediation.",
+      "confidence": "high"
+    }
+  ]
+}
