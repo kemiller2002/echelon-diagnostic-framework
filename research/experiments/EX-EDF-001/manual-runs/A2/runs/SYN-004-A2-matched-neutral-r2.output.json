@@ -1,0 +1,328 @@
+{
+  "summary": "Queue growth was consumer-side, not demand-side: arrival rate stayed normal (E1) while consumer throughput fell ~40% (E2), so the stall is explained by reduced service rate rather than increased load. Two changes landed in the preceding hour (E3) and consumer logs show two distinct symptom families concurrently - lock waits and deserialization warnings (E4). The joint revert restored throughput (E6), which establishes that the change set as a whole caused the regression, but because no single-change revert exists (E7) and telemetry cannot separate database wait time from deserialization retry time (E5) with no retained traces (E8), the evidence does not identify whether the index rebuild, the library upgrade, or an interaction of the two is responsible. The defensible conclusion is a confirmed change-induced consumer slowdown with unresolved attribution among three live alternatives; the priority action is a discriminating single-change run rather than a causal claim.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The backlog was produced by a fall in consumer service rate, not by a rise in demand.",
+      "type": "inference",
+      "basis": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Queue depth rose steadily for 27 minutes while arrival rate remained in the normal range.",
+      "type": "observation",
+      "basis": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Consumer throughput fell roughly 40% over the same interval.",
+      "type": "observation",
+      "basis": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The regression is attributable to the two-change set as a unit: reverting both restored throughput.",
+      "type": "inference",
+      "basis": ["E6", "E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Attribution to either individual change is not identifiable from this package, because the two changes were never varied independently.",
+      "type": "inference",
+      "basis": ["E7", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Both log signals - lock waits and deserialization warnings - increased together, so neither log family by itself discriminates between the candidate causes.",
+      "type": "observation",
+      "basis": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "Log-volume co-occurrence is weak diagnostic evidence: an increase in either message type is also consistent with being a downstream effect of a slower consumer loop rather than its cause.",
+      "type": "interpretation",
+      "basis": ["E4", "E2"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C8",
+      "statement": "The instrumentation gap is the binding constraint on attribution: available telemetry does not split database wait time from deserialization retry time, and no traces were retained.",
+      "type": "observation",
+      "basis": ["E5", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "statement": "An interaction explanation is admissible but not required: deserialization retries could lengthen the time work is held against the database, inflating lock waits, or index-rebuild contention could slow the loop enough to surface retry warnings.",
+      "type": "interpretation",
+      "basis": ["E4", "E3", "E5"],
+      "confidence": "low"
+    },
+    {
+      "id": "C10",
+      "statement": "Nothing in the package supports a cause outside the two changes - no third change, no load shift, no infrastructure event is recorded.",
+      "type": "inference",
+      "basis": ["E1", "E3", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C11",
+      "statement": "The 27-minute steady rise without recovery indicates the consumers did not self-correct within the window; the outcome ended only on intervention.",
+      "type": "inference",
+      "basis": ["E1", "E6"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C12",
+      "statement": "Operating context: a producer-consumer queue whose consumers depend on an external database and on a deserialization path in an upgradeable client library; the actors able to change the outcome are the change-deployment and revert mechanisms.",
+      "type": "inference",
+      "basis": ["E1", "E2", "E3", "E4"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C1",
+      "to": "C2",
+      "type": "supports",
+      "rationale": "Backlog growth under normal arrivals is the signature of reduced drain rate.",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C1",
+      "type": "supports",
+      "rationale": "A measured throughput drop directly evidences the reduced service rate.",
+      "confidence": "high"
+    },
+    {
+      "from": "C1",
+      "to": "C11",
+      "type": "contributes-to",
+      "rationale": "A sustained service-rate deficit produces monotonic backlog growth until the deficit is removed.",
+      "confidence": "high"
+    },
+    {
+      "from": "E3",
+      "to": "C3",
+      "type": "precedes",
+      "rationale": "Both changes landed within the hour before the throughput fall; temporal order only, not attribution.",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C1",
+      "type": "supports",
+      "rationale": "Restoration on joint revert ties the service-rate deficit to the change set.",
+      "confidence": "high"
+    },
+    {
+      "from": "E7",
+      "to": "C5",
+      "type": "contributes-to",
+      "rationale": "Absence of a single-change run is precisely what blocks isolating either factor.",
+      "confidence": "high"
+    },
+    {
+      "from": "C8",
+      "to": "C5",
+      "type": "contributes-to",
+      "rationale": "Without split timing or traces, the internal mechanism cannot be apportioned between the two paths.",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C5",
+      "type": "supports",
+      "rationale": "Simultaneous dual symptoms leave both single-cause stories equally consistent with the logs.",
+      "confidence": "medium"
+    },
+    {
+      "from": "C7",
+      "to": "C6",
+      "type": "mediates",
+      "rationale": "Downstream-effect reasoning weakens the inferential force of the log counts.",
+      "confidence": "medium"
+    },
+    {
+      "from": "C9",
+      "to": "C5",
+      "type": "supports",
+      "rationale": "A genuine interaction would explain the dual symptoms while making single-factor attribution wrong by construction.",
+      "confidence": "low"
+    },
+    {
+      "from": "C10",
+      "to": "C4",
+      "type": "supports",
+      "rationale": "Ruling out recorded alternatives strengthens the change-set attribution.",
+      "confidence": "medium"
+    },
+    {
+      "from": "E8",
+      "to": "C8",
+      "type": "contributes-to",
+      "rationale": "Trace loss removes the only retrospective route to per-span timing.",
+      "confidence": "high"
+    },
+    {
+      "from": "C12",
+      "to": "C9",
+      "type": "supports",
+      "rationale": "Shared consumer loop covering both the database call and deserialization is the structural precondition for interaction.",
+      "confidence": "low"
+    },
+    {
+      "from": "C5",
+      "to": "C4",
+      "type": "unknown",
+      "rationale": "Unidentifiability constrains how far the joint-revert result can be decomposed; it neither confirms nor refutes a single-factor account.",
+      "confidence": "medium"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "question": "Did the database index rebuild alone cause the throughput loss?",
+      "status": "live",
+      "discriminating_observation": "Revert or re-apply the index rebuild alone, library upgrade held constant, and measure consumer throughput.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U2",
+      "question": "Did the consumer-library upgrade alone cause the throughput loss?",
+      "status": "live",
+      "discriminating_observation": "Revert or re-apply the library upgrade alone, index state held constant, and measure consumer throughput.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U3",
+      "question": "Is the effect an interaction requiring both changes present, with neither sufficient alone?",
+      "status": "live",
+      "discriminating_observation": "A full two-by-two of both single-change conditions: interaction is indicated only if each alone is near-normal while both together reproduce the ~40% fall.",
+      "confidence": "low"
+    },
+    {
+      "id": "U4",
+      "question": "How is per-message processing time divided between database wait and deserialization retry?",
+      "status": "unresolved-by-package",
+      "discriminating_observation": "Add separated timers or span-level tracing for the two segments and compare their shares under load.",
+      "confidence": "high"
+    },
+    {
+      "id": "U5",
+      "question": "Are the increased lock waits a cause of the slowdown or a consequence of consumers holding work longer?",
+      "status": "live",
+      "discriminating_observation": "Database-side lock-wait metrics observed with consumers idle or at fixed synthetic rate during an index rebuild.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "question": "Did deserialization warnings correspond to actual retries and lost work, or were they non-fatal and throughput-neutral?",
+      "status": "live",
+      "discriminating_observation": "Retry counters and per-message success rate correlated against the warning rate.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U7",
+      "question": "Was the recovery after revert caused by the revert itself or by backlog drain and transient conditions clearing?",
+      "status": "live",
+      "discriminating_observation": "Throughput measured immediately at revert versus a matched no-revert control interval.",
+      "confidence": "low"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Run a single-change condition: re-apply exactly one of the two changes in a controlled environment and measure consumer throughput.",
+      "mechanism_targeted": "The unidentifiability created by the joint revert (C5, E7).",
+      "priority": 1,
+      "rationale": "This is the only action that converts the confirmed change-set attribution into a specific cause; every other action either assumes an answer or produces data that is still ambiguous without it.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Instrument the consumer loop so database wait time and deserialization/retry time are recorded as separate measures, and restore trace retention for the incident window class.",
+      "mechanism_targeted": "The telemetry gap that prevents apportioning processing time (C8, E5, E8).",
+      "priority": 2,
+      "rationale": "Removes the binding constraint permanently and makes any repeat diagnosable in-flight rather than only by revert; it also sharpens A1 by giving the single-change run an internal readout.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Keep both changes out of production until A1 completes, rather than re-landing either on the assumption it was innocent.",
+      "mechanism_targeted": "The service-rate deficit itself (C1), via the change set established by the joint revert (C4).",
+      "priority": 3,
+      "rationale": "Preserves the known-good state; the joint revert is the only intervention evidenced to restore throughput.",
+      "confidence": "high"
+    },
+    {
+      "id": "A4",
+      "action": "Complete the two-by-two by testing both single-change conditions, not just one, before declaring a single cause.",
+      "mechanism_targeted": "The interaction hypothesis (C9, U3).",
+      "priority": 4,
+      "rationale": "A single negative run is compatible with interaction; only both conditions distinguish a lone cause from a joint requirement.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Separate deployments of library upgrades and database schema or index operations in time so future change sets are attributable by construction.",
+      "mechanism_targeted": "The co-deployment that produced the confound (E3, E7).",
+      "priority": 5,
+      "rationale": "Process control that prevents recurrence of the unidentifiability, though it does not resolve this incident.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A6",
+      "action": "Verify whether deserialization warnings correspond to real retries and failed messages before treating them as a throughput mechanism.",
+      "mechanism_targeted": "The assumed causal weight of the warning signal (C7, U6).",
+      "priority": 6,
+      "rationale": "Cheap check that can demote one of the two live single-cause hypotheses without a full controlled run.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "F1",
+      "statement": "If a run existed in which only the library upgrade was reverted and throughput returned to normal, the index rebuild would be exonerated and the interaction hypothesis largely retired.",
+      "challenges": ["C5", "C9", "U1", "U3"],
+      "confidence": "high"
+    },
+    {
+      "id": "F2",
+      "statement": "If each change reverted alone left throughput depressed while the joint revert restored it, single-cause accounts would fail and the interaction explanation would become the required one.",
+      "challenges": ["U1", "U2"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F3",
+      "statement": "If arrival rate had in fact risen outside the normal range during the window, the consumer-side framing collapses and the change set becomes coincidental to a demand event.",
+      "challenges": ["C1", "C4"],
+      "confidence": "high"
+    },
+    {
+      "id": "F4",
+      "statement": "If lock waits had risen while deserialization warnings stayed flat, the database path would be the leading explanation and A1's first condition should be the index rebuild.",
+      "challenges": ["C6", "C5"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F5",
+      "statement": "If throughput had recovered before the revert was applied, the joint-revert result would lose its causal force and a transient condition would become the leading explanation.",
+      "challenges": ["C4", "U7"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F6",
+      "statement": "If retained traces showed deserialization retry time as a negligible share of processing time, the library upgrade would be demoted regardless of its warning volume.",
+      "challenges": ["C7", "U2", "U6"],
+      "confidence": "medium"
+    }
+  ]
+}
