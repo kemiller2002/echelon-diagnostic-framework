@@ -1,3 +1,11 @@
+---
+title: "Amendment A2: Two-family availability boundary"
+artifactType: experiment-amendment
+status: active
+date: 2026-09-22
+experiment: EX-EDF-001
+---
+
 # Amendment A2: Two-family availability boundary
 
 **Date:** 2026-09-22  
