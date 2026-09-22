@@ -1,0 +1,212 @@
+{
+  "version": "1.0.0",
+  "summary": "The queue grew because consumer throughput fell while arrivals remained normal. The incident coincided with both a consumer-library upgrade and a database index rebuild. Lock-wait messages and deserialization warnings increased, so either change—or both—may have reduced throughput. The joint reversion restored throughput, but the absence of isolated reversions, separable timing telemetry, and traces prevents attributing causality between the two changes.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Queue depth rose steadily for 27 minutes.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "Request arrival rate remained within the normal range during the queue growth.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C3",
+      "statement": "Consumer throughput fell by roughly 40% during the incident interval.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "Reduced consumer throughput, rather than elevated arrivals, explains the observed queue accumulation.",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "C5",
+      "statement": "A consumer-library upgrade and a database index rebuild occurred within the hour preceding the incident.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C6",
+      "statement": "Increased database lock waiting is a plausible contributor to the throughput reduction.",
+      "confidence": "medium",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C7",
+      "statement": "Increased deserialization warnings are a plausible indicator of retries or other processing disruption contributing to the throughput reduction.",
+      "confidence": "medium",
+      "evidence": ["E4", "E5"]
+    },
+    {
+      "id": "C8",
+      "statement": "Reverting both preceding changes was followed by restoration of normal throughput.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C9",
+      "statement": "The evidence does not establish which change caused the throughput reduction or whether both contributed.",
+      "confidence": "high",
+      "evidence": ["E5", "E7", "E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C3",
+      "to": "C1",
+      "type": "contributes-to",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "from": "C2",
+      "to": "C1",
+      "type": "supports",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "from": "C5",
+      "to": "C3",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E2", "E3"]
+    },
+    {
+      "from": "C6",
+      "to": "C3",
+      "type": "contributes-to",
+      "confidence": "medium",
+      "evidence": ["E4"]
+    },
+    {
+      "from": "C7",
+      "to": "C3",
+      "type": "contributes-to",
+      "confidence": "medium",
+      "evidence": ["E4", "E5"]
+    },
+    {
+      "from": "consumer-library upgrade",
+      "to": "C7",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E3", "E4", "E7"]
+    },
+    {
+      "from": "database index rebuild",
+      "to": "C6",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E3", "E4", "E7"]
+    },
+    {
+      "from": "joint reversion",
+      "to": "normal throughput",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E6"]
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "issue": "The relative time spent on database lock waits versus deserialization retries is unknown.",
+      "reason": "Available telemetry does not separate the two categories.",
+      "resolvingEvidence": "Per-message or aggregate timing metrics that separately measure database waiting and deserialization retry time."
+    },
+    {
+      "id": "U2",
+      "issue": "The causal effect of the consumer-library upgrade is unresolved.",
+      "reason": "Both changes were reverted together.",
+      "resolvingEvidence": "A controlled run reverting only the library upgrade while holding the database state constant."
+    },
+    {
+      "id": "U3",
+      "issue": "The causal effect of the database index rebuild is unresolved.",
+      "reason": "Both changes were reverted together.",
+      "resolvingEvidence": "A controlled run reverting only the index rebuild while holding the library version constant."
+    },
+    {
+      "id": "U4",
+      "issue": "Whether both changes interacted to produce the throughput loss is unresolved.",
+      "reason": "There are no isolated-change runs or incident traces.",
+      "resolvingEvidence": "A factorial comparison of baseline, library-only, index-only, and both-changes configurations."
+    },
+    {
+      "id": "U5",
+      "issue": "The detailed execution path from either symptom to reduced throughput is unknown.",
+      "reason": "No trace samples were retained from the incident window.",
+      "resolvingEvidence": "Distributed traces covering deserialization, retries, database calls, lock waits, and message completion."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Test the library upgrade independently with the database change absent and compare throughput, deserialization warnings, and retries.",
+      "priority": 1,
+      "addresses": ["U2"]
+    },
+    {
+      "id": "A2",
+      "action": "Test the index rebuild independently with the prior library version and compare throughput and lock-wait time.",
+      "priority": 1,
+      "addresses": ["U3"]
+    },
+    {
+      "id": "A3",
+      "action": "Test both changes together and compare the result with the two isolated-change runs.",
+      "priority": 2,
+      "addresses": ["U4"]
+    },
+    {
+      "id": "A4",
+      "action": "Add separate telemetry for database waiting and deserialization retries.",
+      "priority": 2,
+      "addresses": ["U1"]
+    },
+    {
+      "id": "A5",
+      "action": "Retain trace samples spanning deserialization, database access, retries, and message completion during future incidents.",
+      "priority": 2,
+      "addresses": ["U5"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "condition": "Only the consumer-library upgrade is reverted.",
+      "expectedObservation": "A throughput recovery would support the library upgrade as a contributor; no recovery would weaken that explanation.",
+      "status": "untested",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "CF2",
+      "condition": "Only the database index rebuild is reverted.",
+      "expectedObservation": "A throughput recovery would support the index rebuild as a contributor; no recovery would weaken that explanation.",
+      "status": "untested",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "CF3",
+      "condition": "Each isolated change has little effect, but applying both reproduces the throughput loss.",
+      "expectedObservation": "This would support an interaction between the two changes.",
+      "status": "untested",
+      "evidence": ["E3", "E7"]
+    },
+    {
+      "id": "CF4",
+      "condition": "Consumer throughput had remained normal while arrivals stayed within the normal range.",
+      "expectedObservation": "The observed sustained queue growth would not be explained by the documented arrival and consumption rates.",
+      "status": "not_observed",
+      "evidence": ["E1", "E2"]
+    }
+  ]
+}
