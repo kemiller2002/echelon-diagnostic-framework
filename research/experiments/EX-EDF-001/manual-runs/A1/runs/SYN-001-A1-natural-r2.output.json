@@ -1,0 +1,169 @@
+{
+  "summary": "The newly enabled legacy-client adapter configuration is the best-supported cause of the invoice creation error spike. It omitted the region-header mapping required by routing, and nearly all sampled failures lacked that header. Disabling the configuration was followed by rapid recovery. The evidence does not establish whether the CPU increase was causal, and it does not connect the earlier PDF rendering ticket to the incident.",
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Invoice creation errors rose sharply shortly after legacy-client traffic began using the new adapter configuration.",
+      "evidence": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "The new legacy-client adapter configuration omitted the region-header mapping required by the routing function.",
+      "evidence": ["E3", "E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Missing region headers were the dominant observed characteristic of sampled failed requests.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "The new legacy-client adapter configuration caused or materially contributed to the invoice creation failures.",
+      "evidence": ["E1", "E2", "E3", "E4", "E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "The database was not supported as the source of the error spike.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "Disabling the new legacy-client adapter configuration was followed by restoration of the prior low error rate.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "Application CPU increased during the incident, but its causal role is unresolved.",
+      "evidence": ["E7"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C8",
+      "claim": "The evidence does not establish a relationship between the PDF rendering ticket and the invoice creation failures.",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "E1",
+      "relationship": "precedes",
+      "target": "E2",
+      "confidence": "high"
+    },
+    {
+      "source": "E4",
+      "relationship": "supports",
+      "target": "C2",
+      "confidence": "high"
+    },
+    {
+      "source": "E3",
+      "relationship": "supports",
+      "target": "C3",
+      "confidence": "high"
+    },
+    {
+      "source": "C2",
+      "relationship": "contributes-to",
+      "target": "C4",
+      "confidence": "high"
+    },
+    {
+      "source": "C3",
+      "relationship": "supports",
+      "target": "C4",
+      "confidence": "high"
+    },
+    {
+      "source": "E6",
+      "relationship": "supports",
+      "target": "C4",
+      "confidence": "high"
+    },
+    {
+      "source": "E5",
+      "relationship": "supports",
+      "target": "C5",
+      "confidence": "high"
+    },
+    {
+      "source": "E7",
+      "relationship": "unknown",
+      "target": "C4",
+      "confidence": "high"
+    },
+    {
+      "source": "E8",
+      "relationship": "unknown",
+      "target": "C4",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "The cause of the remaining 3% of sampled failures is not identified.",
+      "resolvingEvidence": "Request-level traces and error details for those sampled failures."
+    },
+    {
+      "issue": "The evidence does not show whether all missing region headers resulted from the omitted adapter mapping.",
+      "resolvingEvidence": "End-to-end header traces comparing incoming legacy requests with adapter output."
+    },
+    {
+      "issue": "The role of the CPU increase is unresolved.",
+      "resolvingEvidence": "Time-aligned CPU, request-volume, latency, and failure telemetry, plus results from reproducing the configuration change."
+    },
+    {
+      "issue": "No causal connection between the PDF rendering ticket and this incident is established.",
+      "resolvingEvidence": "Ticket diagnostics and request traces showing whether it involved the same invoice-creation path and failure mode."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Restore the region-header mapping in the legacy-client adapter configuration before re-enabling it.",
+      "basis": ["E3", "E4", "E6"],
+      "priority": "high"
+    },
+    {
+      "action": "Test legacy-client routing with present and absent region headers and verify invoice creation before another cutover.",
+      "basis": ["E3", "E4"],
+      "priority": "high"
+    },
+    {
+      "action": "Review request traces for the sampled failures not explained by missing region headers.",
+      "basis": ["E3"],
+      "priority": "medium"
+    },
+    {
+      "action": "Investigate the CPU increase separately if it persists after recovery.",
+      "basis": ["E7"],
+      "priority": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the legacy-client adapter had retained the required region-header mapping,",
+      "expectedOutcome": "the dominant observed failure mechanism would likely have been prevented.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "condition": "If disabling the new adapter configuration had not reduced errors,",
+      "expectedOutcome": "the causal case against that configuration would be weaker.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "condition": "If database metrics had departed from their normal range during the incident,",
+      "expectedOutcome": "a database contribution would require further consideration.",
+      "confidence": "medium",
+      "evidence": ["E5"]
+    }
+  ]
+}
