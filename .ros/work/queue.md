@@ -12,3 +12,4 @@
 | WI-0003 | Author EX-EDF-2026-A003 case ST-006 (propagation) | complete | edf-002,case-authoring | high |
 | WI-0004 | Author EX-EDF-2026-A003 case ST-008 (evidence-revision) | complete | edf-002,case-authoring | high |
 | WI-0005 | Author EX-EDF-2026-A003 case ST-010 (interaction) | complete | edf-002,case-authoring | high |
+| WI-0006 | Author EX-EDF-2026-A003 case ST-012 (protective-controls) | complete | edf-002,case-authoring | high |
