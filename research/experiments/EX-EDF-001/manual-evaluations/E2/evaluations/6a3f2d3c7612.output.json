@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "All three required findings are explicitly and correctly stated: the legacy adapter's missing region-header mapping (C4/C5), the missing header causing routing/invoice failures (C6), and disabling the adapter restoring service (C7/E6). No forbidden claims appear: the database is explicitly excluded via E5 (C9), CPU rise is correctly reasoned as a downstream effect rather than a primary cause (C10, tested via counterfactual CF5), and the PDF ticket is correctly dismissed as coincidental (C11) with no evidenced pathway. Causal structure is accurate and well-mediated (C5→C6 mediates the header omission to failure), with directionality supported by the reversal-on-removal logic (C7→C8) and no invented mechanisms. Evidence discipline is strong — every material claim cites specific evidence IDs, and the residual 3% of failures lacking the missing-header signature is honestly flagged (C12) rather than glossed over. Uncertainty calibration is a particular strength: six well-formed uncertainty items with concrete discriminating observations, live counterfactuals that could have disconfirmed the primary explanation (CF1–CF6), and appropriately hedged medium-confidence claims where the evidence doesn't fully resolve directionality (e.g., CPU, residual failures). Actions are well-prioritized, target the correct mechanism (add the region-header mapping matching the modern-client adapter), include verification and staged rollout to bound risk, and explicitly avoid wasted effort on the database/PDF non-issues without weakening any protective control. This is a comprehensive, tightly evidence-bound analysis with no material errors or omissions."
+}
