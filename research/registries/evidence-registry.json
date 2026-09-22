@@ -1,6 +1,6 @@
 {
-  "version": "1.2.0",
-  "updated": "2026-09-21",
+  "version": "1.3.0",
+  "updated": "2026-09-22",
   "evidence": [
     {
       "id": "EV-EDF-001",
@@ -96,6 +96,17 @@
       ],
       "supports": "A construct-aligned, frozen, fail-closed test now exists for HY-EDF-008 and can preserve future run provenance.",
       "limitations": "No analyzer run, evaluator score, or EDF performance result exists yet. This is procedural evidence only and must not be used to promote HY-EDF-008."
+    },
+    {
+      "id": "EV-EDF-009",
+      "type": "blinded-two-family-benchmark",
+      "title": "EX-EDF-001 two-family structural-value result",
+      "paths": [
+        "research/experiments/EX-EDF-001/two-family-results.json",
+        "research/analysis/edf-two-family-structural-value-results.md"
+      ],
+      "supports": "Under six synthetic held-out cases, EDF did not demonstrate a material semantic advantage over a strong matched-neutral structured prompt. Complete two-evaluator pairs showed +0.56 points versus a frozen +5 margin; post-hoc fence-strip sensitivity across all 12 pairs showed +0.21 points.",
+      "limitations": "Original EX-EDF-001 required three analyzer families and remains incomplete. Three E2 outputs were schema-invalid due Markdown fences. Evaluator scores showed severe ceiling effects, especially E2. Results are bounded to these cases, models, prompts, and rubric."
     }
   ]
 }
