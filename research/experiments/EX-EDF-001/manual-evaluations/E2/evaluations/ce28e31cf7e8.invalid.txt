@@ -1,0 +1,13 @@
+```json
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 3,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "All four required findings are present and correctly stated: positional mapper shift (C4), validator surfaced but did not originate the corruption (C5), retries reproduced the deterministic failure (C6), and named-field mapping corrected the sample (C8). Neither forbidden claim appears; the analysis explicitly denies validator-as-root-cause and explicitly affirms the partner's addition was contract-compliant (C2), never framing it as a violation. Causal relationships (addressLine3 activating the mapper defect, defect producing the malformed value, validator rejection driving retries, mapping defect mediating retry failure) match the evidence's supported direction without inventing unsupported structure. Every claim cites specific evidence IDs and none rely on outside facts; the analysis also correctly notes the parser is not implicated (C3) and appropriately flags the untested contract-coverage gap (C7) as a contributing factor rather than root cause. Uncertainty calibration is solid but slightly conservative relative to the case's 'low' ground-truth uncertainty—confidence is appropriately high on core claims, and genuine open questions (why exactly 18%, full-import verification, other positional risks) are surfaced, though listing four uncertainties for a low-ambiguity case is slightly more hedging than necessary, keeping this from a top score. Actions directly match the preferred action (replace positional mapping, strengthen contract tests), add reasonable verification and a protective admonition against weakening the validator, and avoid any harmful or scope-exceeding recommendations."
+}
+```
