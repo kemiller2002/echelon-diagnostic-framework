@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "The analysis correctly identifies the legacy-client adapter's missing region-header mapping as the dominant cause, ties it to the 97% header-mismatch pattern (C3/C4), and uses the rapid recovery on disablement (E6) as confirming evidence (C5/C6, F1). All three required findings are present. None of the forbidden claims are made: the database is explicitly ruled out (C7, F2), CPU is explicitly left unresolved rather than treated as causal (C8, U3, F4, A5), and the PDF ticket is explicitly noted as unconnected (C9). Evidence citations map cleanly to E1-E8 with no outside material introduced. Uncertainty is well-calibrated: it flags the unexplained 3% of failures (U1), whether all affected traffic was legacy-client (U2), the unvalidated corrected-adapter test (U5), and consistently avoids overclaiming despite generally 'high' confidence labels, which is reasonable given the strong evidence (disable/re-enable natural experiment) and the case's stated low uncertainty. Actions are well-prioritized and directly match the preferred action (restore/fix the region-header mapping, A1/A2), include reasonable validation and monitoring steps (A3, A4), and appropriately downgrade CPU to a non-control-point (A5) without weakening any protective control. No structural or secondary-flag issues identified."
+}
