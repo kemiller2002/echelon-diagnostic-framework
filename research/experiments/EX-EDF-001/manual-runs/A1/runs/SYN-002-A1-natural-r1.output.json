@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "summary": "The product-temperature exceedance is best explained by the interaction of humidity-dependent sensor calibration drift and defective compressor restart logic. Either condition alone was present in a comparison run without an exceedance. Alert suppression did not cause the initial crossing but extended operator response afterward.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Three refrigerated containers exceeded the product temperature limit during the six-hour transfer.",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Relative humidity exceeded 88% for 73 minutes during the transfer.",
+      "evidence": ["E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "When relative humidity exceeded 88%, sensor calibration drifted upward by about 1.5 C.",
+      "evidence": ["E2", "E5"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "After communications timeouts, the firmware defect caused every second compressor restart command to be ignored.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Neither the firmware defect with calibrated sensors nor the sensor drift with corrected restart logic was sufficient to produce a product-limit exceedance in the comparison runs.",
+      "evidence": ["E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "The evidence supports the sensor drift and restart defect acting jointly in the exceedance.",
+      "evidence": ["E2", "E3", "E5", "E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "statement": "The alerting rule suppressed repeated temperature alerts for 45 minutes after the first acknowledgement.",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "The delayed alert extended operator response only after the product temperature had already crossed the limit.",
+      "evidence": ["E8"],
+      "confidence": "high"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "C2",
+      "target": "C3",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "source": "C4",
+      "target": "C6",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "source": "C5",
+      "target": "C6",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "source": "C6",
+      "target": "C1",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "source": "C7",
+      "target": "C8",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "source": "C1",
+      "target": "C8",
+      "type": "precedes",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "The evidence does not specify how an upward sensor drift affected the controller's temperature interpretation or compressor behavior.",
+      "resolvingEvidence": "Time-aligned raw sensor readings, independently calibrated product-temperature readings, and controller decision logs."
+    },
+    {
+      "issue": "The number and timing of communications timeouts, restart commands, and ignored commands during the affected transfer are not provided.",
+      "resolvingEvidence": "Timestamped communications and compressor-controller command logs for the transfer."
+    },
+    {
+      "issue": "The evidence does not quantify how much the delayed operator response increased the duration or severity of the exceedance.",
+      "resolvingEvidence": "Alert, acknowledgement, operator-action, and product-temperature timestamps."
+    },
+    {
+      "issue": "It is not stated whether all three affected containers experienced the same humidity, drift, timeout, and restart-command sequence.",
+      "resolvingEvidence": "Container-level humidity, calibration, communications, controller, and temperature records."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Correct the compressor restart logic so restart commands are not systematically ignored after communications timeouts.",
+      "basis": ["E3", "E7"],
+      "confidence": "high"
+    },
+    {
+      "action": "Correct or compensate for sensor calibration drift when relative humidity exceeds 88%.",
+      "basis": ["E2", "E5", "E6"],
+      "confidence": "high"
+    },
+    {
+      "action": "Revise the alert-suppression behavior so continued or worsening temperature excursions are not hidden for 45 minutes.",
+      "basis": ["E4", "E8"],
+      "confidence": "high"
+    },
+    {
+      "action": "Validate the combined corrections under transfer conditions that include humidity above 88% and communications timeouts.",
+      "basis": ["E2", "E3", "E5", "E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "action": "Collect synchronized container-level sensor, humidity, controller, alert, and operator-response logs.",
+      "basis": ["E1", "E2", "E3", "E8"],
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the sensors had remained calibrated while the firmware defect persisted,",
+      "outcome": "the comparison evidence indicates the containers would have stayed within the product limit.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "condition": "If restart logic had been corrected while the sensor drift persisted,",
+      "outcome": "the comparison evidence indicates the containers would have stayed within the product limit.",
+      "evidence": ["E7"],
+      "confidence": "high"
+    },
+    {
+      "condition": "If repeated alerts had not been suppressed,",
+      "outcome": "operator response may have occurred sooner after the crossing, but the evidence does not establish that the initial crossing would have been prevented.",
+      "evidence": ["E4", "E8"],
+      "confidence": "high"
+    }
+  ]
+}
