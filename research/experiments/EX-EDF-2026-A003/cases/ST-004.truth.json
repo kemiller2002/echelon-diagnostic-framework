@@ -1,0 +1,312 @@
+{
+  "caseId": "ST-004",
+  "authorFamily": "Anthropic",
+  "construct": "control-points",
+  "hypothesis": "HY-EDF-2026-A012",
+  "mechanismSummary": "Quartermaster template tenant-defaults-v7 (released 2026-06-18) dropped the dedupeWindowMs key. edge-gateway 11.2 resolves an absent dedupeWindowMs to a window of 0, so the dedupe shim is effectively disabled for the eleven tenants materialized on or after that date. Tracklet v4 units re-send each position fix up to four times by design, so for those tenants roughly four rows are written per position fix instead of one. The resulting write amplification drives compaction backlog growth, which mediates the geofence read p99 regression. Every loud remedy sits downstream of the shim: scaling frame-writer converted consumer lag into faster backlog growth, raising the compaction rate cap spends the headroom that protects route-planner on unisolated pool-c, and widening the read timeout and alert threshold hides a system with 18% disk falling 1.1 points per day. The only control point that changes the mechanism is the gateway dedupe window plus a loader that refuses a configuration omitting it, which also covers the eleven onboardings already scheduled on v7.",
+  "answers": [
+    {
+      "itemId": "SI-H01",
+      "expected": "supported",
+      "weight": 2.0,
+      "requiredEvidence": ["EV-07", "EV-10", "EV-12", "EV-24", "EV-25"],
+      "allowedEvidence": ["EV-07", "EV-08", "EV-10", "EV-12", "EV-13", "EV-14", "EV-24", "EV-25"],
+      "rationale": "Write rate rose nearly fourfold while active units rose 9% (EV-07); pre-shim frames per position fix are identical across cohorts and flat since April (EV-10), so the excess is created after the shim, not before it; post-shim dedupe ratio is 0.00-0.02 for the later cohort and 0.73-0.79 for the earlier one (EV-12); the eleven configurations lacking the key are exactly the later cohort (EV-25); and an absent key resolves to a window of 0 rather than to 15000 (EV-24)."
+    },
+    {
+      "itemId": "SI-H02",
+      "expected": "unknown",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-18"],
+      "allowedEvidence": ["EV-02", "EV-05", "EV-12", "EV-18"],
+      "rationale": "The cohort split rules the upgrade out as the explanation for which tenants drive writes, but it does not rule out an independent contribution to backlog accumulation. compaction_backlog_bytes did not exist before 2.10.1, the upgrade was not canaried, and both cohorts sit on the single upgraded cluster (EV-18), so no version-differentiated comparison exists. The discriminating measurement is genuinely absent, not merely ambiguous."
+    },
+    {
+      "itemId": "SI-H03",
+      "expected": "refuted",
+      "weight": 1.8,
+      "requiredEvidence": ["EV-03", "EV-06"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-06", "EV-07"],
+      "rationale": "After the consumer group doubled to 24 replicas, consumer lag fell from 41 minutes to 8 minutes while geofence read p99 rose from 1,940 ms to 2,610 ms and backlog grew from 1.9 TB to 3.4 TB (EV-03, EV-06). Lag and read latency moved in opposite directions, so lag is not what drives the latency."
+    },
+    {
+      "itemId": "SI-H04",
+      "expected": "unknown",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-17"],
+      "allowedEvidence": ["EV-04", "EV-16", "EV-17", "EV-22"],
+      "rationale": "Latency is above objective outside the batch window as well as inside it (EV-22), so the batch cannot be the whole story, but its share cannot be quantified: control-group level disk attribution is not collected and never has been for pool-c (EV-17). The measurement that would settle a partial contribution does not exist."
+    },
+    {
+      "itemId": "SI-H05",
+      "expected": "refuted",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-10"],
+      "allowedEvidence": ["EV-07", "EV-09", "EV-10", "EV-12"],
+      "rationale": "frames_received_per_position_fix has held between 3.8 and 4.1 since April with no step change and reads the same for both cohorts (EV-10). Frame volume arriving at the gateway per fix did not rise, so a firmware re-send regression is excluded."
+    },
+    {
+      "itemId": "SI-H06",
+      "expected": "refuted",
+      "weight": 1.2,
+      "requiredEvidence": ["EV-20"],
+      "allowedEvidence": ["EV-01", "EV-20", "EV-22"],
+      "rationale": "The June-to-September audit found query shapes, predicate cardinality, rows scanned per query and query volume per active unit unchanged to within plus or minus 3% (EV-20)."
+    },
+    {
+      "itemId": "SI-E01",
+      "expected": "confirmed",
+      "weight": 2.0,
+      "requiredEvidence": ["EV-12", "EV-24", "EV-25"],
+      "allowedEvidence": ["EV-07", "EV-08", "EV-10", "EV-12", "EV-13", "EV-24", "EV-25"],
+      "rationale": "An absent key gives a window of 0 and passes every frame through (EV-24); eleven configurations lack the key (EV-25) and those same tenants show a collapsed-frame ratio of 0.00-0.02 (EV-12); they produce 71% of index writes on 8% of units (EV-08)."
+    },
+    {
+      "itemId": "SI-E02",
+      "expected": "confirmed",
+      "weight": 1.2,
+      "requiredEvidence": ["EV-02", "EV-06", "EV-07"],
+      "allowedEvidence": ["EV-02", "EV-06", "EV-07", "EV-08", "EV-21"],
+      "rationale": "Write rate rose from 41k to 158k rows per second while backlog rose from 0.2 TB to 1.9 TB to 3.4 TB over the same period (EV-02, EV-06, EV-07), and disk drawdown tracks the same write rate (EV-21)."
+    },
+    {
+      "itemId": "SI-E03",
+      "expected": "confirmed",
+      "weight": 1.2,
+      "requiredEvidence": ["EV-01", "EV-02", "EV-06"],
+      "allowedEvidence": ["EV-01", "EV-02", "EV-06", "EV-07", "EV-22", "EV-23"],
+      "rationale": "Read p99 tracks backlog rather than write rate directly: it worsened as backlog grew even after consumer lag was removed (EV-03, EV-06), and it improved when backlog was drained by 0.3 TB with write volume unchanged (EV-23). That is the signature of a mediating variable."
+    },
+    {
+      "itemId": "SI-E04",
+      "expected": "unknown",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-18"],
+      "allowedEvidence": ["EV-02", "EV-05", "EV-12", "EV-18"],
+      "rationale": "No pre-upgrade backlog series exists, the upgrade was not canaried, and both cohorts share the one cluster (EV-18), so an independent contribution from the compaction-trigger change can be neither confirmed nor refuted."
+    },
+    {
+      "itemId": "SI-E05",
+      "expected": "refuted",
+      "weight": 2.0,
+      "requiredEvidence": ["EV-03", "EV-06"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-06", "EV-07", "EV-21"],
+      "rationale": "Backlog grew from 1.9 TB to 3.4 TB in the eight days after replicas doubled (EV-02, EV-06). Additional consumers move rows into the index faster; they relocate the queue from Kafka into the LSM store rather than preventing backlog growth."
+    },
+    {
+      "itemId": "SI-E06",
+      "expected": "refuted",
+      "weight": 1.2,
+      "requiredEvidence": ["EV-10"],
+      "allowedEvidence": ["EV-09", "EV-10", "EV-12"],
+      "rationale": "The pre-shim duplicate ratio is flat since April and identical across cohorts (EV-10), including across the 2026-08-24 to 2026-08-27 maintenance window (EV-09), so carrier packet loss did not change the duplicate frame rate."
+    },
+    {
+      "itemId": "SI-E07",
+      "expected": "unknown",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-17"],
+      "allowedEvidence": ["EV-04", "EV-17", "EV-22"],
+      "rationale": "The window overlap is suggestive and latency is worse inside the window than outside it (EV-22), but with no per-service disk attribution on pool-c (EV-17) the batch's contribution cannot be established or excluded."
+    },
+    {
+      "itemId": "SI-E08",
+      "expected": "confirmed",
+      "weight": 2.0,
+      "requiredEvidence": ["EV-16", "EV-17"],
+      "allowedEvidence": ["EV-16", "EV-17", "EV-23"],
+      "rationale": "The cap holds compaction to roughly 40% of pool-c throughput and was introduced precisely because unthrottled compaction drove route-planner timeouts to 12% (EV-16); pool-c still has no per-service isolation (EV-17); and a 44% raise already moved route-planner p99 by 40% in one night (EV-23). The cap is an active containment control, not an incidental setting."
+    },
+    {
+      "itemId": "SI-E09",
+      "expected": "confirmed",
+      "weight": 1.8,
+      "requiredEvidence": ["EV-19", "EV-25"],
+      "allowedEvidence": ["EV-07", "EV-08", "EV-19", "EV-24", "EV-25"],
+      "rationale": "Eleven further tenants are scheduled on the same template that omits the key, carrying roughly 2.3 times the current later-cohort unit count (EV-19). Because materialization happens at onboarding from that template (EV-25, EV-24), each wave adds further uncollapsed write volume."
+    },
+    {
+      "itemId": "SI-E10",
+      "expected": "unknown",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-27"],
+      "allowedEvidence": ["EV-02", "EV-06", "EV-21", "EV-27"],
+      "rationale": "Rows carry no ingest-cohort tag and write provenance is not retained, so the backlog cannot be decomposed into already-written and incoming rows and none can be reconstructed (EV-27). The share of current p99 owed to historical rows is genuinely unmeasured."
+    },
+    {
+      "itemId": "SI-A01",
+      "expected": "harmful",
+      "weight": 2.5,
+      "requiredEvidence": ["EV-16", "EV-17", "EV-23"],
+      "allowedEvidence": ["EV-07", "EV-16", "EV-17", "EV-19", "EV-23"],
+      "rationale": "Harmful. The cap is the containment control that keeps compaction inside roughly 40% of unisolated pool-c throughput after the 2025-11-04 route-planner outage (EV-16, EV-17). Raising it to 600 MB/s spends that entire reserve, and a raise to only 260 already cost route-planner 40% of its p99 (EV-23). It leaves write volume untouched while volume keeps climbing (EV-07, EV-19), so the backlog returns and the next raise has no headroom left to take."
+    },
+    {
+      "itemId": "SI-A02",
+      "expected": "harmful",
+      "weight": 2.2,
+      "requiredEvidence": ["EV-03", "EV-06", "EV-21"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-06", "EV-07", "EV-21"],
+      "rationale": "Harmful. The same move from 12 to 24 replicas already converted consumer lag into faster backlog growth and worse read latency (EV-03, EV-06). Going to 40 accelerates duplicate rows onto a cluster at 18% free disk losing 1.1 points per day (EV-21), moving the failure from latency toward disk exhaustion."
+    },
+    {
+      "itemId": "SI-A03",
+      "expected": "rejected",
+      "weight": 2.0,
+      "requiredEvidence": ["EV-19", "EV-21"],
+      "allowedEvidence": ["EV-01", "EV-19", "EV-21", "EV-22"],
+      "rationale": "Moving the threshold to match the degraded value removes the only signal on a system whose disk headroom is falling 1.1 points per day (EV-21) with eleven further onboardings queued on the same template (EV-19). It changes what is observed, not what is happening."
+    },
+    {
+      "itemId": "SI-A04",
+      "expected": "preferred",
+      "weight": 3.0,
+      "requiredEvidence": ["EV-19", "EV-24", "EV-25"],
+      "allowedEvidence": ["EV-07", "EV-12", "EV-13", "EV-14", "EV-19", "EV-24", "EV-25"],
+      "rationale": "This is the control point at which the excess rows are created. Writing the value into the eleven configurations restores collapsing for the affected tenants (EV-24, EV-25, EV-12), and making the loader refuse a configuration that omits the key removes the silent-default behaviour that let a template edit disable the shim, which also covers the eleven onboardings already scheduled on v7 (EV-19). It reduces the rows arriving rather than absorbing them."
+    },
+    {
+      "itemId": "SI-A05",
+      "expected": "rejected",
+      "weight": 2.2,
+      "requiredEvidence": ["EV-07", "EV-17"],
+      "allowedEvidence": ["EV-07", "EV-16", "EV-17", "EV-19", "EV-22"],
+      "rationale": "Architecturally appealing but unsupported here. No evidence establishes pool-c contention as a cause of the current regression; the contribution is explicitly unmeasurable (EV-17), and latency is above objective outside the contended window (EV-22). It leaves the fourfold write amplification in place (EV-07) and adds capacity that the growing volume will consume (EV-19)."
+    },
+    {
+      "itemId": "SI-A06",
+      "expected": "rejected",
+      "weight": 2.5,
+      "requiredEvidence": ["EV-15", "EV-25"],
+      "allowedEvidence": ["EV-14", "EV-15", "EV-24", "EV-25"],
+      "rationale": "Upstream-sounding but ineffective on this system. Gateway configurations are materialized once at onboarding and the gateway reads the store, never the template; re-running provisioning for an existing tenant is a no-op without --force-rematerialize, which is disabled in production (EV-15). The rollback therefore does not restore the key in any of the eleven stored configurations (EV-25), and no evidence indicates v7 broke anything beyond the omitted key."
+    },
+    {
+      "itemId": "SI-A07",
+      "expected": "acceptable",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-02", "EV-27"],
+      "allowedEvidence": ["EV-02", "EV-06", "EV-21", "EV-24", "EV-27"],
+      "rationale": "Supported and non-harmful as sequenced remediation of accumulated state once the ingest path is corrected, but not preferred: it changes nothing about the rate at which rows arrive, and the backlog cannot be decomposed into historical and incoming rows (EV-27), so its effect on p99 is not established."
+    },
+    {
+      "itemId": "SI-A08",
+      "expected": "acceptable",
+      "weight": 1.5,
+      "requiredEvidence": ["EV-11", "EV-12"],
+      "allowedEvidence": ["EV-11", "EV-12", "EV-25"],
+      "rationale": "Supported and non-harmful. The fleet-wide tile stayed inside its nominal band throughout because it aggregates per active unit, while per-tenant values were at zero for eleven tenants (EV-11, EV-12). A per-tenant check would have surfaced the condition. It is detection rather than mechanism change, so acceptable rather than preferred."
+    },
+    {
+      "itemId": "SI-CP1",
+      "expected": "symptom-suppression",
+      "weight": 2.5,
+      "requiredEvidence": ["EV-07", "EV-16", "EV-23"],
+      "allowedEvidence": ["EV-07", "EV-16", "EV-17", "EV-19", "EV-23"],
+      "rationale": "Draining faster acts on the backlog, which is the symptom, while the rate of arriving rows is unchanged (EV-07). It works by spending the containment reserve that protects a co-tenant on unisolated hardware (EV-16, EV-23)."
+    },
+    {
+      "itemId": "SI-CP2",
+      "expected": "symptom-suppression",
+      "weight": 2.2,
+      "requiredEvidence": ["EV-03", "EV-06"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-06", "EV-07"],
+      "rationale": "More consumers relieve the visible Kafka queue and relocate the accumulation into the index, as the previous doubling already demonstrated (EV-03, EV-06). The rows created upstream are unchanged."
+    },
+    {
+      "itemId": "SI-CP3",
+      "expected": "symptom-suppression",
+      "weight": 2.2,
+      "requiredEvidence": ["EV-01", "EV-21"],
+      "allowedEvidence": ["EV-01", "EV-19", "EV-21", "EV-22"],
+      "rationale": "Widening the timeout and moving the threshold changes what is reported about the latency (EV-01) and leaves the write amplification and the disk drawdown untouched (EV-21)."
+    },
+    {
+      "itemId": "SI-CP4",
+      "expected": "mechanism-change",
+      "weight": 3.0,
+      "requiredEvidence": ["EV-19", "EV-24", "EV-25"],
+      "allowedEvidence": ["EV-12", "EV-13", "EV-19", "EV-24", "EV-25"],
+      "rationale": "It acts on the shim window itself, the point where roughly four frames per position fix are either collapsed into one row or not (EV-24, EV-25), and the loader change stops the same silent default from recurring on the queued onboardings (EV-19)."
+    },
+    {
+      "itemId": "SI-CP5",
+      "expected": "no-mechanism-effect",
+      "weight": 2.5,
+      "requiredEvidence": ["EV-15"],
+      "allowedEvidence": ["EV-14", "EV-15", "EV-24", "EV-25"],
+      "rationale": "The action targets the artefact where the key was dropped, but the gateway never reads templates and existing configurations are not re-materialized without a flag disabled in production (EV-15). Neither the stored configurations nor the arriving row volume changes, so the mechanism is left exactly as it is."
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["EV-04", "EV-05", "EV-09", "EV-26"],
+    "redHerringNotes": [
+      "EV-04: corridor-rebuild batch window overlaps the worst latency and was introduced eight days before the first page, inviting a noisy-neighbour diagnosis; EV-22 shows latency is above objective outside the window and EV-17 makes the contribution unmeasurable.",
+      "EV-05: the geo-index 2.10.1 upgrade landed three days before the first page and its release note names the compaction trigger, inviting a change-caused-it diagnosis; the cohort split in EV-08 and EV-12 cannot be produced by a cluster-wide upgrade.",
+      "EV-09: carrier maintenance with elevated packet loss invites attributing duplicate frames to retransmission; EV-10 shows the pre-shim duplicate ratio is flat and cohort-identical.",
+      "EV-26: broker in-sync-replica shrink events during the same week are unrelated to row volume or to compaction and connect to nothing else in the case."
+    ],
+    "conflictingEvidencePairs": [
+      {
+        "ids": ["EV-03", "EV-06"],
+        "note": "INC-8841 records the scale-out as having resolved the latency; INC-8903 shows latency worse and backlog nearly doubled after it, with lag now absent. Resolution: the first remediation removed the visible queue and accelerated the underlying accumulation."
+      },
+      {
+        "ids": ["EV-11", "EV-12"],
+        "note": "The fleet-wide dedupe_hit_ratio tile reads nominal at 0.74 while eleven tenants read 0.00-0.02. Resolution: the tile aggregates per active unit and the unaffected cohort holds 92% of units, so the aggregate hides the split."
+      },
+      {
+        "ids": ["EV-14", "EV-24"],
+        "note": "The Quartermaster v7 release note asserts that omitted keys fall back to documented service defaults; the gateway 11.2 runbook states that an absent dedupeWindowMs resolves to a window of 0 because the 15000 ms default lives in the template, not the binary. Resolution: the gateway runbook describes the deployed behaviour and EV-12 confirms it empirically."
+      },
+      {
+        "ids": ["EV-16", "EV-23"],
+        "note": "The bounded throttle-raise trial reads as a success, improving backlog and read p99 with route-planner still inside its objective; EV-16 records that the cap exists because unthrottled compaction previously drove route-planner timeouts to 12%. Resolution: the trial raised the limit by 44% and consumed 40% of route-planner's latency margin, so it measures the cost of the reserve rather than establishing that the reserve is spare."
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "MI-01",
+        "description": "No pre-upgrade compaction backlog series exists (compaction_backlog_bytes was introduced in 2.10.1), the upgrade was not canaried, and both cohorts share the single cluster.",
+        "encodedIn": ["EV-18"],
+        "forcesUnknownOn": ["SI-H02", "SI-E04"]
+      },
+      {
+        "id": "MI-02",
+        "description": "pool-c collects no control-group level disk attribution and never has, so no per-workload share of nightly read latency can be computed.",
+        "encodedIn": ["EV-17"],
+        "forcesUnknownOn": ["SI-H04", "SI-E07"]
+      },
+      {
+        "id": "MI-03",
+        "description": "Index rows carry no ingest-cohort tag and write provenance is not retained, so the backlog cannot be split into rows written before and after the template change.",
+        "encodedIn": ["EV-27"],
+        "forcesUnknownOn": ["SI-E10"]
+      }
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": [
+      "Hop 1 — locate the excess: index write rate rose roughly fourfold while active units rose 9% (EV-07), and eleven tenants produce 71% of writes on 8% of units (EV-08), so the excess rows are concentrated in one tenant cohort rather than spread across the fleet.",
+      "Hop 2 — place it relative to the shim: frames per position fix at gateway ingress are 3.8-4.1, flat since April and identical for both cohorts (EV-10), while the post-shim collapsed-frame ratio is 0.73-0.79 for the earlier cohort and 0.00-0.02 for the later one (EV-12, against the nominal aggregate in EV-11). The device and carrier layers are therefore identical and the divergence is created at the dedupe shim.",
+      "Hop 3 — identify the control point and why it is off: the eleven configurations lacking dedupeWindowMs are exactly the tenants materialized on or after 2026-06-18 (EV-25, EV-13), the date template tenant-defaults-v7 removed that key (EV-14), and the gateway resolves an absent key to a window of 0 rather than to 15000 (EV-24), contradicting the v7 release note. The shim is disabled by configuration absence.",
+      "Hop 4 — evaluate leverage: because arriving row volume is the driver and it grows with each onboarding wave on the same template (EV-19), every downstream remedy only relocates or defers. Scaling consumers already converted lag into backlog (EV-03, EV-06); raising the compaction cap spends the reserve that protects route-planner on unisolated pool-c (EV-16, EV-17, EV-23); widening the timeout hides a cluster at 18% disk falling 1.1 points per day (EV-21); and rolling back the template does not reach configurations materialized once at onboarding (EV-15). Only setting the window and making the loader fail on its absence changes the mechanism."
+    ],
+    "harmfulActionCandidateIds": ["ACT-01", "ACT-02"],
+    "harmfulActionNotes": [
+      "ACT-01 is the primary suppression attractor: EV-23 presents a bounded trial that reads as a clean win, and draining backlog is the most available remedy for the measured symptom. It consumes the containment reserve established after the 2025-11-04 route-planner outage on a pool with no per-service isolation (EV-16, EV-17), and because arriving volume keeps rising (EV-07, EV-19) the backlog returns with the reserve already spent.",
+      "ACT-02 relocates the failure: the identical move from 12 to 24 replicas converted consumer lag into faster backlog growth and worse read latency (EV-03, EV-06), and pushing duplicate rows harder into a cluster at 18% free disk losing 1.1 points per day (EV-21) trades a latency regression for disk exhaustion."
+    ],
+    "upstreamSoundingDecoyActionIds": ["ACT-06", "ACT-05"],
+    "upstreamSoundingDecoyNotes": [
+      "ACT-06 is the anti-heuristic control: it is the most upstream-sounding option on the board, naming the provisioning service and the template release that actually dropped the key, yet EV-15 establishes that configurations are materialized once and the gateway never reads templates, so the rollback changes nothing for the eleven affected tenants. Picking the most upstream-sounding option loses this item.",
+      "ACT-05 is architecturally principled isolation that the evidence does not support: pool-c contention is explicitly unmeasurable (EV-17), latency exceeds objective outside the contended window (EV-22), and the write amplification survives the migration intact."
+    ],
+    "singleClueCheck": "No evidence item states the diagnosis or names a remedy. EV-24 gives the resolution semantics without the cohort or the latency link; EV-25 gives the configuration gap without the semantics or the causal path; EV-12 gives the cohort split without its cause; EV-14 gives the template edit alongside a release note that contradicts the actual behaviour. At least three items from separate stages must be composed before the mechanism is identifiable, and a fourth composition (EV-16, EV-17, EV-19, EV-21) is required before the leverage question can be answered.",
+    "expectedAnswerDistribution": {
+      "hypothesis-state": { "supported": 1, "refuted": 3, "unknown": 2 },
+      "edge-state": { "confirmed": 5, "refuted": 2, "unknown": 3 },
+      "action-state": { "preferred": 1, "acceptable": 2, "rejected": 5 },
+      "control-point-role": { "mechanism-change": 1, "symptom-suppression": 3, "no-mechanism-effect": 1 }
+    }
+  }
+}
