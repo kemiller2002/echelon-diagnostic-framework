@@ -1,0 +1,228 @@
+{
+  "version": "1.0.0",
+  "summary": "The newly enabled legacy-client adapter configuration is the best-supported cause of the invoice creation error spike. It omitted a region-header mapping required by routing, and nearly all sampled failures lacked that header. The timing of enablement and recovery after disablement strengthens this diagnosis. Database behavior, CPU increase, and the earlier PDF defect ticket do not have evidence-supported causal roles.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Legacy-client traffic began using the new adapter configuration at 09:00.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "Invoice creation errors rose from below 0.2% to 38% at 09:02.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C3",
+      "statement": "The new legacy-client adapter omitted the region-header mapping required by the routing function.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C4",
+      "statement": "Missing required region headers were the observed failure mechanism for most sampled failed requests.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "statement": "Enabling the new legacy-client adapter configuration caused or materially contributed to the error spike.",
+      "confidence": "high",
+      "evidence": ["E1", "E2", "E3", "E4", "E6"]
+    },
+    {
+      "id": "C6",
+      "statement": "Disabling the new legacy-client adapter configuration restored invoice creation errors to their prior level within three minutes.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C7",
+      "statement": "The database is not supported as a contributor to this incident.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C8",
+      "statement": "Application CPU increased during the incident, but the evidence does not establish whether it was a cause, consequence, or unrelated correlation.",
+      "confidence": "medium",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "C9",
+      "statement": "The PDF rendering defect ticket preceded the cutover, but no evidence connects it to invoice creation failures.",
+      "confidence": "high",
+      "evidence": ["E8", "E1", "E2"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C1",
+      "to": "C2",
+      "type": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C2",
+      "type": "mediates",
+      "confidence": "high"
+    },
+    {
+      "from": "C1",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C2",
+      "type": "prevents",
+      "confidence": "high"
+    },
+    {
+      "from": "C8",
+      "to": "C2",
+      "type": "unknown",
+      "confidence": "medium"
+    },
+    {
+      "from": "C9",
+      "to": "C2",
+      "type": "unknown",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Three percent of sampled failed requests did not match the documented missing-header pattern, and their mechanism is unresolved.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "U2",
+      "statement": "The evidence does not state whether all affected requests were legacy-client requests.",
+      "confidence": "medium",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "U3",
+      "statement": "The causal role of the CPU increase is unresolved.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "U4",
+      "statement": "The evidence does not identify how or why the region-header mapping was omitted before enablement.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "U5",
+      "statement": "The evidence does not directly test the corrected legacy-client adapter with the region-header mapping restored.",
+      "confidence": "high",
+      "evidence": ["E4", "E6"]
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Keep the new legacy-client adapter configuration disabled until its region-header mapping is restored and verified.",
+      "leverage": "high",
+      "basis": ["C3", "C5", "C6"]
+    },
+    {
+      "id": "A2",
+      "action": "Validate that legacy-client requests contain the required region header before routing traffic through the adapter.",
+      "leverage": "high",
+      "basis": ["C3", "C4"]
+    },
+    {
+      "id": "A3",
+      "action": "Monitor invoice creation error rate during any re-enablement and use the prior below-0.2% level as the observed recovery reference.",
+      "leverage": "medium",
+      "basis": ["C2", "C6"]
+    },
+    {
+      "id": "A4",
+      "action": "Investigate the minority of sampled failures not explained by the missing region header.",
+      "leverage": "medium",
+      "basis": ["U1"]
+    },
+    {
+      "id": "A5",
+      "action": "Treat CPU monitoring as visibility rather than a demonstrated control point unless further evidence connects it to failures.",
+      "leverage": "low",
+      "basis": ["C8", "U3"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "F1",
+      "condition": "If the omitted region-header mapping were not causal, disabling the new legacy-client adapter would not be expected to restore errors rapidly.",
+      "observed_result": "Errors returned below 0.2% within three minutes of disablement.",
+      "assessment": "challenges alternative explanations",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "F2",
+      "condition": "If the database were the primary cause, abnormal database error rate, saturation, or replication lag would be expected during the incident.",
+      "observed_result": "All three remained within the previous week's normal range.",
+      "assessment": "weakens the database hypothesis",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "F3",
+      "condition": "If the region-header omission explained every failure, all sampled failed requests would lack the required header.",
+      "observed_result": "Ninety-seven percent lacked it.",
+      "assessment": "supports the dominant mechanism but leaves a minority unresolved",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "F4",
+      "condition": "If CPU elevation were the primary control point, reducing or normalizing CPU would need to alter the error outcome.",
+      "observed_result": "No such intervention or response is included in the evidence.",
+      "assessment": "CPU is not established as a control point",
+      "confidence": "medium",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "F5",
+      "condition": "If restoring the region-header mapping is sufficient, a corrected legacy-client adapter should route requests without reproducing the error spike.",
+      "observed_result": "This test is not included in the evidence.",
+      "assessment": "recommended validation remains outstanding",
+      "confidence": "medium",
+      "evidence": ["E3", "E4", "E6"]
+    }
+  ]
+}
