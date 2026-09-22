@@ -1,0 +1,351 @@
+{
+  "version": "1.0.0",
+  "id": "ST-001",
+  "construct": "negative-knowledge",
+  "title": "Intermittent checkout saturation during a regional rollout",
+  "domain": "software operations",
+  "entities": [
+    {
+      "id": "gateway",
+      "name": "Checkout gateway",
+      "type": "service"
+    },
+    {
+      "id": "proxy",
+      "name": "Regional edge proxy",
+      "type": "infrastructure"
+    },
+    {
+      "id": "orders-db",
+      "name": "Orders database",
+      "type": "database"
+    },
+    {
+      "id": "paynet",
+      "name": "External payment network",
+      "type": "external-service"
+    },
+    {
+      "id": "telemetry",
+      "name": "Regional telemetry pipeline",
+      "type": "observability-system"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": "detection",
+      "text": "At 14:02 UTC, checkout p95 latency in region east rose from 0.9 seconds to 4.8 seconds; west remained near 0.9 seconds. The rate of original client checkout submissions was flat in both regions."
+    },
+    {
+      "id": "E02",
+      "stage": "timeline",
+      "text": "At 13:58 UTC, the east proxy fleet completed a policy rollout that reduced its upstream timeout from 2 seconds to 700 milliseconds and increased its retry limit from one attempt to three."
+    },
+    {
+      "id": "E03",
+      "stage": "timeline",
+      "text": "A gateway application release completed in both east and west at 13:54 UTC. All old-version pods were removed before the incident, and no application rollback or mixed-version comparison was performed."
+    },
+    {
+      "id": "E04",
+      "stage": "request-analysis",
+      "text": "For 41 reconstructed east checkout requests, proxy access records contain the same client operation identifier at approximately 0, 0.7, and 1.4 seconds. The gateway assigned a distinct server request identifier to each arrival."
+    },
+    {
+      "id": "E05",
+      "stage": "capacity-analysis",
+      "text": "Between 14:02 and 14:20 UTC, east gateway arrivals and active workers increased to 3.1 times baseline while original client submissions stayed flat. CPU throttling began after active workers doubled."
+    },
+    {
+      "id": "E06",
+      "stage": "database-analysis",
+      "text": "The database audit stream, which independently records every failover and rejected transaction and had no ingestion gaps that day, records neither event in east from 13:30 through 15:00 UTC."
+    },
+    {
+      "id": "E07",
+      "stage": "database-analysis",
+      "text": "Database execution-time p95 stayed between 110 and 125 milliseconds in both regions. Several gateway log lines say 'db timeout', but their structured field identifies a gateway connection-pool acquisition timeout before any database session was opened."
+    },
+    {
+      "id": "E08",
+      "stage": "dependency-analysis",
+      "text": "The payment dashboard shows zero failed payment calls in east during the incident. Its denominator includes only calls for which an HTTP response was received; attempts abandoned by the caller before a response are not counted."
+    },
+    {
+      "id": "E09",
+      "stage": "dependency-analysis",
+      "text": "Packet capture was not enabled, and east egress flow logs for 13:50 through 14:30 UTC were not retained. No source independently records whether response-less payment attempts reached the payment network."
+    },
+    {
+      "id": "E10",
+      "stage": "telemetry-analysis",
+      "text": "The east telemetry collector reported a full queue and dropped 18 percent of gateway span batches from 14:05 through 14:17 UTC. Collector counters do not identify which request outcomes were in the dropped batches."
+    },
+    {
+      "id": "E11",
+      "stage": "telemetry-analysis",
+      "text": "The retained trace set contains no payment spans longer than 700 milliseconds. Trace export occurs when a span closes; a gateway worker killed at its deadline does not close or export its active child span."
+    },
+    {
+      "id": "E12",
+      "stage": "mitigation",
+      "text": "At 14:21 UTC, operators restored the east proxy policy to a 2-second timeout and one attempt. No application, database, or payment-network change was made during the mitigation window."
+    },
+    {
+      "id": "E13",
+      "stage": "mitigation",
+      "text": "New repeated operation identifiers fell to baseline within two minutes of the proxy rollback. Active workers, CPU throttling, and checkout p95 returned to baseline over the following seven minutes."
+    },
+    {
+      "id": "E14",
+      "stage": "background",
+      "text": "A certificate-expiry warning fired at 14:01 UTC for an unused staging hostname. Production certificate inventory shows the east gateway certificate valid for another 74 days."
+    },
+    {
+      "id": "E15",
+      "stage": "background",
+      "text": "The product-catalog cache in east evicted 22 percent more entries than usual at 13:57 UTC. Checkout request reconstruction shows catalog lookup completed before the timed portion of all 41 reconstructed operations."
+    },
+    {
+      "id": "E16",
+      "stage": "background",
+      "text": "A DNS monitor reported one failed probe from a west-region probe host at 14:06 UTC. East proxy resolver metrics show successful production-name resolution throughout, but per-request DNS packets were not captured."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H01",
+        "text": "The gateway application release was a necessary cause of the east checkout degradation."
+      },
+      {
+        "id": "H02",
+        "text": "An orders-database failover or transaction-rejection episode initiated the east checkout degradation."
+      },
+      {
+        "id": "H03",
+        "text": "A payment-network slowdown contributed to the response-less payment attempts during the east incident."
+      },
+      {
+        "id": "H04",
+        "text": "The east proxy retry policy amplified gateway load and prolonged checkout latency."
+      },
+      {
+        "id": "H05",
+        "text": "The telemetry collector discarded at least one span batch containing a response-less payment attempt."
+      }
+    ],
+    "edges": [
+      {
+        "id": "G01",
+        "from": "proxy",
+        "to": "gateway",
+        "relation": "The deployed timeout and retry settings generated repeated gateway arrivals for single client operations."
+      },
+      {
+        "id": "G02",
+        "from": "gateway",
+        "to": "gateway",
+        "relation": "Repeated arrivals increased worker concurrency until CPU throttling occurred."
+      },
+      {
+        "id": "G03",
+        "from": "orders-db",
+        "to": "gateway",
+        "relation": "A database failover caused the logged connection-pool acquisition timeouts."
+      },
+      {
+        "id": "G04",
+        "from": "paynet",
+        "to": "gateway",
+        "relation": "Payment-network response time exceeded the proxy deadline for some attempts."
+      },
+      {
+        "id": "G05",
+        "from": "telemetry",
+        "to": "paynet",
+        "relation": "The retained telemetry establishes that no payment attempt exceeded 700 milliseconds."
+      },
+      {
+        "id": "G06",
+        "from": "proxy",
+        "to": "gateway",
+        "relation": "Restoring the prior proxy settings removed retry amplification before gateway saturation subsided."
+      },
+      {
+        "id": "G07",
+        "from": "gateway",
+        "to": "orders-db",
+        "relation": "Gateway pool exhaustion prevented some logged requests from opening database sessions."
+      },
+      {
+        "id": "G08",
+        "from": "telemetry",
+        "to": "gateway",
+        "relation": "Collector queue loss selectively removed the slowest gateway outcomes from retained traces."
+      }
+    ],
+    "actions": [
+      {
+        "id": "A01",
+        "text": "Keep the restored proxy policy in east while monitoring repeated operation identifiers and worker concurrency."
+      },
+      {
+        "id": "A02",
+        "text": "Force an orders-database failover in east before changing gateway traffic levels."
+      },
+      {
+        "id": "A03",
+        "text": "Capture deadline outcomes and egress timing in a bounded canary before deciding whether the payment network contributed."
+      },
+      {
+        "id": "A04",
+        "text": "Restore the three-attempt, 700-millisecond proxy policy because the payment dashboard reports no failures."
+      },
+      {
+        "id": "A05",
+        "text": "Preserve the current application version while running a controlled single-variable comparison against the prior version."
+      },
+      {
+        "id": "A06",
+        "text": "Increase telemetry queue capacity and add counters for deadline-abandoned child spans."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "S01",
+      "kind": "hypothesis",
+      "candidateId": "H01",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S02",
+      "kind": "hypothesis",
+      "candidateId": "H02",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S03",
+      "kind": "hypothesis",
+      "candidateId": "H03",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S04",
+      "kind": "hypothesis",
+      "candidateId": "H04",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S05",
+      "kind": "hypothesis",
+      "candidateId": "H05",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S06",
+      "kind": "edge",
+      "candidateId": "G01",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S07",
+      "kind": "edge",
+      "candidateId": "G02",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S08",
+      "kind": "edge",
+      "candidateId": "G03",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S09",
+      "kind": "edge",
+      "candidateId": "G04",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S10",
+      "kind": "edge",
+      "candidateId": "G05",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S11",
+      "kind": "edge",
+      "candidateId": "G06",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S12",
+      "kind": "edge",
+      "candidateId": "G07",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S13",
+      "kind": "edge",
+      "candidateId": "G08",
+      "allowedAnswers": ["supported", "contradicted", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S14",
+      "kind": "action",
+      "candidateId": "A01",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": false
+    },
+    {
+      "id": "S15",
+      "kind": "action",
+      "candidateId": "A02",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S16",
+      "kind": "action",
+      "candidateId": "A03",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S17",
+      "kind": "action",
+      "candidateId": "A04",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S18",
+      "kind": "action",
+      "candidateId": "A05",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": true
+    },
+    {
+      "id": "S19",
+      "kind": "action",
+      "candidateId": "A06",
+      "allowedAnswers": ["preferred", "permissible", "harmful", "unknown"],
+      "constructCritical": false
+    }
+  ]
+}
