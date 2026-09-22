@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "id": "ST-007",
+  "construct": "evidence-revision",
+  "title": "Checkout Timeout During Reconciliation Window",
+  "domain": "software operations",
+  "entities": [
+    { "id": "checkout", "type": "service", "name": "Checkout API" },
+    { "id": "release", "type": "deployment", "name": "Checkout release 8.14.2" },
+    { "id": "primary", "type": "database", "name": "Orders primary database" },
+    { "id": "recon", "type": "job", "name": "Settlement reconciliation job" },
+    { "id": "fraud", "type": "external_service", "name": "Fraud screening provider" },
+    { "id": "dns", "type": "infrastructure", "name": "Service DNS" }
+  ],
+  "evidence": [
+    { "id": "E01", "stage": 1, "text": "The Checkout API timeout alert opened at 10:02. Request volume was within 4% of the same weekday's baseline." },
+    { "id": "E02", "stage": 1, "text": "Release 8.14.2 began at 09:55 and reached 40% of Checkout API pods at 10:01; the prior release remained on the other pods." },
+    { "id": "E03", "stage": 1, "text": "At 10:05, sampled database client telemetry showed checkout connection-pool wait time above its normal range. Sampling coverage for the interval was 65%." },
+    { "id": "E04", "stage": 1, "text": "The fraud screening provider's public dashboard reported normal aggregate latency and availability, but it did not break results down by tenant or region." },
+    { "id": "E05", "stage": 1, "text": "A DNS configuration change had been approved the previous afternoon for an unrelated internal zone; the change record did not list Checkout API hostnames." },
+    { "id": "E06", "stage": 2, "text": "All Checkout API pods were returned to release 8.14.1 by 10:14. Checkout timeout rate remained between 11% and 13% through 10:22." },
+    { "id": "E07", "stage": 2, "text": "In 18 of 20 sampled timed-out checkout traces from 10:15-10:20, more than two seconds elapsed while acquiring a primary-database connection. Two traces instead spent most of their time awaiting fraud screening." },
+    { "id": "E08", "stage": 2, "text": "Primary-database lock-wait time rose at 10:00. The longest blocking sessions carried the application tag used by the settlement reconciliation job." },
+    { "id": "E09", "stage": 2, "text": "The reconciliation job started at 10:00 and was configured to use the primary after its replica-lag safety check reported a threshold breach." },
+    { "id": "E10", "stage": 2, "text": "Resolver logs from Checkout API pods showed no SERVFAIL responses or lookup-latency increase between 09:50 and 10:25." },
+    { "id": "E11", "stage": 2, "text": "The replica monitoring dashboard showed lag below the fallback threshold throughout 09:55-10:05. The job's safety-check event and the dashboard were produced by different collectors." },
+    { "id": "E12", "stage": 3, "text": "Operators paused the reconciliation job at 10:24. Primary lock-wait time began falling at 10:27, connection-pool wait time followed, and checkout timeouts returned below 1% at 10:30." },
+    { "id": "E13", "stage": 3, "text": "Request volume, pod count, fraud-provider latency, and DNS lookup latency remained materially unchanged from 10:20 through 10:32." },
+    { "id": "E14", "stage": 3, "text": "At 10:42, operators resumed one reconciliation worker with a one-minute transaction limit. Lock-wait and pool-wait metrics rose; both fell after that worker was paused at 10:46. Checkout timeout rate moved from 0.7% to 2.1% and then back to 0.8%." },
+    { "id": "E15", "stage": 3, "text": "Review of release 8.14.2 found a connection-pool setting change limited to the product-search client; checkout order writes used the unchanged pool configuration." },
+    { "id": "E16", "stage": 3, "text": "Per-client retry counters and the reconciliation safety-check input values were not retained for 09:55-10:10. The available logs cannot distinguish a genuine brief replica-lag breach from a collector or selection error." },
+    { "id": "E17", "stage": 3, "text": "Detailed row-lock graphs were not retained. Session tags identify the blocking application, but the specific statement, tenant, and row range cannot be reconstructed." }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H_DEP_S1", "text": "Using evidence available through stage 1, release 8.14.2 was the primary driver of the checkout timeouts." },
+      { "id": "H_REC_S1", "text": "Using evidence available through stage 1, reconciliation activity on the orders primary was the primary driver of the checkout timeouts." },
+      { "id": "H_DEP_S2", "text": "Using evidence available through stage 2, release 8.14.2 was the primary driver of the checkout timeouts." },
+      { "id": "H_REC_S2", "text": "Using evidence available through stage 2, reconciliation activity on the orders primary was the primary driver of the checkout timeouts." },
+      { "id": "H_REC_S3", "text": "Using evidence available through stage 3, reconciliation activity on the orders primary was the primary driver of the checkout timeouts." },
+      { "id": "H_FRAUD_S3", "text": "Using evidence available through stage 3, fraud-provider latency was the primary driver of the checkout timeouts." },
+      { "id": "H_DNS_S3", "text": "Using evidence available through stage 3, DNS resolver degradation was the primary driver of the checkout timeouts." },
+      { "id": "H_RETRY_S3", "text": "Using evidence available through stage 3, client retry amplification was a necessary contributor to the checkout timeouts." },
+      { "id": "H_FALLBACK_S3", "text": "Using evidence available through stage 3, a collector or replica-selection error caused the reconciliation job to fall back to the primary." },
+      { "id": "H_SQL_S3", "text": "Using evidence available through stage 3, one specific reconciliation statement and row range produced the blocking locks." }
+    ],
+    "edges": [
+      { "id": "G_DEP_TIMEOUT", "from": "release", "to": "checkout", "relation": "causes timeout increase" },
+      { "id": "G_RECON_LOCK", "from": "recon", "to": "primary", "relation": "causes blocking lock load" },
+      { "id": "G_LOCK_POOL", "from": "primary", "to": "checkout", "relation": "causes connection-pool waits" },
+      { "id": "G_POOL_TIMEOUT", "from": "primary", "to": "checkout", "relation": "causes request timeouts through pool waits" },
+      { "id": "G_FRAUD_TIMEOUT", "from": "fraud", "to": "checkout", "relation": "causes timeout increase" },
+      { "id": "G_DNS_TIMEOUT", "from": "dns", "to": "checkout", "relation": "causes timeout increase" },
+      { "id": "G_RETRY_POOL", "from": "checkout", "to": "primary", "relation": "amplifies connection demand through retries" },
+      { "id": "G_LAG_FALLBACK", "from": "primary", "to": "recon", "relation": "triggers primary fallback through reported replica lag" }
+    ],
+    "actions": [
+      { "id": "A_ROLLBACK_S1", "text": "At stage 1, roll back release 8.14.2 while continuing database and dependency investigation." },
+      { "id": "A_RESTART_DB_S1", "text": "At stage 1, immediately restart the orders primary database before identifying active blockers." },
+      { "id": "A_PAUSE_RECON_S2", "text": "At stage 2, pause the reconciliation job and observe lock, pool-wait, and timeout metrics." },
+      { "id": "A_ROUTE_REPLICA_S2", "text": "At stage 2, route all checkout reads and writes to a replica to bypass the primary." },
+      { "id": "A_RESUME_FULL_S3", "text": "At stage 3, resume all reconciliation workers at their previous transaction limits." },
+      { "id": "A_LIMITED_TEST_S3", "text": "At stage 3, keep reconciliation paused pending a throttled, monitored test after lock-level telemetry is enabled." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H_DEP_S1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H_REC_S1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S03", "kind": "action", "candidateId": "A_ROLLBACK_S1", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": true },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H_DEP_S2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S05", "kind": "hypothesis", "candidateId": "H_REC_S2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S06", "kind": "action", "candidateId": "A_PAUSE_RECON_S2", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": true },
+    { "id": "S07", "kind": "hypothesis", "candidateId": "H_REC_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S08", "kind": "hypothesis", "candidateId": "H_FRAUD_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S09", "kind": "hypothesis", "candidateId": "H_DNS_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S10", "kind": "hypothesis", "candidateId": "H_RETRY_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S11", "kind": "hypothesis", "candidateId": "H_FALLBACK_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S12", "kind": "hypothesis", "candidateId": "H_SQL_S3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S13", "kind": "edge", "candidateId": "G_RECON_LOCK", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S14", "kind": "edge", "candidateId": "G_LOCK_POOL", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S15", "kind": "edge", "candidateId": "G_POOL_TIMEOUT", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S16", "kind": "edge", "candidateId": "G_RETRY_POOL", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S17", "kind": "action", "candidateId": "A_RESTART_DB_S1", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": false },
+    { "id": "S18", "kind": "action", "candidateId": "A_ROUTE_REPLICA_S2", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": false },
+    { "id": "S19", "kind": "action", "candidateId": "A_RESUME_FULL_S3", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": false },
+    { "id": "S20", "kind": "action", "candidateId": "A_LIMITED_TEST_S3", "allowedAnswers": ["take", "defer", "reject"], "constructCritical": true }
+  ]
+}

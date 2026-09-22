@@ -1,0 +1,82 @@
+{
+  "version": "1.0.0",
+  "id": "ST-011",
+  "construct": "protective-controls",
+  "title": "Delayed claims ingestion after partner format change",
+  "domain": "insurance event-processing operations",
+  "entities": [
+    { "id": "gateway", "name": "Partner ingestion gateway", "type": "service" },
+    { "id": "validator", "name": "Envelope validator", "type": "control" },
+    { "id": "broker", "name": "Claims event broker", "type": "infrastructure" },
+    { "id": "worker", "name": "Document enrichment workers", "type": "service" },
+    { "id": "breaker", "name": "Partner circuit breaker", "type": "control" },
+    { "id": "quarantine", "name": "Malformed-event quarantine", "type": "control" },
+    { "id": "metadata", "name": "Metadata lookup service", "type": "service" },
+    { "id": "partner", "name": "Northlake partner feed", "type": "external-system" }
+  ],
+  "evidence": [
+    { "id": "E01", "stage": "incident", "text": "At 09:12, the Northlake feed's visible processing lag rose from 40 seconds to 18 minutes; other partner feeds stayed below 55 seconds." },
+    { "id": "E02", "stage": "incident", "text": "At 09:10, the partner circuit breaker opened after the worker failure ratio crossed its configured threshold and stopped new Northlake deliveries for six minutes." },
+    { "id": "E03", "stage": "telemetry", "text": "During the open interval, the Northlake broker partition depth stopped increasing, while already leased messages continued to retry." },
+    { "id": "E04", "stage": "telemetry", "text": "Worker profiles from 09:08 through 09:24 show most CPU time in recursive normalization of nested attachment metadata; profiles from unaffected partitions do not." },
+    { "id": "E05", "stage": "change", "text": "Northlake began sending a previously unused optional `relatedAttachments` field at 09:07. The envelope schema permits that field and does not constrain its nesting depth." },
+    { "id": "E06", "stage": "telemetry", "text": "Quarantine writes increased after the worker-side depth guard rejected envelopes deeper than 32 levels; every sampled rejection contained nested `relatedAttachments`." },
+    { "id": "E07", "stage": "experiment", "text": "In staging, replaying sampled Northlake envelopes with the optional field removed completed normally; replaying the original samples reproduced high CPU and the depth-guard rejection." },
+    { "id": "E08", "stage": "incident", "text": "Operators forced the breaker closed at 09:31. Input throughput briefly rose, worker CPU reached 100%, and lag across two previously healthy partner partitions began increasing." },
+    { "id": "E09", "stage": "incident", "text": "After the breaker was reopened at 09:36, healthy-partition lag returned toward baseline while Northlake events remained paused or quarantined." },
+    { "id": "E10", "stage": "telemetry", "text": "Metadata lookup latency rose from 80 ms to 900 ms between 09:14 and 09:20, including requests from services unrelated to claims ingestion." },
+    { "id": "E11", "stage": "telemetry", "text": "For failed Northlake attempts, traces spend less than 3% of elapsed time in metadata lookup calls and most elapsed time before the lookup span begins." },
+    { "id": "E12", "stage": "change", "text": "A worker deployment completed at 08:50. Its release notes list logging and metric-label changes; no artifact-to-artifact binary comparison was retained." },
+    { "id": "E13", "stage": "telemetry", "text": "Broker dashboards report a leader election at 09:11, but broker logs show no unavailable partition and consumers of unrelated topics report no processing gap." },
+    { "id": "E14", "stage": "recovery", "text": "With Northlake intake paused, increasing the worker pool from 20 to 35 reduced the existing retry backlog but did not allow any sampled deeply nested envelope to complete." },
+    { "id": "E15", "stage": "configuration", "text": "The gateway validator checks types and required fields before publishing; depth is enforced only by the worker guard because no gateway depth limit is configured." },
+    { "id": "E16", "stage": "scope", "text": "The incident record contains no controlled replay of pre-09:07 Northlake traffic on the current worker artifact and no replay of the nested samples on the prior artifact. It also does not record whether a quarantine write removes the corresponding broker message from retry eligibility." }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H1", "text": "Northlake envelope structure drives excessive normalization work in enrichment workers." },
+      { "id": "H2", "text": "The partner circuit breaker creates the worker failures observed for Northlake traffic." },
+      { "id": "H3", "text": "Metadata lookup latency drives the worker failures observed for Northlake traffic." },
+      { "id": "H4", "text": "The 08:50 worker artifact changes how enrichment handles the affected envelopes." },
+      { "id": "H5", "text": "Broker leader movement drives the Northlake processing failure." }
+    ],
+    "edges": [
+      { "id": "R1", "from": "partner", "to": "worker", "relation": "affected envelopes increase normalization demand" },
+      { "id": "R2", "from": "worker", "to": "breaker", "relation": "worker failures contribute to threshold crossing" },
+      { "id": "R3", "from": "breaker", "to": "broker", "relation": "open state limits new feed deliveries" },
+      { "id": "R4", "from": "validator", "to": "worker", "relation": "accepted envelopes reach enrichment processing" },
+      { "id": "R5", "from": "metadata", "to": "worker", "relation": "lookup latency accounts for most failed-attempt duration" },
+      { "id": "R6", "from": "broker", "to": "worker", "relation": "leader movement interrupts affected message consumption" },
+      { "id": "R7", "from": "quarantine", "to": "broker", "relation": "rejected envelopes are separated from the retry path" },
+      { "id": "R8", "from": "breaker", "to": "worker", "relation": "open state initiates recursive normalization failures" }
+    ],
+    "actions": [
+      { "id": "A1", "text": "Keep Northlake intake isolated while preserving breaker and quarantine telemetry." },
+      { "id": "A2", "text": "Add a bounded nesting rule at ingress and coordinate rejected-record handling with Northlake." },
+      { "id": "A3", "text": "Force the partner breaker closed and disable the worker depth guard until the backlog clears." },
+      { "id": "A4", "text": "Cap normalization work and replay quarantined samples in a limited canary before resuming intake." },
+      { "id": "A5", "text": "Roll back the 08:50 worker artifact before conducting further comparisons." },
+      { "id": "A6", "text": "Increase metadata lookup capacity and resume Northlake intake without other changes." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S05", "kind": "hypothesis", "candidateId": "H5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S06", "kind": "edge", "candidateId": "R1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S07", "kind": "edge", "candidateId": "R2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S08", "kind": "edge", "candidateId": "R3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S09", "kind": "edge", "candidateId": "R5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S10", "kind": "edge", "candidateId": "R6", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S11", "kind": "edge", "candidateId": "R7", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S12", "kind": "edge", "candidateId": "R8", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S13", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true },
+    { "id": "S14", "kind": "action", "candidateId": "A2", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true },
+    { "id": "S15", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true },
+    { "id": "S16", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true },
+    { "id": "S17", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": false },
+    { "id": "S18", "kind": "action", "candidateId": "A6", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": false }
+  ]
+}
