@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "The analysis correctly localizes the fault to the mapper's positional indexing (C1, C4), explicitly distinguishes the validator as detection point rather than origin (C5, C6), explains retry futility via determinism (C7), and cites the named-field fix as sample-scoped verified correction (C8, C10, appropriately hedged in confidence). All four required findings are present and none of the forbidden claims (validator-as-root-cause, partner contract violation) appear; the analysis explicitly states the partner acted within contract (C2) and the validator is not the fault site (C5). Causal relationships (precedes/mediates/contributes-to/prevents) track the evidence chain E1→E3→E4 without inverting direction, and R11 correctly notes the validator currently prevents downstream harm. Evidence discipline is strong: claims map to specific evidence IDs, and the one inferential claim (C11, record-subset reasoning) is explicitly flagged as low-confidence and evidence-unstated rather than presented as fact. Uncertainty calibration is thorough, with eight distinct uncertainties each paired with concrete resolving evidence/queries, correctly flagging open questions like silent corruption in accepted records (U1) and full-population validity of the fix (U2). Actions target the mapper as primary leverage (A1), explicitly preserve the validator's protective function (A2), and add a proportionate contract-test fix (A4) plus reasonable extensions (A5 silent-corruption audit, A6 blast-radius check) without overreach or harm. No unsupported outside-evidence use, no condition identification, no missed required findings."
+}
