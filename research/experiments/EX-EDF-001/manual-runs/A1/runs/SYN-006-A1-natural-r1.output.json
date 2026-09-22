@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "summary": "The nightly import failures were caused by a downstream mapper that relied on positional field indexes. When the partner added the contract-permitted optional addressLine3 field, the mapper shifted postalCode into the country slot. The validator then correctly rejected the malformed country value. Repeated retries could not help because they reproduced the same deterministic mapping error. Named-field mapping corrected the failing sample without changes to the partner payload or validator.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The partner's addition of addressLine3 was permitted by the partner contract.",
+      "confidence": "high",
+      "evidence": ["E1", "E6"]
+    },
+    {
+      "id": "C2",
+      "statement": "The ingestion parser accepted addressLine3 and preserved it in the intermediate event.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C3",
+      "statement": "The downstream mapper used positional field indexes.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C4",
+      "statement": "When addressLine3 was present, positional mapping shifted postalCode into the country slot.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "statement": "The malformed country value caused the validation failures that produced most visible error messages.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C6",
+      "statement": "Retrying rejected records did not remediate the failure.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C7",
+      "statement": "The mapper contract test did not cover additive optional fields or the resulting field-position changes.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C8",
+      "statement": "Relaxing validation would risk admitting incorrect address data into fulfillment.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "C9",
+      "statement": "Named-field mapping corrected the failing sample without modifying the partner payload or validator.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C10",
+      "statement": "The mapper defect, rather than the parser or validator, is the supported root cause of the observed rejection pattern.",
+      "confidence": "high",
+      "evidence": ["E2", "E3", "E4", "E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C1",
+      "to": "C10",
+      "type": "supports",
+      "explanation": "The triggering payload change was contract-permitted, directing fault away from partner noncompliance."
+    },
+    {
+      "from": "C2",
+      "to": "C10",
+      "type": "supports",
+      "explanation": "The parser accepted and preserved the new field, so the demonstrated corruption occurred later."
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "type": "contributes-to",
+      "explanation": "Dependence on positions enabled the added field to shift subsequent values."
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "contributes-to",
+      "explanation": "Placing postalCode in the country slot created the malformed value rejected by validation."
+    },
+    {
+      "from": "C1",
+      "to": "C4",
+      "type": "precedes",
+      "explanation": "The permitted addition of addressLine3 occurred before the positional shift."
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "precedes",
+      "explanation": "The mapping corruption occurred before validation rejected the record."
+    },
+    {
+      "from": "C5",
+      "to": "C10",
+      "type": "mediates",
+      "explanation": "Validation exposed the upstream mapping defect through visible rejection messages."
+    },
+    {
+      "from": "C6",
+      "to": "C10",
+      "type": "supports",
+      "explanation": "Identical retry failures are consistent with a repeatable transformation defect."
+    },
+    {
+      "from": "C7",
+      "to": "C10",
+      "type": "contributes-to",
+      "explanation": "The limited contract test failed to detect the mapper's incompatibility with allowed additive fields."
+    },
+    {
+      "from": "C9",
+      "to": "C10",
+      "type": "supports",
+      "explanation": "Changing only the mapper corrected the failing sample."
+    },
+    {
+      "from": "C8",
+      "to": "C5",
+      "type": "supports",
+      "explanation": "The validator's rejection protected fulfillment from malformed address data."
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "Whether all rejected records, rather than only the majority represented by visible validation errors, resulted from the positional mapping defect.",
+      "confidence": "medium",
+      "neededEvidence": "A categorized breakdown of every rejected record and its transformation and validation trace."
+    },
+    {
+      "issue": "Whether named-field mapping corrects the full nightly dataset and all permitted optional-field combinations.",
+      "confidence": "medium",
+      "neededEvidence": "Full-batch results and contract tests covering additive optional fields in multiple combinations."
+    },
+    {
+      "issue": "Why only 18% of partner records were rejected.",
+      "confidence": "low",
+      "neededEvidence": "Record-level comparison showing which payloads contained addressLine3 and how that correlated with rejection."
+    },
+    {
+      "issue": "Whether any incorrect records bypassed validation and entered fulfillment.",
+      "confidence": "low",
+      "neededEvidence": "Validation outcomes and fulfillment audit records for the affected import."
+    }
+  ],
+  "actions": [
+    {
+      "action": "Replace positional indexing in the mapper with named-field mapping.",
+      "priority": "high",
+      "basis": ["E3", "E8"]
+    },
+    {
+      "action": "Extend mapper contract tests to cover contract-permitted additive optional fields, including addressLine3.",
+      "priority": "high",
+      "basis": ["E6"]
+    },
+    {
+      "action": "Do not relax the validator to accept malformed country values.",
+      "priority": "high",
+      "basis": ["E7"]
+    },
+    {
+      "action": "Test the mapper correction against the full rejected set and the nightly import before relying on the sample result.",
+      "priority": "high",
+      "basis": ["E1", "E8"]
+    },
+    {
+      "action": "Suspend automatic retries for this deterministic validation failure until records are remapped correctly.",
+      "priority": "medium",
+      "basis": ["E5"]
+    },
+    {
+      "action": "Audit the affected import for any malformed address data that may have reached fulfillment.",
+      "priority": "medium",
+      "basis": ["E7"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If the mapper had used named-field mapping when addressLine3 was added,",
+      "outcome": "the demonstrated postalCode-to-country shift would not have occurred in the failing sample.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "condition": "If the validator were changed to accept the malformed country value,",
+      "outcome": "incorrect address data could enter fulfillment.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "condition": "If operators continued retrying unchanged rejected records,",
+      "outcome": "the same validation failures would recur.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "condition": "If mapper contract tests had covered additive optional fields and field-position changes,",
+      "outcome": "the positional-mapping incompatibility could have been detected before the nightly import.",
+      "confidence": "medium",
+      "evidence": ["E6"]
+    },
+    {
+      "condition": "If the partner payload or validator were changed while the positional mapper remained defective,",
+      "outcome": "the evidence does not establish that the mapper would safely handle other permitted additive fields.",
+      "confidence": "medium",
+      "evidence": ["E3", "E6", "E8"]
+    }
+  ]
+}
