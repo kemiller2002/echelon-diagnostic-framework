@@ -1,0 +1,199 @@
+{
+  "summary": "Queue depth grew for 27 minutes while arrival rate remained normal, so the backlog is driven by a fall in consumption capacity rather than by demand. Consumer throughput dropped roughly 40% over the same interval, making reduced service rate the proximate mechanism and the rising queue its downstream symptom. Two changes landed in the preceding hour (a consumer-library upgrade and a database index rebuild), and consumer logs show two distinct degradation signatures at once: increased lock waits and increased deserialization warnings. Reverting both changes together restored throughput, which supports the combined change set as a sufficient contributor. Attribution to either change individually cannot be settled from the available evidence: no run reverted only one change, no traces were retained, and telemetry does not separate database wait time from deserialization retry time. The diagnosis therefore holds a two-contributor case open rather than collapsing it to one. Leverage lies in creating discriminating evidence (staged single-change re-application, processing-time decomposition) and in decoupling concurrent risky changes; queue-depth alerting alone is visibility without control.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Backlog growth originated on the consumption side, not from demand, because arrival rate stayed within normal range while depth rose.",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "The proximate mechanism is a reduction in consumer service rate: throughput fell by roughly 40% over the same interval as the depth rise.",
+      "evidence": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Rising queue depth is a symptom of the service-rate deficit and not an independent cause of it.",
+      "evidence": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "The candidate contributor set is bounded by two changes in the preceding hour: a consumer-library upgrade and a database index rebuild.",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Two distinct in-consumer delay signatures were present simultaneously: lock waiting and deserialization retry.",
+      "evidence": ["E4"],
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "statement": "Increased deserialization work plausibly raises per-message processing cost, and is the signature most consistent with the consumer-library change.",
+      "evidence": ["E3", "E4"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C7",
+      "statement": "Increased lock waiting plausibly raises per-message blocked time on the database, and is the signature most consistent with the index rebuild.",
+      "evidence": ["E3", "E4"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C8",
+      "statement": "The two changes together are a sufficient contributor to the throughput loss, since reverting both restored throughput to normal.",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "statement": "Necessity of either change individually is not established; the joint revert cannot distinguish one cause, two additive causes, or an interaction between them.",
+      "evidence": ["E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "statement": "The evidence base cannot decompose processing time, because telemetry does not separate database wait from deserialization retry and no traces were retained.",
+      "evidence": ["E5", "E8"],
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "statement": "Bundling two independently risky changes into one window is itself a contributor to the unresolvable attribution, independent of which change degraded throughput.",
+      "evidence": ["E3", "E7"],
+      "confidence": "medium"
+    }
+  ],
+  "relationships": [
+    { "id": "R1", "from": "E1", "to": "C1", "type": "supports", "confidence": "high", "note": "Normal arrival rate excludes a demand-side driver for the depth rise." },
+    { "id": "R2", "from": "E2", "to": "C2", "type": "supports", "confidence": "high" },
+    { "id": "R3", "from": "C2", "to": "C3", "type": "contributes-to", "confidence": "high", "note": "Service rate below arrival rate produces accumulation." },
+    { "id": "R4", "from": "E3", "to": "C4", "type": "supports", "confidence": "high" },
+    { "id": "R5", "from": "C4", "to": "C2", "type": "precedes", "confidence": "high", "note": "Both changes land before the observed window; ordering only, not attribution." },
+    { "id": "R6", "from": "E4", "to": "C5", "type": "supports", "confidence": "high" },
+    { "id": "R7", "from": "C6", "to": "C2", "type": "contributes-to", "confidence": "medium" },
+    { "id": "R8", "from": "C7", "to": "C2", "type": "contributes-to", "confidence": "medium" },
+    { "id": "R9", "from": "C5", "to": "C6", "type": "supports", "confidence": "medium" },
+    { "id": "R10", "from": "C5", "to": "C7", "type": "supports", "confidence": "medium" },
+    { "id": "R11", "from": "E6", "to": "C8", "type": "supports", "confidence": "high" },
+    { "id": "R12", "from": "E7", "to": "C9", "type": "supports", "confidence": "high", "note": "Absence of a single-change revert blocks separation of the two candidates." },
+    { "id": "R13", "from": "C10", "to": "C9", "type": "mediates", "confidence": "high", "note": "Missing time decomposition is what converts co-occurring signatures into an unresolved split." },
+    { "id": "R14", "from": "C11", "to": "C9", "type": "contributes-to", "confidence": "medium" }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Which change caused the throughput loss, or whether both did, is unresolved; single-cause, additive two-cause, and interaction explanations all remain live.",
+      "confidence": "high",
+      "missingEvidence": ["single-change revert run (E7)", "per-stage processing-time split (E5)", "trace samples from the window (E8)"]
+    },
+    {
+      "id": "U2",
+      "statement": "The mapping of each log signature to a specific change is inferred from co-timing alone and is not directly evidenced.",
+      "confidence": "medium",
+      "missingEvidence": ["stack- or query-level attribution linking lock waits and deserialization warnings to the changed components"]
+    },
+    {
+      "id": "U3",
+      "statement": "The relative magnitude of the two delay sources within the 40% throughput loss is unknown; one may dominate or they may be comparable.",
+      "confidence": "high",
+      "missingEvidence": ["decomposed processing-time telemetry (E5)"]
+    },
+    {
+      "id": "U4",
+      "statement": "A shared upstream condition acting during the same window and coincidentally cleared by the revert procedure is not excluded by the evidence given.",
+      "confidence": "low",
+      "missingEvidence": ["independent observation of consumer host, connection pool, or database load in the window"]
+    },
+    {
+      "id": "U5",
+      "statement": "Whether the index rebuild was still in progress or already complete during the stall is not stated, which affects how its lock behavior should be interpreted.",
+      "confidence": "medium",
+      "missingEvidence": ["rebuild start and completion timestamps relative to the 27-minute window"]
+    },
+    {
+      "id": "U6",
+      "statement": "Whether the increased deserialization warnings represent failing retries or merely noisier logging at unchanged cost is not established.",
+      "confidence": "medium",
+      "missingEvidence": ["retry counts and per-attempt cost, message-level failure outcomes"]
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Re-apply the two changes one at a time in a controlled window and measure throughput after each, producing the single-change comparison that the incident lacks.",
+      "type": "control-point",
+      "leverage": "high",
+      "rationale": "Directly resolves the attribution gap left by the joint revert; it is the only listed step that can separate the two candidates.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "action": "Instrument consumer processing so database wait time and deserialization retry time are recorded as separate measures.",
+      "type": "control-point",
+      "leverage": "high",
+      "rationale": "Removes the decomposition gap that turns co-occurring signatures into an unresolved split, and makes any recurrence diagnosable in-flight.",
+      "confidence": "high"
+    },
+    {
+      "id": "A3",
+      "action": "Retain trace samples covering consumer message handling, with retention that survives an incident window.",
+      "type": "control-point",
+      "leverage": "medium",
+      "rationale": "Restores the per-message evidence that was unavailable; supports but does not by itself settle attribution.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "action": "Separate library upgrades from schema or index maintenance into distinct change windows with an observation gap between them.",
+      "type": "control-point",
+      "leverage": "medium",
+      "rationale": "Addresses the process contributor: change isolation makes future revert evidence conclusive rather than joint.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "action": "Alert on queue depth and consumer throughput together rather than depth alone.",
+      "type": "detection",
+      "leverage": "low",
+      "rationale": "Improves visibility and shortens time to notice, but does not alter the mechanism or resolve cause; classify as monitoring, not control.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "F1",
+      "statement": "If arrival rate had risen instead of staying normal, the consumption-side diagnosis would not hold and the contributor network would shift to demand and capacity planning.",
+      "impact": "Challenges C1; the evidence as given rules this out.",
+      "confidence": "high"
+    },
+    {
+      "id": "F2",
+      "statement": "If only the library upgrade had been reverted and throughput had recovered, the index rebuild would drop out of the contributor set and the lock-wait signature would be reinterpreted as incidental.",
+      "impact": "Would collapse the two-contributor case; no such run exists, so it cannot be tested.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3",
+      "statement": "If only the index rebuild had been reverted and throughput had stayed degraded, the library upgrade would become the necessary contributor.",
+      "impact": "Symmetric test to F2 and equally unavailable; the pair of them is what A1 is designed to supply.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4",
+      "statement": "If throughput had not recovered after the joint revert, the change set would be displaced as the explanation and an unobserved environmental cause would move to the front.",
+      "impact": "Challenges C8; recovery after revert is the main support for the change set and makes this branch unlikely on the evidence given.",
+      "confidence": "high"
+    },
+    {
+      "id": "F5",
+      "statement": "If time-split telemetry had existed during the window, attribution could likely have been settled without any revert, and the recommended control points would shift from experimentation toward direct remediation of the dominant delay source.",
+      "impact": "Shows that the decomposition gap, not the change bundling alone, is what forced the coarse joint revert.",
+      "confidence": "medium"
+    }
+  ]
+}
