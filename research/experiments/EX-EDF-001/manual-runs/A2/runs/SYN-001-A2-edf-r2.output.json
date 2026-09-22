@@ -1,0 +1,60 @@
+{
+  "summary": "At 09:00 legacy-client invoice traffic was switched onto a newly enabled adapter configuration that omitted the region-header mapping the routing function requires; within two minutes invoice creation errors rose from under 0.2% to 38%, and 97% of sampled failures lacked that header. Datastore health stayed normal, and disabling the configuration at 09:19 restored the baseline error rate within three minutes, closing the causal loop. CPU elevation and an 08:54 PDF ticket are best read as a downstream symptom and an unrelated coincidence respectively. The decisive control point is configuration parity for required routing fields before a legacy path is enabled, not additional monitoring.",
+  "claims": [
+    {"id": "C1", "statement": "A newly enabled adapter configuration began carrying legacy-client invoice traffic at 09:00.", "confidence": "high", "evidence": ["E1"]},
+    {"id": "C2", "statement": "Invoice creation errors stepped from below 0.2% to 38% at 09:02, about two minutes after the routing change.", "confidence": "high", "evidence": ["E2", "E1"]},
+    {"id": "C3", "statement": "The legacy-client configuration omitted the region-header mapping that the modern-client configuration retained, so the two paths differed in exactly the field the router requires.", "confidence": "high", "evidence": ["E4"]},
+    {"id": "C4", "statement": "Requests on the failing path arrived without the region header: 97% of sampled failures lacked it.", "confidence": "high", "evidence": ["E3"]},
+    {"id": "C5", "statement": "Mechanism: the missing mapping produced requests the routing function could not resolve, and those unroutable requests failed invoice creation. The error rate is the symptom; the absent mapping is the cause.", "confidence": "high", "evidence": ["E3", "E4", "E2"]},
+    {"id": "C6", "statement": "The datastore was not a contributor: error rate, saturation and replication lag remained inside the prior week's normal range.", "confidence": "high", "evidence": ["E5"]},
+    {"id": "C7", "statement": "Application CPU moving from 51% to 65% is consistent with error-path and retry overhead rather than a cause; it is well short of exhaustion and no resource limit is evidenced.", "confidence": "medium", "evidence": ["E7", "E5"]},
+    {"id": "C8", "statement": "Removing the configuration at 09:19 returned errors below 0.2% within three minutes, a rollback that confirms the configuration as the sufficient trigger.", "confidence": "high", "evidence": ["E6"]},
+    {"id": "C9", "statement": "Impact was scoped to the legacy-client path; the modern-client path kept the mapping and is not implicated by any evidence item.", "confidence": "medium", "evidence": ["E4"]},
+    {"id": "C10", "statement": "The 08:54 PDF rendering ticket precedes the change and concerns a different function; no evidence links it to invoice creation failures.", "confidence": "medium", "evidence": ["E8", "E2"]},
+    {"id": "C11", "statement": "Whatever review or validation preceded enablement did not catch a missing required field, since the configuration reached production traffic in that state.", "confidence": "low", "evidence": ["E1", "E4"]},
+    {"id": "C12", "statement": "About 3% of sampled failures did carry the header and are not explained by the primary mechanism.", "confidence": "medium", "evidence": ["E3"]}
+  ],
+  "relationships": [
+    {"id": "R1", "from": "C11", "to": "C1", "type": "contributes-to", "confidence": "low", "basis": "Enablement of a defective configuration implies no gate stopped it; the gate itself is not described."},
+    {"id": "R2", "from": "C1", "to": "C2", "type": "precedes", "confidence": "high", "basis": "09:00 change, 09:02 error step."},
+    {"id": "R3", "from": "C3", "to": "C4", "type": "contributes-to", "confidence": "high", "basis": "Omitted mapping yields requests without the header."},
+    {"id": "R4", "from": "C1", "to": "C4", "type": "contributes-to", "confidence": "high", "basis": "The configuration only affects traffic once it carries legacy-client requests."},
+    {"id": "R5", "from": "C4", "to": "C5", "type": "supports", "confidence": "high", "basis": "Sampled failure composition matches the proposed mechanism."},
+    {"id": "R6", "from": "C5", "to": "C2", "type": "mediates", "confidence": "high", "basis": "Unroutable requests are the intermediate step between the configuration defect and the observed error rate."},
+    {"id": "R7", "from": "C3", "to": "C2", "type": "contributes-to", "confidence": "high", "basis": "End-to-end contributor to outcome via C5."},
+    {"id": "R8", "from": "C8", "to": "C5", "type": "supports", "confidence": "high", "basis": "Removing the contributor removed the outcome on the same timescale."},
+    {"id": "R9", "from": "C6", "to": "C5", "type": "supports", "confidence": "medium", "basis": "Eliminating the datastore alternative leaves the routing mechanism standing."},
+    {"id": "R10", "from": "C9", "to": "C3", "type": "supports", "confidence": "medium", "basis": "Path-scoped impact matches path-scoped configuration difference."},
+    {"id": "R11", "from": "C2", "to": "C7", "type": "contributes-to", "confidence": "low", "basis": "Error handling and retries plausibly raise CPU; direction is inferred, not measured."},
+    {"id": "R12", "from": "C7", "to": "C2", "type": "unknown", "confidence": "low", "basis": "A causal role for CPU cannot be excluded outright, only made unlikely by the rollback timing."},
+    {"id": "R13", "from": "C10", "to": "C2", "type": "unknown", "confidence": "medium", "basis": "Temporal precedence without any mechanistic link; treated as coincidence."},
+    {"id": "R14", "from": "C12", "to": "C5", "type": "unknown", "confidence": "medium", "basis": "Residual failures are unexplained by the header mechanism."},
+    {"id": "R15", "from": "C3", "to": "C8", "type": "prevents", "confidence": "high", "basis": "Disabling the configuration removes the defect and therefore the failure mode."}
+  ],
+  "uncertainties": [
+    {"id": "U1", "statement": "Why the mapping was omitted (hand edit, template divergence, generation defect) is not evidenced, so recurrence risk cannot be sized.", "impact": "Limits confidence in any fix aimed at the authoring step.", "confidence": "high"},
+    {"id": "U2", "statement": "No evidence describes what pre-enablement validation, review or canary existed, so C11 is an inference from outcome alone.", "impact": "The upstream control point is proposed without direct support.", "confidence": "high"},
+    {"id": "U3", "statement": "The residual ~3% of sampled failures that carried the header have no explained cause.", "impact": "A second, smaller contributor cannot be ruled out.", "confidence": "medium"},
+    {"id": "U4", "statement": "The direction of the CPU relationship is not established by measurement; only its implausibility as a primary cause is argued.", "impact": "Leaves a weak alternative branch open.", "confidence": "medium"},
+    {"id": "U5", "statement": "Sampling method and population for the 97% figure are not described.", "impact": "The dominance of the header mechanism rests on an uncharacterized sample.", "confidence": "medium"},
+    {"id": "U6", "statement": "Whether legacy clients are now served correctly by the prior configuration or are degraded in some other way after the 09:19 disable is not stated.", "impact": "Restoration of the error metric may not equal restoration of function.", "confidence": "medium"},
+    {"id": "U7", "statement": "Nothing indicates whether failed invoice creations were lost, queued or retried successfully.", "impact": "Business impact and any needed reconciliation are unknown.", "confidence": "high"},
+    {"id": "U8", "statement": "The PDF ticket is dismissed on timing and domain separation only; no evidence affirmatively excludes a shared cause.", "impact": "Small chance of a missed common factor.", "confidence": "low"}
+  ],
+  "actions": [
+    {"id": "A1", "statement": "Keep the legacy-client adapter configuration disabled until the region-header mapping is present, and treat re-enablement as gated on that mapping.", "type": "leverage", "confidence": "high", "rationale": "Directly removes the confirmed contributor; the rollback already demonstrates the effect."},
+    {"id": "A2", "statement": "Enforce a parity check across adapter configurations for every field the routing function requires, evaluated before a configuration can take traffic.", "type": "leverage", "confidence": "medium", "rationale": "Attacks the class of defect, not this instance; rests on the inferred gap in validation."},
+    {"id": "A3", "statement": "Make the routing function reject or flag a configuration that cannot supply a required field at load time, rather than failing per request in production.", "type": "leverage", "confidence": "medium", "rationale": "Moves detection ahead of customer impact; the router's actual failure semantics are not evidenced, so feasibility is unconfirmed."},
+    {"id": "A4", "statement": "Introduce a bounded rollout for adapter configuration changes so a defective configuration reaches a small fraction of traffic.", "type": "leverage", "confidence": "medium", "rationale": "Would have cut the 38% peak to a fraction of it; does not prevent the defect."},
+    {"id": "A5", "statement": "Tie an automatic alert on a step change in invoice error rate to recent configuration-change events.", "type": "visibility", "confidence": "medium", "rationale": "Shortens the 19-minute exposure but cannot prevent the failure; do not treat as a fix."},
+    {"id": "A6", "statement": "Investigate the ~3% of failures that carried the header before closing the case.", "type": "visibility", "confidence": "medium", "rationale": "Resolves the open branch that could hide a second contributor."}
+  ],
+  "counterfactuals": [
+    {"id": "X1", "statement": "Had the legacy configuration carried the region-header mapping, the error step would not have occurred.", "assessment": "Supported: the modern path kept the mapping and is unimplicated, and removing the defective configuration restored baseline.", "confidence": "high"},
+    {"id": "X2", "statement": "If the datastore had been the cause, disabling an application-side configuration would not have cleared errors in three minutes and datastore metrics would have deviated.", "assessment": "Neither occurred, so this alternative is rejected.", "confidence": "high"},
+    {"id": "X3", "statement": "If CPU pressure had been the cause, recovery would have tracked load relief rather than the configuration change, and 65% would have to be a limiting level.", "assessment": "Recovery tracked the configuration change and 65% is not evidenced as limiting, so CPU is treated as a symptom.", "confidence": "medium"},
+    {"id": "X4", "statement": "If the PDF defect were causal, errors would have risen near 08:54 rather than at 09:02.", "assessment": "Onset aligns with the 09:00 change, not the ticket, so the ticket is set aside.", "confidence": "medium"},
+    {"id": "X5", "statement": "If only detection had been improved and the configuration left unchanged, the 38% failure rate would still have occurred, merely for a shorter window.", "assessment": "Holds, which is why monitoring is classified as visibility rather than leverage.", "confidence": "high"},
+    {"id": "X6", "statement": "If the residual 3% had an independent ongoing cause, the error rate would have settled above the prior baseline after rollback.", "assessment": "It returned below 0.2%, so the residual is more likely baseline noise than a persistent second contributor, though this is not conclusive.", "confidence": "medium"}
+  ]
+}
