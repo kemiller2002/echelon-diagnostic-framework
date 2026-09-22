@@ -1,0 +1,229 @@
+{
+  "version": "1.0.0",
+  "summary": "The deployed recommendation model produced a segment-specific precision failure, but the staged release and segment-level controls contained its impact. Exposure began at 2% of traffic; monitoring detected a 14-point precision drop in one low-volume segment after six minutes, the automated rule halted expansion, and the feature flag was disabled for that segment. The incident affected 312 requests, with no measurable quality drop in other segments. The evidence does not establish why the model failed for the affected segment or why pre-release integration tests did not reveal the issue.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "The new model produced incorrect results in one low-volume customer segment after deployment.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "The observable failure mechanism was a 14-point precision drop isolated to the affected segment.",
+      "confidence": "high",
+      "evidence": ["E3", "E6"]
+    },
+    {
+      "id": "C3",
+      "statement": "The release initially limited exposure to 2% of traffic.",
+      "confidence": "high",
+      "evidence": ["E2"]
+    },
+    {
+      "id": "C4",
+      "statement": "Segment-level monitoring detected the degradation six minutes after exposure.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "statement": "The automated release rule halted expansion because the segment's drop exceeded the 5-point threshold.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C6",
+      "statement": "Disabling the feature flag for the affected segment isolated the response while the previous model continued serving all other traffic.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "C7",
+      "statement": "The incident was contained to 312 requests, and no other segment showed a measurable quality drop.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C8",
+      "statement": "Passing the integration tests did not demonstrate acceptable quality for every customer segment under deployment conditions.",
+      "confidence": "high",
+      "evidence": ["E1", "E7"]
+    },
+    {
+      "id": "C9",
+      "statement": "The prior rollback practice may have supported operational readiness, but the evidence does not show that it caused or accelerated this rollback.",
+      "confidence": "medium",
+      "evidence": ["E8"]
+    },
+    {
+      "id": "C10",
+      "statement": "The underlying cause of the affected segment's precision drop is not established.",
+      "confidence": "high",
+      "evidence": ["E1", "E3", "E7"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C1",
+      "to": "C2",
+      "type": "supports",
+      "explanation": "The incorrect results were observed quantitatively as a segment-level precision drop."
+    },
+    {
+      "from": "C3",
+      "to": "C7",
+      "type": "contributes-to",
+      "explanation": "Limited initial exposure constrained the traffic that could encounter the model before detection."
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "precedes",
+      "explanation": "Detection supplied the segment-level degradation signal evaluated by the release rule."
+    },
+    {
+      "from": "C2",
+      "to": "C5",
+      "type": "mediates",
+      "explanation": "The 14-point drop exceeded the rule's 5-point threshold and triggered the halt."
+    },
+    {
+      "from": "C5",
+      "to": "C7",
+      "type": "prevents",
+      "explanation": "Halting expansion prevented broader rollout of the degraded model."
+    },
+    {
+      "from": "C6",
+      "to": "C7",
+      "type": "contributes-to",
+      "explanation": "Segment-specific disablement stopped continued exposure in the affected segment without changing service elsewhere."
+    },
+    {
+      "from": "C9",
+      "to": "C6",
+      "type": "unknown",
+      "explanation": "Rollback was practiced previously, but its effect on the actual response is not documented."
+    },
+    {
+      "from": "C8",
+      "to": "C10",
+      "type": "supports",
+      "explanation": "The contrast between passing tests and failing after deployment identifies a detection gap, not the defect's origin."
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "The evidence does not identify the technical or data-related cause of the precision drop.",
+      "confidence": "high",
+      "relevantEvidence": ["E1", "E3", "E7"]
+    },
+    {
+      "id": "U2",
+      "statement": "It is unknown whether the affected segment was represented in pre-release tests or whether those tests measured segment-level precision.",
+      "confidence": "high",
+      "relevantEvidence": ["E7"]
+    },
+    {
+      "id": "U3",
+      "statement": "The evidence does not separate the impact-limiting contribution of the 2% exposure cap from that of detection and rollback.",
+      "confidence": "medium",
+      "relevantEvidence": ["E2", "E3", "E5", "E6"]
+    },
+    {
+      "id": "U4",
+      "statement": "The response time between detection, halted expansion, and segment disablement is not provided.",
+      "confidence": "high",
+      "relevantEvidence": ["E3", "E4", "E5"]
+    },
+    {
+      "id": "U5",
+      "statement": "The evidence does not establish whether the rollback drill materially improved this incident's response.",
+      "confidence": "high",
+      "relevantEvidence": ["E8"]
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Preserve the 2% staged exposure and the automated segment-level halt threshold.",
+      "priority": "high",
+      "rationale": "These are demonstrated leverage points for limiting expansion when segment quality degrades.",
+      "supportedBy": ["E2", "E3", "E4", "E6"]
+    },
+    {
+      "id": "A2",
+      "action": "Preserve segment-specific feature-flag disablement and continued service by the previous model.",
+      "priority": "high",
+      "rationale": "This control isolates the affected segment while avoiding unnecessary rollback for unaffected traffic.",
+      "supportedBy": ["E5", "E6"]
+    },
+    {
+      "id": "A3",
+      "action": "Investigate the affected segment and the 312 requests to determine the source of the precision loss.",
+      "priority": "high",
+      "rationale": "The current evidence establishes the failure and its scope but not its cause.",
+      "supportedBy": ["E1", "E3", "E6", "E7"]
+    },
+    {
+      "id": "A4",
+      "action": "Review whether pre-release tests exercised and evaluated quality for the affected segment.",
+      "priority": "medium",
+      "rationale": "Integration tests passed despite the post-deployment segment failure, indicating a possible pre-release visibility gap.",
+      "supportedBy": ["E1", "E7"]
+    },
+    {
+      "id": "A5",
+      "action": "Measure detection-to-disable timing in future releases.",
+      "priority": "medium",
+      "rationale": "Monitoring provides visibility, while faster halt and disable execution may provide direct leverage over affected-request count.",
+      "supportedBy": ["E3", "E4", "E5", "E6"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "condition": "If segment-level monitoring had not existed,",
+      "expectedEffect": "the isolated precision drop might not have been detected after six minutes, weakening the basis for an automated halt.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "CF2",
+      "condition": "If the 14-point drop had not exceeded the 5-point rule threshold,",
+      "expectedEffect": "the documented automated rule would not, on the supplied evidence, have halted expansion.",
+      "confidence": "high",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "CF3",
+      "condition": "If initial exposure had been broader than 2%,",
+      "expectedEffect": "more requests could have encountered the failing model before containment, although the evidence cannot quantify the increase.",
+      "confidence": "medium",
+      "evidence": ["E2", "E3", "E6"]
+    },
+    {
+      "id": "CF4",
+      "condition": "If segment-specific disablement had been unavailable,",
+      "expectedEffect": "the affected segment could not have been isolated through the documented mechanism while leaving all other traffic on its existing service path.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "id": "CF5",
+      "condition": "If passing integration tests were sufficient to rule out segment-level quality failures,",
+      "expectedEffect": "the observed post-deployment precision drop would not have occurred; the case therefore contradicts that sufficiency claim.",
+      "confidence": "high",
+      "evidence": ["E1", "E3", "E7"]
+    },
+    {
+      "id": "CF6",
+      "condition": "If the prior rollback practice had not occurred,",
+      "expectedEffect": "the evidence is insufficient to determine whether containment would have been slower or less effective.",
+      "confidence": "low",
+      "evidence": ["E8"]
+    }
+  ]
+}
