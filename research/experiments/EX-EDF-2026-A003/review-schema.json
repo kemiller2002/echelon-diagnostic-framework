@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "required": [
+    "caseId",
+    "authorFamily",
+    "reviewerFamily",
+    "reviewerModel",
+    "checks",
+    "verdict",
+    "notes"
+  ],
+  "checks": {
+    "groundTruthSupported": "boolean",
+    "noLexicalLeakage": "boolean",
+    "noSingleClue": "boolean",
+    "candidatePlausibility": "boolean",
+    "constructPressure": "boolean",
+    "difficultyAdequate": "boolean"
+  },
+  "verdict": [
+    "pass",
+    "revise"
+  ],
+  "passRule": "verdict=pass and every check=true; reviewerFamily must differ from authorFamily"
+}
