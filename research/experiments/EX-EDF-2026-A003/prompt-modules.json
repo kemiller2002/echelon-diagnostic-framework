@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "shared": "Analyze only the supplied evidence and candidate items. For every scored item choose one allowed answer, provide confidence 0 to 100, and cite evidence IDs. Do not use outside facts or invent evidence. Return only the required JSON object.",
+  "neutral": {
+    "negative-knowledge": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions.",
+    "control-points": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions.",
+    "propagation": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions.",
+    "evidence-revision": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions.",
+    "interaction": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions.",
+    "protective-controls": "Apply a disciplined generic review. Check each candidate independently, distinguish stronger from weaker support, keep answers internally consistent, avoid assumptions not contained in the evidence, and choose evidence-backed actions."
+  },
+  "construct": {
+    "negative-knowledge": "Treat negative knowledge as first-class evidence. Separate observed absence, not-observed, and genuinely unknown states. Preserve live alternatives when discriminating evidence is missing. Never convert missing evidence into positive evidence or unsupported certainty.",
+    "control-points": "Reason explicitly about control points. Distinguish symptom suppression from interventions that change the causal mechanism. Prefer upstream leverage supported by evidence, and avoid actions that merely hide symptoms or move the failure elsewhere.",
+    "propagation": "Reason explicitly about propagation. Separate origin, mediator, downstream effect, and correlation. Preserve causal direction and distinguish contributes-to, mediates, precedes, prevents, and unknown relationships without inventing unsupported edges.",
+    "evidence-revision": "Reason explicitly about evidence revision. Evaluate each stage only from evidence available by that stage, preserve prior uncertainty, and update hypothesis state proportionally when new evidence arrives. Do not rewrite earlier states using hindsight.",
+    "interaction": "Reason explicitly about interactions. Test joint sufficiency and necessity instead of assuming independent causes. Represent cases where factors combine, neither factor alone is sufficient, and apparent main effects are conditional on another factor.",
+    "protective-controls": "Reason explicitly about protective and detection controls. Distinguish a control that reveals or contains a failure from the mechanism that creates it. Do not weaken validation, monitoring, circuit breaking, quarantine, or similar controls merely because they make failure visible."
+  },
+  "matchingRule": "Neutral and construct modules must remain within 20% normalized character length and must not name EDF."
+}
