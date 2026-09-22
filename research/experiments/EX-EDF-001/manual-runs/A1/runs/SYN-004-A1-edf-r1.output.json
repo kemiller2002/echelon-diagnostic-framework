@@ -1,0 +1,169 @@
+{
+  "version": "1.0.0",
+  "summary": {
+    "diagnosis": "The queue stalled because consumer throughput fell below the normal-range arrival rate for 27 minutes. The evidence implicates one or both preceding changes—the consumer-library upgrade and database index rebuild—but cannot isolate their individual effects.",
+    "confidence": "high"
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Queue accumulation resulted from reduced consumer throughput rather than increased arrivals.",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "id": "C2",
+      "statement": "Increased database lock waiting is a supported candidate contributor to reduced throughput.",
+      "confidence": "medium",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C3",
+      "statement": "Increased deserialization retries or related work is a supported candidate contributor to reduced throughput.",
+      "confidence": "medium",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "id": "C4",
+      "statement": "The combined change state is associated with the degradation because throughput normalized after both changes were reverted.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "C5",
+      "statement": "The evidence does not determine whether either change alone was sufficient or whether both contributed.",
+      "confidence": "high",
+      "evidence": ["E5", "E7", "E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "consumer-library upgrade",
+      "to": "deserialization warnings or retry work",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "from": "database index rebuild",
+      "to": "database lock waits",
+      "type": "unknown",
+      "confidence": "low",
+      "evidence": ["E3", "E4"]
+    },
+    {
+      "from": "database lock waits",
+      "to": "consumer throughput reduction",
+      "type": "contributes-to",
+      "confidence": "medium",
+      "evidence": ["E2", "E4"]
+    },
+    {
+      "from": "deserialization warnings or retry work",
+      "to": "consumer throughput reduction",
+      "type": "contributes-to",
+      "confidence": "medium",
+      "evidence": ["E2", "E4"]
+    },
+    {
+      "from": "consumer throughput reduction",
+      "to": "queue-depth growth",
+      "type": "contributes-to",
+      "confidence": "high",
+      "evidence": ["E1", "E2"]
+    },
+    {
+      "from": "reversion of both changes",
+      "to": "throughput recovery",
+      "type": "precedes",
+      "confidence": "high",
+      "evidence": ["E6"]
+    }
+  ],
+  "uncertainties": [
+    {
+      "issue": "The relative time spent on database waiting versus deserialization retrying is unknown.",
+      "confidence": "high",
+      "evidence": ["E5"]
+    },
+    {
+      "issue": "No evidence isolates the consumer-library upgrade's effect.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "issue": "No evidence isolates the database index rebuild's effect.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "issue": "The absent incident traces prevent request-level propagation analysis.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    },
+    {
+      "issue": "The warnings and lock-wait messages may be contributors, correlates, or a mixture; their causal shares remain unresolved.",
+      "confidence": "high",
+      "evidence": ["E4", "E5"]
+    }
+  ],
+  "actions": [
+    {
+      "priority": 1,
+      "action": "Reproduce the condition and revert only the consumer-library upgrade while holding the index-rebuild state fixed.",
+      "role": "causal-discrimination",
+      "leverage": "high",
+      "rationale": "Tests whether the library change is necessary for the throughput loss."
+    },
+    {
+      "priority": 2,
+      "action": "Reproduce the condition and revert only the database index rebuild while holding the library state fixed.",
+      "role": "causal-discrimination",
+      "leverage": "high",
+      "rationale": "Tests whether the index-rebuild change is necessary for the throughput loss."
+    },
+    {
+      "priority": 3,
+      "action": "Separate consumer processing time into database-wait and deserialization-retry components.",
+      "role": "visibility",
+      "leverage": "medium",
+      "rationale": "Resolves the measurement gap but does not itself restore throughput."
+    },
+    {
+      "priority": 4,
+      "action": "Retain trace samples during future degradation windows.",
+      "role": "visibility",
+      "leverage": "medium",
+      "rationale": "Enables request-level attribution during recurrence."
+    },
+    {
+      "priority": 5,
+      "action": "Use rollback of the implicated change state as a recovery control if the same degradation recurs.",
+      "role": "outcome-control",
+      "leverage": "high",
+      "rationale": "The observed joint rollback was followed by restored throughput."
+    }
+  ],
+  "counterfactuals": [
+    {
+      "condition": "If throughput had remained normal while arrivals stayed normal, the observed steady queue growth would not be explained by the identified imbalance.",
+      "implication": "Challenges C1."
+    },
+    {
+      "condition": "If reverting only the library upgrade restores throughput, the library path gains support while the index rebuild is not shown necessary.",
+      "implication": "Prioritizes the deserialization-related control path."
+    },
+    {
+      "condition": "If reverting only the index rebuild restores throughput, the database-wait path gains support while the library upgrade is not shown necessary.",
+      "implication": "Prioritizes the lock-wait-related control path."
+    },
+    {
+      "condition": "If neither single revert restores throughput but reverting both does, an interaction or dual contribution becomes more plausible.",
+      "implication": "Joint change control remains necessary."
+    },
+    {
+      "condition": "If timing telemetry shows negligible time in one candidate mechanism, warning frequency alone would not justify targeting that mechanism.",
+      "implication": "Visibility data could overturn control-point priority."
+    }
+  ]
+}
