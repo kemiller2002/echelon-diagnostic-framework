@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "The analysis identifies all three required findings: the legacy adapter's omitted region-header mapping, the causal link between the missing header and routing failures, and restoration of service upon disabling the adapter. Causal structure is correctly ordered (config change -> missing mapping -> header-dependent failures -> resolution on rollback) without inventing unsupported mechanisms. Every material claim cites specific evidence IDs, and misleading evidence (DB metrics, CPU rise, PDF ticket) is explicitly handled by ruling out or flagging as unresolved rather than asserting spurious causation—none of the forbidden claims appear. Confidence is appropriately high on the well-supported core causal chain (consistent with the case's low stated uncertainty) while genuinely unresolved details (3% residual failures, CPU role, client-type breakdown, PDF ticket relevance) are separately flagged with concrete resolving evidence, showing good calibration rather than false certainty or hedging. Recommended actions directly target the evidence-supported mechanism (restore/validate the region-header mapping before re-enabling, add config validation, segment monitoring by client type) matching the preferred action, are well-prioritized, and introduce no harmful or scope-exceeding steps."
+}
