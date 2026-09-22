@@ -1,0 +1,187 @@
+{
+  "version": "1.0.0",
+  "summary": "The temperature-limit exceedance during the six-hour transfer is best explained by the combined presence of humidity-triggered sensor drift and defective compressor restart handling. Each condition alone was insufficient in the comparison runs. Alert suppression did not cause the initial crossing but extended operator response after it occurred.",
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Three refrigerated containers exceeded the product temperature limit during the transfer.",
+      "confidence": "high",
+      "evidence": ["E1"]
+    },
+    {
+      "id": "C2",
+      "text": "Relative humidity remained above the sensor-drift threshold for 73 minutes.",
+      "confidence": "high",
+      "evidence": ["E2", "E5"]
+    },
+    {
+      "id": "C3",
+      "text": "During that high-humidity interval, sensor calibration drifted upward by about 1.5 C.",
+      "confidence": "high",
+      "evidence": ["E2", "E5"]
+    },
+    {
+      "id": "C4",
+      "text": "After communications timeouts, the firmware defect caused every second compressor restart command to be ignored.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C5",
+      "text": "The evidence supports an interaction between sensor drift and defective restart logic as a contributor to the limit exceedance.",
+      "confidence": "high",
+      "evidence": ["E6", "E7"]
+    },
+    {
+      "id": "C6",
+      "text": "Neither the firmware defect with calibrated sensors nor sensor drift with corrected restart logic produced a limit exceedance in the comparison runs.",
+      "confidence": "high",
+      "evidence": ["E6", "E7"]
+    },
+    {
+      "id": "C7",
+      "text": "The alerting rule suppressed repeated temperature alerts for 45 minutes after acknowledgement.",
+      "confidence": "high",
+      "evidence": ["E4"]
+    },
+    {
+      "id": "C8",
+      "text": "Alert delay prolonged operator response after the product limit had already been crossed, so it was an aggravating recovery factor rather than the demonstrated cause of the initial crossing.",
+      "confidence": "high",
+      "evidence": ["E8"]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C3",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C3",
+      "to": "C5",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C5",
+      "to": "C1",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "C6",
+      "to": "C5",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C1",
+      "to": "C8",
+      "type": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "C7",
+      "to": "C8",
+      "type": "contributes-to",
+      "confidence": "high"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "text": "The evidence does not state how upward sensor drift interacted with restart control to produce an actual product-temperature exceedance.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "text": "The evidence does not identify the communications-timeout frequency, restart-command sequence, or compressor downtime in the affected containers.",
+      "confidence": "high"
+    },
+    {
+      "id": "U3",
+      "text": "The evidence does not distinguish independently measured product temperature from temperature inferred through the drifting sensors.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "text": "The evidence does not establish whether faster operator response could have reduced the duration or severity of the exceedance.",
+      "confidence": "high"
+    },
+    {
+      "id": "U5",
+      "text": "No evidence identifies additional contributors or explains why exactly three containers were affected.",
+      "confidence": "high"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "text": "Correct the compressor restart logic so restart commands are not discarded after communications timeouts.",
+      "confidence": "high",
+      "basis": ["E3", "E7"]
+    },
+    {
+      "id": "A2",
+      "text": "Correct or compensate for humidity-dependent sensor calibration drift above 88% relative humidity.",
+      "confidence": "high",
+      "basis": ["E2", "E5", "E6"]
+    },
+    {
+      "id": "A3",
+      "text": "Validate the combined corrections under transfer conditions that include humidity above 88% and communications timeouts.",
+      "confidence": "high",
+      "basis": ["E5", "E6", "E7"]
+    },
+    {
+      "id": "A4",
+      "text": "Revise the repeated-alert suppression behavior to avoid a 45-minute loss of visibility after acknowledgement.",
+      "confidence": "high",
+      "basis": ["E4", "E8"]
+    },
+    {
+      "id": "A5",
+      "text": "Use an independent temperature reference to determine whether future threshold crossings reflect actual product temperature or humidity-induced sensor bias.",
+      "confidence": "medium",
+      "basis": ["E2", "E6"]
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "condition": "If sensors had remained calibrated while the firmware defect persisted,",
+      "expectedOutcome": "the product limit would not have been exceeded under the comparison-run conditions.",
+      "confidence": "high",
+      "evidence": ["E6"]
+    },
+    {
+      "id": "CF2",
+      "condition": "If restart logic had been corrected while the sensor drift persisted,",
+      "expectedOutcome": "the product limit would not have been exceeded under the comparison-run conditions.",
+      "confidence": "high",
+      "evidence": ["E7"]
+    },
+    {
+      "id": "CF3",
+      "condition": "If repeated alerts had not been suppressed,",
+      "expectedOutcome": "operator response could have begun sooner after the crossing, but the evidence does not show that the initial crossing would have been prevented.",
+      "confidence": "high",
+      "evidence": ["E4", "E8"]
+    },
+    {
+      "id": "CF4",
+      "condition": "If humidity had not exceeded 88%,",
+      "expectedOutcome": "the specified humidity-triggered sensor drift would not have occurred; whether the firmware defect alone would then cause an exceedance in this transfer is not directly established.",
+      "confidence": "medium",
+      "evidence": ["E2", "E5", "E6"]
+    }
+  ]
+}
