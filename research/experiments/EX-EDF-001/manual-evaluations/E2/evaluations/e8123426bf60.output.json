@@ -1,0 +1,11 @@
+{
+  "dimensionScores": {
+    "diagnostic-accuracy": 4,
+    "causal-fidelity": 4,
+    "evidence-discipline": 4,
+    "uncertainty-calibration": 4,
+    "action-quality": 4
+  },
+  "flags": [],
+  "rationale": "All four required findings are explicitly and correctly represented: single-segment defect (C1), exposure capping as blast-radius limiter (C2/C7/R1), monitoring+automated halt preventing expansion (C3-C5/R3-R5), and flag-based targeted rollback (C6/R6-R8). Neither forbidden claim appears; the analysis explicitly separates 'tests passed' from 'defect escaped' (C8/C9) and never asserts a failure-free deployment, instead foregrounding the incident and its containment. Causal relationships (prevents/contributes-to/mediates) track the evidence-supported chain without inventing mechanism, and items lacking evidentiary support for a causal claim (e.g., root cause of the defect, effect of prior rollback practice) are explicitly flagged as 'unknown' or given low confidence (R9, R15, R16) rather than asserted. Evidence discipline is strong: every claim cites specific evidence IDs, confidence levels are graduated sensibly, and no outside facts are introduced. Uncertainty calibration is a particular strength — U1-U8 systematically enumerate what remains unresolved (root cause, response latency, automation vs. manual action, test coverage, harm quantification, monitoring sensitivity for low-volume segments) with concrete resolving evidence for each, matching the case's low-uncertainty-on-containment/high-uncertainty-on-mechanism profile. Actions target real leverage points (root-cause analysis, closing the pre-release per-segment testing gap, quantifying response latency) while A6 explicitly recommends retaining the layered control set (exposure staging, segment monitoring, threshold halt, flag rollback), matching the preferred action and not weakening any protective control. Minor: C10's 'high' confidence on rehearsal-of-mechanism is a slightly generous read of E8, but the effect claim itself is correctly downgraded to low confidence in R9, so this does not rise to material overreach."
+}
