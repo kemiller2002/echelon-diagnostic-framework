@@ -1,0 +1,225 @@
+{
+  "version": "1.0.0",
+  "summary": {
+    "outcome": "Queue depth increased for 27 minutes because consumer throughput fell while request arrival rate remained normal.",
+    "operating_context": "A queue served by consumers whose processing may involve database access and message deserialization.",
+    "boundaries": "The analysis is limited to the incident interval, the two preceding changes, their joint reversion, consumer logs, and available telemetry.",
+    "actors": [
+      "request producers",
+      "queue",
+      "consumers",
+      "consumer library",
+      "database"
+    ],
+    "constraints": [
+      "Database-wait time cannot be separated from deserialization-retry time.",
+      "Both changes were reverted together.",
+      "No incident traces were retained."
+    ],
+    "best_explanation": "The backlog was directly produced by reduced consumer throughput. The database index rebuild, the consumer-library upgrade, or an interaction between them plausibly caused that reduction; the supplied evidence does not distinguish these alternatives."
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Request arrival rate stayed within the normal range while queue depth rose.",
+      "type": "observation",
+      "evidence": ["E1"],
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "statement": "Consumer throughput fell by roughly 40% during the queue-growth interval.",
+      "type": "observation",
+      "evidence": ["E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "statement": "Reduced consumer throughput, rather than increased arrivals, best explains the queue growth.",
+      "type": "inference",
+      "evidence": ["E1", "E2"],
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "statement": "A consumer-library upgrade and a database index rebuild both preceded the incident.",
+      "type": "observation",
+      "evidence": ["E3"],
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "statement": "Increased lock-wait messages support database waiting as a contributor to reduced throughput.",
+      "type": "inference",
+      "evidence": ["E4"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C6",
+      "statement": "Increased deserialization warnings support deserialization failures or retries as a contributor to reduced throughput.",
+      "type": "inference",
+      "evidence": ["E4"],
+      "confidence": "medium"
+    },
+    {
+      "id": "C7",
+      "statement": "Throughput returned to normal after both changes were reverted.",
+      "type": "observation",
+      "evidence": ["E6"],
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "statement": "The joint reversion implicates the changed configuration collectively but does not identify either change individually.",
+      "type": "inference",
+      "evidence": ["E6", "E7"],
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "statement": "The two log increases may represent separate contributors, an interaction, or one primary problem with a downstream correlated symptom.",
+      "type": "inference",
+      "evidence": ["E4", "E5", "E8"],
+      "confidence": "low"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "C2",
+      "to": "C3",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C1",
+      "to": "C3",
+      "type": "supports",
+      "confidence": "high"
+    },
+    {
+      "from": "C4",
+      "to": "C2",
+      "type": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "database waiting",
+      "to": "reduced consumer throughput",
+      "type": "contributes-to",
+      "confidence": "medium"
+    },
+    {
+      "from": "deserialization failures or retries",
+      "to": "reduced consumer throughput",
+      "type": "contributes-to",
+      "confidence": "medium"
+    },
+    {
+      "from": "reduced consumer throughput",
+      "to": "queue-depth growth",
+      "type": "contributes-to",
+      "confidence": "high"
+    },
+    {
+      "from": "joint reversion",
+      "to": "throughput recovery",
+      "type": "precedes",
+      "confidence": "high"
+    },
+    {
+      "from": "library upgrade",
+      "to": "throughput reduction",
+      "type": "unknown",
+      "confidence": "low"
+    },
+    {
+      "from": "index rebuild",
+      "to": "throughput reduction",
+      "type": "unknown",
+      "confidence": "low"
+    },
+    {
+      "from": "library-upgrade and index-rebuild interaction",
+      "to": "throughput reduction",
+      "type": "unknown",
+      "confidence": "low"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "question": "Was database waiting the primary cause?",
+      "for": ["Increased lock-wait messages occurred during the incident."],
+      "against": ["Deserialization warnings also increased, and no timing breakdown isolates database waiting."],
+      "discriminating_observation": "Per-message processing-time measurements separating database wait from all other processing time."
+    },
+    {
+      "id": "U2",
+      "question": "Was deserialization retrying the primary cause?",
+      "for": ["Deserialization warnings increased after a consumer-library upgrade."],
+      "against": ["Lock-wait messages also increased, and warnings alone do not establish retry cost or throughput impact."],
+      "discriminating_observation": "Per-message deserialization attempt counts and elapsed retry time correlated with throughput."
+    },
+    {
+      "id": "U3",
+      "question": "Did both changes interact to produce the stall?",
+      "for": ["Both were present before the incident and joint reversion restored throughput."],
+      "against": ["No direct interaction measurement or single-change reversion exists."],
+      "discriminating_observation": "Controlled runs of all four configurations: neither change, library only, rebuild only, and both."
+    },
+    {
+      "id": "U4",
+      "question": "Were either log increases merely downstream effects or misleading correlations?",
+      "for": ["Their increase coincided with the throughput drop."],
+      "against": ["Telemetry cannot attribute processing time, and traces are unavailable."],
+      "discriminating_observation": "Traces linking each message's lock waits, deserialization attempts, completion time, and outcome."
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "action": "Run controlled single-change and combined-change tests under comparable arrivals.",
+      "mechanism": "Separates the library effect, index-rebuild effect, and interaction effect.",
+      "priority": 1,
+      "rationale": "It directly resolves the central causal ambiguity created by the joint rollback."
+    },
+    {
+      "id": "A2",
+      "action": "Add telemetry that separately measures database-wait time and deserialization retry time.",
+      "mechanism": "Attributes throughput loss to the competing processing paths.",
+      "priority": 2,
+      "rationale": "It addresses the stated measurement gap and improves diagnosis if the outcome recurs."
+    },
+    {
+      "id": "A3",
+      "action": "Retain trace samples spanning lock waits, deserialization attempts, and message completion.",
+      "mechanism": "Connects warnings and waits to individual processing latency and outcomes.",
+      "priority": 3,
+      "rationale": "It can determine whether either log signal is causal, interacting, or downstream."
+    },
+    {
+      "id": "A4",
+      "action": "Keep the jointly reverted configuration until controlled evidence identifies a safe change set.",
+      "mechanism": "Avoids reintroducing the configuration associated with reduced throughput.",
+      "priority": 4,
+      "rationale": "Recovery followed joint reversion, although this action does not identify the responsible change."
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "change": "Reapply only the library upgrade while excluding the index rebuild, with separated timing telemetry.",
+      "challenge": "If throughput remains normal and deserialization retry time does not rise, the library-primary explanation is substantially weakened."
+    },
+    {
+      "id": "CF2",
+      "change": "Run only the index rebuild without the library upgrade, with separated timing telemetry.",
+      "challenge": "If throughput remains normal and database-wait time does not rise, the rebuild-primary explanation is substantially weakened."
+    },
+    {
+      "id": "CF3",
+      "change": "Run both changes together after each single-change run remains normal.",
+      "challenge": "If throughput falls only when both coexist, the interaction explanation becomes strongest; if it remains normal, the current change-based explanation is strongly challenged."
+    }
+  ]
+}
