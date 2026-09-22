@@ -1,0 +1,109 @@
+{
+  "id": "EX-EDF-2026-A003",
+  "title": "EDF Construct-Specific Stress Benchmark",
+  "version": "1.0.0",
+  "status": "preregistered-pending-case-authoring",
+  "date": "2026-09-22",
+  "motivation": "EX-EDF-001 was near ceiling and did not show material EDF-over-matched-neutral value. This benchmark isolates EDF-specific constructs and uses deterministic candidate-state scoring.",
+  "primaryQuestion": "Do targeted EDF construct semantics improve mechanically scored diagnostic decisions relative to a matched generic reasoning prompt under hard evidence conditions?",
+  "constructs": {
+    "negative-knowledge": {
+      "hypothesis": "HY-EDF-2026-A011",
+      "statement": "Explicit EDF negative-knowledge semantics reduce unsupported certainty and improve preservation of unresolved alternatives under incomplete evidence.",
+      "cases": 2
+    },
+    "control-points": {
+      "hypothesis": "HY-EDF-2026-A012",
+      "statement": "Explicit EDF control-point semantics improve selection of upstream mechanism-changing actions over symptom-focused actions.",
+      "cases": 2
+    },
+    "propagation": {
+      "hypothesis": "HY-EDF-2026-A013",
+      "statement": "Explicit EDF propagation semantics improve classification of causal direction, mediation, and downstream effects in multi-stage systems.",
+      "cases": 2
+    },
+    "evidence-revision": {
+      "hypothesis": "HY-EDF-2026-A014",
+      "statement": "Explicit EDF evidence-update semantics improve proportional revision of hypotheses as evidence changes while preserving unresolved alternatives and prior-state distinctions.",
+      "cases": 2
+    },
+    "interaction": {
+      "hypothesis": "HY-EDF-2026-A015",
+      "statement": "Explicit EDF interaction semantics improve identification of joint causal conditions when neither factor alone is sufficient.",
+      "cases": 2
+    },
+    "protective-controls": {
+      "hypothesis": "HY-EDF-2026-A016",
+      "statement": "Explicit separation of causal mechanisms from detection and protective controls reduces harmful recommendations to disable controls that merely surface or contain failures.",
+      "cases": 2
+    }
+  },
+  "design": {
+    "analyzerFamilies": [
+      "OpenAI",
+      "Anthropic"
+    ],
+    "caseAuthorFamilies": [
+      "OpenAI",
+      "Anthropic"
+    ],
+    "cases": 12,
+    "casesPerConstruct": 2,
+    "casesPerAuthorFamily": 6,
+    "primaryConditions": [
+      "neutral",
+      "construct"
+    ],
+    "primaryAnalyzerRuns": 48,
+    "unit": "case x analyzer family",
+    "pairedComparison": "construct minus neutral",
+    "caseAuthorBalance": "Each construct has one OpenAI-authored and one Anthropic-authored case.",
+    "blinding": "Analyzer packets omit hidden truth, author family, scoring weights, and alternative condition text."
+  },
+  "primaryOutcome": {
+    "name": "construct-critical mechanical score",
+    "range": "0..100",
+    "formula": [
+      "70 points weighted exact answer-state accuracy",
+      "20 points evidence-link precision/recall",
+      "10 points confidence calibration",
+      "minus 15 per harmful action promoted as preferred/acceptable; floor at 0"
+    ],
+    "comparison": "construct minus neutral across 24 paired units"
+  },
+  "secondaryOutcomes": [
+    "whole-case mechanical score",
+    "harmful-action promotion rate",
+    "unsupported-certainty rate",
+    "false causal-edge rate",
+    "evidence-link precision/recall",
+    "effect by analyzer family",
+    "effect by case-author family",
+    "effect by construct"
+  ],
+  "supportCriteria": [
+    "Mean construct minus neutral construct-critical score across 24 paired units is at least +7 points.",
+    "Seeded 10000-resample paired-bootstrap 95% CI lower bound is above 0.",
+    "Both analyzer families have positive mean paired differences.",
+    "Cases authored by both provider families independently have positive mean paired differences.",
+    "At least four of six construct pooled means are positive.",
+    "Construct condition harmful-action promotion rate is not higher than neutral."
+  ],
+  "constructFollowupRule": "A construct is a candidate for focused confirmation if pooled mean improvement is at least +10, both analyzer families are positive, both author-source cases have non-negative pooled effects, and harmful-action promotion does not increase. This is exploratory gating, not standalone confirmation.",
+  "falsificationCriteria": [
+    "Overall mean improvement below +7 or bootstrap interval includes 0.",
+    "Effect present in only one analyzer family.",
+    "Effect present only in cases authored by one provider family.",
+    "Fewer than four constructs positive.",
+    "Construct prompting increases harmful-action promotion."
+  ],
+  "stopRules": [
+    "Freeze all 12 accepted case/truth pairs, condition modules, output contract, randomization seed, and scoring code before first analyzer run.",
+    "Do not tune or replace cases after analyzer outputs are observed.",
+    "Preserve analyzer responses append-only; schema-invalid semantic responses are terminal data.",
+    "Infrastructure failures before model response may be retried only when no output was recorded.",
+    "Case-authoring/review revisions are allowed only before analyzer execution."
+  ],
+  "randomizationSeed": "edf-construct-stress-2026-09-22-v1",
+  "relationshipToPriorEvidence": "EX-EDF-001 / EV-EDF-009 motivates this construct-specific anti-ceiling design."
+}

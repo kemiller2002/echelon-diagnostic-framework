@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "requiredTopLevelFields": [
+    "caseId",
+    "answers"
+  ],
+  "answer": {
+    "required": [
+      "itemId",
+      "answer",
+      "confidence",
+      "evidenceIds"
+    ],
+    "confidence": "integer 0..100",
+    "evidenceIds": "array of evidence IDs from case only"
+  },
+  "rules": [
+    "Return exactly one answer for every scored item.",
+    "answer must be one allowedAnswers value.",
+    "Do not add scored items.",
+    "Do not use outside evidence.",
+    "Optional rationale is ignored by primary scorer."
+  ]
+}

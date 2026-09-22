@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "assignments": [
+    {
+      "caseId": "ST-001",
+      "construct": "negative-knowledge",
+      "hypothesis": "HY-EDF-2026-A011",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-002",
+      "construct": "negative-knowledge",
+      "hypothesis": "HY-EDF-2026-A011",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-003",
+      "construct": "control-points",
+      "hypothesis": "HY-EDF-2026-A012",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-004",
+      "construct": "control-points",
+      "hypothesis": "HY-EDF-2026-A012",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-005",
+      "construct": "propagation",
+      "hypothesis": "HY-EDF-2026-A013",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-006",
+      "construct": "propagation",
+      "hypothesis": "HY-EDF-2026-A013",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-007",
+      "construct": "evidence-revision",
+      "hypothesis": "HY-EDF-2026-A014",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-008",
+      "construct": "evidence-revision",
+      "hypothesis": "HY-EDF-2026-A014",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-009",
+      "construct": "interaction",
+      "hypothesis": "HY-EDF-2026-A015",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-010",
+      "construct": "interaction",
+      "hypothesis": "HY-EDF-2026-A015",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-011",
+      "construct": "protective-controls",
+      "hypothesis": "HY-EDF-2026-A016",
+      "authorFamily": "OpenAI",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    },
+    {
+      "caseId": "ST-012",
+      "construct": "protective-controls",
+      "hypothesis": "HY-EDF-2026-A016",
+      "authorFamily": "Anthropic",
+      "domainHint": "software/operational system",
+      "status": "assigned"
+    }
+  ],
+  "hardRequirements": {
+    "minimumEvidenceItems": 12,
+    "minimumCandidateHypotheses": 4,
+    "minimumCandidateEdges": 6,
+    "minimumCandidateActions": 5,
+    "minimumScoredItems": 12,
+    "minimumConstructCriticalItems": 4,
+    "minimumExpectedUnknownItems": 2,
+    "minimumRedHerringEvidenceItems": 3,
+    "minimumConflictingEvidencePairs": 2,
+    "minimumReasoningHops": 3,
+    "minimumHarmfulCandidateActions": 1,
+    "lexicalLeakage": "Candidate wording must not reveal expected state.",
+    "singleClueRule": "No single evidence item may reveal the complete target diagnosis or preferred action.",
+    "difficultyTarget": "Generic frontier-model reasoning should face plausible traps; cases must not be simple extraction."
+  },
+  "independence": "Each provider authors one case per construct; analyzer packets omit authorFamily."
+}
