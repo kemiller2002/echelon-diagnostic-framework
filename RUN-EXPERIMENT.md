@@ -1,46 +1,66 @@
 # Run EX-EDF-001 A1 (OpenAI)
 
-This branch executes one preregistered analyzer slot without API calls.
+This branch executes one preregistered OpenAI analyzer slot without API billing.
 
-## Scientific boundary
+## Preferred execution path: Codex CLI
 
-This is analyzer execution only. Do not score results and do not inspect hidden truth. The branch packet removes each case's hidden-purpose label. Canonical source blob SHAs and the source commit are recorded for provenance.
+OpenAI does **not** need to spawn subagents. The automated runner starts a separate `codex exec --ephemeral` process for every experiment unit. Each invocation runs in a newly initialized empty temporary Git repository and receives only the exact frozen analyzer prompt.
 
-There are **24 terminal runs**: 18 primary units plus six repeatability units. Each run must use a **fresh isolated context**. A schema-invalid response is data and is terminal. Do not repair or retry it.
+The analyzer cannot see this repository, Git history, Claude results, hidden ground truth, evaluation rubric, prior outputs, or prior Codex sessions.
 
-## Start
+There are **24 terminal runs**: 18 primary units plus six preregistered repeatability units. A schema-invalid response is terminal data and is not repaired or retried.
 
-1. Confirm branch: `experiment/edf-a1-openai-manual`.
-2. Read only this file, `analyzer-packet.json`, and `scripts/edf-manual-agent-run.mjs`.
-3. Run `node scripts/edf-manual-agent-run.mjs verify`.
-4. Run `node scripts/edf-manual-agent-run.mjs isolate`.
-5. Identify the **exact model label selected in the host UI/runtime**. Keep it fixed for all 24 runs.
-6. Bind it before opening a case:
-   `node scripts/edf-manual-agent-run.mjs bind "<EXACT MODEL LABEL>" "<HOST SURFACE>"`
-7. Commit and push the binding before any run:
-   `git add research/experiments/EX-EDF-001/manual-runs/A1/executor.json && git commit -m "research: bind A1 OpenAI executor" && git push`
+### One-time prerequisite
 
-## Execute
+Use Codex CLI authenticated with the same ChatGPT account you want to use for the OpenAI arm. If needed:
 
-Repeat until `next` says `COMPLETE`:
+`codex login --device-auth`
 
-1. `node scripts/edf-manual-agent-run.mjs next > /tmp/edf-next.txt`
-2. Read only `RUN_ID` and the exact analyzer prompt from that file.
-3. Launch a **new isolated analyzer context/subagent** with the bound model.
-4. Give it exactly the emitted prompt and nothing else. No repo, web, search, connected tools, memory, prior outputs, or prior runs.
-5. Save its raw response verbatim to `/tmp/edf-output.json`. Do not edit it.
-6. `node scripts/edf-manual-agent-run.mjs record <RUN_ID> /tmp/edf-output.json`
-7. Commit and push the new run files immediately:
-   `git add research/experiments/EX-EDF-001/manual-runs/A1/runs && git commit -m "research: record A1 <RUN_ID>" && git push`
-8. Destroy/close that analyzer context before the next run.
+Do not configure an OpenAI API key for this experiment. ChatGPT-authenticated Codex uses the Codex access included with the ChatGPT plan and its applicable usage limits.
 
-Never rerun a terminal run.
+### Run the complete A1 arm
+
+From this branch:
+
+`bash scripts/run-edf-a1-with-codex.sh gpt-5.6-sol`
+
+The script will:
+
+1. verify the A1 branch and packet;
+2. bind A1 permanently to `gpt-5.6-sol` before revealing any case;
+3. commit and push the executor binding;
+4. request the next frozen run from the existing helper;
+5. create an empty temporary Git repository;
+6. invoke `codex exec --ephemeral` with no user config/rules and a read-only sandbox;
+7. provide exactly one analyzer prompt through stdin;
+8. record the raw final response append-only;
+9. commit and push that run immediately;
+10. discard the temporary repository and Codex session;
+11. repeat through all 24 units;
+12. create, commit, and push the completion manifest.
+
+If Codex itself fails before returning a response, the script stops and records nothing for that unit. Rerunning the script resumes at the same unrecorded unit. If the model returns invalid JSON/schema, that response is preserved as terminal experimental data and the script proceeds.
+
+## Isolation rules
+
+Do not manually inspect the canonical case files, ground truth, evaluation rubric, other branches, Claude output branch, repository history, prior conversations, or external information while executing A1.
+
+Do not edit analyzer outputs.
+
+Do not merge this branch into `main`.
+
+## Manual fallback
+
+The existing `scripts/edf-manual-agent-run.mjs` workflow remains available if Codex CLI itself is unavailable. Each manual run must still use a brand-new top-level OpenAI conversation/session, not another turn in an existing conversation.
 
 ## Finish
 
-Run `node scripts/edf-manual-agent-run.mjs finish`.
+When the runner reports `A1 COMPLETE`, report only:
 
-Then:
-`git add research/experiments/EX-EDF-001/manual-runs/A1/completion.json && git commit -m "research: complete A1 analyzer execution" && git push`
+- branch
+- bound model label
+- 24/24 terminal runs
+- valid/invalid counts
+- final commit SHA
 
-Report only branch, bound model label, terminal run count, valid/invalid count, and final commit SHA. Do not interpret EDF performance.
+Do not interpret whether EDF won or lost. Evaluation is a later blinded stage.
