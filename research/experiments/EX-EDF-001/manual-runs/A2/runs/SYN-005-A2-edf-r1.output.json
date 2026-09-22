@@ -1,0 +1,219 @@
+{
+  "summary": "Search latency doubled between 14:10 and 14:43 because a 35% cut to the downstream catalog API's per-client rate limit at 14:08 pushed a share of search requests into 429 responses, and those requests then served two exponential-backoff retries before completing. The added wall-clock time of the backoff waits is the latency mechanism. The simultaneous cache hit-rate drop from 91% to 76% is a side effect of the same retries, which carried a cache-bypass header; it is not on the causal path, since requests that never saw a 429 stayed fast whether they hit or missed cache, and the cache service itself was healthy. Restoring the prior rate limit at 14:41 removed the 429s and latency returned within two minutes, closing the loop on the single supported cause.",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "A 35% reduction of the downstream catalog API per-client rate limit at 14:08 immediately preceded the latency doubling at 14:10.",
+      "confidence": "high",
+      "evidence": ["E4", "E1"]
+    },
+    {
+      "id": "C2",
+      "statement": "The reduced limit produced 429 responses for a subset of search requests, each of which then performed two retries with exponential backoff.",
+      "confidence": "high",
+      "evidence": ["E5", "E4"]
+    },
+    {
+      "id": "C3",
+      "statement": "Elevated latency was confined to requests that received 429 responses; requests without 429s showed no latency increase.",
+      "confidence": "high",
+      "evidence": ["E6", "E1"]
+    },
+    {
+      "id": "C4",
+      "statement": "The proximate latency mechanism is the accumulated wait time of the two backoff intervals plus the extra downstream attempts on 429-affected requests.",
+      "confidence": "high",
+      "evidence": ["E5", "E6"]
+    },
+    {
+      "id": "C5",
+      "statement": "The cache hit-rate fall from 91% to 76% was produced by retry traffic sending a cache-bypass header, making it a downstream effect of the retries rather than a cause of latency.",
+      "confidence": "high",
+      "evidence": ["E7", "E2", "E6"]
+    },
+    {
+      "id": "C6",
+      "statement": "The cache tier was not itself degraded: it reported normal latency and no error increase throughout the window.",
+      "confidence": "high",
+      "evidence": ["E3"]
+    },
+    {
+      "id": "C7",
+      "statement": "Cache miss status alone is insufficient to raise search latency under these operating conditions.",
+      "confidence": "high",
+      "evidence": ["E6", "E3"]
+    },
+    {
+      "id": "C8",
+      "statement": "Reverting the rate limit at 14:41 ended the 429 spike and latency normalized about two minutes later, matching the recovery at 14:43.",
+      "confidence": "high",
+      "evidence": ["E8", "E1"]
+    },
+    {
+      "id": "C9",
+      "statement": "The client-side retry policy is an amplifier: it converted a quota reduction that could have surfaced as fast failures into a sustained latency regression, and it added bypass load back onto the same constrained downstream path.",
+      "confidence": "medium",
+      "evidence": ["E5", "E7", "E4"]
+    },
+    {
+      "id": "C10",
+      "statement": "Search request volume must have been close enough to the original quota that a 35% cut crossed the ceiling, though the traffic level itself is not reported.",
+      "confidence": "low",
+      "evidence": ["E4", "E5"]
+    },
+    {
+      "id": "C11",
+      "statement": "Cache hit rate acted as a misleading concurrent indicator during this incident: it moved in lockstep with the outcome while having no causal influence on it.",
+      "confidence": "medium",
+      "evidence": ["E2", "E6", "E7"]
+    }
+  ],
+  "relationships": [
+    { "from": "E4", "to": "C1", "type": "supports", "confidence": "high" },
+    { "from": "C1", "to": "C2", "type": "contributes-to", "confidence": "high" },
+    { "from": "C2", "to": "C4", "type": "contributes-to", "confidence": "high" },
+    { "from": "C4", "to": "C3", "type": "supports", "confidence": "high" },
+    { "from": "C2", "to": "C5", "type": "contributes-to", "confidence": "high" },
+    { "from": "C5", "to": "C11", "type": "supports", "confidence": "medium" },
+    { "from": "C6", "to": "C7", "type": "supports", "confidence": "high" },
+    { "from": "C3", "to": "C7", "type": "supports", "confidence": "high" },
+    { "from": "C9", "to": "C4", "type": "mediates", "confidence": "medium" },
+    { "from": "C1", "to": "E1", "type": "precedes", "confidence": "high" },
+    { "from": "E8", "to": "C8", "type": "supports", "confidence": "high" },
+    { "from": "C8", "to": "C1", "type": "supports", "confidence": "high" },
+    { "from": "E6", "to": "C5", "type": "supports", "confidence": "high" },
+    { "from": "E3", "to": "C6", "type": "supports", "confidence": "high" },
+    { "from": "C10", "to": "C2", "type": "contributes-to", "confidence": "low" },
+    { "from": "C7", "to": "C11", "type": "supports", "confidence": "medium" }
+  ],
+  "uncertainties": [
+    {
+      "id": "U1",
+      "statement": "Request volume and the absolute quota values before and after the change are not given, so it cannot be determined how much headroom existed or whether the restored limit is safe at higher load.",
+      "confidence": "high"
+    },
+    {
+      "id": "U2",
+      "statement": "Backoff parameters (base interval, multiplier, jitter, per-attempt timeout) are unstated, so the expected latency contribution of two retries cannot be quantified against the observed doubling.",
+      "confidence": "high"
+    },
+    {
+      "id": "U3",
+      "statement": "The reason retries carry a cache-bypass header is not documented; it may be deliberate correctness behavior rather than an oversight, which changes whether removing it is safe.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U4",
+      "statement": "Only median latency is reported. Tail behavior, request error rates, and whether any requests exhausted both retries and failed outright are unknown.",
+      "confidence": "high"
+    },
+    {
+      "id": "U5",
+      "statement": "The two-minute gap between the 14:41 revert and normalization at 14:43 is unexplained; plausible readings include in-flight backoff drain, quota-window reset, or metric aggregation lag, and the evidence does not separate them.",
+      "confidence": "medium"
+    },
+    {
+      "id": "U6",
+      "statement": "Why the downstream limit was changed, whether it was intentional, and whether other clients were affected are all outside the supplied evidence.",
+      "confidence": "high"
+    },
+    {
+      "id": "U7",
+      "statement": "It is not established whether the bypass-driven extra load on the downstream path meaningfully worsened the 429 rate itself, which would make the retry path partly self-reinforcing. The evidence is consistent with this but does not demonstrate it.",
+      "confidence": "low"
+    },
+    {
+      "id": "U8",
+      "statement": "No evidence rules out a second, unobserved change inside the same window; the case rests on two aligned timing coincidences at onset and recovery rather than on direct instrumentation of the retry wait time.",
+      "confidence": "medium"
+    }
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "statement": "Treat the downstream per-client quota as the primary intervention point: gate changes to it behind an agreed change process with the search service, and re-derive the limit from measured search demand rather than applying a flat percentage cut.",
+      "leverage": "high",
+      "rationale": "This is the only input whose reversal was directly observed to end the outcome.",
+      "confidence": "high"
+    },
+    {
+      "id": "A2",
+      "statement": "Reshape the retry policy for 429 specifically: apply a global retry budget, cap added wall-clock time per request, add jitter, and shed or fail fast once the downstream signals sustained throttling.",
+      "leverage": "high",
+      "rationale": "The retry waits are the mechanism that converts a quota cut into user-visible latency; bounding them bounds the blast radius of any future quota change.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A3",
+      "statement": "Review whether retries must bypass cache. If the bypass is not required for correctness, removing it lowers redundant downstream load and stops the hit-rate metric from being corrupted during throttling events.",
+      "leverage": "medium",
+      "rationale": "Addresses load amplification and metric distortion; on its own it would not have prevented the latency rise.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A4",
+      "statement": "Alert on downstream 429 rate and on retry-attributable latency, not on cache hit rate, as the first-line signal for this failure shape.",
+      "leverage": "medium",
+      "rationale": "Shortens detection and points responders at the causal variable instead of the correlated one.",
+      "confidence": "medium"
+    },
+    {
+      "id": "A5",
+      "statement": "Keep cache hit-rate dashboards, but annotate them as observation-only for throttling incidents; they showed the disturbance without offering any handle on it.",
+      "leverage": "low",
+      "rationale": "Visibility only. Acting on the hit-rate drop during this window would have directed effort at a healthy component.",
+      "confidence": "high"
+    },
+    {
+      "id": "A6",
+      "statement": "Instrument per-request time spent in backoff so future incidents are diagnosed from direct measurement rather than from timing alignment.",
+      "leverage": "medium",
+      "rationale": "Closes the main evidentiary gap in this diagnosis.",
+      "confidence": "medium"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "id": "CF1",
+      "statement": "Had the rate limit not been reduced at 14:08, no 429s would have occurred and neither the latency rise nor the hit-rate drop would have followed.",
+      "test": "The 14:41 restoration removed the 429s and latency returned at 14:43, reproducing the counterfactual in the reverse direction.",
+      "verdict": "supported",
+      "confidence": "high"
+    },
+    {
+      "id": "CF2",
+      "statement": "Had the cache been the cause, requests missing cache without a 429 should also have been slow.",
+      "test": "Non-429 requests were fast regardless of hit or miss.",
+      "verdict": "refuted",
+      "confidence": "high"
+    },
+    {
+      "id": "CF3",
+      "statement": "Had retries not used the cache-bypass header, hit rate would have held near 91% while latency still doubled.",
+      "test": "Latency tracked 429 status, not cache status, so removing the bypass changes the metric without changing the outcome.",
+      "verdict": "supported, untested directly",
+      "confidence": "medium"
+    },
+    {
+      "id": "CF4",
+      "statement": "Had the cache service been degraded, its own latency or error metrics should have moved.",
+      "test": "It reported normal latency and no error increase for the whole window.",
+      "verdict": "refuted",
+      "confidence": "high"
+    },
+    {
+      "id": "CF5",
+      "statement": "Had throttled requests failed immediately instead of retrying, median latency would likely have held while user-visible errors rose.",
+      "test": "No evidence describes the failure-versus-delay tradeoff, so the desirability of this alternative is undetermined; it is offered as a design choice, not a recommendation.",
+      "verdict": "undetermined",
+      "confidence": "low"
+    },
+    {
+      "id": "CF6",
+      "statement": "Had recovery been driven by some unrelated change rather than the revert, the alignment at both 14:08/14:10 and 14:41/14:43 would be coincidental.",
+      "test": "No competing change appears in the evidence, and two independent alignments at onset and recovery make coincidence a weak alternative, though it cannot be excluded from the supplied evidence alone.",
+      "verdict": "weakly refuted",
+      "confidence": "medium"
+    }
+  ]
+}
