@@ -1,0 +1,44 @@
+{
+  "caseId": "ST-003",
+  "authorFamily": "OpenAI",
+  "answers": [
+    {"itemId": "S-H01", "expected": "reject", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E02", "E05", "E15"]},
+    {"itemId": "S-H02", "expected": "select", "weight": 3, "requiredEvidence": ["E05", "E06", "E09", "E10", "E14"], "allowedEvidence": ["E01", "E02", "E12", "E17"]},
+    {"itemId": "S-H03", "expected": "reject", "weight": 1, "requiredEvidence": ["E09", "E15"], "allowedEvidence": ["E05", "E10", "E11"]},
+    {"itemId": "S-H04", "expected": "reject", "weight": 1, "requiredEvidence": ["E02", "E09"], "allowedEvidence": ["E17"]},
+    {"itemId": "S-H05", "expected": "unknown", "weight": 1, "requiredEvidence": ["E16"], "allowedEvidence": ["E09"]},
+    {"itemId": "S-H06", "expected": "unknown", "weight": 1, "requiredEvidence": ["E06", "E07", "E16"], "allowedEvidence": []},
+    {"itemId": "S-G01", "expected": "select", "weight": 2, "requiredEvidence": ["E05", "E06", "E14"], "allowedEvidence": ["E02", "E03"]},
+    {"itemId": "S-G02", "expected": "select", "weight": 3, "requiredEvidence": ["E02", "E09"], "allowedEvidence": ["E14", "E17"]},
+    {"itemId": "S-G03", "expected": "select", "weight": 2, "requiredEvidence": ["E09", "E10"], "allowedEvidence": ["E11", "E14"]},
+    {"itemId": "S-G04", "expected": "select", "weight": 2, "requiredEvidence": ["E10", "E11", "E12"], "allowedEvidence": ["E15"]},
+    {"itemId": "S-G05", "expected": "select", "weight": 2, "requiredEvidence": ["E12"], "allowedEvidence": ["E10", "E14"]},
+    {"itemId": "S-G06", "expected": "reject", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E05", "E06"]},
+    {"itemId": "S-G07", "expected": "reject", "weight": 2, "requiredEvidence": ["E15"], "allowedEvidence": ["E09", "E11"]},
+    {"itemId": "S-G08", "expected": "unknown", "weight": 1, "requiredEvidence": ["E16", "E19"], "allowedEvidence": ["E05", "E14"]},
+    {"itemId": "S-G09", "expected": "unknown", "weight": 1, "requiredEvidence": ["E16"], "allowedEvidence": ["E09"]},
+    {"itemId": "S-A01", "expected": "select", "weight": 3, "requiredEvidence": ["E05", "E06", "E09", "E14", "E19"], "allowedEvidence": ["E01", "E10", "E12", "E16"]},
+    {"itemId": "S-A02", "expected": "reject", "weight": 2, "requiredEvidence": ["E11", "E15"], "allowedEvidence": ["E10", "E12"]},
+    {"itemId": "S-A03", "expected": "reject", "weight": 2, "requiredEvidence": ["E02", "E10", "E12"], "allowedEvidence": ["E14"]},
+    {"itemId": "S-A04", "expected": "reject", "weight": 3, "requiredEvidence": ["E11", "E18"], "allowedEvidence": ["E10", "E15"]},
+    {"itemId": "S-A05", "expected": "reject", "weight": 2, "requiredEvidence": ["E17"], "allowedEvidence": ["E05", "E06", "E14"]},
+    {"itemId": "S-A06", "expected": "unknown", "weight": 2, "requiredEvidence": ["E06", "E07", "E16"], "allowedEvidence": []},
+    {"itemId": "S-A07", "expected": "unknown", "weight": 2, "requiredEvidence": ["E16"], "allowedEvidence": ["E01", "E09", "E10"]}
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E04", "E08", "E13"],
+    "conflictingEvidencePairs": [
+      ["E02", "E03"],
+      ["E06", "E07"],
+      ["E10", "E11"]
+    ],
+    "missingInformation": [
+      "No client clock-skew telemetry is available to determine whether clock behavior affected retry timing.",
+      "Resolver observations are not segmented by ingress region and audit hostname, so a regional resolver fault cannot be confirmed or excluded.",
+      "The canary is too short to determine long-horizon audit-record loss from durable asynchronous export.",
+      "No verification test establishes the safety and behavior of acknowledging a repeated ID based on the original durable receipt."
+    ],
+    "reasoningHops": 5,
+    "harmfulActionCandidateIds": ["A04"]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "version": "1.0.0",
+  "id": "ST-005",
+  "construct": "propagation",
+  "title": "Intermittent checkout delays after an edge policy rollout",
+  "domain": "multi-region commerce platform operations",
+  "entities": [
+    { "id": "edge-policy", "type": "configuration", "name": "Edge request policy" },
+    { "id": "retry-wave", "type": "behavior", "name": "Client retry traffic" },
+    { "id": "admission-queue", "type": "component", "name": "Checkout admission queue" },
+    { "id": "inventory-rpc", "type": "dependency", "name": "Inventory reservation RPC" },
+    { "id": "checkout-latency", "type": "metric", "name": "Checkout completion latency" },
+    { "id": "payment-errors", "type": "metric", "name": "Payment authorization errors" },
+    { "id": "catalog-job", "type": "workload", "name": "Catalog reindex job" },
+    { "id": "database-cpu", "type": "metric", "name": "Primary database CPU" }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": "baseline",
+      "text": "For the prior 14 days, checkout completion p95 stayed between 1.1 and 1.4 seconds in all three regions; client retries were 2.0-2.4% of attempts and the admission queue remained below 900 requests."
+    },
+    {
+      "id": "E02",
+      "stage": "rollout",
+      "text": "At 09:05, an edge request-policy revision was enabled for 20% of sessions in region east. It changed the inventory reservation timeout from 1800 ms to 650 ms while leaving the service-side deadline at 1500 ms."
+    },
+    {
+      "id": "E03",
+      "stage": "onset",
+      "text": "Between 09:08 and 09:12, the enabled cohort's inventory timeout count rose first, its retry-attempt rate then rose from 2.2% to 19%, the admission queue then grew from 700 to 8,600 requests, and checkout p95 exceeded 8 seconds last. Metric resolution is one minute."
+    },
+    {
+      "id": "E04",
+      "stage": "comparison",
+      "text": "During the same interval in east, sessions outside the enabled cohort retained the 1800 ms timeout. Their initial inventory timeout rate did not rise, although their checkout latency increased after the shared admission queue exceeded 6,000 requests."
+    },
+    {
+      "id": "E05",
+      "stage": "dependency",
+      "text": "Inventory server traces sampled at 09:06-09:10 show median processing at 410 ms and p99 at 920 ms, with no increase in server exceptions. Requests canceled by enabled clients cluster between 645 and 670 ms."
+    },
+    {
+      "id": "E06",
+      "stage": "load test",
+      "text": "At 09:24, operators disabled automatic retries for half of the enabled cohort without changing its 650 ms timeout. In that half, attempts per checkout fell 31%; five minutes later its admission-queue contribution fell 28% and checkout p95 improved from 8.4 to 3.2 seconds, while inventory timeout frequency remained elevated."
+    },
+    {
+      "id": "E07",
+      "stage": "queue control",
+      "text": "At 09:32, workers assigned to the shared admission queue were doubled for ten minutes. Queue depth fell below 1,500 and latency improved for both cohorts, but the enabled cohort continued generating roughly three times as many inventory calls per completed checkout."
+    },
+    {
+      "id": "E08",
+      "stage": "rollback",
+      "text": "At 09:47, the edge policy was rolled back to the 1800 ms timeout. Enabled-cohort inventory timeouts declined within two minutes, retry traffic returned near baseline by 09:51, queue depth normalized by 09:56, and checkout p95 normalized by 09:59. Worker count had already returned to its original value."
+    },
+    {
+      "id": "E09",
+      "stage": "concurrent change",
+      "text": "A scheduled catalog reindex began at 09:00 and ended at 10:00. Database CPU rose from 46% to 71% at 09:02 and stayed between 68% and 74% through the incident and recovery."
+    },
+    {
+      "id": "E10",
+      "stage": "historical comparison",
+      "text": "The same catalog reindex ran on the previous four Tuesdays, producing database CPU peaks of 69-76% without a checkout-latency alert or retry-rate increase."
+    },
+    {
+      "id": "E11",
+      "stage": "regional comparison",
+      "text": "Region west ran the catalog reindex and used the unchanged edge policy. Its database CPU reached 73%, while its retry rate, admission queue, and checkout latency stayed within baseline bands."
+    },
+    {
+      "id": "E12",
+      "stage": "payment telemetry",
+      "text": "Payment authorization errors rose from 0.7% to 1.5% between 09:18 and 09:42. Payment-provider status data is aggregated platform-wide, and no trace field links those errors to queued checkouts or to the enabled cohort."
+    },
+    {
+      "id": "E13",
+      "stage": "operator note",
+      "text": "An on-call note at 09:15 attributes the slowdown to database pressure because database CPU and checkout latency were both above their usual values; the note records no query traces or database wait measurements."
+    },
+    {
+      "id": "E14",
+      "stage": "trace sample",
+      "text": "A sample of 600 slow checkouts at 09:20 spent a median 5.6 seconds awaiting admission and 0.44 seconds inside inventory processing after admission. The sample does not retain client retry lineage."
+    },
+    {
+      "id": "E15",
+      "stage": "capacity history",
+      "text": "Two months earlier, a promotion drove the admission queue above 7,000 requests under the old edge policy; checkout p95 exceeded 7 seconds even though inventory timeout rates remained within baseline."
+    },
+    {
+      "id": "E16",
+      "stage": "observability gap",
+      "text": "Network path telemetry was unavailable from 08:55 to 10:05, so packet loss and connection-reset rates for east cannot be compared with their pre-incident values."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H1", "text": "The edge request-policy revision initiated the incident sequence in the enabled cohort." },
+      { "id": "H2", "text": "The catalog reindex initiated the incident sequence through database pressure." },
+      { "id": "H3", "text": "Admission-queue growth transmitted elevated request volume into checkout delay." },
+      { "id": "H4", "text": "Payment authorization errors initiated the rise in client retry traffic." },
+      { "id": "H5", "text": "A change in east network conditions initiated the inventory timeout increase." }
+    ],
+    "edges": [
+      { "id": "G1", "from": "edge-policy", "to": "retry-wave", "relation": "contributes-to" },
+      { "id": "G2", "from": "retry-wave", "to": "admission-queue", "relation": "contributes-to" },
+      { "id": "G3", "from": "admission-queue", "to": "checkout-latency", "relation": "mediates" },
+      { "id": "G4", "from": "catalog-job", "to": "database-cpu", "relation": "contributes-to" },
+      { "id": "G5", "from": "database-cpu", "to": "checkout-latency", "relation": "contributes-to" },
+      { "id": "G6", "from": "payment-errors", "to": "retry-wave", "relation": "precedes" },
+      { "id": "G7", "from": "admission-queue", "to": "retry-wave", "relation": "contributes-to" },
+      { "id": "G8", "from": "inventory-rpc", "to": "retry-wave", "relation": "prevents" },
+      { "id": "G9", "from": "edge-policy", "to": "inventory-rpc", "relation": "precedes" },
+      { "id": "G10", "from": "payment-errors", "to": "checkout-latency", "relation": "contributes-to" }
+    ],
+    "actions": [
+      { "id": "A1", "text": "Restore the prior inventory timeout in the edge request policy." },
+      { "id": "A2", "text": "Suspend the catalog reindex and retain the revised edge request policy." },
+      { "id": "A3", "text": "Increase automatic retry attempts while retaining the revised timeout." },
+      { "id": "A4", "text": "Temporarily add admission workers while evaluating the initiating condition." },
+      { "id": "A5", "text": "Disable automatic retries for affected sessions while retaining bounded request attempts." },
+      { "id": "A6", "text": "Route all affected sessions to region west without changing retry behavior." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S05", "kind": "hypothesis", "candidateId": "H5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S06", "kind": "edge", "candidateId": "G1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S07", "kind": "edge", "candidateId": "G2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S08", "kind": "edge", "candidateId": "G3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S09", "kind": "edge", "candidateId": "G5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S10", "kind": "edge", "candidateId": "G6", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S11", "kind": "edge", "candidateId": "G7", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S12", "kind": "edge", "candidateId": "G10", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S13", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "acceptable", "harmful", "unknown"], "constructCritical": true },
+    { "id": "S14", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "acceptable", "harmful", "unknown"], "constructCritical": true },
+    { "id": "S15", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "acceptable", "harmful", "unknown"], "constructCritical": false },
+    { "id": "S16", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "acceptable", "harmful", "unknown"], "constructCritical": true }
+  ]
+}
