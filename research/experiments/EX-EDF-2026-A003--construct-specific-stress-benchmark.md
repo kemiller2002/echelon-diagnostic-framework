@@ -1,7 +1,7 @@
 ---
 id: EX-EDF-2026-A003
 title: "EDF Construct-Specific Stress Benchmark"
-status: case-authoring-in-progress
+status: proposed
 created: 2026-09-22
 research_area: diagnostic-frameworks
 author_agent: "ChatGPT GPT-5.6 Sol"
