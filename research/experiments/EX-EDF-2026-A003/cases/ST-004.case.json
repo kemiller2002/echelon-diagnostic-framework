@@ -1,0 +1,360 @@
+{
+  "id": "ST-004",
+  "construct": "control-points",
+  "title": "Meridian fleet telemetry: geofence read latency regression at Calder Freight",
+  "domain": "vehicle telemetry ingestion and geospatial indexing platform",
+  "systemOverview": "Tracklet v4 tracking units emit position fixes over a cellular APN. Frames arrive at edge-gateway, which runs a per-tenant dedupe shim that collapses repeated frames for the same position fix within a configured window. Surviving frames are published to the Kafka topic telemetry.frames and consumed by the frame-writer consumer group, which writes rows into geo-index-prod, an LSM-tree store. geo-index-prod runs on shared node pool pool-c alongside route-planner. fleet-console serves customer geofence queries from geo-index-prod. Tenant onboarding is performed by Quartermaster, which materializes a per-tenant gateway configuration from a template at onboarding time and stores it in tenant-config-store.",
+  "stages": [
+    { "id": "stage-1", "label": "Initial page and first remediation" },
+    { "id": "stage-2", "label": "Recurrence and volume attribution" },
+    { "id": "stage-3", "label": "Ingest path and configuration inspection" },
+    { "id": "stage-4", "label": "Headroom, blast radius and forward load" }
+  ],
+  "entities": [
+    { "id": "ENT-GATEWAY", "name": "edge-gateway", "kind": "service", "note": "Version 11.2. Hosts the per-tenant dedupe shim." },
+    { "id": "ENT-SHIM", "name": "dedupe-shim", "kind": "component", "note": "Collapses repeated frames for the same position fix within dedupeWindowMs." },
+    { "id": "ENT-QUARTERMASTER", "name": "Quartermaster", "kind": "service", "note": "Tenant provisioning service. Materializes gateway tenant configs from templates." },
+    { "id": "ENT-CONFIGSTORE", "name": "tenant-config-store", "kind": "datastore", "note": "Holds materialized per-tenant gateway configurations." },
+    { "id": "ENT-KAFKA", "name": "telemetry.frames", "kind": "topic", "note": "Kafka topic between gateway and frame-writer." },
+    { "id": "ENT-WRITER", "name": "frame-writer", "kind": "service", "note": "Kafka consumer group writing rows into geo-index-prod." },
+    { "id": "ENT-INDEX", "name": "geo-index-prod", "kind": "datastore", "note": "LSM-tree geospatial index cluster serving fleet-console reads." },
+    { "id": "ENT-POOLC", "name": "pool-c", "kind": "infrastructure", "note": "Shared node pool hosting geo-index-prod and route-planner." },
+    { "id": "ENT-ROUTEPLANNER", "name": "route-planner", "kind": "service", "note": "Co-tenant on pool-c. Runs the nightly corridor-rebuild batch job." },
+    { "id": "ENT-CONSOLE", "name": "fleet-console", "kind": "application", "note": "Customer-facing geofence query surface." },
+    { "id": "ENT-DEVICE", "name": "Tracklet v4", "kind": "device-fleet", "note": "Tracking units that re-send each position fix until acknowledged." },
+    { "id": "ENT-COHORT-EARLY", "name": "tenants onboarded before 2026-06-18", "kind": "tenant-cohort", "note": "36 tenants." },
+    { "id": "ENT-COHORT-LATE", "name": "tenants onboarded on or after 2026-06-18", "kind": "tenant-cohort", "note": "11 tenants." }
+  ],
+  "evidence": [
+    {
+      "id": "EV-01",
+      "stage": "stage-1",
+      "source": "incident record INC-8841",
+      "text": "2026-08-29 03:12 UTC: fleet-console geofence read p99 reached 1,940 ms against an 800 ms service level objective. The monthly error budget was 61% consumed in nine days. The on-call note records that elevation began near 01:10 UTC and was worst between 01:00 and 02:30 UTC."
+    },
+    {
+      "id": "EV-02",
+      "stage": "stage-1",
+      "source": "geo-index-prod cluster metrics",
+      "text": "At page time the geo-index-prod compaction backlog stood at 1.9 TB, against 0.2 TB thirty days earlier. Level-0 file count was approximately four times its nominal steady-state value."
+    },
+    {
+      "id": "EV-03",
+      "stage": "stage-1",
+      "source": "incident record INC-8841 remediation log",
+      "text": "frame-writer consumer lag peaked at 41 minutes. The responder scaled the consumer group from 12 to 24 replicas at 03:48 UTC. Geofence read p99 returned to 720 ms within 40 minutes and the incident was closed as resolved."
+    },
+    {
+      "id": "EV-04",
+      "stage": "stage-1",
+      "source": "route-planner change log",
+      "text": "route-planner runs a corridor-rebuild batch job nightly from 01:00 to 02:15 UTC on pool-c. The job was introduced on 2026-08-21, eight days before the first page."
+    },
+    {
+      "id": "EV-05",
+      "stage": "stage-1",
+      "source": "platform change calendar",
+      "text": "geo-index-prod was upgraded from 2.9.4 to 2.10.1 on 2026-08-26, three days before the first page. The 2.10.1 release notes state that the compaction trigger is now evaluated on Level-0 file count in addition to total size."
+    },
+    {
+      "id": "EV-06",
+      "stage": "stage-2",
+      "source": "incident record INC-8903",
+      "text": "2026-09-06: the page recurred. Geofence read p99 reached 2,610 ms and the compaction backlog stood at 3.4 TB. frame-writer consumer lag peaked at only 8 minutes, the 24 replicas having absorbed it. Read latency was worse than during INC-8841."
+    },
+    {
+      "id": "EV-07",
+      "stage": "stage-2",
+      "source": "geo-index-prod write metrics",
+      "text": "The row write rate into geo-index-prod rose from a July mean of 41,000 rows per second to 158,000 rows per second on 2026-09-05. Over the same period the count of active Tracklet v4 units on the platform rose by 9%."
+    },
+    {
+      "id": "EV-08",
+      "stage": "stage-2",
+      "source": "per-tenant write attribution report",
+      "text": "Eleven tenants account for 71% of index writes while representing 8% of active units. Every one of those eleven tenants was onboarded on or after 2026-06-18. The remaining thirty-six tenants account for 29% of writes and 92% of active units."
+    },
+    {
+      "id": "EV-09",
+      "stage": "stage-2",
+      "source": "carrier notification CN-2026-0824",
+      "text": "The cellular carrier serving the Tracklet APN performed maintenance from 2026-08-24 to 2026-08-27 and reported elevated packet loss on affected cells for the duration of the window."
+    },
+    {
+      "id": "EV-10",
+      "stage": "stage-2",
+      "source": "edge-gateway ingress metrics",
+      "text": "The ingress counter frames_received_per_position_fix has held between 3.8 and 4.1 since April, with no step change, and reads within that same band for tenants onboarded before 2026-06-18 and for tenants onboarded on or after that date. Tracklet v4 firmware re-sends each position fix up to four times until acknowledged; this behaviour is documented as intended."
+    },
+    {
+      "id": "EV-26",
+      "stage": "stage-2",
+      "source": "Kafka cluster health report",
+      "text": "Broker kafka-4 recorded 37 in-sync-replica shrink events during the week of 2026-08-24, against a weekly baseline of 2 to 5. Partition leadership for telemetry.frames moved twice during that week."
+    },
+    {
+      "id": "EV-11",
+      "stage": "stage-3",
+      "source": "edge-gateway operations dashboard",
+      "text": "The fleet-wide dedupe_hit_ratio tile reads 0.74 and is rendered in its nominal band, the alerting threshold for that tile being 0.70. The tile has not left its nominal band at any point in the last ninety days."
+    },
+    {
+      "id": "EV-12",
+      "stage": "stage-3",
+      "source": "manual per-tenant metric pull",
+      "text": "A per-tenant breakdown of the same dedupe_hit_ratio metric gives values between 0.73 and 0.79 for tenants onboarded before 2026-06-18, and values between 0.00 and 0.02 for the eleven tenants onboarded on or after that date. The dashboard tile aggregates per active unit rather than per frame, and the earlier cohort holds 92% of active units."
+    },
+    {
+      "id": "EV-13",
+      "stage": "stage-3",
+      "source": "tenant-config-store inspection",
+      "text": "The materialized gateway configuration for tenant cf-northgate, onboarded 2026-07-02, contains no dedupeWindowMs key. The configuration for tenant cf-brayton, onboarded 2025-11-20, contains dedupeWindowMs set to 15000."
+    },
+    {
+      "id": "EV-24",
+      "stage": "stage-3",
+      "source": "edge-gateway 11.2 service runbook, configuration resolution section",
+      "text": "The runbook states that when dedupeWindowMs is absent from a materialized tenant configuration the shim treats the window as 0 and forwards every frame it receives, and that the 15000 ms value is supplied by the provisioning template rather than by the gateway binary."
+    },
+    {
+      "id": "EV-14",
+      "stage": "stage-3",
+      "source": "Quartermaster changelog",
+      "text": "Template tenant-defaults-v7 was released on 2026-06-18. Its diff removes six keys characterised as deprecated pass-through settings, among them dedupeWindowMs. The accompanying release note states that v7 is schema-compatible and that keys omitted from a template fall back to documented service defaults."
+    },
+    {
+      "id": "EV-25",
+      "stage": "stage-3",
+      "source": "tenant-config-store audit",
+      "text": "Of the forty-seven materialized tenant configurations in the store, eleven contain no dedupeWindowMs key and thirty-six set it to 15000. All eleven without the key were materialized on or after 2026-06-18; all thirty-six with it were materialized before that date."
+    },
+    {
+      "id": "EV-15",
+      "stage": "stage-3",
+      "source": "Quartermaster design note QM-DN-014",
+      "text": "Gateway tenant configurations are materialized once, at onboarding, and written to tenant-config-store. The gateway reads tenant-config-store and never reads templates. Re-running provisioning for an existing tenant is a no-op unless the --force-rematerialize flag is supplied, and that flag is disabled in the production deployment."
+    },
+    {
+      "id": "EV-20",
+      "stage": "stage-3",
+      "source": "fleet-console query mix audit",
+      "text": "An audit comparing June and September traffic found geofence query shapes, predicate cardinality and rows scanned per query unchanged to within plus or minus 3%. Query volume per active unit was likewise unchanged."
+    },
+    {
+      "id": "EV-16",
+      "stage": "stage-4",
+      "source": "geo-index-prod configuration and incident history",
+      "text": "Compaction input/output on geo-index-prod is capped by compaction_rate_limit_mbps set to 180, approximately 40% of the provisioned throughput of pool-c. The cap was introduced after the incident of 2025-11-04, in which unthrottled compaction on pool-c drove route-planner request timeouts to 12%."
+    },
+    {
+      "id": "EV-17",
+      "stage": "stage-4",
+      "source": "platform observability team response",
+      "text": "pool-c provides no per-service input/output isolation. The platform team confirms that control-group level disk attribution is not collected and has never been collected for pool-c, so the share of nightly geofence read latency attributable to any individual pool-c workload cannot be determined from available telemetry."
+    },
+    {
+      "id": "EV-18",
+      "stage": "stage-4",
+      "source": "metrics catalogue and upgrade record",
+      "text": "The series compaction_backlog_bytes was introduced in geo-index 2.10.1 and no equivalent series exists for 2.9.4. The 2.10.1 upgrade was not canaried; the whole cluster moved at once, and both tenant cohorts are served by that single cluster, so no version-differentiated comparison is available."
+    },
+    {
+      "id": "EV-19",
+      "stage": "stage-4",
+      "source": "onboarding pipeline schedule",
+      "text": "Eleven further tenants are scheduled for provisioning between 2026-09-15 and 2026-10-31, all of them using template tenant-defaults-v7. Their combined unit count is approximately 2.3 times the current unit count of the tenants onboarded on or after 2026-06-18."
+    },
+    {
+      "id": "EV-21",
+      "stage": "stage-4",
+      "source": "capacity model run 2026-09-08",
+      "text": "Free disk on geo-index-prod stands at 18% and is falling by approximately 1.1 percentage points per day at the current write rate. At the write rate observed before June the same model projected fourteen months of remaining headroom."
+    },
+    {
+      "id": "EV-22",
+      "stage": "stage-4",
+      "source": "latency measurement 2026-09-08",
+      "text": "Geofence read p99 measured outside the 01:00 to 02:30 UTC window averaged 1,430 ms on weekdays, above the 800 ms objective. Within the window it averaged 2,610 ms. corridor-rebuild is not scheduled outside that window."
+    },
+    {
+      "id": "EV-23",
+      "stage": "stage-4",
+      "source": "change record CHG-5512",
+      "text": "On the night of 2026-09-02 compaction_rate_limit_mbps was raised from 180 to 260 as a bounded experiment. Compaction backlog fell by 0.3 TB overnight and geofence read p99 improved to 1,180 ms. route-planner p99 rose by 40% during the same window while remaining inside its own objective. The setting was reverted the following morning under the standing change-freeze policy rather than in response to an alert."
+    },
+    {
+      "id": "EV-27",
+      "stage": "stage-4",
+      "source": "geo-index-prod schema review",
+      "text": "Index rows carry no ingest-cohort tag and row-level write provenance is not retained. No measurement decomposes the current compaction backlog into rows written before and after 2026-06-18, and none can be reconstructed from retained data."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "HYP-01",
+        "text": "Tenant configurations materialized since mid-June omit the gateway dedupe window, so the ingest shim forwards every device re-send onward into the index write path."
+      },
+      {
+        "id": "HYP-02",
+        "text": "The geo-index 2.10.1 compaction-trigger change altered how backlog accumulates on the cluster, independently of the volume of rows arriving from the ingest path."
+      },
+      {
+        "id": "HYP-03",
+        "text": "The frame-writer consumer group was provisioned below the throughput the fleet requires, and the resulting consumer lag is what drives the geofence read latency."
+      },
+      {
+        "id": "HYP-04",
+        "text": "The nightly corridor-rebuild batch on the shared node pool competes for disk throughput and accounts for the elevated geofence read latency observed in that window."
+      },
+      {
+        "id": "HYP-05",
+        "text": "A Tracklet v4 firmware change raised the number of position-fix re-sends emitted per device, lifting the frame volume arriving at the gateway above its prior level."
+      },
+      {
+        "id": "HYP-06",
+        "text": "A change in fleet-console query shapes increased the rows scanned per geofence request, lifting read latency independently of anything happening on the index write path."
+      }
+    ],
+    "edges": [
+      {
+        "id": "EDG-01",
+        "from": "ENT-SHIM",
+        "to": "ENT-INDEX",
+        "relation": "contributes-to",
+        "text": "Frames passing the shim uncollapsed for the later-onboarded tenants contribute to the row write volume reaching geo-index-prod."
+      },
+      {
+        "id": "EDG-02",
+        "from": "ENT-INDEX",
+        "to": "ENT-INDEX",
+        "relation": "contributes-to",
+        "text": "The row write volume reaching geo-index-prod contributes to the growth of its compaction backlog."
+      },
+      {
+        "id": "EDG-03",
+        "from": "ENT-INDEX",
+        "to": "ENT-CONSOLE",
+        "relation": "mediates",
+        "text": "The compaction backlog mediates the effect of index write volume on fleet-console geofence read p99."
+      },
+      {
+        "id": "EDG-04",
+        "from": "ENT-INDEX",
+        "to": "ENT-INDEX",
+        "relation": "contributes-to",
+        "text": "The 2.10.1 compaction-trigger change contributes to the observed compaction backlog over and above the effect of arriving write volume."
+      },
+      {
+        "id": "EDG-05",
+        "from": "ENT-WRITER",
+        "to": "ENT-INDEX",
+        "relation": "prevents",
+        "text": "Increasing frame-writer consumer replicas prevents growth of the geo-index-prod compaction backlog."
+      },
+      {
+        "id": "EDG-06",
+        "from": "ENT-DEVICE",
+        "to": "ENT-GATEWAY",
+        "relation": "contributes-to",
+        "text": "Carrier maintenance packet loss contributes to the rate of duplicate frames arriving at the gateway."
+      },
+      {
+        "id": "EDG-07",
+        "from": "ENT-ROUTEPLANNER",
+        "to": "ENT-CONSOLE",
+        "relation": "contributes-to",
+        "text": "The nightly corridor-rebuild batch contributes to fleet-console geofence read p99 during its window."
+      },
+      {
+        "id": "EDG-08",
+        "from": "ENT-INDEX",
+        "to": "ENT-POOLC",
+        "relation": "prevents",
+        "text": "The compaction rate cap on geo-index-prod prevents compaction work from saturating shared pool-c throughput."
+      },
+      {
+        "id": "EDG-09",
+        "from": "ENT-QUARTERMASTER",
+        "to": "ENT-INDEX",
+        "relation": "precedes",
+        "text": "Each scheduled onboarding wave precedes a further increase in the row write volume reaching geo-index-prod."
+      },
+      {
+        "id": "EDG-10",
+        "from": "ENT-INDEX",
+        "to": "ENT-CONSOLE",
+        "relation": "contributes-to",
+        "text": "Rows already written to geo-index-prod before the present investigation contribute to current geofence read p99."
+      }
+    ],
+    "actions": [
+      {
+        "id": "ACT-01",
+        "text": "Raise the geo-index compaction rate limit from 180 MB/s to 600 MB/s during the nightly window so that the backlog drains faster than new rows arrive."
+      },
+      {
+        "id": "ACT-02",
+        "text": "Increase the frame-writer consumer group from 24 to 40 replicas and raise the broker maximum in-flight request limit to match the higher consumer parallelism."
+      },
+      {
+        "id": "ACT-03",
+        "text": "Raise the fleet-console geofence read timeout from 800 ms to 2500 ms and move the p99 alerting threshold to the same value so that paging reflects current behaviour."
+      },
+      {
+        "id": "ACT-04",
+        "text": "Write an explicit dedupe window into the eleven tenant configurations that lack the key and make the gateway loader reject a materialized configuration that omits it."
+      },
+      {
+        "id": "ACT-05",
+        "text": "Move geo-index-prod onto a dedicated node pool with isolated disk throughput so that its compaction work no longer shares provisioned capacity with other services."
+      },
+      {
+        "id": "ACT-06",
+        "text": "Roll the provisioning service back to the template release preceding the current one and re-run provisioning for every tenant onboarded since that release was published."
+      },
+      {
+        "id": "ACT-07",
+        "text": "Schedule a one-off compaction pass over the affected tenants' key ranges once the ingest path change is in place, running it inside a low-traffic maintenance window."
+      },
+      {
+        "id": "ACT-08",
+        "text": "Add a per-tenant duplicate-ratio check at gateway ingress that reports when a tenant's collapsed-frame ratio falls outside the range established across the fleet."
+      }
+    ]
+  },
+  "scoredItems": [
+    { "id": "SI-H01", "kind": "hypothesis", "candidateId": "HYP-01", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-H02", "kind": "hypothesis", "candidateId": "HYP-02", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-H03", "kind": "hypothesis", "candidateId": "HYP-03", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-H04", "kind": "hypothesis", "candidateId": "HYP-04", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-H05", "kind": "hypothesis", "candidateId": "HYP-05", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-H06", "kind": "hypothesis", "candidateId": "HYP-06", "prompt": "State whether the evidence supports, refutes, or leaves unknown this hypothesis.", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+
+    { "id": "SI-E01", "kind": "edge", "candidateId": "EDG-01", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-E02", "kind": "edge", "candidateId": "EDG-02", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-E03", "kind": "edge", "candidateId": "EDG-03", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-E04", "kind": "edge", "candidateId": "EDG-04", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-E05", "kind": "edge", "candidateId": "EDG-05", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-E06", "kind": "edge", "candidateId": "EDG-06", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-E07", "kind": "edge", "candidateId": "EDG-07", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+    { "id": "SI-E08", "kind": "edge", "candidateId": "EDG-08", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-E09", "kind": "edge", "candidateId": "EDG-09", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": true },
+    { "id": "SI-E10", "kind": "edge", "candidateId": "EDG-10", "prompt": "State whether the evidence confirms, refutes, or leaves unknown this relationship as worded.", "allowedAnswers": ["confirmed", "refuted", "unknown"], "constructCritical": false },
+
+    { "id": "SI-A01", "kind": "action", "candidateId": "ACT-01", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A02", "kind": "action", "candidateId": "ACT-02", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A03", "kind": "action", "candidateId": "ACT-03", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A04", "kind": "action", "candidateId": "ACT-04", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A05", "kind": "action", "candidateId": "ACT-05", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A06", "kind": "action", "candidateId": "ACT-06", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-A07", "kind": "action", "candidateId": "ACT-07", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-A08", "kind": "action", "candidateId": "ACT-08", "prompt": "State how this action should be dispositioned on the evidence available.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+
+    { "id": "SI-CP1", "kind": "control-point", "candidateId": "ACT-01", "prompt": "Classify what this action does to the causal mechanism behind the observed latency.", "allowedAnswers": ["mechanism-change", "symptom-suppression", "no-mechanism-effect", "unknown"], "constructCritical": true },
+    { "id": "SI-CP2", "kind": "control-point", "candidateId": "ACT-02", "prompt": "Classify what this action does to the causal mechanism behind the observed latency.", "allowedAnswers": ["mechanism-change", "symptom-suppression", "no-mechanism-effect", "unknown"], "constructCritical": true },
+    { "id": "SI-CP3", "kind": "control-point", "candidateId": "ACT-03", "prompt": "Classify what this action does to the causal mechanism behind the observed latency.", "allowedAnswers": ["mechanism-change", "symptom-suppression", "no-mechanism-effect", "unknown"], "constructCritical": true },
+    { "id": "SI-CP4", "kind": "control-point", "candidateId": "ACT-04", "prompt": "Classify what this action does to the causal mechanism behind the observed latency.", "allowedAnswers": ["mechanism-change", "symptom-suppression", "no-mechanism-effect", "unknown"], "constructCritical": true },
+    { "id": "SI-CP5", "kind": "control-point", "candidateId": "ACT-06", "prompt": "Classify what this action does to the causal mechanism behind the observed latency.", "allowedAnswers": ["mechanism-change", "symptom-suppression", "no-mechanism-effect", "unknown"], "constructCritical": true }
+  ]
+}

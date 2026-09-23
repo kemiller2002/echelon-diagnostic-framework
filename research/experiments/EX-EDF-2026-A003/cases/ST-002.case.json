@@ -1,0 +1,303 @@
+{
+  "id": "ST-002",
+  "construct": "negative-knowledge",
+  "title": "Missing settlement rows at Marlowe Payments, 31 August to 8 September 2026",
+  "domain": "software/operational system",
+  "summary": "Merchants report payouts that never arrived. Reconciliation finds settlement advices that Marlowe acknowledged with a 2xx response and for which no ledger row exists. Several subsystems returned nothing when queried during the investigation; the records below state, for each subsystem, what was collected and how it was collected.",
+  "entities": [
+    { "id": "ORG-MARLOWE", "kind": "organisation", "name": "Marlowe Payments", "note": "Operates the settlement and ledger platform for 4,180 merchants." },
+    { "id": "SVC-API", "kind": "service", "name": "svc-settlement-api", "note": "Go service terminating the CardNet advice webhook; accepts an advice and produces a settlement event." },
+    { "id": "SVC-WRITER", "kind": "service", "name": "svc-ledger-writer", "note": "Consumes settlement.events.v3 and writes rows into ledger.settlements." },
+    { "id": "GW-EDGE", "kind": "gateway", "name": "edge-gw", "note": "Envoy 1.29 ingress; fronts the /v1/cardnet/advice path." },
+    { "id": "DB-PRIMARY", "kind": "database", "name": "pg-ledger-primary", "note": "PostgreSQL 15 primary holding ledger.settlements." },
+    { "id": "DB-REPLICA", "kind": "database", "name": "pg-ledger-replica-b", "note": "Streaming replica used by reporting workloads." },
+    { "id": "BUS-KAFKA", "kind": "message-bus", "name": "kf-settle-prod", "note": "Kafka cluster hosting topic settlement.events.v3." },
+    { "id": "FLAG-BATCH", "kind": "feature-flag", "name": "settlement_batch_v2", "note": "flagd flag controlling merchant enrolment in instalment settlement." },
+    { "id": "JOB-VACUUM", "kind": "batch-job", "name": "ledger-vacuum", "note": "Nightly maintenance job operating on ledger partitions." },
+    { "id": "SVC-AUDIT", "kind": "service", "name": "audit-trail", "note": "Records mutations against ledger tables." },
+    { "id": "SVC-OTEL", "kind": "service", "name": "otel-collector", "note": "Receives spans from the settlement path." },
+    { "id": "VENDOR-CARDNET", "kind": "vendor", "name": "CardNet", "note": "Acquirer transmitting settlement advices to Marlowe." },
+    { "id": "MER-4412", "kind": "merchant", "name": "Kestrel Outfitters (M-4412)", "note": "Cohort merchant used as the worked sample." },
+    { "id": "MER-7781", "kind": "merchant", "name": "Harlow Tile Co (M-7781)", "note": "Non-cohort merchant reporting a missing payout dated 1 September." },
+    { "id": "MER-8003", "kind": "merchant", "name": "Ardent Roasters (M-8003)", "note": "Non-cohort merchant reporting a missing payout dated 2 September." },
+    { "id": "PER-PRIYA", "kind": "person", "name": "Priya Raghunathan", "note": "On-call site reliability engineer." },
+    { "id": "PER-TOMAS", "kind": "person", "name": "Tomas Berg", "note": "Platform engineer, settlement ingress." },
+    { "id": "PER-DANA", "kind": "person", "name": "Dana Ilves", "note": "Payments lead and incident commander for IN-3318." },
+    { "id": "PER-MARISOL", "kind": "person", "name": "Marisol Okafor", "note": "Vendor liaison for the CardNet integration." }
+  ],
+  "nodes": [
+    { "id": "N-BATCH", "text": "Merchant enrolment in settlement_batch_v2 instalment settlement." },
+    { "id": "N-MULTI", "text": "Several advices of equal amount delivered for one merchant within one settlement date." },
+    { "id": "N-IDEM", "text": "Idempotency key in svc-settlement-api built without the CardNet advice identifier." },
+    { "id": "N-MISS", "text": "Settlement advices acknowledged with a 2xx response for which ledger.settlements holds no row." },
+    { "id": "N-SERDE", "text": "Deployment of avro-serde 1.14.2 in the svc-ledger-writer image." },
+    { "id": "N-REBAL", "text": "Rebalance activity on consumer group ledger-writer-cg." },
+    { "id": "N-VACUUM", "text": "Row removal by ledger-vacuum over direct database sessions." },
+    { "id": "N-OTEL", "text": "Memory exhaustion of otel-collector on 2 September." },
+    { "id": "N-NOTRACE", "text": "No span naming the duplicate-suppression branch anywhere in the window." },
+    { "id": "N-LAG", "text": "Replication lag on pg-ledger-replica-b." },
+    { "id": "N-RECON", "text": "Reconciliation reporting settlement rows as missing." },
+    { "id": "N-RETRY", "text": "CardNet at-least-once delivery with retry until a 2xx response is returned." },
+    { "id": "N-SUPPRESS", "text": "Duplicate suppression at the Marlowe settlement ingress." }
+  ],
+  "answerVocabulary": {
+    "hypothesisState": {
+      "supported": "Evidence in this case establishes that the statement holds.",
+      "refuted": "Evidence in this case establishes that the statement does not hold.",
+      "unresolved": "This case carries evidence bearing on the statement from more than one direction and that evidence does not settle it.",
+      "unknown": "This case carries no evidence able to discriminate the statement, so its state is not determined here."
+    },
+    "edgeState": {
+      "supported": "Evidence in this case establishes that the stated relation holds between the two nodes.",
+      "refuted": "Evidence in this case establishes that the stated relation does not hold between the two nodes.",
+      "unresolved": "This case carries evidence bearing on the relation from more than one direction and that evidence does not settle it.",
+      "unknown": "This case carries no evidence able to discriminate the relation, so its state is not determined here."
+    },
+    "actionState": {
+      "preferred": "The action that this case's evidence indicates should be taken first.",
+      "acceptable": "An action this case's evidence supports taking, though not the one to take first.",
+      "rejected": "An action this case's evidence indicates should not be taken.",
+      "unknown": "This case carries no evidence able to place the action, so its standing is not determined here."
+    },
+    "observationState": {
+      "present": "Evidence in this case shows the described occurrences took place.",
+      "observed-absent": "Evidence in this case shows an observation channel covering the described occurrences was operating and recorded none of them.",
+      "not-observed": "Evidence in this case shows no observation channel covered the described occurrences, so they were never recorded either way.",
+      "unknown": "This case does not establish which of the preceding three states applies to the described occurrences."
+    }
+  },
+  "evidence": [
+    {
+      "id": "E-01",
+      "stage": "intake",
+      "recordedAt": "2026-09-10",
+      "source": "support-desk export, ticket sweep",
+      "text": "Between 2026-08-31 and 2026-09-08, 41 merchants opened tickets for payouts that did not arrive. Reconciliation identifies 218 CardNet settlement advices that Marlowe acknowledged with a 2xx response and for which ledger.settlements holds no row. Marlowe acknowledged 54,300 advices in that window in total."
+    },
+    {
+      "id": "E-02",
+      "stage": "intake",
+      "recordedAt": "2026-09-10",
+      "source": "incident note IN-3318, Dana Ilves",
+      "text": "Opening note on IN-3318: 'svc-ledger-writer began rejecting advices when CardNet added the optional network_token_ref attribute on 31 August. Nothing else changed that week. Roll the writer back and reprocess the window.'"
+    },
+    {
+      "id": "E-03",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "cohort analysis, Priya Raghunathan",
+      "text": "Of the 41 merchants reporting missing payouts, 39 are enrolled in the settlement_batch_v2 cohort, which covers 612 of 4,180 merchants. The remaining two, M-7781 and M-8003, are not enrolled and carry no tokenised card volume."
+    },
+    {
+      "id": "E-04",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "reconciliation join against gateway request index",
+      "text": "Of the 216 missing advices attributed to cohort merchants, every one falls on a merchant-day on which the gateway handled two or more advices for that merchant. Across 3,914 cohort merchant-days carrying exactly one advice, no advice is missing a ledger row."
+    },
+    {
+      "id": "E-05",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "flagd audit log and CardNet programme description",
+      "text": "settlement_batch_v2 reached 30 percent rollout at 2026-08-31T06:00Z. Enrolment registers a merchant for instalment settlement, under which CardNet delivers that merchant's daily payout as several advices of equal amount rather than one aggregate advice."
+    },
+    {
+      "id": "E-06",
+      "stage": "analysis",
+      "recordedAt": "2026-09-12",
+      "source": "Prometheus, scrape target svc-ledger-writer",
+      "text": "settlement_rejected_total{service=\"svc-ledger-writer\"} is registered at process start and exported on every scrape whether or not it has moved. It read 0 on all scrapes from 2026-08-31 to 2026-09-08. Two counters from the same registry, ledger_rows_written_total and schema_registry_fetch_total, advanced throughout the window, and the scrape target records no gaps for that job."
+    },
+    {
+      "id": "E-07",
+      "stage": "analysis",
+      "recordedAt": "2026-09-12",
+      "source": "Tomas Berg, log and instrumentation review",
+      "text": "A search of svc-settlement-api logs across the window returns no entries from the duplicate-suppression branch. Reviewing the branch in source: its only emission is a log.Debug call, the production fleet runs with LOG_LEVEL=info, the branch registers no counter, and it opens no span."
+    },
+    {
+      "id": "E-08",
+      "stage": "analysis",
+      "recordedAt": "2026-09-12",
+      "source": "edge-gw access-log excerpt pasted into ticket MP-9921 on 2026-09-05",
+      "text": "Merchant M-4412 on 2026-09-03: three POSTs to /v1/cardnet/advice at 02:14:07Z, 02:14:09Z and 02:14:11Z, each carrying amount_minor 1284500 and a distinct advice_id, each answered 200 by svc-settlement-api."
+    },
+    {
+      "id": "E-09",
+      "stage": "analysis",
+      "recordedAt": "2026-09-12",
+      "source": "direct query of pg-ledger-primary and topic dump of settlement.events.v3",
+      "text": "pg-ledger-primary holds exactly one row for M-4412 dated 2026-09-03 with amount_minor 1284500. Topic settlement.events.v3 holds exactly one produced event for that merchant and date, produced 4 ms after the first of the three POSTs. Topic retention covers the whole window."
+    },
+    {
+      "id": "E-10",
+      "stage": "code-review",
+      "recordedAt": "2026-09-13",
+      "source": "svc-settlement-api v3.41.0, internal/ledger/idem.go",
+      "text": "The idempotency key is sha256 over merchant_id, amount_minor and settlement_date joined by a separator. On a key hit the handler returns the stored 200 response and does not produce to settlement.events.v3. The CardNet advice_id is persisted on the record but is not an input to the key."
+    },
+    {
+      "id": "E-11",
+      "stage": "code-review",
+      "recordedAt": "2026-09-13",
+      "source": "svc-settlement-api schema review, table idem_keys",
+      "text": "Table idem_keys stores one row per idempotency key together with the stored response body. A row is created on first use and re-read on later hits without being modified; the table carries no hit counter and no hit timestamp. A nightly job prunes rows to a 14-day horizon and no export of the table was taken before the prune."
+    },
+    {
+      "id": "E-12",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "kf-settle-prod broker event log and platform runbook",
+      "text": "Consumer group ledger-writer-cg recorded 47 rebalances on 2026-09-04 between 09:00Z and 11:20Z following a broker restart. The platform runbook lists rebalance storms among the known causes of settlement processing faults."
+    },
+    {
+      "id": "E-13",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "daily breakdown of reconciliation output",
+      "text": "Missing advices are spread across all nine days of the window, between 14 and 38 per day, including 2026-09-01 and 2026-09-07. No rebalance events are recorded for ledger-writer-cg on either of those dates."
+    },
+    {
+      "id": "E-14",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "replication dashboard and recon.yaml in the deployment repository",
+      "text": "pg-ledger-replica-b reported replication lag peaking at 14 minutes on 2026-09-06 during an index rebuild. recon.yaml sets target: primary for the reconciliation job and has not been modified since 2026-04-17."
+    },
+    {
+      "id": "E-15",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "deployment record and schema-registry check history",
+      "text": "The svc-ledger-writer image deployed at 2026-08-31T05:40Z upgraded avro-serde from 1.13.6 to 1.14.2, twenty minutes before the flag rollout. The schema-registry compatibility check for settlement.events.v3 version 7 passed at that deploy and at every deploy since."
+    },
+    {
+      "id": "E-16",
+      "stage": "analysis",
+      "recordedAt": "2026-09-12",
+      "source": "otel-collector pod events and trace store query",
+      "text": "otel-collector was OOM-killed twice on 2026-09-02 and an estimated 6 percent of spans for that date were dropped. No span naming the duplicate-suppression branch of svc-settlement-api appears on any date in the window."
+    },
+    {
+      "id": "E-17",
+      "stage": "analysis",
+      "recordedAt": "2026-09-13",
+      "source": "audit-trail query and interceptor design note",
+      "text": "audit-trail records no DELETE events against ledger.settlements in the window. Its capture is an application interceptor inside svc-ledger-writer; statements issued over direct database sessions do not pass through that interceptor and are therefore not offered to audit-trail at all."
+    },
+    {
+      "id": "E-18",
+      "stage": "analysis",
+      "recordedAt": "2026-09-13",
+      "source": "ledger-vacuum job definition, batch-namespace log policy, pg_stat_user_tables",
+      "text": "ledger-vacuum connects as role svc_maint over a direct session. Its run summary reports partitions scanned and elapsed time and reports no row counts, and container logs in the batch namespace are retained for 72 hours. pg_stat_user_tables.n_tup_del is a cumulative table counter that attributes no statement, table partition or time to any change it records, and it was reset by the primary failover on 2026-09-05."
+    },
+    {
+      "id": "E-19",
+      "stage": "vendor-liaison",
+      "recordedAt": "2026-09-13",
+      "source": "CardNet integration specification section 4.2 and Marlowe 2025 integration sign-off",
+      "text": "CardNet delivers each advice at least once and retries it up to five times across 30 minutes until a 2xx response is returned. Marlowe's 2025 integration sign-off records duplicate suppression at ingress as the compensating control for that delivery behaviour, and records that payouts are released from ledger rows without a second uniqueness check."
+    },
+    {
+      "id": "E-20",
+      "stage": "vendor-liaison",
+      "recordedAt": "2026-09-12",
+      "source": "CardNet ticket CN-88214 reply, annotated by Marisol Okafor",
+      "text": "CardNet support reply of 2026-09-12: 'Our platform transmits one settlement advice per merchant per settlement date.' Marisol Okafor's annotation records that the reply came from tier-1 support and makes no reference to the instalment settlement programme."
+    },
+    {
+      "id": "E-21",
+      "stage": "vendor-liaison",
+      "recordedAt": "2026-09-14",
+      "source": "CardNet ticket CN-88397 and vendor portal retention policy",
+      "text": "Ticket CN-88397, requesting CardNet transmission manifests covering 2026-08-31 to 2026-09-08, was filed on 2026-09-14. The CardNet portal retains manifests for seven days, Marlowe holds no copy of any manifest for the window, and no response to CN-88397 is recorded."
+    },
+    {
+      "id": "E-22",
+      "stage": "analysis",
+      "recordedAt": "2026-09-13",
+      "source": "edge-gw Envoy configuration history and metric store",
+      "text": "edge-gw exports gw_requests_total with a route label. The label value cardnet_advice was introduced in the Envoy configuration released on 2026-09-09; before that date requests on the advice path were counted under route=\"other\" together with eleven further routes, and the aggregate cannot be decomposed after the fact."
+    },
+    {
+      "id": "E-23",
+      "stage": "analysis",
+      "recordedAt": "2026-09-13",
+      "source": "edge-gw archive retention policy",
+      "text": "The edge-gw access-log archive is retained for seven days. Entries from 2026-08-31 to 2026-09-02 were already past retention when the investigation opened on 2026-09-10. The M-4412 excerpt survives only because an engineer pasted it into ticket MP-9921 on 2026-09-05."
+    },
+    {
+      "id": "E-24",
+      "stage": "triage",
+      "recordedAt": "2026-09-11",
+      "source": "reconciliation output, per-merchant breakdown",
+      "text": "M-7781 and M-8003 account for two of the 218 missing advices, dated 2026-09-01 and 2026-09-02 respectively. Both dates fall outside the retained access-log archive. Neither merchant was due more than one payout on the date concerned."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H-01", "text": "Duplicate suppression in svc-settlement-api treats instalment advices that share a merchant, an amount and a settlement date as repeats of one another, acknowledging the later advices without producing a settlement event." },
+      { "id": "H-02", "text": "svc-ledger-writer rejects advices carrying the optional network_token_ref attribute introduced by CardNet on 31 August, so those advices are consumed from the topic without a ledger row being written." },
+      { "id": "H-03", "text": "Rebalances on consumer group ledger-writer-cg advance committed offsets past advices that svc-ledger-writer had read but not yet written, leaving those advices consumed and unrecorded in the ledger." },
+      { "id": "H-04", "text": "CardNet did not transmit the settlement advices that merchants M-7781 and M-8003 report as missing, so no corresponding request reached the Marlowe edge gateway on 1 and 2 September." },
+      { "id": "H-05", "text": "The ledger-vacuum maintenance job removes settlement rows from ledger.settlements inside the incident window over direct database sessions, so rows written during processing no longer appear in the ledger." },
+      { "id": "H-06", "text": "Reconciliation queries pg-ledger-replica-b while replication lag is elevated and reports rows as missing that are present on pg-ledger-primary, producing the 218 advices recorded without ledger rows." }
+    ],
+    "edges": [
+      { "id": "EDG-01", "from": "N-BATCH", "to": "N-MULTI", "relation": "causes", "text": "Enrolment in instalment settlement causes several advices of equal amount within one merchant-day." },
+      { "id": "EDG-02", "from": "N-IDEM", "to": "N-MISS", "relation": "causes", "text": "An idempotency key built without the advice identifier causes acknowledged advices to hold no ledger row." },
+      { "id": "EDG-03", "from": "N-SERDE", "to": "N-MISS", "relation": "causes", "text": "The avro-serde 1.14.2 deployment causes acknowledged advices to hold no ledger row." },
+      { "id": "EDG-04", "from": "N-REBAL", "to": "N-MISS", "relation": "causes", "text": "Rebalance activity on ledger-writer-cg causes acknowledged advices to hold no ledger row." },
+      { "id": "EDG-05", "from": "N-VACUUM", "to": "N-MISS", "relation": "causes", "text": "Row removal by ledger-vacuum causes acknowledged advices to hold no ledger row." },
+      { "id": "EDG-06", "from": "N-OTEL", "to": "N-NOTRACE", "relation": "explains", "text": "Memory exhaustion of otel-collector explains the absence of duplicate-suppression spans across the window." },
+      { "id": "EDG-07", "from": "N-LAG", "to": "N-RECON", "relation": "causes", "text": "Replication lag on pg-ledger-replica-b causes reconciliation to report settlement rows as missing." },
+      { "id": "EDG-08", "from": "N-RETRY", "to": "N-SUPPRESS", "relation": "requires", "text": "CardNet at-least-once delivery with retry requires duplicate suppression at the Marlowe settlement ingress." }
+    ],
+    "actions": [
+      { "id": "A-01", "text": "Add a persistent counter and an info-level record to the duplicate-suppression branch of svc-settlement-api, deploy across the production fleet, and re-examine a week of settlement traffic once that branch reports." },
+      { "id": "A-02", "text": "Extend the idempotency key in svc-settlement-api to combine the CardNet advice identifier with merchant, amount and settlement date, then replay into the ledger those advices for the window that remain available." },
+      { "id": "A-03", "text": "Disable the merchant, amount and date suppression step in svc-settlement-api for merchants in the batch cohort, so that each advice CardNet delivers for them is written to the ledger on receipt." },
+      { "id": "A-04", "text": "Rebuild the ledger partitions covering 31 August to 8 September from the edge-gw request archive, so that the contents of ledger.settlements match the requests the gateway recorded across that period." },
+      { "id": "A-05", "text": "Roll the svc-ledger-writer image back to avro-serde 1.13.6 across the production fleet, then re-run the settlement pipeline for 31 August to 8 September against the restored serialisation path." },
+      { "id": "A-06", "text": "Raise the consumer-group session timeout on kf-settle-prod and reduce the partition count of settlement.events.v3, so that rebalances on ledger-writer-cg no longer interrupt processing during peak settlement hours." },
+      { "id": "A-07", "text": "Escalate ticket CN-88397 with CardNet for the transmission manifests covering the window, and hold the M-7781 and M-8003 cases open until those manifests or an equivalent record arrive." }
+    ],
+    "propositions": [
+      { "id": "P-01", "text": "Advices rejected by schema validation in svc-ledger-writer between 2026-08-31 and 2026-09-08." },
+      { "id": "P-02", "text": "Advices suppressed by the duplicate check in svc-settlement-api between 2026-08-31 and 2026-09-08." },
+      { "id": "P-03", "text": "DELETE statements issued against ledger.settlements over direct database sessions between 2026-08-31 and 2026-09-08." },
+      { "id": "P-04", "text": "Advices transmitted by CardNet for merchants M-7781 and M-8003 on 2026-09-01 and 2026-09-02." },
+      { "id": "P-05", "text": "Advices of equal amount delivered for merchant M-4412 on 2026-09-03 beyond the first of them." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "SI-01", "kind": "hypothesis", "candidateId": "H-01", "prompt": "State H-01 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-02", "kind": "hypothesis", "candidateId": "H-02", "prompt": "State H-02 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-03", "kind": "hypothesis", "candidateId": "H-03", "prompt": "State H-03 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-04", "kind": "hypothesis", "candidateId": "H-04", "prompt": "State H-04 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-05", "kind": "hypothesis", "candidateId": "H-05", "prompt": "State H-05 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-06", "kind": "hypothesis", "candidateId": "H-06", "prompt": "State H-06 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-07", "kind": "edge", "candidateId": "EDG-01", "prompt": "State EDG-01 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-08", "kind": "edge", "candidateId": "EDG-02", "prompt": "State EDG-02 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-09", "kind": "edge", "candidateId": "EDG-03", "prompt": "State EDG-03 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-10", "kind": "edge", "candidateId": "EDG-04", "prompt": "State EDG-04 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-11", "kind": "edge", "candidateId": "EDG-05", "prompt": "State EDG-05 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-12", "kind": "edge", "candidateId": "EDG-06", "prompt": "State EDG-06 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": true },
+    { "id": "SI-13", "kind": "edge", "candidateId": "EDG-07", "prompt": "State EDG-07 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-14", "kind": "edge", "candidateId": "EDG-08", "prompt": "State EDG-08 against the evidence.", "allowedAnswers": ["supported", "refuted", "unresolved", "unknown"], "constructCritical": false },
+    { "id": "SI-15", "kind": "action", "candidateId": "A-01", "prompt": "Place A-01 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-16", "kind": "action", "candidateId": "A-02", "prompt": "Place A-02 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-17", "kind": "action", "candidateId": "A-03", "prompt": "Place A-03 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "SI-18", "kind": "action", "candidateId": "A-04", "prompt": "Place A-04 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-19", "kind": "action", "candidateId": "A-05", "prompt": "Place A-05 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-20", "kind": "action", "candidateId": "A-06", "prompt": "Place A-06 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-21", "kind": "action", "candidateId": "A-07", "prompt": "Place A-07 against the evidence.", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "SI-22", "kind": "observation", "candidateId": "P-01", "prompt": "State P-01 against the evidence.", "allowedAnswers": ["present", "observed-absent", "not-observed", "unknown"], "constructCritical": true },
+    { "id": "SI-23", "kind": "observation", "candidateId": "P-02", "prompt": "State P-02 against the evidence.", "allowedAnswers": ["present", "observed-absent", "not-observed", "unknown"], "constructCritical": true },
+    { "id": "SI-24", "kind": "observation", "candidateId": "P-03", "prompt": "State P-03 against the evidence.", "allowedAnswers": ["present", "observed-absent", "not-observed", "unknown"], "constructCritical": true },
+    { "id": "SI-25", "kind": "observation", "candidateId": "P-04", "prompt": "State P-04 against the evidence.", "allowedAnswers": ["present", "observed-absent", "not-observed", "unknown"], "constructCritical": true },
+    { "id": "SI-26", "kind": "observation", "candidateId": "P-05", "prompt": "State P-05 against the evidence.", "allowedAnswers": ["present", "observed-absent", "not-observed", "unknown"], "constructCritical": false }
+  ]
+}

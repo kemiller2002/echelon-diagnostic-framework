@@ -1,0 +1,193 @@
+{
+  "id": "ST-006",
+  "construct": "propagation",
+  "title": "Halyard collaborative editing platform: reconnect storm on notify-fanout (INC-4471)",
+  "domain": "software/operational system",
+  "summary": "Halyard is a multi-tenant collaborative document editing platform. On 2026-03-11 a websocket reconnect storm and elevated 5xx on the notification fanout tier took the platform to a degraded status for roughly one hour. Evidence is staged in the order the incident responders obtained it. Determine which candidate hypotheses hold, which candidate causal edges hold as written, and which remedial actions are appropriate.",
+  "entities": [
+    { "id": "ENT-COMPACTOR", "name": "doc-compactor", "kind": "service", "description": "Runs an hourly compaction sweep at :52 that rewrites document operation logs. Assigns each tenant's compaction job to a database shard using a configurable hash of the tenant identifier." },
+    { "id": "ENT-SHARD3", "name": "pg-shard-3", "kind": "database-shard", "description": "One of nine primary PostgreSQL shards holding document operation logs. Write-ahead log lives on a dedicated network block volume." },
+    { "id": "ENT-POOL3", "name": "pgbouncer-3", "kind": "connection-pool", "description": "Transaction-mode connection pool fronting pg-shard-3. Serves edit-gateway, doc-compactor and search-indexer index-delta writes." },
+    { "id": "ENT-POOL5", "name": "pgbouncer-5", "kind": "connection-pool", "description": "Connection pool used by notify-fanout for its subscription registry." },
+    { "id": "ENT-GATEWAY", "name": "edit-gateway", "kind": "service", "description": "Establishes editing sessions. A session-establishment call reads and writes shard state through pgbouncer-3." },
+    { "id": "ENT-FANOUT", "name": "notify-fanout", "kind": "service", "description": "Terminates client websockets and fans out presence and notification events. Fronted by an admission limiter." },
+    { "id": "ENT-INDEXER", "name": "search-indexer", "kind": "service", "description": "Builds the full-text index. Reads from the pg-idx-ro replica set; writes index deltas through pgbouncer-3." },
+    { "id": "ENT-CONFIG", "name": "config-distributor", "kind": "platform", "description": "Distributes versioned configuration bundles fleet-wide. Bundle CB-2291 was distributed on the incident day." },
+    { "id": "ENT-WEBCLIENT", "name": "web-client 4.18.0", "kind": "client", "description": "Browser client release carrying the current websocket session logic." },
+    { "id": "ENT-NP77", "name": "node pool NP-77", "kind": "infrastructure", "description": "Compute node pool hosting notify-fanout pods, replaced in a rolling upgrade on the incident day." },
+    { "id": "ENT-BF118", "name": "tenant backfill BF-118", "kind": "batch-job", "description": "A long-running tenant data backfill that writes through the same compaction path as scheduled sweeps." },
+    { "id": "ENT-CORVID", "name": "Corvid Labs", "kind": "tenant", "description": "Enterprise tenant group onboarded two days before the incident." }
+  ],
+  "stages": [
+    { "id": "stage-1-triage", "description": "What the responders saw when the pager fired." },
+    { "id": "stage-2-telemetry", "description": "Metric and dependency evidence pulled during the incident." },
+    { "id": "stage-3-change-review", "description": "Change and rollout records reviewed after mitigation." },
+    { "id": "stage-4-forensics", "description": "Post-incident forensics, capacity references, and records of what was not retained." }
+  ],
+  "evidence": [
+    { "id": "EV-01", "stage": "stage-1-triage", "text": "Pager INC-4471 fired at 14:11 UTC. notify-fanout /ws/subscribe 5xx rate rose from 0.2% to 18.6% and the websocket reconnect rate rose from 120/s to 9,400/s. The public status page was set to degraded." },
+    { "id": "EV-02", "stage": "stage-1-triage", "text": "On-call timeline note: 'Fanout looked like the problem the whole time; every dashboard we had was red on fanout.' notify-fanout autoscaled from 24 to 96 pods within four minutes. No fanout pod restarted and no pod was OOM-killed during the window." },
+    { "id": "EV-03", "stage": "stage-1-triage", "text": "Customer reports describe editors repeatedly losing presence indicators and re-syncing open documents. No report of lost or corrupted document content was filed." },
+    { "id": "EV-04", "stage": "stage-1-triage", "text": "Incident timeline as reconstructed by the responders: first connection-pool alert 14:05, pager 14:11, error rates begin falling 14:44, all-clear 15:02." },
+    { "id": "EV-05", "stage": "stage-2-telemetry", "text": "pgbouncer-3 cl_waiting rose from 0 to 118 at 14:05; client checkout wait p95 crossed 2s at 14:05 and peaked at 11.4s at 14:22. notify-fanout does not use pgbouncer-3; it uses pgbouncer-5, whose checkout wait p95 stayed below 4ms for the entire window." },
+    { "id": "EV-06", "stage": "stage-2-telemetry", "text": "Client SDK telemetry shows 31% of edit-gateway session-establishment calls timed out between 14:06 and 14:41. edit-gateway's own service dashboard counts only responses actually returned and does not count client-observed timeouts." },
+    { "id": "EV-07", "stage": "stage-2-telemetry", "text": "The edit-gateway SLO dashboard reported green for the entire window, with a 5xx rate of 0.1%. It was cited in the first incident update as evidence that the gateway was healthy." },
+    { "id": "EV-08", "stage": "stage-2-telemetry", "text": "pg-shard-3 host processor utilisation stayed between 38% and 44% for the entire window, inside its 90-day band, and buffer cache hit ratio did not move." },
+    { "id": "EV-09", "stage": "stage-2-telemetry", "text": "pg-shard-3 write-ahead-log fsync p99 rose from 4ms to 210ms between 13:58 and 14:38. Block-device queue depth on the write-ahead-log volume rose from 2 to 61 over the same interval." },
+    { "id": "EV-10", "stage": "stage-2-telemetry", "text": "The websocket reconnect rate stayed within 1.2x of its weekday baseline until 14:09 and first exceeded 3x baseline at 14:11, four to six minutes after pgbouncer-3 checkout wait crossed 2s." },
+    { "id": "EV-11", "stage": "stage-2-telemetry", "text": "search-indexer read p99 rose from 80ms to 610ms at 13:41 and stayed elevated until 15:04. Indexing lag grew to 19 minutes and recovered afterwards." },
+    { "id": "EV-12", "stage": "stage-2-telemetry", "text": "The automated correlation service ranked search-indexer read p99 as the top co-moving signal with notify-fanout 5xx rate (r = 0.91 at lag 0), above every other signal in the incident metric set. The service ranks metric co-movement only and holds no service-dependency model." },
+    { "id": "EV-13", "stage": "stage-2-telemetry", "text": "Service dependency manifest v41: notify-fanout calls edit-gateway and pgbouncer-5 and nothing else; it has no call path to search-indexer. search-indexer serves reads from the pg-idx-ro replica set, which runs on separate hardware from pg-shard-3." },
+    { "id": "EV-14", "stage": "stage-2-telemetry", "text": "A notify-fanout websocket session requires a valid edit-gateway session token. A client whose session establishment fails drops its websocket and re-establishes every 3 seconds until the backoff cap is reached. This behaviour has been unchanged across the last six client releases." },
+    { "id": "EV-15", "stage": "stage-2-telemetry", "text": "An anomaly detector flagged a notify-fanout heap sawtooth as a possible memory leak during the window. The same sawtooth appears in every seven-day window for the past 90 days and matches the configured garbage-collection cycle." },
+    { "id": "EV-16", "stage": "stage-3-change-review", "text": "Configuration bundle CB-2291 was distributed fleet-wide at 13:40. Its diff contains three lines: compactor.tenant_shard_hash murmur3_32 to xxhash64; indexer.read_ahead_pages 64 to 8; compactor.job_log_sink file to none." },
+    { "id": "EV-17", "stage": "stage-3-change-review", "text": "doc-compactor dispatches a sweep at :52 of each hour. The 13:52 sweep dispatched 44 large-tenant compaction jobs, of which 41 were assigned to pg-shard-3. The four preceding sweeps assigned between 9 and 12 large-tenant jobs to pg-shard-3." },
+    { "id": "EV-18", "stage": "stage-3-change-review", "text": "A staging replay of the shard-assignment step against the production tenant catalogue placed 40 of 44 large-tenant jobs on shard 3 under xxhash64 and 11 of 44 under murmur3_32." },
+    { "id": "EV-19", "stage": "stage-3-change-review", "text": "Node pool NP-77 hosting notify-fanout completed a rolling upgrade at 13:45, 26 minutes before the pager fired. NP-77 nodes match the pool they replaced in instance type, node count, kernel version and network tier." },
+    { "id": "EV-20", "stage": "stage-3-change-review", "text": "web-client 4.18.0 reached 100% of sessions at 09:10 and ran for four and a half hours at baseline reconnect rates before onset. It was rolled back to 4.17.4 at 14:52." },
+    { "id": "EV-21", "stage": "stage-3-change-review", "text": "Incident update posted at 14:58: 'Rolling back 4.18.0 restored the service.' The reconnect rate had already fallen below 3x baseline at 14:44, and the 13:52 compaction sweep had completed at 14:38." },
+    { "id": "EV-22", "stage": "stage-3-change-review", "text": "Corvid Labs onboarded 12,300 seats on 2026-03-09. Tenant-to-shard mapping records show every Corvid tenant resolves to pg-shard-7 under both murmur3_32 and xxhash64. Fleet-wide edit volume during the incident window stayed inside its 30-day band." },
+    { "id": "EV-23", "stage": "stage-4-forensics", "text": "Connection-tag sampling attributes 97% of pg-shard-3 write IOPS between 13:58 and 14:38 to compaction job connections. The remaining 3% is untagged." },
+    { "id": "EV-24", "stage": "stage-4-forensics", "text": "edit-gateway has run with retry_on_timeout set to false since 2025-11 and CB-2291 did not modify it. A session-establishment call that times out is shed and is not re-issued to the database by the gateway." },
+    { "id": "EV-25", "stage": "stage-4-forensics", "text": "Per-application connection-pool attribution is unavailable for the incident window. The pgbouncer_pools_by_application scrape was added on 2026-03-19, and pgbouncer-3 ran at log level error, so no per-client checkout records exist for 2026-03-11. search-indexer writes index deltas through pgbouncer-3, so its share of pool occupancy during the window cannot be determined from retained data." },
+    { "id": "EV-26", "stage": "stage-4-forensics", "text": "Compactor job-level logs for 13:52 to 14:38 do not exist: compactor.job_log_sink had been set to none by CB-2291 before the sweep began. The backfill scheduler records BF-118 as running from 10:00 to 16:00 with no per-shard and no per-job breakdown, so the volume BF-118 contributed to the 13:52 sweep cannot be determined from retained data." },
+    { "id": "EV-27", "stage": "stage-4-forensics", "text": "The notify-fanout admission limiter capped accepted reconnects at 12,000/s and shed 4.1% of reconnect attempts during the window. Fanout pod heap headroom never fell below 22%." },
+    { "id": "EV-28", "stage": "stage-4-forensics", "text": "Incident INC-3902 on 2026-01-14: a comparable reconnect volume reached notify-fanout before the admission limiter shipped, OOM-killed 61% of fanout pods, and extended that outage by 38 minutes." },
+    { "id": "EV-29", "stage": "stage-4-forensics", "text": "Capacity review from 2025-12: shard write-ahead-log fsync p99 scales super-linearly with the number of concurrent large-tenant compaction jobs above a concurrency of about 15. At concurrency 40 the benchmark recorded fsync p99 between 190ms and 240ms on the same volume class." },
+    { "id": "EV-30", "stage": "stage-4-forensics", "text": "pgbouncer-3 runs with default_pool_size 120 in transaction mode. A server connection is held for the full duration of the statement it is executing, so a statement blocked on a write-ahead-log flush occupies its pooled server connection until the flush completes." }
+  ],
+  "relationGlossary": {
+    "causes": "The from-node directly produces the to-node, and no other node in the candidate node list lies on the path between them.",
+    "mediates": "The from-node lies on the causal path between an upstream node in the candidate node list and the to-node, transmitting that upstream effect.",
+    "contributes-to": "The from-node raises the magnitude or likelihood of the to-node without being sufficient on its own, or reaches the to-node only indirectly.",
+    "precedes": "The from-node occurs before the to-node in time and the evidence establishes no causal relation between them.",
+    "prevents": "The from-node reduces or blocks the occurrence or severity of the to-node.",
+    "unknown": "The evidence does not determine the relation between the two nodes.",
+    "tieBreak": "causes and mediates are mutually exclusive. Where a causal relation holds and both labels could otherwise apply, mediates is the correct label whenever the from-node itself has an identified upstream driver in the candidate node list, and causes is correct only when it does not. This tie-break applies only to causal relations; it does not affect precedes or prevents."
+  },
+  "answerGuide": {
+    "hypothesisItems": {
+      "supported": "The evidence supports the statement as written.",
+      "refuted": "The evidence contradicts the statement as written.",
+      "unknown": "The evidence neither supports nor contradicts the statement."
+    },
+    "edgeItems": {
+      "supported": "Endpoints, direction and relation are all supported by the evidence as written.",
+      "relation-misstated": "Endpoints and direction are right, but the stated relation is not the one the evidence supports under the relation glossary.",
+      "direction-reversed": "The two endpoints are related, but the evidence supports the relation running the other way. Where both would apply, direction-reversed takes precedence over relation-misstated.",
+      "unsupported": "Both endpoints are real, but the evidence supports no relation of the stated kind between them in either direction.",
+      "unknown": "The evidence does not determine whether the edge holds."
+    },
+    "actionItems": {
+      "preferred": "The action the evidence most supports taking.",
+      "acceptable": "Reasonable to take, though not the action the evidence most supports.",
+      "rejected": "Should not be taken on this evidence.",
+      "harmful": "Taking it would worsen the incident, remove a control that bounded it, or create a new failure.",
+      "unknown": "The evidence does not determine whether the action is appropriate."
+    },
+    "observationItems": {
+      "supported": "The evidence supports the statement as written.",
+      "refuted": "The evidence contradicts the statement as written.",
+      "unknown": "The evidence neither supports nor contradicts the statement."
+    }
+  },
+  "candidates": {
+    "nodes": [
+      { "id": "ND-CB2291", "label": "Distribution of configuration bundle CB-2291 at 13:40" },
+      { "id": "ND-PILEUP", "label": "Concentration of large-tenant compaction jobs on pg-shard-3 in the 13:52 sweep" },
+      { "id": "ND-FSYNC", "label": "Write-ahead-log fsync saturation on pg-shard-3" },
+      { "id": "ND-STARVE", "label": "Connection checkout starvation in pgbouncer-3" },
+      { "id": "ND-GWTIMEOUT", "label": "Session-establishment timeouts in edit-gateway" },
+      { "id": "ND-RECONNECT", "label": "Websocket reconnect storm and 5xx on notify-fanout /ws/subscribe" },
+      { "id": "ND-IDXLAT", "label": "Elevated search-indexer read latency" },
+      { "id": "ND-WEBCLIENT", "label": "web-client 4.18.0 at full rollout" },
+      { "id": "ND-NP77", "label": "Rolling upgrade of node pool NP-77" },
+      { "id": "ND-BF118", "label": "Tenant backfill BF-118 in progress" },
+      { "id": "ND-CORVID", "label": "Corvid Labs seat onboarding" },
+      { "id": "ND-LIMITER", "label": "notify-fanout admission limiter" },
+      { "id": "ND-FANOUTOOM", "label": "Memory exhaustion of notify-fanout pods" }
+    ],
+    "hypotheses": [
+      { "id": "HYP-01", "text": "The compactor shard-hash change in bundle CB-2291 concentrated large-tenant compaction jobs on pg-shard-3." },
+      { "id": "HYP-02", "text": "The indexer read-ahead change in bundle CB-2291 degraded notify-fanout websocket session handling." },
+      { "id": "HYP-03", "text": "The node pool NP-77 rolling upgrade left the notify-fanout tier unable to absorb its reconnect volume." },
+      { "id": "HYP-04", "text": "The web-client 4.18.0 rollout introduced the websocket reconnect behaviour seen during the incident window." },
+      { "id": "HYP-05", "text": "The tenant backfill BF-118 added compaction volume to the 13:52 sweep beyond the scheduled large-tenant jobs." },
+      { "id": "HYP-06", "text": "The Corvid Labs seat onboarding raised steady-state edit volume past the pgbouncer-3 connection pool capacity." },
+      { "id": "HYP-07", "text": "pgbouncer-3 held pooled server connections for statements blocked on pg-shard-3 write-ahead-log flushes." }
+    ],
+    "edges": [
+      { "id": "EDG-01", "from": "ND-CB2291", "to": "ND-PILEUP", "relation": "causes", "statement": "Distribution of configuration bundle CB-2291 at 13:40 causes concentration of large-tenant compaction jobs on pg-shard-3 in the 13:52 sweep." },
+      { "id": "EDG-02", "from": "ND-PILEUP", "to": "ND-FSYNC", "relation": "mediates", "statement": "Concentration of large-tenant compaction jobs on pg-shard-3 in the 13:52 sweep mediates write-ahead-log fsync saturation on pg-shard-3." },
+      { "id": "EDG-03", "from": "ND-FSYNC", "to": "ND-STARVE", "relation": "mediates", "statement": "Write-ahead-log fsync saturation on pg-shard-3 mediates connection checkout starvation in pgbouncer-3." },
+      { "id": "EDG-04", "from": "ND-STARVE", "to": "ND-GWTIMEOUT", "relation": "mediates", "statement": "Connection checkout starvation in pgbouncer-3 mediates session-establishment timeouts in edit-gateway." },
+      { "id": "EDG-05", "from": "ND-GWTIMEOUT", "to": "ND-RECONNECT", "relation": "causes", "statement": "Session-establishment timeouts in edit-gateway cause the websocket reconnect storm and 5xx on notify-fanout /ws/subscribe." },
+      { "id": "EDG-06", "from": "ND-FSYNC", "to": "ND-RECONNECT", "relation": "causes", "statement": "Write-ahead-log fsync saturation on pg-shard-3 causes the websocket reconnect storm and 5xx on notify-fanout /ws/subscribe." },
+      { "id": "EDG-07", "from": "ND-CB2291", "to": "ND-RECONNECT", "relation": "causes", "statement": "Distribution of configuration bundle CB-2291 at 13:40 causes the websocket reconnect storm and 5xx on notify-fanout /ws/subscribe." },
+      { "id": "EDG-08", "from": "ND-RECONNECT", "to": "ND-STARVE", "relation": "causes", "statement": "The websocket reconnect storm and 5xx on notify-fanout /ws/subscribe cause connection checkout starvation in pgbouncer-3." },
+      { "id": "EDG-09", "from": "ND-GWTIMEOUT", "to": "ND-FSYNC", "relation": "contributes-to", "statement": "Session-establishment timeouts in edit-gateway contribute to write-ahead-log fsync saturation on pg-shard-3." },
+      { "id": "EDG-10", "from": "ND-IDXLAT", "to": "ND-RECONNECT", "relation": "causes", "statement": "Elevated search-indexer read latency causes the websocket reconnect storm and 5xx on notify-fanout /ws/subscribe." },
+      { "id": "EDG-11", "from": "ND-CB2291", "to": "ND-IDXLAT", "relation": "causes", "statement": "Distribution of configuration bundle CB-2291 at 13:40 causes elevated search-indexer read latency." },
+      { "id": "EDG-12", "from": "ND-IDXLAT", "to": "ND-PILEUP", "relation": "precedes", "statement": "Elevated search-indexer read latency precedes concentration of large-tenant compaction jobs on pg-shard-3 in the 13:52 sweep." },
+      { "id": "EDG-13", "from": "ND-IDXLAT", "to": "ND-STARVE", "relation": "contributes-to", "statement": "Elevated search-indexer read latency contributes to connection checkout starvation in pgbouncer-3." },
+      { "id": "EDG-14", "from": "ND-BF118", "to": "ND-PILEUP", "relation": "contributes-to", "statement": "Tenant backfill BF-118 in progress contributes to concentration of large-tenant compaction jobs on pg-shard-3 in the 13:52 sweep." },
+      { "id": "EDG-15", "from": "ND-WEBCLIENT", "to": "ND-RECONNECT", "relation": "causes", "statement": "web-client 4.18.0 at full rollout causes the websocket reconnect storm and 5xx on notify-fanout /ws/subscribe." },
+      { "id": "EDG-16", "from": "ND-LIMITER", "to": "ND-FANOUTOOM", "relation": "prevents", "statement": "The notify-fanout admission limiter prevents memory exhaustion of notify-fanout pods." },
+      { "id": "EDG-17", "from": "ND-CORVID", "to": "ND-STARVE", "relation": "contributes-to", "statement": "Corvid Labs seat onboarding contributes to connection checkout starvation in pgbouncer-3." }
+    ],
+    "actions": [
+      { "id": "ACT-01", "text": "Restore the previous compactor tenant-shard hash function and re-run the affected sweep in an off-peak window." },
+      { "id": "ACT-02", "text": "Raise the pgbouncer-3 default pool size from 120 to 400 before the next hourly compaction sweep dispatches." },
+      { "id": "ACT-03", "text": "Disable the notify-fanout admission limiter so that shed clients can re-establish their websockets immediately." },
+      { "id": "ACT-04", "text": "Restore the previous indexer read-ahead page count and route the latency regression to the search team for review." },
+      { "id": "ACT-05", "text": "Raise the web-client reconnect backoff cap so that failed sessions retry less often during degraded periods." },
+      { "id": "ACT-06", "text": "Add per-application pool attribution and job-level compactor logging before the next scheduled compaction sweep runs." },
+      { "id": "ACT-07", "text": "Split pg-shard-3 into two shards online during the active window to reduce write pressure on its volume." },
+      { "id": "ACT-08", "text": "Cap concurrent large-tenant compaction jobs per shard at eight for all sweeps until the hash change is resolved." }
+    ],
+    "observations": [
+      { "id": "OBS-01", "text": "The rise in pg-shard-3 write-ahead-log fsync latency was driven by processor saturation on the shard host." },
+      { "id": "OBS-02", "text": "The websocket reconnect storm increased connection demand on pgbouncer-3 during the incident window." }
+    ],
+    "controlPoints": [
+      { "id": "CPT-01", "text": "The notify-fanout admission limiter altered the severity of the fanout tier outcome without altering the upstream chain." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "IT-H01", "kind": "hypothesis", "candidateId": "HYP-01", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "IT-H02", "kind": "hypothesis", "candidateId": "HYP-02", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "IT-H03", "kind": "hypothesis", "candidateId": "HYP-03", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "IT-H04", "kind": "hypothesis", "candidateId": "HYP-04", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "IT-H05", "kind": "hypothesis", "candidateId": "HYP-05", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "IT-H06", "kind": "hypothesis", "candidateId": "HYP-06", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "IT-H07", "kind": "hypothesis", "candidateId": "HYP-07", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "IT-E01", "kind": "edge", "candidateId": "EDG-01", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E02", "kind": "edge", "candidateId": "EDG-02", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-E03", "kind": "edge", "candidateId": "EDG-03", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-E04", "kind": "edge", "candidateId": "EDG-04", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E05", "kind": "edge", "candidateId": "EDG-05", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E06", "kind": "edge", "candidateId": "EDG-06", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E07", "kind": "edge", "candidateId": "EDG-07", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E08", "kind": "edge", "candidateId": "EDG-08", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E09", "kind": "edge", "candidateId": "EDG-09", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E10", "kind": "edge", "candidateId": "EDG-10", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E11", "kind": "edge", "candidateId": "EDG-11", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-E12", "kind": "edge", "candidateId": "EDG-12", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E13", "kind": "edge", "candidateId": "EDG-13", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E14", "kind": "edge", "candidateId": "EDG-14", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": true },
+    { "id": "IT-E15", "kind": "edge", "candidateId": "EDG-15", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-E16", "kind": "edge", "candidateId": "EDG-16", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-E17", "kind": "edge", "candidateId": "EDG-17", "allowedAnswers": ["supported", "relation-misstated", "direction-reversed", "unsupported", "unknown"], "constructCritical": false },
+    { "id": "IT-A01", "kind": "action", "candidateId": "ACT-01", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "IT-A02", "kind": "action", "candidateId": "ACT-02", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "IT-A03", "kind": "action", "candidateId": "ACT-03", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "IT-A04", "kind": "action", "candidateId": "ACT-04", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "IT-A05", "kind": "action", "candidateId": "ACT-05", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "IT-A06", "kind": "action", "candidateId": "ACT-06", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "IT-A07", "kind": "action", "candidateId": "ACT-07", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": true },
+    { "id": "IT-A08", "kind": "action", "candidateId": "ACT-08", "allowedAnswers": ["preferred", "acceptable", "rejected", "harmful", "unknown"], "constructCritical": false },
+    { "id": "IT-O01", "kind": "observation", "candidateId": "OBS-01", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "IT-O02", "kind": "observation", "candidateId": "OBS-02", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "IT-C01", "kind": "control-point", "candidateId": "CPT-01", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false }
+  ]
+}

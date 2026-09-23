@@ -8,4 +8,9 @@
 | EDF-002-REVIEW-OPENAI-BY-CLAUDE-RUN | Record Claude reviews of OpenAI EX-EDF-2026-A003 cases | complete | edf, research, case-review | high |
 | EDF-CONSTRUCT-STRESS-2026-09-22 | Build EDF construct-specific stress benchmark | complete | edf, research, experiment, ablation | high |
 | EDF-UPGRADE-2026-09-21 | Reconcile EDF with current Echelon capabilities and ROS research rules | complete | edf,tooling,ordo,ros | high |
-| ROS-INSTALL-3-1-1 | ROS-INSTALL-3-1-1 | complete |  |  |
+| WI-0001 | Author EX-EDF-2026-A003 case ST-002 (negative-knowledge) | complete | edf-002,case-authoring | high |
+| WI-0002 | Author EX-EDF-2026-A003 case ST-004 (control-points) | complete | edf-002,case-authoring | high |
+| WI-0003 | Author EX-EDF-2026-A003 case ST-006 (propagation) | complete | edf-002,case-authoring | high |
+| WI-0004 | Author EX-EDF-2026-A003 case ST-008 (evidence-revision) | complete | edf-002,case-authoring | high |
+| WI-0005 | Author EX-EDF-2026-A003 case ST-010 (interaction) | complete | edf-002,case-authoring | high |
+| WI-0006 | Author EX-EDF-2026-A003 case ST-012 (protective-controls) | complete | edf-002,case-authoring | high |
