@@ -8,3 +8,4 @@
 | EDF-CONSTRUCT-STRESS-2026-09-22 | Build EDF construct-specific stress benchmark | complete | edf, research, experiment, ablation | high |
 | EDF-UPGRADE-2026-09-21 | Reconcile EDF with current Echelon capabilities and ROS research rules | complete | edf,tooling,ordo,ros | high |
 | ROS-INSTALL-3-1-1 | ROS-INSTALL-3-1-1 | complete |  |  |
+| WI-0001 | OpenAI review Anthropic EX-EDF-2026-A003 cases | complete | edf,research,experiment,review | high |

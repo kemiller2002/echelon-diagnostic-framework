@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-004",
+  "authorFamily": "Anthropic",
+  "reviewerFamily": "OpenAI",
+  "reviewerModel": "gpt-5.6-sol",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "The control-point chain is well supported across multiple independent observations: the stock-badges rollout creates uncached per-item availability traffic, replicas saturate and lag, the lag guard redirects reads to the primary, the primary saturates with unchanged reservation writes, and reservation latency crosses the checkout timeout. The truth correctly distinguishes the upstream leverage point from symptom locations such as connection-pool wait, checkout replicas, and timeout settings. Prior evidence that larger DB pools worsened saturation supports the harmful label for A1; client retry/disconnect behavior supports the harmful label for a longer server timeout; and the documented oversell history supports keeping the lag guard rather than moving the failure into correctness. Postgres replay performance and login traffic remain genuinely unknown. The title is symptom-only, distractors are operationally plausible, no single evidence item reveals the complete causal chain, and the construct-specific actions require reasoning about mechanism-changing control points rather than generic remediation."
+}

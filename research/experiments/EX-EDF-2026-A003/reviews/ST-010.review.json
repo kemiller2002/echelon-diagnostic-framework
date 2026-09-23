@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-010",
+  "authorFamily": "Anthropic",
+  "reviewerFamily": "OpenAI",
+  "reviewerModel": "gpt-5.6-sol",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "The interaction is isolated cleanly. A 60-second visibility timeout alone is refuted by Sep 17 and small-job data; the provider slowdown alone is refuted by 300-second pools with the same long call durations; elevated duplicates occur only when long calls and the short timeout coincide. Region and marketing-message associations are correctly exposed as confounded marginal effects by the pool and recipient-count splits. The worker-count and 120-second questions remain unknown because the needed distributions are absent. Actions A1 and A2 each remove one joint condition, while extending the risky timeout rollout is correctly harmful under current call durations and cross-region routing is independently harmful under the stated data-handling constraint. Distractors are credible and the case requires conditional-effect reasoning across several slices rather than one obvious clue."
+}
