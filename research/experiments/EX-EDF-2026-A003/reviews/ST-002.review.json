@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-002",
+  "authorFamily": "Anthropic",
+  "reviewerFamily": "OpenAI",
+  "reviewerModel": "gpt-5.6-sol",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Ground truth is evidence-bounded and makes the negative-knowledge distinctions the case is meant to test. The outbox and dispatcher records positively refute upstream loss for the 40 known events, while the aged-out broker evidence is correctly not treated as proof of loss. Merchant B is supported by the corrected secret-deployment record plus its verify-and-discard behavior; Merchant A is supported by pre-processing request logs and stale DNS/connection-pool evidence; Merchant C and broader incident scope remain unknown because the available logs and ticket absence do not discriminate receipt/processing state. The partition election, relay CPU alert, retry release, maintenance window, and acknowledgement data are plausible traps rather than straw men. No single clue establishes the whole diagnosis, candidate text does not signal expected states, and the harmful global secret rollback is justified by evidence that it would reintroduce silent verification failures. The case provides substantial construct pressure by repeatedly distinguishing observed absence, not-observed, and unknown."
+}
