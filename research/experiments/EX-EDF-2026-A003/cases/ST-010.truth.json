@@ -1,0 +1,358 @@
+{
+  "caseId": "ST-010",
+  "authorFamily": "Anthropic",
+  "construct": "interaction",
+  "answers": [
+    {
+      "itemId": "S01",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E08",
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E02",
+        "E08",
+        "E10",
+        "E15"
+      ],
+      "rationale": "Pool-a at 60 s had baseline duplicates on Sep 17 and, after Sep 18, baseline duplicates for jobs of 500 or fewer recipients."
+    },
+    {
+      "itemId": "S02",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06",
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E03",
+        "E06",
+        "E09",
+        "E14"
+      ],
+      "rationale": "Pool-b and us-east see the same 95 s p99 durations for large jobs but baseline duplicate rates."
+    },
+    {
+      "itemId": "S03",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06",
+        "E08",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E02",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E12"
+      ],
+      "rationale": "Only pool-a (60 s) large jobs after Sep 18 (p99 95 s) show elevated duplicates; the queue makes a job re-visible if not deleted within the timeout and the provider does not de-duplicate."
+    },
+    {
+      "itemId": "S04",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E09",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E04",
+        "E08",
+        "E09",
+        "E11",
+        "E17"
+      ],
+      "rationale": "The marketing/transactional split is confounded with recipient count; marketing jobs in pool-b and us-east and small marketing jobs in pool-a show baseline rates."
+    },
+    {
+      "itemId": "S05",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E12",
+        "E13"
+      ],
+      "rationale": "Worker counts differ across pools, but no analysis relates them to pick-up of re-visible jobs."
+    },
+    {
+      "itemId": "S06",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06"
+      ],
+      "allowedEvidence": [
+        "E06",
+        "E09",
+        "E12"
+      ],
+      "rationale": "Only the p99 (95 s) is reported; the share of calls above 120 s is not known, so 'all' cannot be established or ruled out."
+    },
+    {
+      "itemId": "S07",
+      "expected": "conditional-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E08",
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E02",
+        "E06",
+        "E08",
+        "E10",
+        "E12",
+        "E15"
+      ],
+      "rationale": "The timeout produces duplicates only for jobs whose calls outlast 60 s, which occur only for large jobs after Sep 18."
+    },
+    {
+      "itemId": "S08",
+      "expected": "conditional-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06",
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E03",
+        "E06",
+        "E08",
+        "E09",
+        "E14"
+      ],
+      "rationale": "The provider change raises duplicates only where the timeout is 60 s."
+    },
+    {
+      "itemId": "S09",
+      "expected": "no-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E07",
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E01",
+        "E05",
+        "E07",
+        "E09"
+      ],
+      "rationale": "eu-west pool-b at 300 s has baseline rates with the same job mix; the regional difference is the timeout configuration."
+    },
+    {
+      "itemId": "S10",
+      "expected": "no-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E11",
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E04",
+        "E08",
+        "E09",
+        "E11"
+      ],
+      "rationale": "Holding recipient count and pool fixed, marketing jobs show baseline rates."
+    },
+    {
+      "itemId": "S11",
+      "expected": "no-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06"
+      ],
+      "allowedEvidence": [
+        "E03",
+        "E06"
+      ],
+      "rationale": "Small-job p99 is 12 s before and after."
+    },
+    {
+      "itemId": "S12",
+      "expected": "no-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E08",
+        "E09",
+        "E16"
+      ],
+      "rationale": "eu-west pool-b shares the network and shows baseline rates; pool-a small jobs are also at baseline."
+    },
+    {
+      "itemId": "S13",
+      "expected": "no-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06"
+      ],
+      "allowedEvidence": [
+        "E06"
+      ],
+      "rationale": "Durations are the same in all pools regardless of timeout."
+    },
+    {
+      "itemId": "S14",
+      "expected": "conditional-effect",
+      "weight": 1,
+      "requiredEvidence": [
+        "E08",
+        "E09",
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E06",
+        "E08",
+        "E09",
+        "E10",
+        "E11"
+      ],
+      "rationale": "Large jobs are duplicated only in pool-a after Sep 18; neither before the provider change nor in 300 s pools."
+    },
+    {
+      "itemId": "S15",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E07",
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E02",
+        "E06",
+        "E07",
+        "E09"
+      ],
+      "rationale": "Removes one of the jointly required conditions; 300 s pools show baseline rates with the same durations."
+    },
+    {
+      "itemId": "S16",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06",
+        "E08"
+      ],
+      "allowedEvidence": [
+        "E06",
+        "E08",
+        "E19"
+      ],
+      "rationale": "Removes the other jointly required condition; small calls take 12 s p99 and the rate limit has ample headroom."
+    },
+    {
+      "itemId": "S17",
+      "expected": "harmful",
+      "weight": 1,
+      "requiredEvidence": [
+        "E18"
+      ],
+      "allowedEvidence": [
+        "E05",
+        "E07",
+        "E18"
+      ],
+      "rationale": "Acts on the apparent regional main effect and would process EU personal data outside eu-west, violating the data-handling policy."
+    },
+    {
+      "itemId": "S18",
+      "expected": "not-recommended",
+      "weight": 1,
+      "requiredEvidence": [
+        "E09"
+      ],
+      "allowedEvidence": [
+        "E04",
+        "E06",
+        "E09",
+        "E14"
+      ],
+      "rationale": "Rests on the provider change being sufficient alone; us-east and pool-b marketing sends are unaffected."
+    },
+    {
+      "itemId": "S19",
+      "expected": "harmful",
+      "weight": 1,
+      "requiredEvidence": [
+        "E06",
+        "E08"
+      ],
+      "allowedEvidence": [
+        "E02",
+        "E06",
+        "E08",
+        "E10",
+        "E15"
+      ],
+      "rationale": "Sep 17 safety held only because calls were short; with current 95 s p99 for large jobs, a 60 s timeout would reproduce the duplicates in pool-b and us-east."
+    },
+    {
+      "itemId": "S20",
+      "expected": "not-recommended",
+      "weight": 1,
+      "requiredEvidence": [
+        "E09",
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E09",
+        "E11",
+        "E17"
+      ],
+      "rationale": "Template engine v2 runs in all pools, which show baseline rates outside the joint condition."
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": [
+      "E04",
+      "E05",
+      "E16",
+      "E17"
+    ],
+    "conflictingEvidencePairs": [
+      [
+        "E14",
+        "E09"
+      ],
+      [
+        "E15",
+        "E08"
+      ],
+      [
+        "E05",
+        "E07"
+      ]
+    ],
+    "missingInformation": [
+      "Distribution of provider call durations above the p99 for large jobs.",
+      "Relationship between worker pool size and pick-up of re-visible jobs."
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": "Provider sync validation lengthens large-job calls to p99 95 s (E03, E06) -> calls exceed the 60 s visibility timeout only in pool-a (E02, E07) -> undeleted jobs become visible and are re-sent by another worker without provider de-duplication (E12) -> duplicates confined to pool-a large jobs after Sep 18 (E08, E09, E10); marginal splits by message type and region reflect this joint condition (E04, E05, E11).",
+    "harmfulActionCandidateIds": [
+      "A3",
+      "A5"
+    ],
+    "constructTraps": [
+      "Reading the region split as an eu-west main effect.",
+      "Reading the message-type split as a marketing main effect.",
+      "Treating the provider slowdown as sufficient alone.",
+      "Treating the Sep 17 clean day as proof the timeout is safe regardless of call duration.",
+      "Assuming 120 s is enough from the p99 alone."
+    ]
+  }
+}

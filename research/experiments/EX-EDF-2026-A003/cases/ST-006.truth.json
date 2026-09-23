@@ -1,0 +1,44 @@
+{
+  "caseId": "ST-006",
+  "authorFamily": "Anthropic",
+  "construct": "propagation",
+  "answers": [
+    { "itemId": "S01", "expected": "supported", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E02", "E03", "E04", "E05", "E06", "E14"], "rationale": "Rollout completed 09:03; cache TTL for cluster.local fell from 30 to 5 s; CoreDNS queries rose about 5.7x by 09:05 and saturated CPU limits; DNS latency then reached both orders-api (via per-call resolution) and payment-worker." },
+    { "itemId": "S02", "expected": "refuted", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E01", "E02", "E09"], "rationale": "Redis was healthy with normal latency and no errors from 08:53, before symptoms began at 09:04." },
+    { "itemId": "S03", "expected": "refuted", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E04", "E11"], "rationale": "CoreDNS query rate stayed flat through the 10 -> 30 pod scale-out on an unchanged node set; the node-local caches, not pod count, determine upstream query rate." },
+    { "itemId": "S04", "expected": "unknown", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E14", "E15"], "rationale": "Retries on DNS timeouts occurred in the relevant window, but idempotency-key behaviour and gateway capture records are unavailable; nothing discriminates retry-induced duplicates from other causes." },
+    { "itemId": "S05", "expected": "contributes-to", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E02", "E03", "E04"], "rationale": "The rollout is an origin condition: it is not produced by any other in-case condition, and its TTL change increases upstream query rate." },
+    { "itemId": "S06", "expected": "mediates", "weight": 1, "requiredEvidence": ["E04", "E05", "E06"], "allowedEvidence": ["E01", "E03", "E04", "E05", "E06", "E07", "E08", "E13"], "rationale": "Throttling is itself produced by the query-rate increase and transmits it to orders-api through slow lookups on every pricing call." },
+    { "itemId": "S07", "expected": "precedes-only", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E01", "E02", "E09"], "rationale": "The failover preceded the errors, but Redis was healthy and error-free before and throughout." },
+    { "itemId": "S08", "expected": "correlates-only", "weight": 1, "requiredEvidence": ["E10"], "allowedEvidence": ["E06", "E10"], "rationale": "The extra log lines are pricing-failure warnings (a shared downstream cause); disk stayed below 20% and shipping is asynchronous with drop-on-overflow, so log volume does not drive latency." },
+    { "itemId": "S09", "expected": "correlates-only", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E04", "E11", "E12"], "rationale": "The scale-out was triggered by slow requests (reverse direction) and did not change the CoreDNS query rate." },
+    { "itemId": "S10", "expected": "prevents", "weight": 1, "requiredEvidence": ["E13"], "allowedEvidence": ["E05", "E13"], "rationale": "The sidecar's 60 s resolution cache and connection reuse kept inventory call latency unchanged while pricing calls degraded." },
+    { "itemId": "S11", "expected": "unknown", "weight": 1, "requiredEvidence": ["E16"], "allowedEvidence": ["E04", "E16"], "rationale": "The image patch and CPU limit increase were applied together; the improvement cannot be attributed to either change, and nothing shows the patch had no effect." },
+    { "itemId": "S12", "expected": "mediates", "weight": 1, "requiredEvidence": ["E05", "E14"], "allowedEvidence": ["E04", "E05", "E14"], "rationale": "DNS latency is produced upstream by CoreDNS saturation and transmits it to payment-worker; attempts without DNS timeouts ran normally." },
+    { "itemId": "S13", "expected": "preferred", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E02", "E03", "E04"], "rationale": "Restores the 30 s cache and removes the origin of the query increase, which persisted at 22-24k/s until 10:30 despite the 09:40 CoreDNS change." },
+    { "itemId": "S14", "expected": "harmful", "weight": 1, "requiredEvidence": ["E11", "E12"], "allowedEvidence": ["E04", "E11", "E12"], "rationale": "The scale-out is an effect, not a cause; 30 pods are near their 64-request limit (58 average), so 10 pods could not hold the load and rejections would increase." },
+    { "itemId": "S15", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E10"], "allowedEvidence": ["E10"], "rationale": "Log volume has no causal effect on latency; the change offers no evidence-supported benefit." },
+    { "itemId": "S16", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E02", "E09"], "rationale": "Targets a condition that preceded but did not cause the errors." },
+    { "itemId": "S17", "expected": "harmful", "weight": 1, "requiredEvidence": ["E13"], "allowedEvidence": ["E05", "E13"], "rationale": "Removes the component that is preventing DNS latency from reaching inventory calls, exposing a second call path to the same failure." },
+    { "itemId": "S18", "expected": "preferred", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E14", "E15"], "rationale": "Resolves the evidence gap that leaves H4 unknown." }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E09", "E10", "E11"],
+    "conflictingEvidencePairs": [["E06", "E07"], ["E04", "E08"]],
+    "missingInformation": [
+      "Separate effects of the CoreDNS image patch and the CPU limit increase.",
+      "payment-worker idempotency-key behaviour and gateway capture logs for the duplicate charges."
+    ],
+    "reasoningHops": 5,
+    "reasoningChain": "chart 2.4.0 rollout (E02) -> cluster.local cache TTL 30 s to 5 s (E03) -> CoreDNS query rate 5.7x and CPU throttling (E04) -> pod DNS latency and timeouts (E05) -> per-call resolution in orders-api pricing client (E06, E13) -> pricing latency near the 3 s ingress timeout -> 502s (E01); in parallel DNS timeouts -> payment-worker backlog (E14).",
+    "harmfulActionCandidateIds": ["A2", "A5"],
+    "constructTraps": [
+      "Treating the Redis failover as causal because it immediately preceded the errors.",
+      "Treating log volume as causal because it co-varies with latency.",
+      "Treating the scale-out as a cause of DNS load (reverse direction).",
+      "Attributing the 09:40 improvement to one of two confounded changes.",
+      "Classifying intermediate links (throttling, DNS latency) as origins.",
+      "Missing the preventing role of the inventory sidecar."
+    ]
+  }
+}

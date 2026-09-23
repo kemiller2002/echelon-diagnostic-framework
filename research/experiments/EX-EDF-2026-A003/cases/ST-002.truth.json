@@ -1,0 +1,49 @@
+{
+  "caseId": "ST-002",
+  "authorFamily": "Anthropic",
+  "construct": "negative-knowledge",
+  "answers": [
+    { "itemId": "S01", "expected": "refuted", "weight": 1, "requiredEvidence": ["E04"], "allowedEvidence": ["E01", "E04", "E07"], "rationale": "All 40 events are present in the outbox (observed presence)." },
+    { "itemId": "S02", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E04", "E05", "E06", "E07", "E16"], "rationale": "The topic search could not examine 18 events (not observed), but the unsampled dispatcher log shows delivery attempts for all 40, so every event reached the dispatcher. Treating the retention gap as a genuine unknown ignores evidence that closes it." },
+    { "itemId": "S03", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E07", "E08"], "rationale": "Every event's final attempt returned HTTP 200; the dead-letter queue is empty and its write path was verified (observed absence, not merely not-observed)." },
+    { "itemId": "S04", "expected": "supported", "weight": 1, "requiredEvidence": ["E10", "E11"], "allowedEvidence": ["E01", "E03", "E07", "E09", "E10", "E11"], "rationale": "New-secret-only signing from Sep 14 (E03), Merchant B's secret changed only on Sep 18 (E10, which supersedes the unverified E09 claim), and a handler that returns 200 and discards on verification failure while logging only verified payloads (E11). Merchant B's empty log is not evidence of non-receipt because that log cannot record rejected payloads; B's receiving address was unchanged (E07)." },
+    { "itemId": "S05", "expected": "refuted", "weight": 1, "requiredEvidence": ["E12"], "allowedEvidence": ["E03", "E07", "E12", "E13", "E14"], "rationale": "Merchant A's pre-processing request log is unsampled and shows no platform requests in the window (observed absence), so the signature check never ran; A's library also accepted the previous secret for 7 days." },
+    { "itemId": "S06", "expected": "unknown", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E01", "E03", "E07", "E15", "E17"], "rationale": "Timing is consistent with the rotation, but Merchant C has not said which log was searched, whether it records pre-verification requests, or when it deployed the new secret. 'Our logs show nothing' is not an observed absence of receipt. No evidence discriminates rotation from other receiver-side causes." },
+    { "itemId": "S07", "expected": "supported", "weight": 1, "requiredEvidence": ["E12", "E14"], "allowedEvidence": ["E07", "E12", "E13", "E14"], "rationale": "Dispatcher received HTTP 200 from 203.0.113.40 (outside A's new range) while A's unsampled application log saw no requests; A had moved hosts before the window." },
+    { "itemId": "S08", "expected": "unknown", "weight": 1, "requiredEvidence": ["E02"], "allowedEvidence": ["E01", "E02", "E03", "E11", "E12", "E14"], "rationale": "Absence of other tickets is not observed absence of the failure: the platform cannot see receiver-side discards after HTTP 2xx, both identified mechanisms are silent to the platform, and about 460 merchants have not acknowledged the new secret. No reconciliation exists." },
+    { "itemId": "S09", "expected": "supported", "weight": 1, "requiredEvidence": ["E10", "E11"], "allowedEvidence": ["E01", "E03", "E09", "E10", "E11"], "rationale": "Same chain as S04." },
+    { "itemId": "S10", "expected": "refuted", "weight": 1, "requiredEvidence": ["E06", "E07"], "allowedEvidence": ["E05", "E06", "E07"], "rationale": "None of the three partition-7 events was written in the at-risk 40-second window, and all 40 events reached the dispatcher." },
+    { "itemId": "S11", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07", "E08"], "allowedEvidence": ["E07", "E08"], "rationale": "All events ended with HTTP 200 within the new retry limits; the verified dead-letter queue is empty." },
+    { "itemId": "S12", "expected": "supported", "weight": 1, "requiredEvidence": ["E13", "E14"], "allowedEvidence": ["E07", "E12", "E13", "E14"], "rationale": "A changed DNS on Sep 13; pools are re-resolved only on recreation; A's deliveries went to the old address until the pod restart." },
+    { "itemId": "S13", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E04", "E07", "E16"], "rationale": "All 40 events were relayed within 2 seconds and reached the dispatcher; the CPU alert did not cause loss of these events." },
+    { "itemId": "S14", "expected": "supported", "weight": 1, "requiredEvidence": ["E12", "E14"], "allowedEvidence": ["E12", "E13", "E14"], "rationale": "After the Sep 18 08:55 restart, deliveries resolved to 198.51.100.17 and A's application logged requests from 09:01." },
+    { "itemId": "S15", "expected": "unknown", "weight": 1, "requiredEvidence": ["E07", "E17"], "allowedEvidence": ["E07", "E15", "E17"], "rationale": "The case gives no timestamps for Merchant C's 503 responses, and C's orders span Sep 14-16, so co-occurrence with the Sep 15 maintenance window cannot be checked. The association is plausible but not established or ruled out." },
+    { "itemId": "S16", "expected": "harmful", "weight": 1, "requiredEvidence": ["E10", "E11"], "allowedEvidence": ["E03", "E10", "E11", "E12"], "rationale": "Merchant B now verifies only the new secret and silently discards failures with HTTP 200; restoring the old secret would reintroduce silent loss for B and any merchant with the same handling, and would not affect Merchant A's address problem." },
+    { "itemId": "S17", "expected": "preferred", "weight": 1, "requiredEvidence": ["E10", "E14"], "allowedEvidence": ["E07", "E10", "E11", "E12", "E14"], "rationale": "Both mechanisms have been removed for A (address re-resolved Sep 18) and B (secret deployed Sep 18), and neither processed the events." },
+    { "itemId": "S18", "expected": "preferred", "weight": 1, "requiredEvidence": ["E13", "E14"], "allowedEvidence": ["E12", "E13", "E14"], "rationale": "Changes the supported mechanism for Merchant A's loss." },
+    { "itemId": "S19", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E07", "E08"], "allowedEvidence": ["E07", "E08"], "rationale": "Targets a mechanism the evidence rules out." },
+    { "itemId": "S20", "expected": "preferred", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E03", "E11", "E15"], "rationale": "Resolves the material gap that leaves H6 unknown." },
+    { "itemId": "S21", "expected": "acceptable", "weight": 1, "requiredEvidence": ["E05"], "allowedEvidence": ["E05", "E07"], "rationale": "Improves future forensic coverage at low risk but does not address any supported mechanism; the gap it would have covered was closed by the dispatcher log." },
+    { "itemId": "S22", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E02"], "allowedEvidence": ["E02", "E03", "E11", "E14"], "rationale": "Rests on treating absence of tickets as absence of impact, which the evidence does not establish." }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E06", "E08", "E16", "E17"],
+    "conflictingEvidencePairs": [["E09", "E10"], ["E07", "E12"], ["E01", "E07"]],
+    "missingInformation": [
+      "Merchant C's log type (pre- or post-verification) and secret deployment date.",
+      "Timestamps of Merchant C's HTTP 503 responses.",
+      "Merchant-side processing outcome for any merchant other than A, B, and C.",
+      "Topic contents for the 18 events that aged out of retention (closed indirectly by dispatcher logs)."
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": "Merchant A: host migration and DNS change (E13) -> dispatcher pools not re-resolved (E14) -> deliveries sent to old address 203.0.113.40 (E14) -> HTTP 200 received from a non-application responder while A's unsampled log shows no requests (E07, E12) -> events unprocessed. Merchant B: new-secret-only signing (E03) -> B's secret deployed Sep 18 not Sep 12 (E10 over E09) -> verification fails -> handler returns 200 and discards without logging (E11) -> events unprocessed and invisible in B's log.",
+    "harmfulActionCandidateIds": ["A1"],
+    "constructTraps": [
+      "Treating Merchant B's empty verified-only log as proof that deliveries never arrived.",
+      "Treating the 18 unsearchable topic events as a live loss possibility despite dispatcher attempts for all 40.",
+      "Extending the rotation explanation to Merchant C on timing alone.",
+      "Treating absence of other tickets as observed absence of impact.",
+      "Treating the maintenance window and C's 503s as linked without timestamps."
+    ]
+  }
+}
