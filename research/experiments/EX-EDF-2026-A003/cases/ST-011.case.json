@@ -1,0 +1,313 @@
+{
+  "id": "ST-011",
+  "construct": "protective-controls",
+  "title": "Schema quarantine after producer contract drift",
+  "domain": "billing event pipeline",
+  "entities": [
+    "event producer",
+    "shared schema contract",
+    "schema validator",
+    "quarantine service",
+    "billing engine",
+    "alerting"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "The schema-quarantine queue grew rapidly after producer release 4.0 began emitting a new `taxRegion` field as a nested object instead of a string."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "The consumer contract still required `taxRegion` to be a string; quarantined messages failed that exact validation rule."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "Messages from producers still on release 3.9 passed validation and were processed normally."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "text": "The quarantine service does not alter message payloads; it stores the original bytes plus validation metadata."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "A replay that bypassed validation allowed malformed 4.0 messages into billing, where 17% were assigned the default tax region and produced incorrect tax calculations."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "A compatibility adapter converting the new object to the legacy string representation allowed a canary batch to pass validation and bill correctly."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "Increasing quarantine workers reduced queue age but did not change the fraction of producer-4.0 messages failing validation."
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "text": "Muting the quarantine alert changed pager volume only; validation failures and queue growth continued."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "text": "Storage checksums for quarantined payloads matched producer-side checksums."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "The producer team confirmed release 4.0 changed the field shape without updating the shared contract version."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "After producer 4.0 was rolled back, new validation failures returned to baseline while the existing quarantine backlog drained."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "A separate alert indicated elevated disk latency on one quarantine node, but failures occurred across nodes with normal disk latency as well."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "The reason the producer release process did not require a contract-version update was not recorded in the incident artifacts."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The quarantine validator created the malformed `taxRegion` payloads."
+      },
+      {
+        "id": "H2",
+        "text": "Producer schema drift caused the validation failures."
+      },
+      {
+        "id": "H3",
+        "text": "Quarantine backlog contributed to customer-visible processing delay after malformed messages were rejected."
+      },
+      {
+        "id": "H4",
+        "text": "Storage corruption in the quarantine tier materially altered the rejected payloads."
+      },
+      {
+        "id": "H5",
+        "text": "A missing release-time contract-version enforcement control enabled the incompatible producer change to ship."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "producer schema drift",
+        "to": "validation failure",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "validation failure",
+        "to": "quarantine backlog",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R3",
+        "from": "quarantine backlog",
+        "to": "processing delay",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R4",
+        "from": "quarantine validator",
+        "to": "producer schema drift",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R5",
+        "from": "alerting",
+        "to": "validation failure",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R6",
+        "from": "storage corruption",
+        "to": "malformed payload",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R7",
+        "from": "release-time contract enforcement gap",
+        "to": "producer schema drift",
+        "relation": "permits"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Restore producer-contract compatibility by rolling back the field-shape change or deploying the verified compatibility adapter."
+      },
+      {
+        "id": "A2",
+        "text": "Increase quarantine processing capacity temporarily while the producer incompatibility is corrected."
+      },
+      {
+        "id": "A3",
+        "text": "Disable schema validation so producer-4.0 messages proceed directly to billing."
+      },
+      {
+        "id": "A4",
+        "text": "Mute quarantine alerts until the backlog clears."
+      },
+      {
+        "id": "A5",
+        "text": "Drop quarantined messages to reduce queue age."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R7",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}
