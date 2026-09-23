@@ -1,0 +1,190 @@
+{
+  "caseId": "ST-007",
+  "authorFamily": "OpenAI",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "E2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E8",
+        "E9",
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E12"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "E12"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E6"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E7"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E13"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "expected": "acceptable",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "expected": "reject",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "E9",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9",
+        "E10",
+        "E11"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6"
+      ]
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": [
+      "E3",
+      "E7",
+      "E13"
+    ],
+    "conflictingEvidencePairs": [
+      [
+        "E1",
+        "E4"
+      ],
+      [
+        "E5",
+        "E12"
+      ]
+    ],
+    "missingInformation": [
+      "At S1 there is not enough evidence to distinguish release causality from a coincident external mechanism.",
+      "At S2 there is no direct cache-state evidence, so stale-key causality is not yet established.",
+      "The exact production configuration that caused stale retention is missing."
+    ],
+    "reasoningHops": 4,
+    "harmfulActionCandidateIds": [
+      "A4",
+      "A5"
+    ]
+  }
+}

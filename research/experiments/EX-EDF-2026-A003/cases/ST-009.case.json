@@ -1,0 +1,309 @@
+{
+  "id": "ST-009",
+  "construct": "interaction",
+  "title": "Checksum corruption under a conditional decoder combination",
+  "domain": "media processing",
+  "entities": [
+    "ARM64 workers",
+    "x86_64 workers",
+    "vectorized decoder",
+    "pooled-buffer allocator",
+    "storage service",
+    "checksum validator"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "Image-checksum mismatches appeared only after the vectorized decoder feature was enabled for part of the fleet."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "All initially affected hosts used ARM64 processors, but most ARM64 hosts did not show corruption."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "No checksum mismatches occurred on x86_64 hosts with the vectorized decoder enabled."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "text": "No checksum mismatches occurred on ARM64 hosts where the vectorized decoder remained disabled."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "Affected ARM64 hosts also used the new pooled-buffer allocator; some unaffected ARM64 hosts used the same allocator with vectorization disabled."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "A controlled matrix reproduced corruption on ARM64 only when both vectorization and the pooled-buffer allocator were active under concurrency above 24 workers."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "ARM64 with vectorization enabled but the legacy allocator did not reproduce corruption in the same test."
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "text": "x86_64 with vectorization and the pooled-buffer allocator did not reproduce corruption at the same concurrency."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "text": "Reducing concurrency to 8 on affected ARM64 hosts stopped corruption without changing architecture, vectorization, or allocator."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "The corruption occurs after a buffer is returned to the pool while a vectorized decode still references a slice from that buffer."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "Storage-object checksums match at read time, before decode begins."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "One affected availability zone had elevated storage latency, but affected hosts also existed in a zone without the latency increase."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "Huge-page settings were not captured consistently, so their modifying effect on the interaction is unknown."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "ARM64 architecture alone was sufficient to cause the checksum corruption."
+      },
+      {
+        "id": "H2",
+        "text": "The vectorized decoder alone was sufficient to cause the checksum corruption."
+      },
+      {
+        "id": "H3",
+        "text": "The observed corruption required the joint presence of ARM64, vectorization, and the pooled-buffer path under high concurrency."
+      },
+      {
+        "id": "H4",
+        "text": "Corrupted storage objects were the initiating source of the checksum mismatches."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "ARM64 architecture",
+        "to": "checksum corruption",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "vectorized decoder",
+        "to": "checksum corruption",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R3",
+        "from": "pooled-buffer reuse",
+        "to": "stale slice reference",
+        "relation": "permits"
+      },
+      {
+        "id": "R4",
+        "from": "stale slice reference",
+        "to": "checksum corruption",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R5",
+        "from": "storage latency",
+        "to": "checksum corruption",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R6",
+        "from": "high concurrency",
+        "to": "buffer reuse overlap",
+        "relation": "amplifies"
+      },
+      {
+        "id": "R7",
+        "from": "huge-page setting",
+        "to": "buffer reuse overlap",
+        "relation": "modifies"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Disable vectorization on ARM64 pooled-buffer hosts while a safe ownership fix is implemented."
+      },
+      {
+        "id": "A2",
+        "text": "Evacuate the affected availability zone as the primary corrective action."
+      },
+      {
+        "id": "A3",
+        "text": "Disable checksum validation so corrupt results are no longer rejected."
+      },
+      {
+        "id": "A4",
+        "text": "Reduce decoder concurrency on the affected combination as a temporary containment measure."
+      },
+      {
+        "id": "A5",
+        "text": "Replace source storage objects because storage corruption is presumed causal."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R7",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}

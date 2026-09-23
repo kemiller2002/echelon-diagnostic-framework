@@ -1,0 +1,303 @@
+{
+  "id": "ST-003",
+  "construct": "control-points",
+  "title": "Search outage under merge pressure and retry amplification",
+  "domain": "distributed search",
+  "entities": [
+    "search API",
+    "API autoscaler",
+    "index shards",
+    "segment merger",
+    "client retry layer",
+    "alerting"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "Search API 5xx responses increased when index-shard p99 latency rose from 110 ms to 4.8 s during a scheduled segment merge."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "API CPU stayed below 48% and memory below 55% throughout the incident, including on hosts returning 5xx responses."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "The API client retries a timed-out search twice immediately against the same shard set; retry volume reached 2.6 times normal request volume."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "text": "Index-shard CPU climbed from 62% to 98% after retry volume increased, while disk queue depth tripled."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "Adding four API replicas reduced per-host API CPU but did not change index latency, 5xx rate, or queue age."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "Increasing the API timeout from 2 s to 8 s cut 5xx responses by 31% but increased median end-user latency and grew the request backlog."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "In a canary, limiting each request to one retry with exponential backoff reduced index request volume by 34% and shard p99 latency by 46% within five minutes."
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "text": "Pausing the segment merge on one affected shard reduced that shard's disk queue depth and p99 latency without changing API capacity."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "text": "Network interface error counters on sampled API and index hosts remained at baseline; packet captures were not retained."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "The autoscaler only observes API CPU and request count; it does not observe index latency, merge state, or shard disk queue depth."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "Alert suppression in a test environment changed pager volume but had no measurable effect on request rate or index latency."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "One unaffected shard was on identical hardware but had not entered segment merge during the incident window."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "After the merge completed naturally, retry volume and index latency both returned toward baseline without removing API replicas."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Insufficient API compute capacity was the primary mechanism producing the search failures."
+      },
+      {
+        "id": "H2",
+        "text": "Segment-merge pressure on index shards initiated the latency increase."
+      },
+      {
+        "id": "H3",
+        "text": "Immediate retries amplified index load and sustained the incident."
+      },
+      {
+        "id": "H4",
+        "text": "Network packet loss between API and index hosts materially contributed to the incident."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "segment merge",
+        "to": "index disk contention",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "index disk contention",
+        "to": "search latency",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R3",
+        "from": "search timeout",
+        "to": "immediate retry volume",
+        "relation": "triggers"
+      },
+      {
+        "id": "R4",
+        "from": "immediate retry volume",
+        "to": "index load",
+        "relation": "amplifies"
+      },
+      {
+        "id": "R5",
+        "from": "API replica count",
+        "to": "index merge pressure",
+        "relation": "reduces"
+      },
+      {
+        "id": "R6",
+        "from": "network packet loss",
+        "to": "search timeout",
+        "relation": "contributes-to"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Add more API replicas whenever index latency rises."
+      },
+      {
+        "id": "A2",
+        "text": "Limit retries with backoff and add a circuit breaker keyed to index health."
+      },
+      {
+        "id": "A3",
+        "text": "Stagger or throttle segment merges when shard disk pressure crosses a safe threshold."
+      },
+      {
+        "id": "A4",
+        "text": "Raise API timeouts further so fewer requests return 5xx."
+      },
+      {
+        "id": "A5",
+        "text": "Suppress the search-latency alert during merge windows."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R6",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}

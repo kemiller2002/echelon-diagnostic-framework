@@ -1,0 +1,303 @@
+{
+  "id": "ST-007",
+  "construct": "evidence-revision",
+  "title": "Authentication failure across changing evidence stages",
+  "domain": "identity and application platform",
+  "entities": [
+    "application release",
+    "tenant configuration",
+    "identity service",
+    "signing-key cache",
+    "cache refresh scheduler",
+    "network"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "Authentication failures began 11 minutes after application release 9.7 reached production."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "The failure rate was concentrated in four enterprise tenants; other tenants on the same release were unaffected."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "Application CPU, memory, and database latency remained near baseline."
+    },
+    {
+      "id": "E4",
+      "stage": "S2",
+      "text": "Release 9.7 was rolled back on half of the affected traffic, but the authentication failure rate did not materially change."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "All four affected tenants used the legacy tenant-configuration path; several unaffected tenants also used it."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "No signing-key cache metrics or cache-entry age telemetry were retained for the affected nodes."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "A packet-loss dashboard showed one short spike 40 minutes after failures had already begun."
+    },
+    {
+      "id": "E8",
+      "stage": "S3",
+      "text": "Identity-service logs show a signing-key rotation completed six minutes before the first authentication failure."
+    },
+    {
+      "id": "E9",
+      "stage": "S3",
+      "text": "Affected application nodes continued requesting the prior key version for 52-67 minutes after the rotation."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "Unaffected nodes refreshed the new key version within three minutes of rotation."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "Manually flushing the key cache on one affected node caused failures routed to that node to stop immediately."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "A staging reproduction with release 9.7 and a forced key rotation did not fail when cache refresh was enabled."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "The cache-refresh scheduler configuration for the four affected production tenants was not retained, so the exact trigger for stale retention cannot be reconstructed."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "At stage S1, release 9.7 was sufficiently established as the primary cause of the failures."
+      },
+      {
+        "id": "H2",
+        "text": "After stage S2, release 9.7 remained supported as the primary cause."
+      },
+      {
+        "id": "H3",
+        "text": "At stage S2, stale signing-key cache state was already established as the cause."
+      },
+      {
+        "id": "H4",
+        "text": "After stage S3, stale signing-key cache state was supported as the immediate cause of the authentication failures."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "release 9.7",
+        "to": "authentication failure",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "signing-key rotation",
+        "to": "stale key usage",
+        "relation": "precedes"
+      },
+      {
+        "id": "R3",
+        "from": "stale key usage",
+        "to": "authentication failure",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R4",
+        "from": "packet loss spike",
+        "to": "authentication failure onset",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R5",
+        "from": "cache flush",
+        "to": "failure cessation",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R6",
+        "from": "legacy tenant configuration",
+        "to": "stale key retention",
+        "relation": "contributes-to"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "At S1, perform a bounded rollback while preserving evidence and treating release causality as provisional."
+      },
+      {
+        "id": "A2",
+        "text": "After S2, continue repeated rollbacks as the primary corrective action."
+      },
+      {
+        "id": "A3",
+        "text": "After S3, flush stale key caches and restore normal key refresh behavior."
+      },
+      {
+        "id": "A4",
+        "text": "Disable signature verification until the cache issue is understood."
+      },
+      {
+        "id": "A5",
+        "text": "At S2, declare the stale-key mechanism confirmed and close alternative hypotheses."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R6",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A5",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}
