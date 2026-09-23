@@ -6,6 +6,7 @@
 | EDF-002-HARNESS-2026-09-22 | Build EX-EDF-002 operational harness | complete | edf, research, experiment, harness | high |
 | EDF-002-REVIEW-OPENAI-BY-CLAUDE | Claude review OpenAI EX-EDF-002 cases | complete | edf, research, case-review | high |
 | EDF-002-REVIEW-OPENAI-BY-CLAUDE-RUN | Record Claude reviews of OpenAI EX-EDF-2026-A003 cases | complete | edf, research, case-review | high |
+| EDF-A003-PREFREEZE-CORRECTION-2026-09-23 | Correct EX-EDF-2026-A003 pre-freeze scoring compatibility | complete | edf, research, experiment, scoring, pre-freeze | high |
 | EDF-CONSTRUCT-STRESS-2026-09-22 | Build EDF construct-specific stress benchmark | complete | edf, research, experiment, ablation | high |
 | EDF-UPGRADE-2026-09-21 | Reconcile EDF with current Echelon capabilities and ROS research rules | complete | edf,tooling,ordo,ros | high |
 | WI-0001 | Author EX-EDF-2026-A003 case ST-002 (negative-knowledge) | complete | edf-002,case-authoring | high |

@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "id": "ST-003",
   "construct": "control-points",
-  "title": "Notification ingress backlog after an audit-path rollout",
+  "title": "Notification ingress backlog and retry surge",
   "domain": "multi-tenant webhook delivery platform",
   "entities": [
     "client SDKs",
@@ -224,27 +224,247 @@
     ]
   },
   "scoredItems": [
-    {"id": "S-H01", "kind": "hypothesis", "candidateId": "H01", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-H02", "kind": "hypothesis", "candidateId": "H02", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-H03", "kind": "hypothesis", "candidateId": "H03", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-H04", "kind": "hypothesis", "candidateId": "H04", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-H05", "kind": "hypothesis", "candidateId": "H05", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-H06", "kind": "hypothesis", "candidateId": "H06", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G01", "kind": "edge", "candidateId": "G01", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-G02", "kind": "edge", "candidateId": "G02", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-G03", "kind": "edge", "candidateId": "G03", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G04", "kind": "edge", "candidateId": "G04", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G05", "kind": "edge", "candidateId": "G05", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G06", "kind": "edge", "candidateId": "G06", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G07", "kind": "edge", "candidateId": "G07", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-G08", "kind": "edge", "candidateId": "G08", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-G09", "kind": "edge", "candidateId": "G09", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": false},
-    {"id": "S-A01", "kind": "action", "candidateId": "A01", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A02", "kind": "action", "candidateId": "A02", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A03", "kind": "action", "candidateId": "A03", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A04", "kind": "action", "candidateId": "A04", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A05", "kind": "action", "candidateId": "A05", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A06", "kind": "action", "candidateId": "A06", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true},
-    {"id": "S-A07", "kind": "action", "candidateId": "A07", "allowedAnswers": ["select", "reject", "unknown"], "constructCritical": true}
+    {
+      "id": "S-H01",
+      "kind": "hypothesis",
+      "candidateId": "H01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H02",
+      "kind": "hypothesis",
+      "candidateId": "H02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-H03",
+      "kind": "hypothesis",
+      "candidateId": "H03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H04",
+      "kind": "hypothesis",
+      "candidateId": "H04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H05",
+      "kind": "hypothesis",
+      "candidateId": "H05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H06",
+      "kind": "hypothesis",
+      "candidateId": "H06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G01",
+      "kind": "edge",
+      "candidateId": "G01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G02",
+      "kind": "edge",
+      "candidateId": "G02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G03",
+      "kind": "edge",
+      "candidateId": "G03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G04",
+      "kind": "edge",
+      "candidateId": "G04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G05",
+      "kind": "edge",
+      "candidateId": "G05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G06",
+      "kind": "edge",
+      "candidateId": "G06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G07",
+      "kind": "edge",
+      "candidateId": "G07",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G08",
+      "kind": "edge",
+      "candidateId": "G08",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G09",
+      "kind": "edge",
+      "candidateId": "G09",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-A01",
+      "kind": "action",
+      "candidateId": "A01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A02",
+      "kind": "action",
+      "candidateId": "A02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A03",
+      "kind": "action",
+      "candidateId": "A03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A04",
+      "kind": "action",
+      "candidateId": "A04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A05",
+      "kind": "action",
+      "candidateId": "A05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A06",
+      "kind": "action",
+      "candidateId": "A06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A07",
+      "kind": "action",
+      "candidateId": "A07",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
   ]
 }
