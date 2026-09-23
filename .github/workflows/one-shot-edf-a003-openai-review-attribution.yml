@@ -1,0 +1,78 @@
+name: One-shot EDF A003 OpenAI review attribution
+
+on:
+  push:
+    branches:
+      - experiment/edf-a003-openai-review-anthropic-ros
+
+permissions:
+  contents: write
+
+jobs:
+  attribute:
+    if: ${{ !contains(github.event.head_commit.message, '[ros-attributed]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Begin ROS research work
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros add "OpenAI review Anthropic EX-EDF-2026-A003 cases" --tag edf,research,experiment,review --priority high
+          WORK_ID="$(node -e "const fs=require('fs');const q=JSON.parse(fs.readFileSync('.ros/work/queue.json','utf8'));process.stdout.write(q.items[q.items.length-1].id)")"
+          echo "WORK_ID=$WORK_ID" >> "$GITHUB_ENV"
+          ./ros work backlog-transition --action ready --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          sleep 1
+          ./ros work begin --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --type research
+
+      - name: Import independent OpenAI reviews
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin experiment/edf-a003-openai-review-anthropic-cases:refs/remotes/origin/experiment/edf-a003-openai-review-anthropic-cases
+          git checkout origin/experiment/edf-a003-openai-review-anthropic-cases -- \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-002.review.json \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-004.review.json \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-006.review.json \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-008.review.json \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-010.review.json \
+            research/experiments/EX-EDF-2026-A003/reviews/ST-012.review.json \
+            research/journal/JR-EDF-2026-005.md
+
+      - name: Validate reviews and cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          for CASE in ST-002 ST-004 ST-006 ST-008 ST-010 ST-012; do
+            node scripts/edf-002-case-author.mjs validate "$CASE"
+            node scripts/edf-002-review.mjs validate "$CASE"
+          done
+          node scripts/edf-002-validate.mjs validate
+          node --test tests/edf-002-validation.test.mjs tests/edf-002-scoring.test.mjs
+
+      - name: Complete ROS work and create final attributed commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros work complete --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --evidence research-record=research/journal/JR-EDF-2026-005.md
+          ./ros registry build
+          rm -f .github/workflows/one-shot-edf-a003-openai-review-attribution.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "research: attribute OpenAI review of Anthropic A003 cases [ros-attributed]"
+
+      - name: Validate final tree and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ROS_BASE_REF="$(git rev-parse origin/experiment/edf-a003-anthropic-case-authoring)"
+          ./ros validate
+          git push origin HEAD:${GITHUB_REF_NAME}
