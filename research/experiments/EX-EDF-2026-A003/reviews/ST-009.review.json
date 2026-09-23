@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "caseId": "ST-009",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-sonnet-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Interaction construct is cleanly pressured: main-effect cohorts (E06: v2 0.05%/v3 0.06% without compression) are near-baseline while the joint condition (E07: v2 0.04%/v3 7.6% with compression) shows the elevation, and reproduction data (E09-E11) confirms neither factor alone reproduces the mismatch. No single evidence item establishes S03/S08 alone; each requires combining E06/E07/E08/E11 or E07/E09/E10/E11, satisfying noSingleClue. Distractor hypotheses/edges (H1/H2/H4, R1/R2/R5/R8) and actions (A2, A3, A5) are genuinely plausible given the temporal rollout correlation in E02, the size correlation in E05, and the latency spike in E03, rather than straw men. A2 in particular is a sophisticated distractor: it does stop the failures (E14) but is 'not_preferred' only because of the bandwidth/latency cost tradeoff versus A1 (E15) — a legitimate cost-based distinction, not an arbitrary one. The three red-herring items (E03, E04, E16) and three encoded conflicting pairs are well-targeted at plausible reasoning traps (db-latency causation, cache-eviction causation, patch-alone causation) without duplicating the joint-condition evidence. H5/R7/A6 are correctly scored 'unknown' rather than resolved, consistent with the explicit missingInformation about untraced buffer ownership — a good example of deliberately withholding ground truth rather than forcing a guess. Ten of nineteen items are construct-critical and each genuinely depends on interaction reasoning (main-effect nulls plus joint-effect signal), well above the four-item minimum. One minor non-blocking observation: several edge 'from' labels (e.g., 'codec-v3+compression', 'chunk-boundary crossing', 'truncated cache write', 'output-buffer ownership') are not declared in the entities list; this is a graph-schema cosmetic gap, not a validity failure under the requested checks, and does not affect scorability or leakage."
+}

@@ -1,0 +1,237 @@
+{
+  "version": "1.0.0",
+  "id": "ST-009",
+  "construct": "interaction",
+  "title": "Intermittent corruption in the session snapshot service",
+  "domain": "software operations",
+  "entities": [
+    {
+      "id": "snapshot-api",
+      "type": "service",
+      "description": "Stores and retrieves serialized session snapshots"
+    },
+    {
+      "id": "codec-v3",
+      "type": "component",
+      "description": "Version 3 of the snapshot serializer"
+    },
+    {
+      "id": "compression",
+      "type": "feature",
+      "description": "Optional payload compression before cache storage"
+    },
+    {
+      "id": "edge-cache",
+      "type": "dependency",
+      "description": "Distributed cache used for snapshot payloads"
+    },
+    {
+      "id": "primary-store",
+      "type": "dependency",
+      "description": "Durable database for session snapshots"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": "incident",
+      "text": "At 14:10 UTC, snapshot read failures rose from 0.04% to 3.8% in two regions; affected reads reported checksum mismatches after cache retrieval."
+    },
+    {
+      "id": "E02",
+      "stage": "incident",
+      "text": "Serializer version 3 had reached 50% of application instances at 13:55 UTC, while the compression flag had been raised from 20% to 80% of tenants at 14:00 UTC."
+    },
+    {
+      "id": "E03",
+      "stage": "triage",
+      "text": "Database latency briefly increased from 18 ms to 41 ms during the alert, but database reads of the same affected snapshot IDs returned payloads whose checksums matched their stored metadata."
+    },
+    {
+      "id": "E04",
+      "stage": "triage",
+      "text": "The cache fleet reported no evictions, host replacements, or memory-error alarms during the incident window."
+    },
+    {
+      "id": "E05",
+      "stage": "triage",
+      "text": "Failures were concentrated among payloads larger than 64 KiB, although 91% of all snapshots larger than 64 KiB were read successfully."
+    },
+    {
+      "id": "E06",
+      "stage": "cohort analysis",
+      "text": "For tenants with compression disabled, checksum failure rates were 0.05% on serializer version 2 and 0.06% on serializer version 3."
+    },
+    {
+      "id": "E07",
+      "stage": "cohort analysis",
+      "text": "For tenants with compression enabled, checksum failure rates were 0.04% on serializer version 2 and 7.6% on serializer version 3."
+    },
+    {
+      "id": "E08",
+      "stage": "cohort analysis",
+      "text": "Within the version-3, compression-enabled cohort, failures occurred only when a serialized frame crossed a 64 KiB chunk boundary; many large payloads did not cross that boundary."
+    },
+    {
+      "id": "E09",
+      "stage": "reproduction",
+      "text": "A staging replay using version 3 with compression disabled crossed the same chunk boundary 10,000 times without a checksum mismatch."
+    },
+    {
+      "id": "E10",
+      "stage": "reproduction",
+      "text": "A staging replay using version 2 with compression enabled crossed the same chunk boundary 10,000 times without a checksum mismatch."
+    },
+    {
+      "id": "E11",
+      "stage": "reproduction",
+      "text": "With version 3 and compression enabled, 317 of 10,000 boundary-crossing replays produced a cache payload shorter than the corresponding database payload."
+    },
+    {
+      "id": "E12",
+      "stage": "instrumentation",
+      "text": "For mismatching replays, the serializer's pre-compression byte count matched the database record, while the cache write's recorded compressed length was one chunk shorter than the compressor's output length."
+    },
+    {
+      "id": "E13",
+      "stage": "instrumentation",
+      "text": "The cache client logs its write as successful before a later read detects the checksum mismatch; current tracing does not capture the ownership or mutation of the output buffer between compression completion and cache write."
+    },
+    {
+      "id": "E14",
+      "stage": "mitigation test",
+      "text": "In a 5% canary that retained version 3 but disabled compression, new checksum mismatches stopped; the canary's cache bandwidth increased by 68% and p99 cache-write latency approached the client timeout."
+    },
+    {
+      "id": "E15",
+      "stage": "mitigation test",
+      "text": "In a separate 5% canary that retained compression but returned to version 2, new checksum mismatches stopped without a measurable bandwidth increase."
+    },
+    {
+      "id": "E16",
+      "stage": "background",
+      "text": "A dashboard shows a routine cache-library patch was installed three days earlier; aggregate checksum failure rates remained at baseline until the two rollout changes on the incident day."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Serializer version 3 is sufficient by itself to produce the elevated checksum failures."
+      },
+      {
+        "id": "H2",
+        "text": "Compression is sufficient by itself to produce the elevated checksum failures."
+      },
+      {
+        "id": "H3",
+        "text": "The elevated failures require the combination of serializer version 3 and compression under boundary-crossing payload conditions."
+      },
+      {
+        "id": "H4",
+        "text": "Primary-store corruption is the source of the mismatching payloads."
+      },
+      {
+        "id": "H5",
+        "text": "The cache-library patch changes output-buffer ownership in a way that contributes to the failures."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "codec-v3",
+        "to": "snapshot-api",
+        "relation": "is sufficient to elevate checksum failures independently of compression"
+      },
+      {
+        "id": "R2",
+        "from": "compression",
+        "to": "snapshot-api",
+        "relation": "is sufficient to elevate checksum failures independently of serializer version"
+      },
+      {
+        "id": "R3",
+        "from": "codec-v3+compression",
+        "to": "snapshot-api",
+        "relation": "jointly creates the elevated checksum-failure condition"
+      },
+      {
+        "id": "R4",
+        "from": "chunk-boundary crossing",
+        "to": "codec-v3+compression",
+        "relation": "conditions whether the joint configuration can manifest the observed failure"
+      },
+      {
+        "id": "R5",
+        "from": "primary-store",
+        "to": "snapshot-api",
+        "relation": "supplies already-corrupted payloads to cache writes"
+      },
+      {
+        "id": "R6",
+        "from": "truncated cache write",
+        "to": "checksum mismatch",
+        "relation": "produces the observed read-time symptom"
+      },
+      {
+        "id": "R7",
+        "from": "cache-library patch",
+        "to": "output-buffer ownership",
+        "relation": "changes buffer lifetime during cache writes"
+      },
+      {
+        "id": "R8",
+        "from": "database latency",
+        "to": "checksum mismatch",
+        "relation": "produces the observed read-time symptom"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Pause the version-3 rollout and route compression-enabled traffic to version 2 while preserving diagnostic samples."
+      },
+      {
+        "id": "A2",
+        "text": "Disable compression for every tenant while retaining version 3 on all instances."
+      },
+      {
+        "id": "A3",
+        "text": "Flush the entire distributed cache and immediately resume both rollout settings."
+      },
+      {
+        "id": "A4",
+        "text": "Add buffer-lifetime and length tracing around compression output and cache writes, then replay all four version-by-compression cohorts at chunk boundaries."
+      },
+      {
+        "id": "A5",
+        "text": "Scale the primary database to reduce its observed latency increase."
+      },
+      {
+        "id": "A6",
+        "text": "Revert the cache-library patch before conducting another controlled cohort test."
+      }
+    ]
+  },
+  "scoredItems": [
+    {"id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S05", "kind": "hypothesis", "candidateId": "H5", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S06", "kind": "edge", "candidateId": "R1", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S07", "kind": "edge", "candidateId": "R2", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S08", "kind": "edge", "candidateId": "R3", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S09", "kind": "edge", "candidateId": "R4", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": true},
+    {"id": "S10", "kind": "edge", "candidateId": "R5", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S11", "kind": "edge", "candidateId": "R6", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S12", "kind": "edge", "candidateId": "R7", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S13", "kind": "edge", "candidateId": "R8", "allowedAnswers": ["supported", "unsupported", "unknown"], "constructCritical": false},
+    {"id": "S14", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true},
+    {"id": "S15", "kind": "action", "candidateId": "A2", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true},
+    {"id": "S16", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": false},
+    {"id": "S17", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": true},
+    {"id": "S18", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": false},
+    {"id": "S19", "kind": "action", "candidateId": "A6", "allowedAnswers": ["preferred", "not_preferred", "unknown"], "constructCritical": false}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-001",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-sonnet-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Each expected answer traces to a defensible evidentiary basis rather than a single decisive item: e.g. S01/H01 stays 'unknown' because the same app release shipped to west (no incident) but no mixed-version/rollback test isolates its necessity from the proxy change (E02/E03/E12/E13); S02/S08 are cleanly contradicted by the DB audit stream plus the structured-field distinction between pool-acquisition and DB timeouts (E06/E07); S09/S10 correctly diverge on the same evidence pool (E08-E11) because one asks about an unresolved fact (payment latency) and the other about an over-claimed epistemic status of the telemetry, which E09-E11 show it does not establish. No candidate wording uses the outcome labels or otherwise gives away the verdict, and the primary supported hypothesis (H04) still requires combining E02+E04+E05+E13 rather than any one item. Distractors are grounded in real but misleading signals (H02/A02 exploit the superficial 'db timeout' log text; A04 exploits the payment dashboard's undisclosed denominator caveat in E08) rather than being nonsensical strawmen. Five of the construct-critical items resolve to 'unknown' (S01, S03, S05, S09, S13) purely due to genuine evidentiary gaps (untested counterfactuals, missing packet/egress capture, non-selective collector loss, non-exporting killed spans), giving solid negative-knowledge pressure, and item weights track evidence-chain length/hop count rather than tracking the unknown/non-unknown label. Red herrings (E14-E16) and the three flagged conflicting-evidence pairs add genuine difficulty without being required by any answer. No issues found that would require revision."
+}

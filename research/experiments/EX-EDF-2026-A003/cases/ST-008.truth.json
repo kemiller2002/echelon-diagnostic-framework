@@ -1,0 +1,394 @@
+{
+  "caseId": "ST-008",
+  "authorFamily": "Anthropic",
+  "construct": "evidence-revision",
+  "hypothesisRecord": "HY-EDF-2026-A014",
+  "diagnosis": "Indexer release 4.21, canaried to 3 of 24 pods at 08:55, carries catalog-keys 2.6.0, whose documentId derives the key from languageOf(locale). languageOf returns the primary language subtag, so all six English regional tags reduce to 'en' and the canary pods write one document per SKU instead of six. SKUs published after 08:55 therefore exist in only one locale, producing the missing-product reports and the 41,240-document shortfall (5 x 8,248). The consumer-lag reading that framed triage was an artifact of an offset exporter holding pre-restart topic metadata and was formally withdrawn at t3; the mapping-rejection spike was real but accounts for 312 documents from an unrelated feed.",
+  "stageOrder": ["t0-intake", "t1-triage", "t2-analysis", "t3-forensics"],
+  "evidenceByStage": {
+    "t0-intake": ["EV-01", "EV-02", "EV-03", "EV-04", "EV-05", "EV-06", "EV-07"],
+    "t1-triage": ["EV-08", "EV-09", "EV-10", "EV-11", "EV-12", "EV-13"],
+    "t2-analysis": ["EV-14", "EV-15", "EV-16", "EV-17", "EV-18", "EV-19", "EV-20"],
+    "t3-forensics": ["EV-21", "EV-22", "EV-23", "EV-24", "EV-25", "EV-26", "EV-27"]
+  },
+  "answers": [
+    {
+      "itemId": "IT-01",
+      "expected": "supported",
+      "weight": 3,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-08"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-04", "EV-06", "EV-08", "EV-09", "EV-10"],
+      "inadmissibleAtThisStage": ["EV-14", "EV-15", "EV-21"],
+      "rationale": "On the record as it stood at t1 this is the supported reading. The only instrument bearing on indexer delay shows lag on partitions 7 to 11 climbing from about 2,000 to 1,940,000 messages from 08:44 (EV-08), minutes before the first customer-visible miss (EV-02, EV-03), with the fleet cut from 24 to 18 pods at 08:30 (EV-09). Nothing available by t1 tells against it. The freshness probe (EV-15) and the formal withdrawal of the lag figures (EV-21) enter the record later and are inadmissible here; answering refuted is hindsight, not reasoning."
+    },
+    {
+      "itemId": "IT-02",
+      "expected": "unresolved",
+      "weight": 3,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-08", "EV-15"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-04", "EV-06", "EV-08", "EV-09", "EV-10", "EV-14", "EV-15", "EV-19"],
+      "inadmissibleAtThisStage": ["EV-21"],
+      "rationale": "At t2 the lag reading (EV-08) still stands uncorrected and two new readings pull the other way, but neither can settle it: the Sentinel probe's canary row is keyed to a SKU that maps to partition 3 and so never samples partitions 7 to 11 (EV-15), and the processed-events counter is a fleet-wide aggregate with no per-partition breakdown (EV-14). Evidence in scope points in more than one direction and no instrument in scope covers the affected partitions, so the state is unresolved. Refuted requires EV-21, which is t3 evidence; supported ignores EV-14 and EV-15."
+    },
+    {
+      "itemId": "IT-03",
+      "expected": "refuted",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-21"],
+      "allowedEvidence": ["EV-08", "EV-14", "EV-15", "EV-21", "EV-23"],
+      "rationale": "The withdrawal and reissue of the lag figures puts recomputed peak lag for the window at 1,912 messages, about 4 s (EV-21), consistent with the probe (EV-15) and the counter (EV-14). No delay path of the size required ever existed, and the missing documents are accounted for by identity collapse (EV-23)."
+    },
+    {
+      "itemId": "IT-04",
+      "expected": "unresolved",
+      "weight": 3,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-10", "EV-11"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-04", "EV-05", "EV-10", "EV-11"],
+      "inadmissibleAtThisStage": ["EV-17", "EV-19", "EV-20", "EV-23", "EV-24"],
+      "rationale": "Two items in scope bear on this and pull opposite ways: release 4.21 was canaried at 08:55, minutes before onset (EV-10), while its release notes assert no change to indexing behaviour (EV-11). A release note is an author's claim, not a measurement of document identity, and no document-level observation exists by t1. That leaves the statement unresolved. Refuted at t1 is premature closure on an unverified claim; supported at t1 imports the t2 dependency diff and the t3 identity audit."
+    },
+    {
+      "itemId": "IT-05",
+      "expected": "supported",
+      "weight": 2,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-17", "EV-19", "EV-20"],
+      "allowedEvidence": ["EV-10", "EV-11", "EV-14", "EV-17", "EV-18", "EV-19", "EV-20"],
+      "inadmissibleAtThisStage": ["EV-23", "EV-24"],
+      "rationale": "By t2 three independent observations converge: the misses are locale-shaped with exactly one surviving locale per SKU, varying by SKU (EV-17); the index is short by 41,240 documents against 8,248 SKUs published since 08:55, which is five of six English locales per SKU (EV-19); and the sole production dependency change in 4.21 normalises locale tags before key derivation (EV-20). That is proportional support without direct confirmation, which arrives at t3."
+    },
+    {
+      "itemId": "IT-06",
+      "expected": "supported",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-23", "EV-24"],
+      "allowedEvidence": ["EV-10", "EV-17", "EV-19", "EV-20", "EV-23", "EV-24"],
+      "rationale": "The identity audit finds 8,248 documents with _id of the form sha1(sku|'en') and no sibling documents for the other five locales (EV-23), and the source reading shows languageOf reducing every English regional tag to 'en' in the version the canary pods alone were running (EV-24)."
+    },
+    {
+      "itemId": "IT-07",
+      "expected": "unresolved",
+      "weight": 2,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-14", "EV-16"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-14", "EV-16", "EV-19"],
+      "inadmissibleAtThisStage": ["EV-22"],
+      "rationale": "The two records in scope disagree and neither can be reconciled from within t2: the Quill bulk error panel shows a rejection spike coincident with onset but carries no counts or identifiers (EV-16), while the indexer's own pod logs for the window record no bulk-rejection errors (EV-14). The forensic replay that sizes the rejected set is t3 evidence. Refuted at t2 is hindsight; supported at t2 discards EV-14."
+    },
+    {
+      "itemId": "IT-08",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-22"],
+      "allowedEvidence": ["EV-14", "EV-16", "EV-19", "EV-22", "EV-23"],
+      "rationale": "The replay recovers 312 rejected documents, all from the seasonal-promo feed, and none of the 8,248 affected SKUs is among them (EV-22) - two orders of magnitude short of the 41,240 shortfall (EV-19) and disjoint from the affected set."
+    },
+    {
+      "itemId": "IT-09",
+      "expected": "unknown",
+      "weight": 2,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-07", "EV-12"],
+      "allowedEvidence": ["EV-04", "EV-07", "EV-12"],
+      "inadmissibleAtThisStage": ["EV-18"],
+      "rationale": "Only two Quill observations exist by t1 and neither can discriminate segment staleness: the cluster-health endpoint reports allocation state and explicitly not segment age or refresh progress (EV-07), and an old-generation GC pause on one node bears on latency, not on which document version a query sees (EV-12). Per-shard counts and refresh intervals are first collected at t2 (EV-18). Reading green health as evidence against the statement converts an absence of coverage into positive knowledge."
+    },
+    {
+      "itemId": "IT-10",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-18"],
+      "allowedEvidence": ["EV-07", "EV-12", "EV-17", "EV-18", "EV-23"],
+      "rationale": "Affected SKUs are spread evenly across all 12 primaries, primary and replica document counts are identical for every shard, and refresh is at the configured 1 s on all nine nodes (EV-18); the misses track locale, not placement (EV-17), and the documents are absent rather than stale (EV-23)."
+    },
+    {
+      "itemId": "IT-11",
+      "expected": "unknown",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-25"],
+      "allowedEvidence": ["EV-15", "EV-23", "EV-24", "EV-25"],
+      "rationale": "The two records that could discriminate source-row freshness do not exist: replica apply-lag samples for catalog-db-ro-2 expired with the 24-hour raw tier, and the indexer's source-row updated_at logging was disabled throughout (EV-25). Establishing identity collapse (EV-23, EV-24) explains the missing documents but does not exclude an additional contribution from a lagging source replica, and nothing in the file measures one. The state is undeterminable rather than refuted."
+    },
+    {
+      "itemId": "IT-12",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-04"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-04", "EV-10", "EV-13"],
+      "rationale": "The bypass reproduction at 09:24 is decisive and already in scope at t0: with Bracken bypassed and Cache-Control: no-store sent to the origin, Kestrel-API omits the SKU from its own response (EV-04). The raised response lifetime (EV-10) and the degraded provider point of presence (EV-13) are coincident but cannot survive the bypass result."
+    },
+    {
+      "itemId": "IT-13",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-04"],
+      "allowedEvidence": ["EV-04", "EV-10", "EV-13", "EV-17", "EV-19"],
+      "rationale": "Nothing at t2 disturbs the bypass reproduction (EV-04), and the shortfall is in the index itself (EV-19), upstream of any caching. State is unchanged from t1."
+    },
+    {
+      "itemId": "IT-14",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-04"],
+      "allowedEvidence": ["EV-04", "EV-10", "EV-13", "EV-17", "EV-23"],
+      "rationale": "Still refuted on the full record: the documents are absent from the index (EV-23), and the origin-direct reproduction (EV-04) excluded the edge cache on the first morning. This hypothesis holds the same state at every stage, so a change of stage is not by itself a reason to change an answer."
+    },
+    {
+      "itemId": "IT-15",
+      "expected": "unknown",
+      "weight": 1,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-06"],
+      "allowedEvidence": ["EV-06", "EV-14", "EV-17", "EV-18"],
+      "inadmissibleAtThisStage": ["EV-26", "EV-27"],
+      "rationale": "The latency excursion is real (EV-06), but nothing in scope at t2 records whether any response was truncated, and no observation distinguishes a shed response from a complete one. Neither support nor refutation is available."
+    },
+    {
+      "itemId": "IT-16",
+      "expected": "unknown",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-26"],
+      "allowedEvidence": ["EV-06", "EV-17", "EV-23", "EV-26", "EV-27"],
+      "rationale": "Forensics confirms the absence rather than closing it: access logs never recorded result-set truncation and the shed-response counter shipped in 4.22 on 18 September, after the window (EV-26); the excursion itself remains unattributed with no further retained data (EV-27). Explaining the missing products by identity collapse (EV-23) does not establish that no truncation occurred, so the state stays undeterminable at the final stage."
+    },
+    {
+      "itemId": "IT-17",
+      "expected": "supported",
+      "weight": 2,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-08"],
+      "allowedEvidence": ["EV-02", "EV-03", "EV-06", "EV-08", "EV-09", "EV-10"],
+      "inadmissibleAtThisStage": ["EV-15", "EV-21"],
+      "rationale": "As of t1 the reported lag on partitions 7 to 11 (EV-08) is the one measurement linking the pipeline to the stale and missing results reported minutes later (EV-02, EV-03), and no reading in scope tells against the link. The edge is correctly supported on the t1 record even though the reading is later withdrawn."
+    },
+    {
+      "itemId": "IT-18",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-21"],
+      "allowedEvidence": ["EV-08", "EV-14", "EV-15", "EV-21", "EV-23"],
+      "rationale": "With the figures withdrawn and reissued at about 4 s of real delay (EV-21), there is no lag of a magnitude that could hold results back, and the observed misses are absent documents rather than delayed ones (EV-23)."
+    },
+    {
+      "itemId": "IT-19",
+      "expected": "supported",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-23", "EV-24"],
+      "allowedEvidence": ["EV-10", "EV-17", "EV-19", "EV-20", "EV-23", "EV-24"],
+      "rationale": "The canary pods were the only writers running catalog-keys 2.6.0 (EV-24), the identity shape they produced never appeared under 4.20 (EV-23), and the affected population matches the SKUs published after the canary went out at 08:55 (EV-10, EV-19)."
+    },
+    {
+      "itemId": "IT-20",
+      "expected": "unknown",
+      "weight": 2,
+      "asOfStage": "t2-analysis",
+      "requiredEvidence": ["EV-10"],
+      "allowedEvidence": ["EV-08", "EV-10", "EV-14", "EV-15"],
+      "inadmissibleAtThisStage": ["EV-21"],
+      "rationale": "By t2 the record holds the broker patch completing at 08:40 (EV-10) and a lag series beginning at 08:44 (EV-08), but no observation of how Lattice resolves partition leadership; the exporter's metadata cache is first examined at t3 (EV-21). Proximity in time is not an observation capable of discriminating the link, so the state is undeterminable at this stage, not supported."
+    },
+    {
+      "itemId": "IT-21",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-22"],
+      "allowedEvidence": ["EV-16", "EV-19", "EV-22", "EV-23"],
+      "rationale": "The rejected set is 312 documents from the seasonal-promo feed and contains none of the affected SKUs (EV-22), so the rejections cannot be a path to the locale-filtered misses (EV-23)."
+    },
+    {
+      "itemId": "IT-22",
+      "expected": "refuted",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-21"],
+      "allowedEvidence": ["EV-09", "EV-14", "EV-15", "EV-21"],
+      "rationale": "With real peak lag at 1,912 messages (EV-21) and throughput above the seven-day median for the window (EV-14), the reduction from 24 to 18 pods (EV-09) did not produce the lag it appeared to explain."
+    },
+    {
+      "itemId": "IT-23",
+      "expected": "unknown",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-26"],
+      "allowedEvidence": ["EV-06", "EV-26", "EV-27"],
+      "rationale": "No retained record distinguishes truncated from complete responses during the excursion, and the counter that would have done so postdates the window (EV-26); the excursion is itself unattributed (EV-27). The link can be neither drawn nor excluded."
+    },
+    {
+      "itemId": "IT-24",
+      "expected": "supported",
+      "weight": 1,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-24"],
+      "allowedEvidence": ["EV-20", "EV-23", "EV-24"],
+      "rationale": "languageOf returns the primary language subtag, which is precisely the step by which the release changes one identity per SKU-locale into one identity per SKU (EV-24), matching the changelog entry (EV-20) and the audited identity shape (EV-23)."
+    },
+    {
+      "itemId": "IT-25",
+      "expected": "acceptable",
+      "weight": 2,
+      "asOfStage": "t1-triage",
+      "requiredEvidence": ["EV-10", "EV-11"],
+      "allowedEvidence": ["EV-02", "EV-04", "EV-08", "EV-10", "EV-11"],
+      "inadmissibleAtThisStage": ["EV-17", "EV-19", "EV-20", "EV-23", "EV-24"],
+      "rationale": "Pinning back a 3-of-24 canary is cheap, reversible and aimed at the one indexing change coincident with onset (EV-10), so it is defensible at t1. It is not the best-justified step on the t1 record, where the supported explanation is consumer lag (EV-08), the release is documented as carrying no indexing change (EV-11), and no document-level observation implicates it. Rating it preferred at t1 imports the t2 dependency diff and the t3 audit; rating it rejected discards a reversible low-cost step against the only coincident change."
+    },
+    {
+      "itemId": "IT-26",
+      "expected": "preferred",
+      "weight": 2,
+      "asOfStage": "t3-forensics",
+      "requiredEvidence": ["EV-23", "EV-24"],
+      "allowedEvidence": ["EV-10", "EV-17", "EV-19", "EV-20", "EV-21", "EV-23", "EV-24"],
+      "rationale": "On the full record this removes the writers that produce collapsed identities (EV-24), is reversible, preserves the index that holds the only identity and version history, and is directly verifiable per locale against the audited population (EV-23, EV-17)."
+    },
+    {
+      "itemId": "IT-27",
+      "expected": "harmful",
+      "weight": 3,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-01", "EV-21"],
+      "allowedEvidence": ["EV-01", "EV-08", "EV-09", "EV-14", "EV-15", "EV-21", "EV-23", "EV-24"],
+      "rationale": "The backlog this targets was withdrawn and reissued at about 4 s of real delay (EV-21), so the premise is false. Worse, catalog.changes is keyed by SKU with ordering preserved per key, and the partition count may be increased but never reduced (EV-01): raising it from 12 to 48 permanently changes the key-to-partition mapping, drops per-SKU ordering across the transition, and with one document identity per SKU (EV-23, EV-24) makes the surviving locale variant arbitrary and irrecoverable. It is the most attractive step on the t1 framing and the most damaging on the record."
+    },
+    {
+      "itemId": "IT-28",
+      "expected": "harmful",
+      "weight": 2,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-01", "EV-24"],
+      "allowedEvidence": ["EV-01", "EV-19", "EV-20", "EV-23", "EV-24"],
+      "rationale": "A full rebuild on the current build spreads the work across a fleet that still contains the 4.21 canary pods (EV-24), extending identity collapse from the 8,248 recently published SKUs to the whole catalog (EV-19), and the alias swap discards the previous index, which holds the only record of document _id values and _version history (EV-01)."
+    },
+    {
+      "itemId": "IT-29",
+      "expected": "rejected",
+      "weight": 1,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-04"],
+      "allowedEvidence": ["EV-04", "EV-10", "EV-13", "EV-23"],
+      "rationale": "The edge cache was excluded on the first morning by the origin-direct reproduction (EV-04) and the documents are absent from the index itself (EV-23); shortening the response lifetime adds origin load against a refuted path without touching the mechanism."
+    },
+    {
+      "itemId": "IT-30",
+      "expected": "acceptable",
+      "weight": 1,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-22"],
+      "allowedEvidence": ["EV-16", "EV-22", "EV-23"],
+      "rationale": "The rejections are a real if unrelated defect: 312 seasonal-promo documents genuinely failed to index (EV-22, EV-16). Repairing the mapping and replaying them is worth doing and harms nothing, but it addresses none of the affected population (EV-23)."
+    },
+    {
+      "itemId": "IT-31",
+      "expected": "acceptable",
+      "weight": 1,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-21"],
+      "allowedEvidence": ["EV-08", "EV-21", "EV-23"],
+      "rationale": "Repairing the exporter's metadata refresh corrects the instrument that misdirected triage (EV-21, EV-08) and is plainly worth doing, but it changes nothing about the indexing defect (EV-23), so it is defensible rather than best-justified."
+    },
+    {
+      "itemId": "IT-32",
+      "expected": "acceptable",
+      "weight": 1,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-25"],
+      "allowedEvidence": ["EV-23", "EV-24", "EV-25"],
+      "rationale": "Enabling source-row timestamp logging is the only step that would make the source-replica question decidable in future (EV-25). It cannot recover the expired window and does not address the identity defect (EV-23, EV-24), so it is defensible rather than best-justified."
+    },
+    {
+      "itemId": "IT-33",
+      "expected": "rejected",
+      "weight": 1,
+      "asOfStage": "complete-record",
+      "requiredEvidence": ["EV-17", "EV-23"],
+      "allowedEvidence": ["EV-02", "EV-17", "EV-23", "EV-24"],
+      "rationale": "Serving default-locale rows when a locale filter returns nothing would show shoppers products not established as available in their locale, and would erase the zero-row locale-filtered query that made the collapse visible in the first place (EV-17, EV-23). It suppresses the symptom and hides recurrence, but it is reversible and does not worsen the mechanism, so it is rejected rather than harmful."
+    }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["EV-05", "EV-09", "EV-12", "EV-13", "EV-16"],
+    "redHerringNotes": [
+      { "id": "EV-05", "note": "UK-only complaints invite a single-locale or single-storefront framing; the UK desk simply publishes earliest in the day." },
+      { "id": "EV-09", "note": "The autoscaler reduction at 08:30 is coincident and corroborates the false lag story; throughput for the window exceeded the seven-day median." },
+      { "id": "EV-12", "note": "An 11.3 s GC pause on one node is real and bears on latency only; it cannot affect which document version a query sees." },
+      { "id": "EV-13", "note": "A degraded provider point of presence overlaps the window but cannot survive the origin-direct reproduction at 09:24." },
+      { "id": "EV-16", "note": "The mapping-rejection spike is a genuine but separate defect of 312 documents from an unrelated feed." }
+    ],
+    "conflictingEvidencePairs": [
+      { "pair": ["EV-08", "EV-15"], "note": "Reported multi-million-message lag against an unchanged end-to-end freshness measurement; unadjudicable at t2 because the probe does not sample the affected partitions." },
+      { "pair": ["EV-14", "EV-16"], "note": "Indexer pod logs record no bulk-rejection errors while the Quill bulk error panel shows a rejection spike in the same window." },
+      { "pair": ["EV-11", "EV-20"], "note": "Release notes assert no change to indexing behaviour against a dependency diff showing the key-derivation library moving 2.5.3 to 2.6.0." },
+      { "pair": ["EV-16", "EV-22"], "note": "A rejection spike with no counts against a replay showing 312 documents disjoint from the affected set." },
+      { "pair": ["EV-05", "EV-17"], "note": "UK-only complaints against a six-locale distribution of misses with a varying surviving locale per SKU." },
+      { "pair": ["EV-08", "EV-21"], "note": "A published lag series against its own formal withdrawal and reissue at about 4 s of real delay." }
+    ],
+    "retraction": {
+      "retractedEvidenceId": "EV-08",
+      "retractingEvidenceId": "EV-21",
+      "retractionStage": "t3-forensics",
+      "note": "Lattice resolved partition leadership from a metadata cache refreshed only at exporter start, so after the 08:40 broker patch it computed lag for partitions 7 to 11 against replica offsets. Observability withdrew the 08:40 to 18:00 figures and reissued them at a peak of 1,912 messages.",
+      "itemsAnsweredOnTheUncorrectedRecord": ["IT-01", "IT-02", "IT-17", "IT-20"],
+      "itemsAnsweredOnTheCorrectedRecord": ["IT-03", "IT-18", "IT-22", "IT-27", "IT-31"],
+      "hingeItem": "IT-02",
+      "hingeNote": "IT-02 is the item that turns exactly on the retraction not yet having happened. At t2 the lag series still stands and the two readings that tell against it do not cover partitions 7 to 11, so the correct state is unresolved; a reasoner who has read EV-21 will answer refuted and will also cite t3 evidence, losing both accuracy and evidence precision."
+    },
+    "hindsightTrap": {
+      "itemId": "IT-01",
+      "candidateId": "H-01",
+      "expectedAnswer": "supported",
+      "contaminatedAnswer": "refuted",
+      "note": "H-01 is correctly supported at t1 on the evidence then available and correctly refuted at t3 after EV-21. The whole trap is that the story's ending is known by the time the case is read. Supporting items: IT-17 runs the same trap on edge E-05, and IT-02 on the intermediate stage."
+    },
+    "prematureClosureTrap": {
+      "itemId": "IT-04",
+      "candidateId": "H-06",
+      "expectedAnswer": "unresolved",
+      "contaminatedAnswer": "refuted",
+      "note": "H-06 looks weak at t1: the release notes deny any indexing change (EV-11) and no document-level observation exists, so a reasoner that closes early answers refuted. It is vindicated at t2 (IT-05, supported) and confirmed at t3 (IT-06). The correct t1 answer preserves the alternative as unresolved. IT-20 applies the same pressure to edge E-03, where the correct t2 answer is unknown rather than supported."
+    },
+    "invariantHypothesis": {
+      "candidateId": "H-05",
+      "state": "refuted",
+      "items": ["IT-12", "IT-13", "IT-14"],
+      "note": "H-05 is refuted at every stage from the 09:24 origin-direct reproduction onward, so a change of stage is not itself a signal that an answer should change. H-07 is likewise unknown at both stages at which it is scored (IT-15, IT-16)."
+    },
+    "missingInformation": [
+      { "id": "MI-01", "description": "Replica apply-lag samples for catalog-db-ro-2 during the incident window do not exist: the metric is retained only in the 24-hour raw tier and forensics ran on day five.", "encodedIn": "EV-25", "affectedItems": ["IT-11"] },
+      { "id": "MI-02", "description": "The indexer's source-row updated_at debug logging is disabled by default and was not enabled at any point during the incident, so no per-row freshness record exists.", "encodedIn": "EV-25", "affectedItems": ["IT-11"] },
+      { "id": "MI-03", "description": "Nothing recorded result-set truncation: access logs do not carry it and the shed-response counter shipped in Kestrel-API 4.22 on 18 September, after the window. The latency excursion itself is unattributed with no further retained data.", "encodedIn": "EV-26, EV-27", "affectedItems": ["IT-15", "IT-16", "IT-23"] },
+      { "id": "MI-04", "description": "As of t1-triage no per-shard, segment-age or refresh data had been collected; the only Quill observations in scope report allocation state and a single node's GC pause. The discriminating measurement arrives at t2.", "encodedIn": "EV-07, EV-12, EV-18", "affectedItems": ["IT-09"] },
+      { "id": "MI-05", "description": "As of t2-analysis nothing had examined how the offset exporter resolves partition leadership, so the broker patch and the lag series stand as coincident facts with no link between them. The discriminating observation arrives at t3.", "encodedIn": "EV-10, EV-21", "affectedItems": ["IT-20"] },
+      { "id": "MI-06", "description": "As of t2-analysis no instrument in scope measures partitions 7 to 11: the freshness probe is keyed to partition 3 and the processed-events counter is a fleet-wide aggregate.", "encodedIn": "EV-14, EV-15", "affectedItems": ["IT-02"] }
+    ],
+    "reasoningHops": 5,
+    "reasoningChain": [
+      { "hop": 1, "evidence": ["EV-04", "EV-03"], "step": "The missing SKU reproduces with the edge cache bypassed and against Kestrel-API directly, so the defect sits at or upstream of the index rather than in response delivery." },
+      { "hop": 2, "evidence": ["EV-17", "EV-18"], "step": "The misses are locale-shaped, with exactly one surviving locale per SKU and the surviving locale varying by SKU, while shard placement, primary-replica counts and refresh intervals are uniform. This is a per-document identity problem, not a placement, replication or refresh problem." },
+      { "hop": 3, "evidence": ["EV-19", "EV-22"], "step": "The index is short by 41,240 documents against 8,248 SKUs published since 08:55, exactly five of six English locales per SKU, and two orders of magnitude larger than the 312 documents the mapping rejections can account for." },
+      { "hop": 4, "evidence": ["EV-20", "EV-24", "EV-10", "EV-11"], "step": "The only production dependency change in release 4.21 is catalog-keys 2.6.0, whose languageOf reduces every English regional tag to 'en', so its writers derive one identity per SKU instead of six. The canary went out at 08:55, minutes before onset, despite release notes asserting no change to indexing behaviour." },
+      { "hop": 5, "evidence": ["EV-08", "EV-15", "EV-21"], "step": "The lag reading that framed triage was computed against pre-restart partition leadership and has been formally withdrawn, so the delay path never existed. This became knowable only at t3, and the t1 and t2 states must still be read off the record as it stood at those stages." }
+    ],
+    "harmfulActionCandidateIds": ["A-01", "A-02"],
+    "harmfulActionNotes": [
+      { "id": "A-01", "itemId": "IT-27", "note": "Attractive under the t1 framing and irreversible: raising the partition count on a SKU-keyed topic cannot be undone, drops per-key ordering across the transition, and with one identity per SKU makes the surviving locale variant arbitrary." },
+      { "id": "A-02", "itemId": "IT-28", "note": "The reflexive remedy for a short index. It writes collapsed identities across the entire catalog rather than the recently published subset, and the alias swap destroys the only record of document identity and version history." }
+    ],
+    "singleClueNote": "No single item carries the diagnosis. EV-23 shows the collapsed identity shape without its cause or provenance; EV-24 describes library behaviour without showing it reached the index; EV-19 gives an arithmetic shortfall with no mechanism; EV-21 removes a false explanation without supplying the true one. The preferred action requires the release provenance in EV-10 and EV-24 together with the audited population in EV-23.",
+    "lexicalNeutralityNote": "Hypothesis texts run 112 to 126 characters and action texts 114 to 126 characters, with no hedging on incorrect candidates and no confidence markers on correct ones. Every hypothesis names a plausible mechanism in the same declarative form, and stage labels do not predict answers: t1 answers include supported, unresolved, unknown, refuted and acceptable, and t3 answers include unknown and refuted as well as supported."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "caseId": "ST-011",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-sonnet-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Ground truth for all 18 scored items traces cleanly to the listed required evidence with no unsupported leaps; the three 'unknown' items (S04/H4, S11/R7, S17/A5) are correctly grounded in the explicit missingInformation entries about the 08:50 artifact and quarantine-retry eligibility rather than arbitrary hedging. The breaker-causality cluster (S02/S07/S08/S12) is well-constructed: E02's ordering (worker failure ratio crossed threshold before breaker opened) plus E08's forced-closure regression correctly reverses the naive 'breaker caused the failures' reading, and no single evidence item alone discloses the full causal chain (envelope depth -> normalization CPU -> quarantine still requires E04+E05+E07 together). Distractor hypotheses (H2 breaker, H3 metadata latency via a genuine coincidental latency spike in E10, H4 recent deploy, H5 leader election) are all temporally or circumstantially plausible, not straw men, and each is refuted by a distinct, non-overlapping evidence subset (E11 trace-share, E13 no-gap logs). Construct-critical items (11 of 18, spanning hypotheses, edges, and actions) genuinely hinge on correctly reasoning about the protective controls (breaker, depth guard, quarantine, validator) rather than incidentally touching them, and weighting (e.g., S15 at 4 for the harmful 'disable depth guard' action) tracks the hardness.harmfulActionCandidateIds flags rather than favoring the construct arbitrarily. Reasoning depth (4 hops) and the three declared conflicting-evidence pairs give adequate difficulty for plausible generic-reasoning errors. No wording in candidates or evidence pre-announces expected answers."
+}

@@ -1,0 +1,747 @@
+{
+  "caseId": "ST-010",
+  "authorFamily": "Anthropic",
+  "construct": "interaction",
+  "hypothesis": "HY-EDF-2026-A015",
+  "targetDiagnosis": "Confirmed layer-not-found failures require the conjunction of concurrent mark-and-sweep collection (factor A) and deferred pull-through replication (factor B). Concurrent collection sweeps blobs the mark snapshot recorded as unreferenced; deferred replication creates reference rows after that snapshot, attaching to long-resident cache-filled blobs. Neither factor alone produces the failure: eager replication creates the reference in the manifest transaction, so no post-snapshot reference exists, and the stop-the-world write barrier blocks reference creation during the mark phase.",
+  "answers": [
+    {
+      "itemId": "SI-01",
+      "expected": "refuted",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08",
+        "EV-05",
+        "EV-06",
+        "EV-11",
+        "EV-16",
+        "EV-17",
+        "EV-18",
+        "EV-29",
+        "EV-12",
+        "EV-13",
+        "EV-02"
+      ],
+      "rationale": "Concurrent collection runs at five sites (EV-03). Three of them use eager replication (EV-04) and have sixty-one site-weeks and 1,180 collection cycles with zero confirmed failures at comparable churn (EV-08, EV-11), and their sweep logs show the same snapshot-then-delete behaviour (EV-16). Factor A is therefore present without the failure, so it is not sufficient acting by itself. The staging report that claims otherwise (EV-17) was run on a profile with deferred replication enabled (EV-18)."
+    },
+    {
+      "itemId": "SI-02",
+      "expected": "refuted",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09",
+        "EV-02",
+        "EV-05",
+        "EV-10",
+        "EV-11",
+        "EV-14",
+        "EV-12",
+        "EV-13",
+        "EV-07"
+      ],
+      "rationale": "SYD-1 runs deferred replication (EV-04) on stop-the-world collection (EV-03) with nineteen site-weeks and zero confirmed failures once the two misfiled tickets are removed (EV-07, EV-09), even though its replication worker writes reference rows minutes after the manifest row (EV-09). Deferred replication also ran for more than two years before any failure appeared (EV-10), and the pre-3.4 fleet ran both replication modes with zero tickets (EV-02). Factor B is present without the failure, so it is not sufficient acting by itself."
+    },
+    {
+      "itemId": "SI-03",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08",
+        "EV-09",
+        "EV-13",
+        "EV-15"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08",
+        "EV-09",
+        "EV-13",
+        "EV-15",
+        "EV-05",
+        "EV-11",
+        "EV-12",
+        "EV-14",
+        "EV-16",
+        "EV-25",
+        "EV-26",
+        "EV-29",
+        "EV-02"
+      ],
+      "rationale": "Only IAD-3 and SIN-2 hold both factors (EV-03, EV-04) and all twenty-four confirmed tickets come from exactly those two sites (EV-05). The other three cells of the table are clean: factor A without B (EV-08), factor B without A (EV-09), and neither factor in the pre-upgrade fleet (EV-02). The mechanism joins the two: deferred replication creates reference rows after the manifest row and can attach to already-resident blobs (EV-13), and the concurrent snapshot does not re-check references created after it (EV-12), producing the observed write-snapshot-reference-sweep-fail sequence at IAD-3 (EV-15). Removing only factor B at SIN-2 stopped the failures while factor A stayed enabled (EV-29)."
+    },
+    {
+      "itemId": "SI-04",
+      "expected": "refuted",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-23",
+        "EV-24"
+      ],
+      "allowedEvidence": [
+        "EV-23",
+        "EV-24",
+        "EV-08",
+        "EV-03",
+        "EV-04",
+        "EV-05",
+        "EV-29"
+      ],
+      "rationale": "The Cirrus backend and the Vantage 2.1 proxy do co-occur at both failing sites (EV-23), which makes this pairing look like the joint condition. ORD-2 runs the same backend behind the same proxy build with no confirmed failures (EV-24, EV-08), so their joint presence does not produce the failure. This is co-occurrence, not conjunction."
+    },
+    {
+      "itemId": "SI-05",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-22"
+      ],
+      "allowedEvidence": [
+        "EV-22",
+        "EV-21",
+        "EV-02",
+        "EV-08",
+        "EV-26",
+        "EV-05"
+      ],
+      "rationale": "The migration emitted identical warning volumes at all five upgraded sites including the three with no failures (EV-21, EV-08), and a full reindex with checksum verification at IAD-3 found no inconsistencies while failures continued at the prior rate (EV-22)."
+    },
+    {
+      "itemId": "SI-06",
+      "expected": "refuted",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-07"
+      ],
+      "allowedEvidence": [
+        "EV-07",
+        "EV-05",
+        "EV-15",
+        "EV-31",
+        "EV-01"
+      ],
+      "rationale": "Expired credentials explain only the two SYD-1 tickets, which were reclassified as authentication failures with every referenced layer present in storage (EV-07). The twenty-four confirmed tickets are accompanied by blob deletions recorded in collector logs and by missing layer digests captured at pull time (EV-15, EV-31)."
+    },
+    {
+      "itemId": "SI-07",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-28"
+      ],
+      "allowedEvidence": [
+        "EV-28",
+        "EV-03",
+        "EV-04",
+        "EV-09"
+      ],
+      "rationale": "The v2 deduplication store is deployed only at SYD-1, which runs stop-the-world collection, and release 3.4 refuses to start with the v2 store and concurrent collection both enabled while the change freeze blocks further deployment (EV-28, EV-03). The cell in which both would be present has never been observed and cannot be constructed, so this joint claim is neither supported nor refuted by the available evidence."
+    },
+    {
+      "itemId": "SI-08",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-05",
+        "EV-07",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-05",
+        "EV-07",
+        "EV-09",
+        "EV-02",
+        "EV-04",
+        "EV-14",
+        "EV-06"
+      ],
+      "rationale": "Every one of the twenty-four confirmed failures occurred at IAD-3 or SIN-2 (EV-05), both running concurrent collection (EV-03). The only sites without concurrent collection are SYD-1, whose two tickets were reclassified and which is otherwise clean (EV-07, EV-09), and the pre-upgrade fleet, which recorded none (EV-02). No confirmed failure exists without factor A, so factor A is necessary even though it is not sufficient."
+    },
+    {
+      "itemId": "SI-09",
+      "expected": "refuted",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08",
+        "EV-06",
+        "EV-11",
+        "EV-16",
+        "EV-29",
+        "EV-17",
+        "EV-18"
+      ],
+      "rationale": "Three sites run concurrent collection with eager replication and have produced no confirmed failure across sixty-one site-weeks at comparable workload (EV-03, EV-04, EV-08, EV-11). Sufficiency therefore fails even though the prevalence figure and the vendor advisory point at this factor (EV-06). This item and the necessity item about the same factor take opposite answers."
+    },
+    {
+      "itemId": "SI-10",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-04",
+        "EV-05",
+        "EV-08"
+      ],
+      "allowedEvidence": [
+        "EV-04",
+        "EV-05",
+        "EV-08",
+        "EV-03",
+        "EV-11",
+        "EV-29",
+        "EV-13",
+        "EV-10"
+      ],
+      "rationale": "All confirmed failures come from IAD-3 and SIN-2 (EV-05), the only failing sites with deferred replication (EV-04); the three concurrent-collection sites with eager replication are clean (EV-08) and removing deferred replication at SIN-2 ended the failures there (EV-29). Factor B is necessary despite having been enabled for more than two years before failures began (EV-10), which is a duration argument, not an exoneration."
+    },
+    {
+      "itemId": "SI-11",
+      "expected": "refuted",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09",
+        "EV-02",
+        "EV-10",
+        "EV-14",
+        "EV-07"
+      ],
+      "rationale": "SYD-1 runs deferred replication without concurrent collection and is clean across nineteen site-weeks (EV-03, EV-04, EV-09), and the write barrier explains why late reference writes are harmless there (EV-14). Factor B is necessary but not sufficient, so this item and the necessity item about the same factor take opposite answers."
+    },
+    {
+      "itemId": "SI-12",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-04",
+        "EV-05",
+        "EV-08"
+      ],
+      "allowedEvidence": [
+        "EV-04",
+        "EV-05",
+        "EV-08",
+        "EV-03",
+        "EV-06",
+        "EV-11",
+        "EV-16",
+        "EV-29"
+      ],
+      "rationale": "Concurrent collection was enabled at five sites on the same date (EV-06). Failures appeared only in the deferred-replication stratum (EV-04, EV-05) and are absent in the eager stratum across sixty-one site-weeks at comparable workload (EV-08, EV-11). The apparent main effect of enabling concurrent collection exists in one stratum and is absent in the other, which is the correct conditional reading rather than a fleet-wide effect."
+    },
+    {
+      "itemId": "SI-13",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-27"
+      ],
+      "allowedEvidence": [
+        "EV-27",
+        "EV-04",
+        "EV-13",
+        "EV-09"
+      ],
+      "rationale": "No replica blob-fetch latency data exists for the incident window, the series cannot be backfilled, and no substitute record of fetch duration was retained (EV-27). Whether latency was elevated at all is therefore unmeasured, so a joint claim involving it cannot be supported or refuted."
+    },
+    {
+      "itemId": "SI-14",
+      "expected": "unconditional",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-13"
+      ],
+      "allowedEvidence": [
+        "EV-13",
+        "EV-09",
+        "EV-04",
+        "EV-15"
+      ],
+      "rationale": "Deferred replication writes the manifest row first and creates reference rows only as blobs are materialized (EV-13); SYD-1, which has no concurrent collection, shows the same post-manifest reference writes (EV-09). The relation from deferred replication to late reference creation holds regardless of collection mode."
+    },
+    {
+      "itemId": "SI-15",
+      "expected": "unconditional",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-12"
+      ],
+      "allowedEvidence": [
+        "EV-12",
+        "EV-16",
+        "EV-15",
+        "EV-03"
+      ],
+      "rationale": "Concurrent collection always sweeps blobs its snapshot recorded as unreferenced (EV-12), and the clean site ORD-2 shows the same snapshot-and-delete volume per cycle (EV-16). The relation to sweeping holds regardless of replication mode; it is the relation to failure that is conditional."
+    },
+    {
+      "itemId": "SI-16",
+      "expected": "conditional",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-12",
+        "EV-14",
+        "EV-15"
+      ],
+      "allowedEvidence": [
+        "EV-12",
+        "EV-14",
+        "EV-15",
+        "EV-09",
+        "EV-13",
+        "EV-03"
+      ],
+      "rationale": "A reference created after the snapshot causes a loss only when the sweep uses that snapshot without re-checking, that is under concurrent collection (EV-12, EV-15). Under stop-the-world collection the write barrier prevents such a reference from being created mid-mark at all, and SYD-1's late reference writes cause no failures (EV-14, EV-09). The relation holds only under the stated further condition."
+    },
+    {
+      "itemId": "SI-17",
+      "expected": "conditional",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-08",
+        "EV-05",
+        "EV-16",
+        "EV-29",
+        "EV-06",
+        "EV-11"
+      ],
+      "rationale": "Concurrent collection contributes to the failures at the two sites that also run deferred replication (EV-03, EV-04, EV-05) and contributes nothing detectable at the three sites that do not (EV-08, EV-16). The edge is real but holds only within the deferred-replication stratum."
+    },
+    {
+      "itemId": "SI-18",
+      "expected": "conditional",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-04",
+        "EV-09",
+        "EV-05",
+        "EV-10",
+        "EV-02",
+        "EV-29"
+      ],
+      "rationale": "Deferred replication contributes to the failures where concurrent collection is enabled (EV-04, EV-05, EV-29) and contributes nothing detectable at SYD-1, which has run it for years under stop-the-world collection (EV-03, EV-09, EV-10). The edge holds only within the concurrent-collection stratum."
+    },
+    {
+      "itemId": "SI-19",
+      "expected": "unconditional",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-02",
+        "EV-09",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-02",
+        "EV-09",
+        "EV-14",
+        "EV-03",
+        "EV-04",
+        "EV-12"
+      ],
+      "rationale": "The write barrier blocks any reference row from being created between snapshot and sweep (EV-14), which removes the mechanism entirely rather than only in one stratum. It held in the pre-upgrade fleet across both replication configurations with zero tickets (EV-02) and holds at SYD-1 under deferred replication today (EV-09). This prevention relation is unconditional, unlike the two factor-to-failure edges."
+    },
+    {
+      "itemId": "SI-20",
+      "expected": "absent",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-22"
+      ],
+      "allowedEvidence": [
+        "EV-22",
+        "EV-21",
+        "EV-26",
+        "EV-08"
+      ],
+      "rationale": "The migration ran with identical warning output at sites that never failed (EV-21, EV-08) and a verified reindex neither found corruption nor changed the failure rate (EV-22). No contribution is established in any stratum."
+    },
+    {
+      "itemId": "SI-21",
+      "expected": "absent",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-24"
+      ],
+      "allowedEvidence": [
+        "EV-24",
+        "EV-23",
+        "EV-08",
+        "EV-05"
+      ],
+      "rationale": "ORD-2 runs the same backend and proxy build together and records no confirmed failures (EV-23, EV-24, EV-08), so the pairing contributes nothing; it merely co-occurs with the two failing sites."
+    },
+    {
+      "itemId": "SI-22",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-27"
+      ],
+      "allowedEvidence": [
+        "EV-27",
+        "EV-13",
+        "EV-04"
+      ],
+      "rationale": "The latency series for the incident window was dropped by a retention change before the incident began and cannot be reconstructed (EV-27), so neither presence nor absence of this contribution can be assessed."
+    },
+    {
+      "itemId": "SI-23",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-28"
+      ],
+      "allowedEvidence": [
+        "EV-28",
+        "EV-03",
+        "EV-09",
+        "EV-04"
+      ],
+      "rationale": "The only site with the v2 store runs stop-the-world collection and is clean (EV-28, EV-09), which says nothing about its behaviour under concurrent collection; that combination is barred by a configuration guard and by the change freeze (EV-28). The relevant cell was never observed and cannot be created, so the contribution is unknown rather than absent."
+    },
+    {
+      "itemId": "SI-24",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-04",
+        "EV-08",
+        "EV-29"
+      ],
+      "allowedEvidence": [
+        "EV-04",
+        "EV-08",
+        "EV-29",
+        "EV-03",
+        "EV-09",
+        "EV-13",
+        "EV-15",
+        "EV-25",
+        "EV-11"
+      ],
+      "rationale": "This breaks the conjunction at exactly the two sites that hold both factors, by moving them into the stratum shown clean across sixty-one site-weeks (EV-04, EV-08), and the same change at SIN-2 already produced nine days with zero tickets while concurrent collection stayed on (EV-29). Eager replication writes the reference inside the manifest transaction, so no post-snapshot reference can exist (EV-13). It is targeted, reversible, and leaves the upgrade programme and push latency untouched."
+    },
+    {
+      "itemId": "SI-25",
+      "expected": "acceptable",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-03",
+        "EV-09",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-03",
+        "EV-09",
+        "EV-14",
+        "EV-02",
+        "EV-04",
+        "EV-08"
+      ],
+      "rationale": "Removing the other leg of the conjunction also works, as SYD-1 demonstrates (EV-03, EV-09), but the barrier suspends pushes and replication writes for an average of thirty-eight minutes per mark phase (EV-14), so it costs more than the targeted replication change while achieving the same break."
+    },
+    {
+      "itemId": "SI-26",
+      "expected": "acceptable",
+      "weight": 2,
+      "requiredEvidence": [
+        "EV-25",
+        "EV-26"
+      ],
+      "allowedEvidence": [
+        "EV-25",
+        "EV-26",
+        "EV-12",
+        "EV-13",
+        "EV-15"
+      ],
+      "rationale": "The 3.4.2 barrier explicitly excludes replication-created reference rows (EV-25), which is why IAD-3 kept failing after upgrading (EV-26); extending it addresses the mechanism durably. It is sound but requires a vendor build and canary validation, so it does not stop the current failures on its own timescale."
+    },
+    {
+      "itemId": "SI-27",
+      "expected": "rejected",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-08",
+        "EV-04",
+        "EV-14"
+      ],
+      "allowedEvidence": [
+        "EV-08",
+        "EV-04",
+        "EV-14",
+        "EV-03",
+        "EV-06",
+        "EV-11",
+        "EV-16",
+        "EV-29"
+      ],
+      "rationale": "This is the action a main-effect reading of the prevalence figure motivates (EV-06). It imposes thirty-eight minute push suspensions per cycle and a full release rollback on three sites that have never failed and cannot fail through this mechanism because they lack the second factor (EV-04, EV-08, EV-14). The cost falls almost entirely on the stratum that has no problem; it is disproportionate rather than dangerous."
+    },
+    {
+      "itemId": "SI-28",
+      "expected": "rejected",
+      "weight": 1,
+      "requiredEvidence": [
+        "EV-24"
+      ],
+      "allowedEvidence": [
+        "EV-24",
+        "EV-23",
+        "EV-08",
+        "EV-05"
+      ],
+      "rationale": "It targets a pairing already shown to be innocent at ORD-2 (EV-23, EV-24, EV-08) and leaves both real factors in place, so the failures would continue after a large platform migration."
+    },
+    {
+      "itemId": "SI-29",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-12",
+        "EV-15",
+        "EV-30"
+      ],
+      "allowedEvidence": [
+        "EV-12",
+        "EV-15",
+        "EV-30",
+        "EV-04",
+        "EV-08",
+        "EV-13",
+        "EV-31",
+        "EV-16",
+        "EV-32"
+      ],
+      "rationale": "Grace is measured from blob write time and sweep eligibility is bounded by it (EV-12), so setting the window to zero makes freshly cached blobs sweepable immediately and cutting the snapshot interval to one hour multiplies the number of snapshot-to-sweep windows. At IAD-3 and SIN-2 this widens exactly the race that destroyed sha256:9f3c1a (EV-15), while at the three eager sites nothing changes because references are written transactionally (EV-04, EV-08), so fleet dashboards would show no regression and the damage would concentrate where both factors are present. It also removes the resident-age record that lets responders reconstruct which swept blobs were recently referenced which no other retained record substitutes for (EV-32), and it addresses only the collector side of the conjunction while leaving the conjunction intact. Storage pressure (EV-30) makes it attractive to approve."
+    },
+    {
+      "itemId": "SI-30",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "EV-31",
+        "EV-15"
+      ],
+      "allowedEvidence": [
+        "EV-31",
+        "EV-15",
+        "EV-01",
+        "EV-12",
+        "EV-30",
+        "EV-13"
+      ],
+      "rationale": "The pull-time integrity check is the only signal that a layer is missing and the only reason all twenty-four tickets could be localized to a manifest and a collection cycle (EV-31). Downgrading it to a warning and serving a stale cached manifest converts a loud, attributable failure into silent delivery of images whose layers were already deleted (EV-15), while the sweep continues destroying referenced blobs. It suppresses detection without touching either factor."
+    }
+  ],
+  "hardness": {
+    "reasoningHops": 5,
+    "reasoningChain": [
+      "Hop 1: The prevalence panel and vendor advisory (EV-06) plus the pre-upgrade clean baseline (EV-02) make concurrent collection look like a sufficient main effect, because 92 percent of tickets sit on concurrent-collection sites and the first ticket followed the rollout by three days.",
+      "Hop 2: Joining the collection-mode inventory (EV-03) to the replication-mode inventory (EV-04) and the ticket origin breakdown (EV-05) shows that the failing sites are the intersection of the two factor sets, not the whole concurrent-collection set.",
+      "Hop 3: The clean operating records fill the remaining cells: factor A without B is clean over sixty-one site-weeks at comparable churn (EV-08, EV-11, EV-16), factor B without A is clean over nineteen site-weeks once the misfiled tickets are removed (EV-07, EV-09), and the neither cell is the pre-upgrade fleet (EV-02). Sufficiency fails for both factors while necessity holds for both.",
+      "Hop 4: The mechanism notes explain why only the intersection fails: deferred replication creates reference rows after the manifest row and can attach to long-resident cache-filled blobs (EV-13), the concurrent snapshot never re-checks post-snapshot references and grace is measured from blob write time (EV-12), and the stop-the-world barrier forecloses the race entirely (EV-14). The IAD-3 log sequence instantiates it (EV-15).",
+      "Hop 5: The apparent counter-evidence resolves. The staging reproduction claiming factor A alone (EV-17) ran on a deferred-replication profile (EV-18); the 3.4.2 release note suggesting the bug is fixed (EV-25) excludes replication-created references, which is why IAD-3 kept failing after upgrading (EV-26). Breaking either leg works, and the targeted break of factor B at the two intersection sites is already demonstrated (EV-29), which selects AC-01 over the fleet-wide single-factor rollback AC-04."
+    ],
+    "interactionStructure": {
+      "factorA": "Concurrent mark-and-sweep collection (N-CONCURRENT), enabled fleet-wide except SYD-1 on 2026-06-08.",
+      "factorB": "Deferred pull-through blob replication (N-DEFERRED), in place at IAD-3, SIN-2 and SYD-1 since March 2024.",
+      "cells": {
+        "A-and-B": {
+          "sites": [
+            "IAD-3",
+            "SIN-2",
+            "stg-1"
+          ],
+          "outcome": "failing",
+          "evidence": [
+            "EV-03",
+            "EV-04",
+            "EV-05",
+            "EV-15",
+            "EV-17",
+            "EV-18",
+            "EV-26"
+          ]
+        },
+        "A-without-B": {
+          "sites": [
+            "ORD-2",
+            "FRA-1",
+            "DUB-4"
+          ],
+          "outcome": "healthy",
+          "evidence": [
+            "EV-03",
+            "EV-04",
+            "EV-08",
+            "EV-11",
+            "EV-16",
+            "EV-24"
+          ]
+        },
+        "B-without-A": {
+          "sites": [
+            "SYD-1"
+          ],
+          "outcome": "healthy",
+          "evidence": [
+            "EV-03",
+            "EV-04",
+            "EV-07",
+            "EV-09",
+            "EV-10"
+          ]
+        },
+        "neither": {
+          "sites": [
+            "pre-3.4 fleet"
+          ],
+          "outcome": "healthy",
+          "evidence": [
+            "EV-02"
+          ]
+        }
+      },
+      "mainEffectTrap": {
+        "prevalenceStatistic": "EV-06: 92 percent of tickets (24 of 26) came from sites running concurrent collection, with a three-day gap between the fleet-wide enablement and the first ticket, endorsed by vendor advisory VA-2026-118.",
+        "supportingMisreads": [
+          "EV-02",
+          "EV-10",
+          "EV-17",
+          "EV-21"
+        ],
+        "disconfirmingCell": "EV-08 with EV-03 and EV-04: concurrent collection present at ORD-2, FRA-1 and DUB-4 with zero confirmed failures across sixty-one site-weeks and 1,180 cycles, at workloads within 12 percent of the failing sites (EV-11).",
+        "tallyRepair": "EV-07 reclassifies the two non-concurrent tickets as authentication failures, so factor A is necessary in 24 of 24 confirmed cases while still not sufficient.",
+        "wrongAnswerIfCounting": "HC-01 supported, OB-02 supported, AC-04 preferred."
+      },
+      "spuriousConjunction": {
+        "candidate": "HC-04 / EC-08: Cirrus backend jointly with the Vantage 2.1 proxy build.",
+        "coOccurrence": "EV-23 shows the pairing at both failing sites and at no other pair of sites.",
+        "defeater": "EV-24: ORD-2 runs the same pairing and is clean, so choosing the conjunctive option by heuristic still fails."
+      },
+      "necessityVersusSufficiency": {
+        "factorA": {
+          "necessity": "SI-08 supported",
+          "sufficiency": "SI-09 refuted"
+        },
+        "factorB": {
+          "necessity": "SI-10 supported",
+          "sufficiency": "SI-11 refuted"
+        }
+      },
+      "conditionalMainEffect": "SI-12 (OB-05): the post-enablement rise exists in the deferred-replication stratum and is absent in the eager stratum; the effect is real in one stratum only.",
+      "conditionalVersusUnconditionalEdges": {
+        "conditional": [
+          "SI-16",
+          "SI-17",
+          "SI-18"
+        ],
+        "unconditional": [
+          "SI-14",
+          "SI-15",
+          "SI-19"
+        ]
+      },
+      "emptyCellUnknowns": [
+        "SI-07",
+        "SI-23"
+      ]
+    },
+    "redHerringEvidenceIds": [
+      "EV-19",
+      "EV-20",
+      "EV-21",
+      "EV-23",
+      "EV-17"
+    ],
+    "conflictingEvidencePairs": [
+      {
+        "evidenceA": "EV-06",
+        "evidenceB": "EV-08",
+        "description": "The prevalence panel and advisory frame concurrent collection as the cause, while the operating record of the three concurrent-collection sites using eager replication shows the factor present with no failures. Resolution requires conditioning on replication mode (EV-03, EV-04) rather than counting tickets."
+      },
+      {
+        "evidenceA": "EV-17",
+        "evidenceB": "EV-18",
+        "description": "The staging reproduction concludes concurrent collection is sufficient, but the staging configuration snapshot shows deferred replication was enabled for both runs, so the experiment never tested factor A alone."
+      },
+      {
+        "evidenceA": "EV-25",
+        "evidenceB": "EV-26",
+        "description": "The 3.4.2 release note presents the write barrier as closing this race, while IAD-3 filed four further confirmed tickets after upgrading; the barrier excludes replication-created reference rows, which are the ones that matter here."
+      },
+      {
+        "evidenceA": "EV-10",
+        "evidenceB": "EV-05",
+        "description": "Deferred replication predates the failures by more than two years, which appears to exonerate it, while every confirmed failure occurs at a deferred-replication site. A factor can be long-standing and still necessary once the second factor arrives."
+      }
+    ],
+    "missingInformation": [
+      "No site has ever run the v2 deduplication store together with concurrent collection: release 3.4 refuses to start with both enabled and the Q4 change freeze blocks further deployment (EV-28). That cell of the table is empty and cannot be constructed, so SI-07 and SI-23 are unknown rather than absent.",
+      "Replica blob-fetch latency for the incident window was dropped by the 2026-05-30 retention change and cannot be backfilled or substituted (EV-27), so whether latency was elevated at all, and whether it combines with concurrent collection, cannot be assessed: SI-13 and SI-22 are unknown.",
+      "The grace window has been six hours at every site since the upgrade and the collector does not record swept-blob residency, so no stratum-by-stratum comparison of a shorter window exists (EV-32); the magnitude of the harm from AC-06 is argued from mechanism, not from an observed contrast.",
+      "Ticket records do not resolve whether specific manifests were re-pushed after the sweep, so the per-manifest recovery rate at IAD-3 and SIN-2 is not established."
+    ],
+    "harmfulActionCandidateIds": [
+      "AC-06",
+      "AC-07"
+    ],
+    "harmfulActionNotes": {
+      "AC-06": "Primary attractor. Framed as collector tuning that mitigates the factor-A side by shrinking the reference backlog, and motivated by real storage pressure (EV-30). It leaves the conjunction intact, widens the snapshot-to-sweep race where both factors are present, produces no visible change in the eager stratum so fleet-level dashboards read clean, and erases the residency record used for forensics.",
+      "AC-07": "Secondary attractor. Suppresses the only detection control (EV-31) and serves stale manifests while the sweep keeps deleting referenced blobs, converting attributable 404s into silent corruption."
+    },
+    "singleClueCompliance": "No single evidence item states the conjunction. Collection mode (EV-03), replication mode (EV-04) and ticket origins (EV-05) are separate items; the three healthy cells come from three further items (EV-02, EV-08, EV-09); and the mechanism requires EV-12 with EV-13 and EV-14. EV-15 shows one instance of the race at one site without establishing that either factor alone is insufficient, and EV-29 shows one leg can be broken without showing that the other is also necessary.",
+    "expectedNaiveFailureModes": [
+      "Counting tickets by factor and answering HC-01 supported and AC-04 preferred.",
+      "Treating the two factors as independent additive contributors and marking both EC-04 and EC-05 unconditional.",
+      "Answering the necessity and sufficiency items identically for a given factor.",
+      "Selecting the conjunctive option by heuristic and landing on HC-04.",
+      "Treating the unobservable v2 store cell as absent rather than unknown because the only site with the store is healthy.",
+      "Approving AC-06 because storage pressure is real and the action names the collector, which the advisory blames."
+    ]
+  }
+}
