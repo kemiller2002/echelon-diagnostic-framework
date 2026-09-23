@@ -1,7 +1,7 @@
 ---
 id: EX-EDF-2026-A003
 title: "EDF Construct-Specific Stress Benchmark"
-status: proposed
+status: case-authoring-in-progress
 created: 2026-09-22
 research_area: diagnostic-frameworks
 author_agent: "ChatGPT GPT-5.6 Sol"
@@ -27,3 +27,9 @@ EX-EDF-001 found no material semantic advantage for the complete EDF prompt over
 Primary scoring is deterministic. Analyzer outputs classify frozen candidate hypotheses, causal edges, and actions, cite evidence IDs, and report confidence. Hidden truth defines the expected state for every scored item. LLM evaluators are not used for the primary outcome.
 
 Twelve cases are independently authored: one OpenAI-authored and one Anthropic-authored case per construct. Both analyzer families execute both primary conditions on every case.
+
+## Current execution state
+
+As of 2026-09-23, the six OpenAI-assigned cases (ST-001, ST-003, ST-005, ST-007, ST-009, ST-011) have been authored with hidden truth files and are pending opposite-provider review. The six Anthropic-assigned cases remain un-authored. No case set has been frozen and no analyzer run has begun.
+
+The canonical experiment identifier is `EX-EDF-2026-A003`. Legacy harness filenames beginning with `edf-002-` are compatibility names from pre-merge harness work and do not identify a separate experiment.
