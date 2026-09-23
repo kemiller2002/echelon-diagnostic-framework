@@ -1,0 +1,105 @@
+{
+  "id": "ST-010",
+  "construct": "interaction",
+  "title": "Duplicate customer emails from the notification service",
+  "domain": "queue-based notification delivery",
+  "context": "A notification-service consumes send jobs from a message queue and calls an external email provider's batch-send API. Each job is one provider call with up to 2,000 recipients. Worker pools run in eu-west (pool-a and pool-b) and us-east. On Sep 19 customers began reporting duplicate emails. The team must work out which conditions produce duplicates and what to change.",
+  "entities": [
+    { "id": "send-queue", "description": "Message queue holding send jobs; supports a per-queue-consumer visibility timeout." },
+    { "id": "eu-west-pool-a", "description": "eu-west worker pool, 24 workers." },
+    { "id": "eu-west-pool-b", "description": "eu-west worker pool, 16 workers." },
+    { "id": "us-east-pool", "description": "us-east worker pool, 30 workers." },
+    { "id": "email-provider", "description": "External batch-send API." },
+    { "id": "template-engine", "description": "Renders marketing email bodies before a send job is queued." }
+  ],
+  "answerGuide": {
+    "hypothesis": {
+      "supported": "The evidence in this case positively establishes the statement, directly or through a chain of inference from case evidence.",
+      "refuted": "The evidence in this case positively rules the statement out.",
+      "unknown": "The case lacks evidence that discriminates between the statement being true and false."
+    },
+    "edge": {
+      "independent-effect": "The from-node changes the to-node regardless of the other conditions described in the case.",
+      "conditional-effect": "The from-node changes the to-node only when one or more other conditions described in the case are also present.",
+      "no-effect": "The evidence shows the from-node does not change the to-node once the other conditions are held fixed.",
+      "unknown": "The case lacks evidence that discriminates among the relations above."
+    },
+    "action": {
+      "preferred": "Directly addresses an evidence-supported mechanism or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    { "id": "E01", "stage": 1, "source": "customer support (Sep 19)", "text": "About 38,000 duplicate email sends were identified for Sep 18-19. All duplicated sends were processed by eu-west workers." },
+    { "id": "E02", "stage": 1, "source": "change log", "text": "Sep 17 10:00: the queue visibility timeout for eu-west pool-a was lowered from 300 s to 60 s to speed up recovery from crashed workers. The plan was to apply the same change to eu-west pool-b next and then to us-east." },
+    { "id": "E03", "stage": 1, "source": "email provider status page", "text": "From Sep 18 06:00 the provider validates recipients synchronously for requests with more than 500 recipients. Requests with 500 or fewer recipients are unaffected." },
+    { "id": "E04", "stage": 1, "source": "duplicate analysis by message type (eu-west, Sep 18-19)", "text": "Duplicate rate: marketing sends 3.2%; transactional sends 0.00%." },
+    { "id": "E05", "stage": 1, "source": "duplicate analysis by region (Sep 18-19)", "text": "Duplicate rate: eu-west 2.1%; us-east 0.01% (the long-run baseline is 0.01%)." },
+    { "id": "E06", "stage": 2, "source": "provider call timings (all pools)", "text": "p99 provider call duration for requests with more than 500 recipients: 26 s before Sep 18 06:00 and 95 s after. For requests with 500 or fewer recipients: 12 s both before and after. Durations are the same in all three pools." },
+    { "id": "E07", "stage": 2, "source": "configuration audit (Sep 19)", "text": "The Sep 17 change never reached eu-west pool-b: its configuration push failed without alerting, and pool-b is still at 300 s. us-east is at 300 s. Pool-b processes about 40% of eu-west jobs with the same mix of message types and batch sizes as pool-a." },
+    { "id": "E08", "stage": 2, "source": "duplicate analysis, eu-west pool-a (Sep 18-19)", "text": "Duplicate rate for jobs with more than 500 recipients: 4.4%. For jobs with 500 or fewer recipients: 0.01%." },
+    { "id": "E09", "stage": 2, "source": "duplicate analysis, eu-west pool-b and us-east (Sep 18-19)", "text": "Duplicate rate for jobs with more than 500 recipients: pool-b 0.01%, us-east 0.01%. For jobs with 500 or fewer recipients: pool-b 0.00%, us-east 0.01%." },
+    { "id": "E10", "stage": 2, "source": "duplicate analysis (Sep 17)", "text": "On Sep 17, after pool-a moved to 60 s and before the provider change, the duplicate rate was 0.01% in every pool, including for pool-a jobs with more than 500 recipients." },
+    { "id": "E11", "stage": 2, "source": "job composition", "text": "Transactional jobs always have 50 or fewer recipients. Marketing jobs range from 50 to 2,000 recipients; about 60% of marketing jobs have more than 500." },
+    { "id": "E12", "stage": 2, "source": "queue and worker behaviour", "text": "A worker deletes a job from the queue only after the provider call returns. If a job is not deleted within the visibility timeout it becomes visible again and can be received by another worker. The provider does not de-duplicate repeated requests." },
+    { "id": "E13", "stage": 2, "source": "worker pool sizing", "text": "Pool-a has 24 workers, pool-b 16, and us-east 30. No analysis relates the number of idle workers to how quickly a re-visible job is picked up or to the duplicate rate." },
+    { "id": "E14", "stage": 1, "source": "engineering lead", "text": "\"The provider slowdown hit every region. This is the provider's bug and it is what is causing the duplicates.\"" },
+    { "id": "E15", "stage": 1, "source": "SRE on call", "text": "\"Pool-a ran on 60 s for all of Sep 17 with zero extra duplicates. The timeout change is proven safe.\"" },
+    { "id": "E16", "stage": 1, "source": "network change log", "text": "eu-west network maintenance on Sep 18 from 02:00 to 03:00 caused brief packet loss between worker hosts and the queue." },
+    { "id": "E17", "stage": 1, "source": "marketing release notes", "text": "Template engine v2 went live for all marketing emails in all regions on Sep 16." },
+    { "id": "E18", "stage": 1, "source": "data-handling policy", "text": "Personal data of EU customers must be processed only by eu-west infrastructure." },
+    { "id": "E19", "stage": 2, "source": "provider account limits", "text": "The provider allows 50 calls per second per account; current peak usage is 4 calls per second." }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H1", "text": "A 60 s visibility timeout is sufficient on its own to produce elevated duplicate sends." },
+      { "id": "H2", "text": "The provider's slower handling of requests above 500 recipients is sufficient on its own to produce elevated duplicate sends." },
+      { "id": "H3", "text": "A 60 s visibility timeout together with provider call durations above 60 s is sufficient to produce elevated duplicate sends." },
+      { "id": "H4", "text": "Marketing content or templates raise the duplicate rate independently of recipient count." },
+      { "id": "H5", "text": "Among jobs whose provider call outlasts the visibility timeout, pool worker count affects the duplicate rate." },
+      { "id": "H6", "text": "A 120 s visibility timeout would prevent all elevated duplicates for jobs above 500 recipients under current provider behaviour." }
+    ],
+    "edges": [
+      { "id": "X1", "from": "60 s visibility timeout", "to": "duplicate sends", "relation": "to-be-classified" },
+      { "id": "X2", "from": "provider synchronous validation from Sep 18", "to": "duplicate sends", "relation": "to-be-classified" },
+      { "id": "X3", "from": "eu-west region", "to": "duplicate sends", "relation": "to-be-classified" },
+      { "id": "X4", "from": "marketing message type", "to": "duplicate sends", "relation": "to-be-classified" },
+      { "id": "X5", "from": "provider synchronous validation from Sep 18", "to": "call duration for jobs with 500 or fewer recipients", "relation": "to-be-classified" },
+      { "id": "X6", "from": "eu-west network maintenance on Sep 18", "to": "duplicate sends", "relation": "to-be-classified" },
+      { "id": "X7", "from": "60 s visibility timeout", "to": "provider call duration", "relation": "to-be-classified" },
+      { "id": "X8", "from": "recipient count above 500", "to": "duplicate sends", "relation": "to-be-classified" }
+    ],
+    "actions": [
+      { "id": "A1", "text": "Return eu-west pool-a's visibility timeout to 300 s." },
+      { "id": "A2", "text": "Split marketing jobs so that no provider call has more than 500 recipients." },
+      { "id": "A3", "text": "Route eu-west marketing jobs to the us-east pool until the incident is resolved." },
+      { "id": "A4", "text": "Pause all marketing sends in every region until provider latency returns to normal." },
+      { "id": "A5", "text": "Complete the planned rollout of the 60 s visibility timeout to eu-west pool-b and us-east." },
+      { "id": "A6", "text": "Roll marketing emails back to template engine v1." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S05", "kind": "hypothesis", "candidateId": "H5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S06", "kind": "hypothesis", "candidateId": "H6", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S07", "kind": "edge", "candidateId": "X1", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": true },
+    { "id": "S08", "kind": "edge", "candidateId": "X2", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": true },
+    { "id": "S09", "kind": "edge", "candidateId": "X3", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": false },
+    { "id": "S10", "kind": "edge", "candidateId": "X4", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": false },
+    { "id": "S11", "kind": "edge", "candidateId": "X5", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": false },
+    { "id": "S12", "kind": "edge", "candidateId": "X6", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": false },
+    { "id": "S13", "kind": "edge", "candidateId": "X7", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": false },
+    { "id": "S14", "kind": "edge", "candidateId": "X8", "allowedAnswers": ["independent-effect", "conditional-effect", "no-effect", "unknown"], "constructCritical": true },
+    { "id": "S15", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S16", "kind": "action", "candidateId": "A2", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S17", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S18", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S19", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S20", "kind": "action", "candidateId": "A6", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false }
+  ]
+}

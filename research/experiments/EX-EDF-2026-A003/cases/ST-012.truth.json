@@ -1,0 +1,44 @@
+{
+  "caseId": "ST-012",
+  "authorFamily": "Anthropic",
+  "construct": "protective-controls",
+  "answers": [
+    { "itemId": "S01", "expected": "supported", "weight": 1, "requiredEvidence": ["E07", "E08"], "allowedEvidence": ["E03", "E06", "E07", "E08"], "rationale": "Both quarantined and loaded v9 rows have totals exactly 100x the captured amount; the checkout team's statement (E06) is contradicted by the samples." },
+    { "itemId": "S02", "expected": "refuted", "weight": 1, "requiredEvidence": ["E08"], "allowedEvidence": ["E02", "E03", "E07", "E08", "E10"], "rationale": "R1 catches only inflated totals above 50,000; inflated totals below it passed validation and were loaded between 02:05 and 02:40." },
+    { "itemId": "S03", "expected": "refuted", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E03", "E05", "E09"], "rationale": "RSD rows match payment captures; they fail only because the reference list predates the market launch." },
+    { "itemId": "S04", "expected": "unknown", "weight": 1, "requiredEvidence": ["E12"], "allowedEvidence": ["E04", "E12"], "rationale": "Night-time RSD-only windows were 1.8-2.4%, but daytime RSD share is unobserved with no forecast." },
+    { "itemId": "S05", "expected": "refuted", "weight": 1, "requiredEvidence": ["E03", "E04"], "allowedEvidence": ["E03", "E04", "E14"], "rationale": "Windows containing only RSD quarantines stayed at 1.8-2.4%; the threshold was crossed only as R1 failures from v9 accumulated after 02:05." },
+    { "itemId": "S06", "expected": "causes", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E03", "E06", "E07"], "rationale": "v9 produces the inflated totals that R1 rejects." },
+    { "itemId": "S07", "expected": "causes", "weight": 1, "requiredEvidence": ["E05", "E09"], "allowedEvidence": ["E03", "E05", "E09"], "rationale": "The outdated list produces false-positive quarantines of valid RSD rows; the control's configuration, not the data, is the failure here." },
+    { "itemId": "S08", "expected": "contains", "weight": 1, "requiredEvidence": ["E02", "E08"], "allowedEvidence": ["E02", "E06", "E08", "E15"], "rationale": "Since 02:41 the breaker has stopped further inflated v9 rows that pass R1 from loading; containment is partial because rows loaded before the trip." },
+    { "itemId": "S09", "expected": "causes", "weight": 1, "requiredEvidence": ["E01", "E02"], "allowedEvidence": ["E01", "E02"], "rationale": "The halt is what makes the tables stale; the protective control produces this visible symptom without producing the underlying data failure." },
+    { "itemId": "S10", "expected": "detects", "weight": 1, "requiredEvidence": ["E01"], "allowedEvidence": ["E01"], "rationale": "The monitor reports staleness; it neither causes nor limits it." },
+    { "itemId": "S11", "expected": "no-relation", "weight": 1, "requiredEvidence": ["E08"], "allowedEvidence": ["E07", "E08"], "rationale": "Inflated totals below 50,000 pass R1; R1 neither detects nor contains them." },
+    { "itemId": "S12", "expected": "no-relation", "weight": 1, "requiredEvidence": ["E02", "E13"], "allowedEvidence": ["E01", "E02", "E13"], "rationale": "Loading is halted by the breaker, which persisted long after the vacuum ended at 02:55." },
+    { "itemId": "S13", "expected": "unknown", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E06", "E11"], "rationale": "Loyalty events come from a separate code path whose v9 behaviour is unchecked, and accruals have not been examined." },
+    { "itemId": "S14", "expected": "harmful", "weight": 1, "requiredEvidence": ["E06", "E08"], "allowedEvidence": ["E02", "E06", "E08", "E10", "E15"], "rationale": "v9 is still running, and its inflated totals below 50,000 pass validation; without the breaker they would load into the tables used for the close." },
+    { "itemId": "S15", "expected": "preferred", "weight": 1, "requiredEvidence": ["E07", "E08"], "allowedEvidence": ["E06", "E07", "E08"], "rationale": "Removes the failure-producing mechanism." },
+    { "itemId": "S16", "expected": "preferred", "weight": 1, "requiredEvidence": ["E05", "E09"], "allowedEvidence": ["E04", "E05", "E09", "E12"], "rationale": "Correctly tunes a control whose configuration is producing false positives, while leaving R2 active against genuinely invalid currencies (E15)." },
+    { "itemId": "S17", "expected": "harmful", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E03", "E07", "E08"], "rationale": "Would let the inflated totals R1 currently catches pass into the loader, hiding the corruption R1 is detecting." },
+    { "itemId": "S18", "expected": "preferred", "weight": 1, "requiredEvidence": ["E08"], "allowedEvidence": ["E01", "E08"], "rationale": "Addresses the corruption that escaped containment before the breaker tripped." },
+    { "itemId": "S19", "expected": "preferred", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E05", "E09"], "rationale": "The quarantined RSD rows are shown to be valid; releasing them after fixing the list restores correct data." },
+    { "itemId": "S20", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E13"], "allowedEvidence": ["E02", "E13"], "rationale": "Targets a job with no relation to the halt." }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E13", "E14", "E16"],
+    "conflictingEvidencePairs": [["E10", "E08"], ["E06", "E07"]],
+    "missingInformation": [
+      "RSD share of orders during Serbian daytime traffic.",
+      "Whether v9 changed the checkout event path feeding loyalty-service."
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": "v9 canary writes 100x totals (E06, E07) -> large inflated totals fail R1 and are quarantined, small ones pass and load (E07, E08) -> R1 failures push the combined quarantine rate over 5% on top of RSD false positives (E03, E04, E05) -> breaker halts loading at 02:41 (E02) -> tables stale and freshness monitor alerts (E01). Disabling the breaker would resume loading of inflated sub-50,000 totals while v9 still runs.",
+    "harmfulActionCandidateIds": ["A1", "A4"],
+    "constructTraps": [
+      "Treating the breaker as the cause of the incident because it produces the visible staleness.",
+      "Accepting that validation caught all bad rows (E10) when R1 cannot see inflated totals below its bound.",
+      "Loosening R1 to reduce quarantines.",
+      "Refusing to adjust R2 even though its reference data is demonstrably out of date."
+    ]
+  }
+}

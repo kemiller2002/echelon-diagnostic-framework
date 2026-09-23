@@ -1,0 +1,524 @@
+{
+  "id": "ST-002",
+  "construct": "negative-knowledge",
+  "title": "Unprocessed order.paid webhooks for three merchants",
+  "domain": "payments platform webhook delivery",
+  "context": "A payments platform writes order.paid events to a transactional outbox. An outbox relay publishes them to an events topic, and a webhook-dispatcher consumes the topic and sends signed HTTP deliveries to each merchant's configured endpoint. Three merchants report that their systems did not process order.paid webhooks for some orders paid between Sep 14 and Sep 17 (UTC). The incident owner wants to know where the deliveries were lost, how far the problem extends, and what to do next.",
+  "entities": [
+    {
+      "id": "outbox",
+      "description": "Transactional outbox table written in the same database transaction as payment settlement."
+    },
+    {
+      "id": "outbox-relay",
+      "description": "Process that reads outbox rows and publishes them to the events topic."
+    },
+    {
+      "id": "events-topic",
+      "description": "Partitioned message topic carrying order events; 72-hour retention."
+    },
+    {
+      "id": "webhook-dispatcher",
+      "description": "Consumes the events topic and performs signed HTTP deliveries to merchant endpoints with retries and a dead-letter queue."
+    },
+    {
+      "id": "signing-secret",
+      "description": "Per-merchant HMAC secret used to sign webhook payloads."
+    },
+    {
+      "id": "merchant-a-receiver",
+      "description": "Merchant A's webhook endpoint and application."
+    },
+    {
+      "id": "merchant-b-receiver",
+      "description": "Merchant B's webhook endpoint and application."
+    },
+    {
+      "id": "merchant-c-receiver",
+      "description": "Merchant C's webhook endpoint and application."
+    }
+  ],
+  "answerGuide": {
+    "hypothesis": {
+      "supported": "The evidence in this case positively establishes the statement, directly or through a chain of inference from case evidence.",
+      "refuted": "The evidence in this case positively rules the statement out.",
+      "unknown": "The case lacks evidence that discriminates between the statement being true and false."
+    },
+    "edge": {
+      "supported": "The evidence establishes that the stated relation holds between the two nodes.",
+      "refuted": "The evidence establishes that the stated relation does not hold.",
+      "unknown": "The case lacks evidence that discriminates whether the stated relation holds."
+    },
+    "action": {
+      "preferred": "Directly addresses an evidence-supported mechanism or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": 1,
+      "source": "support tickets",
+      "text": "Merchants A, B, and C, in tickets filed on Sep 18, report that their systems have no record of processing order.paid webhooks for 40 orders paid between Sep 14 00:00 and Sep 17 23:59 UTC (Merchant A: 17 orders, Merchant B: 15, Merchant C: 8). For each merchant these are all of its orders paid in that period. Payment settlement completed for all 40 orders."
+    },
+    {
+      "id": "E02",
+      "stage": 1,
+      "source": "platform overview",
+      "text": "The platform sends order.paid webhooks to about 2,100 merchants. No merchant other than A, B, and C has opened a ticket about webhooks for Sep 14-17. The platform records its own delivery attempts only; it has no mechanism that confirms whether a merchant application processed a delivery that received an HTTP 2xx response."
+    },
+    {
+      "id": "E03",
+      "stage": 1,
+      "source": "signing-secret service",
+      "text": "All merchants' webhook signing secrets were rotated at Sep 14 00:00 UTC; from that moment payloads were signed only with the new secret. Merchants were emailed on Sep 12. The dashboard shows about 1,640 of 2,100 merchants have clicked 'acknowledge new secret'; acknowledgement does not record whether or when a merchant deployed the new secret."
+    },
+    {
+      "id": "E04",
+      "stage": 2,
+      "source": "outbox query",
+      "text": "All 40 order.paid events are present in the outbox table with status 'relayed'. Each relay timestamp is within 2 seconds of the corresponding payment settlement."
+    },
+    {
+      "id": "E05",
+      "stage": 2,
+      "source": "events-topic search",
+      "text": "The events-topic search ran Sep 18 12:00 UTC. With 72-hour retention, 22 of the 40 events were still retained and all 22 were found on the topic. The other 18 events had aged out and could not be searched."
+    },
+    {
+      "id": "E06",
+      "stage": 2,
+      "source": "broker logs",
+      "text": "At Sep 15 03:10:05 UTC partition 7 of the events topic had an unclean leader election; the broker log warns that unreplicated messages written between 03:09:25 and 03:10:05 may have been lost. Three of the 40 events hash to partition 7; their relay timestamps are Sep 14 11:42, Sep 15 19:05, and Sep 16 08:30 UTC."
+    },
+    {
+      "id": "E07",
+      "stage": 2,
+      "source": "dispatcher delivery logs",
+      "text": "The webhook-dispatcher writes an unsampled delivery_attempt record (14-day retention) for every HTTP attempt, including event ID, resolved remote IP, HTTP status, and latency. All 40 event IDs have delivery_attempt records, and the final attempt for each returned HTTP 200. Nine events (5 for Merchant B, 4 for Merchant C) received one or two HTTP 503 responses before the HTTP 200. The remote IPs recorded for Merchant B and Merchant C deliveries are unchanged from Sep 1 to Sep 20."
+    },
+    {
+      "id": "E08",
+      "stage": 2,
+      "source": "dispatcher release notes and DLQ",
+      "text": "Dispatcher release v4.12, deployed Sep 13, changed retry backoff from exponential to a fixed 30-second interval and lowered maximum attempts from 8 to 5. The dispatcher dead-letter queue has zero entries for Sep 13-18; a synthetic undeliverable event injected on Sep 16 was written to the dead-letter queue as designed."
+    },
+    {
+      "id": "E09",
+      "stage": 1,
+      "source": "Merchant B ticket reply (Sep 17)",
+      "text": "Merchant B support contact: \"We switched to the new secret the same day your email arrived.\""
+    },
+    {
+      "id": "E10",
+      "stage": 2,
+      "source": "Merchant B engineer (Sep 19)",
+      "text": "After checking the configuration repository, a Merchant B engineer reports that the production webhook secret value was changed on Sep 18 at 10:20 UTC. Merchant B reports that order.paid webhooks have been processed normally since then."
+    },
+    {
+      "id": "E11",
+      "stage": 2,
+      "source": "Merchant B engineer (Sep 19)",
+      "text": "Merchant B's handler verifies each payload against one configured secret. When verification fails it returns HTTP 200 and discards the payload, a choice made to avoid retry storms. Merchant B's request log records only payloads that passed verification."
+    },
+    {
+      "id": "E12",
+      "stage": 2,
+      "source": "Merchant A engineer",
+      "text": "Merchant A's application logs every inbound HTTP request, unsampled, before any processing. Those logs contain no requests from the platform's webhook source addresses between Sep 13 18:00 and Sep 18 09:00 UTC; requests reappear from Sep 18 09:01. Merchant A verifies signatures with a library that accepts both the current and the previous secret for 7 days after a change."
+    },
+    {
+      "id": "E13",
+      "stage": 2,
+      "source": "Merchant A engineer",
+      "text": "Merchant A moved its API to a new hosting provider on Sep 13 at 18:00 UTC and updated the DNS record for its webhook hostname at that time (TTL 300 seconds). The new provider's addresses are in 198.51.100.0/24."
+    },
+    {
+      "id": "E14",
+      "stage": 2,
+      "source": "dispatcher delivery logs and configuration",
+      "text": "delivery_attempt records for Merchant A's 17 events show remote IP 203.0.113.40 on every attempt; Merchant A deliveries after Sep 18 09:00 show 198.51.100.17. Dispatcher configuration keeps an HTTP connection pool per endpoint hostname alive indefinitely and re-resolves the hostname only when the pool is recreated. All dispatcher pods restarted at Sep 18 08:55 UTC for an unrelated node upgrade."
+    },
+    {
+      "id": "E15",
+      "stage": 2,
+      "source": "Merchant C ticket reply",
+      "text": "Merchant C replied: \"Our logs show nothing for these orders.\" Merchant C has not said which logs were searched, whether they record requests before or after signature verification, or whether and when it deployed the new secret. Merchant C's 8 orders were paid between Sep 14 02:00 and Sep 16 21:00 UTC."
+    },
+    {
+      "id": "E16",
+      "stage": 1,
+      "source": "outbox relay alert",
+      "text": "The outbox relay raised a CPU alert (93% utilisation) from Sep 16 14:00 to 14:20 UTC during a batch backfill, and relay lag peaked at 45 seconds during that window."
+    },
+    {
+      "id": "E17",
+      "stage": 1,
+      "source": "Merchant C status page",
+      "text": "Merchant C's public status page lists a database maintenance window on Sep 15 from 01:00 to 03:00 UTC with degraded API availability."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Some of the 40 events were never written to the outbox."
+      },
+      {
+        "id": "H2",
+        "text": "Some of the 40 events were lost between the outbox relay and the webhook-dispatcher."
+      },
+      {
+        "id": "H3",
+        "text": "Some of the 40 events were abandoned by the webhook-dispatcher without an HTTP 2xx response."
+      },
+      {
+        "id": "H4",
+        "text": "Merchant B's receiver discarded deliveries it received because they were signed with a secret it had not deployed."
+      },
+      {
+        "id": "H5",
+        "text": "Merchant A's receiver discarded deliveries it received because they were signed with a secret it had not deployed."
+      },
+      {
+        "id": "H6",
+        "text": "Merchant C's receiver discarded deliveries it received because they were signed with a secret it had not deployed."
+      },
+      {
+        "id": "H7",
+        "text": "Merchant A's deliveries were sent to a network address that was no longer serving Merchant A's application."
+      },
+      {
+        "id": "H8",
+        "text": "No merchant other than A, B, and C had order.paid deliveries between Sep 14 and Sep 17 that its application did not process."
+      }
+    ],
+    "edges": [
+      {
+        "id": "X1",
+        "from": "signing-secret rotation on Sep 14",
+        "to": "Merchant B unprocessed deliveries",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X2",
+        "from": "partition 7 unclean leader election",
+        "to": "loss of some of the 40 events",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X3",
+        "from": "dispatcher v4.12 retry changes",
+        "to": "loss of some of the 40 events",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X4",
+        "from": "dispatcher per-hostname connection pool reuse",
+        "to": "Merchant A unprocessed deliveries",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X5",
+        "from": "outbox relay CPU saturation on Sep 16",
+        "to": "loss of some of the 40 events",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X6",
+        "from": "dispatcher pod restart on Sep 18",
+        "to": "Merchant A deliveries reaching Merchant A's application",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X7",
+        "from": "Merchant C database maintenance on Sep 15",
+        "to": "HTTP 503 responses from Merchant C's endpoint",
+        "relation": "contributes-to"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Restore the pre-rotation signing secret for all merchants until every merchant has acknowledged the new secret."
+      },
+      {
+        "id": "A2",
+        "text": "Redeliver the affected events to Merchants A and B using their original event IDs."
+      },
+      {
+        "id": "A3",
+        "text": "Limit dispatcher connection-pool lifetime so endpoint hostnames are re-resolved at the DNS TTL."
+      },
+      {
+        "id": "A4",
+        "text": "Roll back the dispatcher v4.12 retry settings to the previous exponential backoff with 8 attempts."
+      },
+      {
+        "id": "A5",
+        "text": "Ask Merchant C which log it searched, whether that log records requests before signature verification, and when it deployed the new secret."
+      },
+      {
+        "id": "A6",
+        "text": "Increase events-topic retention from 72 hours to 7 days."
+      },
+      {
+        "id": "A7",
+        "text": "Record the incident scope as Merchants A, B, and C and close it after redelivery."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "S01",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S02",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S03",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S04",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S05",
+      "kind": "hypothesis",
+      "candidateId": "H5",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S06",
+      "kind": "hypothesis",
+      "candidateId": "H6",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S07",
+      "kind": "hypothesis",
+      "candidateId": "H7",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S08",
+      "kind": "hypothesis",
+      "candidateId": "H8",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S09",
+      "kind": "edge",
+      "candidateId": "X1",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S10",
+      "kind": "edge",
+      "candidateId": "X2",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S11",
+      "kind": "edge",
+      "candidateId": "X3",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S12",
+      "kind": "edge",
+      "candidateId": "X4",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S13",
+      "kind": "edge",
+      "candidateId": "X5",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S14",
+      "kind": "edge",
+      "candidateId": "X6",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S15",
+      "kind": "edge",
+      "candidateId": "X7",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S16",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S17",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S18",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S19",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S20",
+      "kind": "action",
+      "candidateId": "A5",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S21",
+      "kind": "action",
+      "candidateId": "A6",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S22",
+      "kind": "action",
+      "candidateId": "A7",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    }
+  ]
+}
