@@ -28,7 +28,7 @@ jobs:
           ./ros add "Author OpenAI EX-EDF-2026-A003 stress cases" --tag edf,research,experiment --priority high
           WORK_ID="$(node -e "const fs=require('fs');const q=JSON.parse(fs.readFileSync('.ros/work/queue.json','utf8'));process.stdout.write(q.items[q.items.length-1].id)")"
           echo "WORK_ID=$WORK_ID" >> "$GITHUB_ENV"
-          ./ros work ready --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work backlog-transition --action ready --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
           sleep 1
           ./ros work begin --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --type research
 
