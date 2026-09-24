@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-003",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": false,
+    "noLexicalLeakage": false,
+    "noSingleClue": false,
+    "candidatePlausibility": false,
+    "constructPressure": false,
+    "difficultyAdequate": false
+  },
+  "verdict": "revise",
+  "notes": "Source commit 2202272025b255a6894a698cb63bb00bc4a10d88. DEFECTS: (1) noLexicalLeakage=false - the analyzer-visible title 'Search outage under merge pressure and retry amplification' names both hidden mechanisms (H2 merge pressure, H3 retry amplification, R4 'amplifies'), directly cueing I2, I3 and I6 (combined weight 7). (2) noSingleClue=false - each preferred action is pre-tested by a single evidence item: E7 is a canary of A2's retry limit/backoff showing a 34% load and 46% latency reduction, and E8 is a merge-pause test for A3; likewise E5 pre-tests A1 and E6 pre-tests A4. Action scoring (I9-I12, weight 10 of 26) reduces to matching each action to its intervention result. (3) constructPressure=false and difficultyAdequate=false - because interventions are pre-tested and the title names the mechanisms, distinguishing upstream control points from symptom suppression requires no control-point reasoning; a generic reader extracts every action state. (4) candidatePlausibility=false - R5 'API replica count reduces index merge pressure' is a straw man with no mechanism in the case; the only harmful candidate (A5, alert suppression) is unscored, so the case never exercises the harmful-action penalty and contains no scored plausible harmful action. (5) groundTruthSupported=false - I12 expects A4 'reject', but E6 (its only required evidence) shows that raising timeouts grew the request backlog and raised end-user latency, i.e. evidenced harm; 'harmful' is at least as defensible as 'reject' under exact-match scoring, and the case does not define the boundary. H4/R6 unknown via E9 (captures not retained) is acceptable. SMALLEST REMEDIATION: neutralize the title (e.g. 'Search 5xx incident during scheduled maintenance'); remove or weaken the direct intervention results for the preferred actions (e.g. drop E7/E8 or make them partial/confounded so preference must be inferred from the causal chain E1/E3/E4/E10/E12/E13); add a scored, plausible harmful action whose harm is evidenced in-case (A5 or an equivalent); replace R5 with a plausible competing edge; and either change I12 to 'harmful' or remove the backlog-growth clause from E6. The case must then receive a fresh Anthropic review."
+}

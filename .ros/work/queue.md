@@ -8,3 +8,4 @@
 | EDF-UPGRADE-2026-09-21 | Reconcile EDF with current Echelon capabilities and ROS research rules | complete | edf,tooling,ordo,ros | high |
 | ROS-INSTALL-3-1-1 | ROS-INSTALL-3-1-1 | complete |  |  |
 | WI-0001 | Author OpenAI EX-EDF-2026-A003 stress cases | complete | edf,research,experiment | high |
+| WI-0002 | Review OpenAI EX-EDF-2026-A003 cases | complete | edf,research,experiment | high |

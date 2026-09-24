@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-005",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": false,
+    "noLexicalLeakage": false,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": false
+  },
+  "verdict": "revise",
+  "notes": "Source commit 2202272025b255a6894a698cb63bb00bc4a10d88. Strengths: I2 (H2 reverses the GC-pause -> redelivery direction) is a genuine propagation-direction trap; I3 (dedup saturation mediates part of the path) and I7 (R4) require mediation reasoning from E5/E6/E9; I11 A3 harmful is grounded in E11. DEFECTS: (1) groundTruthSupported=false - I4 (H4 rack retransmission materially contributed to worker pauses) and I8 (R7 rack retransmission -> full-GC pause) are expected 'unknown' with E7 as sole required evidence, but E7 itself says affected and unaffected workers were spread across several racks (retransmits on one rack cannot account for pauses elsewhere), E2 ties the pauses to a 2.3x allocation increase, and E8 shows schema rollback alone returned GC pauses to baseline. Unlike the other unknowns in this benchmark, no evidence item encodes a missing network measurement, and the truth's own missingInformation list does not mention network data. 'contradicted' is at least as well supported as 'unknown'; the author's own conflicting pair [E7, E8] treats E8 as bearing on H4, yet E8 is excluded from I4/I8 allowedEvidence, so an analyzer citing it is penalized. Meanwhile the case's genuine encoded unknown (E13, allocation source) is not scored. (2) noLexicalLeakage=false - A2 text 'to contain lag while the upstream mechanism is corrected' labels A2 as containment and cues I10='acceptable' rather than preferred; the title 'Telemetry ingest lag after schema expansion' names the origin tested by I1/I5 (weight 5). (3) difficultyAdequate=false - the chain is presented in causal order (E1->E2->E3->E5->E6) and every scored action is pre-tested by one intervention item (A1<-E8, A2<-E9, A3<-E11, A5<-E12), so most items are extraction; only I2/I3 require genuine propagation reasoning. SMALLEST REMEDIATION: either add analyzer-visible evidence that leaves network contribution genuinely unresolved (e.g. retransmit data unavailable for the racks hosting most affected workers) or change I4/I8 to 'contradicted' and add E8 to their allowed evidence; score an unknown that is actually encoded (e.g. an item grounded in E13); reword A2 neutrally (e.g. 'Increase deduplication capacity') and neutralize the title; and reduce action pre-testing (e.g. make E9 or E8 partial) or score the R6 feedback edge to add propagation difficulty. The case must then receive a fresh Anthropic review."
+}
