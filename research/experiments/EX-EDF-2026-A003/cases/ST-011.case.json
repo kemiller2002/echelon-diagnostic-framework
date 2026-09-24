@@ -65,7 +65,7 @@
     {
       "id": "E11",
       "stage": "S3",
-      "text": "After producer 4.0 was rolled back, new validation failures returned to baseline while the existing quarantine backlog drained."
+      "text": "After producer 4.0 was rolled back, new validation failures returned to baseline within five minutes. Incident recording ended 12 minutes later; remaining quarantine backlog size and drain rate were not captured."
     },
     {
       "id": "E12",
@@ -81,6 +81,11 @@
       "id": "E14",
       "stage": "S3",
       "text": "In a prior staging drill, quarantine paging was the only automated signal of schema-validation failures; when paging was disabled, the failing queue grew for 18 minutes until an operator manually opened the dashboard."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "text": "Billing-database CPU was elevated in one region during part of the incident, but schema-validation failures occurred before billing and at similar rates in regions with normal database CPU."
     }
   ],
   "candidates": {
