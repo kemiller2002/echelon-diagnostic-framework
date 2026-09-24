@@ -76,6 +76,16 @@
       "id": "E13",
       "stage": "S3",
       "text": "After the merge completed naturally, retry volume and index latency both returned toward baseline without removing API replicas."
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "text": "A query-cache configuration change had been deployed to the API tier 35 minutes before the incident; the same change was present in an unaffected region with comparable traffic."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "text": "The proportion of long-tail search terms increased by 6% during the incident, but the same query-mix shift appeared on unaffected shards that were not in segment merge."
     }
   ],
   "candidates": {
@@ -90,7 +100,7 @@
       },
       {
         "id": "H3",
-        "text": "Immediate retries amplified index load and sustained the incident."
+        "text": "Immediate retries amplified index load during the segment merge."
       },
       {
         "id": "H4",
