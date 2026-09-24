@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-003",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": false,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "revise",
+  "notes": "Source commit 48fc7aba4d53af1644c13c8d46566552835666f2 (OpenAI remediation r1); fresh review, prior verdicts at fab9973fcf891e67705a51a41abf473bb473baca not carried forward. Prior-defect re-test: the title \"Search 5xx incident during scheduled maintenance\" no longer names merge pressure or retry amplification; E7 (retry canary) is now confounded by concurrent merge completion and E8 is observational, so A2/A3 preference must be inferred from the E1/E3/E4/E8/E12 chain rather than read off one intervention; R5 (API timeout increase -> request backlog) replaces the straw-man replica edge and is directly evidenced by E6; I12 A4 (raise API timeouts further) now expects harmful, which is evidence-supported by E6 (backlog grew and median end-user latency rose while 5xx fell 31% only by holding requests longer), and it is scored, so the harmful-action penalty is exercised. Control-point reasoning (A3/A2 mechanism-changing vs A1 capacity and A4 symptom masking) is genuinely required. BLOCKING DEFECT - groundTruthSupported=false: I3 (weight 3, construct-critical) expects H3 \"Immediate retries amplified index load and sustained the incident\" = supported with E13 as required evidence, but E13 says that after the merge completed naturally, retry volume and index latency both returned toward baseline with the retry policy unchanged. That observation undercuts the \"sustained the incident\" conjunct (the incident did not persist once the merge trigger ended, so retries did not sustain it independently), while the \"amplified index load\" conjunct rests on E3 plus the temporal E4 and the confounded E7. The compound proposition is therefore not supported as written, and a careful analyzer who answers contradicted or unknown on the second conjunct is marked wrong under exact-match scoring; the same E13 is also required evidence for I6 (R4), I10 (A2 preferred) and I11. SECONDARY MECHANICAL DEFECT: hardness.redHerringEvidenceIds lists E9, E11 and E13, but E13 is required evidence for five scored items including the main diagnosis (I2, I3, I6, I10, I11) and E9 is the sole required evidence for I4/I8, so only E11 is a genuine red herring and the >=3 red-herring requirement is met only nominally. Minor: I7 (R5) and I12 (A4) are both single-item lookups from E6; H4/R6 score the same network proposition twice on E9. SMALLEST REMEDIATION: reword H3 to \"Immediate retries amplified index load during the merge\" (drop \"and sustained the incident\") and move E13 from requiredEvidence to allowedEvidence for I3/I6; replace E9/E13 in redHerringEvidenceIds with genuinely misleading items (e.g. E6 or E10, or add one new distractor such as an unrelated config change) so three real red herrings exist. No case/truth file was modified by the reviewer. The case must then receive a fresh Anthropic review."
+}

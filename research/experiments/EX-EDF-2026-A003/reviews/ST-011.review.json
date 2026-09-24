@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-011",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": false,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "revise",
+  "notes": "Source commit 48fc7aba4d53af1644c13c8d46566552835666f2 (OpenAI remediation r1); fresh review, prior verdicts at fab9973fcf891e67705a51a41abf473bb473baca not carried forward. Prior-defect re-test: I3 (H3 customer-visible delay) now expects unknown, correcting the unsupported claim (no item measures customer-facing delay). H5/R7 (release process permitted 4.0 to ship without a contract-version update) now expect supported from E10/E13, which matches the release records; only the reason for the gap is unrecorded. I12 A4 (disable quarantine paging) now expects harmful, with analyzer-visible harm in E14 (paging was the only automated signal and disabling it let the failing queue grow unnoticed for 18 minutes) plus E8 (muting fixes nothing); the analogy is from a staging drill but it is the same control and failure type. The title \"Billing pipeline quarantine surge\" and A1/A2/A4 wording are neutral. Detection (alerting), containment (validator/quarantine) and failure creation (producer drift) remain distinguishable: I1/I6 (validator created payloads / reversed edge) contradicted via E1/E4/E10, I7 (alerting -> failure) contradicted via E8, I11 (disable validation) harmful via E5. BLOCKING DEFECT - groundTruthSupported=false: the new second unknown I13 (H6 \"After producer compatibility is restored, quarantine capacity will remain a separate customer-impacting bottleneck\" = unknown, required E7, allowed E7/E11) is not genuinely unresolved. E11 directly observes the post-restoration state: after producer 4.0 was rolled back, new validation failures returned to baseline \"while the existing quarantine backlog drained\" at the existing capacity. That is evidence the quarantine tier did not remain a bottleneck once compatibility was restored, so contradicted is at least as defensible as unknown, and E7 (capacity during the incident, confounded by a 9% volume drop) does not bear on the post-restoration question. Because I3 is the only other expected unknown, the case does not have two sound unknown items. Minor, non-failing: E11 is also a complete demonstration of the rollback half of A1, so I9 remains close to a single-item lookup; E8 and E13 are listed as red herrings but are required evidence for I7/I12 and I4/I8. SMALLEST REMEDIATION: make the post-restoration capacity question genuinely open, e.g. change E11 to end at rollback (\"after producer 4.0 was rolled back, new validation failures returned to baseline; drain of the existing backlog was not observed before incident records closed\") and keep I13 unknown; or keep E11 and change I13 to contradicted with E11 required, then add a different genuinely unresolved unknown. No case/truth file was modified by the reviewer. The case must then receive a fresh Anthropic review."
+}
