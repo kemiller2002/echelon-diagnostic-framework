@@ -1,0 +1,470 @@
+{
+  "version": "1.0.0",
+  "id": "ST-003",
+  "construct": "control-points",
+  "title": "Notification ingress backlog and retry surge",
+  "domain": "multi-tenant webhook delivery platform",
+  "entities": [
+    "client SDKs",
+    "ingress API",
+    "audit exporter",
+    "durable delivery queue",
+    "delivery workers",
+    "DNS resolver service"
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": "architecture",
+      "text": "For each accepted notification, ingress validates the request, writes the notification to the durable delivery queue, emits an audit record, and then returns HTTP 202. Delivery workers consume the queue and perform an idempotency check before invoking a destination."
+    },
+    {
+      "id": "E02",
+      "stage": "incident",
+      "text": "At 10:05 UTC, ingress end-to-end response p95 rose from 640 ms to 2.7 s while the accepted-notification alert began firing; the rate of HTTP 5xx responses remained below 0.1%."
+    },
+    {
+      "id": "E03",
+      "stage": "tracing",
+      "text": "Application traces for the same interval show validation plus queue-write spans at p95 of 510 ms, with neither span individually accounting for the end-to-end response time."
+    },
+    {
+      "id": "E04",
+      "stage": "metrics",
+      "text": "The delivery database reported a CPU rise from 46% to 68% during the incident. Query p95 remained between 18 and 23 ms, and no lock-wait increase was recorded."
+    },
+    {
+      "id": "E05",
+      "stage": "change-history",
+      "text": "At 09:58 UTC, ingress release 4.18 changed audit emission from an in-process buffered write to a flush performed before the HTTP response. No delivery-worker code changed in that release."
+    },
+    {
+      "id": "E06",
+      "stage": "tracing",
+      "text": "In 63% of ingress traces slower than two seconds, an audit-export flush occupied 1.4 to 2.1 seconds. Packet samples from those hosts show repeated DNS lookup timeouts for the audit collector name during that span."
+    },
+    {
+      "id": "E07",
+      "stage": "operations",
+      "text": "The resolver service dashboard and status report show availability within objective and no fleet-wide incident during the window; resolver metrics are not labeled by ingress region or audit hostname."
+    },
+    {
+      "id": "E08",
+      "stage": "change-history",
+      "text": "A customer-console JavaScript bundle was deployed at 09:52 UTC. Console traffic uses a separate service and represents under 2% of notification submissions."
+    },
+    {
+      "id": "E09",
+      "stage": "request-analysis",
+      "text": "For request IDs seen more than once, the first repeated submission usually begins 1.9 to 2.1 seconds after the original. The three largest SDK versions use a two-second response deadline and retry an unacknowledged request with the same request ID."
+    },
+    {
+      "id": "E10",
+      "stage": "queue-analysis",
+      "text": "During the peak, 71% of queue entries shared a request ID with an earlier entry. The corresponding proportion was 6% before 10:05 UTC; unique-request arrival rate changed by less than 4%."
+    },
+    {
+      "id": "E11",
+      "stage": "worker-analysis",
+      "text": "Worker idempotency checks suppressed repeated destination invocations, so sampled customers received one callback per request ID despite repeated queue entries. Those checks occur only after entries have consumed queue and worker capacity."
+    },
+    {
+      "id": "E12",
+      "stage": "load-test",
+      "text": "A replay using the incident's duplicate ratio increased ingress queue-admission wait by 420 ms and worker queue age by 11 minutes relative to the same unique-request rate without repeats."
+    },
+    {
+      "id": "E13",
+      "stage": "operations",
+      "text": "A certificate-expiry warning appeared at 10:02 UTC for a staging-only callback endpoint. Production trust stores and the audit collector certificate were not implicated by the warning."
+    },
+    {
+      "id": "E14",
+      "stage": "canary",
+      "text": "On two ingress canaries configured so that audit-export flush did not block the HTTP response, response p95 fell to 690 ms, SDK retries fell 82%, and queue input fell 48% at comparable unique-request volume. The canary record does not specify a production durability design."
+    },
+    {
+      "id": "E15",
+      "stage": "mitigation-test",
+      "text": "Temporarily doubling delivery workers drained the existing backlog faster, but the fraction of repeated request IDs entering the queue did not change. Queue age began rising again after the extra workers were removed."
+    },
+    {
+      "id": "E16",
+      "stage": "information-gaps",
+      "text": "The incident record contains no client clock-skew telemetry, no resolver results broken down by ingress region and hostname, no audit-loss study longer than the 30-minute canary, and no test of returning success for a repeated ID after independently verifying its original durable receipt."
+    },
+    {
+      "id": "E17",
+      "stage": "client-test",
+      "text": "In a lab run, raising the SDK deadline from two to five seconds reduced retries, but ingress response p95 remained 2.6 seconds while audit flush stayed synchronous. The installed SDK population cannot receive a deadline-default change for at least six weeks."
+    },
+    {
+      "id": "E18",
+      "stage": "safety-test",
+      "text": "A benchmark with worker idempotency checks disabled increased worker throughput by 34%, but repeated queue entries produced repeated destination invocations in 29 of 40 injected duplicate cases."
+    },
+    {
+      "id": "E19",
+      "stage": "durability-test",
+      "text": "In a separate 30-minute test, ingress wrote audit records to a durable local spool before acknowledging them and exported them later; reconciliation found no missing audit sequence numbers. Longer-horizon behavior was not measured."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H01",
+        "text": "Delivery-database saturation is the primary initiator of the backlog."
+      },
+      {
+        "id": "H02",
+        "text": "Response-path audit flushing pushes acknowledgements beyond client deadlines and initiates retry amplification."
+      },
+      {
+        "id": "H03",
+        "text": "Insufficient delivery-worker capacity is the primary initiator of repeated submissions."
+      },
+      {
+        "id": "H04",
+        "text": "A rise in ingress server errors is the primary trigger for client resubmission."
+      },
+      {
+        "id": "H05",
+        "text": "Client clock skew materially contributes to the timing of repeated submissions."
+      },
+      {
+        "id": "H06",
+        "text": "A resolver fault confined to one ingress region materially contributes to audit-flush delay."
+      }
+    ],
+    "edges": [
+      {
+        "id": "G01",
+        "from": "response-path audit flush",
+        "to": "ingress acknowledgement latency",
+        "relation": "increases"
+      },
+      {
+        "id": "G02",
+        "from": "acknowledgement latency beyond the SDK deadline",
+        "to": "same-ID client retries",
+        "relation": "increases"
+      },
+      {
+        "id": "G03",
+        "from": "same-ID client retries",
+        "to": "duplicate queue entries",
+        "relation": "increases"
+      },
+      {
+        "id": "G04",
+        "from": "duplicate queue entries",
+        "to": "queue and worker load",
+        "relation": "increases"
+      },
+      {
+        "id": "G05",
+        "from": "duplicate-heavy ingress traffic",
+        "to": "queue-admission delay",
+        "relation": "increases"
+      },
+      {
+        "id": "G06",
+        "from": "delivery-database CPU utilization",
+        "to": "initial ingress acknowledgement delay",
+        "relation": "is the dominant cause of"
+      },
+      {
+        "id": "G07",
+        "from": "additional delivery workers",
+        "to": "creation of repeated submissions",
+        "relation": "decreases"
+      },
+      {
+        "id": "G08",
+        "from": "asynchronous audit export through a durable spool",
+        "to": "long-horizon audit-record loss",
+        "relation": "increases"
+      },
+      {
+        "id": "G09",
+        "from": "client clock skew",
+        "to": "retry timing in the incident",
+        "relation": "materially changes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A01",
+        "text": "Move audit export out of the response path using a durable spool, stage the rollout, and reconcile audit sequence numbers."
+      },
+      {
+        "id": "A02",
+        "text": "Keep audit flushing synchronous and permanently double the delivery-worker pool."
+      },
+      {
+        "id": "A03",
+        "text": "Keep system behavior unchanged and raise the accepted-notification alert threshold above the observed latency."
+      },
+      {
+        "id": "A04",
+        "text": "Disable worker idempotency checks to increase queue-drain throughput."
+      },
+      {
+        "id": "A05",
+        "text": "Keep audit flushing synchronous and change the default SDK response deadline from two seconds to five seconds."
+      },
+      {
+        "id": "A06",
+        "text": "Route audit-hostname lookups to an alternate resolver in the ingress region with the highest timeout rate."
+      },
+      {
+        "id": "A07",
+        "text": "At ingress, return success for a repeated request ID after independently confirming that its original entry is durable."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "S-H01",
+      "kind": "hypothesis",
+      "candidateId": "H01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H02",
+      "kind": "hypothesis",
+      "candidateId": "H02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-H03",
+      "kind": "hypothesis",
+      "candidateId": "H03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H04",
+      "kind": "hypothesis",
+      "candidateId": "H04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H05",
+      "kind": "hypothesis",
+      "candidateId": "H05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-H06",
+      "kind": "hypothesis",
+      "candidateId": "H06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G01",
+      "kind": "edge",
+      "candidateId": "G01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G02",
+      "kind": "edge",
+      "candidateId": "G02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G03",
+      "kind": "edge",
+      "candidateId": "G03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G04",
+      "kind": "edge",
+      "candidateId": "G04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G05",
+      "kind": "edge",
+      "candidateId": "G05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G06",
+      "kind": "edge",
+      "candidateId": "G06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G07",
+      "kind": "edge",
+      "candidateId": "G07",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-G08",
+      "kind": "edge",
+      "candidateId": "G08",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-G09",
+      "kind": "edge",
+      "candidateId": "G09",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S-A01",
+      "kind": "action",
+      "candidateId": "A01",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A02",
+      "kind": "action",
+      "candidateId": "A02",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A03",
+      "kind": "action",
+      "candidateId": "A03",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A04",
+      "kind": "action",
+      "candidateId": "A04",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A05",
+      "kind": "action",
+      "candidateId": "A05",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A06",
+      "kind": "action",
+      "candidateId": "A06",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S-A07",
+      "kind": "action",
+      "candidateId": "A07",
+      "allowedAnswers": [
+        "select",
+        "reject",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}
