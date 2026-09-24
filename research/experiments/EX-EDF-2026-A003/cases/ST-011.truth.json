@@ -36,7 +36,7 @@
     },
     {
       "itemId": "I3",
-      "expected": "supported",
+      "expected": "unknown",
       "weight": 1,
       "requiredEvidence": [
         "E7"
@@ -47,9 +47,10 @@
     },
     {
       "itemId": "I4",
-      "expected": "unknown",
+      "expected": "supported",
       "weight": 2,
       "requiredEvidence": [
+        "E10",
         "E13"
       ],
       "allowedEvidence": [
@@ -99,9 +100,10 @@
     },
     {
       "itemId": "I8",
-      "expected": "unknown",
+      "expected": "supported",
       "weight": 2,
       "requiredEvidence": [
+        "E10",
         "E13"
       ],
       "allowedEvidence": [
@@ -150,13 +152,15 @@
     },
     {
       "itemId": "I12",
-      "expected": "reject",
+      "expected": "harmful",
       "weight": 2,
       "requiredEvidence": [
-        "E8"
+        "E8",
+        "E14"
       ],
       "allowedEvidence": [
-        "E8"
+        "E8",
+        "E14"
       ]
     }
   ],
@@ -177,13 +181,13 @@
       ]
     ],
     "missingInformation": [
-      "The process-control gap that allowed an unversioned contract change is not explained by the incident evidence.",
+      "No customer-facing latency measurement was retained for messages waiting in quarantine.",
       "The evidence does not quantify whether quarantine capacity would become a separate bottleneck after producer compatibility is restored."
     ],
     "reasoningHops": 4,
     "harmfulActionCandidateIds": [
       "A3",
-      "A5"
+      "A4"
     ]
   }
 }
