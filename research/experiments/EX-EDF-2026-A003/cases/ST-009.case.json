@@ -76,6 +76,26 @@
       "id": "E13",
       "stage": "S3",
       "text": "Huge-page settings were not captured consistently across affected and unaffected hosts during the incident."
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "text": "A matched decoder test held vectorization enabled, pooled-buffer allocator enabled, and concurrency at 32 workers while varying only architecture. ARM64 recorded 8 checksum mismatches in 600,000 decodes; x86_64 recorded 0 in 600,000."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "text": "One affected rack ran a newer NIC firmware revision, but checksum mismatches also occurred on affected hosts with the older revision and did not occur on x86_64 hosts using either revision."
+    },
+    {
+      "id": "E16",
+      "stage": "S3",
+      "text": "Buffer-pool size differed in one availability zone, but corruption occurred in both default-size and enlarged-pool zones when the failing decoder combination was present."
+    },
+    {
+      "id": "E17",
+      "stage": "S3",
+      "text": "Affected source images had a broad range of compression ratios, and mismatch frequency did not cluster around any compression-ratio band in the retained sample."
     }
   ],
   "candidates": {
