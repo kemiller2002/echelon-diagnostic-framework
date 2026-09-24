@@ -24,11 +24,14 @@
       "weight": 2,
       "requiredEvidence": [
         "E2",
-        "E3"
+        "E3",
+        "E10"
       ],
       "allowedEvidence": [
         "E2",
-        "E3"
+        "E3",
+        "E8",
+        "E10"
       ]
     },
     {
@@ -192,12 +195,15 @@
       "weight": 2,
       "requiredEvidence": [
         "E3",
-        "E6"
+        "E6",
+        "E9"
       ],
       "allowedEvidence": [
         "E3",
         "E5",
-        "E6"
+        "E6",
+        "E9",
+        "E10"
       ]
     },
     {
@@ -205,18 +211,20 @@
       "expected": "unknown",
       "weight": 1,
       "requiredEvidence": [
-        "E10"
+        "E15"
       ],
       "allowedEvidence": [
-        "E10"
+        "E3",
+        "E10",
+        "E15"
       ]
     }
   ],
   "hardness": {
     "redHerringEvidenceIds": [
-      "E7",
-      "E12",
-      "E14"
+      "E14",
+      "E16",
+      "E17"
     ],
     "conflictingEvidencePairs": [
       [
@@ -229,8 +237,8 @@
       ]
     ],
     "missingInformation": [
-      "The exact allocation source within the decoder was not captured.",
-      "The incident data do not establish whether a different lease duration would have side effects under unrelated failures."
+      "The exact allocation source within the decoder was not captured because no incident heap profile exists.",
+      "Crash and failover behavior under the 30-second lease was not tested, and the crash-recovery SLO is not present in the incident artifacts."
     ],
     "reasoningHops": 5,
     "harmfulActionCandidateIds": [
