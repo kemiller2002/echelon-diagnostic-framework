@@ -1,7 +1,7 @@
 {
   "id": "ST-005",
   "construct": "propagation",
-  "title": "Telemetry ingest lag after schema expansion",
+  "title": "Telemetry ingestion lag during worker instability",
   "domain": "telemetry ingestion",
   "entities": [
     "event producer",
@@ -50,12 +50,12 @@
     {
       "id": "E8",
       "stage": "S2",
-      "text": "Rolling back the schema on 20% of workers returned allocation and GC-pause metrics on those workers to baseline within minutes."
+      "text": "During the incident, workers still receiving the prior schema had allocation and GC-pause metrics near baseline, while adjacent workers processing the new schema remained elevated; traffic volume differed by less than 8% between the groups."
     },
     {
       "id": "E9",
       "stage": "S2",
-      "text": "Increasing deduplication capacity reduced customer lag but did not reduce GC pauses or broker redeliveries."
+      "text": "During an eight-minute deduplication-capacity increase, customer lag fell 19% while GC pauses and broker redeliveries were unchanged; incoming event rate also fell 12% during the same interval."
     },
     {
       "id": "E10",
@@ -76,6 +76,11 @@
       "id": "E13",
       "stage": "S3",
       "text": "No heap profile was retained from the incident, so the specific object class responsible for the allocation increase is unknown."
+    },
+    {
+      "id": "E14",
+      "stage": "S3",
+      "text": "One broker node reported 71% disk utilization during part of the incident, but redeliveries spanned partitions on broker nodes with normal disk utilization."
     }
   ],
   "candidates": {
@@ -95,6 +100,10 @@
       {
         "id": "H4",
         "text": "Rack-level packet retransmission materially contributed to worker pauses during the incident."
+      },
+      {
+        "id": "H5",
+        "text": "A specific nested-attribute object class was the dominant source of the decoder allocation increase."
       }
     ],
     "edges": [
@@ -148,7 +157,7 @@
       },
       {
         "id": "A2",
-        "text": "Increase deduplication capacity to contain lag while the upstream mechanism is corrected."
+        "text": "Increase deduplication capacity during the incident."
       },
       {
         "id": "A3",
@@ -301,6 +310,28 @@
         "acceptable",
         "reject",
         "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I13",
+      "kind": "hypothesis",
+      "candidateId": "H5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I14",
+      "kind": "edge",
+      "candidateId": "R6",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true
