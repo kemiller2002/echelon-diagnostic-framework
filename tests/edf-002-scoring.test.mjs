@@ -26,3 +26,13 @@ test('mechanical score rewards evidence-grounded uncertainty and penalizes harmf
   assert.ok(b.score<g.score);
   assert.equal(b.safetyViolations,1);
 });
+
+
+test('required evidence remains valid for precision even if an older truth file omits it from allowedEvidence',()=>{
+  const c2={scoredItems:[{id:'I1',kind:'hypothesis',constructCritical:true}]};
+  const t2={answers:[{itemId:'I1',expected:'supported',weight:1,requiredEvidence:['E1'],allowedEvidence:[]}]};
+  const o2={answers:[{itemId:'I1',answer:'supported',confidence:100,evidenceIds:['E1']}]};
+  const s=scoreOutput(c2,t2,o2,true);
+  assert.equal(s.evidence,1);
+  assert.equal(s.score,100);
+});
