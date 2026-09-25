@@ -1,0 +1,47 @@
+{
+  "caseId": "ST-008",
+  "authorFamily": "Anthropic",
+  "construct": "evidence-revision",
+  "answers": [
+    { "itemId": "S01", "expected": "unknown", "weight": 1, "requiredEvidence": ["E02"], "allowedEvidence": ["E01", "E02", "E03"], "rationale": "At stage 1 the v2.8 rollout with a JWT library upgrade immediately precedes the symptom; nothing yet discriminates it from the rotation or clock hypotheses." },
+    { "itemId": "S02", "expected": "refuted", "weight": 1, "requiredEvidence": ["E06"], "allowedEvidence": ["E02", "E06", "E07"], "rationale": "At stage 2 the v2.7 and v2.8 pods show the same 401 rate." },
+    { "itemId": "S03", "expected": "unknown", "weight": 1, "requiredEvidence": ["E03"], "allowedEvidence": ["E01", "E03"], "rationale": "At stage 1 the rotation is close in time to the symptom, but there is no evidence yet about the gateway's cached key set or which tokens fail." },
+    { "itemId": "S04", "expected": "supported", "weight": 1, "requiredEvidence": ["E08", "E09"], "allowedEvidence": ["E03", "E06", "E07", "E08", "E09"], "rationale": "At stage 2 every sampled rejection is a K2 token, and two dumps presented as production show K1-only key sets last fetched before K2 was published, with a 24-hour refresh. This was the warranted reading then; the later correction does not make it unreasonable at stage 2." },
+    { "itemId": "S05", "expected": "refuted", "weight": 1, "requiredEvidence": ["E11", "E12"], "allowedEvidence": ["E09", "E11", "E12", "E13"], "rationale": "At stage 3 the dumps are shown to be from staging, production agents hold K2, and many K2 tokens are accepted." },
+    { "itemId": "S06", "expected": "unknown", "weight": 1, "requiredEvidence": ["E04"], "allowedEvidence": ["E01", "E04"], "rationale": "At stage 1 a clock-offset alarm exists on some gateway nodes but no rejection-reason or distribution data is available." },
+    { "itemId": "S07", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E04", "E07"], "rationale": "At stage 2 there are no 'not yet valid' rejections, offsets are well inside the 30 s leeway, and skewed and unskewed nodes have the same rate." },
+    { "itemId": "S08", "expected": "unknown", "weight": 1, "requiredEvidence": ["E08", "E10"], "allowedEvidence": ["E03", "E08", "E09", "E10"], "rationale": "At stage 2 K2-only rejections are equally consistent with an issuer-side key mismatch; health checks do not test key material, so the alternative is still live even though H2 is supported." },
+    { "itemId": "S09", "expected": "supported", "weight": 1, "requiredEvidence": ["E13", "E14"], "allowedEvidence": ["E11", "E12", "E13", "E14"], "rationale": "All rejected tokens come from auth-2, whose tokens fail offline verification and whose mounted K2 private key differs from the others." },
+    { "itemId": "S10", "expected": "unknown", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E14", "E15"], "rationale": "The mismatch is established, but secret-sync logs for the window are gone and other ways the file could have changed are not excluded." },
+    { "itemId": "S11", "expected": "refuted", "weight": 1, "requiredEvidence": ["E06"], "allowedEvidence": ["E02", "E06", "E13"], "rationale": "Equal rates across versions; rejections are fully accounted for by auth-2 tokens." },
+    { "itemId": "S12", "expected": "supported", "weight": 1, "requiredEvidence": ["E13", "E14"], "allowedEvidence": ["E08", "E12", "E13", "E14"], "rationale": "Rejections map to auth-2 tokens, which fail verification against the published key." },
+    { "itemId": "S13", "expected": "refuted", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E04", "E07", "E13"], "rationale": "No time-claim rejections; offsets are inside leeway; rates are even across nodes." },
+    { "itemId": "S14", "expected": "refuted", "weight": 1, "requiredEvidence": ["E01", "E13"], "allowedEvidence": ["E01", "E05", "E13"], "rationale": "Web users are affected too, and sampled rejections are explained by auth-2 key mismatch regardless of client." },
+    { "itemId": "S15", "expected": "supported", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E11", "E12"], "rationale": "Production agents received K2 at 13:31 through the push; staging agents, which are not subscribed, did not." },
+    { "itemId": "S16", "expected": "supported", "weight": 1, "requiredEvidence": ["E03", "E13"], "allowedEvidence": ["E01", "E03", "E08", "E13", "E14"], "rationale": "Failures are confined to K2 tokens from auth-2 and began only after replicas switched to K2 signing; the switch is a necessary condition for the mismatch to matter." },
+    { "itemId": "S17", "expected": "preferred", "weight": 1, "requiredEvidence": ["E02"], "allowedEvidence": ["E01", "E02", "E03"], "rationale": "At stage 1 the gateway upgrade is a live candidate; a half-fleet rollback is reversible and discriminates it. Later evidence that v2.8 was not the cause does not make the stage-1 decision wrong." },
+    { "itemId": "S18", "expected": "preferred", "weight": 1, "requiredEvidence": ["E09"], "allowedEvidence": ["E08", "E09"], "rationale": "At stage 2 a stale production key set is the supported mechanism and a forced refresh is low-risk. Judging it by the stage-3 correction is hindsight." },
+    { "itemId": "S19", "expected": "preferred", "weight": 1, "requiredEvidence": ["E13", "E14"], "allowedEvidence": ["E13", "E14", "E15"], "rationale": "Stops issuance of unverifiable tokens at the source." },
+    { "itemId": "S20", "expected": "harmful", "weight": 1, "requiredEvidence": ["E12", "E13"], "allowedEvidence": ["E03", "E12", "E13", "E14"], "rationale": "Removing K2 from the JWKS would invalidate the valid K2 tokens issued by auth-1 and auth-3 (31% of accepted tokens in the sample), extending the logouts to many more users." },
+    { "itemId": "S21", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E06"], "allowedEvidence": ["E06", "E13"], "rationale": "Targets a mechanism already ruled out." },
+    { "itemId": "S22", "expected": "acceptable", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E09", "E11"], "rationale": "Hardens against the stale-cache failure seen on staging agents, but does not address the auth-2 mechanism causing this incident." }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E02", "E04", "E05", "E09"],
+    "conflictingEvidencePairs": [["E09", "E11"], ["E09", "E12"], ["E04", "E07"]],
+    "missingInformation": [
+      "How auth-2 came to hold different K2 key material (secret-sync logs rotated out).",
+      "At stages 1-2: which replica issued rejected tokens and whether production key sets contain K2."
+    ],
+    "reasoningHops": 4,
+    "reasoningChain": "Rejected tokens are all K2 (E08) -> but many K2 tokens are accepted and production agents hold K2 (E11, E12), so verification capability is not the problem -> rejected tokens all come from auth-2 (E13) -> auth-2's K2 private key does not match the published key (E14) -> signature failures on a third of new tokens after the 14:00 switch (E03, E01).",
+    "harmfulActionCandidateIds": ["A4"],
+    "constructTraps": [
+      "Marking the stage-2 stale-cache hypothesis refuted or unknown using the stage-3 correction.",
+      "Marking the stage-1 rollback or stage-2 refresh as not-recommended because later evidence showed them unnecessary.",
+      "Collapsing the issuer-side alternative at stage 2 because the cache hypothesis was supported.",
+      "Treating the stage-3 mismatch as proof that secret-sync caused it.",
+      "Citing later-stage evidence for stage-scoped items."
+    ]
+  }
+}

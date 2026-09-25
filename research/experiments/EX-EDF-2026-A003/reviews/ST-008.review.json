@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-008",
+  "authorFamily": "Anthropic",
+  "reviewerFamily": "OpenAI",
+  "reviewerModel": "gpt-5.6-sol",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "This case strongly exercises evidence revision rather than hindsight reasoning. At stage 1 the gateway release, key rotation, and clock skew are all live alternatives. The half-fleet rollback legitimately refutes the gateway-version hypothesis at stage 2, while the mislabeled K1-only dumps make stale production JWKS state a warranted stage-2 belief. Stage 3 then explicitly invalidates that evidence, shows production caches contain K2, localizes rejected tokens to auth-2, and establishes mismatched signing material. The truth correctly preserves the reasonableness of earlier states and actions instead of rewriting them with later knowledge. Secret-sync causation remains unknown because the relevant logs are gone. The staged actions are reversible and appropriately evaluated as of their evidence stage. The case has multiple plausible alternatives, a meaningful evidence correction, no lexical answer leakage, and sufficient difficulty."
+}

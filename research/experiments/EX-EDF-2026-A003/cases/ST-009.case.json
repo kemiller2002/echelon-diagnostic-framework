@@ -1,7 +1,7 @@
 {
   "id": "ST-009",
   "construct": "interaction",
-  "title": "Checksum corruption under a conditional decoder combination",
+  "title": "Checksum mismatches after decoder rollout",
   "domain": "media processing",
   "entities": [
     "ARM64 workers",
@@ -40,17 +40,17 @@
     {
       "id": "E6",
       "stage": "S2",
-      "text": "A controlled matrix reproduced corruption on ARM64 only when both vectorization and the pooled-buffer allocator were active under concurrency above 24 workers."
+      "text": "On ARM64 workers using the pooled-buffer allocator at concurrency 32, enabling vectorization reproduced 7 checksum mismatches in 500,000 decodes. The test did not vary architecture and allocator in the same run."
     },
     {
       "id": "E7",
       "stage": "S2",
-      "text": "ARM64 with vectorization enabled but the legacy allocator did not reproduce corruption in the same test."
+      "text": "On ARM64 workers at concurrency 32 using the legacy allocator, vectorization produced no mismatches in 500,000 decodes."
     },
     {
       "id": "E8",
       "stage": "S2",
-      "text": "x86_64 with vectorization and the pooled-buffer allocator did not reproduce corruption at the same concurrency."
+      "text": "On x86_64 workers using vectorization and the pooled-buffer allocator, no mismatch appeared in 100,000 decodes, but those workers ran at concurrency 16 because the test harness could not sustain 32."
     },
     {
       "id": "E9",
@@ -75,22 +75,42 @@
     {
       "id": "E13",
       "stage": "S3",
-      "text": "Huge-page settings were not captured consistently, so their modifying effect on the interaction is unknown."
+      "text": "Huge-page settings were not captured consistently across affected and unaffected hosts during the incident."
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "text": "A matched decoder test held vectorization enabled, pooled-buffer allocator enabled, and concurrency at 32 workers while varying only architecture. ARM64 recorded 8 checksum mismatches in 600,000 decodes; x86_64 recorded 0 in 600,000."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "text": "One affected rack ran a newer NIC firmware revision, but checksum mismatches also occurred on affected hosts with the older revision and did not occur on x86_64 hosts using either revision."
+    },
+    {
+      "id": "E16",
+      "stage": "S3",
+      "text": "Buffer-pool size differed in one availability zone, but corruption occurred in both default-size and enlarged-pool zones when the failing decoder combination was present."
+    },
+    {
+      "id": "E17",
+      "stage": "S3",
+      "text": "Affected source images had a broad range of compression ratios, and mismatch frequency did not cluster around any compression-ratio band in the retained sample."
     }
   ],
   "candidates": {
     "hypotheses": [
       {
         "id": "H1",
-        "text": "ARM64 architecture alone was sufficient to cause the checksum corruption."
+        "text": "ARM64 architecture materially increases corruption risk even without the pooled-buffer and vectorization combination."
       },
       {
         "id": "H2",
-        "text": "The vectorized decoder alone was sufficient to cause the checksum corruption."
+        "text": "The vectorized decoder materially increases corruption risk even when the pooled-buffer allocator is not active."
       },
       {
         "id": "H3",
-        "text": "The observed corruption required the joint presence of ARM64, vectorization, and the pooled-buffer path under high concurrency."
+        "text": "The observed corruption depends on the joint presence of ARM64, vectorization, pooled-buffer reuse, and sufficiently high concurrency."
       },
       {
         "id": "H4",
@@ -152,15 +172,15 @@
       },
       {
         "id": "A3",
-        "text": "Disable checksum validation so corrupt results are no longer rejected."
+        "text": "Allow decoder outputs to proceed without checksum validation during the incident."
       },
       {
         "id": "A4",
-        "text": "Reduce decoder concurrency on the affected combination as a temporary containment measure."
+        "text": "Reduce decoder concurrency on affected hosts from current levels to 8 workers."
       },
       {
         "id": "A5",
-        "text": "Replace source storage objects because storage corruption is presumed causal."
+        "text": "Replace source storage objects for affected jobs."
       }
     ]
   },
@@ -301,6 +321,28 @@
         "acceptable",
         "reject",
         "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I13",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I14",
+      "kind": "edge",
+      "candidateId": "R2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true

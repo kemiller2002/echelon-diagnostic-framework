@@ -1,0 +1,502 @@
+{
+  "id": "ST-008",
+  "construct": "evidence-revision",
+  "title": "Intermittent token rejections after an afternoon of changes",
+  "domain": "API authentication and token verification",
+  "context": "A SaaS product's API gateway verifies JWT access tokens issued by auth-service. Public verification keys are cached on each gateway node by a jwks-agent daemon that the gateway pods read from. On Sep 21 at 14:05 UTC users began to be logged out intermittently. The investigation proceeded in three stages; evidence is labelled with the stage at which it became available. Some scored items ask for the state that was warranted at a particular stage.",
+  "entities": [
+    {
+      "id": "api-gateway",
+      "description": "24 gateway pods that verify JWT signatures and time claims."
+    },
+    {
+      "id": "jwks-agent",
+      "description": "Per-node daemon that fetches and caches the JWKS public keys for gateway pods on that node."
+    },
+    {
+      "id": "auth-service",
+      "description": "Token issuer; three replicas (auth-1, auth-2, auth-3) behind a round-robin load balancer."
+    },
+    {
+      "id": "jwks-endpoint",
+      "description": "Publishes the public keys that the gateway uses to verify token signatures."
+    },
+    {
+      "id": "secret-sync",
+      "description": "Controller that delivers signing-key material to auth-service replicas."
+    },
+    {
+      "id": "mobile-app",
+      "description": "Mobile client."
+    },
+    {
+      "id": "web-app",
+      "description": "Browser client."
+    }
+  ],
+  "answerGuide": {
+    "staging": "A scored item with an asOfStage value must be answered using only evidence whose stage is less than or equal to that value, and should cite only such evidence. For an action with asOfStage, judge it as a decision taken at that stage. Items without asOfStage are answered using all evidence.",
+    "hypothesis": {
+      "supported": "The evidence in scope positively establishes the statement, directly or through a chain of inference.",
+      "refuted": "The evidence in scope positively rules the statement out.",
+      "unknown": "The evidence in scope does not discriminate between the statement being true and false; it remains a live possibility."
+    },
+    "edge": {
+      "supported": "The evidence establishes that the stated relation holds between the two nodes.",
+      "refuted": "The evidence establishes that the stated relation does not hold.",
+      "unknown": "The case lacks evidence that discriminates whether the stated relation holds."
+    },
+    "action": {
+      "preferred": "Directly addresses a mechanism the in-scope evidence supports or keeps live, or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the in-scope evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": 1,
+      "source": "gateway alert (14:20)",
+      "text": "HTTP 401 responses are 3.1% of authenticated API requests since 14:05 (baseline 0.3%). Both web and mobile users report being logged out unexpectedly."
+    },
+    {
+      "id": "E02",
+      "stage": 1,
+      "source": "change log",
+      "text": "Gateway v2.8 was rolled out to all 24 gateway pods between 13:50 and 14:00. Its changelog includes a JWT library upgrade from 4.2 to 5.0."
+    },
+    {
+      "id": "E03",
+      "stage": 1,
+      "source": "auth-service runbook",
+      "text": "Weekly signing-key rotation: new key K2 was published on the JWKS endpoint alongside K1 at 13:30, and auth-service replicas switched to signing with K2 at 14:00. The rotation has run weekly for 20 weeks without incident."
+    },
+    {
+      "id": "E04",
+      "stage": 1,
+      "source": "NTP monitoring",
+      "text": "Clock-offset alarm at 14:10: three of the twelve gateway nodes were 1.2-1.8 s ahead of reference time."
+    },
+    {
+      "id": "E05",
+      "stage": 1,
+      "source": "mobile release log",
+      "text": "Mobile app v7.1 was released to 10% of mobile users at 12:00 on Sep 21."
+    },
+    {
+      "id": "E06",
+      "stage": 2,
+      "source": "canary rollback (14:45-15:05)",
+      "text": "12 of the 24 gateway pods were rolled back to v2.7 at 14:45. From 14:45 to 15:05 the 401 rate was 3.0% on v2.7 pods and 3.2% on v2.8 pods."
+    },
+    {
+      "id": "E07",
+      "stage": 2,
+      "source": "gateway error breakdown",
+      "text": "401s are spread evenly across pods (2.8-3.4% each), including pods on the three nodes with clock offset. Rejection reasons: 98% 'signature verification failed', 2% 'token expired', none 'token not yet valid'. The gateway allows 30 s of clock leeway."
+    },
+    {
+      "id": "E08",
+      "stage": 2,
+      "source": "token sample (15:00)",
+      "text": "Of 200 rejected tokens sampled at 15:00, all carry key ID K2."
+    },
+    {
+      "id": "E09",
+      "stage": 2,
+      "source": "gateway debug dumps posted in incident channel (14:52)",
+      "text": "Two dumps labelled 'gw-prod-node-3 jwks-agent' and 'gw-prod-node-7 jwks-agent': each cached key set contains only K1, with last JWKS fetch at 13:12. Configured scheduled refresh interval: 24 hours."
+    },
+    {
+      "id": "E10",
+      "stage": 2,
+      "source": "auth-service health",
+      "text": "All three auth-service replicas report healthy. Token issuance rate is normal."
+    },
+    {
+      "id": "E11",
+      "stage": 3,
+      "source": "incident channel correction (15:20)",
+      "text": "Both 14:52 dumps were taken from jwks-agents on staging nodes (gw-staging-node-3 and gw-staging-node-7); the production labels were a copy-paste error. Dumps from jwks-agents on four production gateway nodes at 15:20 show K1 and K2, with K2 received at 13:31 through auth-service's key-publication push. Staging jwks-agents are not subscribed to publication pushes."
+    },
+    {
+      "id": "E12",
+      "stage": 3,
+      "source": "token sample (15:30)",
+      "text": "Of 1,000 accepted tokens sampled at 15:30, 310 carry key ID K2."
+    },
+    {
+      "id": "E13",
+      "stage": 3,
+      "source": "token forensics",
+      "text": "Token ID prefixes identify the issuing replica. All 200 rejected tokens from the 15:00 sample and 500 further rejected tokens sampled at 15:30 were issued by auth-2. The accepted K2 tokens were issued by auth-1 and auth-3."
+    },
+    {
+      "id": "E14",
+      "stage": 3,
+      "source": "offline verification",
+      "text": "Offline verification of auth-2-issued K2 tokens against the published K2 public key fails. The fingerprint of the K2 private key mounted on auth-2 differs from the one mounted on auth-1 and auth-3."
+    },
+    {
+      "id": "E15",
+      "stage": 3,
+      "source": "secret-sync records",
+      "text": "auth-2 runs in a different availability zone; its secret volume was last updated at 13:58. secret-sync logs for 13:30-14:00 have been rotated out, and there is no record of what material was delivered to auth-2 or whether the mounted file was changed by other means."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The JWT library upgrade in gateway v2.8 causes the gateway to reject valid tokens."
+      },
+      {
+        "id": "H2",
+        "text": "Production gateway nodes are verifying with a cached key set that lacks K2."
+      },
+      {
+        "id": "H3",
+        "text": "Gateway clock offset causes valid tokens to be rejected."
+      },
+      {
+        "id": "H4",
+        "text": "An auth-service replica is signing tokens with key material that does not match the published key."
+      },
+      {
+        "id": "H5",
+        "text": "secret-sync delivered incorrect K2 key material to auth-2."
+      }
+    ],
+    "edges": [
+      {
+        "id": "X1",
+        "from": "gateway v2.8 rollout",
+        "to": "401 signature failures",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X2",
+        "from": "auth-2 key-material mismatch",
+        "to": "401 signature failures",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X3",
+        "from": "clock offset on three gateway nodes",
+        "to": "401 responses",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X4",
+        "from": "mobile app v7.1 release",
+        "to": "401 responses",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X5",
+        "from": "auth-service key-publication push at 13:30",
+        "to": "production jwks-agent caches containing K2",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "X6",
+        "from": "switch to K2 signing at 14:00",
+        "to": "401 signature failures",
+        "relation": "contributes-to"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Roll 12 of the 24 gateway pods back to v2.7 and compare 401 rates between versions."
+      },
+      {
+        "id": "A2",
+        "text": "Force an immediate JWKS refresh on the jwks-agents of all production gateway nodes."
+      },
+      {
+        "id": "A3",
+        "text": "Remove auth-2 from the auth-service load balancer until its K2 key material is replaced."
+      },
+      {
+        "id": "A4",
+        "text": "Roll back the key rotation: return all replicas to signing with K1 and remove K2 from the JWKS endpoint."
+      },
+      {
+        "id": "A5",
+        "text": "Roll the remaining gateway pods back to v2.7."
+      },
+      {
+        "id": "A6",
+        "text": "Shorten the jwks-agent scheduled refresh interval from 24 hours to 5 minutes on all gateway nodes."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "S01",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "asOfStage": 1,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S02",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "asOfStage": 2,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S03",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "asOfStage": 1,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S04",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "asOfStage": 2,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S05",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S06",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "asOfStage": 1,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S07",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "asOfStage": 2,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S08",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "asOfStage": 2,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S09",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S10",
+      "kind": "hypothesis",
+      "candidateId": "H5",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S11",
+      "kind": "edge",
+      "candidateId": "X1",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S12",
+      "kind": "edge",
+      "candidateId": "X2",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S13",
+      "kind": "edge",
+      "candidateId": "X3",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S14",
+      "kind": "edge",
+      "candidateId": "X4",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S15",
+      "kind": "edge",
+      "candidateId": "X5",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S16",
+      "kind": "edge",
+      "candidateId": "X6",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S17",
+      "kind": "action",
+      "candidateId": "A1",
+      "asOfStage": 1,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S18",
+      "kind": "action",
+      "candidateId": "A2",
+      "asOfStage": 2,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S19",
+      "kind": "action",
+      "candidateId": "A3",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S20",
+      "kind": "action",
+      "candidateId": "A4",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S21",
+      "kind": "action",
+      "candidateId": "A5",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S22",
+      "kind": "action",
+      "candidateId": "A6",
+      "asOfStage": 3,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    }
+  ]
+}

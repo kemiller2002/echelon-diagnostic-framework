@@ -39,7 +39,9 @@ function criticalFiles(){
     path.join(EXP,'review-schema.json'),
     path.join(EXP,'randomization.json'),
     path.join(ROOT,'scripts','edf-002-score.mjs'),
-    path.join(ROOT,'scripts','edf-002-validate.mjs')
+    path.join(ROOT,'scripts','edf-002-validate.mjs'),
+    path.join(ROOT,'scripts','edf-002-analyzer.mjs'),
+    path.join(ROOT,'scripts','edf-002-freeze.mjs')
   ];
 }
 function expected(){

@@ -1,0 +1,102 @@
+{
+  "id": "ST-006",
+  "construct": "propagation",
+  "title": "Orders API errors and payment backlog on a Kubernetes cluster",
+  "domain": "Kubernetes service networking",
+  "context": "On Sep 20 a 40-node Kubernetes cluster running an order platform showed ingress 502 errors for orders-api, a growing payment-worker backlog, and several other anomalies. Every pod resolves names through a node-local DNS cache (node-local-dns, one per node) that forwards cache misses to cluster CoreDNS. The reviewer must classify how the observed conditions relate to one another and choose follow-up actions.",
+  "entities": [
+    { "id": "node-local-dns", "description": "Per-node DNS cache daemonset; forwards cache misses to CoreDNS." },
+    { "id": "coredns", "description": "Cluster DNS; 4 replicas." },
+    { "id": "orders-api", "description": "Order API; calls pricing-service over HTTP and inventory-service through an endpoint-cache sidecar; autoscaled by an HPA." },
+    { "id": "pricing-service", "description": "Price computation service called by orders-api." },
+    { "id": "inventory-service", "description": "Stock service called by orders-api." },
+    { "id": "payment-worker", "description": "Queue consumer that captures payments at an external payment gateway." },
+    { "id": "redis-cache", "description": "Cache cluster used by orders-api." },
+    { "id": "ingress", "description": "Cluster ingress; 3 s upstream timeout." }
+  ],
+  "answerGuide": {
+    "hypothesis": {
+      "supported": "The evidence in this case positively establishes the statement, directly or through a chain of inference from case evidence.",
+      "refuted": "The evidence in this case positively rules the statement out.",
+      "unknown": "The case lacks evidence that discriminates between the statement being true and false."
+    },
+    "edge": {
+      "contributes-to": "The from-node is an origin condition (not itself produced by another condition in this case) and causally contributes to the to-node.",
+      "mediates": "The from-node is itself produced by an upstream condition in this case and transmits that effect to the to-node.",
+      "precedes-only": "The from-node occurred before the to-node, but the evidence shows it did not cause it.",
+      "prevents": "The from-node blocks or reduces the to-node.",
+      "correlates-only": "The two nodes co-vary, but the evidence shows no causal effect in the stated direction (for example a common cause or reverse direction).",
+      "unknown": "The case lacks evidence that discriminates among the relations above."
+    },
+    "action": {
+      "preferred": "Directly addresses an evidence-supported mechanism or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    { "id": "E01", "stage": 1, "source": "ingress alert (09:10)", "text": "Ingress 502 rate for orders-api is 6% since 09:04 (baseline below 0.1%). All 502s are ingress upstream timeouts at 3 s." },
+    { "id": "E02", "stage": 1, "source": "change log", "text": "08:50: planned Redis cache failover to a new primary node, completed 08:52. 08:58-09:03: node-local-dns daemonset rolled to chart 2.4.0 on all 40 nodes as a routine chart bump; release notes say 'cache settings are now templated; defaults aligned with upstream'." },
+    { "id": "E03", "stage": 2, "source": "rendered configuration diff", "text": "node-local-dns rendered config, before and after chart 2.4.0: the cluster.local zone changed from 'cache 30' to 'cache 5'. Forwarding targets and all other zones are unchanged." },
+    { "id": "E04", "stage": 2, "source": "CoreDNS metrics", "text": "CoreDNS query rate 4,100 per second at 08:55, 23,500 per second at 09:05, then flat between 22,000 and 24,000 per second until 10:30. Each of the 4 replicas has a 1-core CPU limit; usage sits at the limit and 58% of CPU scheduling periods are throttled from 09:04." },
+    { "id": "E05", "stage": 2, "source": "in-cluster DNS probe", "text": "Lookup latency from pods: p50 2 ms -> 40 ms, p99 12 ms -> 1.9 s from 09:04. 3.8% of lookups time out at 5 s." },
+    { "id": "E06", "stage": 2, "source": "orders-api configuration and traces", "text": "Since orders-api v5.2 its HTTP client for pricing-service has keep-alive disabled (workaround for a connection-reuse bug), so every pricing call opens a new connection and resolves the pricing-service name. For orders-api requests slower than 1 s, 70-90% of span time is in dns.lookup before the pricing call." },
+    { "id": "E07", "stage": 1, "source": "orders-api team lead", "text": "\"We reuse connections to pricing, so DNS isn't in our hot path.\"" },
+    { "id": "E08", "stage": 1, "source": "platform team", "text": "\"Nodes are averaging 35% CPU across the cluster. DNS can't be CPU-starved.\"" },
+    { "id": "E09", "stage": 1, "source": "Redis metrics", "text": "Failover completed 08:52. From 08:53 onward orders-api Redis command p99 latency is 1.1 ms (same as prior week) and the Redis error count is zero." },
+    { "id": "E10", "stage": 1, "source": "logging pipeline", "text": "orders-api log volume rose from 1.2 GB/h to 9.8 GB/h from 09:05; 91% of the added lines are 'pricing call failed, retrying' warnings. Node disk utilisation stayed below 20%. The log shipper is asynchronous with a bounded in-memory buffer that drops on overflow." },
+    { "id": "E11", "stage": 1, "source": "autoscaling events", "text": "The orders-api HPA scales on in-flight requests per pod (target 40). It scaled orders-api from 10 to 30 pods between 09:12 and 09:15; node count stayed at 40. The 502 rate per pod is similar for the original and the new pods. CoreDNS query rate did not change during or after the scale-out." },
+    { "id": "E12", "stage": 2, "source": "orders-api capacity", "text": "orders-api pods reject work above 64 in-flight requests. At 09:25, with 30 pods, average in-flight requests per pod was 58." },
+    { "id": "E13", "stage": 2, "source": "inventory client sidecar", "text": "orders-api reaches inventory-service through an endpoint-cache sidecar that resolves each upstream name at most once per 60 s and reuses connections. Sidecar logs show about one lookup per upstream per minute throughout the incident. orders-api -> inventory-service p99 latency stayed at 35 ms, while orders-api -> pricing-service p99 (including connection setup) rose from 60 ms to 2.8 s." },
+    { "id": "E14", "stage": 2, "source": "payment-worker logs and queue metrics", "text": "payment-worker resolves the payment gateway hostname through cluster DNS on each capture attempt and retries a timed-out attempt up to 3 times. DNS timeouts appear in 4% of attempts from 09:04. Queue backlog grew from 200 to 14,000 messages by 09:40; capture attempts that did not hit a DNS timeout completed in normal time." },
+    { "id": "E15", "stage": 2, "source": "support and payments team", "text": "Two customers report being charged twice for orders placed between 09:20 and 09:30. Whether payment-worker reuses an idempotency key across retries is not documented. Gateway capture logs for the two orders have been requested and not yet received." },
+    { "id": "E16", "stage": 3, "source": "CoreDNS rollout (09:40)", "text": "A single CoreDNS deployment revision at 09:40 both applied image patch 1.11.3 and raised the CPU limit from 1 to 2 cores per replica. By 09:45 DNS timeouts fell from 3.8% to 0.4% and throttling to 9%. Neither change was applied separately." }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H1", "text": "The node-local-dns chart 2.4.0 rollout is the origin of the orders-api 502s and the payment-worker backlog." },
+      { "id": "H2", "text": "The 08:50 Redis failover is the origin of the orders-api 502s." },
+      { "id": "H3", "text": "The orders-api scale-out increased load on CoreDNS." },
+      { "id": "H4", "text": "payment-worker retries during DNS timeouts produced the two reported double charges." }
+    ],
+    "edges": [
+      { "id": "X1", "from": "node-local-dns chart 2.4.0 rollout", "to": "CoreDNS query rate increase", "relation": "to-be-classified" },
+      { "id": "X2", "from": "CoreDNS CPU throttling", "to": "orders-api 502 responses", "relation": "to-be-classified" },
+      { "id": "X3", "from": "Redis failover at 08:50", "to": "orders-api 502 responses", "relation": "to-be-classified" },
+      { "id": "X4", "from": "orders-api log volume increase", "to": "orders-api request latency", "relation": "to-be-classified" },
+      { "id": "X5", "from": "orders-api scale-out from 10 to 30 pods", "to": "CoreDNS query rate", "relation": "to-be-classified" },
+      { "id": "X6", "from": "inventory endpoint-cache sidecar", "to": "DNS latency in orders-api -> inventory-service calls", "relation": "to-be-classified" },
+      { "id": "X7", "from": "CoreDNS image patch 1.11.3", "to": "reduction in DNS timeouts after 09:40", "relation": "to-be-classified" },
+      { "id": "X8", "from": "DNS lookup latency in pods", "to": "payment-worker queue backlog", "relation": "to-be-classified" }
+    ],
+    "actions": [
+      { "id": "A1", "text": "Roll node-local-dns back to the previous chart version." },
+      { "id": "A2", "text": "Cap the orders-api HPA at 10 replicas until the incident is resolved." },
+      { "id": "A3", "text": "Lower the orders-api log level from INFO to WARN." },
+      { "id": "A4", "text": "Fail the Redis cache back to its original primary node." },
+      { "id": "A5", "text": "Remove the endpoint-cache sidecar from orders-api so all upstream calls use the same resolution path." },
+      { "id": "A6", "text": "Obtain the payment gateway capture logs, including idempotency keys, for the two reported double charges." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S05", "kind": "edge", "candidateId": "X1", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": false },
+    { "id": "S06", "kind": "edge", "candidateId": "X2", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S07", "kind": "edge", "candidateId": "X3", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S08", "kind": "edge", "candidateId": "X4", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S09", "kind": "edge", "candidateId": "X5", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S10", "kind": "edge", "candidateId": "X6", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S11", "kind": "edge", "candidateId": "X7", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": true },
+    { "id": "S12", "kind": "edge", "candidateId": "X8", "allowedAnswers": ["contributes-to", "mediates", "precedes-only", "prevents", "correlates-only", "unknown"], "constructCritical": false },
+    { "id": "S13", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S14", "kind": "action", "candidateId": "A2", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S15", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S16", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S17", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S18", "kind": "action", "candidateId": "A6", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false }
+  ]
+}

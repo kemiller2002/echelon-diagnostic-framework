@@ -1,7 +1,7 @@
 {
   "id": "ST-003",
   "construct": "control-points",
-  "title": "Search outage under merge pressure and retry amplification",
+  "title": "Search 5xx incident during scheduled maintenance",
   "domain": "distributed search",
   "entities": [
     "search API",
@@ -45,12 +45,12 @@
     {
       "id": "E7",
       "stage": "S2",
-      "text": "In a canary, limiting each request to one retry with exponential backoff reduced index request volume by 34% and shard p99 latency by 46% within five minutes."
+      "text": "A five-minute canary limited each request to one retry with exponential backoff. During the canary index request volume fell 18% and shard p99 improved from 4.8 s to 3.9 s; two canary shards also completed merge phases during the interval, so the improvement cannot be attributed to retry policy alone."
     },
     {
       "id": "E8",
       "stage": "S2",
-      "text": "Pausing the segment merge on one affected shard reduced that shard's disk queue depth and p99 latency without changing API capacity."
+      "text": "Across affected shards, shards still in active segment merge had 2.1-3.4 times the disk queue depth of same-hardware shards not currently merging. The first affected shard to finish its merge saw p99 latency fall before the others, without a change in API capacity."
     },
     {
       "id": "E9",
@@ -76,6 +76,16 @@
       "id": "E13",
       "stage": "S3",
       "text": "After the merge completed naturally, retry volume and index latency both returned toward baseline without removing API replicas."
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "text": "A query-cache configuration change had been deployed to the API tier 35 minutes before the incident; the same change was present in an unaffected region with comparable traffic."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "text": "The proportion of long-tail search terms increased by 6% during the incident, but the same query-mix shift appeared on unaffected shards that were not in segment merge."
     }
   ],
   "candidates": {
@@ -90,7 +100,7 @@
       },
       {
         "id": "H3",
-        "text": "Immediate retries amplified index load and sustained the incident."
+        "text": "Immediate retries amplified index load during the segment merge."
       },
       {
         "id": "H4",
@@ -124,9 +134,9 @@
       },
       {
         "id": "R5",
-        "from": "API replica count",
-        "to": "index merge pressure",
-        "relation": "reduces"
+        "from": "API timeout increase",
+        "to": "request backlog",
+        "relation": "contributes-to"
       },
       {
         "id": "R6",

@@ -9,3 +9,4 @@
 | ROS-INSTALL-3-1-1 | ROS-INSTALL-3-1-1 | complete |  |  |
 | WI-0001 | Author OpenAI EX-EDF-2026-A003 stress cases | complete | edf,research,experiment | high |
 | WI-0002 | Review OpenAI EX-EDF-2026-A003 cases | complete | edf,research,experiment | high |
+| WI-0003 | Integrate and pre-freeze audit EX-EDF-2026-A003 accepted cases and reviews | complete | edf,research,experiment,pre-freeze | high |

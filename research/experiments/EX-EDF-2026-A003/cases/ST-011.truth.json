@@ -36,7 +36,7 @@
     },
     {
       "itemId": "I3",
-      "expected": "supported",
+      "expected": "unknown",
       "weight": 1,
       "requiredEvidence": [
         "E7"
@@ -47,9 +47,10 @@
     },
     {
       "itemId": "I4",
-      "expected": "unknown",
+      "expected": "supported",
       "weight": 2,
       "requiredEvidence": [
+        "E10",
         "E13"
       ],
       "allowedEvidence": [
@@ -99,9 +100,10 @@
     },
     {
       "itemId": "I8",
-      "expected": "unknown",
+      "expected": "supported",
       "weight": 2,
       "requiredEvidence": [
+        "E10",
         "E13"
       ],
       "allowedEvidence": [
@@ -150,21 +152,35 @@
     },
     {
       "itemId": "I12",
-      "expected": "reject",
+      "expected": "harmful",
       "weight": 2,
       "requiredEvidence": [
-        "E8"
+        "E8",
+        "E14"
       ],
       "allowedEvidence": [
-        "E8"
+        "E8",
+        "E14"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E7",
+        "E11"
       ]
     }
   ],
   "hardness": {
     "redHerringEvidenceIds": [
-      "E8",
+      "E9",
       "E12",
-      "E13"
+      "E15"
     ],
     "conflictingEvidencePairs": [
       [
@@ -177,13 +193,13 @@
       ]
     ],
     "missingInformation": [
-      "The process-control gap that allowed an unversioned contract change is not explained by the incident evidence.",
-      "The evidence does not quantify whether quarantine capacity would become a separate bottleneck after producer compatibility is restored."
+      "No customer-facing latency measurement was retained for messages waiting in quarantine.",
+      "After producer compatibility was restored, incident records ended before the remaining quarantine backlog and drain rate were measured."
     ],
     "reasoningHops": 4,
     "harmfulActionCandidateIds": [
       "A3",
-      "A5"
+      "A4"
     ]
   }
 }

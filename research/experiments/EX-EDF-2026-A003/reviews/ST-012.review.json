@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-012",
+  "authorFamily": "Anthropic",
+  "reviewerFamily": "OpenAI",
+  "reviewerModel": "gpt-5.6-sol",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "The case separates failure-producing mechanisms, detection, and containment well. Checkout v9 is supported as the 100x amount mechanism by both quarantined and already-loaded samples. R2's stale currency reference produces false-positive RSD quarantines, while the circuit breaker causes visible staleness but contains further corrupted rows that can evade R1. The freshness monitor is correctly classified as detection only. The truth also catches the important partial-control nuance: R1 detects only totals over its threshold, so some corrupt rows already reached finance. Disabling the breaker or loosening R1 would remove protections while v9 remains active and is therefore harmful; tuning R2 and remediating already-loaded rows are evidence-supported. Daytime RSD share and loyalty-path impact remain genuinely unknown. The title and candidate wording do not leak answers, and the case resists the common mistake of blaming controls for the failures they reveal or contain."
+}

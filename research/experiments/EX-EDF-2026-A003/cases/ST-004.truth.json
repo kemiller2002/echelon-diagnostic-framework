@@ -1,0 +1,42 @@
+{
+  "caseId": "ST-004",
+  "authorFamily": "Anthropic",
+  "construct": "control-points",
+  "answers": [
+    { "itemId": "S01", "expected": "supported", "weight": 1, "requiredEvidence": ["E08", "E09"], "allowedEvidence": ["E07", "E08", "E09", "E10", "E11"], "rationale": "Flag to 100% at 17:20 with one uncached per-item request per tile (E08); per-item rate rose 1,400 -> 9,100/s while listing views were flat (E09, E11); replicas saturated by 17:32 (E07). The product-team estimate (E10) is contradicted by measured traffic." },
+    { "itemId": "S02", "expected": "refuted", "weight": 1, "requiredEvidence": ["E02", "E15"], "allowedEvidence": ["E01", "E02", "E03", "E15"], "rationale": "Errors are timeouts waiting on inventory-service, which is itself waiting on the database; restarting checkout pods produced only a transient dip." },
+    { "itemId": "S03", "expected": "refuted", "weight": 1, "requiredEvidence": ["E03", "E14"], "allowedEvidence": ["E02", "E03", "E14"], "rationale": "Pool waits are where the delay appears, but the primary is CPU-saturated; a previous pool increase under saturation worsened write latency. The pool is a symptom location, not the binding constraint." },
+    { "itemId": "S04", "expected": "unknown", "weight": 1, "requiredEvidence": ["E04"], "allowedEvidence": ["E04", "E07"], "rationale": "The upgrade was uneventful at normal load for 40 hours, but replay throughput on 15.8 has never been measured at elevated load, so neither reduced nor unchanged throughput is established." },
+    { "itemId": "S05", "expected": "supported", "weight": 1, "requiredEvidence": ["E03", "E06"], "allowedEvidence": ["E03", "E05", "E06", "E07", "E11"], "rationale": "Reservation writes are unchanged; redirected reads began at 17:34-17:35 and primary saturation at 17:38, before the bot spike at 17:50." },
+    { "itemId": "S06", "expected": "supported", "weight": 1, "requiredEvidence": ["E07", "E09"], "allowedEvidence": ["E07", "E08", "E09", "E11"], "rationale": "Per-item rate increase after 17:20 coincides with replica CPU rising to 99% by 17:32, with no change in listing views." },
+    { "itemId": "S07", "expected": "supported", "weight": 1, "requiredEvidence": ["E07"], "allowedEvidence": ["E04", "E07", "E16"], "rationale": "Lag stayed at 0.1-0.3 s for 40 hours and rose to 3-8 s only after replica CPU reached 99%." },
+    { "itemId": "S08", "expected": "supported", "weight": 1, "requiredEvidence": ["E05", "E06"], "allowedEvidence": ["E05", "E06", "E07"], "rationale": "The guard redirects reads when lag exceeds 2 s; redirected reads rose from zero as lag exceeded 3 s." },
+    { "itemId": "S09", "expected": "supported", "weight": 1, "requiredEvidence": ["E02", "E03"], "allowedEvidence": ["E01", "E02", "E03"], "rationale": "Primary write latency and pool waits exceed the 2 s checkout timeout." },
+    { "itemId": "S10", "expected": "refuted", "weight": 1, "requiredEvidence": ["E01", "E12"], "allowedEvidence": ["E01", "E12", "E15"], "rationale": "Timeouts began at 17:40 and persisted after the four-minute loss cleared." },
+    { "itemId": "S11", "expected": "unknown", "weight": 1, "requiredEvidence": ["E11"], "allowedEvidence": ["E03", "E11"], "rationale": "Saturation preceded the bot spike, so the bots are not the origin, but whether login traffic touches this primary at all was never established; any contribution is undetermined." },
+    { "itemId": "S12", "expected": "harmful", "weight": 1, "requiredEvidence": ["E03", "E14"], "allowedEvidence": ["E02", "E03", "E14"], "rationale": "Adds concurrency to a CPU-saturated primary; the only in-case precedent shows write latency worsening sharply." },
+    { "itemId": "S13", "expected": "harmful", "weight": 1, "requiredEvidence": ["E13"], "allowedEvidence": ["E01", "E02", "E13"], "rationale": "Would lower the recorded timeout-error rate while connections are held longer; mobile clients abandon at 5 s and retry while abandoned work continues, adding load to the saturated primary." },
+    { "itemId": "S14", "expected": "preferred", "weight": 1, "requiredEvidence": ["E08", "E09"], "allowedEvidence": ["E07", "E08", "E09"], "rationale": "Removes the uncached per-item read volume at its origin while keeping the feature; batch endpoint has a 96% CDN hit ratio." },
+    { "itemId": "S15", "expected": "acceptable", "weight": 1, "requiredEvidence": ["E17"], "allowedEvidence": ["E07", "E09", "E17"], "rationale": "Low-risk capacity at a mediator, but not available before the 20:00 peak and does not remove the origin load." },
+    { "itemId": "S16", "expected": "harmful", "weight": 1, "requiredEvidence": ["E05", "E07"], "allowedEvidence": ["E05", "E06", "E07"], "rationale": "Moves the failure from latency to correctness: replicas lag 3-8 s, the range that previously caused overselling." },
+    { "itemId": "S17", "expected": "not-recommended", "weight": 1, "requiredEvidence": ["E15"], "allowedEvidence": ["E01", "E02", "E15"], "rationale": "Checkout-service is not the origin; the prior restart gave a transient dip only." },
+    { "itemId": "S18", "expected": "preferred", "weight": 1, "requiredEvidence": ["E08", "E09"], "allowedEvidence": ["E07", "E08", "E09"], "rationale": "Removes the origin load immediately through the flag." }
+  ],
+  "hardness": {
+    "redHerringEvidenceIds": ["E04", "E11", "E12", "E15", "E16"],
+    "conflictingEvidencePairs": [["E09", "E10"], ["E03", "E15"], ["E07", "E16"], ["E02", "E03"]],
+    "missingInformation": [
+      "Replica replay throughput on Postgres 15.8 under elevated load.",
+      "Whether the login service's session store shares the inventory primary."
+    ],
+    "reasoningHops": 5,
+    "reasoningChain": "stock-badges flag to 100% with uncached per-item calls (E08) -> per-item rate 6.5x with flat page views (E09, E11) -> replica CPU 99% (E07) -> lag above 2 s (E07) -> lag guard redirects reads to primary (E05, E06) -> primary CPU saturation with unchanged writes (E03) -> pool waits and reservation latency above the 2 s timeout (E02, E01).",
+    "harmfulActionCandidateIds": ["A1", "A2", "A5"],
+    "constructTraps": [
+      "Treating pool wait (E02) as the leverage point rather than the place where upstream load becomes visible.",
+      "Raising the timeout, which improves the error metric while increasing load.",
+      "Disabling the lag guard, which removes the primary load by moving the failure into overselling.",
+      "Treating added replicas as the fix when it cannot arrive before the peak and leaves the origin intact."
+    ]
+  }
+}

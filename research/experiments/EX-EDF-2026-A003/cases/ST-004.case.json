@@ -1,0 +1,101 @@
+{
+  "id": "ST-004",
+  "construct": "control-points",
+  "title": "Checkout reservation timeouts during evening traffic",
+  "domain": "e-commerce checkout and inventory services",
+  "context": "An online retailer's checkout-service reserves stock by calling inventory-service, which reads availability from two Postgres read replicas and writes reservations to the Postgres primary. On Sep 22 from about 17:40 UTC, checkout reservation errors rose sharply. The incident commander needs to decide which interventions to apply before the 20:00 traffic peak.",
+  "entities": [
+    { "id": "web-listing-pages", "description": "Product listing pages rendered for web visitors." },
+    { "id": "stock-badges", "description": "Web listing-page component showing per-product stock status, controlled by a feature flag." },
+    { "id": "api-gateway", "description": "Routes client and page requests to backend services." },
+    { "id": "cdn", "description": "Caches cacheable API responses in front of the gateway." },
+    { "id": "checkout-service", "description": "Handles checkout requests from web and mobile clients." },
+    { "id": "inventory-service", "description": "Serves availability reads and reservation writes; 12 pods, each with a 20-connection database pool." },
+    { "id": "pg-replicas", "description": "Two Postgres read replicas." },
+    { "id": "pg-primary", "description": "Postgres primary; max_connections 300." },
+    { "id": "mobile-app", "description": "Mobile checkout client." }
+  ],
+  "answerGuide": {
+    "hypothesis": {
+      "supported": "The evidence in this case positively establishes the statement, directly or through a chain of inference from case evidence.",
+      "refuted": "The evidence in this case positively rules the statement out.",
+      "unknown": "The case lacks evidence that discriminates between the statement being true and false."
+    },
+    "edge": {
+      "supported": "The evidence establishes that the stated relation holds between the two nodes.",
+      "refuted": "The evidence establishes that the stated relation does not hold.",
+      "unknown": "The case lacks evidence that discriminates whether the stated relation holds."
+    },
+    "action": {
+      "preferred": "Directly addresses an evidence-supported mechanism or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    { "id": "E01", "stage": 1, "source": "checkout alert (18:05)", "text": "Checkout reservation error rate is 7.4% (baseline 0.2%) since about 17:40. All errors are checkout-service's 2-second server-side timeout on calls to inventory-service POST /reservations." },
+    { "id": "E02", "stage": 1, "source": "inventory-service dashboard", "text": "Inventory-service POST /reservations p99 latency is 4.1 s (baseline 40 ms). Inventory-service pods are at 35% CPU with normal memory. Database connection-pool wait time p99 is 1.9 s; all 20 connections per pod are in use." },
+    { "id": "E03", "stage": 1, "source": "pg-primary metrics", "text": "Primary CPU has been 95-98% since 17:38 (typical evening level 45%). Active connections 240 of 300. p99 write latency 1.6 s. Reservation write rate is about 310 per second, the same as at this time last week." },
+    { "id": "E04", "stage": 1, "source": "change log", "text": "Postgres was upgraded from 15.6 to 15.8 on the primary and both replicas on Sep 21 at 01:00. From the upgrade until 17:30 on Sep 22, primary p99 write latency stayed between 11 and 13 ms and replica lag between 0.1 and 0.3 s. Replica replay throughput on 15.8 has not been measured under load above normal levels." },
+    { "id": "E05", "stage": 2, "source": "inventory-service design notes", "text": "Inventory-service reads availability from the replicas unless measured replica lag exceeds 2 s; while lag exceeds 2 s it sends availability reads to the primary. The guard was added after a March 2025 flash sale in which reads from a replica lagging 2-5 s allowed 340 units to be oversold." },
+    { "id": "E06", "stage": 2, "source": "inventory-service logs", "text": "Availability reads routed to the primary by the lag guard: about 0 per minute before 17:34, 4,800 per minute at 17:45, 9,500 per minute at 18:00." },
+    { "id": "E07", "stage": 2, "source": "replica metrics", "text": "Both replicas: CPU about 60% at 17:00, 99% by 17:32. Replication lag 0.2 s at 17:25, then between 3 and 8 s continuously from 17:34." },
+    { "id": "E08", "stage": 2, "source": "feature-flag audit", "text": "The stock-badges flag was switched from 0% to 100% of web listing-page traffic at 17:20. The component requests GET /availability/{sku} once per product tile shown, sending Cache-Control: no-cache." },
+    { "id": "E09", "stage": 2, "source": "gateway and CDN metrics", "text": "Gateway rate for GET /availability/{sku}: 1,400 requests/s at 17:00, 9,100 requests/s at 17:40. Before 17:20, listing pages used only the batch endpoint GET /availability?skus=..., which the CDN caches for 60 s with a 96% hit ratio; per-item requests previously came from product detail pages and the mobile app." },
+    { "id": "E10", "stage": 2, "source": "product team (incident channel)", "text": "\"Badges can only add a few hundred requests a second. Each listing page shows at most 24 tiles and most visitors never scroll past the first row.\"" },
+    { "id": "E11", "stage": 1, "source": "CDN and WAF analytics", "text": "Web listing-page views from 17:00 to 19:00 are within 3% of the same window last week. The WAF flagged a bot-score spike on /login between 17:50 and 18:30. Whether the login service's session store is on the same Postgres primary was not established during the incident." },
+    { "id": "E12", "stage": 1, "source": "network monitoring", "text": "Inter-availability-zone packet loss of 0.8% was alerted between 18:12 and 18:16 and then cleared." },
+    { "id": "E13", "stage": 2, "source": "client and service configuration", "text": "The mobile app times out a reservation request after 5 s and retries up to 2 times after 500 ms. Checkout-service does not cancel its downstream inventory call when the client disconnects; inventory-service keeps its database connection until its own work completes or checkout-service's server-side timeout fires." },
+    { "id": "E14", "stage": 2, "source": "capacity review (March 2026)", "text": "During an earlier period of primary CPU saturation, per-pod pool size was raised from 20 to 40. Primary p99 write latency rose from 0.9 s to 2.3 s within ten minutes and the change was reverted." },
+    { "id": "E15", "stage": 1, "source": "on-call log", "text": "On-call restarted all checkout-service pods at 18:20. The error rate fell to 3% for about three minutes and then returned to about 7%. A checkout-service JVM GC-pause alert fired at 18:25 (p99 pause 180 ms)." },
+    { "id": "E16", "stage": 1, "source": "DBA morning check (09:00)", "text": "\"Replicas healthy: CPU around 40%, lag under 0.3 s. No action needed.\"" },
+    { "id": "E17", "stage": 2, "source": "infrastructure runbook", "text": "A new read replica is built from the nightly snapshot and takes 5-6 hours to catch up before it can serve traffic." }
+  ],
+  "candidates": {
+    "hypotheses": [
+      { "id": "H1", "text": "Per-item availability requests from the stock-badges component are the origin of the replica overload." },
+      { "id": "H2", "text": "Checkout-service pods are the origin of the reservation timeouts." },
+      { "id": "H3", "text": "The inventory-service per-pod connection pool size is the binding constraint on reservation latency." },
+      { "id": "H4", "text": "The Postgres 15.8 upgrade reduced replica replay throughput." },
+      { "id": "H5", "text": "Primary CPU saturation is driven mainly by availability reads redirected by the lag guard." }
+    ],
+    "edges": [
+      { "id": "X1", "from": "stock-badges per-item requests", "to": "replica CPU saturation", "relation": "contributes-to" },
+      { "id": "X2", "from": "replica CPU saturation", "to": "replication lag above 2 s", "relation": "contributes-to" },
+      { "id": "X3", "from": "replication lag above 2 s", "to": "availability reads on the primary", "relation": "contributes-to" },
+      { "id": "X4", "from": "primary CPU saturation", "to": "reservation timeouts", "relation": "contributes-to" },
+      { "id": "X5", "from": "inter-AZ packet loss at 18:12", "to": "reservation timeouts from 17:40 onward", "relation": "contributes-to" },
+      { "id": "X6", "from": "WAF-flagged bot traffic on /login", "to": "primary CPU saturation", "relation": "contributes-to" }
+    ],
+    "actions": [
+      { "id": "A1", "text": "Raise the inventory-service per-pod database pool from 20 to 60 connections." },
+      { "id": "A2", "text": "Raise checkout-service's server-side timeout for reservation calls from 2 s to 10 s." },
+      { "id": "A3", "text": "Change the stock-badges component to use the CDN-cached batch availability endpoint." },
+      { "id": "A4", "text": "Provision two additional read replicas." },
+      { "id": "A5", "text": "Disable the replica-lag guard so availability reads always use the replicas." },
+      { "id": "A6", "text": "Restart checkout-service pods again and add two more checkout-service pods." },
+      { "id": "A7", "text": "Set the stock-badges flag to 0% of web listing-page traffic." }
+    ]
+  },
+  "scoredItems": [
+    { "id": "S01", "kind": "hypothesis", "candidateId": "H1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S02", "kind": "hypothesis", "candidateId": "H2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S03", "kind": "hypothesis", "candidateId": "H3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": true },
+    { "id": "S04", "kind": "hypothesis", "candidateId": "H4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S05", "kind": "hypothesis", "candidateId": "H5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S06", "kind": "edge", "candidateId": "X1", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S07", "kind": "edge", "candidateId": "X2", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S08", "kind": "edge", "candidateId": "X3", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S09", "kind": "edge", "candidateId": "X4", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S10", "kind": "edge", "candidateId": "X5", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S11", "kind": "edge", "candidateId": "X6", "allowedAnswers": ["supported", "refuted", "unknown"], "constructCritical": false },
+    { "id": "S12", "kind": "action", "candidateId": "A1", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S13", "kind": "action", "candidateId": "A2", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S14", "kind": "action", "candidateId": "A3", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S15", "kind": "action", "candidateId": "A4", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S16", "kind": "action", "candidateId": "A5", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true },
+    { "id": "S17", "kind": "action", "candidateId": "A6", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": false },
+    { "id": "S18", "kind": "action", "candidateId": "A7", "allowedAnswers": ["preferred", "acceptable", "not-recommended", "harmful"], "constructCritical": true }
+  ]
+}

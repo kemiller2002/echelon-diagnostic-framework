@@ -1,0 +1,512 @@
+{
+  "id": "ST-012",
+  "construct": "protective-controls",
+  "title": "Stale finance dashboards before the daily revenue close",
+  "domain": "order data pipeline and warehouse loading",
+  "context": "Order rows flow from checkout hosts through a change-data-capture stream into a validation stage and then a warehouse loader that feeds finance tables. The validation stage applies rules and routes failing rows to a quarantine table. The loader has a circuit breaker. On Sep 22 finance dashboards stopped refreshing overnight, and finance needs current tables for the 08:00 UTC daily revenue close. It is now 06:15 UTC.",
+  "entities": [
+    {
+      "id": "checkout-hosts",
+      "description": "Write order rows, including order_total and currency."
+    },
+    {
+      "id": "payment-service",
+      "description": "Captures payments; records the amount actually charged per order."
+    },
+    {
+      "id": "validation-stage",
+      "description": "Applies rules R1 and R2; routes failing rows to quarantine."
+    },
+    {
+      "id": "rule-R1",
+      "description": "order_total must be between 0 and 50,000 in major currency units."
+    },
+    {
+      "id": "rule-R2",
+      "description": "currency must appear in the currency reference list."
+    },
+    {
+      "id": "quarantine",
+      "description": "Table holding rows that failed a rule; rows can be released to the loader."
+    },
+    {
+      "id": "loader-breaker",
+      "description": "Halts warehouse loading while quarantined rows exceed 5% of rows in any 10-minute window."
+    },
+    {
+      "id": "freshness-monitor",
+      "description": "Alerts when finance tables have not refreshed for 60 minutes."
+    },
+    {
+      "id": "loyalty-service",
+      "description": "Consumes checkout order events and accrues points from order_total."
+    }
+  ],
+  "answerGuide": {
+    "hypothesis": {
+      "supported": "The evidence in this case positively establishes the statement, directly or through a chain of inference from case evidence.",
+      "refuted": "The evidence in this case positively rules the statement out.",
+      "unknown": "The case lacks evidence that discriminates between the statement being true and false."
+    },
+    "edge": {
+      "causes": "The from-node produces or brings about the to-node condition.",
+      "detects": "The from-node identifies or reports the to-node condition without producing it or limiting its spread.",
+      "contains": "The from-node stops or limits the spread of the to-node condition.",
+      "no-relation": "The evidence shows the from-node neither causes, detects, nor contains the to-node condition.",
+      "unknown": "The case lacks evidence that discriminates among the relations above."
+    },
+    "action": {
+      "preferred": "Directly addresses an evidence-supported mechanism or resolves a material evidence gap, with no evidence-indicated harm.",
+      "acceptable": "Reasonable and low-risk, but does not directly address a supported mechanism or a material evidence gap.",
+      "not-recommended": "Targets a mechanism the evidence rules out, rests on a conclusion the evidence does not establish, or has no evidence-supported benefit.",
+      "harmful": "Evidence indicates it would worsen outcomes, hide the failure, or remove a protection."
+    }
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "stage": 1,
+      "source": "freshness monitor",
+      "text": "Finance tables last refreshed at 02:40. The freshness monitor alerted at 03:40. The 08:00 revenue close reads these tables."
+    },
+    {
+      "id": "E02",
+      "stage": 1,
+      "source": "loader log",
+      "text": "The loader circuit breaker tripped at 02:41. The quarantine rate for 02:30-02:40 was 7.9% against a 5% threshold. Loading has been halted since."
+    },
+    {
+      "id": "E03",
+      "stage": 1,
+      "source": "quarantine summary (00:00-02:41)",
+      "text": "R1 failures: 11,400 rows, all written after 02:05. R2 failures: 8,300 rows, all with currency RSD, spread from 00:00 onward."
+    },
+    {
+      "id": "E04",
+      "stage": 1,
+      "source": "quarantine rate by window",
+      "text": "Quarantine rate per 10-minute window: 1.8-2.4% from 00:00 to 02:00; then 4.1%, 5.6%, 6.8%, and 7.9% for the windows ending 02:10, 02:20, 02:30, and 02:40."
+    },
+    {
+      "id": "E05",
+      "stage": 1,
+      "source": "product and reference-data change logs",
+      "text": "The Serbia market launched at 00:00 with prices in RSD. The currency reference list used by R2 was last updated on Aug 30."
+    },
+    {
+      "id": "E06",
+      "stage": 1,
+      "source": "checkout change log",
+      "text": "Checkout v9 has been running on 30% of checkout hosts as a canary since 02:05. The checkout team describes v9 as a UI refresh and says order amount handling was not changed."
+    },
+    {
+      "id": "E07",
+      "stage": 2,
+      "source": "R1 quarantine sample",
+      "text": "200 R1-quarantined rows sampled: all were written by v9 hosts, and each order_total is exactly 100 times the amount payment-service captured for that order."
+    },
+    {
+      "id": "E08",
+      "stage": 2,
+      "source": "loaded-row sample",
+      "text": "200 rows written by v9 hosts between 02:05 and 02:40 that passed validation and were loaded into finance tables: each order_total is exactly 100 times the payment-service captured amount. All 200 totals are below 50,000."
+    },
+    {
+      "id": "E09",
+      "stage": 2,
+      "source": "R2 quarantine sample",
+      "text": "200 RSD rows sampled from quarantine: order_total equals the payment-service captured amount for every row, and payment-service records the charges in RSD."
+    },
+    {
+      "id": "E10",
+      "stage": 1,
+      "source": "on-call note (03:50)",
+      "text": "\"Validation is catching the bad rows, so nothing bad has reached finance. The breaker is the only thing blocking the close; we should switch it off.\""
+    },
+    {
+      "id": "E11",
+      "stage": 2,
+      "source": "loyalty-service owner",
+      "text": "loyalty-service accrues points from order_total on checkout order events. Those events are emitted by a different checkout code path from the one that writes order rows, and whether v9 changed that path has not been checked. Nobody has examined loyalty accruals for orders since 02:05."
+    },
+    {
+      "id": "E12",
+      "stage": 2,
+      "source": "market operations",
+      "text": "Serbian daytime traffic begins around 04:00 UTC. Because the market launched at midnight, the RSD share of orders during daytime hours has not yet been observed, and no forecast exists."
+    },
+    {
+      "id": "E13",
+      "stage": 1,
+      "source": "warehouse maintenance log",
+      "text": "The routine nightly vacuum job ran on the finance schema from 02:30 to 02:55."
+    },
+    {
+      "id": "E14",
+      "stage": 1,
+      "source": "marketing calendar",
+      "text": "A US promotion raised checkout volume by about 40% from 01:30."
+    },
+    {
+      "id": "E15",
+      "stage": 2,
+      "source": "incident history",
+      "text": "On Aug 14 R2 quarantined 1,200 rows with blank currency caused by a partner-integration defect; the breaker tripped and those rows never reached finance tables."
+    },
+    {
+      "id": "E16",
+      "stage": 1,
+      "source": "infrastructure alert",
+      "text": "A loader node reported 85% disk usage at 02:20; usage has not changed since."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Checkout v9 writes order_total values that are 100 times the amount charged."
+      },
+      {
+        "id": "H2",
+        "text": "Every v9 row with an incorrect order_total has been kept out of the finance tables."
+      },
+      {
+        "id": "H3",
+        "text": "The quarantined RSD rows contain incorrect order data."
+      },
+      {
+        "id": "H4",
+        "text": "With v9 removed, RSD quarantines alone would trip the breaker during Serbian daytime traffic."
+      },
+      {
+        "id": "H5",
+        "text": "RSD quarantines alone would have tripped the breaker by 02:41."
+      }
+    ],
+    "edges": [
+      {
+        "id": "X1",
+        "from": "checkout v9 canary",
+        "to": "R1 quarantined rows",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X2",
+        "from": "currency reference list last updated Aug 30",
+        "to": "R2 quarantined rows",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X3",
+        "from": "loader circuit breaker",
+        "to": "v9 rows with incorrect totals reaching finance tables",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X4",
+        "from": "loader circuit breaker",
+        "to": "finance table staleness",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X5",
+        "from": "freshness monitor",
+        "to": "finance table staleness",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X6",
+        "from": "rule R1",
+        "to": "v9 rows with incorrect totals below 50,000",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X7",
+        "from": "nightly vacuum job",
+        "to": "finance table staleness",
+        "relation": "to-be-classified"
+      },
+      {
+        "id": "X8",
+        "from": "checkout v9 canary",
+        "to": "incorrect loyalty accruals",
+        "relation": "to-be-classified"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Disable the loader circuit breaker so finance tables refresh before the 08:00 close."
+      },
+      {
+        "id": "A2",
+        "text": "Roll back the checkout v9 canary."
+      },
+      {
+        "id": "A3",
+        "text": "Add RSD to the currency reference list used by R2."
+      },
+      {
+        "id": "A4",
+        "text": "Raise R1's upper bound from 50,000 to 5,000,000."
+      },
+      {
+        "id": "A5",
+        "text": "Identify the v9 rows loaded between 02:05 and 02:40 and amend or withdraw them before the 08:00 close."
+      },
+      {
+        "id": "A6",
+        "text": "After RSD is on the reference list, release the quarantined RSD rows to the loader."
+      },
+      {
+        "id": "A7",
+        "text": "Postpone the nightly vacuum job on the finance schema."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "S01",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S02",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S03",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S04",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S05",
+      "kind": "hypothesis",
+      "candidateId": "H5",
+      "allowedAnswers": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S06",
+      "kind": "edge",
+      "candidateId": "X1",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S07",
+      "kind": "edge",
+      "candidateId": "X2",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S08",
+      "kind": "edge",
+      "candidateId": "X3",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S09",
+      "kind": "edge",
+      "candidateId": "X4",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S10",
+      "kind": "edge",
+      "candidateId": "X5",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S11",
+      "kind": "edge",
+      "candidateId": "X6",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S12",
+      "kind": "edge",
+      "candidateId": "X7",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S13",
+      "kind": "edge",
+      "candidateId": "X8",
+      "allowedAnswers": [
+        "causes",
+        "detects",
+        "contains",
+        "no-relation",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S14",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S15",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S16",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S17",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "S18",
+      "kind": "action",
+      "candidateId": "A5",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S19",
+      "kind": "action",
+      "candidateId": "A6",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "S20",
+      "kind": "action",
+      "candidateId": "A7",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "not-recommended",
+        "harmful"
+      ],
+      "constructCritical": false
+    }
+  ]
+}
