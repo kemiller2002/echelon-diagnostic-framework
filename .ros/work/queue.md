@@ -10,3 +10,4 @@
 | WI-0001 | Author OpenAI EX-EDF-2026-A003 stress cases | complete | edf,research,experiment | high |
 | WI-0002 | Remediate OpenAI EX-EDF-2026-A003 cases after Anthropic review | complete | edf,research,experiment,review-remediation | high |
 | WI-0003 | Remediate OpenAI EX-EDF-2026-A003 cases after Anthropic re-review round 1 | complete | edf,research,experiment,review-remediation | high |
+| WI-0004 | Anthropic re-review of OpenAI EX-EDF-2026-A003 remediation r2 | complete | edf,research,experiment,opposite-provider-review | high |

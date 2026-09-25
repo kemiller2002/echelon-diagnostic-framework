@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-005",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Source commit 6ab052d9d44c7980703f7e0fb8971eb237307513 (OpenAI remediation r2, ROS-attributed); fresh review from the official packet, r1 verdicts at 0ef0abde042fefec735fe2399f91ea198e78d079 consulted only to identify defects to re-test and not carried forward. R1 DEFECT 1 RE-TEST (resolved, noLexicalLeakage): E13 now says only that no heap profile was retained and allocation telemetry is aggregate bytes per worker with GC-pause duration. It no longer states the H5 answer; I13 (H5 specific nested-attribute object class dominant = unknown) must be inferred against the E1 lure (the schema introduced a nested attribute map). R1 DEFECT 2 RE-TEST (resolved, groundTruthSupported): H6 now asks whether abrupt worker crashes with a 30-second lease would still meet the service recovery SLO; E15 records that the lease canary did not include crashes or failover and that the crash-recovery SLO is absent from the artifacts. E3/E10 show a longer lease delays redelivery after a real failure, but without an SLO the proposition cannot be scored supported or contradicted, so unknown is the only defensible state and E15 encodes a genuine absence rather than naming the answer. The case therefore has two sound expected unknowns (I13, I15). R1 DEFECT 3 RE-TEST (resolved): I2 now allows E8/E10 and requires E10; I14 now allows E9/E10, so analyses citing the strongest refutations are not penalised. NEW-DEFECT SEARCH: E16 (producer-zone volume skew, cohorts balanced) and E17 (metrics-agent rollout, no within-cohort difference) are genuine distractors alongside E14; none is required or allowed. Origin (I1/I5), mediator (I3, I7), downstream (I12) and reversed direction (I14: lag fell under E9 with redeliveries unchanged, redelivery preceded lag via E5/E6) still require propagation reasoning; no single item reveals the chain. Structural audit: 17 evidence, 6 hypotheses, 7 edges, 5 actions, 15 scored items (12 construct-critical), unknowns I13/I15, harmful A3 scored as I11, all references resolve. NON-BLOCKING: (a) E15 says the canary \"injected long GC pauses\", while E10 says the lease change left GC behaviour unchanged; if pauses were artificially injected, E10's GC observation is less informative for I2, but I2 contradicted remains supported by E2/E3/E8 and E10's allocation observation. Rewording E15 to \"ran under the incident's long GC pauses\" would remove the ambiguity. (b) I15 is an easy unknown once E15 is read, but it is weight 1 and not construct-critical. (c) E17 could be cited when ruling out alternatives for H1 and would cost precision. No case/truth file was modified by the reviewer."
+}

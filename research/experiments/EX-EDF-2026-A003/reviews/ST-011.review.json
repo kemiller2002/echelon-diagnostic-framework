@@ -1,0 +1,16 @@
+{
+  "caseId": "ST-011",
+  "authorFamily": "OpenAI",
+  "reviewerFamily": "Anthropic",
+  "reviewerModel": "claude-opus-5-5",
+  "checks": {
+    "groundTruthSupported": true,
+    "noLexicalLeakage": true,
+    "noSingleClue": true,
+    "candidatePlausibility": true,
+    "constructPressure": true,
+    "difficultyAdequate": true
+  },
+  "verdict": "pass",
+  "notes": "Source commit 6ab052d9d44c7980703f7e0fb8971eb237307513 (OpenAI remediation r2, ROS-attributed); fresh review from the official packet, r1 verdicts at 0ef0abde042fefec735fe2399f91ea198e78d079 consulted only to identify defects to re-test and not carried forward. R1 DEFECT RE-TEST (resolved, groundTruthSupported): E11 now reports only that new validation failures returned to baseline within five minutes of rollback and that incident recording ended 12 minutes later without capturing remaining backlog size or drain rate. Nothing in the case observes quarantine capacity after compatibility was restored, so I13 (H6 quarantine capacity will remain a separate customer-impacting bottleneck = unknown) is genuinely unresolved: E7 (capacity increase slowed queue-age growth during the incident, confounded by a 9% volume drop) lures toward supported, E11 (failures back to baseline) lures toward contradicted, and neither measures the post-restoration state. With I3 (customer-visible delay unmeasured) the case has two sound expected unknowns. R1 MINOR ITEMS: E8 and E13 are no longer listed as red herrings; the list is now E9, E12, E15, none of which is required or allowed evidence. NEW-DEFECT SEARCH: the revised E11 still supports H2 (I2) and A1 (I9) and does not conflict with any other item; E15 (billing-database CPU in one region, failures upstream of billing and at similar rates elsewhere) is a genuine distractor. Detection (paging, I7/I12), containment (validator/quarantine, I1/I6) and origin (producer drift, I2/I5, release gap I4/I8) remain separable only by protective-control reasoning; A3 and A4 are both scored harmful with analyzer-visible harm (E5, E14). Structural audit: 15 evidence, 6 hypotheses, 7 edges, 5 actions, 13 scored items (10 construct-critical), unknowns I3/I13, harmful A3/A4 scored as I11/I12, all references resolve. NON-BLOCKING: (a) I13 requires only E7 while E11 is the item that encodes the missing post-restoration measurement; an analyzer citing only E11 gets zero recall on a weight-1, non-construct-critical item. Adding E11 to I13 requiredEvidence would be the natural key. (b) E9 is a weak red herring because it exculpates storage directly and the storage candidates (H4, R6) are unscored; E12 and E15 are the stronger distractors. (c) I9 remains close to a single-item lookup from E11; I4/I8 double-score the release-process proposition on E10/E13. No case/truth file was modified by the reviewer."
+}
