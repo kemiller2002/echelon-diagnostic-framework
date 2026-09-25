@@ -1,467 +1,310 @@
 {
-  "version": "1.0.0",
   "id": "ST-003",
   "construct": "control-points",
-  "title": "Notification ingress backlog and retry surge",
-  "domain": "multi-tenant webhook delivery platform",
+  "title": "Search 5xx incident during scheduled maintenance",
+  "domain": "distributed search",
   "entities": [
-    "client SDKs",
-    "ingress API",
-    "audit exporter",
-    "durable delivery queue",
-    "delivery workers",
-    "DNS resolver service"
+    "search API",
+    "API autoscaler",
+    "index shards",
+    "segment merger",
+    "client retry layer",
+    "alerting"
   ],
   "evidence": [
     {
-      "id": "E01",
-      "stage": "architecture",
-      "text": "For each accepted notification, ingress validates the request, writes the notification to the durable delivery queue, emits an audit record, and then returns HTTP 202. Delivery workers consume the queue and perform an idempotency check before invoking a destination."
+      "id": "E1",
+      "stage": "S1",
+      "text": "Search API 5xx responses increased when index-shard p99 latency rose from 110 ms to 4.8 s during a scheduled segment merge."
     },
     {
-      "id": "E02",
-      "stage": "incident",
-      "text": "At 10:05 UTC, ingress end-to-end response p95 rose from 640 ms to 2.7 s while the accepted-notification alert began firing; the rate of HTTP 5xx responses remained below 0.1%."
+      "id": "E2",
+      "stage": "S1",
+      "text": "API CPU stayed below 48% and memory below 55% throughout the incident, including on hosts returning 5xx responses."
     },
     {
-      "id": "E03",
-      "stage": "tracing",
-      "text": "Application traces for the same interval show validation plus queue-write spans at p95 of 510 ms, with neither span individually accounting for the end-to-end response time."
+      "id": "E3",
+      "stage": "S1",
+      "text": "The API client retries a timed-out search twice immediately against the same shard set; retry volume reached 2.6 times normal request volume."
     },
     {
-      "id": "E04",
-      "stage": "metrics",
-      "text": "The delivery database reported a CPU rise from 46% to 68% during the incident. Query p95 remained between 18 and 23 ms, and no lock-wait increase was recorded."
+      "id": "E4",
+      "stage": "S1",
+      "text": "Index-shard CPU climbed from 62% to 98% after retry volume increased, while disk queue depth tripled."
     },
     {
-      "id": "E05",
-      "stage": "change-history",
-      "text": "At 09:58 UTC, ingress release 4.18 changed audit emission from an in-process buffered write to a flush performed before the HTTP response. No delivery-worker code changed in that release."
+      "id": "E5",
+      "stage": "S2",
+      "text": "Adding four API replicas reduced per-host API CPU but did not change index latency, 5xx rate, or queue age."
     },
     {
-      "id": "E06",
-      "stage": "tracing",
-      "text": "In 63% of ingress traces slower than two seconds, an audit-export flush occupied 1.4 to 2.1 seconds. Packet samples from those hosts show repeated DNS lookup timeouts for the audit collector name during that span."
+      "id": "E6",
+      "stage": "S2",
+      "text": "Increasing the API timeout from 2 s to 8 s cut 5xx responses by 31% but increased median end-user latency and grew the request backlog."
     },
     {
-      "id": "E07",
-      "stage": "operations",
-      "text": "The resolver service dashboard and status report show availability within objective and no fleet-wide incident during the window; resolver metrics are not labeled by ingress region or audit hostname."
+      "id": "E7",
+      "stage": "S2",
+      "text": "A five-minute canary limited each request to one retry with exponential backoff. During the canary index request volume fell 18% and shard p99 improved from 4.8 s to 3.9 s; two canary shards also completed merge phases during the interval, so the improvement cannot be attributed to retry policy alone."
     },
     {
-      "id": "E08",
-      "stage": "change-history",
-      "text": "A customer-console JavaScript bundle was deployed at 09:52 UTC. Console traffic uses a separate service and represents under 2% of notification submissions."
+      "id": "E8",
+      "stage": "S2",
+      "text": "Across affected shards, shards still in active segment merge had 2.1-3.4 times the disk queue depth of same-hardware shards not currently merging. The first affected shard to finish its merge saw p99 latency fall before the others, without a change in API capacity."
     },
     {
-      "id": "E09",
-      "stage": "request-analysis",
-      "text": "For request IDs seen more than once, the first repeated submission usually begins 1.9 to 2.1 seconds after the original. The three largest SDK versions use a two-second response deadline and retry an unacknowledged request with the same request ID."
+      "id": "E9",
+      "stage": "S2",
+      "text": "Network interface error counters on sampled API and index hosts remained at baseline; packet captures were not retained."
     },
     {
       "id": "E10",
-      "stage": "queue-analysis",
-      "text": "During the peak, 71% of queue entries shared a request ID with an earlier entry. The corresponding proportion was 6% before 10:05 UTC; unique-request arrival rate changed by less than 4%."
+      "stage": "S3",
+      "text": "The autoscaler only observes API CPU and request count; it does not observe index latency, merge state, or shard disk queue depth."
     },
     {
       "id": "E11",
-      "stage": "worker-analysis",
-      "text": "Worker idempotency checks suppressed repeated destination invocations, so sampled customers received one callback per request ID despite repeated queue entries. Those checks occur only after entries have consumed queue and worker capacity."
+      "stage": "S3",
+      "text": "Alert suppression in a test environment changed pager volume but had no measurable effect on request rate or index latency."
     },
     {
       "id": "E12",
-      "stage": "load-test",
-      "text": "A replay using the incident's duplicate ratio increased ingress queue-admission wait by 420 ms and worker queue age by 11 minutes relative to the same unique-request rate without repeats."
+      "stage": "S3",
+      "text": "One unaffected shard was on identical hardware but had not entered segment merge during the incident window."
     },
     {
       "id": "E13",
-      "stage": "operations",
-      "text": "A certificate-expiry warning appeared at 10:02 UTC for a staging-only callback endpoint. Production trust stores and the audit collector certificate were not implicated by the warning."
+      "stage": "S3",
+      "text": "After the merge completed naturally, retry volume and index latency both returned toward baseline without removing API replicas."
     },
     {
       "id": "E14",
-      "stage": "canary",
-      "text": "On two ingress canaries configured so that audit-export flush did not block the HTTP response, response p95 fell to 690 ms, SDK retries fell 82%, and queue input fell 48% at comparable unique-request volume. The canary record does not specify a production durability design."
+      "stage": "S2",
+      "text": "A query-cache configuration change had been deployed to the API tier 35 minutes before the incident; the same change was present in an unaffected region with comparable traffic."
     },
     {
       "id": "E15",
-      "stage": "mitigation-test",
-      "text": "Temporarily doubling delivery workers drained the existing backlog faster, but the fraction of repeated request IDs entering the queue did not change. Queue age began rising again after the extra workers were removed."
-    },
-    {
-      "id": "E16",
-      "stage": "information-gaps",
-      "text": "The incident record contains no client clock-skew telemetry, no resolver results broken down by ingress region and hostname, no audit-loss study longer than the 30-minute canary, and no test of returning success for a repeated ID after independently verifying its original durable receipt."
-    },
-    {
-      "id": "E17",
-      "stage": "client-test",
-      "text": "In a lab run, raising the SDK deadline from two to five seconds reduced retries, but ingress response p95 remained 2.6 seconds while audit flush stayed synchronous. The installed SDK population cannot receive a deadline-default change for at least six weeks."
-    },
-    {
-      "id": "E18",
-      "stage": "safety-test",
-      "text": "A benchmark with worker idempotency checks disabled increased worker throughput by 34%, but repeated queue entries produced repeated destination invocations in 29 of 40 injected duplicate cases."
-    },
-    {
-      "id": "E19",
-      "stage": "durability-test",
-      "text": "In a separate 30-minute test, ingress wrote audit records to a durable local spool before acknowledging them and exported them later; reconciliation found no missing audit sequence numbers. Longer-horizon behavior was not measured."
+      "stage": "S2",
+      "text": "The proportion of long-tail search terms increased by 6% during the incident, but the same query-mix shift appeared on unaffected shards that were not in segment merge."
     }
   ],
   "candidates": {
     "hypotheses": [
       {
-        "id": "H01",
-        "text": "Delivery-database saturation is the primary initiator of the backlog."
+        "id": "H1",
+        "text": "Insufficient API compute capacity was the primary mechanism producing the search failures."
       },
       {
-        "id": "H02",
-        "text": "Response-path audit flushing pushes acknowledgements beyond client deadlines and initiates retry amplification."
+        "id": "H2",
+        "text": "Segment-merge pressure on index shards initiated the latency increase."
       },
       {
-        "id": "H03",
-        "text": "Insufficient delivery-worker capacity is the primary initiator of repeated submissions."
+        "id": "H3",
+        "text": "Immediate retries amplified index load during the segment merge."
       },
       {
-        "id": "H04",
-        "text": "A rise in ingress server errors is the primary trigger for client resubmission."
-      },
-      {
-        "id": "H05",
-        "text": "Client clock skew materially contributes to the timing of repeated submissions."
-      },
-      {
-        "id": "H06",
-        "text": "A resolver fault confined to one ingress region materially contributes to audit-flush delay."
+        "id": "H4",
+        "text": "Network packet loss between API and index hosts materially contributed to the incident."
       }
     ],
     "edges": [
       {
-        "id": "G01",
-        "from": "response-path audit flush",
-        "to": "ingress acknowledgement latency",
-        "relation": "increases"
+        "id": "R1",
+        "from": "segment merge",
+        "to": "index disk contention",
+        "relation": "contributes-to"
       },
       {
-        "id": "G02",
-        "from": "acknowledgement latency beyond the SDK deadline",
-        "to": "same-ID client retries",
-        "relation": "increases"
+        "id": "R2",
+        "from": "index disk contention",
+        "to": "search latency",
+        "relation": "contributes-to"
       },
       {
-        "id": "G03",
-        "from": "same-ID client retries",
-        "to": "duplicate queue entries",
-        "relation": "increases"
+        "id": "R3",
+        "from": "search timeout",
+        "to": "immediate retry volume",
+        "relation": "triggers"
       },
       {
-        "id": "G04",
-        "from": "duplicate queue entries",
-        "to": "queue and worker load",
-        "relation": "increases"
+        "id": "R4",
+        "from": "immediate retry volume",
+        "to": "index load",
+        "relation": "amplifies"
       },
       {
-        "id": "G05",
-        "from": "duplicate-heavy ingress traffic",
-        "to": "queue-admission delay",
-        "relation": "increases"
+        "id": "R5",
+        "from": "API timeout increase",
+        "to": "request backlog",
+        "relation": "contributes-to"
       },
       {
-        "id": "G06",
-        "from": "delivery-database CPU utilization",
-        "to": "initial ingress acknowledgement delay",
-        "relation": "is the dominant cause of"
-      },
-      {
-        "id": "G07",
-        "from": "additional delivery workers",
-        "to": "creation of repeated submissions",
-        "relation": "decreases"
-      },
-      {
-        "id": "G08",
-        "from": "asynchronous audit export through a durable spool",
-        "to": "long-horizon audit-record loss",
-        "relation": "increases"
-      },
-      {
-        "id": "G09",
-        "from": "client clock skew",
-        "to": "retry timing in the incident",
-        "relation": "materially changes"
+        "id": "R6",
+        "from": "network packet loss",
+        "to": "search timeout",
+        "relation": "contributes-to"
       }
     ],
     "actions": [
       {
-        "id": "A01",
-        "text": "Move audit export out of the response path using a durable spool, stage the rollout, and reconcile audit sequence numbers."
+        "id": "A1",
+        "text": "Add more API replicas whenever index latency rises."
       },
       {
-        "id": "A02",
-        "text": "Keep audit flushing synchronous and permanently double the delivery-worker pool."
+        "id": "A2",
+        "text": "Limit retries with backoff and add a circuit breaker keyed to index health."
       },
       {
-        "id": "A03",
-        "text": "Keep system behavior unchanged and raise the accepted-notification alert threshold above the observed latency."
+        "id": "A3",
+        "text": "Stagger or throttle segment merges when shard disk pressure crosses a safe threshold."
       },
       {
-        "id": "A04",
-        "text": "Disable worker idempotency checks to increase queue-drain throughput."
+        "id": "A4",
+        "text": "Raise API timeouts further so fewer requests return 5xx."
       },
       {
-        "id": "A05",
-        "text": "Keep audit flushing synchronous and change the default SDK response deadline from two seconds to five seconds."
-      },
-      {
-        "id": "A06",
-        "text": "Route audit-hostname lookups to an alternate resolver in the ingress region with the highest timeout rate."
-      },
-      {
-        "id": "A07",
-        "text": "At ingress, return success for a repeated request ID after independently confirming that its original entry is durable."
+        "id": "A5",
+        "text": "Suppress the search-latency alert during merge windows."
       }
     ]
   },
   "scoredItems": [
     {
-      "id": "S-H01",
+      "id": "I1",
       "kind": "hypothesis",
-      "candidateId": "H01",
+      "candidateId": "H1",
       "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
-      "constructCritical": false
+      "constructCritical": true
     },
     {
-      "id": "S-H02",
+      "id": "I2",
       "kind": "hypothesis",
-      "candidateId": "H02",
+      "candidateId": "H2",
       "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-H03",
+      "id": "I3",
       "kind": "hypothesis",
-      "candidateId": "H03",
+      "candidateId": "H3",
       "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
-      "constructCritical": false
+      "constructCritical": true
     },
     {
-      "id": "S-H04",
+      "id": "I4",
       "kind": "hypothesis",
-      "candidateId": "H04",
+      "candidateId": "H4",
       "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-H05",
-      "kind": "hypothesis",
-      "candidateId": "H05",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-H06",
-      "kind": "hypothesis",
-      "candidateId": "H06",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-G01",
-      "kind": "edge",
-      "candidateId": "G01",
-      "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-G02",
+      "id": "I5",
       "kind": "edge",
-      "candidateId": "G02",
+      "candidateId": "R1",
       "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-G03",
+      "id": "I7",
       "kind": "edge",
-      "candidateId": "G03",
+      "candidateId": "R5",
       "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-G04",
-      "kind": "edge",
-      "candidateId": "G04",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-G05",
-      "kind": "edge",
-      "candidateId": "G05",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-G06",
-      "kind": "edge",
-      "candidateId": "G06",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-G07",
-      "kind": "edge",
-      "candidateId": "G07",
-      "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-G08",
+      "id": "I8",
       "kind": "edge",
-      "candidateId": "G08",
+      "candidateId": "R6",
       "allowedAnswers": [
-        "select",
-        "reject",
+        "supported",
+        "contradicted",
         "unknown"
       ],
-      "constructCritical": false
+      "constructCritical": true
     },
     {
-      "id": "S-G09",
-      "kind": "edge",
-      "candidateId": "G09",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": false
-    },
-    {
-      "id": "S-A01",
+      "id": "I9",
       "kind": "action",
-      "candidateId": "A01",
+      "candidateId": "A1",
       "allowedAnswers": [
-        "select",
+        "preferred",
+        "acceptable",
         "reject",
+        "harmful",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-A02",
+      "id": "I10",
       "kind": "action",
-      "candidateId": "A02",
+      "candidateId": "A2",
       "allowedAnswers": [
-        "select",
+        "preferred",
+        "acceptable",
         "reject",
+        "harmful",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-A03",
+      "id": "I11",
       "kind": "action",
-      "candidateId": "A03",
+      "candidateId": "A3",
       "allowedAnswers": [
-        "select",
+        "preferred",
+        "acceptable",
         "reject",
+        "harmful",
         "unknown"
       ],
       "constructCritical": true
     },
     {
-      "id": "S-A04",
+      "id": "I12",
       "kind": "action",
-      "candidateId": "A04",
+      "candidateId": "A4",
       "allowedAnswers": [
-        "select",
+        "preferred",
+        "acceptable",
         "reject",
-        "unknown"
-      ],
-      "constructCritical": true
-    },
-    {
-      "id": "S-A05",
-      "kind": "action",
-      "candidateId": "A05",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": true
-    },
-    {
-      "id": "S-A06",
-      "kind": "action",
-      "candidateId": "A06",
-      "allowedAnswers": [
-        "select",
-        "reject",
-        "unknown"
-      ],
-      "constructCritical": true
-    },
-    {
-      "id": "S-A07",
-      "kind": "action",
-      "candidateId": "A07",
-      "allowedAnswers": [
-        "select",
-        "reject",
+        "harmful",
         "unknown"
       ],
       "constructCritical": true
