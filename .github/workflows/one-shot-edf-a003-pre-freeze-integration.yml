@@ -1,0 +1,224 @@
+name: One-shot EDF A003 pre-freeze integration
+
+on:
+  push:
+    branches:
+      - experiment/edf-a003-pre-freeze-integration-r2
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    if: ${{ !contains(github.event.head_commit.message, '[ros-attributed]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Begin ROS research work
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros add "Integrate and pre-freeze audit EX-EDF-2026-A003 accepted cases and reviews" --tag edf,research,experiment,pre-freeze --priority high
+          WORK_ID="$(node -e "const fs=require('fs');const q=JSON.parse(fs.readFileSync('.ros/work/queue.json','utf8'));process.stdout.write(q.items[q.items.length-1].id)")"
+          echo "WORK_ID=$WORK_ID" >> "$GITHUB_ENV"
+          ./ros work backlog-transition --action ready --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          sleep 1
+          ./ros work begin --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --type research
+
+      - name: Fetch exact accepted sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin experiment/edf-a003-openai-remediation-r2-ros:refs/remotes/origin/experiment/edf-a003-openai-remediation-r2-ros
+          git fetch origin experiment/edf-a003-anthropic-rereview-openai-r2:refs/remotes/origin/experiment/edf-a003-anthropic-rereview-openai-r2
+          git fetch origin experiment/edf-a003-anthropic-case-authoring:refs/remotes/origin/experiment/edf-a003-anthropic-case-authoring
+          git fetch origin experiment/edf-a003-openai-review-anthropic-ros:refs/remotes/origin/experiment/edf-a003-openai-review-anthropic-ros
+          git fetch origin experiment/edf-a003-pre-freeze-harness-audit:refs/remotes/origin/experiment/edf-a003-pre-freeze-harness-audit
+
+      - name: Import audited harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout 3fab654459e5b2e97fc061af7740e6665e195d67 --             scripts/edf-002-score.mjs             scripts/edf-002-validate.mjs             scripts/edf-002-freeze.mjs             tests/edf-002-scoring.test.mjs             tests/edf-002-harness.test.mjs
+
+      - name: Import exact accepted OpenAI-authored cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in ST-001 ST-003 ST-005 ST-007 ST-009 ST-011; do
+            git checkout 6ab052d9d44c7980703f7e0fb8971eb237307513 --               "research/experiments/EX-EDF-2026-A003/cases/${id}.case.json"               "research/experiments/EX-EDF-2026-A003/cases/${id}.truth.json"
+            git checkout eec7de637403a0dc89f9aa2a241463b45e6a9553 --               "research/experiments/EX-EDF-2026-A003/reviews/${id}.review.json"
+          done
+
+      - name: Import exact accepted Anthropic-authored cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in ST-002 ST-004 ST-006 ST-008 ST-010 ST-012; do
+            git checkout e3965fa9711f3c7d55cba4c0438813c00d72997b --               "research/experiments/EX-EDF-2026-A003/cases/${id}.case.json"               "research/experiments/EX-EDF-2026-A003/cases/${id}.truth.json"
+            git checkout d41767cd1a11333f80bd0735c8e80eef83d3ab17 --               "research/experiments/EX-EDF-2026-A003/reviews/${id}.review.json"
+          done
+
+      - name: Verify imported blob identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob() {
+            local source="$1"
+            local path="$2"
+            local expected actual
+            expected="$(git rev-parse "${source}:${path}")"
+            actual="$(git hash-object "${path}")"
+            if [ "$expected" != "$actual" ]; then
+              echo "BLOB MISMATCH $path expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          }
+          for id in ST-001 ST-003 ST-005 ST-007 ST-009 ST-011; do
+            check_blob 6ab052d9d44c7980703f7e0fb8971eb237307513 "research/experiments/EX-EDF-2026-A003/cases/${id}.case.json"
+            check_blob 6ab052d9d44c7980703f7e0fb8971eb237307513 "research/experiments/EX-EDF-2026-A003/cases/${id}.truth.json"
+            check_blob eec7de637403a0dc89f9aa2a241463b45e6a9553 "research/experiments/EX-EDF-2026-A003/reviews/${id}.review.json"
+          done
+          for id in ST-002 ST-004 ST-006 ST-008 ST-010 ST-012; do
+            check_blob e3965fa9711f3c7d55cba4c0438813c00d72997b "research/experiments/EX-EDF-2026-A003/cases/${id}.case.json"
+            check_blob e3965fa9711f3c7d55cba4c0438813c00d72997b "research/experiments/EX-EDF-2026-A003/cases/${id}.truth.json"
+            check_blob d41767cd1a11333f80bd0735c8e80eef83d3ab17 "research/experiments/EX-EDF-2026-A003/reviews/${id}.review.json"
+          done
+
+      - name: Validate 12 accepted case and review pairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in ST-001 ST-002 ST-003 ST-004 ST-005 ST-006 ST-007 ST-008 ST-009 ST-010 ST-011 ST-012; do
+            node scripts/edf-002-case-author.mjs validate "$id"
+            node scripts/edf-002-review.mjs validate "$id"
+          done
+          node scripts/edf-002-validate.mjs freeze
+          node --test             tests/edf-002-validation.test.mjs             tests/edf-002-scoring.test.mjs             tests/edf-002-harness.test.mjs
+
+      - name: Audit scorer and execution boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e research/experiments/EX-EDF-2026-A003/frozen-files.json
+          test ! -d research/experiments/EX-EDF-2026-A003/manual-runs
+          test ! -d research/experiments/EX-EDF-2026-A003/runs
+          node --input-type=module <<'NODE'
+          import { analyzeRuns } from './scripts/edf-002-score.mjs';
+          const result=analyzeRuns();
+          if(result.status!=='not-evaluable' || result.reason!=='No recorded analyzer runs.'){
+            console.error(result);
+            process.exit(1);
+          }
+          console.log(JSON.stringify(result,null,2));
+          NODE
+
+      - name: Write pre-freeze integration journal
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > research/journal/JR-EDF-2026-011.md <<'EOF'
+          ---
+          id: JR-EDF-2026-011
+          title: EX-EDF-2026-A003 Pre-Freeze Integration and Harness Audit
+          date: 2026-09-25
+          experiment: EX-EDF-2026-A003
+          ---
+
+          # Research Journal
+
+          ## Objective
+
+          Consolidate the exact 12 accepted EX-EDF-2026-A003 case/truth pairs and their passing opposite-provider reviews onto a fresh branch, audit the scoring/analyzer harness before freeze, and prove that no analyzer execution has begun.
+
+          ## Canonical integration base
+
+          - main: 8fd901155680aab114d4d188668cb051c9818f69
+
+          ## Exact accepted sources
+
+          - OpenAI-authored ST-001/003/005/007/009/011 case/truth pairs:
+            6ab052d9d44c7980703f7e0fb8971eb237307513
+          - Passing Anthropic reviews for those OpenAI-authored cases:
+            eec7de637403a0dc89f9aa2a241463b45e6a9553
+          - Anthropic-authored ST-002/004/006/008/010/012 case/truth pairs:
+            e3965fa9711f3c7d55cba4c0438813c00d72997b
+          - Passing OpenAI reviews for those Anthropic-authored cases:
+            d41767cd1a11333f80bd0735c8e80eef83d3ab17
+
+          The historical experiment/edf-a003-pre-freeze-integration lineage and older edf-002 case/review branches were not used as accepted sources.
+
+          ## Blob identity
+
+          Every imported case, truth and review file was compared with git object identity against its pinned accepted source commit before validation. Any mismatch aborts the integration job.
+
+          ## Harness audit findings and corrections
+
+          The analyzer writes terminal run metadata and outputs beneath:
+
+          research/experiments/EX-EDF-2026-A003/manual-runs/<slot>/runs
+
+          The pre-audit scorer only read:
+
+          research/experiments/EX-EDF-2026-A003/runs
+
+          Therefore valid completed manual analyzer runs would never become visible to the scorer. This was corrected before freeze. The scorer now discovers both legacy runs and slot-scoped manual-runs directories.
+
+          Additional pre-freeze hardening:
+
+          - terminal invalid outputs are reported explicitly as not-evaluable; no numeric fallback was invented because the preregistration defines them as terminal but does not preregister a fallback score;
+          - required evidence is treated as valid evidence by the scorer even defensively;
+          - validation now requires requiredEvidence to be included in allowedEvidence;
+          - validation detects duplicate truth item IDs and invalid red-herring/conflict/harmful-action references;
+          - the freeze manifest now hashes the analyzer harness and freeze script in addition to scoring and validation code;
+          - regression tests cover manual-run discovery and required-evidence scoring.
+
+          Harness audit source commit:
+          3fab654459e5b2e97fc061af7740e6665e195d67
+
+          ## Pre-freeze validation
+
+          The integration job validates all 12 cases with the case-author helper, all 12 reviews with the review helper, runs the complete-case validator in freeze mode, and runs the validation, scoring, and harness regression tests.
+
+          ## Execution boundary
+
+          Before this integration commit:
+
+          - no frozen-files.json exists;
+          - no manual-runs directory exists;
+          - no legacy runs directory exists;
+          - analyzeRuns reports not-evaluable solely because there are no recorded analyzer runs.
+
+          No analyzer output was generated or inspected by this work.
+
+          ## Next transition
+
+          If this integration passes ROS and all repository validation, the next operation is the cryptographic freeze on this exact integrated tree, immediately followed by freeze verification. Analyzer execution remains prohibited until the freeze succeeds and verifies.
+          EOF
+
+      - name: Complete ROS and commit integrated pre-freeze tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros work complete --id "$WORK_ID" --occurred-at "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --evidence research-record=research/journal/JR-EDF-2026-011.md
+          ./ros registry build
+          rm -f .github/workflows/one-shot-edf-a003-pre-freeze-integration.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "research: integrate EX-EDF-2026-A003 pre-freeze set [ros-attributed]"
+
+      - name: Validate final integrated tree and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ROS_BASE_REF="8fd901155680aab114d4d188668cb051c9818f69"
+          ./ros validate
+          git push origin HEAD:${GITHUB_REF_NAME}
