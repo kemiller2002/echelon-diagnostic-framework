@@ -48,19 +48,31 @@ export function validatePair(caseDoc,truth){
   const itemIds=new Set((caseDoc.scoredItems??[]).map(x=>x.id));
   if(evidenceIds.size!==(caseDoc.evidence??[]).length) errors.push('duplicate evidence IDs');
   if(itemIds.size!==(caseDoc.scoredItems??[]).length) errors.push('duplicate scored-item IDs');
-  const truthBy=new Map((truth.answers??[]).map(x=>[x.itemId,x]));
+  const truthAnswers=truth.answers??[];
+  const truthIds=truthAnswers.map(x=>x.itemId);
+  if(new Set(truthIds).size!==truthIds.length) errors.push('duplicate truth item IDs');
+  const truthBy=new Map(truthAnswers.map(x=>[x.itemId,x]));
   for(const item of caseDoc.scoredItems??[]){
     const gt=truthBy.get(item.id);
     if(!gt){errors.push('missing truth for '+item.id);continue;}
     if(!(item.allowedAnswers??[]).includes(gt.expected)) errors.push('truth answer not allowed for '+item.id);
     for(const e of [...(gt.requiredEvidence??[]),...(gt.allowedEvidence??[])]) if(!evidenceIds.has(e)) errors.push(item.id+': unknown evidence '+e);
+    const allowed=new Set(gt.allowedEvidence??[]);
+    for(const e of gt.requiredEvidence??[]) if(!allowed.has(e)) errors.push(item.id+': required evidence must also be allowed '+e);
   }
   if(truthBy.size!==(caseDoc.scoredItems??[]).length) errors.push('truth/scored-item cardinality mismatch');
   if((truth.answers??[]).filter(x=>x.expected==='unknown').length<spec.minimumExpectedUnknownItems) errors.push('too few expected-unknown items');
-  if((truth.hardness?.redHerringEvidenceIds??[]).length<spec.minimumRedHerringEvidenceItems) errors.push('too few red herrings');
-  if((truth.hardness?.conflictingEvidencePairs??[]).length<spec.minimumConflictingEvidencePairs) errors.push('too few conflicting evidence pairs');
+  const redHerrings=truth.hardness?.redHerringEvidenceIds??[];
+  if(redHerrings.length<spec.minimumRedHerringEvidenceItems) errors.push('too few red herrings');
+  for(const e of redHerrings) if(!evidenceIds.has(e)) errors.push('unknown red-herring evidence '+e);
+  const conflicts=truth.hardness?.conflictingEvidencePairs??[];
+  if(conflicts.length<spec.minimumConflictingEvidencePairs) errors.push('too few conflicting evidence pairs');
+  for(const pair of conflicts) for(const e of pair??[]) if(!evidenceIds.has(e)) errors.push('unknown conflicting evidence '+e);
   if(Number(truth.hardness?.reasoningHops??0)<spec.minimumReasoningHops) errors.push('reasoning chain too short');
-  if((truth.hardness?.harmfulActionCandidateIds??[]).length<spec.minimumHarmfulCandidateActions) errors.push('no harmful candidate action');
+  const actionIds=new Set((caseDoc.candidates?.actions??[]).map(x=>x.id));
+  const harmful=truth.hardness?.harmfulActionCandidateIds??[];
+  if(harmful.length<spec.minimumHarmfulCandidateActions) errors.push('no harmful candidate action');
+  for(const id of harmful) if(!actionIds.has(id)) errors.push('unknown harmful action '+id);
   return errors;
 }
 
