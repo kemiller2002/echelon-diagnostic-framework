@@ -1,0 +1,309 @@
+{
+  "id": "ST-005",
+  "construct": "propagation",
+  "title": "Telemetry ingest lag after schema expansion",
+  "domain": "telemetry ingestion",
+  "entities": [
+    "event producer",
+    "ingest decoder",
+    "message broker",
+    "deduplication service",
+    "storage writer",
+    "customer lag monitor"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "A new telemetry schema increased median event size by 41% and introduced a nested attribute map parsed by the ingest decoder."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "Within 12 minutes of enabling the schema, ingest-worker allocation rate increased 2.3x and full-GC pauses rose from under 100 ms to 9-14 s."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "Broker lease duration is 10 s. During full-GC pauses, affected workers stopped heartbeating and 18% of in-flight messages were redelivered."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "text": "Redelivered messages carried the same broker message IDs as their first deliveries."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "The deduplication service CPU exceeded 95% only after redelivery volume rose; before that point it remained below 50%."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "Customer-visible ingestion lag began seven minutes after deduplication CPU crossed 90%."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "A network dashboard showed elevated retransmits on one rack, but affected and unaffected workers were spread across several racks."
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "text": "Rolling back the schema on 20% of workers returned allocation and GC-pause metrics on those workers to baseline within minutes."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "text": "Increasing deduplication capacity reduced customer lag but did not reduce GC pauses or broker redeliveries."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "Extending broker leases to 30 s on a canary reduced redelivery by 82% while leaving decoder allocation and GC behavior unchanged."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "Disabling deduplication in staging made duplicate downstream records visible during forced GC pauses."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "Storage-write latency remained at baseline until after customer lag had already begun."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "No heap profile was retained from the incident, so the specific object class responsible for the allocation increase is unknown."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The new schema and decoder path initiated the worker memory-pressure change."
+      },
+      {
+        "id": "H2",
+        "text": "Broker redelivery was the initiating origin of the worker GC pauses."
+      },
+      {
+        "id": "H3",
+        "text": "Deduplication saturation mediated part of the path from redelivery to customer-visible lag."
+      },
+      {
+        "id": "H4",
+        "text": "Rack-level packet retransmission materially contributed to worker pauses during the incident."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "new telemetry schema",
+        "to": "decoder allocation pressure",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "decoder allocation pressure",
+        "to": "full-GC pause",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R3",
+        "from": "full-GC pause",
+        "to": "broker redelivery",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R4",
+        "from": "broker redelivery",
+        "to": "deduplication saturation",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R5",
+        "from": "deduplication saturation",
+        "to": "customer ingestion lag",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R6",
+        "from": "customer ingestion lag",
+        "to": "broker redelivery",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R7",
+        "from": "rack retransmission",
+        "to": "full-GC pause",
+        "relation": "contributes-to"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Rollback or gate the new schema/decoder path while profiling the allocation increase."
+      },
+      {
+        "id": "A2",
+        "text": "Increase deduplication capacity to contain lag while the upstream mechanism is corrected."
+      },
+      {
+        "id": "A3",
+        "text": "Disable deduplication so the service cannot become saturated."
+      },
+      {
+        "id": "A4",
+        "text": "Extend broker leases enough to tolerate observed pauses while preserving redelivery safety."
+      },
+      {
+        "id": "A5",
+        "text": "Increase storage-write timeout because storage latency rose during the incident."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R7",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A5",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    }
+  ]
+}

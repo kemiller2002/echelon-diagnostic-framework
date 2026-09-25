@@ -1,0 +1,304 @@
+{
+  "id": "ST-001",
+  "construct": "negative-knowledge",
+  "title": "Duplicate notifications after worker slowdown",
+  "domain": "event-driven billing",
+  "entities": [
+    "API gateway",
+    "message broker",
+    "billing worker",
+    "tax service",
+    "idempotency cache",
+    "ledger database",
+    "notification service"
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "text": "Duplicate invoice-side-effect alerts rose from a baseline of 0-2 per hour to 41 in the first hour after worker release 4.18 reached 60% of workers."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "text": "The message broker recorded 37 lease expirations and redeliveries during the same hour; normal is fewer than 3."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "text": "For messages that reached the ledger write, the database unique constraint rejected duplicate ledger-row keys; the customer-notification side effect is outside that transaction."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "text": "Gateway request logs were retained for only about 30% of tenants because of an unrelated sampling configuration."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "text": "For six duplicate notifications, traces show the first worker call waiting on the tax service beyond the 60-second broker lease before a second delivery began."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "text": "One fully traced duplicate used the same broker message ID on both worker executions, 63 seconds apart."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "text": "For eight affected tenants whose gateway logs were complete, no second client submission occurred in the 10 minutes surrounding the duplicate notification."
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "text": "The idempotency-cache metrics exporter failed 20 minutes before the incident; hit/miss counters are unavailable for the incident window."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "text": "Two sampled workers had NTP offsets below 20 ms. Four other affected workers had no clock telemetry retained."
+    },
+    {
+      "id": "E10",
+      "stage": "S3",
+      "text": "A staging replay with a deliberately slow tax-service response reproduced lease expiry and redelivery. It did not reproduce a duplicate customer notification while the idempotency cache was known healthy."
+    },
+    {
+      "id": "E11",
+      "stage": "S3",
+      "text": "Incident-window idempotency-cache request logs had already rotated, so cache availability and key-presence for the affected messages cannot be reconstructed."
+    },
+    {
+      "id": "E12",
+      "stage": "S3",
+      "text": "Three duplicate notifications were produced by workers that had not yet received release 4.18."
+    },
+    {
+      "id": "E13",
+      "stage": "S3",
+      "text": "The tax service showed no error-rate increase, but its p99 latency increased from 18 seconds to 74 seconds during the incident."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Broker redelivery after lease expiry contributed to duplicate worker execution."
+      },
+      {
+        "id": "H2",
+        "text": "A second client submission was required for the duplicate notifications."
+      },
+      {
+        "id": "H3",
+        "text": "An idempotency-cache miss or outage allowed a duplicate notification after redelivery."
+      },
+      {
+        "id": "H4",
+        "text": "Worker clock skew caused the broker lease expirations."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "tax-service latency",
+        "to": "worker lease expiry",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R2",
+        "from": "worker lease expiry",
+        "to": "broker redelivery",
+        "relation": "precedes"
+      },
+      {
+        "id": "R3",
+        "from": "broker redelivery",
+        "to": "duplicate worker execution",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R4",
+        "from": "client resubmission",
+        "to": "duplicate worker execution",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R5",
+        "from": "worker clock skew",
+        "to": "worker lease expiry",
+        "relation": "contributes-to"
+      },
+      {
+        "id": "R6",
+        "from": "idempotency-cache miss",
+        "to": "duplicate notification",
+        "relation": "permits"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Disable idempotency checks until cache telemetry is restored."
+      },
+      {
+        "id": "A2",
+        "text": "Restore cache observability and preserve cache request logs before deciding whether cache failure was causal."
+      },
+      {
+        "id": "A3",
+        "text": "Block client retries globally because retries are the presumed duplicate source."
+      },
+      {
+        "id": "A4",
+        "text": "Add broker-lease renewal or bound the tax-service wait so long downstream calls cannot silently outlive the lease."
+      },
+      {
+        "id": "A5",
+        "text": "Increase the database unique-key retry count so rejected duplicate ledger writes are retried automatically."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "id": "I1",
+      "kind": "hypothesis",
+      "candidateId": "H1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I2",
+      "kind": "hypothesis",
+      "candidateId": "H2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I3",
+      "kind": "hypothesis",
+      "candidateId": "H3",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I4",
+      "kind": "hypothesis",
+      "candidateId": "H4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I5",
+      "kind": "edge",
+      "candidateId": "R1",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I6",
+      "kind": "edge",
+      "candidateId": "R2",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
+    },
+    {
+      "id": "I7",
+      "kind": "edge",
+      "candidateId": "R4",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I8",
+      "kind": "edge",
+      "candidateId": "R5",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I9",
+      "kind": "action",
+      "candidateId": "A1",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I10",
+      "kind": "action",
+      "candidateId": "A2",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I11",
+      "kind": "action",
+      "candidateId": "A3",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I12",
+      "kind": "action",
+      "candidateId": "A4",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": false
+    }
+  ]
+}
