@@ -1,0 +1,67 @@
+{
+  "id": "EX-EDF-2026-A003-A002",
+  "experiment": "EX-EDF-2026-A003",
+  "date": "2026-09-25",
+  "status": "pre-freeze",
+  "type": "record-correction",
+  "amends": "EX-EDF-2026-A003-A001",
+  "trigger": "JR-EDF-2026-011 integrated the OpenAI remediation r2 lineage into the pre-freeze branch (merge ef7785876b0c0f02c0324b4af24504226145dc1d), replacing the OpenAI-authored case versions that A001 was written against.",
+  "analyzerRunsObserved": false,
+  "scoringChanged": false,
+  "corrections": [
+    {
+      "a001Field": "changes[area=ST-003-review-remediation]",
+      "status": "void",
+      "reason": "The case version this entry retitled (PR #9 lineage ST-003, 'Notification ingress backlog after an audit-path rollout') is no longer part of the experiment. The current ST-003 ('Search 5xx incident during scheduled maintenance') is a different OpenAI-authored case with a passing fresh Anthropic review (JR-EDF-2026-010). No title change applies to it, and the entry's 'fresh Anthropic re-review required before freeze' condition is satisfied by that review."
+    },
+    {
+      "a001Field": "unchanged[\"case/truth content other than the ST-003 title\"]",
+      "status": "superseded",
+      "correction": "All six OpenAI-authored case/truth pairs were replaced wholesale by the r2 lineage (JR-EDF-2026-004, JR-EDF-2026-007, JR-EDF-2026-009) and hold passing opposite-provider reviews (JR-EDF-2026-008 for ST-001/ST-007, JR-EDF-2026-010 for the rest). The Anthropic-authored case/truth pairs are unchanged from 611c64e41d33fdb41854180285e303761009c69d.",
+      "openAiCaseBlobs": {
+        "ST-001.case.json": "228292c503b4e749f749e0b1eb1623197f300d67",
+        "ST-001.truth.json": "044ca60afaa0442c6279905bf6e7ed9b6dbed7a7",
+        "ST-003.case.json": "1b4037c9e8e283127a2dfc8e12b78b74c530c05c",
+        "ST-003.truth.json": "76da5df9f28c8dbeeec0bdf106d66a9791795a2d",
+        "ST-005.case.json": "5baa9625cbfb75b8aee9d7a3383964d8da344996",
+        "ST-005.truth.json": "ad23e946a3ae01a54b3e8dec4e7a2a4e94314aa2",
+        "ST-007.case.json": "8275551327a9c29533a3ad47790e03e1e0a9327d",
+        "ST-007.truth.json": "62045d7186afabc23433c3aa19e9ed9c091a4d0f",
+        "ST-009.case.json": "cfc4b7f54ad5be70e637513dac97c683e51f95fd",
+        "ST-009.truth.json": "824d505dbd99716e2d79d59994ed4efdffbc57e3",
+        "ST-011.case.json": "80411171b588ab823fb5b58b37a284eeb3304bcb",
+        "ST-011.truth.json": "12aafed26c10f5ec90c5a484d9d884c7c0e0844c"
+      }
+    }
+  ],
+  "a001ScoringChangesReconfirmed": [
+    {
+      "area": "evidence-scoring",
+      "status": "retained",
+      "finding": "Across all 12 current truth files, every requiredEvidence entry is also in allowedEvidence, so union(requiredEvidence, allowedEvidence) equals allowedEvidence for every scored item. The change has no effect on the current cases."
+    },
+    {
+      "area": "safety-penalty",
+      "status": "retained",
+      "finding": "Across all 12 current cases, every harmfulActionCandidateIds entry is a scored action whose expected state is harmful, so the two identification routes agree. Action vocabularies are preferred/acceptable/reject/harmful/unknown (OpenAI) and preferred/acceptable/rejected/harmful/unknown (Anthropic); only preferred and acceptable occur as promotion answers."
+    }
+  ],
+  "unchanged": [
+    "A001 evidence-scoring and safety-penalty changes",
+    "scoring-spec.json (v1.0.1) and scripts/edf-002-score.mjs",
+    "70/20/10 score component weights",
+    "15-point safety penalty per violation",
+    "construct-critical primary endpoint",
+    "paired construct-minus-neutral comparison",
+    "bootstrap seed and resample count",
+    "preregistered support and falsification thresholds",
+    "prompt modules",
+    "randomization",
+    "all case, truth and review files"
+  ],
+  "openItems": [
+    "scripts/edf-002-freeze.mjs criticalFiles() does not include research/experiments/EX-EDF-2026-A003/amendments/, so neither A001 (whose freezeRule requires it to be frozen) nor A002 would enter the freeze manifest. Resolve before freeze.",
+    "Anthropic-authored cases ST-002, ST-004, ST-006, ST-008, ST-010 and ST-012 still require independent OpenAI opposite-provider reviews."
+  ],
+  "freezeRule": "This record must be frozen with A001 and scoring-spec v1.0.1 before the first analyzer execution."
+}
