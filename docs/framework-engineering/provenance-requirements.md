@@ -2,6 +2,7 @@
 id: RQ-EDF-2026-PROVENANCE
 title: Provenance of EDF research records
 status: accepted
+version: 1.2.0
 created: 2026-09-26
 updated: 2026-09-26
 requirements: [RQ-EDF-2026-A001, RQ-EDF-2026-A002, RQ-EDF-2026-A003, RQ-EDF-2026-A004, RQ-EDF-2026-A005, RQ-EDF-2026-A006]
@@ -46,6 +47,8 @@ RQ-ROS-2026-A010). Recorded identity is self-reported and unverified.
 In the claim registries, identity fields (`actor`, `author`, `authorAgent`,
 `authorFamily`, `executor`, `executorFamily`, `provider`, `model`, `runtime`,
 and similar) SHALL appear only inside an entry's top-level `provenance` block.
+Keys are compared normalised: lowercased, with `_`, `-`, and spaces removed,
+so `agent_id`, `Author`, and `created-by-agent` are identity fields too.
 `confidence`, `state`, and `publicState` SHALL remain labels, not structures
 that could carry inputs.
 
@@ -67,7 +70,21 @@ execution identity fields, legacy author fields (`author_agent`,
 `authorAgent`, `created_by_agent`, `owner_agent`, `source_author`), Praxis
 execution or contributor keys (`EXE-`, `EXT-`, `CTB-` in any form), actor
 environment variable names, or AI provider/model/runtime names, whether as
-JSON keys or anywhere in the text. `provider`, `model`, and `runtime` are
+JSON keys or anywhere in the text. JSON keys are compared normalised
+(lowercased, `_`, `-`, and spaces removed) against the identity key set,
+which includes `actor`, `author`, `agentId`, `sessionId`, `runId`,
+`threadId`, `conversationId`, `executionId`, `generatedBy`, `producedBy`, and
+`writtenBy`. The identity text signals run on the raw text and on every
+decoded JSON member name and string value, so JSON escapes cannot hide them.
+Word matching treats `_` as a separator (`claude_code` is caught). The
+environment variable names are every name in Praxis
+`identity-environment.json` plus any `ROS_ACTOR*`, `ROS_EXECUTION*`, or
+`ROS_TELEMETRY*` name. Schema tags include `praxis.provenance/` and
+`echelon.execution-envelope/`, and model names include forms such as
+`gpt4o`, `gpt-4o`, and `claude-*`. Blinded JSON that repeats a member name
+within one object is rejected, because the shadowed value would never be
+checked. `provider`, `model`, and `runtime` (and their `-name`/`-version`
+forms) are
 allowed as keys only because incident cases describe systems with those
 attributes; their values are still checked. This mirrors Percepta's
 experiment leakage check (PCT-038). Case authorship and executor bindings
@@ -86,7 +103,10 @@ unattributed; no author is inferred or backfilled.
 
 `node scripts/validate-repository.mjs` and `node --test` SHALL fail when
 RQ-EDF-2026-A002 or RQ-EDF-2026-A004 is violated or when a registry entry's
-`provenance` block is malformed. The check is read-only and passes on the
+`provenance` block is malformed. Registry files are read as text: a
+registry that repeats a member name within one object, or whose `provenance`
+is `null` or holds an unpaired surrogate, fails (Praxis contract 1.2 rule 1
+and rule 6). The check is read-only and passes on the
 current frozen material.
 
 ## Repository policy
@@ -105,6 +125,22 @@ therefore not added; it is a follow-up for the ROS upgrade, with a
 | RQ-EDF-2026-A001 | RQ-ROS-2026-A004, A015, A016 | registry `provenance` field accepted and classified by `scripts/provenance-integrity.mjs` using the vendored `scripts/vendor/praxis/provenance-interchange.mjs` | `tests/provenance-integrity.test.mjs` (inbound block, round trip, contributors, lineage, versions) |
 | RQ-EDF-2026-A002 | RQ-ROS-2026-A019, A010 | `registryEntryFindings`; claim-and-confidence policy "Provenance is not evidence" | `tests/provenance-integrity.test.mjs` ("identity fields outside the provenance block are rejected", "identity is not weight") |
 | RQ-EDF-2026-A003 | RQ-ROS-2026-A019 | claim-and-confidence policy | protocol review |
-| RQ-EDF-2026-A004 | DF-ROS-2026-A037 | `blindedMaterialFindings`, `isBlindedMaterial` | `tests/provenance-integrity.test.mjs` (blinded leaks); repository run |
+| RQ-EDF-2026-A004 | DF-ROS-2026-A037 | `blindedMaterialFindings`, `isBlindedMaterial`, `normaliseKey`, `identitySignals`, `duplicateMemberNames` | `tests/provenance-integrity.test.mjs` (blinded leaks, round-3 bypasses, ordinary text that stays clean); repository run |
 | RQ-EDF-2026-A005 | DF-ROS-2026-A036 | no edits to frozen paths | `git diff --stat` on frozen paths; v0.3 blob-hash check in `scripts/repository-integrity.mjs` |
-| RQ-EDF-2026-A006 | RQ-ROS-2026-A018 | `scripts/repository-integrity.mjs` calls `validateProvenanceIntegrity` | `node --test`; `node scripts/validate-repository.mjs`; vendored-file SHA-256 and 40 Praxis conformance cases |
+| RQ-EDF-2026-A006 | RQ-ROS-2026-A018 | `scripts/repository-integrity.mjs` calls `validateProvenanceIntegrity` | `node --test`; `node scripts/validate-repository.mjs`; vendored-file SHA-256; the 70 Praxis conformance cases, 14 text cases (also through `registryTextFindings`), 8 lineage cases, and 12 envelope-key cases (vendored library) |
+
+## Revision notes
+
+- **1.2.0** (2026-09-26, FEAT-ECHELON-PROVENANCE-R3; Praxis contract
+  revision 1.2 at `b003718`, second adversarial review finding 9).
+  RQ-EDF-2026-A002, A004, and A006 are tightened: identity keys are
+  normalised; identity signals run on every decoded JSON string; all Praxis
+  identity environment variable names are matched; `_` is a word separator;
+  schema tags and model-name forms are widened; and JSON that repeats a member
+  name is rejected in blinded material and registries. Praxis files are
+  re-vendored at `b003718`, including the new text, lineage, and envelope-key
+  fixtures, and the `addLineage` result shape (`{ ok, block }`) is adopted. No
+  frozen or preregistered material changed, and the repository still passes.
+- **1.1.0** (FEAT-ECHELON-PROVENANCE-R2; Praxis contract revision 1.1). The
+  full identity key set and a text scan of every blinded file.
+- **1.0.0** (FEAT-ECHELON-PROVENANCE). Initial requirements.

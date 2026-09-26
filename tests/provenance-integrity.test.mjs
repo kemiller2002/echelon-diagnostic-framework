@@ -6,9 +6,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import crypto from "node:crypto";
 import {
-  registryEntryFindings, registryFindings, isBlindedMaterial, blindedMaterialFindings, validateProvenanceIntegrity,
+  registryEntryFindings, registryFindings, registryTextFindings, isBlindedMaterial, blindedMaterialFindings,
+  validateProvenanceIntegrity, duplicateMemberNames, normaliseKey, identitySignals,
 } from "../scripts/provenance-integrity.mjs";
-import { classify, appendContribution, addLineage, emptyBlock, preservationViolations } from "../scripts/vendor/praxis/provenance-interchange.mjs";
+import {
+  classify, classifyText, appendContribution, addLineage, emptyBlock, preservationViolations, keyFromEnvelopeV1,
+  IDENTITY_ENVIRONMENT_VARIABLES,
+} from "../scripts/vendor/praxis/provenance-interchange.mjs";
 
 const fixtureUrl = (name) => new URL(`./fixtures/praxis-provenance/${name}`, import.meta.url);
 const fixture = (name) => JSON.parse(fs.readFileSync(fixtureUrl(name), "utf8"));
@@ -30,7 +34,7 @@ const hypothesis = (extra = {}) => ({
 test("vendored Praxis files match SOURCE.json", () => {
   const source = fixture("SOURCE.json");
   assert.equal(source.repository, "kemiller2002/praxis");
-  assert.equal(source.commit, "c2657efb4d54f11d0fd0617cc1bcd5b8418601d5");
+  assert.equal(source.commit, "b0037183389c8b9392919f58521b9487d1b4d5c6");
   for (const [relative, expected] of Object.entries(source.files)) {
     const actual = crypto.createHash("sha256").update(fs.readFileSync(fixtureUrl(relative))).digest("hex");
     assert.equal(actual, expected, `${relative} was edited locally`);
@@ -42,6 +46,33 @@ for (const item of fixture("cases.json").cases) {
     const result = classify(item.block);
     assert.equal(result.verdict, item.expect, JSON.stringify(result.problems));
     assert.equal(result.warnings.length, item.warnings);
+  });
+}
+
+// Contract 1.2 fixtures: raw text, lineage, and v1 envelope keys.
+for (const item of fixture("text-cases.json").cases) {
+  test(`Praxis text conformance: ${item.name} is ${item.expect}`, () => {
+    assert.equal(classifyText(item.text).verdict, item.expect);
+    // EDF reads registry provenance as text too: embedded in a registry file, a malformed block is a finding.
+    const registry = `{"evidence":[{"id":"EV-EDF-900","provenance":${item.text}}]}`;
+    const findings = registryTextFindings(registry, "evidence-registry.json", "evidence");
+    assert.equal(findings.length > 0, item.expect === "malformed", findings.join("; "));
+  });
+}
+
+for (const item of fixture("lineage-cases.json").cases) {
+  test(`Praxis lineage conformance: ${item.name} is ${item.ok ? "ok" : "refused"}`, () => {
+    const result = addLineage(item.block, item.references);
+    assert.equal(result.ok, item.ok, JSON.stringify(result));
+    if (item.ok) assert.deepEqual(result.block.derivedFrom, item.derivedFrom);
+  });
+}
+
+for (const item of fixture("envelope-key-cases.json").cases) {
+  test(`Praxis envelope-key conformance (vendored library): ${item.name}`, () => {
+    const envelope = item.envelopeText === undefined ? item.envelope : JSON.parse(item.envelopeText);
+    if (item.error) assert.throws(() => keyFromEnvelopeV1(envelope));
+    else assert.equal(keyFromEnvelopeV1(envelope), item.key);
   });
 }
 
@@ -73,10 +104,11 @@ test("multiple contributors, two executions of one agent, human, automation, and
     assert.deepEqual(preservationViolations(block, next.block), []);
     block = next.block;
   }
-  const derived = addLineage(block, ["EV-EDF-009", "praxis:RQ-ROS-2026-A019"]);
-  assert.deepEqual(derived.derivedFrom, ["EV-EDF-009", "praxis:RQ-ROS-2026-A019"]);
-  assert.deepEqual(preservationViolations(block, derived), []);
-  block = derived;
+  const derived = addLineage(block, ["EV-EDF-009", "praxis:RQ-ROS-2026-A019", "EV-EDF-009"]);
+  assert.ok(derived.ok, JSON.stringify(derived));
+  assert.deepEqual(derived.block.derivedFrom, ["EV-EDF-009", "praxis:RQ-ROS-2026-A019"]);
+  assert.deepEqual(preservationViolations(block, derived.block), []);
+  block = derived.block;
   assert.equal(classify(block).verdict, "supported");
   assert.deepEqual(registryEntryFindings(hypothesis({ provenance: block }), "hypothesis-registry.json"), []);
 });
@@ -208,7 +240,8 @@ test("identity values are caught even under system-description keys", () => {
 
 test("every blinded identity key is rejected as a JSON key", async () => {
   const { BLINDED_IDENTITY_KEYS, IDENTITY_KEYS } = await import("../scripts/provenance-integrity.mjs");
-  assert.deepEqual([...IDENTITY_KEYS].filter((key) => !BLINDED_IDENTITY_KEYS.has(key)).sort(), ["model", "modelVersion", "provider", "runtime"]);
+  assert.deepEqual([...IDENTITY_KEYS].filter((key) => !BLINDED_IDENTITY_KEYS.has(key)).sort(),
+    ["model", "modelid", "modelname", "modelversion", "provider", "runtime", "runtimename", "runtimeversion"]);
   for (const key of BLINDED_IDENTITY_KEYS) {
     assert.notDeepEqual(blindedMaterialFindings("x/ST-900.case.json", JSON.stringify({ id: "ST-900", [key]: "value" })), [], key);
   }
@@ -222,4 +255,110 @@ test("ordinary diagnostic prose in a blinded case is not flagged", () => {
     evidence: [{ id: "EV1", text: "The deploy agent restarted workers; the executor pool drained. Extended retries (EXTENDED) were off." }],
   });
   assert.deepEqual(blindedMaterialFindings("x/ST-900.case.json", text), []);
+});
+
+// Round-3 review regressions (Praxis contract revision 1.2 review, finding 9).
+const CASES = "research/experiments/EX-X/cases.json";
+const caseWith = (fields) => JSON.stringify({ cases: [{ id: "C1", ...fields }] });
+
+test("keys are normalised: case, '_' and '-' do not hide an identity field", () => {
+  assert.equal(normaliseKey("agent_id"), "agentid");
+  assert.equal(normaliseKey("Generated-By"), "generatedby");
+  for (const key of ["agent_id", "agentId", "Agent-Id", "sessionId", "session_id", "runId", "RUN_ID", "Author", "AUTHOR",
+    "generatedBy", "generated_by", "executionId", "execution-id", "actor", "Actor_Kind", "threadId", "conversationId",
+    "createdByAgent", "writtenBy", "producedBy", "contributors"]) {
+    assert.ok(blindedMaterialFindings(CASES, caseWith({ [key]: "v" })).some((finding) => finding.includes("identity field")), key);
+  }
+});
+
+test("registry identity keys are normalised too", () => {
+  const findings = registryEntryFindings(hypothesis({ agent_id: "a", Author: "x", createdByAgent: "y", sessionId: "s", runId: "r" }), "registry");
+  assert.equal(findings.filter((finding) => finding.includes("identity field")).length, 5);
+});
+
+test("model, provider and runtime stay allowed as keys in blinded material, in any spelling, but their values are checked", () => {
+  assert.deepEqual(blindedMaterialFindings(CASES, caseWith({ Model: "db-7", model_name: "resnet-50", Provider: "cloud-dns", runtime_version: "jvm-21" })), []);
+  assert.notDeepEqual(blindedMaterialFindings(CASES, caseWith({ model_name: "gpt-4o" })), []);
+});
+
+test("identity patterns run on every decoded string, not only the raw text", () => {
+  for (const text of [
+    '{"cases":[{"id":"C1","\\u0061uthor":"Kevin"}]}',
+    '{"cases":[{"id":"C1","note":"\\u0063laude wrote this"}]}',
+    '{"cases":[{"id":"C1","x":"EX\\u0045-20260926T000000000Z-ab12cd34"}]}',
+    '{"cases":[{"id":"C1","x":"\\u0070raxis.provenance/1"}]}',
+    '{"cases":[{"id":"C1","note":"openai\\u002fcodex"}]}',
+    '{"cases":[{"id":"C1","tags":["\\u0067pt4o"]}]}',
+    '{"cases":[{"id":"C1","\\u0063laude notes":"x"}]}',
+  ]) {
+    assert.notDeepEqual(blindedMaterialFindings(CASES, text), [], text);
+  }
+  assert.ok(blindedMaterialFindings(CASES, '{"cases":[{"id":"C1","note":"\\u0063laude"}]}').some((finding) => finding.includes("'cases[0].note'")));
+  assert.notDeepEqual(blindedMaterialFindings("x/analyzer-packets/a.txt", "Produced by \\u0063laude.\n"), []);
+});
+
+test("every identity environment variable is caught, and matches the vendored identity-environment.json", () => {
+  assert.deepEqual([...IDENTITY_ENVIRONMENT_VARIABLES], fixture("identity-environment.json").variables);
+  for (const name of fixture("identity-environment.json").variables) {
+    assert.ok(identitySignals(`set ${name}=abc123`).some(([signal]) => signal === "identity environment variable"), name);
+    assert.notDeepEqual(blindedMaterialFindings(CASES, caseWith({ note: `${name}=abc123` })), [], name);
+  }
+  assert.notDeepEqual(identitySignals("ROS_TELEMETRY_FUTURE_FIELD=1"), []);
+});
+
+test("'_' is a word separator: claude_code and friends are caught", () => {
+  for (const text of ["claude_code run", "ran under claude_code", "OPENAI_API_BASE was set", "x_codex_y", "a GEMINI_SESSION_ID leak", "run_EXE-20260926T000000000Z-ab12cd34"]) {
+    assert.notDeepEqual(identitySignals(text), [], text);
+  }
+});
+
+test("execution keys, schema tags, and model names are caught", () => {
+  for (const text of [
+    "EXE-20260926T000000000Z-ab12cd34", "see EXT-dokimos.run-7", "CTB-kevin", "(EXE-1)",
+    "praxis.provenance/1", "PRAXIS.PROVENANCE/2", "echelon.execution-envelope/v1",
+    "model: gpt4o", "gpt-4o", "GPT-5.1-codex", "gpt4", "claude-opus", "claude-3.5-sonnet", "Claude3", "llama-3", "llama3.1",
+    "anthropic", "OpenAI", "chatgpt", "gemini-cli", "copilot", "ollama", "mistral",
+  ]) {
+    assert.notDeepEqual(identitySignals(text), [], text);
+  }
+});
+
+test("ordinary incident text in blinded material stays clean", () => {
+  for (const text of [
+    "User session ID: 1234 expired after the load balancer reset.",
+    "The GPT partition table was rewritten by the installer.",
+    "Run id run-42 of the nightly batch failed at 02:00.",
+    "The deploy agent restarted workers; the executor pool drained.",
+    "Extended retries (EXTENDED) were off; ext4 journal replay took 40s.",
+    "Author of the change reverted it within an hour.",
+    "The model predicted churn; runtime was jvm-21; provider cloud-dns.",
+    "snake_case_keys and author_notes were in the config.",
+    "Claudette from ops paged the on-call.",
+    "The codec negotiated h264; the gemstone service timed out.",
+    "The executor ran runs 1 to 7; sessions were sticky.",
+    "Created by the scheduler at 09:00; generated by cron.",
+    "exec-7 and ctb_2 were the affected hosts; the GitHub Actions workflow retried.",
+  ]) {
+    assert.deepEqual(identitySignals(text), [], text);
+    assert.deepEqual(blindedMaterialFindings(CASES, caseWith({ note: text })), [], text);
+  }
+  const system = { session: "s-1", sessionCount: 3, run: "r1", runs: [1, 2], threads: 4, author_notes: "x", modelName: "db-7",
+    providerRegion: "us", executionTime: "3s", createdAt: "t", owner: "team-a", operator: "alice" };
+  assert.deepEqual(blindedMaterialFindings(CASES, caseWith(system)), []);
+});
+
+test("blinded JSON that repeats a member name is rejected (the shadowed value is never scanned)", () => {
+  assert.deepEqual(duplicateMemberNames('{"a":1,"b":{"a":2},"c":[{"a":3},{"a":4}]}'), []);
+  assert.deepEqual(duplicateMemberNames('{"a":"x","\\u0061":"y"}'), ["a"]);
+  assert.deepEqual(duplicateMemberNames('{"s":"{\\"a\\":1,\\"a\\":2}"}'), []);
+  const findings = blindedMaterialFindings(CASES, '{"cases":[{"id":"C1","note":"\\u0063laude","note":"fine"}]}');
+  assert.ok(findings.some((finding) => finding.includes("member name repeated")), findings.join("; "));
+});
+
+test("registry text: duplicate members, a stored null provenance, and a lone surrogate are findings", () => {
+  const dup = '{"evidence":[{"id":"EV-EDF-900","provenance":{"schema":"praxis.provenance/1","contributions":{"CTB-1":{"operations":["created"],"at":"2026-09-26T08:00:00.000Z","actor":{"kind":"human","id":"mallory"}},"CTB-1":{"operations":["modified"],"at":"2026-09-26T08:00:00.000Z","actor":{"kind":"human","id":"alice"}}}}}]}';
+  assert.notDeepEqual(registryTextFindings(dup, "evidence-registry.json", "evidence"), []);
+  assert.ok(registryEntryFindings(evidence({ provenance: null }), "registry").some((finding) => finding.includes("malformed provenance")));
+  const surrogate = '{"evidence":[{"id":"EV-EDF-900","provenance":{"schema":"praxis.provenance/2","x-a":"\\ud800"}}]}';
+  assert.notDeepEqual(registryTextFindings(surrogate, "evidence-registry.json", "evidence"), []);
 });
