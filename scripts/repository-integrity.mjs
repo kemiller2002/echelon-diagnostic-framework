@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { validateProvenanceIntegrity } from "./provenance-integrity.mjs";
 
 const allowedStates = new Set(["internal-demonstration","suggestive","unsupported","contradicted","falsified","superseded","planned"]);
 const allowedPublicStates = new Set(["internal","suggestive","unsupported","open"]);
@@ -148,9 +149,14 @@ export function validateRepository(root = process.cwd()) {
   const repro = fs.readFileSync(path.join(root, "docs/edf/validation/reproducibility-findings.md"), "utf8");
   if (!repro.includes("No completed cross-executor reproducibility result exists") || !repro.includes("execution reconstructability")) errors.push("Current qualified reproducibility boundary is missing.");
 
+  // Actor identity is provenance, not evidence; blinded material carries none (DF-EDF-2026-A001).
+  const provenance = validateProvenanceIntegrity(root);
+  errors.push(...provenance.errors);
+
   return {
     errors,
     summary: {
+      blindedFilesChecked: provenance.summary.blindedFilesChecked,
       hypotheses: hypothesisIds.size,
       evidenceRecords: evidenceIds.size,
       theoryRecords: theoryIds.size,
