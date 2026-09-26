@@ -1,7 +1,7 @@
 {
   "id": "ST-007",
   "construct": "evidence-revision",
-  "title": "Authentication failure across changing evidence stages",
+  "title": "Intermittent authentication failures affecting enterprise tenants",
   "domain": "identity and application platform",
   "entities": [
     "application release",
@@ -65,7 +65,7 @@
     {
       "id": "E11",
       "stage": "S3",
-      "text": "Manually flushing the key cache on one affected node caused failures routed to that node to stop immediately."
+      "text": "On one affected node, a manual key-cache flush was followed by an 82% drop in failures routed to that node over 15 minutes; the cache-refresh scheduler was restarted during the same maintenance window, so the isolated effect of the flush was not measured."
     },
     {
       "id": "E12",
@@ -76,13 +76,18 @@
       "id": "E13",
       "stage": "S3",
       "text": "The cache-refresh scheduler configuration for the four affected production tenants was not retained, so the exact trigger for stale retention cannot be reconstructed."
+    },
+    {
+      "id": "E14",
+      "stage": "S3",
+      "text": "In staging, disabling signature verification allowed a token signed with an untrusted test key to reach the application; production policy requires rejecting tokens whose signatures cannot be verified."
     }
   ],
   "candidates": {
     "hypotheses": [
       {
         "id": "H1",
-        "text": "At stage S1, release 9.7 was sufficiently established as the primary cause of the failures."
+        "text": "Using only stage S1 evidence, release 9.7 was the primary cause of the failures."
       },
       {
         "id": "H2",
@@ -90,7 +95,7 @@
       },
       {
         "id": "H3",
-        "text": "At stage S2, stale signing-key cache state was already established as the cause."
+        "text": "Using evidence available through stage S2, stale signing-key cache state caused the failures."
       },
       {
         "id": "H4",
@@ -138,7 +143,7 @@
     "actions": [
       {
         "id": "A1",
-        "text": "At S1, perform a bounded rollback while preserving evidence and treating release causality as provisional."
+        "text": "At S1, perform a bounded rollback while preserving incident evidence."
       },
       {
         "id": "A2",
@@ -154,7 +159,7 @@
       },
       {
         "id": "A5",
-        "text": "At S2, declare the stale-key mechanism confirmed and close alternative hypotheses."
+        "text": "At S2, flush signing-key caches across affected nodes and document stale cache as the incident cause."
       }
     ]
   },
@@ -290,6 +295,19 @@
       "id": "I12",
       "kind": "action",
       "candidateId": "A5",
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "reject",
+        "harmful",
+        "unknown"
+      ],
+      "constructCritical": true
+    },
+    {
+      "id": "I13",
+      "kind": "action",
+      "candidateId": "A4",
       "allowedAnswers": [
         "preferred",
         "acceptable",

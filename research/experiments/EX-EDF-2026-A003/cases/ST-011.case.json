@@ -1,7 +1,7 @@
 {
   "id": "ST-011",
   "construct": "protective-controls",
-  "title": "Schema quarantine after producer contract drift",
+  "title": "Billing pipeline quarantine surge",
   "domain": "billing event pipeline",
   "entities": [
     "event producer",
@@ -40,12 +40,12 @@
     {
       "id": "E6",
       "stage": "S2",
-      "text": "A compatibility adapter converting the new object to the legacy string representation allowed a canary batch to pass validation and bill correctly."
+      "text": "A compatibility adapter converting the new object to the legacy string representation allowed 40 sampled messages to pass validation; five spot-checked bills used the expected tax region, but no full financial reconciliation was run."
     },
     {
       "id": "E7",
       "stage": "S2",
-      "text": "Increasing quarantine workers reduced queue age but did not change the fraction of producer-4.0 messages failing validation."
+      "text": "During a ten-minute window after quarantine-worker capacity increased by 25%, queue-age growth slowed while the producer-4.0 validation-failure fraction was unchanged; incoming malformed-message volume also fell 9% during the window."
     },
     {
       "id": "E8",
@@ -60,7 +60,7 @@
     {
       "id": "E10",
       "stage": "S3",
-      "text": "The producer team confirmed release 4.0 changed the field shape without updating the shared contract version."
+      "text": "Release 4.0 code diff and artifact metadata show that taxRegion serialization changed from a string to a nested object while the shared contract version metadata remained unchanged; the producer team confirmed both observations."
     },
     {
       "id": "E11",
@@ -75,7 +75,12 @@
     {
       "id": "E13",
       "stage": "S3",
-      "text": "The reason the producer release process did not require a contract-version update was not recorded in the incident artifacts."
+      "text": "Release records show producer 4.0 was promoted despite unchanged shared-contract version metadata; incident artifacts do not record why the release process permitted that mismatch."
+    },
+    {
+      "id": "E14",
+      "stage": "S3",
+      "text": "In a prior staging drill, quarantine paging was the only automated signal of schema-validation failures; when paging was disabled, the failing queue grew for 18 minutes until an operator manually opened the dashboard."
     }
   ],
   "candidates": {
@@ -98,7 +103,11 @@
       },
       {
         "id": "H5",
-        "text": "A missing release-time contract-version enforcement control enabled the incompatible producer change to ship."
+        "text": "The release process permitted producer 4.0 to ship without a required contract-version update."
+      },
+      {
+        "id": "H6",
+        "text": "After producer compatibility is restored, quarantine capacity will remain a separate customer-impacting bottleneck."
       }
     ],
     "edges": [
@@ -140,7 +149,7 @@
       },
       {
         "id": "R7",
-        "from": "release-time contract enforcement gap",
+        "from": "release process permitting unchanged contract version",
         "to": "producer schema drift",
         "relation": "permits"
       }
@@ -148,11 +157,11 @@
     "actions": [
       {
         "id": "A1",
-        "text": "Restore producer-contract compatibility by rolling back the field-shape change or deploying the verified compatibility adapter."
+        "text": "Roll producer 4.0 back or deploy the compatibility adapter."
       },
       {
         "id": "A2",
-        "text": "Increase quarantine processing capacity temporarily while the producer incompatibility is corrected."
+        "text": "Increase quarantine worker capacity during the incident."
       },
       {
         "id": "A3",
@@ -160,7 +169,7 @@
       },
       {
         "id": "A4",
-        "text": "Mute quarantine alerts until the backlog clears."
+        "text": "Disable quarantine paging for the duration of the incident."
       },
       {
         "id": "A5",
@@ -308,6 +317,17 @@
         "unknown"
       ],
       "constructCritical": true
+    },
+    {
+      "id": "I13",
+      "kind": "hypothesis",
+      "candidateId": "H6",
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ],
+      "constructCritical": false
     }
   ]
 }
