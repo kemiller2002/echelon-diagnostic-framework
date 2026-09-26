@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kemiller2002/echelon-diagnostic-framework/schemas/edf-provenance-sidecar.schema.json",
+  "title": "EDF provenance sidecar",
+  "description": "Optional, self-reported provenance for one future EDF research artifact (a case, review, analyzer run, or evaluation), kept in a sidecar file at research/experiments/<EX-ID>/provenance/<kind>s/<id>.provenance.json. That location is outside every frozen/hashed set and outside every analyzer-, reviewer-, and scorer-visible input. Identity is provenance used only for independence/separation checks and stratified reporting; it MUST NOT change evidence weight, scores, claim state, or confidence (claim-and-confidence-policy.md, Independence, v1.1; DF-EDF-2026-A001). The embedded record is the Praxis provenance interchange record, unchanged.",
+  "$comment": "The $defs actor, contribution, reference and provenanceRecord are vendored from kemiller2002/praxis @ b32677d3d26b512f4816d9ba5662c9484d15fad2 (schemas/provenance-actor.schema.json, schemas/artifact-provenance.schema.json, schemas/provenance-record.schema.json) with cross-file $refs rewritten to local #/$defs pointers. Do not change their meaning here; re-vendor instead.",
+  "type": "object",
+  "required": [
+    "contract",
+    "version",
+    "experiment",
+    "kind",
+    "target",
+    "targetSha256",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract": {
+      "const": "edf.provenance-sidecar"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "experiment": {
+      "type": "string",
+      "pattern": "^EX-EDF-[0-9A-Z-]+$"
+    },
+    "kind": {
+      "enum": [
+        "case",
+        "review",
+        "run",
+        "evaluation"
+      ]
+    },
+    "target": {
+      "description": "Repository-relative path of the artifact this sidecar describes. The sidecar never replaces or edits it.",
+      "type": "string",
+      "pattern": "^research/experiments/EX-EDF-[^\\s]+$"
+    },
+    "targetSha256": {
+      "description": "SHA-256 of the target's bytes when the sidecar was written, binding the provenance to exactly that artifact.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "provenance": {
+      "description": "A Praxis provenance interchange record (major version 1) whose subject is edf:<target>. Contributions are keyed by execution: ROS_EXECUTION_ID when Praxis propagated one, else EXE-edf.<run>; a human acting outside any run uses CTB-.... Unknown is recorded as unknown, never guessed.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/provenanceRecord"
+        },
+        {
+          "type": "object",
+          "required": [
+            "subject"
+          ],
+          "properties": {
+            "version": {
+              "type": "string",
+              "pattern": "^1\\."
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "actor": {
+      "$comment": "praxis schemas/provenance-actor.schema.json",
+      "type": "object",
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "pattern": "^(agent|human|automation|unknown|x-[a-z0-9][a-z0-9-]*)$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "agent"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "provider",
+              "model",
+              "runtime"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "contribution": {
+      "$comment": "praxis schemas/artifact-provenance.schema.json#/$defs/contribution",
+      "type": "object",
+      "required": [
+        "operations",
+        "at",
+        "actor"
+      ],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(created|modified|reviewed|approved|superseded|migrated|x-[a-z0-9][a-z0-9-]*)$"
+          }
+        },
+        "at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,9})?Z$"
+        },
+        "last": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,9})?Z$"
+        },
+        "actor": {
+          "$ref": "#/$defs/actor"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "reference": {
+      "$comment": "praxis schemas/provenance-record.schema.json#/$defs/reference",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\s]+$"
+    },
+    "provenanceRecord": {
+      "$comment": "praxis schemas/provenance-record.schema.json",
+      "type": "object",
+      "required": [
+        "contract",
+        "version",
+        "contributions"
+      ],
+      "properties": {
+        "contract": {
+          "const": "praxis.provenance-record"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "subject": {
+          "$ref": "#/$defs/reference"
+        },
+        "contributions": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(EXE|CTB)-[A-Za-z0-9._-]+$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/contribution"
+          }
+        },
+        "derivedFrom": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        },
+        "sources": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/reference"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/provenanceRecord"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
