@@ -26,6 +26,7 @@ Historical v1.1 validation artifacts remain preserved. They do not automatically
 | [validation-protocol.md](validation-protocol.md) | Historical/current v1.1 protocol used by prior cases |
 | [validation-protocol-v1.2.md](validation-protocol-v1.2.md) | Protocol for future controlled runs |
 | [claim-and-confidence-policy.md](claim-and-confidence-policy.md) | Defines evidence language, claim states, independence, and promotion gates |
+| [provenance-sidecars.md](provenance-sidecars.md) | Optional provenance sidecars for future artifacts; identity is provenance, not evidence weight |
 | [longitudinal-reference-cases.md](longitudinal-reference-cases.md) | Defines evidence-state evolution studies |
 | [analytical-lens-evaluation.md](analytical-lens-evaluation.md) | Evaluates whether analytical lenses earn their place |
 | [deferred-insights.md](deferred-insights.md) | Records findings not accepted into EDF |

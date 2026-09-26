@@ -1,8 +1,8 @@
 # Claim and Confidence Policy
 
 Status: Current research governance
-Version: 1.0
-Effective: 2026-09-20
+Version: 1.1
+Effective: 2026-09-26
 
 ## Purpose
 
@@ -96,6 +96,30 @@ Different cases authored by the same research process are not independent eviden
 
 Independent replication requires a materially separate execution source under a frozen configuration. The source may be a human analyst or a separate model family, depending on the research question.
 
+### Actor identity is provenance, not evidence (v1.1)
+
+Each case, review, analyzer run, evaluation, finding, hypothesis update, or conclusion may carry the identity of its author, reviewer, executor, or evaluator. That identity is self-reported provenance, in the shape of the Praxis actor and provenance record. It is not authentication. It is not evidence either. The identity may be an OpenAI, Anthropic, or Google model, a human, or unknown.
+
+Identity MAY be used only for:
+
+- **Independence and separation checks.** Examples: requiring an opposite-family reviewer, or refusing to count two runs from one execution source as independent replications.
+- **Stratified reporting.** Results may be reported per author family, analyzer slot, or executor, as descriptive strata.
+
+Identity MUST NOT:
+
+- change evidence weight, scores, claim state, or confidence labels;
+- act as a tie-breaker, a prior, or a quality proxy;
+- promote or demote a claim because of who produced it.
+
+A stratified result is still judged by its own evidence and preregistered rules. Rules for recording identity:
+
+- Record identity only as declared. When it is not known, record the literal `unknown`. Never infer it from Git authorship, prose, `author_agent`-style fields, or telemetry.
+- Recording identity does not relax the requirements of the numerical-claims gate or the research-execution gate. Model/provider/version and evaluator identity are preserved there so that results can be recomputed and audited, not so that they can be weighted.
+- Historical artifacts are not backfilled. The *Historical artifacts* rules below still apply, and identity absent from a past artifact stays absent.
+- Future artifacts may carry identity in an optional provenance sidecar. See [provenance-sidecars.md](provenance-sidecars.md) and `DF-EDF-2026-A001`. A sidecar lives outside every frozen or hashed set, and outside every analyzer-, reviewer-, and scorer-visible input.
+
+This follows the Praxis provenance contract: `RQ-ROS-2026-A010` (provenance is not attestation or evidence weight) and `RQ-ROS-2026-A013`, `RQ-ROS-2026-A014`, and `RQ-ROS-2026-A015` (interchange record, execution propagation, no silent stripping). Tests enforce it: scoring is identity-invariant (`tests/identity-neutral-scoring.test.mjs`), and sidecars are validated and isolated (`tests/provenance-sidecar.test.mjs`).
+
 ## Public claim gate
 
 Every material public claim about EDF performance must map to a current hypothesis or evidence record.
@@ -160,3 +184,8 @@ Exploratory runs may omit some of these controls, but they must be labeled explo
 The machine-readable registries under `research/registries/` are the current source of truth for claim state and evidence interpretation.
 
 The Evidence Ledger is a human-readable projection of those registries.
+
+## Version history
+
+- **1.1 (2026-09-26):** Added *Actor identity is provenance, not evidence* under Independence (`DF-EDF-2026-A001`). No claim state, confidence label, or historical artifact changed.
+- **1.0 (2026-09-20):** Initial policy.
