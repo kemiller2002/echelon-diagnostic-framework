@@ -30,7 +30,7 @@ const hypothesis = (extra = {}) => ({
 test("vendored Praxis files match SOURCE.json", () => {
   const source = fixture("SOURCE.json");
   assert.equal(source.repository, "kemiller2002/praxis");
-  assert.equal(source.commit, "a42c44e8ae0e6e16fdd513141460b700e5fa6648");
+  assert.equal(source.commit, "c2657efb4d54f11d0fd0617cc1bcd5b8418601d5");
   for (const [relative, expected] of Object.entries(source.files)) {
     const actual = crypto.createHash("sha256").update(fs.readFileSync(fixtureUrl(relative))).digest("hex");
     assert.equal(actual, expected, `${relative} was edited locally`);
@@ -162,4 +162,64 @@ test("the repository passes: frozen registries and blinded cases carry no proven
   const result = validateProvenanceIntegrity();
   assert.deepEqual(result.errors, [], result.errors.join("\n"));
   assert.ok(result.summary.blindedFilesChecked >= 6);
+});
+
+// Round-2 review regressions (Praxis contract revision 1.1 review).
+test("reviewer case: analyzer cases.json with author, agent, createdBy and authors is rejected", () => {
+  const relative = "research/experiments/EX-X/cases.json";
+  assert.ok(isBlindedMaterial(relative));
+  for (const document of [
+    { cases: [{ id: "C1", author: "someone" }] },
+    { cases: [{ id: "C1", agent: "lane-a" }] },
+    { cases: [{ id: "C1", createdBy: "EXE-20260926T090000000Z-aaaa0001" }] },
+    { cases: [{ id: "C1", authors: ["gpt-5"] }] },
+    { cases: [{ id: "C1", execution: "EXE-1" }] },
+  ]) {
+    assert.notDeepEqual(blindedMaterialFindings(relative, JSON.stringify(document)), [], JSON.stringify(document));
+  }
+  const combined = blindedMaterialFindings(relative, JSON.stringify({ cases: [{ author: "x", agent: "y", createdBy: "EXE-20260926T090000000Z-aaaa0001", authors: ["gpt-5"] }] }));
+  for (const signal of ["'cases[0].author'", "'cases[0].agent'", "'cases[0].createdBy'", "'cases[0].authors'", "execution key", "provider/model/runtime name"]) {
+    assert.ok(combined.some((finding) => finding.includes(signal)), `${signal} missing from ${combined.join("; ")}`);
+  }
+});
+
+test("reviewer case: Markdown packet with authorAgent or an execution key is rejected", () => {
+  const relative = "research/experiments/EX-X/analyzer-packets/run-1.packet.md";
+  assert.ok(isBlindedMaterial(relative));
+  for (const text of [
+    "authorAgent: codex\n",
+    "execution: EXE-1\n",
+    "Run under EXT-dokimos.run-42.\n",
+    "Contributor CTB-kevin reviewed this.\n",
+    "author_agent: someone\n",
+    "created_by_agent: someone\n",
+    "source_author: someone\n",
+    "Set ROS_EXECUTION_ID before running.\n",
+    "Produced by Claude.\n",
+  ]) {
+    assert.notDeepEqual(blindedMaterialFindings(relative, text), [], text);
+  }
+});
+
+test("identity values are caught even under system-description keys", () => {
+  assert.notDeepEqual(blindedMaterialFindings("x/ST-900.case.json", JSON.stringify({ analyst: { provider: "anthropic", model: "claude-opus" } })), []);
+  assert.notDeepEqual(blindedMaterialFindings("x/ST-900.case.json", JSON.stringify({ meta: { model: "gpt-5.1" } })), []);
+});
+
+test("every blinded identity key is rejected as a JSON key", async () => {
+  const { BLINDED_IDENTITY_KEYS, IDENTITY_KEYS } = await import("../scripts/provenance-integrity.mjs");
+  assert.deepEqual([...IDENTITY_KEYS].filter((key) => !BLINDED_IDENTITY_KEYS.has(key)).sort(), ["model", "modelVersion", "provider", "runtime"]);
+  for (const key of BLINDED_IDENTITY_KEYS) {
+    assert.notDeepEqual(blindedMaterialFindings("x/ST-900.case.json", JSON.stringify({ id: "ST-900", [key]: "value" })), [], key);
+  }
+});
+
+test("ordinary diagnostic prose in a blinded case is not flagged", () => {
+  const text = JSON.stringify({
+    id: "ST-900",
+    title: "Queue backlog after deploy",
+    entities: [{ id: "E1", provider: "cloud-dns", model: "db-7", runtime: "jvm-21" }],
+    evidence: [{ id: "EV1", text: "The deploy agent restarted workers; the executor pool drained. Extended retries (EXTENDED) were off." }],
+  });
+  assert.deepEqual(blindedMaterialFindings("x/ST-900.case.json", text), []);
 });

@@ -62,9 +62,16 @@ condition. It is still not a quality signal for any single output.
 Analyzer-facing blinded material (`*.case.json`, analyzer packets, and an
 experiment's analyzer inputs such as `cases.json`, `prompts.json`,
 `prompt-modules.json`, and `output-contract.json`) SHALL NOT contain a
-`provenance` block, a `praxis.provenance/...` tag, or author/executor identity
-fields. Case authorship and executor bindings live in evaluator material
-(truth files, assignments, executor bindings).
+`provenance` block, a `praxis.provenance/...` tag, author/agent/executor/
+execution identity fields, legacy author fields (`author_agent`,
+`authorAgent`, `created_by_agent`, `owner_agent`, `source_author`), Praxis
+execution or contributor keys (`EXE-`, `EXT-`, `CTB-` in any form), actor
+environment variable names, or AI provider/model/runtime names, whether as
+JSON keys or anywhere in the text. `provider`, `model`, and `runtime` are
+allowed as keys only because incident cases describe systems with those
+attributes; their values are still checked. This mirrors Percepta's
+experiment leakage check (PCT-038). Case authorship and executor bindings
+live in evaluator material (truth files, assignments, executor bindings).
 
 ## RQ-EDF-2026-A005 No retroactive change
 

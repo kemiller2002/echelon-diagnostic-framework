@@ -18,25 +18,45 @@ import fs from "node:fs";
 import path from "node:path";
 import { classify } from "./vendor/praxis/provenance-interchange.mjs";
 
-/** Fields that name who or what produced something. */
+/** Fields that name who or what produced something, or which execution did. */
 export const IDENTITY_KEYS = Object.freeze(new Set([
   "actor", "actors", "actorKind", "actorId",
-  "agent", "agentId", "agentFamily",
+  "agent", "agents", "agentId", "agentFamily",
   "author", "authors", "authorAgent", "author_agent", "authorFamily",
-  "createdBy", "created_by_agent", "owner_agent", "source_author",
+  "createdBy", "created_by", "created_by_agent", "owner_agent", "source_author",
   "executor", "executors", "executorFamily", "executorIdentity",
+  "execution", "executions", "executionId", "execution_id",
   "provider", "model", "modelVersion", "runtime",
 ]));
 
 /**
- * Identity fields forbidden in blinded material. Narrower than IDENTITY_KEYS
- * because incident cases may legitimately describe a system's `provider`,
- * `model`, or `runtime`; these names only ever identify an author or executor.
+ * Keys that describe the system under diagnosis at least as often as the
+ * analyst. An incident case can legitimately give a component a `provider`
+ * (cloud or DNS provider), a `model` (hardware or ML model), or a `runtime`.
+ * These keys are therefore allowed as keys in blinded material, but their
+ * values are still scanned: a provider/model/runtime name of an AI executor
+ * (IDENTITY_TEXT_SIGNALS) is rejected wherever it appears.
  */
-export const BLINDED_IDENTITY_KEYS = Object.freeze(new Set([
-  "actor", "actors", "actorKind", "authorAgent", "author_agent", "authorFamily",
-  "created_by_agent", "owner_agent", "source_author", "executor", "executorFamily", "executorIdentity",
-]));
+const SYSTEM_DESCRIPTION_KEYS = new Set(["provider", "model", "modelVersion", "runtime"]);
+
+/** Identity fields forbidden as keys in blinded material. */
+export const BLINDED_IDENTITY_KEYS = Object.freeze(new Set(
+  [...IDENTITY_KEYS].filter((key) => !SYSTEM_DESCRIPTION_KEYS.has(key)),
+));
+
+/**
+ * Text signals of provenance or identity, applied to the full text of every
+ * blinded file (JSON or not). Mirrors Percepta's ExperimentBlinding
+ * (PCT-038), with execution keys matched in any form, not only full EXE ids.
+ */
+export const IDENTITY_TEXT_SIGNALS = Object.freeze([
+  ["provenance block", /^\s*provenance\s*:|"provenance"\s*:|praxis\.provenance\//m],
+  ["legacy author field", /\b(author_agent|authorAgent|created_by_agent|owner_agent|source_author)\b/],
+  ["execution key", /\b(?:EXE|EXT|CTB)-[A-Za-z0-9][A-Za-z0-9._:-]*/],
+  ["actor variable", /\bROS_(?:ACTOR_KIND|ACTOR|TELEMETRY_PROVIDER|TELEMETRY_MODEL|TELEMETRY_RUNTIME|EXECUTION_ID)\b/],
+  ["provider/model/runtime name", /\b(?:anthropic|openai|claude|chatgpt|codex|gemini|deepmind|copilot|gpt-\d[\w.-]*)\b/i],
+  ["identity field", new RegExp(`(?:^|[\\s{,"'])(?:${[...BLINDED_IDENTITY_KEYS].join("|")})["']?\\s*:`, "m")],
+]);
 
 export const REGISTRY_FILES = Object.freeze({
   "research/registries/hypothesis-registry.json": "hypotheses",
@@ -98,22 +118,23 @@ export const isBlindedMaterial = (relativePath) =>
 
 /** Findings for one blinded file, given its text. */
 export const blindedMaterialFindings = (relativePath, text) => {
-  if (!relativePath.endsWith(".json")) {
-    return /^\s*provenance\s*:|"provenance"\s*:|praxis\.provenance\//m.test(text)
-      ? [`${relativePath}: blinded material carries provenance`]
-      : [];
-  }
+  const textFindings = IDENTITY_TEXT_SIGNALS
+    .map(([name, pattern]) => [name, pattern.exec(text)])
+    .filter(([, match]) => match)
+    .map(([name, match]) => `${relativePath}: blinded material carries ${name} (${match[0].trim()})`);
+  if (!relativePath.endsWith(".json")) return textFindings;
   let document;
   try {
     document = JSON.parse(text);
   } catch (error) {
-    return [`${relativePath}: blinded material is not valid JSON (${error.message})`];
+    return [...textFindings, `${relativePath}: blinded material is not valid JSON (${error.message})`];
   }
-  return entries(document).flatMap((item) => [
+  const keyFindings = entries(document).flatMap((item) => [
     ...(item.key === "provenance" ? [`${relativePath}: blinded material carries a provenance block at '${item.path}'`] : []),
     ...(BLINDED_IDENTITY_KEYS.has(item.key) ? [`${relativePath}: blinded material carries identity field '${item.path}'`] : []),
     ...(typeof item.value === "string" && PROVENANCE_TAG.test(item.value) ? [`${relativePath}: blinded material carries a provenance schema tag at '${item.path}'`] : []),
   ]);
+  return [...textFindings, ...keyFindings];
 };
 
 const SKIPPED_DIRECTORIES = new Set([".git", "node_modules", ".ros", ".echelon"]);
