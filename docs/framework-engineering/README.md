@@ -11,6 +11,7 @@ EDF and framework-engineering methods evolve independently.
 Current research interpretation is governed by:
 
 - [Claim and Confidence Policy](claim-and-confidence-policy.md)
+- [Provenance requirements](provenance-requirements.md) (actor identity is provenance, not evidence)
 - [Validation Protocol v1.2](validation-protocol-v1.2.md) for future runs
 - [Hypothesis Registry](../../research/registries/hypothesis-registry.json)
 - [Evidence Registry](../../research/registries/evidence-registry.json)

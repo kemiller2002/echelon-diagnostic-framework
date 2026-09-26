@@ -1,8 +1,9 @@
 # Claim and Confidence Policy
 
 Status: Current research governance
-Version: 1.0
+Version: 1.1
 Effective: 2026-09-20
+Amended: 2026-09-26 (Provenance is not evidence; DF-EDF-2026-A001)
 
 ## Purpose
 
@@ -95,6 +96,19 @@ Named analytical lenses produced by one model, agent, or research process are no
 Different cases authored by the same research process are not independent evidence families merely because their case IDs differ.
 
 Independent replication requires a materially separate execution source under a frozen configuration. The source may be a human analyst or a separate model family, depending on the research question.
+
+## Provenance is not evidence
+
+Rule (DF-EDF-2026-A001; [provenance requirements](provenance-requirements.md) RQ-EDF-2026-A001..A006; Praxis RQ-ROS-2026-A019, RQ-ROS-2026-A010):
+
+- Who produced a record (an OpenAI, Anthropic, Google, or other model, a human, or automation) is provenance. It never raises or lowers evidentiary weight, a confidence label, a claim state, or a public claim.
+- Recorded identity is self-reported and unverified. It is not authentication and not an independence proof.
+- Executor identity matters only when a preregistration declares it as the experimental variable, for example cross-executor reproducibility. It is then an experimental condition recorded in sealed or evaluator material, and results are grouped by that condition. It is still not a quality signal for any single output. The model/provider/version preserved under "Numerical claims" and "Research execution gate" serves reconstructability, not weighting.
+- New records keep Praxis provenance where the repository's ROS supports it. In the claim registries, identity fields appear only inside an entry's top-level `provenance` block; `confidence`, `state`, and `publicState` stay labels.
+- Blinded analyzer-facing material (`*.case.json`, analyzer packets, analyzer inputs) never carries provenance or author/executor identity.
+- Frozen, preregistered, released, or hash-pinned material is never edited to add or correct provenance, and no historical author is inferred.
+
+`node scripts/validate-repository.mjs` and `node --test` enforce the registry and blinding parts of this rule.
 
 ## Public claim gate
 
