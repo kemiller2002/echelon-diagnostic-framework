@@ -28,7 +28,7 @@ function reviewErrors(){
   return errors;
 }
 
-function criticalFiles(){
+export function criticalFiles(){
   return [
     path.join(EXP,'preregistration.json'),
     path.join(EXP,'output-contract.json'),
@@ -42,12 +42,19 @@ function criticalFiles(){
     path.join(ROOT,'scripts','edf-002-validate.mjs')
   ];
 }
+const listDir=(dir,pattern)=>fs.existsSync(dir)?fs.readdirSync(dir).filter(x=>pattern.test(x)).sort().map(f=>path.join(dir,f)):[];
+export function manifestFiles(){
+  return [
+    ...criticalFiles(),
+    ...listDir(path.join(EXP,'amendments'),/\.json$/),
+    ...listDir(path.join(EXP,'cases'),/\.(case|truth)\.json$/),
+    ...listDir(path.join(EXP,'reviews'),/\.review\.json$/)
+  ];
+}
 function expected(){
   const errors=[...validateCases(true),...reviewErrors()];
   if(errors.length) return {errors};
-  const files=[...criticalFiles()];
-  for(const f of fs.readdirSync(path.join(EXP,'cases')).filter(x=>/\.(case|truth)\.json$/.test(x)).sort()) files.push(path.join(EXP,'cases',f));
-  for(const f of fs.readdirSync(path.join(EXP,'reviews')).filter(x=>x.endsWith('.review.json')).sort()) files.push(path.join(EXP,'reviews',f));
+  const files=manifestFiles();
   return {errors:[],manifest:{
     version:'1.0.0',
     experiment:'EX-EDF-2026-A003',
@@ -57,7 +64,9 @@ function expected(){
 }
 
 const cmd=process.argv[2]??'verify';
-if(cmd==='freeze'){
+if(import.meta.url!==`file://${process.argv[1]}`){
+  // imported as a module: no CLI action
+}else if(cmd==='freeze'){
   if(fs.existsSync(OUT)){console.error('frozen-files.json already exists; refusing replacement');process.exitCode=2;}
   else {
     const x=expected();

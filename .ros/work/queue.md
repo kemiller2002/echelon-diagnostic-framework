@@ -22,3 +22,4 @@
 | WI-0010 | Anthropic re-review of OpenAI EX-EDF-2026-A003 remediation r2 | complete | edf,research,experiment,opposite-provider-review | high |
 | WI-0011 | Integrate OpenAI remediation r2 lineage and Anthropic re-review into EX-EDF-2026-A003 pre-freeze integration | complete | edf,research,experiment,integration | high |
 | WI-0012 | Reconcile EX-EDF-2026-A003 amendment A001 with integrated OpenAI r2 cases (amendment A002) | complete | edf,research,experiment,pre-freeze | high |
+| WI-0013 | Include EX-EDF-2026-A003 amendments in freeze manifest | complete | edf,research,experiment,pre-freeze | high |
