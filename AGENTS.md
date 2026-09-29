@@ -165,3 +165,7 @@ Before producing consequential communication, read:
 
 Treat research maturity as a constraint. Do not turn provisional findings into universal rules, optimize persuasion at the expense of user autonomy, or substitute style for proof obligations.
 <!-- echelon:communication-engineering:end -->
+
+## CI observation discipline
+
+Commit and push incremental recovery points. Keep working after pushes when independent work remains. Do not wait for remote CI after every push. Check remote CI at the final implementation boundary by default, or earlier only when the result is needed to proceed safely. Ordinary commit-driven CI should wait for a 10-minute quiet period so nearby commits batch together.
