@@ -4,7 +4,7 @@
   "repository": "echelon-diagnostic-framework",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-21T14:46:18.455Z",
-  "updatedAt": "2026-10-06T16:26:31Z",
+  "updatedAt": "2026-10-06T16:30:58Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -248,13 +248,48 @@
     {
       "id": "WI-0009",
       "type": "task",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-10-06T16:26:31Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".echelon/toolchain.json"
+        },
+        {
+          "type": "implementation",
+          "path": "conditor.json"
+        },
+        {
+          "type": "tests",
+          "path": ".github/workflows/praxis-validation.yml"
+        }
+      ],
+      "updatedAt": "2026-10-06T16:30:58Z",
       "telemetryExecutionIds": [
         "EXE-20261006T162631844Z-768d688c"
-      ]
+      ],
+      "latestCheckpoint": {
+        "id": "0c6079237e045d1a2920e147",
+        "recordedAt": "2026-10-06T16:30:15Z",
+        "executionId": "EXE-20261006T162631844Z-768d688c",
+        "repository": "echelon-diagnostic-framework",
+        "branch": "chore/echelon-current-372",
+        "commit": "d95630f49dd200b95f11a20ec44b734f272beec9",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/echelon-diagnostic-framework"
+        },
+        "remoteBranch": "chore/echelon-current-372",
+        "remoteCommit": "d95630f49dd200b95f11a20ec44b734f272beec9",
+        "summary": "Upgraded echelon-diagnostic-framework to Praxis 3.7.2 / Ordo 1.4.2 (and Visual Engineering 1.0.1 where installed) and adopted Conditor against echelon-current.",
+        "nextAction": "Open the PR and merge once CI is green.",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-10-06T16:30:58Z",
+      "conclusion": "Toolchain at praxis 3.7.2 / ordo 1.4.2; conditor.json adopted; verifiers pass."
     }
   ]
 }

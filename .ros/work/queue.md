@@ -15,4 +15,4 @@
 | WI-0006 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
 | WI-0007 | Move echelon-diagnostic-framework to Praxis 3.7.1 (ROS -> Praxis rename) and Ordo 1.4.0 | complete | praxis, ordo, toolchain | medium |
 | WI-0008 | Move echelon-diagnostic-framework to Ordo 1.4.1 | complete | ordo, toolchain | medium |
-| WI-0009 | Move echelon-diagnostic-framework to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | ready |  | medium |
+| WI-0009 | Move echelon-diagnostic-framework to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete |  | medium |
