@@ -13,3 +13,4 @@
 | WI-0004 | Remediate OpenAI EX-EDF-2026-A003 cases after Anthropic review | complete | edf,research,experiment,review-remediation | high |
 | WI-0005 | Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare the boundary not applicable | complete |  | medium |
 | WI-0006 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
+| WI-0007 | Move echelon-diagnostic-framework to Praxis 3.7.1 (ROS -> Praxis rename) and Ordo 1.4.0 | complete | praxis, ordo, toolchain | medium |
