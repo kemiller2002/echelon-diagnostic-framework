@@ -33,6 +33,20 @@ function localTargetExists(root, sourceFile, target) {
   return fs.existsSync(resolved);
 }
 
+// Praxis tool-owned files are verified byte for byte by `praxis verify --strict`
+// against the pinned release; their relative links point into the Praxis source
+// repository, so this repository's link check covers only repository-owned files.
+function praxisToolOwnedPaths(root) {
+  const manifestPath = path.join(root, ".echelon", "ros.json");
+  if (!fs.existsSync(manifestPath)) return new Set();
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  return new Set(
+    (manifest.managedArtifacts ?? [])
+      .filter(artifact => artifact.ownership === "tool-owned")
+      .map(artifact => path.join(root, artifact.path))
+  );
+}
+
 export function validateRepository(root = process.cwd()) {
   const errors = [];
   const hypothesisPath = path.join(root, "research/registries/hypothesis-registry.json");
@@ -110,11 +124,12 @@ export function validateRepository(root = process.cwd()) {
     } catch (e) { errors.push("Cannot validate v0.3 release manifest: " + e.message); }
   }
 
+  const toolOwned = praxisToolOwnedPaths(root);
   const linkFiles = [
     ...walk(path.join(root, "docs"), f => f.endsWith(".md") && !f.includes(path.join("docs", "edf", "releases"))),
     ...walk(path.join(root, "research"), f => f.endsWith(".md")),
     ...walk(path.join(root, "static-site"), f => f.endsWith(".html"))
-  ];
+  ].filter(file => !toolOwned.has(file));
   for (const file of linkFiles) {
     const text = fs.readFileSync(file, "utf8");
     const targets = [];
