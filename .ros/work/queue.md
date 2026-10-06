@@ -12,3 +12,4 @@
 | WI-0003 | Anthropic re-review of remediated OpenAI EX-EDF-2026-A003 cases | complete | edf,research,experiment,opposite-provider-review | high |
 | WI-0004 | Remediate OpenAI EX-EDF-2026-A003 cases after Anthropic review | complete | edf,research,experiment,review-remediation | high |
 | WI-0005 | Upgrade Limen to 0.7.0 (@echelon-foundry/limen) and declare the boundary not applicable | complete |  | medium |
+| WI-0006 | Upgrade Limen to 0.7.1 to match the echelon-current channel | complete |  | medium |
