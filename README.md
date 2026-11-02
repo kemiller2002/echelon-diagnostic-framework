@@ -39,12 +39,12 @@ node scripts/validate-repository.mjs
 node scripts/edf-benchmark.mjs validate
 ```
 
-The checks validate registry referential integrity, evidence paths, internal links, public-claim synchronization, canonical site structure, removal of stale duplicate web stacks, benchmark preregistration integrity, frozen experiment hashes, and confirmatory executor readiness rules.
+The checks validate Forma pinning and site structure, registry referential integrity, evidence paths, internal links, public-claim synchronization, canonical site structure, removal of stale duplicate web stacks, benchmark preregistration integrity, frozen experiment hashes, and confirmatory executor readiness rules.
 
 GitHub Actions runs the same checks on pushes and pull requests. GitHub Pages deploys only after the integrity suite passes.
 
 ## Website
 
-The public website is plain HTML and CSS in `static-site/`.
+The public website is plain, hand-authored HTML in `static-site/`, presented with the pinned Echelon Foundry design system, Forma (`forma.lock`). It ships no JavaScript.
 
-GitHub Pages publishes that directory at the domain root. There is no Next.js, Vite, Cloudflare Worker, JavaScript bundle, framework build step, or repository subfolder in published asset URLs.
+GitHub Pages publishes that directory at the domain root after CI installs the pinned Forma assets. There is no Next.js, Vite, Cloudflare Worker, JavaScript bundle, framework build step, or repository subfolder in published asset URLs. See `docs/website-architecture.md`; browser conformance is `tests/browser` (F#).
