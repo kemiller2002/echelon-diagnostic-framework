@@ -53,8 +53,8 @@ link). It now consumes the pinned Forma release instead. Decisions:
   printable EDF worksheet or report is introduced.
 - **Defects found in Forma are fixed in Forma.** The migration found that
   Forma 0.13.0 marketing containers do not contain list-item text and leave a
-  96px content box in a toned CTA at 320px with 200% text (`kemiller2002/forma`
-  WI-0043). `styles.css` carries the upstream fix as two documented
+  96px content box in a toned CTA at 320px with 200% text (fixed upstream in
+  `kemiller2002/forma#177`, WI-0043). `styles.css` carries the upstream fix as two documented
   `forma-exception` rules until `forma.lock` moves to the release that
   contains it; delete them on that upgrade.
 
