@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ef-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,105 +8,192 @@
   <meta property="og:title" content="EDF — Understand the system before changing it">
   <meta property="og:description" content="A practical framework for understanding systems before changing them.">
   <meta property="og:image" content="/og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&amp;display=swap">
+  <link rel="stylesheet" href="/assets/forma/forma-echelon-marketing.css">
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="EDF home"><span>EDF</span><small>Echelon Diagnostic Framework</small></a>
-    <nav aria-label="Primary navigation"><a href="/learn.html">Learn</a><a href="/examples.html">Examples</a><a href="/evidence.html">Evidence</a><a href="/start.html">Start</a></nav>
-    <a class="header-cta" href="/start.html">Start a diagnosis <span>↗</span></a>
+<body class="ef-site" data-ef-layout="marketing">
+  <a class="ef-skip-link" href="#main-content">Skip to main content</a>
+  <header class="ef-site-header">
+    <div class="ef-site-header__inner">
+      <div class="ef-site-header__identity">
+        <a class="ef-site-header__brand" href="/" aria-label="EDF home"><span class="ef-site-header__mark" aria-hidden="true">EDF</span><span class="ef-site-header__name">Echelon Diagnostic Framework</span></a>
+      </div>
+      <nav class="ef-site-nav" aria-label="Primary">
+        <ul class="ef-site-nav__list">
+          <li><a class="ef-site-nav__link" href="/" aria-current="page">Home</a></li>
+          <li><a class="ef-site-nav__link" href="/learn.html">Learn</a></li>
+          <li><a class="ef-site-nav__link" href="/examples.html">Examples</a></li>
+          <li><a class="ef-site-nav__link" href="/evidence.html">Evidence</a></li>
+          <li><a class="ef-site-nav__link" data-ef-variant="action" href="/start.html">Start a diagnosis</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div>
-        <p class="eyebrow"><span class="status-dot"></span> Working draft · Specification v0.3</p>
-        <h1>Understand the system.<br><em>Then change it.</em></h1>
-        <p class="lede">A structured way to make a system explanation explicit, trace how evidence supports it, and identify candidate points where intervention may have leverage.</p>
-        <div class="hero-actions"><a class="button primary" href="/learn.html">Learn the framework →</a><a class="button text" href="/examples.html">See it in practice ↗</a></div>
-      </div>
-      <aside class="diagnostic-card">
-        <p class="card-label">THE DEFAULT PATTERN</p>
-        <p>Observation → Assumption → <strong>Solution</strong></p>
-        <div class="divider">EDF INTERRUPTS HERE</div>
-        <ol><li>Observation</li><li>Evidence</li><li>Competing explanations</li><li>Understanding</li><li><b>Action</b></li></ol>
-      </aside>
-    </section>
 
-    <section class="problem band">
-      <p class="eyebrow">THE PROBLEM BENEATH THE PROBLEM</p>
-      <div class="section-intro"><h2>A common diagnostic failure is acting before an explanation has earned confidence.</h2><p>A visible symptom can become “the problem.” A plausible story can become “the cause.” EDF is designed to make those transitions explicit enough to challenge before action outruns evidence.</p></div>
-      <div class="three-grid">
-        <article><span>01</span><h3>Symptoms masquerade as causes</h3><p>The place where pain appears is often far from where it began.</p></article>
-        <article><span>02</span><h3>One story crowds out alternatives</h3><p>The first coherent explanation earns confidence it has not yet earned.</p></article>
-        <article><span>03</span><h3>Origins are mistaken for leverage</h3><p>Where a cause began may not be where the system can best be changed.</p></article>
+  <main class="ef-site__main" id="main-content" tabindex="-1">
+    <section class="ef-hero" aria-labelledby="hero-title">
+      <div class="ef-hero__content">
+        <ul class="ef-badge-list" aria-label="Framework status"><li><span class="ef-badge" data-ef-status="warning">Working draft</span></li><li><span class="ef-badge">Specification v0.3</span></li></ul>
+        <h1 class="ef-hero__title" id="hero-title">Understand the system. <em>Then change it.</em></h1>
+        <p class="ef-lead">A structured way to make a system explanation explicit, trace how evidence supports it, and identify candidate points where intervention may have leverage.</p>
+        <div class="ef-actions"><a class="ef-button" data-ef-variant="primary" href="/learn.html">Learn the framework</a><a class="ef-button" href="/examples.html">See it in practice</a></div>
       </div>
-    </section>
-
-    <section id="framework" class="section">
-      <div class="section-intro"><div><p class="eyebrow">THE DIAGNOSTIC GRAMMAR</p><h2>Seven moves from signal to responsible action.</h2></div><p>Every step produces an artifact that can be challenged, revised, and traced.</p></div>
-      <div class="stages">
-        <article><span>01 · DEFINE</span><h3>System context</h3><p>Within what declared context is this diagnosis valid?</p><small>Produces: Primary system · Context · Focus</small></article>
-        <article><span>02 · OBSERVE</span><h3>Outcome &amp; manifestations</h3><p>What happened, and what signals show it?</p><small>Produces: Observable outcome · Measurable signals</small></article>
-        <article><span>03 · EXPLAIN</span><h3>Origin network</h3><p>What interacting contributors made this possible?</p><small>Produces: Technical · Human · Organizational origins</small></article>
-        <article><span>04 · EXPLAIN</span><h3>Propagation</h3><p>How did effects move through the system?</p><small>Produces: Physical · Informational · Organizational paths</small></article>
-        <article><span>05 · VALIDATE</span><h3>Evidence &amp; confidence</h3><p>What supports this explanation—and what contradicts it?</p><small>Produces: Evidence · Gaps · Confidence</small></article>
-        <article><span>06 · INFLUENCE</span><h3>Control points</h3><p>Where can we most effectively influence what happens next?</p><small>Produces: Ranked points of leverage</small></article>
-        <article><span>07 · VALIDATE</span><h3>Diagnostic sufficiency</h3><p>Do we understand enough for the next responsible action?</p><small>Produces: Act · Investigate · Reframe</small></article>
+      <div class="ef-hero__aside">
+        <article class="ef-card" data-ef-tone="inverse" aria-labelledby="default-pattern-title">
+          <p class="ef-eyebrow" id="default-pattern-title">The default pattern</p>
+          <p>Observation → Assumption → <strong>Solution</strong></p>
+          <p class="ef-eyebrow">EDF interrupts here</p>
+          <ol class="ef-steps" role="list" aria-label="The EDF sequence">
+            <li>Observation</li>
+            <li>Evidence</li>
+            <li>Competing explanations</li>
+            <li>Understanding</li>
+            <li><strong>Action</strong></li>
+          </ol>
+        </article>
       </div>
     </section>
 
-    <section id="how-to" class="how-to band">
-      <div class="section-intro"><div><p class="eyebrow">HOW TO USE EDF</p><h2>Start small. Make the reasoning visible.</h2></div><p>A useful diagnosis is the smallest evidence-backed model that supports the next responsible action.</p></div>
-      <div class="level-grid">
-        <article><span>EDF–0 · RAPID</span><h3>One local issue.<br>Low disagreement.</h3><p>Use a quick card when evidence is direct and one action can safely test the explanation.</p><b>Example: a conference-room light will not turn on.</b></article>
-        <article class="featured"><span>EDF–1 · STANDARD</span><h3>Several explanations.<br>Consequences matter.</h3><p>Make alternatives, evidence, unknowns, and control-point ranking explicit.</p><b>Example: a cooling system hums but does not start.</b></article>
-        <article><span>EDF–2 · COMPLEX</span><h3>Interacting systems.<br>Distributed control.</h3><p>Map technical, human, organizational, and contextual origins.</p><b>Example: aircraft design, certification, training, and safety.</b></article>
-      </div>
-      <ol class="field-guide">
-        <li><span>01</span><div><h3>Frame the system</h3><p>Name the primary system, larger context, and narrow focus.</p></div><blockquote>“Checkout flow, within the mobile storefront, focused on payment completion.”</blockquote></li>
-        <li><span>02</span><div><h3>State the outcome</h3><p>Write what happened without causal language, blame, or a proposed fix.</p></div><blockquote>“Payment completion fell from 71% to 54% after Tuesday’s release.”</blockquote></li>
-        <li><span>03</span><div><h3>Build competing explanations</h3><p>List interacting origins and trace how each could reach the manifestation.</p></div><blockquote>“SDK change → timeout → retry loop → abandoned checkout.”</blockquote></li>
-        <li><span>04</span><div><h3>Test with evidence</h3><p>Record support, contradiction, source quality, and unknowns.</p></div><blockquote>“Logs support timeouts; web checkout did not decline.”</blockquote></li>
-        <li><span>05</span><div><h3>Rank control points</h3><p>Compare influence, controllability, cost, and confidence.</p></div><blockquote>“Rollback outranks retraining: faster, reversible, directly testable.”</blockquote></li>
-        <li><span>06</span><div><h3>Check sufficiency</h3><p>Ask whether you know enough for the next responsible action.</p></div><blockquote>“Yes for rollback; no for declaring the incident fully explained.”</blockquote></li>
+    <section class="ef-section" aria-labelledby="problem-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">The problem beneath the problem</p>
+          <h2 id="problem-title">A common diagnostic failure is acting before an explanation has earned confidence.</h2>
+          <p>A visible symptom can become “the problem.” A plausible story can become “the cause.” EDF is designed to make those transitions explicit enough to challenge before action outruns evidence.</p>
+        </div>
+      </header>
+      <ul class="ef-card-grid" data-ef-columns="3" aria-label="Common diagnostic failures">
+        <li><article class="ef-card"><p class="ef-eyebrow">01</p><h3 class="ef-card__title">Symptoms masquerade as causes</h3><p>The place where pain appears is often far from where it began.</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">02</p><h3 class="ef-card__title">One story crowds out alternatives</h3><p>The first coherent explanation earns confidence it has not yet earned.</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">03</p><h3 class="ef-card__title">Origins are mistaken for leverage</h3><p>Where a cause began may not be where the system can best be changed.</p></article></li>
+      </ul>
+    </section>
+
+    <section class="ef-section" id="framework" aria-labelledby="framework-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">The diagnostic grammar</p>
+          <h2 id="framework-title">Seven moves from signal to responsible action.</h2>
+          <p>Every step produces an artifact that can be challenged, revised, and traced.</p>
+        </div>
+      </header>
+      <ul class="ef-card-grid" data-ef-columns="4" aria-label="The seven EDF moves">
+        <li><article class="ef-card"><p class="ef-eyebrow">01 · Define</p><h3 class="ef-card__title">System context</h3><p>Within what declared context is this diagnosis valid?</p><p class="ef-card__footer">Produces: Primary system · Context · Focus</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">02 · Observe</p><h3 class="ef-card__title">Outcome &amp; manifestations</h3><p>What happened, and what signals show it?</p><p class="ef-card__footer">Produces: Observable outcome · Measurable signals</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">03 · Explain</p><h3 class="ef-card__title">Origin network</h3><p>What interacting contributors made this possible?</p><p class="ef-card__footer">Produces: Technical · Human · Organizational origins</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">04 · Explain</p><h3 class="ef-card__title">Propagation</h3><p>How did effects move through the system?</p><p class="ef-card__footer">Produces: Physical · Informational · Organizational paths</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">05 · Validate</p><h3 class="ef-card__title">Evidence &amp; confidence</h3><p>What supports this explanation—and what contradicts it?</p><p class="ef-card__footer">Produces: Evidence · Gaps · Confidence</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">06 · Influence</p><h3 class="ef-card__title">Control points</h3><p>Where can we most effectively influence what happens next?</p><p class="ef-card__footer">Produces: Ranked points of leverage</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">07 · Validate</p><h3 class="ef-card__title">Diagnostic sufficiency</h3><p>Do we understand enough for the next responsible action?</p><p class="ef-card__footer">Produces: Act · Investigate · Reframe</p></article></li>
+      </ul>
+    </section>
+
+    <section class="ef-section" id="how-to" aria-labelledby="how-to-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">How to use EDF</p>
+          <h2 id="how-to-title">Start small. Make the reasoning visible.</h2>
+          <p>A useful diagnosis is the smallest evidence-backed model that supports the next responsible action.</p>
+        </div>
+      </header>
+      <ul class="ef-card-grid" data-ef-columns="3" aria-label="EDF levels">
+        <li><article class="ef-card"><p class="ef-eyebrow">EDF–0 · Rapid</p><h3 class="ef-card__title">One local issue. Low disagreement.</h3><p>Use a quick card when evidence is direct and one action can safely test the explanation.</p><p class="ef-card__footer">Example: a conference-room light will not turn on.</p></article></li>
+        <li><article class="ef-card" data-ef-tone="elevated"><p class="ef-eyebrow">EDF–1 · Standard</p><h3 class="ef-card__title">Several explanations. Consequences matter.</h3><p>Make alternatives, evidence, unknowns, and control-point ranking explicit.</p><p class="ef-card__footer">Example: a cooling system hums but does not start.</p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">EDF–2 · Complex</p><h3 class="ef-card__title">Interacting systems. Distributed control.</h3><p>Map technical, human, organizational, and contextual origins.</p><p class="ef-card__footer">Example: aircraft design, certification, training, and safety.</p></article></li>
+      </ul>
+      <ol class="ef-index" aria-label="Field guide">
+        <li class="ef-index__item"><p class="ef-index__marker">01</p><div class="ef-index__heading"><h3 class="ef-index__title">Frame the system</h3></div><div class="ef-index__summary"><p>Name the primary system, larger context, and narrow focus.</p><blockquote><p>“Checkout flow, within the mobile storefront, focused on payment completion.”</p></blockquote></div></li>
+        <li class="ef-index__item"><p class="ef-index__marker">02</p><div class="ef-index__heading"><h3 class="ef-index__title">State the outcome</h3></div><div class="ef-index__summary"><p>Write what happened without causal language, blame, or a proposed fix.</p><blockquote><p>“Payment completion fell from 71% to 54% after Tuesday’s release.”</p></blockquote></div></li>
+        <li class="ef-index__item"><p class="ef-index__marker">03</p><div class="ef-index__heading"><h3 class="ef-index__title">Build competing explanations</h3></div><div class="ef-index__summary"><p>List interacting origins and trace how each could reach the manifestation.</p><blockquote><p>“SDK change → timeout → retry loop → abandoned checkout.”</p></blockquote></div></li>
+        <li class="ef-index__item"><p class="ef-index__marker">04</p><div class="ef-index__heading"><h3 class="ef-index__title">Test with evidence</h3></div><div class="ef-index__summary"><p>Record support, contradiction, source quality, and unknowns.</p><blockquote><p>“Logs support timeouts; web checkout did not decline.”</p></blockquote></div></li>
+        <li class="ef-index__item"><p class="ef-index__marker">05</p><div class="ef-index__heading"><h3 class="ef-index__title">Rank control points</h3></div><div class="ef-index__summary"><p>Compare influence, controllability, cost, and confidence.</p><blockquote><p>“Rollback outranks retraining: faster, reversible, directly testable.”</p></blockquote></div></li>
+        <li class="ef-index__item"><p class="ef-index__marker">06</p><div class="ef-index__heading"><h3 class="ef-index__title">Check sufficiency</h3></div><div class="ef-index__summary"><p>Ask whether you know enough for the next responsible action.</p><blockquote><p>“Yes for rollback; no for declaring the incident fully explained.”</p></blockquote></div></li>
       </ol>
     </section>
 
-    <section id="examples" class="section">
-      <div class="section-intro"><div><p class="eyebrow">THREE SCALES · ONE GRAMMAR</p><h2>See what a finished diagnosis looks like.</h2></div><p>The fields stay stable as complexity grows. The evidence burden and origin network expand.</p></div>
-      <div class="examples">
-        <article><span>EDF–0 · HIGH CONFIDENCE</span><h3>Conference-room lighting</h3><dl><dt>Outcome</dt><dd>Lights did not turn on during use.</dd><dt>Evidence</dt><dd>A replacement bulb restored lighting.</dd><dt>Origin → path</dt><dd>Failed bulb → no illumination.</dd><dt>Control</dt><dd>Replace the bulb.</dd></dl></article>
-        <article><span>EDF–1 · MEDIUM CONFIDENCE</span><h3>Residential cooling startup</h3><dl><dt>Outcome</dt><dd>Temperature stayed above target.</dd><dt>Evidence</dt><dd>Unit hummed; capacitor measured out of range.</dd><dt>Origin → path</dt><dd>Failed capacitor → motor did not start → no cooling.</dd><dt>Control</dt><dd>Replace capacitor, then verify startup.</dd></dl></article>
-        <article><span>EDF–2 · MED–HIGH CONFIDENCE</span><h3>Apollo 11 success</h3><dl><dt>Outcome</dt><dd>The mission landed and returned safely.</dd><dt>Origins</dt><dd>Engineering rigor, testing culture, clarity, integration.</dd><dt>Propagation</dt><dd>Clear goals and testing shaped design and execution.</dd><dt>Control</dt><dd>Preserve testing discipline.</dd></dl></article>
+    <section class="ef-section" id="examples" aria-labelledby="examples-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">Three scales · One grammar</p>
+          <h2 id="examples-title">See what a finished diagnosis looks like.</h2>
+          <p>The fields stay stable as complexity grows. The evidence burden and origin network expand.</p>
+        </div>
+      </header>
+      <ul class="ef-card-grid" data-ef-columns="3" aria-label="Finished diagnoses">
+        <li><article class="ef-card"><p class="ef-eyebrow">EDF–0 · High confidence</p><h3 class="ef-card__title">Conference-room lighting</h3><dl class="ef-facts"><div class="ef-facts__item"><dt>Outcome</dt><dd>Lights did not turn on during use.</dd></div><div class="ef-facts__item"><dt>Evidence</dt><dd>A replacement bulb restored lighting.</dd></div><div class="ef-facts__item"><dt>Origin → path</dt><dd>Failed bulb → no illumination.</dd></div><div class="ef-facts__item"><dt>Control</dt><dd>Replace the bulb.</dd></div></dl></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">EDF–1 · Medium confidence</p><h3 class="ef-card__title">Residential cooling startup</h3><dl class="ef-facts"><div class="ef-facts__item"><dt>Outcome</dt><dd>Temperature stayed above target.</dd></div><div class="ef-facts__item"><dt>Evidence</dt><dd>Unit hummed; capacitor measured out of range.</dd></div><div class="ef-facts__item"><dt>Origin → path</dt><dd>Failed capacitor → motor did not start → no cooling.</dd></div><div class="ef-facts__item"><dt>Control</dt><dd>Replace capacitor, then verify startup.</dd></div></dl></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">EDF–2 · Med–high confidence</p><h3 class="ef-card__title">Apollo 11 success</h3><dl class="ef-facts"><div class="ef-facts__item"><dt>Outcome</dt><dd>The mission landed and returned safely.</dd></div><div class="ef-facts__item"><dt>Origins</dt><dd>Engineering rigor, testing culture, clarity, integration.</dd></div><div class="ef-facts__item"><dt>Propagation</dt><dd>Clear goals and testing shaped design and execution.</dd></div><div class="ef-facts__item"><dt>Control</dt><dd>Preserve testing discipline.</dd></div></dl></article></li>
+      </ul>
+    </section>
+
+    <section class="ef-section" aria-labelledby="case-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">Worked example · Challenger</p>
+          <h2 id="case-title">The O-ring failed. The diagnosis cannot stop there.</h2>
+          <p>“O-ring failure” identifies a physical origin. It does not explain why known warning signals failed to stop the launch.</p>
+        </div>
+      </header>
+      <ol class="ef-card-grid" data-ef-columns="3" aria-label="Challenger diagnostic path">
+        <li><article class="ef-card"><p class="ef-eyebrow">Manifestation</p><p><strong>Loss of vehicle 73 seconds after launch</strong></p></article></li>
+        <li><article class="ef-card"><p class="ef-eyebrow">→ Origin network</p><p><strong>Cold-sensitive seals · normalized risk · schedule pressure · fragmented authority</strong></p></article></li>
+        <li><article class="ef-card" data-ef-tone="inverse"><p class="ef-eyebrow">→ Control point</p><p><strong>Engineering authority over launch decisions</strong></p></article></li>
+      </ol>
+    </section>
+
+    <section class="ef-section" id="research" aria-labelledby="research-title">
+      <header class="ef-section-heading">
+        <div class="ef-section-heading__text">
+          <p class="ef-eyebrow">Evidence, not certainty theater</p>
+          <h2 id="research-title">What the research supports—and what it does not yet.</h2>
+          <p>EDF separates public claims by evidence state. The framework is frozen at v0.3 while validation continues.</p>
+        </div>
+      </header>
+      <ul class="ef-card-grid" data-ef-columns="3" aria-label="Current claims">
+        <li><article class="ef-card" data-claim-id="HY-EDF-001" data-claim-state="internal"><ul class="ef-badge-list" aria-label="Evidence state"><li><span class="ef-badge" data-ef-status="info">Internal demonstration · Med–high</span></li></ul><h3 class="ef-card__title">The same grammar can structure varied repository-authored cases</h3><p>Failure and success cases repeatedly populate the same EDF fields. That demonstrates representational consistency inside this research corpus, not external validity.</p></article></li>
+        <li><article class="ef-card" data-claim-id="HY-EDF-004" data-claim-state="suggestive"><ul class="ef-badge-list" aria-label="Evidence state"><li><span class="ef-badge" data-ef-status="warning">Suggestive · Low</span></li></ul><h3 class="ef-card__title">EDF may help surface system-level control points</h3><p>Current cases often identify controls beyond the nearest symptom, but no blinded comparison has shown that EDF produces better control points than matched alternatives.</p></article></li>
+        <li><article class="ef-card" data-claim-id="HY-EDF-010" data-claim-state="open"><ul class="ef-badge-list" aria-label="Evidence state"><li><span class="ef-badge">Open · Low</span></li></ul><h3 class="ef-card__title">EDF–0 may be practical for routine use</h3><p>The teaching flow is intentionally compact, but time-on-task, learning curve, and independent usability have not yet been measured.</p></article></li>
+      </ul>
+      <aside class="ef-callout" data-ef-callout="caution" aria-labelledby="evidence-boundary-label">
+        <p class="ef-callout__label" id="evidence-boundary-label">Current evidence boundary</p>
+        <p>EDF is a coherent working diagnostic grammar. Cross-executor reproducibility, computational reconstruction of the historical R1 runs, incremental value over matched structure, evidence-sensitive updating, and intervention quality remain unestablished. <a href="/evidence.html">See the current claim registry</a>.</p>
+      </aside>
+    </section>
+
+    <section class="ef-section" id="start" aria-labelledby="start-title">
+      <div class="ef-cta" data-ef-tone="surface">
+        <div class="ef-cta__text">
+          <p class="ef-eyebrow">Your first EDF–0</p>
+          <h2 id="start-title">Before proposing a solution, write down what you actually know.</h2>
+          <ol class="ef-steps" role="list" aria-label="EDF–0 fields">
+            <li>System context: primary system · larger context · narrow focus</li>
+            <li>Outcome: what happened—without interpretation?</li>
+            <li>Origin + path: what contributed, and how did the effect travel?</li>
+            <li>Evidence: what supports, contradicts, or remains unknown?</li>
+            <li>Control: which intervention offers the best leverage?</li>
+            <li>Sufficiency: do you know enough for a responsible, testable action?</li>
+          </ol>
+        </div>
+        <div class="ef-actions"><a class="ef-button" data-ef-variant="primary" href="/start.html">Build your first diagnosis</a></div>
       </div>
-    </section>
-
-    <section class="case band">
-      <div class="section-intro"><div><p class="eyebrow">WORKED EXAMPLE · CHALLENGER</p><h2>The O-ring failed. The diagnosis cannot stop there.</h2></div><p>“O-ring failure” identifies a physical origin. It does not explain why known warning signals failed to stop the launch.</p></div>
-      <div class="case-map"><article><span>MANIFESTATION</span><strong>Loss of vehicle 73 seconds after launch</strong></article><b>→</b><article><span>ORIGIN NETWORK</span><strong>Cold-sensitive seals · normalized risk · schedule pressure · fragmented authority</strong></article><b>→</b><article class="control"><span>CONTROL POINT</span><strong>Engineering authority over launch decisions</strong></article></div>
-    </section>
-
-    <section id="research" class="section">
-      <div class="section-intro"><div><p class="eyebrow">EVIDENCE, NOT CERTAINTY THEATER</p><h2>What the research supports—and what it does not yet.</h2></div><p>EDF separates public claims by evidence state. The framework is frozen at v0.3 while validation continues.</p></div>
-      <div class="claims"><article data-claim-id="HY-EDF-001" data-claim-state="internal"><span>INTERNAL DEMONSTRATION · MED–HIGH</span><h3>The same grammar can structure varied repository-authored cases</h3><p>Failure and success cases repeatedly populate the same EDF fields. That demonstrates representational consistency inside this research corpus, not external validity.</p></article><article data-claim-id="HY-EDF-004" data-claim-state="suggestive"><span>SUGGESTIVE · LOW</span><h3>EDF may help surface system-level control points</h3><p>Current cases often identify controls beyond the nearest symptom, but no blinded comparison has shown that EDF produces better control points than matched alternatives.</p></article><article data-claim-id="HY-EDF-010" data-claim-state="open"><span>OPEN · LOW</span><h3>EDF–0 may be practical for routine use</h3><p>The teaching flow is intentionally compact, but time-on-task, learning curve, and independent usability have not yet been measured.</p></article></div>
-      <p class="disclosure"><b>Current evidence boundary.</b> EDF is a coherent working diagnostic grammar. Cross-executor reproducibility, computational reconstruction of the historical R1 runs, incremental value over matched structure, evidence-sensitive updating, and intervention quality remain unestablished. <a href="/evidence.html">See the current claim registry →</a></p>
-    </section>
-
-    <section id="start" class="start band">
-      <p class="eyebrow">YOUR FIRST EDF–0</p><h2>Before proposing a solution, write down what you actually know.</h2>
-      <div class="starter">
-        <p><span>01 · SYSTEM CONTEXT</span> Primary system · larger context · narrow focus</p>
-        <p><span>02 · OUTCOME</span> What happened—without interpretation?</p>
-        <p><span>03 · ORIGIN + PATH</span> What contributed, and how did the effect travel?</p>
-        <p><span>04 · EVIDENCE</span> What supports, contradicts, or remains unknown?</p>
-        <p><span>05 · CONTROL</span> Which intervention offers the best leverage?</p>
-        <p><span>06 · SUFFICIENCY</span> Do you know enough for a responsible, testable action?</p>
-      </div>
-      <a class="button primary" href="/start.html">Build your first diagnosis →</a>
     </section>
   </main>
 
-  <footer><div class="brand"><span>EDF</span><small>Echelon Diagnostic Framework</small></div><p>A working research framework for understanding systems before changing them.</p><div class="footer-links"><a href="/learn.html">Learn</a><a href="/examples.html">Examples</a><a href="/evidence.html">Evidence</a><a href="/start.html">Start</a></div></footer>
+  <footer class="ef-site-footer" data-ef-tone="inverse">
+    <div class="ef-site-footer__inner">
+      <div class="ef-site-footer__main">
+        <div>
+          <p class="ef-eyebrow">EDF · Echelon Diagnostic Framework</p>
+          <p>A working research framework for understanding systems before changing them.</p>
+        </div>
+      </div>
+      <nav class="ef-site-footer__nav" aria-label="Footer"><ul><li><a href="/learn.html">Learn</a></li><li><a href="/examples.html">Examples</a></li><li><a href="/evidence.html">Evidence</a></li><li><a href="/start.html">Start</a></li><li><a href="https://github.com/kemiller2002/echelon-diagnostic-framework">Source on GitHub</a></li></ul></nav>
+      <p class="ef-site-footer__note"><span>Working draft · Specification v0.3</span><span>Echelon Foundry</span></p>
+    </div>
+  </footer>
 </body>
 </html>
