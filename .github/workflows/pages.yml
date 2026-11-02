@@ -18,6 +18,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -29,6 +30,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Install pinned Forma presentation assets
+        # Keep the tag equal to the version in forma.lock.
+        uses: kemiller2002/forma/actions/install-presentation@v0.13.0
+        with:
+          lock: forma.lock
+
+      - name: Check local CSS against the Forma policy
+        uses: kemiller2002/forma/actions/check-site-css@v0.13.0
+        with:
+          files: static-site/styles.css
+          forma: static-site/assets/forma/forma-echelon-marketing.css
 
       - name: Run repository integrity tests
         run: |
