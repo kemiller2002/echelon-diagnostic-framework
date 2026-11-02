@@ -8,3 +8,21 @@
   Forma's local-CSS policy allows (docs/MARKETING-SITES.md, question 5) and
   is checked by Forma's F# SiteCssPolicy in CI.
 */
+
+/* forma-exception: MKT-CONTAIN (kemiller2002/forma WI-0043). Forma 0.13.0
+   does not pass overflow-wrap containment to list items inside marketing
+   cards, and leaves a 96px content box in a toned CTA at 320px with 200%
+   text. These two rules are the upstream fix verbatim; delete both when
+   forma.lock moves to the first release that contains it. */
+.ef-site :where(
+  .ef-hero, .ef-section-heading, .ef-card, .ef-facts, .ef-index, .ef-callout,
+  .ef-cta, .ef-split, .ef-doc, .ef-prose, .ef-statement, .ef-site-footer
+) {
+  overflow-wrap: break-word;
+}
+
+/* forma-exception: MKT-CONTAIN (kemiller2002/forma WI-0043), toned CTA
+   inline padding cap; same rule as Forma's toned .ef-section (ULI-L05). */
+.ef-cta[data-ef-tone]:not([data-ef-tone="page"]) {
+  padding-inline: min(calc(var(--ef-layout-block-space) * 2), 12.5vw);
+}
