@@ -21,12 +21,48 @@ function stripTarget(target) {
   return target.trim().replace(/^<|>$/g, "").split("#")[0].split("?")[0];
 }
 
+// forma.lock pins the Forma presentation release the site consumes
+// (Forma docs/MARKETING-SITES.md). Its assets are installed at build time and
+// are not committed, so a site reference to a pinned asset is a valid target.
+export function parseFormaLock(text) {
+  const lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line && !line.startsWith("#"));
+  const field = key => lines.filter(line => line.startsWith(key + " ")).map(line => line.slice(key.length + 1).trim());
+  const assets = field("asset").map(value => {
+    const [name, digest = ""] = value.split(/\s+/);
+    return { name, sha256: digest.replace(/^sha256:/, "") };
+  });
+  return { version: field("forma")[0] ?? null, repository: field("repository")[0] ?? null, destination: field("destination")[0] ?? null, assets };
+}
+
+export function formaLockErrors(lock) {
+  return [
+    ...(/^\d+\.\d+\.\d+$/.test(lock.version ?? "") ? [] : ["forma.lock must pin an exact Forma version"]),
+    ...(lock.repository === "kemiller2002/forma" ? [] : ["forma.lock must name the authoritative Forma repository kemiller2002/forma"]),
+    ...(lock.destination === "static-site/assets/forma" ? [] : ["forma.lock destination must be static-site/assets/forma"]),
+    ...(lock.assets.length > 0 ? [] : ["forma.lock must pin at least one asset"]),
+    ...lock.assets.filter(asset => !/^[0-9a-f]{64}$/.test(asset.sha256)).map(asset => "forma.lock asset lacks a recorded sha256: " + asset.name)
+  ];
+}
+
+function readFormaLock(root) {
+  const lockPath = path.join(root, "forma.lock");
+  return fs.existsSync(lockPath) ? parseFormaLock(fs.readFileSync(lockPath, "utf8")) : null;
+}
+
+function pinnedFormaAsset(root, sitePath) {
+  const lock = readFormaLock(root);
+  if (!lock || !lock.destination) return false;
+  const prefix = lock.destination.replace(/^static-site\//, "") + "/";
+  return sitePath.startsWith(prefix) && lock.assets.some(asset => asset.name === sitePath.slice(prefix.length));
+}
+
 function localTargetExists(root, sourceFile, target) {
   const t = stripTarget(target);
   if (!t || /^(https?:|mailto:|tel:|javascript:)/i.test(t)) return true;
   if (t === "/") return fs.existsSync(path.join(root, "static-site", "index.html"));
   if (t.startsWith("/")) {
     if (t === "/og.png") return fs.existsSync(path.join(root, "public", "og.png"));
+    if (pinnedFormaAsset(root, t.slice(1))) return true;
     return fs.existsSync(path.join(root, "static-site", t.slice(1)));
   }
   const resolved = path.resolve(path.dirname(sourceFile), t);
@@ -154,8 +190,11 @@ export function validateRepository(root = process.cwd()) {
     }
   }
 
-  const required = ["static-site/index.html","static-site/learn.html","static-site/examples.html","static-site/evidence.html","static-site/start.html","static-site/styles.css","public/og.png"];
+  const required = ["static-site/index.html","static-site/learn.html","static-site/examples.html","static-site/evidence.html","static-site/start.html","static-site/styles.css","public/og.png","forma.lock"];
   for (const rel of required) if (!fs.existsSync(path.join(root, rel))) errors.push("Missing canonical website file: " + rel);
+
+  const formaLock = readFormaLock(root);
+  if (formaLock) errors.push(...formaLockErrors(formaLock));
 
   const legacy = ["app","build","worker",".openai/hosting.json","next.config.ts","vite.config.ts","next-env.d.ts","tsconfig.json","package.json","package-lock.json"];
   for (const rel of legacy) if (fs.existsSync(path.join(root, rel))) errors.push("Stale duplicate web stack remains: " + rel);
@@ -172,7 +211,8 @@ export function validateRepository(root = process.cwd()) {
       repsChecked: fs.existsSync(repPath) ? 1 : 0,
       frozenV03FilesChecked: frozenFilesChecked,
       checkedLinkFiles: linkFiles.length,
-      requiredWebsiteFiles: required.length
+      requiredWebsiteFiles: required.length,
+      formaVersion: formaLock?.version ?? null
     }
   };
 }

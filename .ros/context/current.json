@@ -4,7 +4,7 @@
   "repository": "echelon-diagnostic-framework",
   "actor": "anthropic/claude-code",
   "startedAt": "2026-09-21T14:46:18.455Z",
-  "updatedAt": "2026-10-09T00:00:38.000Z",
+  "updatedAt": "2026-11-02T07:11:33.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -386,6 +386,51 @@
       },
       "completedAt": "2026-10-09T00:00:38.000Z",
       "conclusion": "Limen upgraded 0.7.1 -> 0.9.0; limen verify --strict and the repository checks pass locally"
+    },
+    {
+      "id": "WI-0012",
+      "type": "task",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": "static-site/index.html"
+        },
+        {
+          "type": "tests",
+          "path": "tests/forma-site.test.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/browser/Program.fs"
+        }
+      ],
+      "updatedAt": "2026-11-02T07:11:33.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20261102T063242291Z-f73672e7"
+      ],
+      "latestCheckpoint": {
+        "id": "111891afbd48689c825410be",
+        "recordedAt": "2026-11-02T07:11:32.000Z",
+        "executionId": "EXE-20261102T063242291Z-f73672e7",
+        "repository": "echelon-diagnostic-framework",
+        "branch": "claude/edf-forma-migration",
+        "commit": "3eb739d37b135d607b6abc8f814e11872d8feb71",
+        "remote": {
+          "name": "origin",
+          "url": "https://github.com/kemiller2002/echelon-diagnostic-framework"
+        },
+        "remoteBranch": "claude/edf-forma-migration",
+        "remoteCommit": "3eb739d37b135d607b6abc8f814e11872d8feb71",
+        "summary": "EDF site migrated to Forma 0.13.0 with structure and F# browser conformance tests and CI gates; Forma defect fixed upstream in kemiller2002/forma#177 and bridged by two forma-exception rules",
+        "nextAction": "Merge after CI; when Forma releases the #177 fix, bump forma.lock and the action tags and delete the forma-exception rules",
+        "verification": {
+          "status": "verified",
+          "mechanism": "git-remote-observation"
+        }
+      },
+      "completedAt": "2026-11-02T07:11:33.000Z"
     }
   ]
 }

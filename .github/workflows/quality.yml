@@ -2,21 +2,81 @@ name: Repository quality
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 permissions:
   contents: read
 
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Keep equal to the version in forma.lock (Forma docs/MARKETING-SITES.md, question 9).
+  FORMA_VERSION: "0.13.0"
+  # Release-asset digest of echelon-foundry-design-system-0.13.0.tgz, for the token validator.
+  FORMA_PACKAGE_SHA256: "2f9ceeb6ea99a54f6cf4ffa03e3a69fd609dd60a89ddbd99680811cca2d43725"
+
 jobs:
   integrity:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install pinned Forma presentation assets
+        uses: kemiller2002/forma/actions/install-presentation@v0.13.0
+        with:
+          lock: forma.lock
       - name: Run integrity tests
         run: |
           node --test
           node scripts/validate-repository.mjs
           node scripts/edf-benchmark.mjs validate
+
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+      - name: Install pinned Forma presentation assets
+        uses: kemiller2002/forma/actions/install-presentation@v0.13.0
+        with:
+          lock: forma.lock
+      - name: Check local CSS against the Forma policy
+        uses: kemiller2002/forma/actions/check-site-css@v0.13.0
+        with:
+          files: static-site/styles.css
+          forma: static-site/assets/forma/forma-echelon-marketing.css
+      - name: Validate design-token references against the pinned Forma package
+        run: |
+          package="echelon-foundry-design-system-${FORMA_VERSION}.tgz"
+          curl -fsSLO "https://github.com/kemiller2002/forma/releases/download/v${FORMA_VERSION}/${package}"
+          echo "${FORMA_PACKAGE_SHA256}  ${package}" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/forma" && tar -xzf "$package" -C "$RUNNER_TEMP/forma"
+          dotnet run --project "$RUNNER_TEMP/forma/package/tools/TokenValidator/TokenValidator.fsproj" -- \
+            --forma "$RUNNER_TEMP/forma/package" static-site/styles.css
+      - name: Build the F# browser conformance suite
+        run: dotnet build -c Release tests/browser
+      - name: Install Chromium for Playwright
+        run: pwsh tests/browser/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+      - name: Serve the site and run browser conformance
+        run: |
+          cp public/og.png static-site/og.png
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory static-site > /dev/null 2>&1 &
+          for attempt in $(seq 1 30); do curl -fsS -o /dev/null http://127.0.0.1:8765/index.html && break; sleep 1; done
+          dotnet run -c Release --no-build --project tests/browser -- --base-url http://127.0.0.1:8765 --out artifacts/browser
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-evidence
+          path: artifacts/browser
+          if-no-files-found: warn
