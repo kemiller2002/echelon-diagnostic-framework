@@ -315,7 +315,7 @@ match argv with
         split (conditionReport rows) seed (String.concat "\n" pairLines) (String.concat "\n" rtLines)
 | [ "bundle"; casesDir; promptsDir; outDir; phase; conds; trials; split; orderSeed ] ->
     // Writes one self-contained prompt bundle per (condition, case) and a seeded-random run order.
-    let shared = File.ReadAllText(Path.Combine(promptsDir, "SHARED.md"))
+    let shared = File.ReadAllText(Path.Combine(promptsDir, "SHARED.txt"))
     let caseFiles =
         Directory.GetFiles(casesDir, "*.case.json") |> Array.sort |> List.ofArray
         |> List.filter (fun p -> split = "all" || (readJson p |> strOr "" "split") = split)
@@ -323,7 +323,7 @@ match argv with
     Directory.CreateDirectory outDir |> ignore
     let bundles =
         [ for cid in condIds do
-            let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.md"))
+            let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.txt"))
             for cf in caseFiles do
                 let caseJson = File.ReadAllText cf
                 let caseId = readJson cf |> strOr "" "id"
