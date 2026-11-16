@@ -13,3 +13,6 @@ Current claim state (from EDF registries, unchanged by this research): 16 hypoth
 | 7 | Field multiple-baseline study (Exp. 9) | Only path to outcome claims | Targeted recurrence ↓≥30% in ≥4/5 clients |
 
 Literature gaps to close (search budget exhausted this session): CAST/STAMP evidence, group model building, ACH inter-rater reliability, HFACS reliability (RQ-B-004..006).
+
+| 8 | Action-strength scale reliability (combined Exp. 11) | Only defensible methodological asset identified for the follow-through offer | κ ≥ 0.6 on ≥ 40 actions |
+| 9 | Cross-executor reliability vs CAST/AcciMap benchmarks | Systemic methods reach only weak-to-moderate agreement; EDF must at least match | Agreement ≥ CAST benchmark |

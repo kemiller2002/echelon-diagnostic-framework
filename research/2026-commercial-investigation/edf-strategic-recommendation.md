@@ -12,3 +12,5 @@
 8. **Reconcile with Clarity**: v0.3 calls Clarity a decision framework; Clarity rejects that. Adopt the v1-draft relationship (Clarity determines how much diagnosis is justified; EDF diagnoses) only if Experiment 8 shows the combination adds value.
 
 What would change this: EX-EDF-2026-A003 or Experiment 8 showing a material, preregistered advantage on hard cases or action strength.
+
+9. **Second-round literature (v3):** do not cite Analysis of Competing Hypotheses as support — controlled tests found it null or harmful. Benchmark EDF's cross-executor reliability against CAST/AcciMap (weak-to-moderate agreement; different methods overlapped on as little as 8% of causes). The most defensible EDF-derived asset for the commercial offer is a domain-adapted **action-strength scale with measured inter-rater reliability** (combined validation Exp. 11) — and it must be scored together with completion, since strong actions are completed less often (73.3% vs 97.6%).
