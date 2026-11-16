@@ -499,14 +499,30 @@
     },
     {
       "metricId": "agent.interruptions",
-      "status": "unknown",
-      "reason": "runtime capability not reported or mapped",
-      "discoveredAt": "2026-11-16T09:20:16.319Z",
+      "status": "derived",
+      "reason": "normalized measurement recorded",
+      "discoveredAt": "2026-11-16T10:18:50.000Z",
       "source": {
-        "type": "environment",
-        "name": "runtime-identity",
-        "mechanism": "whitelisted-claude-environment"
-      }
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "blocked-transition"
+      },
+      "lastAssessedAt": "2026-11-16T10:18:50.000Z",
+      "recordedAt": "2026-11-16T10:18:50.000Z",
+      "history": [
+        {
+          "status": "unknown",
+          "reason": "runtime capability not reported or mapped",
+          "source": {
+            "type": "environment",
+            "name": "runtime-identity",
+            "mechanism": "whitelisted-claude-environment"
+          },
+          "discoveredAt": "2026-11-16T09:20:16.319Z",
+          "lastAssessedAt": "2026-11-16T09:20:16.319Z",
+          "recordedAt": "2026-11-16T09:20:16.319Z"
+        }
+      ]
     },
     {
       "metricId": "agent.resumes",
@@ -1348,6 +1364,26 @@
       },
       "collectedAt": "2026-11-16T09:20:16.319Z",
       "schemaVersion": "1.0.0"
+    },
+    {
+      "measurementId": "MEAS-6f8f32cde7e8b827623b0d10",
+      "id": "agent.interruptions",
+      "value": 1,
+      "unit": "count",
+      "currency": null,
+      "quality": "derived",
+      "confidence": null,
+      "scope": "execution",
+      "aggregation": "sum",
+      "dimensions": {},
+      "pricing": null,
+      "source": {
+        "type": "calculated",
+        "name": "ros-work-protocol",
+        "mechanism": "blocked-transition"
+      },
+      "collectedAt": "2026-11-16T10:18:50.000Z",
+      "schemaVersion": "1.0.0"
     }
   ],
   "rawTelemetry": [],
@@ -1360,6 +1396,17 @@
         "name": "ros",
         "mechanism": "work-lifecycle"
       }
+    },
+    {
+      "type": "work.blocked",
+      "occurredAt": "2026-11-16T10:18:50.000Z",
+      "reason": "Mission PARTIALLY COMPLETE: remaining work needs cross-provider analyzer credentials, human-analyst participants and authorized real-organization studies; see research/2026-framework-improvement/continuation/continuation-manifest.json",
+      "source": {
+        "type": "ros-clock",
+        "name": "ros",
+        "mechanism": "work-lifecycle"
+      },
+      "eventId": "TEVT-1350e2365cca1e1b7ecc8fb5"
     }
   ],
   "repository": {
