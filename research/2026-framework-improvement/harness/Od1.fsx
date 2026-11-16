@@ -340,44 +340,38 @@ match argv with
         order |> List.map (fun (c, k, t, p, n) -> sprintf "[\"%s\",\"%s\",%d,\"%s\",%d]" c k t p n) |> String.concat ",\n"
     File.WriteAllText(Path.Combine(outDir, sprintf "%s.order.json" phase), "[\n" + json + "\n]")
     printfn "bundles=%d runs=%d order=%s" bundles.Length order.Length (Path.Combine(outDir, sprintf "%s.order.json" phase))
-| [ "ingest"; journal; orderFile; rawDir; model ] ->
-    // Extracts structured outputs from a workflow journal.jsonl and writes append-only raw run records.
-    let order =
-        (readJson orderFile).EnumerateArray() |> Seq.map (fun e -> let a = e.EnumerateArray() |> Array.ofSeq in a.[0].GetString(), a.[1].GetString(), a.[2].GetInt32(), a.[4].GetInt32()) |> List.ofSeq
-    let phase = Path.GetFileName(orderFile).Replace(".order.json", "")
-    let lines = File.ReadAllLines journal |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone())
-    let findOutput (label: string) =
-        lines |> List.tryPick (fun e ->
-            let text = e.GetRawText()
-            if text.Contains(JsonSerializer.Serialize(label).Trim('"')) then
-                let rec search (x: JsonElement) : JsonElement option =
-                    match x.ValueKind with
-                    | JsonValueKind.Object when (prop "answers" x).IsSome && (prop "caseId" x).IsSome -> Some x
-                    | JsonValueKind.Object -> x.EnumerateObject() |> Seq.tryPick (fun p -> search p.Value)
-                    | JsonValueKind.Array -> x.EnumerateArray() |> Seq.tryPick search
-                    | JsonValueKind.String ->
-                        let s = x.GetString()
-                        if s.TrimStart().StartsWith "{" && s.Contains "\"answers\"" then
-                            (try Some (JsonDocument.Parse(s).RootElement.Clone()) with _ -> None) |> Option.bind search
-                        else None
-                    | _ -> None
-                search e
-            else None)
-    Directory.CreateDirectory rawDir |> ignore
+| [ "ingest"; journals; rawDir; model ] ->
+    // journals: comma-separated workflow journal.jsonl paths. Joins started(label,key) with result(key,result).
+    // Writes one append-only raw record per run label; existing files are never overwritten.
+    let events =
+        journals.Split(',') |> List.ofArray
+        |> List.collect (fun j -> File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone()))
+    let labels =
+        events |> List.filter (fun e -> str "type" e = Some "started")
+        |> List.choose (fun e -> match str "key" e, str "label" e with | Some k, Some l -> Some (k, l) | _ -> None) |> Map.ofList
     let results =
-        order |> List.map (fun (c, k, t, n) ->
-            let runId = sprintf "%s|%s|%s|t%d" phase c k t
-            let out = findOutput runId
-            let path = Path.Combine(rawDir, sprintf "%s__%s__%s__t%d.json" phase c k t)
-            if File.Exists path then runId, true, "exists"
-            else
-                let body =
-                    sprintf "{\"runId\":%s,\"phase\":%s,\"condition\":%s,\"caseId\":%s,\"trial\":%d,\"model\":%s,\"promptChars\":%d,\"status\":%s,\"output\":%s}"
-                        (JsonSerializer.Serialize runId) (JsonSerializer.Serialize phase) (JsonSerializer.Serialize c) (JsonSerializer.Serialize k) t
-                        (JsonSerializer.Serialize model) n (JsonSerializer.Serialize(if out.IsSome then "ok" else "missing"))
-                        (out |> Option.map (fun o -> o.GetRawText()) |> Option.defaultValue "null")
-                File.WriteAllText(path, body)
-                runId, out.IsSome, "written")
-    printfn "ingested=%d found=%d missing=%d" results.Length (results |> List.filter (fun (_, f, _) -> f) |> List.length) (results |> List.filter (fun (_, f, _) -> not f) |> List.length)
-    results |> List.filter (fun (_, f, _) -> not f) |> List.iter (fun (r, _, _) -> printfn "MISSING %s" r)
+        events |> List.filter (fun e -> str "type" e = Some "result")
+        |> List.choose (fun e -> match str "key" e with Some k -> Some (k, prop "result" e) | None -> None)
+    let promptChars (phase: string) (cid: string) (kid: string) =
+        let p = sprintf "/home/user/od1-bundles/%s__%s__%s.txt" phase cid kid
+        if File.Exists p then (File.ReadAllText p).Length else 0
+    Directory.CreateDirectory rawDir |> ignore
+    let written =
+        results |> List.choose (fun (k, out) ->
+            Map.tryFind k labels |> Option.map (fun label ->
+                let parts = label.Split('|')
+                let phase, cid, kid, trial = parts.[0], parts.[1], parts.[2], int (parts.[3].TrimStart('t'))
+                let path = Path.Combine(rawDir, sprintf "%s__%s__%s__t%d.json" phase cid kid trial)
+                if File.Exists path then label, "exists"
+                else
+                    let body =
+                        sprintf "{\"runId\":%s,\"phase\":%s,\"condition\":%s,\"caseId\":%s,\"trial\":%d,\"model\":%s,\"promptChars\":%d,\"status\":%s,\"output\":%s}"
+                            (JsonSerializer.Serialize label) (JsonSerializer.Serialize phase) (JsonSerializer.Serialize cid) (JsonSerializer.Serialize kid) trial
+                            (JsonSerializer.Serialize model) (promptChars phase cid kid)
+                            (JsonSerializer.Serialize(if out.IsSome then "ok" else "missing"))
+                            (out |> Option.map (fun o -> o.GetRawText()) |> Option.defaultValue "null")
+                    File.WriteAllText(path, body)
+                    label, "written"))
+    printfn "results=%d written=%d existing=%d unlabeled=%d" results.Length
+        (written |> List.filter (snd >> (=) "written") |> List.length) (written |> List.filter (snd >> (=) "exists") |> List.length) (results.Length - written.Length)
 | _ -> eprintfn "usage: validate <casesDir> | score <casesDir> <rawDir> <outDir> | stats <outDir> <split|all> <seed> <a,b;c,d>"; exit 2

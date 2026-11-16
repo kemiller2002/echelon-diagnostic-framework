@@ -1,0 +1,421 @@
+{
+  "id": "OD-HO-G",
+  "split": "heldout",
+  "benchmarkClass": "G",
+  "title": "Backlog doubling after a daily close quota at Tallyfield Software",
+  "organization": {
+    "type": "privately held B2B SaaS company",
+    "industry": "cloud invoicing, bookkeeping and payroll software for small businesses",
+    "size": "approx. 430 staff; customer support of 44 agents: a 38-agent general queue in five teams (A-E) with team leads and a Tier 2 lead, plus a 6-agent Billing-Compliance pod"
+  },
+  "presentingRequest": "Our support backlog has doubled since June even though we put every agent on a clear daily target of 20 closed tickets. Half the time people still miss it, and the Payroll launch has added a lot of volume on top. I need help deciding between a tougher target with real consequences and the 12 extra agents in my budget request, and a plan to get the backlog back under 2,000 by the end of Q1 2027. - Dana Whitcombe, VP Customer Experience",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "VP Customer Experience, Dana Whitcombe (interview, 2026-11-02)",
+      "sourceType": "leadership-account",
+      "text": "'In June our open backlog was about 1,850 tickets. To fix it, from 2026-07-06 every agent in the general queue has a quota of 20 tickets closed per day; the team was averaging about 12. The backlog is now 3,900. Agents still miss the quota on more than half of their days, so either the bar is too soft or people aren't putting in the work. On top of that, the Payroll launch in August flooded us. I need either a tougher target or the 12 extra agents in my Q4 budget request - ideally both.'"
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Help-desk platform monthly report, general queue (system export, Jan-Oct 2026)",
+      "sourceType": "system-record",
+      "text": "Tickets created / closed / open backlog at month end. Jan-Jun 2026: created 9,280-9,520 per month, closed 9,240-9,500 per month, backlog 1,780-1,900 (30 Jun: 1,850). Jul: created 12,100, closed 11,500, backlog 2,450. Aug: 14,300 / 13,800 / 2,950. Sep: 15,200 / 14,700 / 3,450. Oct: 15,600 / 15,150 / 3,900. 'Closed' counts every solve event, including a second or third solve of the same ticket after it is reopened. Closes per agent working day: Jan-Jun average 11.7; Oct 19.0. Backlog snapshot on 2026-08-14: 2,710."
+    },
+    {
+      "id": "E3",
+      "stage": "S2",
+      "source": "Support analytics analyst, ticket-creation decomposition (system query, 2026-11-05)",
+      "sourceType": "system-record",
+      "text": "Tickets created, by origin. June 2026: 9,420 = 8,770 first-contact customer issues + 240 agent-created 'split' child tickets + 410 customer duplicates (same requester, same topic, within 7 days of an earlier ticket, per the nightly duplicate-matching job, unchanged since 2025). October 2026: 15,600 = 9,120 first-contact issues (+4%) + 3,710 split children + 2,770 customer duplicates. 14-day reopen rate (share of solved tickets reopened within 14 days): Jan-Jun 5.8-6.4% (avg 6%), Jul 14%, Aug 19%, Sep 23%, Oct 23%. Open backlog composition: 30 Jun = 160 reopened + 70 split children + 120 duplicates + 1,500 original first-contact tickets; 31 Oct = 1,180 reopened + 960 split children + 640 duplicates + 1,120 original first-contact tickets."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Team B lead, Priya Nandakumar (interview, 2026-11-03)",
+      "sourceType": "manager-account",
+      "text": "'Leads were told the 20 is non-negotiable and that misses go on the weekly leaderboard. So the floor learned the tricks fast: solve on first reply with a help-centre link and let the customer reopen if it didn't work; if a customer asks two things, split it into two tickets - that's two closes; and a reopened ticket you solve again counts again. I don't blame them. Nobody gets credit for spending three hours on a bank-feed integration ticket.'"
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "source": "Anonymous agent pulse survey run by People team (2026-09-22; 31 of 38 general-queue agents responded)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "74% agree 'I regularly choose tickets I know I can close quickly over older ones'. 68% agree 'In the last month I have marked a ticket solved that I believed was not fully resolved, in order to make my number'. 61% agree 'I split multi-question tickets mainly because it helps my count'. 58% say they are 'actively considering leaving in the next six months' (same survey, March 2026: 21%). Free-text, most frequent theme (19 comments): the quota rewards speed over fixing problems."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "source": "Help-desk queue-pick log and aging report, general queue (system export, 2026-11-06)",
+      "sourceType": "system-record",
+      "text": "Share of tickets picked in default oldest-first order: Jan-Jun 71%; Aug-Oct 34%. Use of the saved filter 'quick-wins' (tags: password-reset, how-to, invoice-resend), created by agents on 2026-07-09: 0 picks before July, 41% of all picks in Oct. Complex tickets (Tier-2 tags: bank-feed integration, data migration, tax configuration) aged more than 7 days: Jun avg 140; Jul 190; Aug 280; Sep 370; Oct 430. Complex tickets as a share of first-contact issues: Jun 22%, Oct 23%."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "source": "Support operations director, Marcus Oyelaran, Billing-Compliance pod comparison (system export with commentary, 2026-11-06)",
+      "sourceType": "system-record",
+      "text": "The 6-agent Billing-Compliance pod handles refunds, chargebacks and tax-document requests. By Compliance policy it was exempted from the close quota and has no daily target. June vs October for the pod: incoming tickets +5%; 14-day reopen rate 5% -> 6%; split tickets 9 -> 11 per month; oldest-first pick share 74% -> 72%; tickets aged >7 days 18 -> 21. Oyelaran: 'Different ticket mix, so it isn't a perfect comparison, but same tooling, same customers, same managers, same months.'"
+    },
+    {
+      "id": "E8",
+      "stage": "S2",
+      "source": "Customer success manager for Larkspur Dental Group, 140-seat customer (email to VP CX, 2026-10-14)",
+      "sourceType": "customer-account",
+      "text": "'Larkspur's office manager has raised the same bank-feed sync failure four times since 2026-08-11. Each time it was marked solved within the hour with a link to the same help article, which they had already tried. She now opens a new ticket every couple of days in case the old ones are being ignored. Their renewal is in February and their finance director has asked me whether we are a support-capable vendor.'"
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "source": "Post-ticket CSAT survey results (system record, Jan-Oct 2026)",
+      "sourceType": "system-record",
+      "text": "Average CSAT (1-5): Jan-Jun 4.4; Jul 4.1; Aug 3.8; Sep 3.6; Oct 3.6. Responses containing 'already', 'again' or 'same issue' in the comment: Jan-Jun 7% of comments; Oct 31%. Response rate stable at 18-20%."
+    },
+    {
+      "id": "E10",
+      "stage": "S1",
+      "source": "HR workforce record, general queue (system-record, 2026-11-04)",
+      "sourceType": "system-record",
+      "text": "Agents in post: 30 Jun 38 FTE; 31 Oct 37 FTE (one vacancy open since 2026-10-03). Scheduled agent hours: Jun 6,020; Oct 5,960. Resignations: Apr-Jun 1; Jul 0; Aug 2; Sep 2; Oct 0. All but one leaver backfilled within 5 weeks from an existing candidate pool."
+    },
+    {
+      "id": "E11",
+      "stage": "S2",
+      "source": "HR business partner, summary of exit interviews (document, 2026-10-20)",
+      "sourceType": "document",
+      "text": "Of the four Aug-Sep leavers, two named 'quota pressure' among their reasons; three joined Corvane Fintech, which opened a support centre in the same city in August 2026 advertising pay about 15% above ours. Our annual pay review, normally effective in July, was deferred on 2026-06-12 to January 2027 for budget reasons. One leaver cited relocation only."
+    },
+    {
+      "id": "E12",
+      "stage": "S1",
+      "source": "Product release record and payroll ticket tag report (document + system export, 2026-11-04)",
+      "sourceType": "document",
+      "text": "Tallyfield Payroll module general availability: 2026-08-18. Payroll-tagged tickets created, all origins including splits and duplicates: average 160 per week in Sep-Oct (about 690 per month), of which about 380 per month are first-contact issues. Payroll-tagged tickets in the open backlog on 31 Oct: 210 of 3,900. Payroll-tagged reopen rate Sep-Oct: 21%, in line with the queue average."
+    },
+    {
+      "id": "E13",
+      "stage": "S2",
+      "source": "Tier 2 lead, Helen Achterberg (interview, 2026-11-07)",
+      "sourceType": "manager-account",
+      "text": "'That 23% reopen figure is misleading. The platform reopens a ticket automatically whenever a customer replies to a solved ticket - even with a thank-you. Somebody must have changed that rule over the summer. Strip those out and I bet reopens are near where they were.'"
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "source": "Help-desk platform configuration audit log (system-record, retrieved 2026-11-08)",
+      "sourceType": "system-record",
+      "text": "Trigger 'Reopen on customer reply' created 2024-03-11, active continuously since; last edit to any solve/reopen automation on 2025-11-02 (unrelated SLA timer). The reopen-rate report definition has not been edited since 2025-01-20. Sample check by the analyst of 200 reopens from October: 9 (4.5%) were courtesy-only replies; March 2026 sample of 200: 11 (5.5%)."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "source": "Team C lead, Tomasz Wierzbicki, with team metrics (interview + system export, 2026-11-07)",
+      "sourceType": "manager-account",
+      "text": "'From 2026-09-01 I stopped counting any close that got reopened within 14 days towards my team's 20, on my own initiative. Split tickets still count.' Team C (7 agents) metrics: 14-day reopen rate Aug 24% -> Oct 10%; split children created Aug 610 -> Oct 690; quick-wins filter share of picks Aug 39% -> Oct 44%; Team C complex tickets aged >7 days Aug 61 -> Oct 88."
+    },
+    {
+      "id": "E16",
+      "stage": "S2",
+      "source": "Engineering manager, Integrations, Rafael Quintero (interview, 2026-11-10)",
+      "sourceType": "manager-account",
+      "text": "'Support-escalated bugs in our queue went from 40 at the end of June to 71 at the end of October, mostly bank-feed sync after a banking-partner API change in September. I'm sure a lot of those aged complex tickets are really waiting on us.' Support ops note appended: the help-desk 'Waiting on engineering' status is optional and used inconsistently; on 31 Oct only 64 of the 430 complex tickets aged >7 days carried it, and nobody has checked how many of the rest are linked to an open bug."
+    },
+    {
+      "id": "E17",
+      "stage": "S1",
+      "source": "Finance business partner, Q4 headcount request costing (financial-record, 2026-10-28)",
+      "sourceType": "financial-record",
+      "text": "12 additional support agents: fully loaded $62,000 each, $744,000 per year; recruiting lead time 6-8 weeks plus 10 weeks' ramp to full productivity. Approved positions become permanent headcount and, under Finance policy, cannot be withdrawn within the fiscal year once requisitions open. Note: general-queue headcount and scheduled hours were unchanged between Jan and Jun 2026, when the backlog stayed between 1,780 and 1,900."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The backlog has grown mainly because genuine customer demand (new, distinct customer issues) has risen sharply since June, including from the Payroll launch."
+      },
+      {
+        "id": "H2",
+        "text": "The per-agent daily close quota has induced premature closures, ticket splitting and selective picking of quick tickets, and this is the main driver of the backlog growth."
+      },
+      {
+        "id": "H3",
+        "text": "General-queue agents have been putting in insufficient effort or working too slowly since June, and this is the main reason the backlog has grown."
+      },
+      {
+        "id": "H4",
+        "text": "The backlog has grown mainly because the general queue has lost capacity (fewer agents or fewer scheduled hours) since June."
+      },
+      {
+        "id": "H5",
+        "text": "The rise in the 14-day reopen rate from about 6% to 23% is mainly a measurement artifact of a help-desk configuration or reporting change, not a real change in how tickets are resolved."
+      },
+      {
+        "id": "H6",
+        "text": "A growing backlog of support-escalated bugs in Engineering is a material contributor to the tripling of complex tickets aged more than 7 days."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Per-agent daily close quota introduced 2026-07-06",
+        "to": "Agents picking quick tickets ahead of older complex tickets",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Premature closures and splitting of tickets by agents",
+        "to": "Growth in tickets created and in the open backlog",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Quota pressure",
+        "to": "Agent resignations in August-September 2026",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Payroll module launch (2026-08-18)",
+        "to": "Doubling of the open backlog since June",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Raise the daily close quota from 20 to 26 and put agents who miss it for three consecutive weeks on performance improvement plans."
+      },
+      {
+        "id": "A2",
+        "text": "Approve the 12 additional general-queue agents in the Q4 budget request now ($744,000 per year)."
+      },
+      {
+        "id": "A3",
+        "text": "Suspend the per-agent daily close quota and replace it with team-level resolution-quality measures (14-day reopen rate, duplicate rate, count of complex tickets aged >7 days, CSAT), with named ownership of every ticket aged >7 days."
+      },
+      {
+        "id": "A4",
+        "text": "Over the next two weeks, have support operations and Engineering jointly classify the 430 complex tickets aged >7 days by what is blocking each one (open bug in Engineering, waiting on customer, or unworked in the support queue)."
+      },
+      {
+        "id": "A5",
+        "text": "Keep the 20-per-day quota but roll out Team C's rule company-wide: closes reopened within 14 days no longer count towards it."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Ticket-level blocking-status classification of the 430 aged complex tickets, linked to Engineering's open bug list"
+      },
+      {
+        "id": "Q2",
+        "text": "Engineering bug-fix cycle times for support-escalated bugs, Jan-Oct 2026, by component"
+      },
+      {
+        "id": "Q3",
+        "text": "Full exit-interview transcripts and competing-offer details for the four August-September leavers, with a comparison of resignations at other local support employers"
+      },
+      {
+        "id": "Q4",
+        "text": "Office seating plan and desk assignments for the general-queue teams"
+      },
+      {
+        "id": "Q5",
+        "text": "Per-agent typing speed and keystroke analytics for October 2026"
+      },
+      {
+        "id": "Q6",
+        "text": "Published industry benchmark of tickets closed per support agent per day in B2B SaaS"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "H6",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I16",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

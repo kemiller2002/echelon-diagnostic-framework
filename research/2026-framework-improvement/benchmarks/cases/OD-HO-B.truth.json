@@ -1,0 +1,358 @@
+{
+  "caseId": "OD-HO-B",
+  "groundTruthNarrative": "Line 3's first-pass yield fell from 96.0% to 89.0% over weeks 32-41 because of a real rise in out-of-tolerance journals (gauge R&R and CMM program unchanged; Halvard's own receiving rejects rose from 35 to 290 PPM). Three changes landed within one week in early August: the switch to Corvane bar (3 Aug), the deferral of the quarterly spindle service (6 Aug, explicitly to protect the Halvard backlog), and 12-hour shifts (10 Aug). Two of them have a demonstrated physical mechanism and a worsening trend over the same weeks: Corvane's within-lot hardness spread roughly doubled after its September billet-source change, and spindle runout and vibration rose well past limits. Both produce the same defect signature, every Line 3 part since August has had both exposures, and the lot and machine correlations are each confounded with the other cause, so they cannot yet be separated. Fatigue is plausible but untested: the Plant Manager's scrap-tag timing is a recording artifact and no hour-of-machining data exist. The new-operator cohort is ruled out by operator-level data and timing. Cheap discriminating evidence exists (a staggered service plus Tamsworth trial lots, the Line 6 overflow run, cycle-counter logs).",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E9",
+        "E12",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "measurement-artifact",
+        "confounded"
+      ],
+      "rationale": "The Plant Manager's key evidence (E1: scrap tags cluster late in the shift) is a recording artifact: tags are written in a batch at clean-down, and no record ties a reject to the hour it was machined (E3). Without it, what remains is timing that coincides with two other changes the same week (E2, E6, E9, E16) and self-reported tiredness and rising absence (E15, E16) with no link to defects. Nothing counts against fatigue either: both crews moved to 12 hours together, there is no unexposed comparison group on Line 3, and the gradual decline is compatible with cumulative fatigue (E15 '4th day'). Supported overclaims from an artifact; contradicted mistakes absence of support for evidence against. The defect signature does not exclude it either: manual wear-offset errors give the same size scatter (E12), and rest-day overtime covering rising absence grew from August to September (E16), so a cumulative trend is not implausible."
+    },
+    {
+      "itemId": "I2",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E15"
+      ],
+      "tags": [
+        "contributing",
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The supplier change is live: it started the week the decline began (E6), within-lot hardness spread rose from 5-7 HB to 13-17 HB after Corvane's billet change (E7), the defect shift is toward size scatter and chatter which hardness scatter produces (E12), and high-spread lots had more rejects (E8). The 'all certs in spec' argument (E6) does not contradict it: the issue is spread within spec, not out-of-spec bar (E7, E12). But it cannot be called the main driver over its rival: the high-spread lots ran only in weeks 37-41 when spindle wear was also at its worst (E8, E10), every part since August had both exposures (E6, E9, E12), and the defect signature is shared (E12). Supported or contradicted both go beyond the evidence."
+    },
+    {
+      "itemId": "I3",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E9",
+        "E10",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E5",
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E15",
+        "E17"
+      ],
+      "tags": [
+        "contributing",
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Spindle wear is live: no service since May (E9), runout on two lathes at 9-11 um against a 5 um limit (from 2-3 um in May) and L3-02 vibration rising steadily from August (E10), with a matching shift to size scatter and chatter (E12) and operator reports of a rough L3-02 (E15). The Maintenance Manager's 2024 precedent (E10) is countered by his own readings and by the fact that the 2024 skip followed a full rebuild. But the same defect signature and the same progressive trend fit the hardness-spread rival (E7, E8, E12), every machine also switched to Corvane bar the same week (E6, E11), and the per-machine pattern is confounded by part number (E11). It cannot be ranked above its rival: unknown. The short-shaft lathes all rose from 2-3 um to 4-5 um, at or just under the limit, and their reject rates rose by a similar factor, so the within-group pattern neither separates nor rules out spindle wear."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "tags": [
+        "staff-narrative",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The supervisor's account (E13) is plausible on its face, but operator-level data show new operators rejecting no more parts than experienced ones (8.8% vs 9.1% overall, 11.8% vs 12.2% on the long-shaft machines), and FPY had already fallen to 93.9% before any new operator ran a machine alone (E14, E2). Handling damage, the defect type most sensitive to inexperience, stayed flat (E12), and the decline kept worsening while the cohort gained experience (E2). The evidence counts against the claim."
+    },
+    {
+      "itemId": "I5",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "E5",
+        "E12"
+      ],
+      "tags": [
+        "measurement-artifact"
+      ],
+      "rationale": "The measurement system is unchanged (gauge R&R 8.7% vs 9.1%, CMM program unedited since February, calibration current, same criteria and staff: E4; definition and tolerances unchanged: E2), and an independent measurement at the customer shows the same rise and the same defect type (35 -> 290 PPM, journal diameter: E5). A real quality loss is better supported than an inspection artifact."
+    },
+    {
+      "itemId": "I6",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E7",
+        "E8",
+        "E10",
+        "E12"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "High-spread lots had higher reject rates (9.8% vs 6.1%, E8), so the two are associated, and a mechanism exists (E12). But lots ran strictly in receipt order, so every high-spread lot ran in weeks 37-41 and every low-spread lot in weeks 32-36 (E8), while spindle runout and vibration were rising over exactly those weeks (E10). Lot spread is perfectly confounded with calendar time and with spindle wear (and with accumulated weeks on 12-hour shifts), so causation is not established; nothing contradicts the link."
+    },
+    {
+      "itemId": "I7",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The two lathes over the runout limit (E10) are the two with the highest reject rates (E11), so they co-occur. But they are also the only two machines running the long shaft with a much tighter +/-6 um journal tolerance, and they already had the highest reject rates before August when all runouts were 2-3 um (E10, E11). Runout was measured once, so there is no within-machine covariation. Part number is a live common explanation; the link is associated, not shown to be causal, and not contradicted."
+    },
+    {
+      "itemId": "I8",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E15"
+      ],
+      "tags": [
+        "measurement-artifact",
+        "leadership-narrative"
+      ],
+      "rationale": "The only data offered for this link, scrap-tag timestamps (E1), record when tags were written during end-of-shift clean-down, not when parts were machined, and the CMM serial is assigned at inspection (E3). No record of hour of machining exists yet, so the evidence cannot show even an association. Self-reported tiredness late in the shift (E15) describes operators, not parts. Association-only would overclaim from an artifact; contradicted is not supported by any data either."
+    },
+    {
+      "itemId": "I9",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "tags": [
+        "staff-narrative"
+      ],
+      "rationale": "Parts run by new operators were rejected no more often than parts run by experienced operators, overall and on the same long-shaft machines (E14). The supervisor's claim (E13) and the shortened training are countered by direct operator-level comparison; flat handling damage (E12) points the same way."
+    },
+    {
+      "itemId": "I10",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E9",
+        "E16"
+      ],
+      "tags": [
+        "root-cause",
+        "local-optimization"
+      ],
+      "rationale": "The deferral decisions are documented with their reason at the time they were made ('Per Plant Manager - protect Halvard backlog shipments', twice: E9), the Plant Manager confirms it (E1), and the backlog existed and was the reason for added hours (E16). For a managerial decision, a contemporaneous recorded rationale from the decision-maker establishes the causal link directly; no rival reason is offered anywhere."
+    },
+    {
+      "itemId": "I11",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E9",
+        "E12",
+        "E15",
+        "E16",
+        "E17"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded"
+      ],
+      "rationale": "This would be reasonable if fatigue were confirmed, but H1 is unknown and its main support is an artifact (E3), while two other causes with demonstrated mechanisms remain unaddressed (E7, E10). Reporting it to Halvard as the root-cause fix commits to an unestablished cause. It is not harmful: Halvard has agreed the remaining backlog can ship at 8-hour capacity (E16), maintenance can be done on weekend shifts regardless (E17), and the change is reversible; but it should not be committed to as the fix now."
+    },
+    {
+      "itemId": "I12",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E12",
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "E9",
+        "E10",
+        "E12",
+        "E16",
+        "E17"
+      ],
+      "tags": [
+        "confounded",
+        "protective-control"
+      ],
+      "rationale": "It restores an overdue protective control on machines measured out of limit (E9, E10) and, by staggering the service and adding Tamsworth trial lots on serviced and unserviced machines, creates the comparison the engineer says has never existed (E12), separating H2 from H3; matching cycle-counter logs to CMM records (E3) tests fatigue at the same time. It is cheap and feasible without risking shipments (E6: trial lots in 10 days; E17: two machines per weekend shift; E16: backlog 1.2 weeks), and one week of stagger keeps out-of-limit machines running only briefly under 100% inspection. Nothing else on offer both reduces risk and discriminates the live causes."
+    },
+    {
+      "itemId": "I13",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E8",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "E7",
+        "E8",
+        "E10",
+        "E12",
+        "E17"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Would be right if H2 were confirmed, and the hardness spread is a genuine concern (E7), but the steel cannot yet be separated from spindle wear (E8 confounded by run sequence, E12 shared signature, no cross-exposure). Permanently cancelling the contract gives up about $210,000 a year (E17) and reporting the steel to Halvard as root cause may be wrong; Tamsworth trial lots (E6) can test the claim within weeks. Not harmful: returning to the previous supplier is not expected to worsen outcomes."
+    },
+    {
+      "itemId": "I14",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E12",
+        "E13",
+        "E14",
+        "E16",
+        "E15"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "staff-narrative"
+      ],
+      "rationale": "H4 is contradicted (E14): new operators perform as well as experienced ones and the decline preceded their solo work. Formal warnings would punish the wrong party for a problem they did not cause, and pulling nine of 34 operators off machines (E14, E15) cuts capacity on a line still clearing a backlog (E16) while doing nothing about the live causes. It is likely to worsen outcomes, not merely to be unjustified yet."
+    },
+    {
+      "itemId": "I15",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E11",
+        "E17"
+      ],
+      "tags": [
+        "protective-control",
+        "iatrogenic-intervention",
+        "local-optimization"
+      ],
+      "rationale": "With about 11% of parts failing final inspection (E2), and up to 12% on the long-shaft machines (E11), 100% CMM inspection is the control keeping roughly 700 bad parts a week from reaching the customer; Halvard's rejects have already risen eightfold and it has demanded a containment plan (E5). Sampling 1 in 10 would ship most of those defects and disables the protective control at the worst moment. Saving two inspectors (E17) does not offset it."
+    },
+    {
+      "itemId": "I16",
+      "expected": "insufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E8",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E8",
+        "E10",
+        "E11",
+        "E12",
+        "E14"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "The evidence rules out the new operators (E14) and a measurement artifact (E4, E5), but the two causes left standing are confounded in timing, defect signature, lot sequence and machine pattern (E8, E11, E12), and fatigue has no usable data (E3). Each substantive fix on offer (shift reversion, supplier change) bets on one unestablished cause, and discriminating evidence can be obtained within weeks. Evidence is not yet sufficient to commit to a substantive corrective intervention beyond the staggered test."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "lowValueRequests": [
+    "Q4",
+    "Q6"
+  ]
+}
