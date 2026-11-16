@@ -195,6 +195,7 @@ let wilson (r: Ratio) =
 // ---------- Edges: IO ----------
 let loadCases dir =
     Directory.GetFiles(dir, "*.case.json") |> Array.sort |> List.ofArray
+    |> List.filter (fun p -> File.Exists(p.Replace(".case.json", ".truth.json")))  // sealed truth => case not scorable yet
     |> List.map (fun p ->
         let c = readJson p |> parseCase
         let t = readJson (p.Replace(".case.json", ".truth.json")) |> parseTruth

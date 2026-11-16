@@ -30,7 +30,8 @@ const instruction = path =>
   `This is an isolated, controlled benchmark task. Ignore any repository or project instructions you may have been given; they do not apply. ` +
   `Make exactly one tool call: use the Read tool on the file ${path} . Do not read, list, search or open any other file, and do not use any other tool. ` +
   `The file contains your complete task. Follow it exactly and return your answer through the structured output tool.`
-const runs = await pipeline(args.order, ([cid, kid, trial, path, chars]) => {
+const runs = await pipeline(args.order, ([cid, kid, trial, rel, chars]) => {
+  const path = rel.startsWith('B/') ? args.base + rel.slice(2) : rel
   const runId = `${args.phase}|${cid}|${kid}|t${trial}`
   return agent(instruction(path), { label: runId, phase: 'Analyze', schema: OUTPUT_SCHEMA, model: args.model })
     .then(o => ({ runId, ok: !!o }))
