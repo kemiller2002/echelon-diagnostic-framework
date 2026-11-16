@@ -17,7 +17,7 @@ D was designed after the dev phase, from dev failures plus the literature. It wa
 
 | Contrast | Held-out recognition (Sonnet) | Held-out recognition (Haiku) | Open generation (Sonnet) |
 |---|---|---|---|
-| D − B (vs EDF v0.3) | +1.5 [−0.3, 3.6], 7 wins / 5 losses | +0.1 [−1.9, 2.5] | +0.9 [−4.3, 6.6] |
+| D − B (vs EDF v0.3) | +1.5 [−0.3, 3.6], 6 wins / 6 losses | +0.1 [−1.9, 2.5] | +0.9 [−4.3, 6.6] |
 | D − A (vs general AI) | +2.9 [0.8, 5.2] | −1.5 [−3.5, 0.9] | +2.6 [−3.3, 9.2] |
 | D − N (vs matched structure) | +4.3 [1.6, 7.8] | +5.6 [2.5, 9.0] | +0.7 [−3.9, 5.2] |
 | D − C (vs KT + Nadler-Tushman) | +2.1 [−0.3, 4.7] | – | −1.7 [−6.2, 3.8] |
@@ -46,14 +46,14 @@ The only consistent advantage is **D − N**, and it reflects N's weakness, not 
 
 Analyzers saw only a catalogue of each case's evidence: ID, stage, source and source type, with content hidden. They chose k = 6 of the ~17 items, then diagnosed from those items alone with the D module.
 
-| Selection strategy | Mean score | Required-evidence coverage | Δ vs full evidence (D, 96.0) |
+| Selection strategy | Mean score | Required-evidence coverage | Δ vs full evidence (D, 95.9) |
 |---|---|---|---|
-| Model-selected with D guidance | 84.3 | 48% | −11.6 [−14.4, −8.9] |
-| Model-selected with general prompt | 84.5 | 48% | −11.5 [−14.8, −8.3] |
-| First 6 items (fixed sequence) | 69.9 | 35% | −26.1 [−31.2, −21.1] |
-| Seeded random 6 | 72.7 | 35% | −23.3 [−29.9, −17.0] |
+| Model-selected with D guidance | 84.2 | 48% | −11.7 [−14.4, −9.0] |
+| Model-selected with general prompt | 84.4 | 48% | −11.5 [−14.8, −8.4] |
+| First 6 items (fixed sequence) | 69.8 | 35% | −26.1 [−31.3, −21.1] |
+| Seeded random 6 | 72.6 | 35% | −23.4 [−29.9, −17.1] |
 
-- Model-selected beats random by +11.7 [5.9, 17.9]. Adaptive (value-of-information) selection substantially beats fixed or random collection.
+- Model-selected beats random by +11.6 [5.9, 17.9]. Adaptive (value-of-information) selection substantially beats fixed or random collection.
 - D guidance vs general prompt: −0.2 [−3.8, 3.4]. EDF semantics add nothing to evidence selection.
 - Reading ~35% of the evidence by adaptive choice retains about 88% of full-evidence performance. It still loses about 12 points, mostly because the selector cannot see content and misses some decisive items.
 

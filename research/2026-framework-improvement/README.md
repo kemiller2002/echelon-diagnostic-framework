@@ -13,6 +13,7 @@ What measurable changes make EDF better at identifying real organizational probl
 - **No rewritten EDF variant** met its preregistered improvement margin.
 - **Evidence acquisition** was the largest measurable lever. Adaptive (model-chosen) evidence beat random or fixed-order collection by about 12–14 points at the same budget. EDF guidance did not improve the choice.
 - The one framework component with a significant ablation effect is **decision-gate semantics**: harm judged under every live hypothesis, "no intervention warranted" as a sufficient conclusion, and discriminating next evidence. The effect is +2.8 [0.5, 5.7], from a single trial on one tier, so it is unconfirmed.
+- **Follow-up OD1-S (sequential acquisition):** reading evidence one item at a time keeps accuracy within 1–3 points while skipping about a third of it. Kepner-Tregoe was the most evidence-efficient method. EDF added no efficiency, and the variant broke an evidence budget (`experiments/sequential-results.md`).
 - **Clarity integration** into diagnosis gave no benefit. **EDF-0** was slightly worse than full EDF. A **long generic protocol** hurt accuracy.
 
 Read `strategy/executive-recommendations.md` first.

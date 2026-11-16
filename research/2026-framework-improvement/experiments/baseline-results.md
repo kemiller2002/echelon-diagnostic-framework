@@ -21,10 +21,10 @@ Every condition shares the ~1.9k-char task frame and the case file (~18–21k ch
 
 | Condition | Dev (10 cases, Sonnet) | Held-out (12 cases, Sonnet) | Held-out (12 cases, Haiku) |
 |---|---|---|---|
-| A_GENERAL | 91.5 | 93.1 | **94.3** |
-| B_EDF03 | 93.6 | 94.5 (2 trials) | 92.7 |
-| B0_EDF0 | 93.2 | 92.4 | – |
-| C_KTNT | 92.9 | 93.9 | – |
+| A_GENERAL | 91.4 | 93.1 | **94.3** |
+| B_EDF03 | 93.5 | 94.5 (2 trials) | 92.7 |
+| B0_EDF0 | 93.1 | 92.4 | – |
+| C_KTNT | 92.8 | 93.9 | – |
 | N_NEUTRAL | **94.8** | 91.7 | 87.2 |
 
 ## Paired contrasts against the baseline
@@ -56,7 +56,7 @@ The paired contrasts B − A (+1.7 [−1.5, 5.8]), B − N (−0.2 [−3.9, 3.6]
 | H-OD1-2: B adds value beyond matched structure | mean ≥ +5 and CI > 0 | +2.8 [0.8, 5.3] Sonnet (CI > 0, below margin); +5.4 [1.2, 9.6] Haiku; −0.2 OG; −1.3 dev | **Not supported** at the preregistered margin. The direction is inconsistent across phases. Where B beats N, it is because N under-performs the general-AI prompt, not because B beats it. |
 | H-OD1-3: C differs from B | two-sided | −0.6 [−2.0, 0.7] recognition; +2.6 [−3.3, 7.5] OG | **No detectable difference** |
 | H-OD1-4: EDF-0 non-inferior to EDF v0.3 | mean > −3 | −2.1 [−3.9, −0.5] held-out; −0.4 dev | **Inconclusive.** The point estimate passes but the CI lower bound crosses the margin. |
-| H-OD1-9: recognition format saturates | condition means within 5 points | Sonnet held-out range 91.7–96.0; Haiku 87.2–94.3 | **Supported** (descriptive) |
+| H-OD1-9: recognition format saturates | condition means within 5 points | Sonnet held-out range 91.7–95.9; Haiku 87.2–94.3 | **Supported** (descriptive) |
 
 ## Interpretation
 

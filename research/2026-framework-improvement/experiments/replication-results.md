@@ -23,9 +23,10 @@ Full report: `experiments/replication/replication-report.md`. Code: `experiments
 
 | # | Finding | Effect | Disposition |
 |---|---|---|---|
-| R-1 | The harness weights the calibration term by item weight; spec §5 says a plain mean | ≤ 0.39 points per run, ≤ 0.02 per contrast; flips one tally (D − B 7/5 → 6/6) | **Known deviation**, recorded here. Results are reported as computed. Both conventions give the same conclusions. |
+| R-1 | The harness weights the calibration term by item weight; spec §5 says a plain mean | ≤ 0.39 points per run, ≤ 0.02 per contrast; flips one tally (D − B 7/5 → 6/6) | **Fixed 2026-11-16**: harness now uses the plain mean per spec. All phases re-scored; every contrast moved ≤ 0.02 points; D − B tally is now 6/6. |
 | R-2 | The harness treats a run as valid if any answers exist; it defaults missing confidence to 50 | No run triggers it | Recorded |
 | R-3 | Two Haiku N runs wrote request IDs as "Q1: title"; both scorers give 0 | Haiku N − A moves from −7.04 to −5.37 if parsed leniently | Conclusion unchanged (N still worst) |
+| R-5 | Request-menu order leaked the answer (18/22 cases) | Request component invalid in OD1 runs | **Fixed for new runs**: the bundler now shuffles the menu and relabels ids X1..Xn per run (map stored beside each bundle, translated back at ingest). OD1 runs are not re-run; their request component stays flagged. |
 | R-4 | `SHARED_OG.txt` was not in a hash manifest | Written before the first OG run and never edited; committed in `e5b54d6` (10:01 UTC) shortly after the first OG slice launched | Hash added retroactively to `frozen-prompts-heldout.sha256`, labeled as retroactive |
 
 ## Threats identified by the replication

@@ -3,7 +3,7 @@
 ## Workflows evaluated
 
 1. **EDF alone** (B_EDF03): 94.5 held-out.
-2. **Clarity alone** (CL_ALONE, dev only): 93.5 dev, against 91.5 for A_GENERAL and 93.6 for B_EDF03.
+2. **Clarity alone** (CL_ALONE, dev only): 93.5 dev, against 91.4 for A_GENERAL and 93.5 for B_EDF03.
 3. **EDF followed by Clarity** (B_CLARITY): 93.7 held-out.
 4. **Clarity applied during EDF evidence evaluation** (BI_CLARITY): 94.5 held-out.
 5. **Integrated workflow with a variant EDF**: not run, because neither integration improved on its parent condition.

@@ -19,13 +19,16 @@ Frequencies are from OD1 held-out recognition runs (Sonnet, 144 runs × 15–23 
 | FT-13 | Failure to update when evidence changes | Staged evidence (class H) | S3 | `revisionAccuracy` | 79–100%; N worst (0.79) | Stale diagnosis | Stage-bounded reasoning | B 0.96, D 0.93 | 2 dynamic cases |
 | FT-14 | Inability to generalize | OOD organizations | S2 | Class J scores | 82–97 (J2 hardest) | — | — | No collapse | 2 cases |
 | FT-15 | Excessive procedural complexity | Long generic protocols | S2 | N − A | Haiku −7.0 [−11.2, −3.2]; Sonnet −1.4 | Displaces attention from evidence | Short, decision-relevant rules only | N worst held-out on both tiers | Cause unconfirmed |
-| FT-16 | Evidence acquisition failure | Budgeted evidence; decisive items not collected | S4 | Adaptive experiment | −12 (model-selected) to −26 (fixed order) points | Diagnosis on wrong evidence | Discriminating-evidence planning (VOI) | Selected vs random +11.7 [5.9, 17.9] | Catalogue-only selection |
+| FT-16 | Evidence acquisition failure | Budgeted evidence; decisive items not collected | S4 | Adaptive experiment | −12 (model-selected) to −26 (fixed order) points | Diagnosis on wrong evidence | Discriminating-evidence planning (VOI) | Selected vs random +11.6 [5.9, 17.9] | Catalogue-only selection |
 | FT-17 | Inconsistent results across runs | — | S2 | Test–retest | 2.5% item disagreement | Low | — | B = D 97.5% | Human analysts untested |
 | FT-18 | Poor user comprehension | Human users | S2 | Not measurable here | — | — | — | None | **Untested** |
 | FT-19 | Incorrect intervention selection | — | S3 | Action accuracy | 92–97% | — | Harm-under-every-hypothesis gate | D − D_NOGATE +2.8 [0.5, 5.7] | Real outcomes untested |
+
+| FT-20 | Evidence-budget non-compliance | Instruction to seek discriminating evidence under an explicit collection limit | S3 (scope / consent breach in practice) | Transcript read count vs budget | D 10/12, general 4/12 runs exceeded k = 6 (OD1-S) | Exceeds agreed data-request scope; confounds efficiency | Make budget and consent limits hard constraints in any acquisition rule | OD1-S | Single tier |
 
 ## Failure modes found independently (not in the mission list)
 
 - **FT-15, procedural displacement.** A long, generic procedure lowered accuracy, especially for the smaller model.
 - **FT-16, evidence acquisition.** The largest measured effect in the programme came from which evidence was read, not from how it was analyzed.
+- **FT-20, budget non-compliance.** Found in OD1-S: discriminating-evidence instructions overrode an explicit 6-item limit.
 - **Truth-key granularity.** Errors shared by every condition cluster on adjacent categories. Benchmark answer categories need sharper operational definitions. This is a measurement failure, not a diagnostic failure.

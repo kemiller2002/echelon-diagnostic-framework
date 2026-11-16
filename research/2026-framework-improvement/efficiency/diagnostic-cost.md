@@ -18,10 +18,10 @@ See `token-analysis.md`. Framework text adds 1–2% to a run. Wall-clock time pe
 
 | Strategy | Evidence read | Score | Note |
 |---|---|---|---|
-| Full file | ~17 items (100%) | 96.0 (D) | Curated: every item relevant |
-| Model-selected | 6 items (35%) | 84.4 | Adaptive choice from a catalogue |
-| Fixed first-6 | 6 items (35%) | 69.9 | Sequence-driven collection |
-| Random-6 | 6 items (35%) | 72.7 | — |
+| Full file | ~17 items (100%) | 95.9 (D) | Curated: every item relevant |
+| Model-selected | 6 items (35%) | 84.3 | Adaptive choice from a catalogue |
+| Fixed first-6 | 6 items (35%) | 69.8 | Sequence-driven collection |
+| Random-6 | 6 items (35%) | 72.6 | — |
 
 In real engagements evidence collection means interviews, document requests, data extracts and observation, and that is where organizational disruption occurs. The experiment supports **adaptive, discriminating evidence requests** as the largest efficiency lever. Fixed-sequence collection (the default in templated diagnostics, including the v0.3 sequence) is the worst strategy tested.
 
