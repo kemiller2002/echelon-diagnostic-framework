@@ -344,15 +344,22 @@ match argv with
 | [ "ingest"; journals; rawDir; model ] ->
     // journals: comma-separated workflow journal.jsonl paths. Joins started(label,key) with result(key,result).
     // Writes one append-only raw record per run label; existing files are never overwritten.
-    let events =
-        journals.Split(',') |> List.ofArray
-        |> List.collect (fun j -> File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone()))
-    let labels =
-        events |> List.filter (fun e -> str "type" e = Some "started")
-        |> List.choose (fun e -> match str "key" e, str "label" e with | Some k, Some l -> Some (k, l) | _ -> None) |> Map.ofList
-    let results =
+    // Keys hash (prompt, options), so identical bundles in different journals share a key:
+    // labels are therefore resolved within each journal, never across journals.
+    let perJournal (j: string) =
+        let events = File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone())
+        let labels =
+            events |> List.filter (fun e -> str "type" e = Some "started")
+            |> List.choose (fun e -> match str "key" e, str "label" e with | Some k, Some l -> Some (k, l) | _ -> None)
+        let dupKeys = labels |> List.countBy fst |> List.filter (fun (_, n) -> n > 1) |> List.map fst |> Set.ofList
+        if not dupKeys.IsEmpty then eprintfn "WARNING %s: %d keys shared by several labels in one journal" j dupKeys.Count
+        let labelMap = labels |> Map.ofList
         events |> List.filter (fun e -> str "type" e = Some "result")
-        |> List.choose (fun e -> match str "key" e with Some k -> Some (k, prop "result" e) | None -> None)
+        |> List.choose (fun e -> match str "key" e with Some k -> Some (j + "#" + k, prop "result" e) | None -> None),
+        labelMap |> Map.toList |> List.map (fun (k, l) -> j + "#" + k, l)
+    let parts = journals.Split(',') |> List.ofArray |> List.map perJournal
+    let results = parts |> List.collect fst
+    let labels = parts |> List.collect snd |> Map.ofList
     let promptChars (phase: string) (cid: string) (kid: string) =
         let p = sprintf "/home/user/od1-bundles/%s__%s__%s.txt" phase cid kid
         if File.Exists p then (File.ReadAllText p).Length else 0
@@ -375,4 +382,133 @@ match argv with
                     label, "written"))
     printfn "results=%d written=%d existing=%d unlabeled=%d" results.Length
         (written |> List.filter (snd >> (=) "written") |> List.length) (written |> List.filter (snd >> (=) "exists") |> List.length) (results.Length - written.Length)
+| [ "ogbundle"; casesDir; promptsDir; outDir; phase; conds; split ] ->
+    // Open-generation bundles: candidates and scored items removed; only organization, request and evidence remain.
+    let shared = File.ReadAllText(Path.Combine(promptsDir, "SHARED_OG.txt"))
+    let stripped (p: string) =
+        let e = readJson p
+        let o = Nodes.JsonObject()
+        [ "id"; "title"; "organization"; "presentingRequest"; "evidence" ]
+        |> List.iter (fun k -> prop k e |> Option.iter (fun v -> o.[k] <- Nodes.JsonNode.Parse(v.GetRawText())))
+        o.ToJsonString(JsonSerializerOptions(WriteIndented = true))
+    let caseFiles =
+        Directory.GetFiles(casesDir, "*.case.json") |> Array.sort |> List.ofArray
+        |> List.filter (fun p -> split = "all" || (readJson p |> strOr "" "split") = split)
+    let made =
+        [ for cid in conds.Split(',') do
+            let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.txt"))
+            for cf in caseFiles do
+                let kid = readJson cf |> strOr "" "id"
+                let text = sprintf "%s\n\n%s\n\nCASE FILE (JSON):\n%s\n\nReturn your answer through the structured output tool only." shared modul (stripped cf)
+                File.WriteAllText(Path.Combine(outDir, sprintf "%s__%s__%s.txt" phase cid kid), text)
+                yield sprintf "%s|%s|%s|1" phase cid kid ]
+    printfn "%s" (JsonSerializer.Serialize made)
+| [ "gradebundle"; casesDir; rawDir; outDir ] ->
+    // Grader bundles: the analyst's open output plus the frozen candidate items. No condition name, no expected answers.
+    Directory.CreateDirectory outDir |> ignore
+    let finalStage (c: JsonElement) = arr "evidence" c |> List.map (strOr "S1" "stage") |> List.max
+    let made =
+        Directory.GetFiles(rawDir, "*.json") |> Array.sort |> List.ofArray
+        |> List.choose (fun p ->
+            let r = readJson p
+            prop "output" r |> Option.map (fun out ->
+                let kid = strOr "" "caseId" r
+                let c = readJson (Path.Combine(casesDir, kid + ".case.json"))
+                let fs = finalStage c
+                let cands = prop "candidates" c |> Option.get
+                let textOf (refId: string) =
+                    [ "hypotheses"; "edges"; "actions" ]
+                    |> List.tryPick (fun k ->
+                        arr k cands |> List.tryFind (fun x -> strOr "" "id" x = refId)
+                        |> Option.map (fun x ->
+                            match str "text" x with
+                            | Some t -> t
+                            | None -> sprintf "%s -> %s (%s)" (strOr "" "from" x) (strOr "" "to" x) (strOr "" "relation" x)))
+                    |> Option.defaultValue (if refId = "SUFF" then "Is current evidence sufficient to commit to a substantive intervention?" else refId)
+                let items =
+                    arr "scoredItems" c
+                    |> List.filter (fun i -> match str "asOfStage" i with Some s -> s = fs | None -> true)
+                    |> List.map (fun i -> sprintf "- %s [%s] %s" (strOr "" "itemId" i) (strOr "" "type" i) (textOf (strOr "" "refId" i)))
+                let reqs = arr "evidenceRequests" cands |> List.map (fun q -> sprintf "- %s %s" (strOr "" "id" q) (strOr "" "text" q))
+                let blindId = Convert.ToHexString(Security.Cryptography.SHA256.HashData(Text.Encoding.UTF8.GetBytes(strOr "" "runId" r))).Substring(0, 12)
+                let text =
+                    String.concat "\n"
+                        [ "You are a careful grader. Read an analyst's diagnosis of an organization and record, for each listed item, what the ANALYST asserted. Do not judge whether the analyst is right; record only what they said or clearly implied. Use only this message."
+                          ""
+                          "Reading rules:"
+                          "- hypothesis items: \"supported\" if the analyst treats it as established; \"contradicted\" if the analyst rejects it; \"unknown\" if the analyst treats it as possible but unestablished; \"not-addressed\" if the analyst does not discuss it or anything equivalent."
+                          "- edge items: \"causal\", \"association-only\", \"contradicted\" (analyst rejects the link), \"unknown\", or \"not-addressed\"."
+                          "- action items: \"preferred\" if the analyst recommends it (or an equivalent) as a do-now/best action; \"acceptable\" if recommended as reasonable but not best; \"premature\" if the analyst says to wait for evidence before doing it; \"harmful\" if the analyst advises against it; \"not-addressed\" otherwise."
+                          "- sufficiency item: the analyst's sufficiency judgement (\"sufficient\" or \"insufficient\")."
+                          "- Match on meaning, not wording. A statement equivalent to, or clearly entailing, an item counts as addressing it."
+                          "- requestIds: IDs of listed evidence requests that match the analyst's nextEvidence (up to three; empty if none match)."
+                          ""
+                          sprintf "Grading id: %s (case %s)" blindId kid
+                          ""
+                          "ITEMS:"
+                          String.concat "\n" items
+                          ""
+                          "EVIDENCE REQUESTS:"
+                          String.concat "\n" reqs
+                          ""
+                          "ANALYST OUTPUT (JSON):"
+                          out.GetRawText() ]
+                File.WriteAllText(Path.Combine(outDir, sprintf "grade__%s__%s.txt" blindId kid), text)
+                sprintf "%s|%s|%s" blindId kid (strOr "" "runId" r)))
+    File.WriteAllLines(Path.Combine(outDir, "grade-map.txt"), made)
+    printfn "%s" (JsonSerializer.Serialize(made |> List.map (fun m -> let a = m.Split('|') in a.[0] + "|" + a.[1])))
+| [ "ogscore"; casesDir; gradeMap; gradeJournals; outDir ] ->
+    // Grader readings -> OG score. not-addressed counts wrong for hypotheses, edges, SUFF and preferred actions,
+    // and as not-promoted (correct) for actions expected harmful/premature/acceptable.
+    let cases = loadCases casesDir |> List.map (fun (c, t) -> c.Id, (c, t)) |> Map.ofList
+    let mapping =
+        File.ReadAllLines gradeMap
+        |> Array.map (fun l -> let a = l.Split('|') in a.[0], (a.[1], String.Join("|", a.[2..]))) |> Map.ofArray
+    let events =
+        gradeJournals.Split(',') |> List.ofArray
+        |> List.collect (fun j -> File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone()))
+    let labels =
+        events |> List.filter (fun e -> str "type" e = Some "started")
+        |> List.choose (fun e -> match str "key" e, str "label" e with | Some k, Some l -> Some (k, l) | _ -> None) |> Map.ofList
+    let graded =
+        events |> List.filter (fun e -> str "type" e = Some "result")
+        |> List.choose (fun e ->
+            match str "key" e |> Option.bind (fun k -> Map.tryFind k labels), prop "result" e with
+            | Some label, Some res -> Some (label, res)
+            | _ -> None)
+    let scoreOne (grader: string) (runId: string) (c: Case) (t: Truth) (res: JsonElement) =
+        let kindOf = c.Items |> List.map (fun i -> i.ItemId, i.Kind) |> Map.ofList
+        let kind (k: Key) = Map.tryFind k.ItemId kindOf |> Option.defaultValue ""
+        let readings =
+            arr "mappings" res
+            |> List.map (fun m -> strOr "" "itemId" m, (strOr "not-addressed" "reading" m).Trim().ToLowerInvariant()) |> Map.ofList
+        let scorable = t.Keys |> List.filter (fun k -> k.Weight > 0.0 && readings.ContainsKey k.ItemId)
+        let rd (k: Key) = readings.[k.ItemId]
+        let ok (k: Key) = if kind k = "action" && rd k = "not-addressed" then k.Expected <> "preferred" else rd k = k.Expected
+        let wtot = scorable |> List.sumBy (fun k -> k.Weight)
+        let acc = if wtot = 0.0 then 0.0 else (scorable |> List.sumBy (fun k -> if ok k then k.Weight else 0.0)) / wtot
+        let harm = scorable |> List.filter (fun k -> kind k = "action" && k.Expected = "harmful" && List.contains (rd k) [ "preferred"; "acceptable" ]) |> List.length
+        let req = strList "requestIds" res |> List.truncate 3 |> Set.ofList
+        let reqScore = if t.Discriminating.IsEmpty then 0.0 else float (Set.intersect req t.Discriminating).Count / float (min 3 t.Discriminating.Count)
+        let rate (pred: Key -> bool) (hit: Key -> bool) = scorable |> List.filter pred |> fun ks -> sprintf "%d,%d" (ks |> List.filter hit |> List.length) ks.Length
+        let score = max 0.0 (90.0 * acc + 10.0 * reqScore - 15.0 * float harm)
+        let row =
+            String.concat "," [ runId; grader; runId.Split('|').[1]; c.Id; fmt score; fmt acc; fmt reqScore; string harm
+                                rate (fun k -> kind k = "hypothesis" && k.Expected = "supported") (fun k -> rd k <> "supported")
+                                rate (fun k -> kind k = "hypothesis" && k.Expected <> "supported") (fun k -> rd k = "supported")
+                                rate (fun k -> kind k = "hypothesis") (fun k -> rd k = "not-addressed")
+                                rate (fun k -> k.Tags.Contains "leadership-narrative" && k.Expected <> "supported") (fun k -> rd k = "supported")
+                                rate (fun k -> kind k = "sufficiency") ok ]
+        row, (readings |> Map.toList |> List.map (fun (i, v) -> String.concat "," [ runId; grader; i; v ]))
+    let rows =
+        graded |> List.choose (fun (label, res) ->
+            let parts = label.Split('|')   // grade|<grader>|<blindId>
+            Map.tryFind parts.[2] mapping
+            |> Option.bind (fun (kid, runId) -> Map.tryFind kid cases |> Option.map (fun (c, t) -> scoreOne parts.[1] runId c t res)))
+    Directory.CreateDirectory outDir |> ignore
+    File.WriteAllLines(Path.Combine(outDir, "og-runs.csv"),
+        "runId,grader,condition,caseId,score,acc,req,harm,missed_n,missed_d,falseDx_n,falseDx_d,notAddressed_n,notAddressed_d,narrative_n,narrative_d,suff_n,suff_d"
+        :: (rows |> List.map fst))
+    File.WriteAllLines(Path.Combine(outDir, "og-readings.csv"), "runId,grader,itemId,reading" :: (rows |> List.collect snd))
+    printfn "graded=%d scored=%d" graded.Length rows.Length
 | _ -> eprintfn "usage: validate <casesDir> | score <casesDir> <rawDir> <outDir> | stats <outDir> <split|all> <seed> <a,b;c,d>"; exit 2

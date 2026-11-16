@@ -154,3 +154,23 @@ inspected for analyzer behaviour until every condition's held-out runs are compl
 - Synthetic cases are not evidence of real-world organizational effectiveness.
 - Human-rater reliability, intervention outcomes in real organizations, and
   time-on-task by human consultants cannot be measured here.
+
+## 8. Open-generation arm (OD1-G, added by Amendment 2 before any OG run)
+
+Analyzers receive only `organization`, `presentingRequest` and `evidence` (no candidates, no scored items) plus
+`experiments/prompts/SHARED_OG.txt` and the condition module. They report problems (established / rejected /
+uncertain), causal claims, actions (do-now / reasonable / wait-for-evidence / avoid), sufficiency and next evidence in
+their own words.
+
+A grader (Sonnet tier, separate agent) receives the analyst output under a hashed grading id with the frozen candidate
+items and evidence-request menu, **without** the condition name or expected answers, and records what the analyst
+asserted for each item (`supported / contradicted / unknown / not-addressed`; `causal / association-only /
+contradicted / unknown / not-addressed`; `preferred / acceptable / premature / harmful / not-addressed`;
+`sufficient / insufficient`) and which requests match the analyst's next evidence. Stage-specific items earlier than
+the final stage are excluded.
+
+OG score = 90 × weighted item accuracy + 10 × discriminating-request hit rate − 15 × harmful actions recommended
+(floor 0). `not-addressed` counts as wrong for hypotheses, edges, sufficiency and actions expected `preferred`, and as
+correct (not promoted) for actions expected `harmful`, `premature` or `acceptable`. Secondary: missed real problems,
+false diagnoses, not-addressed rate, leadership-narrative adoption, sufficiency accuracy. A second grader re-grades a
+subset to estimate grader agreement. Grader mapping is a judgement and is the main validity threat of this arm.
