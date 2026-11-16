@@ -25,7 +25,7 @@
 | Does the improved variant beat EDF? | No: +1.5 [−0.3, 3.6]; +0.1 on Haiku |
 | Does Clarity integration help diagnosis? | No: −0.8 and −0.0 |
 | Is EDF-0 enough? | Slightly worse than full EDF: −2.1 [−3.9, −0.5] |
-| What helps? | Choosing evidence adaptively: +11.7 [5.9, 17.9] over random collection at the same budget. Explicit decision gates: +2.8 [0.5, 5.7] in ablation, unconfirmed. |
+| What helps? | Choosing evidence adaptively: +11.6 [5.9, 17.9] over random collection at the same budget. Explicit decision gates: +2.8 [0.5, 5.7] in ablation, unconfirmed. |
 | Are results reproducible? | Yes, under independent re-scoring. 97.5% item test–retest. Grader κ 0.95. |
 
 ## Recommendations

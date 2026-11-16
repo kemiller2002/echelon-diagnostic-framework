@@ -79,7 +79,12 @@ let parseRun (e: JsonElement) : Run =
       PromptChars = num "promptChars" e |> Option.map int |> Option.defaultValue 0
       OutputChars = output |> Option.map (fun o -> o.GetRawText().Length) |> Option.defaultValue 0
       Answers = output |> Option.bind (fun o -> match parseAnswers o with [] -> None | xs -> Some xs)
-      Requests = output |> Option.map (strList "evidenceRequests") |> Option.defaultValue [] }
+      Requests =
+        let raw = output |> Option.map (strList "evidenceRequests") |> Option.defaultValue []
+        match prop "requestMap" e with
+        | Some m when m.ValueKind = JsonValueKind.Object ->
+            raw |> List.map (fun r -> match m.TryGetProperty(r.Trim()) with | true, v -> v.GetString() | _ -> r)
+        | _ -> raw }
 
 // ---------- Validation (pure: returns a list of problems) ----------
 let validatePair (c: Case) (t: Truth) : string list =
@@ -125,11 +130,12 @@ let scoreRun (c: Case) (t: Truth) (run: Run) : Scored =
     let valid = run.Answers.IsSome
     let acc = if wtot = 0.0 then 0.0 else wsum (fun k -> if isCorrect k then 1.0 else 0.0) / wtot
     let evf1 = if wtot = 0.0 then 0.0 else wsum (fun k -> match lookup k with Some a when a.Answer = k.Expected -> f1 a.EvidenceIds k | _ -> 0.0) / wtot
+    // Spec §5: calibration is a plain (unweighted) mean over scored items (replication finding R-1, fixed 2026-11-16).
     let cal =
-        if wtot = 0.0 then 0.0
-        else wsum (fun k -> match lookup k with
-                            | Some a -> let y = if a.Answer = k.Expected then 1.0 else 0.0 in 1.0 - (a.Confidence - y) ** 2.0
-                            | None -> 0.0) / wtot
+        if keys.IsEmpty then 0.0
+        else keys |> List.averageBy (fun k -> match lookup k with
+                                              | Some a -> let y = if a.Answer = k.Expected then 1.0 else 0.0 in 1.0 - (a.Confidence - y) ** 2.0
+                                              | None -> 0.0)
     let chosen = run.Requests |> List.distinct |> List.filter (fun q -> c.RequestIds.Contains q) |> List.truncate 3 |> Set.ofList
     let req =
         if t.Discriminating.IsEmpty then 0.0
@@ -191,6 +197,26 @@ let wilson (r: Ratio) =
         let centre = (p + z * z / (2.0 * r.Den)) / d
         let half = z * sqrt (p * (1.0 - p) / r.Den + z * z / (4.0 * r.Den * r.Den)) / d
         centre - half, centre + half
+
+// ---------- Request-menu relabeling (fixes the menu-order leak found by replication) ----------
+// Shuffles the evidence-request menu with a seeded RNG and renames ids X1..Xn (X avoids clashing with edge ids R#); returns the new case JSON and a map X->Q.
+let relabelRequests (seed: int) (caseText: string) : string * (string * string) list =
+    let node = Nodes.JsonNode.Parse(caseText).AsObject()
+    let cands = node.["candidates"].AsObject()
+    let reqs = cands.["evidenceRequests"].AsArray() |> Seq.map (fun n -> n.ToJsonString()) |> List.ofSeq
+    let rng = Random(seed)
+    let shuffled = reqs |> List.map (fun r -> rng.Next(), r) |> List.sortBy fst |> List.map snd
+    let renamed =
+        shuffled |> List.mapi (fun i r ->
+            let o = Nodes.JsonNode.Parse(r).AsObject()
+            let oldId = o.["id"].GetValue<string>()
+            let newId = sprintf "X%d" (i + 1)
+            o.["id"] <- Nodes.JsonValue.Create(newId)
+            o.ToJsonString(), (newId, oldId))
+    cands.["evidenceRequests"] <- Nodes.JsonNode.Parse("[" + String.Join(",", renamed |> List.map fst) + "]")
+    node.ToJsonString(JsonSerializerOptions(WriteIndented = true)), renamed |> List.map snd
+
+let seedOf (s: string) = s |> Seq.fold (fun h ch -> (h * 31 + int ch) &&& 0x7fffffff) 17
 
 // ---------- Edges: IO ----------
 let loadCases dir =
@@ -326,8 +352,10 @@ match argv with
         [ for cid in condIds do
             let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.txt"))
             for cf in caseFiles do
-                let caseJson = File.ReadAllText cf
                 let caseId = readJson cf |> strOr "" "id"
+                let caseJson, rmap = relabelRequests (seedOf (orderSeed + "|" + cid + "|" + caseId)) (File.ReadAllText cf)
+                File.WriteAllText(Path.Combine(outDir, sprintf "%s__%s__%s.map.json" phase cid caseId),
+                    "{" + String.Join(",", rmap |> List.map (fun (r, q) -> sprintf "\"%s\":\"%s\"" r q)) + "}")
                 let text = sprintf "%s\n\n%s\n\nCASE FILE (JSON):\n%s\n\nReturn your answer through the structured output tool only. Answer every scored item exactly once. Use itemIds exactly as given." shared modul caseJson
                 let path = Path.Combine(outDir, sprintf "%s__%s__%s.txt" phase cid caseId)
                 File.WriteAllText(path, text)
@@ -378,6 +406,8 @@ match argv with
                             (JsonSerializer.Serialize model) (promptChars phase cid kid)
                             (JsonSerializer.Serialize(if out.IsSome then "ok" else "missing"))
                             (out |> Option.map (fun o -> o.GetRawText()) |> Option.defaultValue "null")
+                    let mapPath = sprintf "/home/user/od1-bundles/%s__%s__%s.map.json" phase cid kid
+                    let body = if File.Exists mapPath then body.TrimEnd('}') + ",\"requestMap\":" + File.ReadAllText mapPath + "}" else body
                     File.WriteAllText(path, body)
                     label, "written"))
     printfn "results=%d written=%d existing=%d unlabeled=%d" results.Length
