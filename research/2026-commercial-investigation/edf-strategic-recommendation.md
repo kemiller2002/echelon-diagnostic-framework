@@ -3,7 +3,7 @@
 **Status: research recommendation for owner decision; registries and specification unchanged.**
 
 1. **Treat EDF as a method, not a product.** Use it internally to structure investigations inside outcome-oriented services. Do not market EDF by name to buyers until there is outcome evidence.
-2. **Publish the negative EX-EDF-001 result** in the README, evidence ledger, experiment status files and public evidence page, and close the experiment. The registry already records it; the public layer does not. Honest disclosure is Echelon's most distinctive asset and a precondition for credibility.
+2. **Publish the EX-EDF-001 two-family result** (no material incremental value over matched neutral structure; registered analysis not fully evaluable; "not supported by this benchmark", not evidence of no value) in the README, evidence ledger, experiment status files and public evidence page, and record a decision on whether to complete or close the experiment. The registry already records it; the public layer does not. Honest disclosure is Echelon's most distinctive asset and a precondition for credibility.
 3. **Stop implying that EDF improves AI analysis.** Echelon's own benchmark found no material effect.
 4. **Redirect validation to what a prompt cannot do:** intervention strength and uptake, verified effectiveness and recurrence, construct value on hard/misleading cases, resistance to client framing (validation plan priorities 3–5, 7).
 5. **Add a harm/ethics gate**: no "harm" or "ethic" terms were found in `docs/edf` (SRC-G); diagnoses can expose individuals.
