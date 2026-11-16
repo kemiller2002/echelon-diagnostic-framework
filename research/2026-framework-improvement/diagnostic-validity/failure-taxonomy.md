@@ -24,8 +24,11 @@ Frequencies are from OD1 held-out recognition runs (Sonnet, 144 runs × 15–23 
 | FT-18 | Poor user comprehension | Human users | S2 | Not measurable here | — | — | — | None | **Untested** |
 | FT-19 | Incorrect intervention selection | — | S3 | Action accuracy | 92–97% | — | Harm-under-every-hypothesis gate | D − D_NOGATE +2.8 [0.5, 5.7] | Real outcomes untested |
 
+| FT-20 | Evidence-budget non-compliance | Instruction to seek discriminating evidence under an explicit collection limit | S3 (scope / consent breach in practice) | Transcript read count vs budget | D 10/12, general 4/12 runs exceeded k = 6 (OD1-S) | Exceeds agreed data-request scope; confounds efficiency | Make budget and consent limits hard constraints in any acquisition rule | OD1-S | Single tier |
+
 ## Failure modes found independently (not in the mission list)
 
 - **FT-15, procedural displacement.** A long, generic procedure lowered accuracy, especially for the smaller model.
 - **FT-16, evidence acquisition.** The largest measured effect in the programme came from which evidence was read, not from how it was analyzed.
+- **FT-20, budget non-compliance.** Found in OD1-S: discriminating-evidence instructions overrode an explicit 6-item limit.
 - **Truth-key granularity.** Errors shared by every condition cluster on adjacent categories. Benchmark answer categories need sharper operational definitions. This is a measurement failure, not a diagnostic failure.

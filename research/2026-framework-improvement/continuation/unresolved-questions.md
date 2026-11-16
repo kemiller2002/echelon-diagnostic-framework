@@ -5,7 +5,8 @@
 | UQ-01 | Do results hold with non-Claude analyzers, case authors and graders? | No cross-provider credentials in this session | Re-run OD1/OD2 with OpenAI and Google analyzers (harness supports any executor that returns the output contract) | High |
 | UQ-02 | Does EDF help *human* analysts (comprehension, communication, reviewability, time to actionable finding)? | No human participants | Human-analyst study (`strategy/framework-roadmap.md` item 7) | High |
 | UQ-03 | Do framework differences appear when tasks are harder: decisive evidence absent, noisy files, evidence acquisition required? | OD1 saturated (condition means 87–96) | OD2 benchmark | High |
-| UQ-04 | Does sequential evidence acquisition with a stopping rule close the 12-point gap left by batch selection? | Only batch selection tested | Sequential-acquisition experiment | High |
+| UQ-04 | Can analyzers stop collecting evidence adaptively (in line with difficulty) and within budget? | OD1-S: sequential acquisition nearly closes the accuracy gap but over-collects (60–73%); stopping does not track difficulty; budget violated (FT-20) | Explicit value-of-information stopping rule with an enforced budget; test on OD2 | High |
+| UQ-15 | Is Kepner-Tregoe's contrast specification the mechanism behind its evidence efficiency? | Observed in OD1-S only | Ablate the IS/IS-NOT step | Medium |
 | UQ-05 | Do decision-gate semantics (CI-01) replicate across tiers and trials? | Single-trial, single-tier ablation | Confirmatory ablation on OD2 | Medium |
 | UQ-06 | Do organizational guards help specifically on contradictory-stakeholder and masked-risk cases? | One case per class; not seen on Haiku | Class-focused benchmark (≥ 10 cases per class) | Medium |
 | UQ-07 | Does the four-way causal edge scale itself reduce overclaiming? | Held constant across conditions | With-vs-without-scale experiment | Medium |

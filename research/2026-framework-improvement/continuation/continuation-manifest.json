@@ -26,13 +26,6 @@
   ],
   "nextActions": [
     {
-      "id": "NA-1",
-      "action": "Fix OD1 defects: randomize evidence-request menu order; align calibration weighting with spec (R-1); hash all prompts before runs",
-      "blocks": [
-        "NA-2"
-      ]
-    },
-    {
       "id": "NA-2",
       "action": "Design and preregister OD2 (evidence acquisition in task, decisive evidence absent by default, harder/noisier files, sharper action/edge definitions)"
     },
@@ -41,16 +34,16 @@
       "action": "Obtain cross-provider analyzer credentials and replicate OD1 held-out A/B/C/D"
     },
     {
-      "id": "NA-4",
-      "action": "Sequential evidence-acquisition experiment with stopping rule"
-    },
-    {
       "id": "NA-5",
       "action": "Human-analyst study protocol approval and recruitment"
     },
     {
       "id": "NA-6",
       "action": "Update docs/edf/validation/evidence-ledger.md and research registries with EX-EDF-001 and OD1 outcomes (requires governance decision)"
+    },
+    {
+      "id": "NA-7",
+      "action": "OD2: add an explicit value-of-information stopping rule with an enforced evidence budget; test KT IS/IS-NOT ablation (UQ-15)"
     }
   ],
   "unresolvedQuestions": "continuation/unresolved-questions.md",
@@ -58,5 +51,9 @@
     "docs/edf/specification.md (frozen v0.3)",
     "benchmarks/cases/* (frozen; see sha256 manifests)",
     "experiments/raw/* (append-only)"
+  ],
+  "completed": [
+    "NA-1 harness defects fixed (calibration, request relabeling)",
+    "NA-4 sequential acquisition experiment run (OD1-S)"
   ]
 }

@@ -119,3 +119,19 @@ Model-selected vs random: +11.6 [5.9, 17.9]. Model-selected vs fixed: +14.4 [10.
 - EDF-specific guidance does not improve selection.
 - Selection from a content-blind catalogue misses about half of the decisive evidence. That argues for *sequential* acquisition (read, update, choose again) over a single up-front batch. Sequential acquisition is untested here and is the next experiment.
 - Optimal stopping was not tested; a fixed budget k = 6 was imposed.
+
+### Sequential acquisition (OD1-S, EXP-OD1-09)
+
+Full results: `experiments/sequential-results.md`. Analyzers started with no evidence content and read items one at a time, choosing what to read next.
+
+| Condition | Score | Items read | Δ vs full evidence |
+|---|---|---|---|
+| General AI, free stopping | 91.8 | 11.8 (70%) | −1.3 [−3.5, 1.9] |
+| EDF v0.3, free | 91.9 | 12.3 (73%) | −2.5 [−6.6, 2.1] |
+| KT + NT, free | 90.9 | 10.1 (60%) | −2.9 [−6.9, 1.2] |
+| Variant D, free | 93.2 | 11.0 (66%) | −2.7 [−5.2, −0.6] |
+
+- Free sequential acquisition nearly preserves accuracy while skipping 27–40% of the evidence.
+- Stopping does not track case difficulty (r ≈ 0) under any method.
+- EDF guidance did not make acquisition more efficient. Kepner-Tregoe was the most efficient method.
+- Under a hard budget of 6, variant D exceeded the limit in 10 of 12 runs (failure FT-20). Among budget-compliant runs, sequential acquisition did not beat batch selection.

@@ -407,7 +407,7 @@ match argv with
                             (JsonSerializer.Serialize(if out.IsSome then "ok" else "missing"))
                             (out |> Option.map (fun o -> o.GetRawText()) |> Option.defaultValue "null")
                     let mapPath = sprintf "/home/user/od1-bundles/%s__%s__%s.map.json" phase cid kid
-                    let body = if File.Exists mapPath then body.TrimEnd('}') + ",\"requestMap\":" + File.ReadAllText mapPath + "}" else body
+                    let body = if File.Exists mapPath then body.Substring(0, body.Length - 1) + ",\"requestMap\":" + File.ReadAllText mapPath + "}" else body
                     File.WriteAllText(path, body)
                     label, "written"))
     printfn "results=%d written=%d existing=%d unlabeled=%d" results.Length

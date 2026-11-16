@@ -9,7 +9,7 @@
 - Audited the EDF repository and froze the v0.3 baseline (commit `41fea6f`).
 - Reviewed 224 sources across organizational diagnosis, validity, causal inference, organizational dynamics, interventions, adaptive diagnosis, AI diagnosis and monitoring.
 - Built **OD1**, a 22-case organizational diagnosis benchmark covering classes A–K. Cases were independently authored, adversarially reviewed, hash-frozen, and their truth sealed during runs.
-- Ran **484 analyzer and grader runs** across:
+- Ran **580 analyzer and grader runs** (484 in OD1, 96 in the OD1-S sequential follow-up) across:
   - general AI, EDF v0.3, EDF-0, Kepner-Tregoe + Nadler-Tushman and matched structure;
   - an experimental EDF variant and two ablations;
   - three Clarity integrations, two model tiers, an open-generation arm and an adaptive-evidence experiment.
@@ -26,6 +26,7 @@
 | Does Clarity integration help diagnosis? | No: −0.8 and −0.0 |
 | Is EDF-0 enough? | Slightly worse than full EDF: −2.1 [−3.9, −0.5] |
 | What helps? | Choosing evidence adaptively: +11.6 [5.9, 17.9] over random collection at the same budget. Explicit decision gates: +2.8 [0.5, 5.7] in ablation, unconfirmed. |
+| Does sequential evidence acquisition help? (follow-up OD1-S) | Free stopping keeps accuracy within 1–3 points while reading 60–73% of evidence. KT is the most evidence-efficient (−1.7 items). EDF adds no efficiency. Variant D broke a 6-item evidence budget in 10/12 runs. |
 | Are results reproducible? | Yes, under independent re-scoring. 97.5% item test–retest. Grader κ 0.95. |
 
 ## Recommendations
@@ -38,7 +39,8 @@
    - a **cross-provider replication**;
    - a **human-analyst study**, since EDF's plausible remaining value is helping people communicate and review diagnoses, which this programme could not measure.
 6. **Keep Clarity separate**, at the decision-record stage.
-7. **Do not add continuous monitoring** to EDF except for a defined purpose with aggregate data and safeguards.
+7. **Any EDF evidence-acquisition rule must treat budget and consent limits as hard constraints.** A discriminating-evidence instruction overrode a collection limit in OD1-S.
+8. **Do not add continuous monitoring** to EDF except for a defined purpose with aggregate data and safeguards.
 
 ## Confidence and limits
 
