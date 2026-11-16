@@ -1,0 +1,1514 @@
+{
+  "benchmark": "EX-EDF-2026-OD1",
+  "version": "1.0.0",
+  "frozen": {
+    "dev": "benchmarks/frozen-cases-dev.sha256",
+    "heldout": "benchmarks/frozen-cases-heldout.sha256"
+  },
+  "classes": {
+    "A": "Known-cause organizational cases",
+    "B": "Ambiguous cases (multiple plausible explanations)",
+    "C": "Incomplete-information cases",
+    "D": "Contradictory stakeholder cases",
+    "E": "Misleading metrics",
+    "F": "Complex systems (feedback loops, delays)",
+    "G": "Intervention-selection cases",
+    "H": "Dynamic cases (evidence changes during diagnosis)",
+    "I": "Adversarial cases (manipulated evidence, politics, false narratives)",
+    "J": "Out-of-distribution cases (held-out only)",
+    "K": "Reported problem that does not exist / intentional tradeoff"
+  },
+  "authorship": "Synthetic; each case authored by an independent Claude-family agent and adversarially reviewed by a second agent before freezing.",
+  "limitations": [
+    "synthetic",
+    "single model family for authoring, review and analysis",
+    "candidate-recognition format offers the true answer among options",
+    "no real organizational outcomes"
+  ],
+  "cases": [
+    {
+      "id": "OD-DEV-A",
+      "split": "dev",
+      "benchmarkClass": "A",
+      "title": "Feature release cadence slip at Meridale Invoicing",
+      "organization": {
+        "type": "private company, product-led B2B software vendor",
+        "industry": "B2B invoicing and accounts-receivable SaaS",
+        "size": "approx. 400 staff, of whom 138 are engineers in 12 squads across 4 product lines (Core App, Billing, Integrations, Reporting)"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "system-record": 8,
+        "document": 3,
+        "manager-account": 2,
+        "staff-account": 1,
+        "prior-report": 1,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 15,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 4,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 6,
+        "supported": 1,
+        "causal": 1,
+        "association-only": 1,
+        "unknown": 1,
+        "preferred": 1,
+        "harmful": 2,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "symptom-not-cause": 3,
+        "measurement-artifact": 2,
+        "root-cause": 4,
+        "protective-control": 5,
+        "staff-narrative": 2,
+        "causal-overclaim-trap": 4,
+        "confounded": 1,
+        "iatrogenic-intervention": 2
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-A.case.json",
+        "truth": "benchmarks/cases/OD-DEV-A.truth.json",
+        "review": "benchmarks/cases/OD-DEV-A.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-B",
+      "split": "dev",
+      "benchmarkClass": "B",
+      "title": "Falling net revenue retention at a field-service scheduling SaaS",
+      "organization": {
+        "type": "Privately held, venture-backed software company (fictional: Lanterna Field Systems)",
+        "industry": "B2B SaaS - scheduling and dispatch software for mid-market field-service firms (HVAC, plumbing, facilities)",
+        "size": "~250 staff; ~$47M ARR; ~620 customer accounts; North America ~70% of ARR, EMEA ~30%"
+      },
+      "evidenceItems": 18,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 3,
+        "financial-record": 4,
+        "system-record": 4,
+        "document": 3,
+        "external-data": 1,
+        "manager-account": 1,
+        "customer-account": 1,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "unknown": 2,
+        "supported": 1,
+        "causal": 1,
+        "association-only": 2,
+        "preferred": 2,
+        "harmful": 1,
+        "premature": 2,
+        "insufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 4,
+        "causal-overclaim-trap": 5,
+        "measurement-artifact": 2,
+        "external-cause": 2,
+        "contributing": 3,
+        "confounded": 9,
+        "hidden-problem": 1,
+        "symptom-not-cause": 1,
+        "root-cause": 2,
+        "side-effect": 1,
+        "iatrogenic-intervention": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.9375,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-B.case.json",
+        "truth": "benchmarks/cases/OD-DEV-B.truth.json",
+        "review": "benchmarks/cases/OD-DEV-B.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-C",
+      "split": "dev",
+      "benchmarkClass": "C",
+      "title": "Individual-giving decline at Tri-County Harvest Food Bank",
+      "organization": {
+        "type": "501(c)(3) nonprofit",
+        "industry": "regional food bank / hunger relief",
+        "size": "34 staff, about 600 regular volunteers, $9.1M annual budget; serves Ashby, Bellmont and Carrow counties"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "financial-record": 2,
+        "document": 5,
+        "system-record": 4,
+        "manager-account": 1,
+        "external-data": 2,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 17,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 3,
+        "unknown": 4,
+        "causal": 2,
+        "association-only": 2,
+        "harmful": 2,
+        "preferred": 1,
+        "premature": 1,
+        "acceptable": 1,
+        "insufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 4,
+        "causal-overclaim-trap": 3,
+        "staff-narrative": 1,
+        "external-cause": 2,
+        "confounded": 4,
+        "hidden-problem": 3,
+        "measurement-artifact": 4,
+        "root-cause": 2,
+        "iatrogenic-intervention": 3,
+        "protective-control": 1,
+        "contributing": 1,
+        "revision": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 9
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-C.case.json",
+        "truth": "benchmarks/cases/OD-DEV-C.truth.json",
+        "review": "benchmarks/cases/OD-DEV-C.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-D",
+      "split": "dev",
+      "benchmarkClass": "D",
+      "title": "Win-rate collapse and conflicting explanations at Harrowgate Industrial Supply",
+      "organization": {
+        "type": "privately held industrial distributor",
+        "industry": "MRO (maintenance, repair and operations) parts and supplies distribution",
+        "size": "approx. 620 staff; 44 quota-carrying sales reps in 4 regions (North, South, East, West), a 6-person inside-sales desk, a 9-person marketing team and a 3-person revenue-operations (RevOps) team"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "staff-account": 1,
+        "manager-account": 1,
+        "document": 2,
+        "system-record": 5,
+        "prior-report": 1,
+        "financial-record": 2,
+        "anonymous-staff-survey": 1,
+        "external-data": 1
+      },
+      "scoredItems": 14,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 4,
+        "action": 4,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 1,
+        "preferred": 2,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "causal-overclaim-trap": 5,
+        "measurement-artifact": 4,
+        "root-cause": 4,
+        "staff-narrative": 3,
+        "metric-gaming": 1,
+        "local-optimization": 1,
+        "confounded": 2,
+        "contributing": 1,
+        "external-cause": 1,
+        "iatrogenic-intervention": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 3
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-D.case.json",
+        "truth": "benchmarks/cases/OD-DEV-D.truth.json",
+        "review": "benchmarks/cases/OD-DEV-D.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-E",
+      "split": "dev",
+      "benchmarkClass": "E",
+      "title": "Handle-time bonus pilot and proposed network rollout at Corrigan Mutual Insurance",
+      "organization": {
+        "type": "mutual insurance company",
+        "industry": "personal-lines property and auto insurance",
+        "size": "approx. 2,300 staff; customer contact operation of about 460 front-line agents across four sites (Hartwell, Brookvale, Ashby Cross, Linden Park) plus a centralized 38-person tier-2 specialist desk"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "manager-account": 2,
+        "system-record": 6,
+        "document": 3,
+        "anonymous-staff-survey": 2,
+        "financial-record": 1,
+        "customer-account": 1,
+        "external-data": 1
+      },
+      "scoredItems": 14,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 4,
+        "action": 4,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 3,
+        "supported": 2,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 2,
+        "metric-gaming": 6,
+        "hidden-problem": 1,
+        "root-cause": 4,
+        "measurement-artifact": 1,
+        "external-cause": 1,
+        "causal-overclaim-trap": 5,
+        "confounded": 2,
+        "side-effect": 1,
+        "staff-narrative": 1,
+        "iatrogenic-intervention": 1,
+        "protective-control": 2,
+        "organizational-silence": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.929,
+        "disputes": 3
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-E.case.json",
+        "truth": "benchmarks/cases/OD-DEV-E.truth.json",
+        "review": "benchmarks/cases/OD-DEV-E.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-F",
+      "split": "dev",
+      "benchmarkClass": "F",
+      "title": "Rising incidents and an exhausted on-call rotation in Brindlewood Payments' platform engineering org",
+      "organization": {
+        "type": "operating subsidiary of a privately held holding company (Ostrander Holdings)",
+        "industry": "B2B payment processing for mid-market merchants",
+        "size": "approx. 540 staff; platform engineering org of 31 engineers at 2025-12-31 in 4 teams (Compute, Storage, Networking, Delivery), plus 38 senior and 71 non-senior engineers in product engineering"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "system-record": 8,
+        "financial-record": 1,
+        "document": 3,
+        "anonymous-staff-survey": 1,
+        "prior-report": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 3,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "acceptable": 1,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "causal-overclaim-trap": 2,
+        "root-cause": 4,
+        "feedback-loop": 5,
+        "confounded": 3,
+        "staff-narrative": 1,
+        "external-cause": 3,
+        "measurement-artifact": 1,
+        "symptom-not-cause": 2,
+        "contributing": 1,
+        "iatrogenic-intervention": 1,
+        "metric-gaming": 1,
+        "organizational-silence": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 1
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-F.case.json",
+        "truth": "benchmarks/cases/OD-DEV-F.truth.json",
+        "review": "benchmarks/cases/OD-DEV-F.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-G",
+      "split": "dev",
+      "benchmarkClass": "G",
+      "title": "Shrink doubles at a regional grocery chain",
+      "organization": {
+        "type": "privately held retail chain",
+        "industry": "grocery retail",
+        "size": "58 stores, ~6,900 employees, FY2025 sales $1.16B"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "financial-record": 2,
+        "system-record": 6,
+        "document": 3,
+        "independent-observation": 1,
+        "manager-account": 2,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 15,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 4,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 3,
+        "association-only": 1,
+        "premature": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "root-cause": 4,
+        "hidden-problem": 1,
+        "staff-narrative": 2,
+        "confounded": 2,
+        "measurement-artifact": 1,
+        "side-effect": 2,
+        "intentional-tradeoff": 2,
+        "causal-overclaim-trap": 1,
+        "iatrogenic-intervention": 3,
+        "organizational-silence": 2,
+        "symptom-not-cause": 1,
+        "protective-control": 1,
+        "local-optimization": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 3
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-G.case.json",
+        "truth": "benchmarks/cases/OD-DEV-G.truth.json",
+        "review": "benchmarks/cases/OD-DEV-G.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-H",
+      "split": "dev",
+      "benchmarkClass": "H",
+      "title": "Twice-slipped smart thermostat launch at a consumer hardware company",
+      "organization": {
+        "type": "Private, venture-backed company",
+        "industry": "Consumer hardware (connected home devices)",
+        "size": "Approx. 420 employees; product engineering approx. 95 (firmware 14, mobile app 22, cloud 18, hardware/mechanical 26, QA 15)"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 3,
+        "system-record": 6,
+        "manager-account": 1,
+        "document": 3,
+        "independent-observation": 1,
+        "customer-account": 1,
+        "financial-record": 1,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 19,
+      "itemTypes": {
+        "hypothesis": 9,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "supported": 5,
+        "contradicted": 4,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "premature": 2,
+        "harmful": 1,
+        "preferred": 2,
+        "sufficient": 1
+      },
+      "tags": {
+        "revision": 8,
+        "leadership-narrative": 4,
+        "measurement-artifact": 3,
+        "symptom-not-cause": 2,
+        "hidden-problem": 3,
+        "root-cause": 5,
+        "external-cause": 1,
+        "causal-overclaim-trap": 4,
+        "confounded": 3,
+        "iatrogenic-intervention": 1,
+        "organizational-silence": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-H.case.json",
+        "truth": "benchmarks/cases/OD-DEV-H.truth.json",
+        "review": "benchmarks/cases/OD-DEV-H.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-I",
+      "split": "dev",
+      "benchmarkClass": "I",
+      "title": "Green dashboards and missed dates in the Carrier Solutions Division at Tessaline Logistics Software",
+      "organization": {
+        "type": "privately held B2B software company",
+        "industry": "logistics and transportation management software",
+        "size": "approx. 1,100 staff; three product divisions (Carrier Solutions - CSD, approx. 139 staff after February 2026; Freight Visibility - FVD; Warehouse Systems - WSD) sharing one Platform Engineering team of 38 approved positions"
+      },
+      "evidenceItems": 15,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "document": 3,
+        "system-record": 5,
+        "manager-account": 3,
+        "anonymous-staff-survey": 1,
+        "independent-observation": 1,
+        "staff-account": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 2,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "acceptable": 1,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 5,
+        "metric-gaming": 5,
+        "causal-overclaim-trap": 4,
+        "organizational-silence": 5,
+        "root-cause": 4,
+        "hidden-problem": 1,
+        "contributing": 3,
+        "external-cause": 1,
+        "measurement-artifact": 1,
+        "confounded": 2,
+        "iatrogenic-intervention": 2,
+        "local-optimization": 1,
+        "protective-control": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 3
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-I.case.json",
+        "truth": "benchmarks/cases/OD-DEV-I.truth.json",
+        "review": "benchmarks/cases/OD-DEV-I.review.json"
+      }
+    },
+    {
+      "id": "OD-DEV-K",
+      "split": "dev",
+      "benchmarkClass": "K",
+      "title": "Reported associate morale and retention crisis at Halbrook Vance LLP",
+      "organization": {
+        "type": "private partnership, full-service regional law firm",
+        "industry": "legal services (litigation, corporate, real estate, employment)",
+        "size": "approx. 120 lawyers (38 equity and income partners, 10 counsel, 72 associates) plus 85 business staff, one office"
+      },
+      "evidenceItems": 18,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "system-record": 6,
+        "external-data": 2,
+        "document": 3,
+        "manager-account": 1,
+        "anonymous-staff-survey": 2,
+        "financial-record": 1,
+        "prior-report": 1,
+        "staff-account": 1
+      },
+      "scoredItems": 15,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 5,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 1,
+        "association-only": 1,
+        "premature": 2,
+        "preferred": 1,
+        "acceptable": 1,
+        "harmful": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "nonexistent-problem": 5,
+        "causal-overclaim-trap": 3,
+        "staff-narrative": 1,
+        "intentional-tradeoff": 4,
+        "symptom-not-cause": 1,
+        "confounded": 2,
+        "measurement-artifact": 1,
+        "side-effect": 1,
+        "protective-control": 1,
+        "organizational-silence": 1,
+        "iatrogenic-intervention": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.867,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-DEV-K.case.json",
+        "truth": "benchmarks/cases/OD-DEV-K.truth.json",
+        "review": "benchmarks/cases/OD-DEV-K.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-A",
+      "split": "heldout",
+      "benchmarkClass": "A",
+      "title": "ED length-of-stay rise at Halden Valley Community Hospital",
+      "organization": {
+        "type": "non-profit community hospital",
+        "industry": "acute healthcare",
+        "size": "400 licensed beds (388 staffed adult beds), 36-room emergency department, approx. 2,300 staff"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "manager-account": 3,
+        "system-record": 6,
+        "financial-record": 2,
+        "document": 2,
+        "staff-account": 1,
+        "anonymous-staff-survey": 1
+      },
+      "scoredItems": 15,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "preferred": 1,
+        "acceptable": 1,
+        "premature": 1,
+        "harmful": 2,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 4,
+        "symptom-not-cause": 1,
+        "root-cause": 5,
+        "external-cause": 1,
+        "causal-overclaim-trap": 3,
+        "contributing": 3,
+        "confounded": 1,
+        "iatrogenic-intervention": 1,
+        "protective-control": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 3
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-A.case.json",
+        "truth": "benchmarks/cases/OD-HO-A.truth.json",
+        "review": "benchmarks/cases/OD-HO-A.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-B",
+      "split": "heldout",
+      "benchmarkClass": "B",
+      "title": "First-pass yield decline on a shaft machining line at an automotive parts plant",
+      "organization": {
+        "type": "Privately owned tier-2 automotive supplier, single plant (fictional: Brannock Precision Components, Plant 2)",
+        "industry": "Automotive components - CNC turning of alloy-steel drivetrain shafts for a tier-1 driveline customer",
+        "size": "~410 staff at the plant; 9 machining lines; Line 3 has 6 CNC lathes (L3-01 to L3-06) and ~6,500 parts/week"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "system-record": 7,
+        "staff-account": 1,
+        "customer-account": 1,
+        "manager-account": 4,
+        "document": 1,
+        "anonymous-staff-survey": 1,
+        "financial-record": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "unknown": 4,
+        "contradicted": 2,
+        "supported": 1,
+        "association-only": 2,
+        "causal": 1,
+        "premature": 2,
+        "preferred": 1,
+        "harmful": 2,
+        "insufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "measurement-artifact": 3,
+        "confounded": 9,
+        "contributing": 2,
+        "causal-overclaim-trap": 6,
+        "staff-narrative": 3,
+        "root-cause": 1,
+        "local-optimization": 2,
+        "protective-control": 2,
+        "iatrogenic-intervention": 2
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-B.case.json",
+        "truth": "benchmarks/cases/OD-HO-B.truth.json",
+        "review": "benchmarks/cases/OD-HO-B.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-C",
+      "split": "heldout",
+      "benchmarkClass": "C",
+      "title": "Teller turnover surge at Cedar Hollow Bank",
+      "organization": {
+        "type": "state-chartered community bank",
+        "industry": "retail and small-business banking",
+        "size": "1,350 employees, 46 branches in four regions, average teller headcount 412, $6.8B in assets"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "system-record": 4,
+        "anonymous-staff-survey": 1,
+        "document": 3,
+        "external-data": 2,
+        "staff-account": 1,
+        "manager-account": 1,
+        "financial-record": 2
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "unknown": 5,
+        "supported": 1,
+        "contradicted": 1,
+        "association-only": 2,
+        "causal": 1,
+        "premature": 1,
+        "harmful": 1,
+        "preferred": 2,
+        "acceptable": 1,
+        "insufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 5,
+        "causal-overclaim-trap": 5,
+        "hidden-problem": 1,
+        "confounded": 4,
+        "external-cause": 2,
+        "measurement-artifact": 1,
+        "contributing": 1,
+        "side-effect": 1,
+        "feedback-loop": 1,
+        "iatrogenic-intervention": 1,
+        "root-cause": 2,
+        "protective-control": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.8125,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-C.case.json",
+        "truth": "benchmarks/cases/OD-HO-C.truth.json",
+        "review": "benchmarks/cases/OD-HO-C.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-D",
+      "split": "heldout",
+      "benchmarkClass": "D",
+      "title": "Conflicting accounts of IT responsiveness between the Faculty of Arts and central IT at Corran Valley University",
+      "organization": {
+        "type": "public research university",
+        "industry": "higher education",
+        "size": "approx. 31,000 students and 9,800 staff accounts eligible for the central IT service desk; Faculty of Arts has 1,180 staff accounts across 9 departments, all housed on the Lindqvist satellite campus; central Information Technology Services (ITS) runs a 21-FTE service desk"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "system-record": 7,
+        "document": 2,
+        "manager-account": 2,
+        "staff-account": 2,
+        "anonymous-staff-survey": 1,
+        "financial-record": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 3,
+        "supported": 2,
+        "unknown": 2,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "premature": 1,
+        "acceptable": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 4,
+        "symptom-not-cause": 1,
+        "root-cause": 3,
+        "causal-overclaim-trap": 3,
+        "organizational-silence": 2,
+        "hidden-problem": 1,
+        "contributing": 1,
+        "measurement-artifact": 2,
+        "confounded": 1,
+        "iatrogenic-intervention": 2,
+        "local-optimization": 1,
+        "revision": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.9375,
+        "disputes": 6
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-D.case.json",
+        "truth": "benchmarks/cases/OD-HO-D.truth.json",
+        "review": "benchmarks/cases/OD-HO-D.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-E",
+      "split": "heldout",
+      "benchmarkClass": "E",
+      "title": "98% on-time claim and proposed advertising campaign at Harlow & Vane Freight Lines",
+      "organization": {
+        "type": "privately held regional freight carrier",
+        "industry": "less-than-truckload (LTL) freight transport",
+        "size": "approx. 1,150 staff; 14 terminals; about 400 linehaul and pickup-and-delivery drivers; 34 dispatchers in three dispatch centers (Northgate, Riverside, Pell Junction)"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "manager-account": 2,
+        "document": 3,
+        "system-record": 5,
+        "customer-account": 1,
+        "anonymous-staff-survey": 1,
+        "staff-account": 1,
+        "external-data": 1,
+        "financial-record": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 5,
+        "supported": 2,
+        "unknown": 1,
+        "causal": 1,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 2,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "metric-gaming": 8,
+        "hidden-problem": 1,
+        "measurement-artifact": 2,
+        "root-cause": 3,
+        "causal-overclaim-trap": 6,
+        "staff-narrative": 1,
+        "confounded": 3,
+        "contributing": 1,
+        "feedback-loop": 2,
+        "iatrogenic-intervention": 2
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 1
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-E.case.json",
+        "truth": "benchmarks/cases/OD-HO-E.truth.json",
+        "review": "benchmarks/cases/OD-HO-E.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-F",
+      "split": "heldout",
+      "benchmarkClass": "F",
+      "title": "Agency nurse spend has tripled at Larchmere Regional Medical Center's nursing division",
+      "organization": {
+        "type": "independent not-for-profit acute-care hospital",
+        "industry": "healthcare (inpatient acute care)",
+        "size": "412 licensed beds, approx. 3,100 staff; nursing division of 18 inpatient units with 760 permanent RNs (budgeted 890 RN FTE) at 2026-09-30"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "financial-record": 1,
+        "system-record": 6,
+        "document": 3,
+        "prior-report": 1,
+        "external-data": 2,
+        "anonymous-staff-survey": 1,
+        "staff-account": 1,
+        "manager-account": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 5,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 3,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 1,
+        "premature": 1,
+        "acceptable": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 4,
+        "external-cause": 4,
+        "feedback-loop": 4,
+        "root-cause": 5,
+        "causal-overclaim-trap": 4,
+        "contributing": 1,
+        "hidden-problem": 2,
+        "revision": 1,
+        "confounded": 2,
+        "iatrogenic-intervention": 3,
+        "side-effect": 1,
+        "protective-control": 1,
+        "symptom-not-cause": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.9375,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-F.case.json",
+        "truth": "benchmarks/cases/OD-HO-F.truth.json",
+        "review": "benchmarks/cases/OD-HO-F.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-G",
+      "split": "heldout",
+      "benchmarkClass": "G",
+      "title": "Backlog doubling after a daily close quota at Tallyfield Software",
+      "organization": {
+        "type": "privately held B2B SaaS company",
+        "industry": "cloud invoicing, bookkeeping and payroll software for small businesses",
+        "size": "approx. 430 staff; customer support of 44 agents: a 38-agent general queue in five teams (A-E) with team leads and a Tier 2 lead, plus a 6-agent Billing-Compliance pod"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "system-record": 7,
+        "manager-account": 4,
+        "anonymous-staff-survey": 1,
+        "customer-account": 1,
+        "document": 2,
+        "financial-record": 1
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 5,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 1,
+        "premature": 1,
+        "preferred": 2,
+        "acceptable": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "measurement-artifact": 2,
+        "root-cause": 3,
+        "metric-gaming": 5,
+        "iatrogenic-intervention": 4,
+        "causal-overclaim-trap": 2,
+        "staff-narrative": 1,
+        "contributing": 1,
+        "confounded": 3,
+        "feedback-loop": 1,
+        "side-effect": 2,
+        "external-cause": 1,
+        "local-optimization": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 4
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-G.case.json",
+        "truth": "benchmarks/cases/OD-HO-G.truth.json",
+        "review": "benchmarks/cases/OD-HO-G.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-H",
+      "split": "heldout",
+      "benchmarkClass": "H",
+      "title": "Bus on-time performance decline at Corrin Valley Transit",
+      "organization": {
+        "type": "public agency, municipal transit authority",
+        "industry": "urban public bus transit",
+        "size": "approx. 1,250 staff including 940 bus operators; 310 buses on 38 routes run from two garages (North Garage, South Garage)"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "system-record": 9,
+        "staff-account": 2,
+        "document": 2,
+        "external-data": 1,
+        "independent-observation": 1
+      },
+      "scoredItems": 23,
+      "itemTypes": {
+        "hypothesis": 9,
+        "edge": 6,
+        "action": 7,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "unknown": 2,
+        "contradicted": 5,
+        "supported": 3,
+        "association-only": 2,
+        "causal": 3,
+        "premature": 2,
+        "harmful": 2,
+        "preferred": 3,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 5,
+        "revision": 11,
+        "causal-overclaim-trap": 5,
+        "measurement-artifact": 9,
+        "symptom-not-cause": 1,
+        "hidden-problem": 1,
+        "staff-narrative": 3,
+        "root-cause": 5,
+        "external-cause": 3,
+        "contributing": 1,
+        "confounded": 2,
+        "iatrogenic-intervention": 1,
+        "intentional-tradeoff": 1,
+        "organizational-silence": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-H.case.json",
+        "truth": "benchmarks/cases/OD-HO-H.truth.json",
+        "review": "benchmarks/cases/OD-HO-H.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-I",
+      "split": "heldout",
+      "benchmarkClass": "I",
+      "title": "Zero deviations and a model line at a medical-device contract manufacturer",
+      "organization": {
+        "type": "Privately held contract manufacturer (single plant)",
+        "industry": "Medical devices: single-use infusion sets and catheter assemblies built to OEM customer specifications",
+        "size": "About 430 employees; five assembly lines (Lines 1-5) on two shifts"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "system-record": 5,
+        "document": 2,
+        "manager-account": 3,
+        "anonymous-staff-survey": 2,
+        "financial-record": 1,
+        "customer-account": 1,
+        "staff-account": 1,
+        "prior-report": 1
+      },
+      "scoredItems": 17,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 5,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 5,
+        "supported": 1,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 2,
+        "harmful": 2,
+        "preferred": 2,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 5,
+        "metric-gaming": 3,
+        "measurement-artifact": 1,
+        "hidden-problem": 3,
+        "organizational-silence": 6,
+        "root-cause": 4,
+        "local-optimization": 3,
+        "causal-overclaim-trap": 7,
+        "external-cause": 2,
+        "feedback-loop": 1,
+        "confounded": 2,
+        "iatrogenic-intervention": 2,
+        "protective-control": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-I.case.json",
+        "truth": "benchmarks/cases/OD-HO-I.truth.json",
+        "review": "benchmarks/cases/OD-HO-I.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-J1",
+      "split": "heldout",
+      "benchmarkClass": "J",
+      "title": "Ticket revenue decline and a contract decision at the Tarrant Valley Symphony Orchestra",
+      "organization": {
+        "type": "nonprofit regional symphony orchestra",
+        "industry": "performing arts (classical music)",
+        "size": "operating budget approx. $6.8M; 74 contracted musicians, 31 administrative staff; 30-32 subscription concerts per season"
+      },
+      "evidenceItems": 16,
+      "stages": [
+        "S1",
+        "S2"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "financial-record": 2,
+        "document": 5,
+        "system-record": 3,
+        "customer-account": 2,
+        "external-data": 1,
+        "manager-account": 1
+      },
+      "scoredItems": 15,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 3,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 3,
+        "supported": 2,
+        "unknown": 2,
+        "causal": 1,
+        "association-only": 1,
+        "harmful": 2,
+        "preferred": 2,
+        "premature": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 6,
+        "external-cause": 5,
+        "causal-overclaim-trap": 5,
+        "nonexistent-problem": 1,
+        "root-cause": 3,
+        "confounded": 2,
+        "iatrogenic-intervention": 2,
+        "side-effect": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.933,
+        "disputes": 5
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-J1.case.json",
+        "truth": "benchmarks/cases/OD-HO-J1.truth.json",
+        "review": "benchmarks/cases/OD-HO-J1.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-J2",
+      "split": "heldout",
+      "benchmarkClass": "J",
+      "title": "Record dividends and an expansion vote at a grain-handling cooperative",
+      "organization": {
+        "type": "Member-owned agricultural cooperative (about 640 farmer-members)",
+        "industry": "Grain handling and merchandising: receiving, drying, grading, storage and rail shipment of corn and soybeans",
+        "size": "58 employees; four country elevators (Harlan Junction, Wexford, Millbrook, Tanager Creek); fiscal year ends 31 August"
+      },
+      "evidenceItems": 17,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 2,
+        "financial-record": 2,
+        "system-record": 5,
+        "external-data": 2,
+        "manager-account": 2,
+        "independent-observation": 1,
+        "anonymous-staff-survey": 1,
+        "document": 2
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 3,
+        "supported": 3,
+        "unknown": 1,
+        "causal": 1,
+        "association-only": 2,
+        "premature": 1,
+        "preferred": 3,
+        "harmful": 1,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 3,
+        "causal-overclaim-trap": 5,
+        "external-cause": 4,
+        "root-cause": 4,
+        "hidden-problem": 4,
+        "metric-gaming": 2,
+        "measurement-artifact": 1,
+        "side-effect": 1,
+        "staff-narrative": 1,
+        "organizational-silence": 1,
+        "confounded": 2,
+        "protective-control": 3,
+        "iatrogenic-intervention": 1,
+        "revision": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 1.0,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-J2.case.json",
+        "truth": "benchmarks/cases/OD-HO-J2.truth.json",
+        "review": "benchmarks/cases/OD-HO-J2.review.json"
+      }
+    },
+    {
+      "id": "OD-HO-K",
+      "split": "heldout",
+      "benchmarkClass": "K",
+      "title": "Reported kitchen inefficiency at Copperleaf Kitchen Co. after a change of ownership",
+      "organization": {
+        "type": "privately held multi-unit restaurant group, acquired by a private investment firm on 2026-06-30",
+        "industry": "full-service casual dining (scratch-cooking, made-to-order menu)",
+        "size": "9 locations, approx. 540 employees, FY2025 revenue approx. $41M"
+      },
+      "evidenceItems": 18,
+      "stages": [
+        "S1"
+      ],
+      "sourceTypes": {
+        "leadership-account": 1,
+        "prior-report": 1,
+        "document": 4,
+        "system-record": 6,
+        "financial-record": 1,
+        "external-data": 1,
+        "manager-account": 2,
+        "staff-account": 2
+      },
+      "scoredItems": 16,
+      "itemTypes": {
+        "hypothesis": 6,
+        "edge": 4,
+        "action": 5,
+        "sufficiency": 1
+      },
+      "expectedAnswerDistribution": {
+        "contradicted": 4,
+        "supported": 2,
+        "unknown": 1,
+        "causal": 2,
+        "association-only": 1,
+        "harmful": 3,
+        "preferred": 2,
+        "sufficient": 1
+      },
+      "tags": {
+        "leadership-narrative": 5,
+        "nonexistent-problem": 4,
+        "measurement-artifact": 1,
+        "intentional-tradeoff": 6,
+        "hidden-problem": 2,
+        "root-cause": 4,
+        "staff-narrative": 2,
+        "causal-overclaim-trap": 3,
+        "confounded": 1,
+        "iatrogenic-intervention": 3,
+        "metric-gaming": 1
+      },
+      "review": {
+        "verdict": "accepted-with-fixes",
+        "blindAgreement": 0.9375,
+        "disputes": 2
+      },
+      "files": {
+        "case": "benchmarks/cases/OD-HO-K.case.json",
+        "truth": "benchmarks/cases/OD-HO-K.truth.json",
+        "review": "benchmarks/cases/OD-HO-K.review.json"
+      }
+    }
+  ]
+}

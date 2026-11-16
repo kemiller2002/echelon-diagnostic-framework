@@ -1,0 +1,53 @@
+{
+  "id": "EX-EDF-2026-OD1",
+  "title": "EDF Organizational Diagnosis Benchmark",
+  "mission": "EDF-IMPROVEMENT-2026-001",
+  "workItem": "WI-0013",
+  "baselineCommit": "41fea6ffc764adc69643d5ee2940916592486f84",
+  "date": "2026-11-16",
+  "status": "preregistered-before-analyzer-runs",
+  "specification": "benchmarks/benchmark-specification.md",
+  "heldOutPolicy": "benchmarks/held-out-policy.md",
+  "scoring": "harness/Od1.fsx (deterministic; no LLM judge for any primary outcome)",
+  "executor": {
+    "mechanism": "Claude Code workflow subagents; each reads exactly one prompt bundle file and returns schema-constrained JSON",
+    "primaryAnalyzerModel": "sonnet tier alias as resolved by the host at run time (exact version string not exposed to the workflow; recorded as 'sonnet')",
+    "replicationAnalyzerModel": "haiku tier alias",
+    "singleProviderLimitation": "All analyzers and case authors are Anthropic Claude-family models; no cross-provider analyzer is available in this session (no external API credentials)."
+  },
+  "conditions": {
+    "A_GENERAL": "General-purpose AI: shared task frame + one-sentence 'think carefully' instruction (mission Approach A).",
+    "B_EDF03": "Frozen EDF v0.3 specification verbatim (mission Approach B, current EDF).",
+    "B0_EDF0": "Frozen EDF-0 quick card verbatim (simplification probe).",
+    "C_KTNT": "Kepner-Tregoe problem + decision analysis framed by Nadler-Tushman congruence (mission Approach C, established method).",
+    "N_NEUTRAL": "Generic structured review protocol without EDF constructs (matched-structure control from EX-EDF-001).",
+    "D_*": "Experimental EDF variants designed ONLY from dev-split failures, frozen and hashed before any held-out run (mission Approach D).",
+    "*_CLARITY": "Condition followed by a Clarity decision pass over actions (question, evidence, assumptions, consequence, reversibility, decision, ownership, learning, reassessment)."
+  },
+  "phases": [
+    {"phase": "dev", "split": "dev", "conditions": ["A_GENERAL", "B_EDF03", "B0_EDF0", "C_KTNT", "N_NEUTRAL"], "trials": 1, "purpose": "exploratory; failure taxonomy; variant design"},
+    {"phase": "heldout", "split": "heldout", "conditions": ["A_GENERAL", "B_EDF03", "C_KTNT", "N_NEUTRAL", "D_primary"], "trials": 2, "purpose": "primary comparisons"},
+    {"phase": "heldout-ablation", "split": "heldout", "conditions": ["B0_EDF0", "D ablations", "Clarity variants"], "trials": 1, "purpose": "ablation and integration"},
+    {"phase": "replication", "split": "heldout", "conditions": ["A_GENERAL", "B_EDF03", "D_primary"], "trials": 1, "model": "haiku", "purpose": "model-tier generalization"}
+  ],
+  "unit": "case (score averaged across trials); paired by case",
+  "primaryOutcome": "OD1 case score 0..100 (benchmark-specification.md section 5)",
+  "hypotheses": [
+    {"id": "H-OD1-1", "statement": "Current EDF (B) outperforms general-purpose AI (A) on held-out cases.", "support": "mean(B-A) >= +5 and paired-bootstrap 95% CI lower bound > 0"},
+    {"id": "H-OD1-2", "statement": "EDF adds value beyond matched generic structure in organizational diagnosis (replication of HY-EDF-008 in a new domain).", "support": "mean(B-N) >= +5 and CI lower bound > 0", "falsification": "CI includes 0 or mean < +5"},
+    {"id": "H-OD1-3", "statement": "An established method (C) differs from current EDF (B).", "support": "two-sided; report mean(C-B) and CI; no directional prediction"},
+    {"id": "H-OD1-4", "statement": "EDF-0 (B0) is non-inferior to full EDF v0.3 (B).", "support": "mean(B0-B) > -3 (dev and held-out-ablation runs)"},
+    {"id": "H-OD1-5", "statement": "The experimental EDF variant (D) improves on current EDF (B).", "support": "mean(D-B) >= +5, CI lower bound > 0, pooled harmfulPromotion and falseDiagnosis rates not higher than B, effect positive in both model tiers", "edfSpecific": "additionally mean(D-N) >= +3 with CI lower bound > 0; otherwise the improvement is attributed to generic content, not EDF semantics"},
+    {"id": "H-OD1-6", "statement": "A Clarity decision pass improves action selection.", "support": "actionAccuracy higher and harmfulPromotion not higher than the same condition without Clarity; exploratory (1 trial)"},
+    {"id": "H-OD1-7", "statement": "Each retained D component contributes.", "support": "exploratory: removing the component lowers mean score by >= 2 points; components failing this are candidates for removal"}
+  ],
+  "decisionGates": "ADOPT requires H-OD1-5 support on held-out with both model tiers, no safety regression, and independent re-scoring agreement; otherwise EXPERIMENTAL, INCONCLUSIVE or REJECT.",
+  "stopRules": [
+    "Freeze case/truth hashes before the first analyzer run.",
+    "Do not edit cases or truth after any analyzer output is observed (dev included); errors found later are recorded as known truth-key defects and analysed by sensitivity analysis only.",
+    "Freeze D prompts before held-out runs.",
+    "Schema-invalid or missing outputs are terminal and score 0; infrastructure failures with no recorded output may be retried once.",
+    "Outputs are append-only raw files under experiments/raw/."
+  ],
+  "statistics": {"bootstrap": "paired, case-level, 10000 resamples, seed 20261116", "rates": "pooled with Wilson 95% intervals", "multiplicity": "no correction; seven hypotheses reported in full, exploratory ones labeled"}
+}

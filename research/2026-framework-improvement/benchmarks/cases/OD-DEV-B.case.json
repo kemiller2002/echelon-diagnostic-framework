@@ -1,0 +1,431 @@
+{
+  "id": "OD-DEV-B",
+  "split": "dev",
+  "benchmarkClass": "B",
+  "title": "Falling net revenue retention at a field-service scheduling SaaS",
+  "organization": {
+    "type": "Privately held, venture-backed software company (fictional: Lanterna Field Systems)",
+    "industry": "B2B SaaS - scheduling and dispatch software for mid-market field-service firms (HVAC, plumbing, facilities)",
+    "size": "~250 staff; ~$47M ARR; ~620 customer accounts; North America ~70% of ARR, EMEA ~30%"
+  },
+  "presentingRequest": "From the CEO: 'Our net revenue retention has dropped from 112% to 96% since Routewise entered our market in March. We need a competitive response plan for the December board meeting, including a decision on whether to roll back the January price increase. Please tell us how to stop the bleeding.'",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "CEO (interview, 2026-10-28)",
+      "sourceType": "leadership-account",
+      "text": "NRR was 112% at the end of FY2025 and is 96% trailing-twelve-months as of 30 September 2026. The timing lines up with Routewise launching in March - they are at every trade show pitching our customers, and our reps hear their name constantly. I am open to a pricing response if that is what it takes to defend the base."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Finance - NRR bridge prepared by the Corporate Controller (2026-10-15)",
+      "sourceType": "financial-record",
+      "text": "NRR decomposition, FY2025 vs TTM to 30 Sep 2026: gross revenue retention (logo churn plus downgrades) 93.1% -> 89.4% (-3.7 pts); expansion contribution +18.9 pts -> +6.6 pts (-12.3 pts). NRR 112.0% -> 96.0%. The NRR definition, ARR base and FX treatment are unchanged between periods (controller sign-off attached). Gross dollar churn plus downgrades TTM: $4.9M, of which logo churn $3.0M (37 logos) and seat/site downgrades $1.9M."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "VP Sales (interview, 2026-10-29)",
+      "sourceType": "leadership-account",
+      "text": "Renewals got hard the moment the January price increase hit. Look at the CRM - price is the number one loss reason by a distance. Between the increase and Routewise undercutting us, my renewal managers are fighting with one hand tied behind their backs."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "CRM closed-lost report, renewal opportunities, 1 Jan - 30 Sep 2026",
+      "sourceType": "system-record",
+      "text": "37 churned logos. Primary loss reason (required field at close): Price/Budget 15 (41%); Product/Fit 8 (22%); Competitor 6 (16%); Other 8 (22%)."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "RevOps senior analyst - data-quality memo on loss-reason coding (2026-10-20)",
+      "sourceType": "document",
+      "text": "The renewal close form requires a loss reason; 'Price/Budget' is the pre-selected first value in the dropdown. Of the 15 churned logos coded Price/Budget, 12 have no free-text notes and no logged pricing discussion. 9 of the 15 were on multi-year price-locked contracts and received no price increase in 2026."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Finance - pricing cohort analysis (FP&A manager, 2026-10-22)",
+      "sourceType": "financial-record",
+      "text": "The January 2026 15% list increase applied at renewal only to accounts without a price lock (55% of ARR). Accounts on 2024-25 multi-year price-lock terms (45% of ARR) received no increase in 2026. Realized average uplift on affected renewals after discounts: 11.2%, adding about $2.1M ARR. TTM NRR, price-increase cohort: 111% -> 95%; price-locked cohort: 113% -> 97%. GRR: increase cohort 92.8% -> 89.0%; locked cohort 93.5% -> 89.9%. Expansion contribution fell by a similar amount in both cohorts (-12.2 pts and -12.5 pts). Cohorts are similar in account size and industry mix."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "Finance - NRR by region, TTM to 30 Sep 2026",
+      "sourceType": "financial-record",
+      "text": "North America (70% of ARR): NRR 112% -> 96%. EMEA (30% of ARR): NRR 113% -> 97%. Both regions show the same pattern - most of the fall is in expansion, not in logo churn."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "Routewise public website and launch press release (retrieved 2026-10-30)",
+      "sourceType": "external-data",
+      "text": "Routewise launched commercially on 4 March 2026 and sells only in the United States and Canada. Its trust page states that it has no EU data residency and lists EU availability as 'planned for 2027'."
+    },
+    {
+      "id": "E9",
+      "stage": "S1",
+      "source": "Customer Success exit records for churned logos, 1 Jan - 30 Sep 2026",
+      "sourceType": "system-record",
+      "text": "Destination of the 37 churned logos where known: Routewise 6 (combined ARR $0.41M); incumbent ERP field-service module 11; spreadsheets or manual dispatch 8; unknown 12. All 6 Routewise losses are North American accounts."
+    },
+    {
+      "id": "E10",
+      "stage": "S1",
+      "source": "Sales competitive-intelligence report, Q2-Q3 2026",
+      "sourceType": "document",
+      "text": "Routewise appeared in 58% of competitive new-logo sales cycles in Q2-Q3 2026; Lanterna win rate against Routewise was 44%. (Scope: new-logo pipeline only; renewal and expansion opportunities are not included in this report.)"
+    },
+    {
+      "id": "E11",
+      "stage": "S1",
+      "source": "HR headcount record and implementation scheduling system extract (pulled by Head of Implementation, 2026-10-18)",
+      "sourceType": "system-record",
+      "text": "Under the 'Fit for 2026' cost program, the implementation team was reduced from 15 to 7 specialists effective 2 February 2026. New-site implementation requests from existing customers were flat (Q4 2025 average 41 per month; Q2-Q3 2026 average 39 per month). New-logo implementations started were also flat (Q4 2025 average 9 per month; Q2-Q3 2026 average 8 per month). Median wait from request to implementation start: 16 days (H2 2025) -> 67 days (Q3 2026). Queue on 30 Sep 2026: 112 sites. Every account's request history, including withdrawn requests, is retained in the system, but no withdrawal reason is recorded."
+    },
+    {
+      "id": "E12",
+      "stage": "S1",
+      "source": "Head of Implementation (interview, 2026-10-30)",
+      "sourceType": "manager-account",
+      "text": "Customers scope a new branch with us before they sign the expansion order, so the queue sits in front of the order. Since February we triage: new logos go first because sales commission is tied to their go-live, existing customers adding branches wait. Some of those customers have stopped asking. I believe we've lost expansions that way, but I can't tell you how many - nobody records why a request goes quiet."
+    },
+    {
+      "id": "E13",
+      "stage": "S1",
+      "source": "SRE incident register and migration plan (Director of Platform Engineering)",
+      "sourceType": "system-record",
+      "text": "Accounts were migrated to the new hosting platform by data-centre shard, not by account size or segment: Wave 1 on 14 Apr 2026 (~35% of accounts), Wave 2 on 9 Jun (~35%), Wave 3 planned 18 Aug, slipped, completed 6 Oct (~30%). Platform uptime Apr-Sep 2026: 99.71% vs 99.95% Oct 2025-Mar 2026. Sev-1 incidents: 9 in Apr-Sep vs 2 in the prior six months; 7 of the 9 postmortems name migrated components as the cause. 4 of the 9 Sev-1s were in the shared mobile dispatch API and affected all accounts regardless of wave. A 14-item remediation backlog is being worked by the 6-person platform team. Per-account wave assignment is recorded."
+    },
+    {
+      "id": "E14",
+      "stage": "S1",
+      "source": "CS Operations - health-score analysis (CS Ops lead, 2026-10-24)",
+      "sourceType": "document",
+      "text": "Accounts with 3 or more outage-tagged support tickets between April and September expanded at a 9% rate vs 24% for all other accounts. Caveat from the analyst: high-ticket accounts are disproportionately large multi-site accounts, and new-site setups generate tickets - 61% of high-ticket accounts had an open implementation request during the period vs 22% of other accounts. No adjustment for size or queue status has been made."
+    },
+    {
+      "id": "E15",
+      "stage": "S1",
+      "source": "Director of Operations, regional HVAC services customer (customer advisory call, 2026-10-09)",
+      "sourceType": "customer-account",
+      "text": "We planned to roll Lanterna out to our four northern branches this summer. Getting an implementation slot took about two months, and while we waited your dispatch app went down twice during our peak week. Our board said hold off until next year. Honestly it was both - either one alone we would probably have pushed through."
+    },
+    {
+      "id": "E16",
+      "stage": "S1",
+      "source": "Finance - expansion bookings by quarter",
+      "sourceType": "financial-record",
+      "text": "Expansion bookings (new ARR from existing accounts): Q4 2025 $3.1M; Q1 2026 $2.8M; Q2 2026 $1.7M; Q3 2026 $1.2M. Typical time from first scoping request to signed expansion order is 6-10 weeks. Both the February implementation cut and the April Wave 1 migration precede the Q2 drop."
+    },
+    {
+      "id": "E17",
+      "stage": "S1",
+      "source": "CFO (interview, 2026-10-31)",
+      "sourceType": "leadership-account",
+      "text": "Fit for 2026 saved about $1.0M a year, and rebuilding the implementation team permanently would undo that; I won't do it on a hunch. If we need capacity quickly, Keystone Implementation Partners can supply certified specialists on 90-day contracts at about $38k per specialist per quarter, cancellable at term."
+    },
+    {
+      "id": "E18",
+      "stage": "S1",
+      "source": "Anonymous pulse survey of Customer Success Managers (n=22 of 26, Sep 2026)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "Asked 'What are customers' top complaints this quarter? (select up to two)': implementation wait times 71%; reliability/outages 64%; pricing 14%; missing features vs competitors 9%."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The January 2026 price increase is the primary driver of the NRR decline."
+      },
+      {
+        "id": "H2",
+        "text": "Routewise's market entry is the primary driver of the NRR decline, by taking existing customers."
+      },
+      {
+        "id": "H3",
+        "text": "The February 2026 implementation-team reduction is the main driver of the NRR decline, by stalling expansion into new sites."
+      },
+      {
+        "id": "H4",
+        "text": "The reliability decline that followed the platform migration is the main driver of the NRR decline, by deterring expansion and prompting churn."
+      },
+      {
+        "id": "H5",
+        "text": "Most of the NRR decline comes from reduced expansion within retained accounts rather than from lost customers."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Implementation team reduced from 15 to 7 specialists (Feb 2026)",
+        "to": "Longer wait for new-site implementation for existing customers",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "January 2026 list-price increase",
+        "to": "Higher churn and downgrades among affected accounts",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Routewise market entry (Mar 2026)",
+        "to": "Loss of existing customers driving the NRR decline",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Account exposure to outages (3+ outage-tagged tickets)",
+        "to": "Lower expansion rate",
+        "relation": "causes"
+      },
+      {
+        "id": "R5",
+        "from": "Implementation-queue delays",
+        "to": "Decline in expansion bookings",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Before committing to a fix, run a 4-6 week analysis using existing records: compare expansion and contraction by migration wave and by implementation-queue exposure, reconstruct the status of withdrawn or stalled expansion requests, and interview a sample of accounts that paused expansion."
+      },
+      {
+        "id": "A2",
+        "text": "Contract 3 implementation specialists from a partner firm on cancellable 90-day terms and assign them to a randomly selected half of the existing-customer expansion queue, comparing request-to-order conversion between served and not-yet-served accounts."
+      },
+      {
+        "id": "A3",
+        "text": "Roll back the January price increase for all accounts and offer 15% loyalty discounts to North American accounts at renewal to defend against Routewise."
+      },
+      {
+        "id": "A4",
+        "text": "Freeze the product roadmap for two quarters and redirect all engineering teams to a reliability program, announced to customers as the company's response to declining retention."
+      },
+      {
+        "id": "A5",
+        "text": "Permanently rehire 8 implementation specialists to restore the team to 15 and create a dedicated expansion-onboarding function as the company's response to declining retention."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Expansion, downgrade and churn rates by platform migration wave (Wave 1 / Wave 2 / Wave 3), Apr-Sep 2026"
+      },
+      {
+        "id": "Q2",
+        "text": "Account-level history of 2026 expansion scoping requests: time in queue, outcome (ordered / withdrawn / still waiting) and expansion behaviour of comparable accounts not in the queue"
+      },
+      {
+        "id": "Q3",
+        "text": "Structured interviews with economic buyers at 20 accounts that paused or cancelled planned expansion in 2026"
+      },
+      {
+        "id": "Q4",
+        "text": "Feature-by-feature and price comparison of Lanterna versus Routewise"
+      },
+      {
+        "id": "Q5",
+        "text": "Customer CSAT scores on support tickets, by month, Oct 2025 - Sep 2026"
+      },
+      {
+        "id": "Q6",
+        "text": "Third-party analyst benchmark of list prices for field-service scheduling software"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R5",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I16",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

@@ -18,3 +18,5 @@
 | WI-0009 | Move echelon-diagnostic-framework to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete |  | medium |
 | WI-0010 | Move echelon-diagnostic-framework to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
 | WI-0011 | Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current) | complete |  | medium |
+| WI-0012 | WI-0012 | complete |  |  |
+| WI-0013 | EDF-IMPROVEMENT-2026-001: EDF framework improvement research (organizational diagnosis validity, causal accuracy, interventions, efficiency, ablation, Clarity integration) | ready | research,edf,benchmark | high |

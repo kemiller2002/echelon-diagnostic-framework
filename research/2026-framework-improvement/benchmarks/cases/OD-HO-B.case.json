@@ -1,0 +1,424 @@
+{
+  "id": "OD-HO-B",
+  "split": "heldout",
+  "benchmarkClass": "B",
+  "title": "First-pass yield decline on a shaft machining line at an automotive parts plant",
+  "organization": {
+    "type": "Privately owned tier-2 automotive supplier, single plant (fictional: Brannock Precision Components, Plant 2)",
+    "industry": "Automotive components - CNC turning of alloy-steel drivetrain shafts for a tier-1 driveline customer",
+    "size": "~410 staff at the plant; 9 machining lines; Line 3 has 6 CNC lathes (L3-01 to L3-06) and ~6,500 parts/week"
+  },
+  "presentingRequest": "From the Plant Manager: 'First-pass yield on Line 3 has dropped from 96% to 89% in ten weeks, and Halvard is starting to complain. It started right after we put Line 3 on 12-hour shifts in August - the scrap tags pile up in the last hours of every shift. People are exhausted. I want to go back to 8-hour shifts from Monday and I need you to confirm that is the fix, and tell me what else we should do so this doesn't happen again.'",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Plant Manager (interview, 2026-10-20)",
+      "sourceType": "leadership-account",
+      "text": "We moved Line 3 to two crews on 12-hour shifts from Monday 10 August to work off the Halvard Drivetrain backlog - Line 3 is the only line we changed. Yield fell apart right after. Walk the floor at 4 a.m. and you can see it, and the scrap tags are timestamped mostly in the last three or four hours of the shift. We did push the quarterly lathe service back a bit to protect Halvard shipments, but maintenance tell me the spindles are fine. The steel change was a purchasing decision and the certs are all in spec."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Quality management system - Line 3 weekly first-pass yield report (extracted 2026-10-16)",
+      "sourceType": "system-record",
+      "text": "First-pass yield (FPY) = parts passing 100% final CMM inspection at first presentation / parts presented. Weeks 18-31 (27 Apr - 2 Aug 2026): mean 96.0%, weekly range 95.3%-96.8%. Week 32 (from 3 Aug) 95.6%; wk33 94.7%; wk34 93.9%; wk35 93.0%; wk36 92.4%; wk37 91.6%; wk38 90.8%; wk39 90.2%; wk40 89.6%; wk41 (5-11 Oct) 89.0%. Weekly volume 4,500-4,800 parts in weeks 18-32 and 6,300-6,700 from week 33 (12-hour pattern). FPY definition, part numbers and drawing tolerances unchanged in 2026."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Line 3 quality technician (interview, 2026-10-21)",
+      "sourceType": "staff-account",
+      "text": "The scrap tag time is when the operator writes the tag, not when the part was machined. Rejects from the CMM go into a red bin by the machine, and operators fill the tags in a batch during the last 30-45 minutes of the shift when they clean down - that has been the practice for years, on 8-hour shifts too. The CMM assigns the serial number at inspection, so nothing we record ties a reject to the hour it was cut. The lathes' cycle-counter logs are kept for 180 days, but nobody has ever matched them to CMM results."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Metrology records - gauge R&R studies and CMM program revision log",
+      "sourceType": "system-record",
+      "text": "CMM gauge R&R on the journal-diameter characteristic: 8.7% of tolerance (study dated 11 March 2026); 9.1% (repeat study dated 15 September 2026). CMM inspection program for Line 3 part numbers: last revision 12 February 2026; no edits since. CMM calibration current (last 1 July 2026). No change to inspection staff or reject criteria in 2026."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Halvard Drivetrain supplier scorecard (customer receiving inspection), issued 2026-10-09",
+      "sourceType": "customer-account",
+      "text": "Brannock Plant 2 shaft part numbers - parts rejected at Halvard receiving inspection: January-July 2026 average 35 PPM; August 120 PPM; September 290 PPM. Predominant reject reason: bearing-journal diameter out of tolerance. 'Supplier to submit containment and root-cause plan by 13 November.'"
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Purchasing Manager and Supplier Quality Engineer (joint interview, 2026-10-22)",
+      "sourceType": "manager-account",
+      "text": "We moved the 65 mm 4140 bar for Line 3 from Tamsworth Steel to Corvane Steel for a 7.5% price saving. The last Tamsworth bar was consumed on 31 July and every part on Line 3 since 3 August has been cut from Corvane bar; no other line uses this bar. Every Corvane mill certificate is inside our 255-321 HB hardness specification, so in our view the steel cannot be the cause. Tamsworth has confirmed it could supply two trial lots within 10 days at the old price plus 3%."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "Incoming inspection - hardness testing by lot (5 bars x 3 positions per lot), Jan-Oct 2026",
+      "sourceType": "system-record",
+      "text": "Tamsworth lots T-01 to T-14 (Jan-Jul): lot mean 274-284 HB; within-lot standard deviation 5-7 HB. Corvane lots C-01 to C-04 (received Jul-Aug): mean 276-288 HB; within-lot SD 8-10 HB. Corvane lots C-05 to C-10 (received Sep-Oct): mean 271-290 HB; within-lot SD 13-17 HB. All individual readings 259-314 HB (inside specification). Attached: Corvane letter dated 4 September 2026 notifying a change of billet source at its mill for production from 1 September."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "Supplier Quality Engineer - lot reject analysis (memo, 2026-10-14)",
+      "sourceType": "document",
+      "text": "Line 3 reject rate by bar lot: low-spread Corvane lots C-01 to C-04 (SD 8-10 HB): 6.1% of 32,400 parts; high-spread lots C-05 to C-10 (SD 13-17 HB): 9.8% of 32,600 parts. Note: bar is issued to the line in order of receipt and lots are not mixed, so C-01 to C-04 were run in weeks 32-36 and C-05 to C-10 in weeks 37-41. No lot has been run out of sequence."
+    },
+    {
+      "id": "E9",
+      "stage": "S1",
+      "source": "Maintenance management system - Line 3 work orders",
+      "sourceType": "system-record",
+      "text": "Quarterly spindle service for all six Line 3 lathes (bearing preload check, spindle runout measurement, lubrication, drive belt check; about 6 hours per machine) last completed 9-10 May 2026. Next due 8 August. Work order WO-31877 status changed to 'Deferred' on 6 August, note: 'Per Plant Manager - protect Halvard backlog shipments, reschedule when backlog clears.' Rescheduled to 5 September; deferred again on 3 September with the same note. No spindle service on Line 3 since May. Line 3 runs 7 days a week on the 12-hour pattern, so service now requires stopping production."
+    },
+    {
+      "id": "E10",
+      "stage": "S1",
+      "source": "Maintenance Manager (interview, 2026-10-22) with attached spot-check readings",
+      "sourceType": "manager-account",
+      "text": "'We skipped a quarterly service once in 2024 and yield did not move - these spindles are fine.' Attached readings: spindle runout spot check on 2 October 2026 - L3-01 4 um, L3-02 11 um, L3-03 5 um, L3-04 5 um, L3-05 9 um, L3-06 5 um; maintenance standard limit 5 um. In May all six read 2-3 um. Vibration velocity on L3-02 (the only Line 3 lathe with a permanent sensor): July average 1.9 mm/s, mid-August 2.3, mid-September 3.1, first week of October 4.1. The 2024 skipped service was eight months after a full spindle rebuild of all six lathes."
+    },
+    {
+      "id": "E11",
+      "stage": "S1",
+      "source": "Manufacturing execution system - reject rate by machine (prepared by Quality Manager, 2026-10-15)",
+      "sourceType": "system-record",
+      "text": "Reject rate Jan-Jul 2026 -> September 2026: L3-01 3.4% -> 7.6%; L3-02 5.1% -> 12.4%; L3-03 3.6% -> 7.9%; L3-04 3.3% -> 7.2%; L3-05 4.9% -> 11.8%; L3-06 3.7% -> 8.0%. L3-02 and L3-05 are the only machines that run the long shaft (P/N 7741-L), whose bearing-journal tolerance is +/-6 um versus +/-10 um for the short shafts run on the other four. All six machines take bar from the same lot at any given time."
+    },
+    {
+      "id": "E12",
+      "stage": "S1",
+      "source": "Senior Manufacturing Engineer (interview, 2026-10-23)",
+      "sourceType": "manager-account",
+      "text": "Reject mix, Jan-Jul vs Sep: journal diameter / roundness 46% -> 62% of rejects; surface finish / chatter 21% -> 27%; handling damage, burrs and other 33% -> 11% (handling rejects steady at about 35-40 parts a week). Wider hardness scatter changes tool deflection and gives size scatter and chatter; a worn spindle bearing gives size scatter and chatter too. So does a wrong wear-offset entry, and operators are keying offsets by hand far more often now that inserts are changed more. The defect codes cannot tell any of these apart. On Line 3 we have never cut Corvane bar on a freshly serviced spindle, or Tamsworth bar on a worn one, so I cannot separate them. In September we overflowed about 1,400 long shafts to the spare lathe on Line 6 (serviced on schedule in July, run on 8-hour shifts) using Corvane bar; nobody has pulled its CMM results yet."
+    },
+    {
+      "id": "E13",
+      "stage": "S1",
+      "source": "Line 3 Production Supervisor (interview, 2026-10-21)",
+      "sourceType": "manager-account",
+      "text": "We took on nine new operators in August and HR cut their training from three weeks to one because we were short. You cannot hand a CNC lathe to somebody with a week's training and expect 96%. If you want my view, the new starters are the problem, and the 12-hour shifts make it worse."
+    },
+    {
+      "id": "E14",
+      "stage": "S1",
+      "source": "HR onboarding records and MES operator-login reject data (prepared by Quality Manager, 2026-10-19)",
+      "sourceType": "system-record",
+      "text": "Nine new operators started 10 August, shadowed experienced operators without their own machine login until 24 August (week 35), and were then spread across both crews (Crew A: 4, Crew B: 5). September reject rate by operator logged on the machine: new operators 8.8% of 6,850 parts; experienced operators 9.1% of 21,400 parts. On the long-shaft machines L3-02 and L3-05 only: new 11.8%, experienced 12.2%. FPY had already fallen to 93.9% in week 34, before any new operator ran a machine alone."
+    },
+    {
+      "id": "E15",
+      "stage": "S1",
+      "source": "Line 3 anonymous operator pulse survey, 28 respondents of 34 (2026-10-12)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "'I feel very tired in the last three hours of a 12-hour shift': 64% agree. 'I would prefer to return to 8-hour shifts': 39% agree, 46% disagree (overtime pay valued). Free-text themes: 'L3-02 sounds rough and the finish keeps drifting' (6 mentions); 'the new bar chatters - we keep changing inserts and offsets' (5 mentions); 'long shifts wear you down by the fourth day' (7 mentions)."
+    },
+    {
+      "id": "E16",
+      "stage": "S1",
+      "source": "Production planning and HR - shift pattern, backlog and attendance records",
+      "sourceType": "system-record",
+      "text": "Line 3 crewing from 10 August: two crews, 12-hour shifts, 4-on/4-off, 168 machine-hours a week (previously three 8-hour shifts, 5 days, 120 hours). All other lines unchanged on 8-hour shifts. Halvard backlog for Line 3 parts: 3.5 weeks of output on 31 July; 1.2 weeks on 16 October. Halvard's buyer confirmed in writing (14 October) that the remaining backlog may ship over the next six weeks at 8-hour-shift capacity. Line 3 unplanned absence: 2.1% (May-July) -> 3.4% (Aug-Sep); absence is covered by experienced operators working rest-day overtime shifts (6 such shifts in August, 31 in September)."
+    },
+    {
+      "id": "E17",
+      "stage": "S1",
+      "source": "Plant Controller (memo to Plant Manager, 2026-10-19)",
+      "sourceType": "financial-record",
+      "text": "Line 3 scrap and rework cost: about $9,800 a week in September vs $3,100 a week in H1. Proposal: reduce Line 3 final CMM inspection from 100% to 1-in-10 sampling, releasing two inspectors and removing the CMM queue that now holds parts for up to a shift, and adopt the 7.5% Corvane saving (about $210,000 a year) as permanent. Note: spindle service can be done two machines at a time on a 12-hour weekend shift; with the Halvard backlog now at 1.2 weeks, losing two machines for one shift does not put any shipment at risk."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Operator fatigue from the switch to 12-hour shifts on Line 3 is the main driver of the first-pass yield decline."
+      },
+      {
+        "id": "H2",
+        "text": "Increased within-lot hardness variation in the Corvane bar is the main driver of the first-pass yield decline."
+      },
+      {
+        "id": "H3",
+        "text": "Spindle wear on the Line 3 lathes, following the deferral of the quarterly spindle service, is the main driver of the first-pass yield decline."
+      },
+      {
+        "id": "H4",
+        "text": "The inexperience of the August new-operator cohort is the main driver of the first-pass yield decline."
+      },
+      {
+        "id": "H5",
+        "text": "The fall in first-pass yield reflects a real increase in out-of-tolerance parts rather than a change in how parts are inspected or measured."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Higher within-lot hardness spread in a Corvane bar lot (SD 13-17 HB vs 8-10 HB)",
+        "to": "Higher reject rate for parts cut from that lot",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Spindle runout above the 5 um limit on L3-02 and L3-05",
+        "to": "Higher reject rates on L3-02 and L3-05 than on the other Line 3 lathes",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Hours elapsed in a 12-hour shift",
+        "to": "Likelihood that a part machined in that hour is rejected",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "A part being run by one of the August new operators",
+        "to": "Higher likelihood of that part being rejected",
+        "relation": "causes"
+      },
+      {
+        "id": "R5",
+        "from": "Halvard backlog pressure",
+        "to": "Deferral of the August and September Line 3 spindle service",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Return Line 3 to three 8-hour shifts from next Monday as the corrective action for the yield decline, and report it to Halvard as the root-cause fix."
+      },
+      {
+        "id": "A2",
+        "text": "Over the next two weekends, complete the overdue spindle service in two staggered groups (L3-01, L3-02, L3-04 first; L3-03, L3-05, L3-06 the following weekend), and during the same period run two Tamsworth trial lots alongside Corvane bar on one long-shaft and one short-shaft machine in each group; log reject rate by machine, bar source and service status, and match lathe cycle-counter logs to CMM results to recover the hour of machining."
+      },
+      {
+        "id": "A3",
+        "text": "Cancel the Corvane contract and return all 65 mm 4140 bar purchasing to Tamsworth permanently, reporting the steel change to Halvard as the root cause."
+      },
+      {
+        "id": "A4",
+        "text": "Put the nine August new operators on formal performance-improvement plans with written warnings, and restrict them to loading and deburring duties until Line 3 yield recovers."
+      },
+      {
+        "id": "A5",
+        "text": "Reduce Line 3 final CMM inspection from 100% to 1-in-10 sampling to release two inspectors and cut the inspection queue, as proposed by the Plant Controller."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Weekly spindle-load and drive-current history for each Line 3 lathe, May-October 2026, reconstructed from the lathe controllers' retained logs"
+      },
+      {
+        "id": "Q2",
+        "text": "CMM results for the ~1,400 long shafts cut from Corvane bar on the Line 6 spare lathe in September 2026"
+      },
+      {
+        "id": "Q3",
+        "text": "Hour of machining for each Line 3 reject, Aug-Oct 2026, reconstructed by matching lathe cycle-counter logs to CMM inspection records"
+      },
+      {
+        "id": "Q4",
+        "text": "Full operator survey on shift-pattern preferences, overtime and work-life balance across all plant lines"
+      },
+      {
+        "id": "Q5",
+        "text": "Corvane Steel's ISO/IATF certification status and most recent supplier audit report"
+      },
+      {
+        "id": "Q6",
+        "text": "Industry benchmark of first-pass yield for CNC turning of alloy-steel drivetrain shafts"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R5",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I16",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

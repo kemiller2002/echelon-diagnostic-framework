@@ -1,0 +1,62 @@
+{
+  "mission": "EDF-IMPROVEMENT-2026-001",
+  "resumeFrom": {
+    "branch": "claude/edf-framework-improvement-wdhmgj",
+    "praxisWorkItem": "WI-0013"
+  },
+  "environment": {
+    "dotnet": "10.x (install via dotnet-install.sh --channel 10.0)",
+    "praxis": "3.7.2 (./praxis auto-installs)",
+    "node": ">=22 for repository checks",
+    "executor": "Claude Code workflow subagents; analyzers read one prompt bundle and return schema JSON (see harness/run-analyzers.workflow.js)"
+  },
+  "reproduce": [
+    "dotnet fsi harness/Od1.fsx validate benchmarks/cases",
+    "dotnet fsi harness/Od1.fsx score benchmarks/cases experiments/raw/heldout experiments/scored/heldout",
+    "dotnet fsi harness/Od1.fsx stats experiments/scored/heldout heldout 20261116 \"B_EDF03,A_GENERAL;D_EDFX,B_EDF03\"",
+    "python3 -I experiments/replication/od1_score.py  (independent re-scoring)"
+  ],
+  "newRunProcedure": [
+    "dotnet fsi harness/Od1.fsx bundle <cases> experiments/prompts <bundleDir> <phase> <conds> <trials> <split> <seed>",
+    "seal truth files (openssl enc) during analyzer runs; analyzers must not access the repository",
+    "run harness/run-analyzers.workflow.js with run keys phase|condition|case|trial",
+    "dotnet fsi harness/Od1.fsx ingest <journal1,journal2,...> experiments/raw/<phase> <model>  (labels resolved per journal)",
+    "audit tool calls (exactly one Read of the agent's own bundle + StructuredOutput)",
+    "unseal, verify frozen hashes, score, stats"
+  ],
+  "nextActions": [
+    {
+      "id": "NA-1",
+      "action": "Fix OD1 defects: randomize evidence-request menu order; align calibration weighting with spec (R-1); hash all prompts before runs",
+      "blocks": [
+        "NA-2"
+      ]
+    },
+    {
+      "id": "NA-2",
+      "action": "Design and preregister OD2 (evidence acquisition in task, decisive evidence absent by default, harder/noisier files, sharper action/edge definitions)"
+    },
+    {
+      "id": "NA-3",
+      "action": "Obtain cross-provider analyzer credentials and replicate OD1 held-out A/B/C/D"
+    },
+    {
+      "id": "NA-4",
+      "action": "Sequential evidence-acquisition experiment with stopping rule"
+    },
+    {
+      "id": "NA-5",
+      "action": "Human-analyst study protocol approval and recruitment"
+    },
+    {
+      "id": "NA-6",
+      "action": "Update docs/edf/validation/evidence-ledger.md and research registries with EX-EDF-001 and OD1 outcomes (requires governance decision)"
+    }
+  ],
+  "unresolvedQuestions": "continuation/unresolved-questions.md",
+  "doNotChange": [
+    "docs/edf/specification.md (frozen v0.3)",
+    "benchmarks/cases/* (frozen; see sha256 manifests)",
+    "experiments/raw/* (append-only)"
+  ]
+}

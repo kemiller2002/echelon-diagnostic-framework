@@ -1,0 +1,351 @@
+{
+  "caseId": "OD-HO-G",
+  "groundTruthNarrative": "On 2026-07-06 Tallyfield's VP Customer Experience imposed a 20-closes-per-day quota on the general support queue to cut a stable 1,850-ticket backlog. Agents responded rationally: they solved on first reply and let customers reopen, split multi-question tickets, re-solved reopened tickets for extra credit, and filtered for quick tickets instead of working oldest-first. Solve events rose 62% per agent day, but the 14-day reopen rate went from 6% to 23%, frustrated customers filed duplicates, and split children and duplicates made up 94% of a 66% rise in tickets created. Distinct customer demand rose only 4%, capacity was flat, the reopen metric is valid, and the Payroll launch came after the backlog had already climbed. Complex tickets aged >7 days tripled as they were skipped, while a quota-exempt pod stayed stable. The quota caused the backlog doubling it was meant to fix. Raising it would deepen the gaming. Whether Engineering's growing bug queue also holds up aged tickets, and whether the quota drove resignations amid a competitor's hiring and a deferred pay review, are unresolved.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E12",
+        "E17"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "measurement-artifact"
+      ],
+      "rationale": "Total tickets created rose 66% (E2), but E3 shows first-contact customer issues rose only 4% (8,770 -> 9,120); 94% of the increase (5,830 of 6,180) is agent-created split tickets and customer duplicates. Payroll adds about 380 first-contact issues a month and only 210 of the 3,900 open tickets (E12), and the backlog had already reached 2,710 before the 2026-08-18 launch (E2). The surface signal of rising volume is therefore not new demand."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E15"
+      ],
+      "tags": [
+        "root-cause",
+        "metric-gaming",
+        "iatrogenic-intervention"
+      ],
+      "rationale": "Timing: the quota started 2026-07-06 and reopens, splits, duplicates and aged complex tickets all start rising in July (E2, E3, E6). Mechanism: agents and a team lead describe solve-on-first-reply, splitting and re-solve counting (E4, E5), and the pick logs show oldest-first picking fell from 71% to 34% with a 'quick-wins' filter created 2026-07-09 (E6). Covariation: splits and duplicates account for 94% of the creation increase and reopened/split/duplicate tickets account for 2,780 of the 3,900 open tickets (E3). Rival ruled out: the quota-exempt pod, with the same tooling and months, shows no change (E7). Customer accounts and CSAT corroborate (E8, E9)."
+    },
+    {
+      "itemId": "I3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E5",
+        "E10",
+        "E17"
+      ],
+      "tags": [
+        "leadership-narrative"
+      ],
+      "rationale": "The VP reads missed quota days as low effort (E1), but closes per agent day rose from 11.7 to 19.0 with scheduled hours flat (E2, E10). Agents are doing more solve events, not fewer; the problem is what the solves consist of (E3, E5), not effort."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E10",
+        "E17"
+      ],
+      "tags": [
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Headcount went from 38 to 37 FTE and scheduled hours from 6,020 to 5,960 (-1%) (E10); the same staffing held the backlog flat from January to June (E17). A 1% capacity change cannot explain a 111% backlog increase."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9",
+        "E13",
+        "E14"
+      ],
+      "tags": [
+        "measurement-artifact",
+        "staff-narrative"
+      ],
+      "rationale": "The Tier 2 lead's claim (E13) is countered by the audit log: the auto-reopen trigger has been active since 2024 and no solve/reopen automation or report definition changed in 2026, and courtesy-only reopens are about 5% of reopens in both March and October samples (E14). Independent signals, CSAT 'same issue' comments rising from 7% to 31% (E9) and the customer account (E8), confirm real repeat contacts."
+    },
+    {
+      "itemId": "I6",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "contributing",
+        "confounded"
+      ],
+      "rationale": "Engineering's escalated bug queue grew from 40 to 71 (E16), which makes the hypothesis plausible, but the 'Waiting on engineering' status is optional and used inconsistently, only 64 of 430 aged tickets carry it, and no one has linked the rest to bugs (E16). The pick-log shift (E6, E15) explains aging without Engineering but does not rule out an Engineering contribution. The evidence does not discriminate; Q1/A4 would resolve it."
+    },
+    {
+      "itemId": "I7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E15"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "metric-gaming"
+      ],
+      "rationale": "Temporal order (quota 2026-07-06, quick-wins filter created 2026-07-09, oldest-first share 71% -> 34%) (E6); stated mechanism by agents (74% admit choosing quick tickets) and a team lead (E4, E5); and a comparison group exempt from the quota whose oldest-first share barely moved (74% -> 72%) over the same months (E7). Complex share of incoming work was flat (22% -> 23%, E6), ruling out a shift in the ticket mix. Team C, still under a count-based quota, kept cherry-picking (E15)."
+    },
+    {
+      "itemId": "I8",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E7",
+        "E8",
+        "E9",
+        "E15"
+      ],
+      "tags": [
+        "feedback-loop",
+        "metric-gaming"
+      ],
+      "rationale": "This is directly established by the system records: split children rose from 240 to 3,710 a month and duplicates from 410 to 2,770, together 94% of the increase in tickets created; reopened, split and duplicate tickets went from 350 to 2,780 of the open backlog, while original first-contact tickets in the backlog fell (E3). The mechanism (premature solve -> customer reopens or re-files) is described by staff and customers (E4, E5, E8), and the duplicate-matching job did not change (E3). Team C's rule change (E15) acts as an intervention: when reopened closes stopped counting, its reopen rate fell from 24% to 10%."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E10",
+        "E11"
+      ],
+      "tags": [
+        "side-effect",
+        "confounded"
+      ],
+      "rationale": "Resignations rose from 1 in Apr-Jun to 4 in Aug-Sep after the quota, and intent-to-leave rose from 21% to 58% (E5, E10), and two leavers cited the quota (E11). But a competitor opened nearby in August paying about 15% more and took three of the four leavers, and the July pay review was deferred (E11). These common-period rivals are not ruled out, so the link is an association, not an established cause."
+    },
+    {
+      "itemId": "I10",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E12"
+      ],
+      "tags": [
+        "external-cause",
+        "leadership-narrative"
+      ],
+      "rationale": "Temporal order fails: the backlog had already risen from 1,850 to 2,710 by 2026-08-14, before the 2026-08-18 Payroll launch (E2). Payroll tickets are about 210 of 3,900 open tickets, and payroll tickets reopen at the same rate as the rest of the queue (E12). First-contact issues overall rose only 4% (E3)."
+    },
+    {
+      "itemId": "I11",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E5",
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E10",
+        "E11",
+        "E15"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "side-effect",
+        "metric-gaming"
+      ],
+      "rationale": "The quota is the mechanism that inflates the backlog (E3, E5, E6, E7). Raising it would increase the incentive to split, solve prematurely and cherry-pick, and would punish agents for responding to the incentive set for them. Team C shows that tweaking a count-based target does not stop cherry-picking (E15). It also adds pressure in a workforce with 58% intent to leave (E5), so turnover risk is a likely side effect even though the attrition link is not proven."
+    },
+    {
+      "itemId": "I12",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E10",
+        "E16",
+        "E17"
+      ],
+      "tags": [
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Distinct demand is up only 4% (E3) and the same headcount held the backlog stable before the quota (E17, E10). Hiring would be right only if a real capacity gap remains once the inflated tickets are removed, and that is unconfirmed (the size of the remaining backlog and any Engineering-blocked share are unknown, E16). Committing $744k a year and 4 months of hiring and ramp-up now is not justified. It is not harmful because extra capacity does not itself worsen outcomes. Finance policy makes the positions irreversible within the fiscal year once requisitions open (E17), which is why committing now rather than after the inflated work is removed is premature rather than merely acceptable."
+    },
+    {
+      "itemId": "I13",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E9",
+        "E15"
+      ],
+      "tags": [
+        "root-cause",
+        "iatrogenic-intervention"
+      ],
+      "rationale": "This removes the cause shown in H2/R1/R2: the incentive to split, solve prematurely and cherry-pick (E3, E5, E6). The exempt pod shows that working without a per-agent count target is compatible with stable results (E7). Team C shows a partial fix leaves cherry-picking in place (E15), so the counting rule has to go, not just be adjusted. The quality measures track the harms that have appeared (E3, E6, E9)."
+    },
+    {
+      "itemId": "I14",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "E16"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "This is the cheapest way to settle the only material open question (H6) and to size any residual need for Engineering or headcount before committing money (E16). It runs in parallel with A3 and does not delay it."
+    },
+    {
+      "itemId": "I15",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "E15"
+      ],
+      "tags": [
+        "local-optimization",
+        "metric-gaming"
+      ],
+      "rationale": "Team C's natural experiment shows the rule cuts reopens sharply (24% -> 10%), so it beats the status quo and is not harmful. But splitting and quick-ticket picking continued and Team C's aged complex tickets rose 61 -> 88 (E15), so it leaves two of the three gaming mechanisms in place and is not among the best options."
+    },
+    {
+      "itemId": "I16",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "E6",
+        "E7",
+        "E10",
+        "E14"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The decomposition of tickets created and of the backlog (E3), the pick logs (E6), the exempt-pod comparison (E7) and the elimination of demand, capacity and measurement rivals (E3, E10, E12, E14) together establish the main cause well enough to commit to a substantive, reversible change (A3). The open question (H6, the Engineering contribution) affects how much residual work remains, not whether the quota should go."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "lowValueRequests": [
+    "Q4",
+    "Q5"
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "id": "OD-HO-D",
+  "split": "heldout",
+  "benchmarkClass": "D",
+  "title": "Conflicting accounts of IT responsiveness between the Faculty of Arts and central IT at Corran Valley University",
+  "organization": {
+    "type": "public research university",
+    "industry": "higher education",
+    "size": "approx. 31,000 students and 9,800 staff accounts eligible for the central IT service desk; Faculty of Arts has 1,180 staff accounts across 9 departments, all housed on the Lindqvist satellite campus; central Information Technology Services (ITS) runs a 21-FTE service desk"
+  },
+  "presentingRequest": "Central IT is simply unresponsive to the Faculty of Arts. My staff wait weeks for tickets to be resolved while other faculties get same-week service, and ITS's answer is to blame us for raising too many tickets. I want an independent review that documents this so I can take it to the Provost with a concrete proposal: transfer 2 FTE of the central service desk budget to the Faculty so we can run our own Arts IT desk from the 2027 spring term. - Prof. Imelda Varga, Dean of Arts",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Dean of Arts (interview, 2026-10-26)",
+      "sourceType": "leadership-account",
+      "text": "'My department heads tell me tickets take weeks. Room clashes in our scheduling system sat unresolved for a month at the start of spring term and lecturers turned up to occupied rooms. When I raised it with ITS I was told, for the first time, that our tickets were in some best-effort queue. Nobody ever told Arts that - not me, not my predecessor as far as I know, not the Faculty Operations Manager. I took up the deanship on 2025-07-01 and I would remember. An Arts-run desk with two of our own people would know our systems, including SlotBook, and would answer our tickets first. ITS has no reason to prioritise us.'"
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "ITS Director (interview, 2026-10-27)",
+      "sourceType": "leadership-account",
+      "text": "'Arts raises three times as many tickets per head as anyone else, and it is almost all SlotBook - a home-made scheduling app on a departmental server that we never agreed to support. Arts staff also send us a lot of trivial and duplicate tickets. In August 2025 I brought in a routing rule, RR-17, that sends SlotBook tickets to our best-effort queue. I explained it in person to the then Arts Faculty Operations Manager at our quarterly check-in on 2025-08-12, so Arts knew. If the Dean wants faster service, Arts should retire SlotBook; until they do, frankly, we should put all Arts tickets on the best-effort track so the rest of the university isn't subsidising them. They can move to CampusBook, our enterprise room-booking system, for January 2027 - it covers everything SlotBook does.'"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "ServiceDesk ticket system - reviewer's own extract, academic year 2025-26 (2025-09-01 to 2026-08-31), pulled 2026-11-02",
+      "sourceType": "system-record",
+      "text": "All faculties and units: 9,800 eligible staff accounts, 11,860 tickets, 1.21 tickets per account, median resolution 3.0 business days. Faculty of Arts: 1,180 accounts, 3,870 tickets, 3.28 tickets per account (2.7x the university average), median resolution 9.0 business days. Resolution time is measured from ticket creation to resolved status and includes time in 'awaiting requester' status."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "ServiceDesk ticket system - reviewer's decomposition of the AY 2025-26 Arts tickets (queries reproduced from raw data, 2026-11-03)",
+      "sourceType": "system-record",
+      "text": "1,610 of the 3,870 Arts tickets (42%) carry the category 'Departmental app - SlotBook'; no other faculty raised a SlotBook ticket. All 1,610 were routed to the P4 'Best-effort / unsupported' queue. SlotBook tickets: median resolution 21.0 business days, of which a median 17.0 days elapsed before first technician action and median recorded hands-on time was 1.6 days. Arts tickets excluding SlotBook: 2,260 tickets (1.92 per account, 1.6x the university average), median resolution 4.8 days. Removing SlotBook tickets therefore closes 4.2 of the 6.0-day gap (70%). Arts non-SlotBook tickets excluding on-site hardware: median 3.1 days. Comparing Arts non-SlotBook tickets with non-Arts tickets of the same category and priority, the Arts median is within 0.3 days of the non-Arts median in every remotely handled category with 50 or more tickets (P2 and P3 queues); on-site hardware tickets are reported separately in the on-site support extract. Duplicate-ticket rate: Arts 4.1%, university 3.9%. 'How-to / training' category share: Arts non-SlotBook 9%, non-Arts 11%."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "ITS on-site support rota and ServiceDesk extract for on-site hardware tickets, AY 2025-26",
+      "sourceType": "system-record",
+      "text": "The Lindqvist satellite campus (Faculty of Arts and Faculty of Education) has a field technician on site on Tuesdays and Thursdays only; the main campus has technicians on site daily. On-site hardware tickets are 31% of Arts non-SlotBook tickets versus 14% of non-Arts tickets. Median resolution of on-site hardware tickets: Arts (Lindqvist) 6.5 days; Education (Lindqvist) 6.4 days; main-campus faculties 1.8 days. Median time from ticket creation to technician arrival on site: Lindqvist 4.7 business days, main campus 0.6; median on-site repair time is under 0.5 days at both. Education's overall median resolution is 3.9 days."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Routing rule RR-17, ITS configuration change record (created 2025-08-04, effective 2025-08-18)",
+      "sourceType": "document",
+      "text": "'Tickets concerning the departmental application SlotBook are categorised Departmental app - SlotBook and routed to queue P4 (Best-effort / unsupported). No resolution target applies. Rationale: application not under ITS support agreement; no source documentation; hosted on an unmanaged departmental server.' Approver: ITS Director. Distribution list on the change record: 'ITS Service Desk staff'. The change record has no field for external notification and none is recorded."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "ServiceDesk auto-acknowledgement templates, configuration export (2026-11-03)",
+      "sourceType": "system-record",
+      "text": "Template ACK-P2: 'We aim to resolve your request within 1 business day.' Template ACK-P3: 'We aim to resolve your request within 3 business days.' Template ACK-P4 (sent for every SlotBook ticket since 2025-08-18): 'Thank you, your request has been received and will be addressed by our team.' ACK-P4 does not mention priority, best-effort status, or any expected timeframe. Template change log shows no edits to ACK-P4 since 2023-05-11."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "Calendar, email and file searches for the August 2025 check-in (ITS records team and Arts Faculty Office, completed 2026-11-04)",
+      "sourceType": "system-record",
+      "text": "The ITS Director's calendar shows a 30-minute meeting 'ITS-Arts quarterly check-in' on 2025-08-12 with two attendees: the ITS Director and the then Arts Faculty Operations Manager; no agenda or attachment. A search of both mailboxes (2025-07-01 to 2025-10-31) for 'RR-17', 'SlotBook', 'best-effort' and 'P4' found no messages between ITS and any Arts recipient on the topic. The Arts Faculty Office shared drive holds no notes of the meeting. The former Faculty Operations Manager retired on 2025-12-19; contacted through the alumni office on 2026-10-28, she declined to be interviewed. No other record of what was said at the meeting exists."
+    },
+    {
+      "id": "E9",
+      "stage": "S1",
+      "source": "Current Arts Faculty Operations Manager (interview, 2026-10-29; in post since 2026-01-12)",
+      "sourceType": "manager-account",
+      "text": "'There was no handover note about SlotBook or any ITS queue when I started. I first heard of a best-effort queue in September 2026 when a service-desk analyst mentioned P4 on the phone. I can't tell you what my predecessor was or wasn't told - I wasn't here.'"
+    },
+    {
+      "id": "E10",
+      "stage": "S1",
+      "source": "Department administrator, History (interview, 2026-10-30)",
+      "sourceType": "staff-account",
+      "text": "'Honestly, ITS is fine for normal things - my laptop was swapped the next day and a projector fault was fixed in two days. It's SlotBook. Six departments use it to timetable about 1,900 teaching sections a term. My room-clash ticket from 2026-02-10 sat for five weeks and I never heard anything except the automatic \"received\" email. SlotBook logins have been flaky ever since the university's login change last September. CampusBook can't do our repeating multi-section patterns, so we can't just switch.'"
+    },
+    {
+      "id": "E11",
+      "stage": "S1",
+      "source": "Lecturer, Philosophy (interview, 2026-10-30)",
+      "sourceType": "staff-account",
+      "text": "'ITS is hopeless across the board. My email migration problem in March took three weeks to fix, and everyone in my corridor has a story like that. It is not just SlotBook.'"
+    },
+    {
+      "id": "E12",
+      "stage": "S1",
+      "source": "ServiceDesk record for the Philosophy lecturer's email-migration ticket (opened 2026-03-03, resolved 2026-03-24)",
+      "sourceType": "system-record",
+      "text": "Priority P3. 15 business days from creation to resolution, of which 11 business days were in 'awaiting requester' status after the technician requested a device-verification code; three automated reminders were sent. First technician response was 0.4 business days after creation. Active ITS time on the ticket totalled under 1 business day."
+    },
+    {
+      "id": "E13",
+      "stage": "S1",
+      "source": "Faculty of Arts staff pulse survey, March 2026 (anonymous; 212 respondents, 18% response rate)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "'Satisfied with IT support': 61% of Arts respondents dissatisfied or very dissatisfied, versus 24% in the university-wide staff survey of November 2025. Of 94 Arts free-text comments about IT, 58 mention SlotBook, room booking or timetabling; 9 mention email or laptops; the remainder are general ('IT never gets back to us')."
+    },
+    {
+      "id": "E14",
+      "stage": "S1",
+      "source": "ServiceDesk monthly SlotBook ticket counts, with ITS reporting analyst's note (2026-11-04)",
+      "sourceType": "system-record",
+      "text": "The 'Departmental app - SlotBook' category did not exist before RR-17 took effect on 2025-08-18. Category-tagged SlotBook tickets: September 2025 241; October 2025 168; monthly average September 2025 to August 2026 134. Before the category existed, a keyword search for 'SlotBook' in ticket text finds an average of 31 per month for January-July 2025 and 58 in September 2024. Analyst's note: 'Pre-category keyword counts undercount - many older tickets were filed as Other or Applications without naming the app. The university's single-sign-on migration to the new identity provider went live on 2025-09-08. September is also the start of the teaching term, when timetabling activity peaks every year.'"
+    },
+    {
+      "id": "E15",
+      "stage": "S1",
+      "source": "ITS Identity & Access team lead (interview, 2026-10-31)",
+      "sourceType": "manager-account",
+      "text": "'SlotBook was never integrated with single sign-on - as far as we know it uses its own local passwords - so the 2025-09-08 migration shouldn't have touched it. But we've never had access to that server or its logs, so I can't prove it either way.'"
+    },
+    {
+      "id": "E16",
+      "stage": "S1",
+      "source": "ITS service desk staffing and capacity report, AY 2025-26",
+      "sourceType": "financial-record",
+      "text": "Service desk establishment 21 FTE (reduced from 23 FTE on 2024-07-01), average utilisation 94%. P2 and P3 queues met their resolution targets in 10 of 12 months. The P4 best-effort queue is staffed at 0.4 FTE. All 21 FTE serve all faculties and units; 8,620 of the 9,800 eligible accounts are outside Arts."
+    },
+    {
+      "id": "E17",
+      "stage": "S1",
+      "source": "SlotBook technical inventory and ITS project register (checked 2026-11-02)",
+      "sourceType": "document",
+      "text": "SlotBook was built in 2019 by an Arts postdoctoral researcher who left the university in 2022; it runs PHP 5.6 on a departmental server in the Lindqvist building, with no source documentation and no support agreement. It is used by 6 of the 9 Arts departments. The ITS project register contains no requirements-fit assessment comparing SlotBook with CampusBook, and no migration project has been scoped or costed."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Central IT deprioritises the Faculty of Arts: Arts tickets wait longer than other faculties' tickets of the same kind because they come from Arts."
+      },
+      {
+        "id": "H2",
+        "text": "Most of the gap between Arts' 9-day median resolution and the university's 3-day median comes from SlotBook tickets being routed to the low-priority P4 best-effort queue."
+      },
+      {
+        "id": "H3",
+        "text": "Arts' above-average ticket volume per user (about 3x) is fully explained by the unsupported SlotBook application."
+      },
+      {
+        "id": "H4",
+        "text": "ITS informed Arts Faculty leadership (the Dean or the Faculty Operations Manager) of the SlotBook routing rule (RR-17) at or before its 2025-08-18 effective date."
+      },
+      {
+        "id": "H5",
+        "text": "Arts staff who raised SlotBook tickets were not told by the ticketing system that their tickets were on a best-effort track with no resolution target."
+      },
+      {
+        "id": "H6",
+        "text": "Arts' high ticket volume is mainly driven by Arts staff filing trivial or duplicate tickets."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "RR-17 routing of SlotBook tickets to the P4 best-effort queue",
+        "to": "Arts' longer median ticket resolution time (9.0 vs 3.0 days)",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Tuesday/Thursday-only on-site technician coverage at the Lindqvist campus",
+        "to": "the remaining gap between Arts' non-SlotBook median resolution (4.8 days) and the university median (3.0 days)",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "The 2025-09-08 single-sign-on migration",
+        "to": "The rise in SlotBook tickets from September 2025",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "ITS not having informed Arts Faculty leadership (the Dean or the Faculty Operations Manager) of RR-17 when it took effect",
+        "to": "The Dean's view that central IT is unresponsive to Arts",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Place all Arts tickets on the P4 best-effort track until Arts retires SlotBook (the ITS Director's proposal)."
+      },
+      {
+        "id": "A2",
+        "text": "Convene the Dean and ITS Director to agree in writing SlotBook's support status (owner, interim support level and response target), and change the P4 auto-acknowledgement so SlotBook requesters are told the priority and expected timeframe."
+      },
+      {
+        "id": "A3",
+        "text": "Decommission SlotBook and move all Arts timetabling to CampusBook for the January 2027 term."
+      },
+      {
+        "id": "A4",
+        "text": "Publish a monthly Arts service report to the Dean and ITS Director that splits SlotBook from non-SlotBook tickets and compares Arts with other faculties on a category- and priority-matched basis."
+      },
+      {
+        "id": "A5",
+        "text": "Transfer 2 FTE of the central service desk budget to the Faculty of Arts to run its own Arts IT desk, taking over all Arts service-desk tickets from the 2027 spring term (the Dean's proposal)."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Re-coding of a random sample of January-August 2025 Arts tickets filed as 'Other' or 'Applications' to identify SlotBook tickets raised before the category existed"
+      },
+      {
+        "id": "Q2",
+        "text": "SlotBook application and departmental server authentication and error logs from July 2025 onward"
+      },
+      {
+        "id": "Q3",
+        "text": "Requirements-fit assessment of CampusBook against SlotBook's timetabling functions, carried out with Arts department administrators"
+      },
+      {
+        "id": "Q4",
+        "text": "Second interviews with the ITS Director and the Dean of Arts about the 2025-08-12 check-in"
+      },
+      {
+        "id": "Q5",
+        "text": "Peer-university benchmark of staff satisfaction with central IT support"
+      },
+      {
+        "id": "Q6",
+        "text": "Breakdown of Arts non-SlotBook tickets by requester employment type (continuing vs sessional staff)"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "H6",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I16",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

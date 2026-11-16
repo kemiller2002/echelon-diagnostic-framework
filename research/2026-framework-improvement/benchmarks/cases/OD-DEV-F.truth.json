@@ -1,0 +1,333 @@
+{
+  "caseId": "OD-DEV-F",
+  "groundTruthNarrative": "In July 2025 the CTO paused the reliability roadmap for Project Meridian, a deliberate and defensible tradeoff. Overdue postmortem fixes accumulated. After a delay of roughly one to two quarters (median 4.6 months from due date to recurrence), the unfixed failure modes began recurring, and SEV1-SEV2 incidents rose from 10 to 25 a quarter. Incidents absorb engineering time (interrupt share up from 19% to 48%). That time pushes out more reliability work (44 of 52 deferrals cite incident load), which produces more recurrences: a self-reinforcing loop. Storage's six-week exemption broke the loop locally and its incidents fell to 1. Traffic grew only 7%, and the tooling change affects only SEV4s, as merchant credits confirm. The hiring freeze did not start the rise, but it now amplifies it by preventing backfill. Senior attrition rose alongside overtime, but compensation and Halden's local hiring confound that link. Response coverage is not the constraint: acknowledgement times are unchanged and incidents rarely overlap. Adding a second on-call slot treats the symptom and drains fix capacity, as the Networking pilot showed.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "E7",
+        "E15"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Transaction volume rose only 7% (E3) while SEV1-SEV2 incidents rose 150% and merchant-facing degraded minutes more than quadrupled. The EU region carries 11% of volume and only 3 of 25 Q3 incidents (E3). Storage held its traffic share constant and its incidents still fell from 5 to 1 after it cleared deferred fixes (E7). The other teams' incidents kept rising over the same traffic. Most Q3 incidents recur known, unfixed failure modes (E6). Volume cannot be the main driver, so the leadership claims in E1 and E15 are contradicted rather than merely unestablished."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E12",
+        "E14"
+      ],
+      "tags": [
+        "root-cause",
+        "feedback-loop"
+      ],
+      "rationale": "The order of events fits: roadmap paused in July 2025 (E5), open action items rose from 38 to 126 (E6), and incidents rose from Q1 2026 (E2). The mechanism is shown by the 60% recurrence of overdue failure modes with a 4.6-month median lag (E6). The loop closes because interrupt share rose to 48% and delivery fell to 17% (E4), and 44 of 52 deferrals cite incident load (E5). Storage's exemption cleared its fixes and its incidents fell while the other teams kept rising (E7), an intervention result that rules out rivals. Survey comments corroborate this (E14)."
+    },
+    {
+      "itemId": "I3",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E10",
+        "E11",
+        "E14"
+      ],
+      "tags": [
+        "confounded",
+        "staff-narrative"
+      ],
+      "rationale": "Every leaver who cited on-call also cited pay (E10), so the exit interviews cannot separate the two. Platform has both the on-call burden and the lower relative pay: 41st vs 58th market percentile (E11). The higher platform attrition rate therefore fits either explanation. Halden recruits from both orgs (E11). The survey lists both reasons at similar frequency (E14). No stay interviews or dose-response data exist (E11). The evidence does not favour 'primarily compensation' over on-call burden, nor rule it out."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6",
+        "E8",
+        "E9"
+      ],
+      "tags": [
+        "external-cause"
+      ],
+      "rationale": "The freeze took effect on 2026-02-09 (E9), but January 2026 already had 5 SEV1-SEV2 incidents against a prior run rate of about 3.3 a month (E2). The platform had no departures before April 2026, and the rotation was still 31 engineers on 2026-03-31 (E8, E9), so the freeze had not reduced capacity when the rise began. The backlog that drives the rise started building in July 2025 (E5, E6). The freeze amplifies the problem (see R4) but did not start it."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E16"
+      ],
+      "tags": [
+        "measurement-artifact"
+      ],
+      "rationale": "The tool migration auto-creates SEV4s only and does not touch SEV1-SEV2, whose declaration criteria have been unchanged since 2024 (E2). Independent outcome measures, merchant-facing degraded minutes and SLA credits, rose in step with the SEV1-SEV2 count (E3). The rise is real. The SEV3-4 jump is the only artifact."
+    },
+    {
+      "itemId": "I6",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E12",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "E12",
+        "E13"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "symptom-not-cause"
+      ],
+      "rationale": "Acknowledgement within 5 minutes is unchanged at 94-95% (E13). Only 3 of 25 Q3 incidents overlapped (E13), so a single responder is rarely facing two at once. Escalation help arrives in a median of 6 minutes. When Networking doubled its responder coverage, acknowledgement barely moved (3.1 to 2.9 minutes) and its incidents still rose (E12). The binding constraint is capacity to fix recurring causes (E4, E12), not responder coverage."
+    },
+    {
+      "itemId": "I7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E7",
+        "E12",
+        "E14"
+      ],
+      "tags": [
+        "feedback-loop"
+      ],
+      "rationale": "The logged reason for 44 of 52 deferrals is incident load (E5), which is a direct record of the mechanism. Interrupt share and roadmap delivery moved inversely quarter by quarter (E4). Two interventions show the direction. Removing engineers from interrupts let Storage close 11 of 13 items (E7). Adding on-call load in Networking cut its roadmap completion from 30% to 9% (E12). Mechanism, temporal order, covariation and intervention results all point the same way."
+    },
+    {
+      "itemId": "I8",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "tags": [
+        "feedback-loop",
+        "root-cause"
+      ],
+      "rationale": "The recurrence analysis ties specific incidents to specific overdue fixes, and the lag is measured: median 4.6 months, range 2-8 (E6). This matches the gap between the July 2025 pause (E5) and the Q1 2026 rise (E2). The Storage exemption works as a natural experiment. Clearing the backlog cut Storage's incidents from 5 to 1 while traffic share was constant and the other teams kept rising (E7). Traffic is ruled out as a rival (E3)."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E14"
+      ],
+      "tags": [
+        "feedback-loop",
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Overtime and senior departures rose together (E8, E9), and on-call appears in leavers' reasons (E10, E14), so the two are associated. The link is not contradicted. Causation is not established, though. Every leaver who cited on-call also cited pay (E10). The higher-on-call group is also the lower-paid group relative to its market (E11). A new local competitor hires from both orgs (E11). No dose-response data by individual on-call load exists. Confounding remains live, so 'causal' overclaims."
+    },
+    {
+      "itemId": "I10",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E8",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9"
+      ],
+      "tags": [
+        "external-cause",
+        "contributing"
+      ],
+      "rationale": "The freeze explicitly cancelled four approved requisitions, two of them accepted offers that would have joined the rotation in August 2026, and it forbids backfill of the six departures (E9). The rotation therefore shrank from 31 to 25 with no replacement, and per-engineer frequency rose from 1 in 7.75 to 1 in 6.25 (E8). Without the freeze the rotation at 2026-09-30 would have had at least two more engineers. This is a documented external decision acting through simple rota arithmetic; the departures explain why the rotation shrank, but the freeze is why it was not refilled."
+    },
+    {
+      "itemId": "I11",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E8",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E8",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "symptom-not-cause",
+        "leadership-narrative"
+      ],
+      "rationale": "With 25 engineers, the plan puts everyone on call about every third week (E8). On-call weeks yield almost no planned work (E4), so the plan cuts the remediation capacity that drives the loop. Responder coverage is not the constraint (E13). The Networking pilot of this exact design left acknowledgement unchanged. It also cut roadmap completion to 9%, raised after-hours hours 46% and prompted transfer requests (E12). Outcomes are likely to get worse, so the action is harmful, not merely premature."
+    },
+    {
+      "itemId": "I12",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E14"
+      ],
+      "tags": [
+        "root-cause",
+        "feedback-loop"
+      ],
+      "rationale": "This action targets the established loop at its leverage point: overdue fixes behind 60% of recurrences (E6). Storage has already tested it, with large incident and page reductions at a modest temporary rotation cost (E7). Funding it by trimming feature commitments addresses the refusal recorded in E7. No other candidate acts on a confirmed cause."
+    },
+    {
+      "itemId": "I13",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E9"
+      ],
+      "tags": [
+        "external-cause"
+      ],
+      "rationale": "Backfill would relieve the freeze-driven load (R4), so asking is reasonable and carries little risk. Exceptions are considered only at the Q1 2027 review and only for revenue-generating roles, and new hires take 5 months to ramp (E9). The request cannot affect the loop for at least two quarters and may be refused. Worthwhile, but not among the best next actions."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E10",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E10",
+        "E11",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "Putting the entire discretionary budget into pay is right only if attrition is primarily pay-driven (H3), and that remains unknown (E10, E11). It is not harmful, since pay is a plausible contributor. But committing all of the budget now, before stay interviews, is not justified."
+    },
+    {
+      "itemId": "I15",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E16"
+      ],
+      "tags": [
+        "metric-gaming",
+        "organizational-silence"
+      ],
+      "rationale": "SEV1-SEV2 declaration is at the responder's discretion (E2, E16). The last time counts were tied to ratings, 19 incidents were downgraded and two outages went undeclared (E16). The action would suppress the very signal the diagnosis depends on, and it would not fix the underlying causes."
+    },
+    {
+      "itemId": "I16",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E12",
+        "E13"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The core loop (R1, R2) is established by mechanism, lag analysis and two interventions (E4-E7, E12). That is enough to commit to the substantive remediation in A2 and to reject A1. The open questions concern the attrition driver, which affects A4, not the main intervention."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2"
+  ],
+  "lowValueRequests": [
+    "Q3",
+    "Q4"
+  ]
+}

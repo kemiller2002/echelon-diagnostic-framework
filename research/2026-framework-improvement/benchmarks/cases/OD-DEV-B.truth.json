@@ -1,0 +1,344 @@
+{
+  "caseId": "OD-DEV-B",
+  "groundTruthNarrative": "Lanterna's NRR fell from 112% to 96% mainly because expansion within retained accounts collapsed (-12.3 of the -16 pts); logo churn and downgrades explain the rest. Two internal changes landed within ten weeks of each other: the February cut of the implementation team (which demonstrably lengthened the wait for new-site implementation, with demand flat) and the April-October platform migration (which demonstrably raised Sev-1 incidents and lowered uptime). Either, or both together, could have deterred customers from expanding to new sites; the current evidence - aggregate timing, a confounded ticket correlation, staff and customer accounts that name both - cannot separate them. The CEO's competitor narrative is contradicted: EMEA, where Routewise does not sell, declined identically, and Routewise took only $0.41M of churned ARR. The VP Sales' price narrative is contradicted: price-locked accounts declined as much as accounts that took the increase, and the 'Price' loss code is a dropdown-default artifact. Discriminating data already exists (per-account migration wave assigned by shard; per-account queue history), so the right move is a short discriminating analysis plus, at most, a reversible capacity test - not a price rollback or a large one-sided bet.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "E5",
+        "E6",
+        "E18"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "causal-overclaim-trap",
+        "measurement-artifact"
+      ],
+      "rationale": "E6 is a natural comparison: the 45% of ARR on price locks received no increase yet fell 113%->97%, matching the increase cohort's 111%->95%, with similar GRR and expansion falls and similar mix. The surface signal (E3, E4: 'Price' as top loss reason) is countered by E5: the code is the pre-selected dropdown default, 12 of 15 have no notes, and 9 of 15 were price-locked accounts that received no increase. E18 shows CSMs rarely hear pricing complaints. Supported or unknown cannot be defended against a cohort comparison showing no differential."
+    },
+    {
+      "itemId": "I2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E18"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "external-cause",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "EMEA, where Routewise does not and cannot yet sell (E8), shows the same NRR fall as North America (E7). Routewise took 6 logos worth $0.41M (E9), under one NRR point against a 16-point decline, and most of the decline is expansion in retained accounts (E2), which customer defection cannot explain. The trap (E1, E10: Routewise in 58% of competitive cycles) is explicitly scoped to new-logo deals, not the installed base."
+    },
+    {
+      "itemId": "I3",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E11",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E18"
+      ],
+      "tags": [
+        "contributing",
+        "confounded",
+        "hidden-problem"
+      ],
+      "rationale": "There is a real mechanism (E11, E12: queue sits in front of the expansion order; waits rose from 16 to 67 days) and timing fits (E16). But the rival reliability explanation fits the same timing (E13 Wave 1 in April also precedes the Q2 drop), CSMs name both equally (E18), the one customer account says it was both (E15), and no account-level link between queue time and lost expansion exists (E12: withdrawal reasons not recorded). The evidence does not favour H3 over H4, so 'main driver' is live but unestablished. Not contradicted: nothing counts against it."
+    },
+    {
+      "itemId": "I4",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E13",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E18"
+      ],
+      "tags": [
+        "contributing",
+        "confounded"
+      ],
+      "rationale": "Reliability clearly worsened after the migration (E13), and outage-exposed accounts expanded less (E14), but E14's own caveat shows confounding by size and implementation-queue status, and 4 of 9 Sev-1s hit all accounts, so exposure is not cleanly separable. Timing (E16), CSM complaints (E18) and the customer account (E15) equally fit the onboarding explanation. The wave comparison that could discriminate (E13: shard-based waves recorded) has not been run. Live, not established, not contradicted."
+    },
+    {
+      "itemId": "I5",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E6",
+        "E7",
+        "E16"
+      ],
+      "tags": [
+        "symptom-not-cause",
+        "root-cause"
+      ],
+      "rationale": "The controller-signed bridge (E2) attributes 12.3 of the 16-point decline to expansion and 3.7 to GRR, with an unchanged definition ruling out a measurement artifact. E6, E7 and E16 replicate the expansion-led pattern across cohorts, regions and bookings. This is a decomposition, not a causal claim, so it is fully supported."
+    },
+    {
+      "itemId": "I6",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "root-cause",
+        "side-effect"
+      ],
+      "rationale": "Temporal order (cut on 2 Feb, wait rises after), mechanism (capacity halved from 15 to 7 while new-logo work is prioritised, E12), covariation (16 -> 67 days, queue of 112 sites), and the main rival - rising demand from either existing customers or new logos - is ruled out by flat request and new-logo volumes (E11). This meets the causal standard; association-only would understate it. Note this edge is about wait times, not NRR."
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "tags": [
+        "causal-overclaim-trap",
+        "measurement-artifact"
+      ],
+      "rationale": "Affected accounts' GRR fell 92.8%->89.0% (-3.8) vs price-locked accounts 93.5%->89.9% (-3.6) (E6): no differential in churn and downgrades attributable to the increase. The apparent association in E4 is undermined by E5 (default dropdown coding; 9 of 15 'Price' churns had no increase)."
+    },
+    {
+      "itemId": "I8",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E7",
+        "E8",
+        "E9",
+        "E10"
+      ],
+      "tags": [
+        "external-cause",
+        "leadership-narrative"
+      ],
+      "rationale": "Routewise did take some customers (E9: 6 logos), but the edge claims customer loss to Routewise drives the NRR decline: those losses are ~$0.41M against a decline driven mainly by expansion (E2), and the decline is identical in EMEA where Routewise is absent (E7, E8). Evidence counts against the link as stated."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E13",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "E14 shows a clear correlation (9% vs 24% expansion) but explicitly flags confounding: high-ticket accounts are larger, multi-site and far more often in the implementation queue (61% vs 22%), and new-site setups themselves generate tickets (possible reverse/common cause). No adjustment or wave-based comparison exists. Not 'unknown' because the association is directly shown; not causal because rivals remain live."
+    },
+    {
+      "itemId": "I10",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E16",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Queue delays and falling expansion bookings co-occur in time (E11, E16), and there is a plausible mechanism (E12), but the migration (a common-period rival) also precedes the drop, the Head of Implementation cannot quantify lost expansions (E12), and the only customer account names both causes jointly (E15). No account-level comparison links queue exposure to lost orders. Co-occurrence with a live rival = association-only."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E11",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "The two live causes are not yet separated, and the data to separate them already exists: migration waves were assigned by shard, independent of account size (E13), giving a near-natural experiment, and per-account queue and withdrawal histories are retained (E11). A 4-6 week analysis directly targets the open question at low cost before the board decision."
+    },
+    {
+      "itemId": "I12",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E17",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12",
+        "E15",
+        "E17"
+      ],
+      "tags": [
+        "contributing",
+        "confounded"
+      ],
+      "rationale": "Wait times are causally worse because of the cut (E11) and customers say waiting deterred them (E12, E15); 90-day cancellable contracts at ~$114k per quarter (E17) are cheap and reversible, and random assignment within the queue turns the capacity relief into a controlled test of H3/R5 that the migration rival cannot confound. Relieving a demonstrated harm while generating discriminating evidence makes it among the best next actions alongside A1. It is not premature because it is a reversible, self-evaluating pilot, not a committing bet on H3 (contrast A5); its preferred status is consistent with SUFF = insufficient because it does not commit to a fix ahead of evidence."
+    },
+    {
+      "itemId": "I13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "leadership-narrative"
+      ],
+      "rationale": "Price is contradicted as a driver (E6), so it is not merely premature: rolling back gives up ~$2.1M of realized ARR uplift (E6) and the extra 15% discounts mechanically lower NRR further, while the evidence shows no retention gain to expect (locked accounts declined identically) and the competitor it targets is not driving the decline (E7, E8, E9). Likely to worsen the outcome it aims to fix."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E13",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E18"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "Would be reasonable if H4 were confirmed as the main driver, but H4 is unestablished (E14 confounded; E15, E16, E18 equally fit H3). A two-quarter roadmap freeze of all engineering is a large, hard-to-reverse commitment, and a remediation backlog is already being worked (E13). Not harmful: reliability did worsen, so it addresses a real problem; it is the commitment ahead of evidence that is wrong."
+    },
+    {
+      "itemId": "I15",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E17",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12",
+        "E15",
+        "E16",
+        "E17"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "Would be right if H3 were confirmed, but whether the queue drives lost expansion is unestablished (association-only, live rival). A permanent ~$1.0M/yr rebuild plus a new function is a big, hard-to-reverse bet, and E17 shows a cheaper reversible way to buy capacity and test the hypothesis first (A2). Not harmful: wait times really are worse because of the cut."
+    },
+    {
+      "itemId": "I16",
+      "expected": "insufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E13",
+        "E14",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E18"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "The two candidate causes left standing cannot be discriminated with current evidence (shared timing E16, confounded correlation E14, joint attributions E15, E18), and the substantive interventions on offer each bet on one of them. Evidence is sufficient to rule out price and competitor responses, but not to commit to a substantive fix; reversible capacity tests and the discriminating analysis are the justified next steps."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "lowValueRequests": [
+    "Q4",
+    "Q6"
+  ]
+}

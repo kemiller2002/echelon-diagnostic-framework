@@ -1,0 +1,152 @@
+{
+  "caseId": "OD-HO-E",
+  "groundTruthNarrative": "Harlow & Vane measures on-time delivery against the current promised date, which dispatchers can revise at will; the original commitment drops out of the KPI. When an on-time bonus started on 2026-03-01 at Northgate and Riverside, and on 2026-07-01 at Pell Junction, each center's revision rate jumped about fivefold in the month it became eligible, and its reported on-time rate rose to about 98% at the same time. The growth was almost all in the Operational - Capacity code. Customer-requested revisions stayed flat, more revisions were entered on or after the due date, and fewer customers were told. RouteWise cut miles but does not explain the on-time pattern. Lateness complaints rose 35% before and after the portal launch while other complaint categories stayed flat. The largest customer's own logs show 81% on time against original dates (87% a year earlier). Actual timeliness got worse while the metric showed improvement. The driver shortage may contribute, but the data do not separate it from lane length. Advertising the figure or enlarging the bonus would make things worse.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E9", "E11"],
+      "allowedEvidence": ["E3", "E4", "E6", "E7", "E9", "E11", "E12"],
+      "tags": ["leadership-narrative", "metric-gaming"],
+      "rationale": "E3 shows that the KPI uses the revised date, so the 98% says nothing direct about the original commitments. The only measure against original dates (E11, the largest customer) fell from 87% to 81% while Harlow's scorecard reported 98.4%. Network lateness complaints rose 35% on 4% more volume (E9), and the portal explanation is ruled out (see I5). The evidence counts against a real improvement."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E9", "E11"],
+      "allowedEvidence": ["E3", "E4", "E6", "E7", "E9", "E11", "E12"],
+      "tags": ["metric-gaming", "hidden-problem", "measurement-artifact"],
+      "rationale": "This is the 'metric conceals deterioration' item. Reported on-time rose by 6.7 points (E7). Meanwhile the original-date rate at the largest customer fell 6 points (E11) and network lateness complaints rose 35% while damage and billing complaints stayed flat (E9). E3 explains how both can be true at once: revisions overwrite the original date in the KPI. No rival explains rising lateness complaints across the network: the portal is ruled out by the March-May rise, and weather days fell (E15). The claim is supported over the rival that service merely held steady. Its exact network-wide size awaits Q1."
+    },
+    {
+      "itemId": "I3",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": ["E4", "E5", "E6"],
+      "allowedEvidence": ["E4", "E5", "E6", "E7", "E11", "E12", "E15", "E16"],
+      "tags": ["metric-gaming", "root-cause"],
+      "rationale": "Revisions rose fivefold (E4), and each center jumped in the month its bonus began, including Pell Junction's four-month delay (E5, E6). Customer-request revisions were flat at 1.6 vs 1.8 per 100 shipments, and weather's share fell while disruption days fell (E15). The growth sits almost entirely in the discretionary Operational - Capacity code. More revisions were entered late, and notification dropped from 61% to 18% (E4), which is inconsistent with the manager's 'proactive' account in E2. Brightwell requested only 46 of 311 revisions (E11), and 72% of dispatchers report pressure to protect the number (E12)."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": ["E7", "E8"],
+      "allowedEvidence": ["E5", "E6", "E7", "E8"],
+      "tags": ["leadership-narrative", "causal-overclaim-trap"],
+      "rationale": "Northgate had no RouteWise until 2026-10-19, yet its reported on-time rose to 97-98.6% from March (E7, E8). Pell Junction had RouteWise from February but stayed at about 91-92% until July, when its bonus began. Reported on-time follows the bonus dates, not the RouteWise dates. RouteWise's documented benefit was miles and fuel (E8)."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": ["E9"],
+      "allowedEvidence": ["E9", "E10"],
+      "tags": ["staff-narrative", "causal-overclaim-trap"],
+      "rationale": "The manager's explanation in E10 is countered by E9. Lateness complaints were already up 36% in March-May, before the portal launched on 2026-06-15, and the post-launch rise (+34%) was no larger. Damage and billing complaints, which go through the same portal, were flat (+2%, -3%)."
+    },
+    {
+      "itemId": "I6",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": ["E14"],
+      "allowedEvidence": ["E13", "E14", "E15"],
+      "tags": ["confounded", "contributing"],
+      "rationale": "Driver vacancy did rise from 6.1% to 9.4% on 4% more volume (E14), and a dispatcher describes missing second-leg drivers (E13), so the mechanism is plausible. But no original-date timeliness data are broken down by terminal or capacity (E14 analyst note). The vacancy-revision correlation is confounded with lane length (see I8). The deterioration could equally come from dispatchers no longer working to the original date. The evidence neither establishes nor rules out 'primarily'."
+    },
+    {
+      "itemId": "I7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": ["E5", "E6"],
+      "allowedEvidence": ["E4", "E5", "E6", "E7", "E12", "E15"],
+      "tags": ["metric-gaming", "root-cause", "feedback-loop"],
+      "rationale": "The staggered start of the bonus is a natural experiment. Northgate and Riverside jumped in March, when they became eligible. Pell Junction stayed at about 3 per 100 through June and jumped to about 14-15 in July, when it became eligible (E5, E6). The order in time, the mechanism (the bonus is paid on a metric that revisions inflate, E3/E5), the covariation, and the ruled-out rivals (weather days fell in E15; customer requests flat in E4; no change to revision rules in E5) together establish causation."
+    },
+    {
+      "itemId": "I8",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": ["E14"],
+      "allowedEvidence": ["E13", "E14"],
+      "tags": ["confounded", "causal-overclaim-trap"],
+      "rationale": "Vacancy and revision rate correlate across terminals (r = 0.58, E14). But the high-vacancy terminals are the long mountain-lane terminals, and they already had the four highest revision rates in Q3 2025, when vacancy was 7% or below everywhere. Lane length is a live common cause. The analysis is unadjusted. A dispatcher's anecdote (E13) gives a mechanism but no controlled comparison. The two are associated, but causation is not established."
+    },
+    {
+      "itemId": "I9",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": ["E9"],
+      "allowedEvidence": ["E9", "E10"],
+      "tags": ["causal-overclaim-trap"],
+      "rationale": "The rise began three months before the portal existed and did not speed up after launch. Other categories filed through the same portal did not rise (E9). The evidence counts against the link."
+    },
+    {
+      "itemId": "I10",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": ["E7", "E8"],
+      "allowedEvidence": ["E5", "E7", "E8"],
+      "tags": ["leadership-narrative", "causal-overclaim-trap"],
+      "rationale": "RouteWise go-live in February at Riverside and Pell Junction did not raise Pell Junction's reported on-time. Northgate's rose in March without RouteWise (E7, E8). The timing contradicts the link."
+    },
+    {
+      "itemId": "I11",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E11"],
+      "allowedEvidence": ["E3", "E4", "E9", "E11", "E12"],
+      "tags": ["iatrogenic-intervention", "metric-gaming"],
+      "rationale": "The figure does not measure delivery against the commitment a customer would understand 'on time' to mean (E3). The largest customer's own records show 81% (E11), and that customer is already re-tendering 30% of its lanes. Publicly advertising 98% would make an unsubstantiable claim, further harm trust with customers who see the gap, and lock the organization into defending the gamed metric."
+    },
+    {
+      "itemId": "I12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": ["E5", "E6"],
+      "allowedEvidence": ["E3", "E4", "E5", "E6", "E12", "E16"],
+      "tags": ["iatrogenic-intervention", "metric-gaming", "feedback-loop"],
+      "rationale": "The bonus is shown to cause the revision surge (I7). 31 of 34 dispatchers already hit the top tier (E16), so the higher tier would mostly be reached by more revisions. A larger reward on the same revisable metric would strengthen the gaming loop and deepen the hidden deterioration."
+    },
+    {
+      "itemId": "I13",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E11"],
+      "allowedEvidence": ["E3", "E4", "E9", "E11", "E14"],
+      "tags": ["measurement-artifact"],
+      "rationale": "The revision log keeps the original dates (E3), so the true measure can be rebuilt cheaply. One customer's logs (E11) show a large gap, and network-wide size is the main open quantity. Suspending the claim stops harm while this is done. This is among the best next steps."
+    },
+    {
+      "itemId": "I14",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E5", "E6"],
+      "allowedEvidence": ["E3", "E4", "E5", "E6", "E11", "E12"],
+      "tags": ["metric-gaming", "root-cause"],
+      "rationale": "The incentive-to-revision mechanism is already established causally (I7), whatever the network-wide size of the deterioration. Paying on a measure the payee can reset is corrupt on its face. Measuring against the original date and requiring documented grounds before a revision can count in the KPI targets the confirmed root cause, still lets customers be told about expected delays, and does not depend on unresolved hypotheses (unlike A5)."
+    },
+    {
+      "itemId": "I15",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": ["E14"],
+      "allowedEvidence": ["E13", "E14"],
+      "tags": ["causal-overclaim-trap", "confounded"],
+      "rationale": "This would be right only if H6 were confirmed. The evidence linking capacity to timeliness is an unadjusted, confounded correlation with revision rates, not with original-date misses (E14). A $2.1M commitment is not justified until Q2 or Q1 shows that capacity drives the deterioration. It is not harmful as such, because shortages are plausible."
+    },
+    {
+      "itemId": "I16",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": ["E3", "E5", "E6", "E11"],
+      "allowedEvidence": ["E3", "E4", "E5", "E6", "E7", "E9", "E11", "E12"],
+      "tags": ["metric-gaming"],
+      "rationale": "The metric definition (E3), the natural experiment linking the bonus to revisions (E5, E6), and independent outcome evidence (E9, E11) together justify a substantive intervention now: re-basing the incentive and revision controls (A4) and withdrawing the claim. What remains unknown (network-wide size, the capacity contribution) affects A5, not the core fix."
+    }
+  ],
+  "discriminatingRequests": ["Q1", "Q2", "Q3"],
+  "lowValueRequests": ["Q4", "Q5"]
+}

@@ -1,0 +1,344 @@
+{
+  "caseId": "OD-DEV-A",
+  "groundTruthNarrative": "On 2026-04-06 Meridale introduced SEC-POL-14, requiring AppSec sign-off on every release candidate touching auth, payment or customer-data paths (87% of feature releases). Only one reviewer may sign off, and she can give reviews about 35% of her week (~4.5 reviews/week) against 5-8 submissions/week; the second-reviewer requisition is frozen. A queue built up, and the wait between QA pass and sign-off grew to a median of 37 days, which accounts for the whole slip from a 14-day to a 49-day cadence. Squad-controlled stages, PR throughput and code-review speed are unchanged. Non-gated Reporting releases from the same monorepo kept a 14-day cadence. When a full-time delegate covered the reviewer's August vacation, the queue drained and six releases shipped in 2.5 weeks; the queue rebuilt after she returned. The CTO's 'discipline' indicators (idle tickets, sprint carry-over) are mostly tickets waiting in the security queue, because Done requires a production deploy. Engagement fell at the same time, but a salary freeze confounds that. The gate is contractually required, and its protective effect has not yet been measured.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E7",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E12",
+        "E14"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "symptom-not-cause",
+        "measurement-artifact"
+      ],
+      "rationale": "The CTO's indicators (E1, E8, E14) are explained by the queue: 88% of idle tickets are 'Awaiting SecReview' (E9), and carry-over is mechanical because Done requires a production deploy (E14 appendix). Engineer-controlled measures are flat: merged PRs 7.2 to 6.9, code-review latency 5 h, story points 41 to 42 (E7), and freeze-to-RC and RC-to-QA stages are unchanged (E5). In August the slip reversed with no change to engineering staffing or process (E6), and same-process non-gated releases kept a 14-day cadence (E12). The evidence counts against the claim, so the answer is contradicted, not unknown."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E9",
+        "E12",
+        "E13",
+        "E17",
+        "E7",
+        "E11"
+      ],
+      "tags": [
+        "root-cause",
+        "protective-control"
+      ],
+      "rationale": "Timing: the gate started 2026-04-06 (E3) and the slip began in Q2 (E2). Capacity: the reviewer completes 4.3-4.6 reviews/week against 5.2-7.9 submissions/week, and the queue grew from 11 to 27 (E4, E13). The added time sits entirely between QA pass and sign-off (E5). The natural experiment shows the effect: a full-time delegate cleared 19 reviews, cut the median wait to 3 days, and six releases shipped, then the queue rebuilt after the handback (E6). Non-gated releases were unaffected (E12). The rivals are contradicted, so this is the best-supported hypothesis."
+    },
+    {
+      "itemId": "I3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E11",
+        "E12",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E10",
+        "E11",
+        "E12",
+        "E6",
+        "E7"
+      ],
+      "tags": [
+        "staff-narrative",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The VP's account (E10) is plausible but countered. Debt index rose only 4%, build time +1 min, and flaky tests and change failure rate are flat (E11). Build and QA stages are unchanged (E5). Non-gated Reporting releases from the same monorepo, CI pipeline and QA stage kept a 14-day cadence (E12). Releases recovered in August without any code-base change (E6). Tech debt would slow gated and non-gated releases alike and would lengthen engineer-controlled stages, and neither happened."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "E6",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E6",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Per-review active time is 3.0-3.4 h (E4), about the same as the delegate's 3.3 h (E6). The delegate cleared the queue because he reviewed full time, not because he worked faster. The reviewer's throughput is capped by her ~35% allocation, required by other contractual duties, and by the frozen second requisition (E13, E3). The evidence points to staffing and allocation, not individual performance."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E7",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E12",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "causal-overclaim-trap",
+        "symptom-not-cause"
+      ],
+      "rationale": "Morale did fall (E15), but the claim is that it reduced output. Engineering output is flat (E7), and engineer-controlled pipeline stages are unchanged (E5). The cadence recovered in August, with no evidence of any morale change, when review capacity rose (E6). Lower morale coexists with unchanged output, which counts against it as a contributor to the slip."
+    },
+    {
+      "itemId": "I6",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E12",
+        "E13",
+        "E7",
+        "E11"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "All the elements of a causal claim are present: temporal order (E3, E2), a mechanism shown in queue data and stage timestamps (E4, E5), covariation in queue depth and wait times (E4), a natural experiment that reversed and then restored the effect with the engineering process held constant (E6), and rivals ruled out (E11, E12, E7). The correct answer is causal, not association-only."
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E9",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E7",
+        "E8",
+        "E9",
+        "E14",
+        "E6"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "measurement-artifact",
+        "symptom-not-cause"
+      ],
+      "rationale": "Idle tickets rose because a new status, 'Awaiting SecReview', now holds 88% of them (E9). Carry-over rose because Done requires a production deploy, which the gate delays (E14). Discipline indicators that engineers control are flat (E7). The observed rise has a specific alternative cause and counts against the link. A reader who answers association-only has missed E9, which explains the metric directly."
+    },
+    {
+      "itemId": "I8",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E11",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "staff-narrative"
+      ],
+      "rationale": "Tech debt barely moved (E11). Non-gated releases from the same code base were unaffected (E12). Engineer-controlled stages are unchanged (E5). The cadence recovered without any code change (E6). The evidence counts against debt as a cause of the slip."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E15",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The two co-occur: engagement fell from 74 to 61 over the same period as the slip, and 22% of comments cite waiting on security review (E15). But a salary freeze and promotion deferral were announced on 2026-05-12, in the same window (E16), and are the larger comment theme at 31%. Results cannot be split between gated and non-gated squads (E15). Co-occurrence is established, but the confound is live, so the answer is association-only. It is not causal and not unknown."
+    },
+    {
+      "itemId": "I10",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E17"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "The policy states what the gate is for (E3), but no production security-defect data has been compiled since the gate started, and the pen-test report is not yet available (E17). There is no outcome data, so not even an association can be assessed. Answering contradicted because the gate is the bottleneck, or causal because of its stated purpose, both go beyond the evidence."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E6",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "root-cause",
+        "protective-control"
+      ],
+      "rationale": "This action targets the established constraint (review capacity) and keeps the contractually required control (E3, E17). Its mechanism was effectively piloted in August (E6). It uses a delegate route the policy already allows (E3) and a requisition that is already approved in principle (E3, E13)."
+    },
+    {
+      "itemId": "I12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E9",
+        "E12",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "iatrogenic-intervention"
+      ],
+      "rationale": "This program punishes the wrong party. Engineer output is unchanged (E7, E5), and the metrics it would target are inflated by the security queue (E9, E14). Engineers cannot shorten the queue. PIPs based on velocity would penalize people for a constraint outside their control and would add pressure on top of already falling engagement (E15)."
+    },
+    {
+      "itemId": "I13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E10",
+        "E17",
+        "E6"
+      ],
+      "tags": [
+        "protective-control",
+        "iatrogenic-intervention"
+      ],
+      "rationale": "Suspending the gate disables a protective control that three enterprise contracts (31% of ARR) require. It was introduced after a real audit finding about an unauthenticated endpoint (E3, E17). A capacity fix that keeps the control is available (E6). Removing the control would trade a contractual and security risk for a delay that more staffing can fix."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "Risk-tiering is contract-compatible in principle, but only if the tiering is justified by review history (E3). The Head of Security says no one has tallied review findings by change category, so there is no basis yet for judging any category low-risk (E17). Not harmful outright: the control is kept for higher-risk changes and the contracts allow tiering. Not preferred or acceptable: committing now, with no review-history basis, is unjustified. Evidence request Q1 would settle it."
+    },
+    {
+      "itemId": "I15",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E12",
+        "E13",
+        "E9",
+        "E11"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "Queue data, stage timestamps, a natural experiment, and contradicted rivals together justify a substantive intervention on review capacity (A1) now. The remaining unknowns (the gate's protective effect, which change categories are risky) bear only on how to rescope the gate, not on whether to add capacity."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2"
+  ],
+  "lowValueRequests": [
+    "Q3",
+    "Q4"
+  ]
+}
