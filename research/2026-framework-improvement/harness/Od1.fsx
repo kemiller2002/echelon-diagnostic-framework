@@ -511,4 +511,75 @@ match argv with
         :: (rows |> List.map fst))
     File.WriteAllLines(Path.Combine(outDir, "og-readings.csv"), "runId,grader,itemId,reading" :: (rows |> List.collect snd))
     printfn "graded=%d scored=%d" graded.Length rows.Length
+| [ "adapt1"; casesDir; promptsDir; outDir; conds; k; split ] ->
+    // Stage 1 of the adaptive-evidence experiment: catalogue only (id, stage, source, sourceType), choose k items.
+    let caseFiles =
+        Directory.GetFiles(casesDir, "*.case.json") |> Array.sort |> List.ofArray
+        |> List.filter (fun p -> split = "all" || (readJson p |> strOr "" "split") = split)
+    let made =
+        [ for cid in conds.Split(',') do
+            let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.txt"))
+            for cf in caseFiles do
+                let e = readJson cf
+                let kid = strOr "" "id" e
+                let catalogue =
+                    arr "evidence" e
+                    |> List.map (fun x -> sprintf "- %s [%s] source: %s (%s)" (strOr "" "id" x) (strOr "" "stage" x) (strOr "" "source" x) (strOr "" "sourceType" x))
+                let candidates = prop "candidates" e |> Option.map (fun c -> c.GetRawText()) |> Option.defaultValue "{}"
+                let text =
+                    String.concat "\n"
+                        [ sprintf "You are planning an organizational diagnosis under an evidence budget. You may collect only %s of the evidence items listed below. You can see each item's source but not its content. Use no tools other than returning your answer." k
+                          "Choose the items that will most improve your ability to judge the candidate hypotheses, causal links and actions correctly. Prefer items that discriminate between live explanations over items that would only confirm the client's framing."
+                          ""
+                          "Method guidance (apply as relevant to choosing evidence):"
+                          modul
+                          ""
+                          sprintf "ORGANIZATION: %s" (prop "organization" e |> Option.map (fun o -> o.GetRawText()) |> Option.defaultValue "")
+                          sprintf "PRESENTING REQUEST: %s" (strOr "" "presentingRequest" e)
+                          ""
+                          "EVIDENCE CATALOGUE (content hidden):"
+                          String.concat "\n" catalogue
+                          ""
+                          "CANDIDATES THAT WILL BE JUDGED:"
+                          candidates
+                          ""
+                          sprintf "Return exactly %s distinct evidence IDs in 'selected', most valuable first." k ]
+                File.WriteAllText(Path.Combine(outDir, sprintf "adapt1__%s__%s.txt" cid kid), text)
+                yield sprintf "adapt1|%s|%s|1" cid kid ]
+    printfn "%s" (JsonSerializer.Serialize made)
+| [ "adapt2"; casesDir; promptsDir; outDir; selJournals; k; seed ] ->
+    // Stage 2: recognition bundles (D_EDFX module) containing only the selected evidence.
+    // Selectors: SEL_A_GENERAL / SEL_D_EDFX (from stage-1 journals), FIXED (first k by file order), RANDOM (seeded).
+    let kk = int k
+    let events =
+        selJournals.Split(',') |> List.ofArray
+        |> List.collect (fun j ->
+            let ev = File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone())
+            let labels = ev |> List.filter (fun e -> str "type" e = Some "started") |> List.choose (fun e -> match str "key" e, str "label" e with | Some a, Some b -> Some (a, b) | _ -> None) |> Map.ofList
+            ev |> List.filter (fun e -> str "type" e = Some "result")
+            |> List.choose (fun e -> match str "key" e |> Option.bind (fun x -> Map.tryFind x labels), prop "result" e with
+                                     | Some l, Some r -> Some (l, strList "selected" r) | _ -> None))
+    let selections = events |> List.map (fun (l, s) -> let p = l.Split('|') in (p.[1], p.[2]), s) |> Map.ofList
+    let shared = File.ReadAllText(Path.Combine(promptsDir, "SHARED.txt"))
+    let modul = File.ReadAllText(Path.Combine(promptsDir, "D_EDFX.module.txt"))
+    let seedInt = seed |> Seq.fold (fun h ch -> (h * 31 + int ch) &&& 0x7fffffff) 17
+    let made =
+        [ for (kid, cf) in (Directory.GetFiles(casesDir, "*.case.json") |> Array.sort |> Array.map (fun p -> (readJson p |> strOr "" "id"), p) |> List.ofArray) do
+            let e = readJson cf
+            let ids = arr "evidence" e |> List.map (strOr "" "id")
+            let rnd = Random(seedInt + (kid |> Seq.sumBy int))
+            let strategies =
+                [ "FIXED", ids |> List.truncate kk
+                  "RANDOM", ids |> List.map (fun i -> rnd.Next(), i) |> List.sortBy fst |> List.map snd |> List.truncate kk ]
+                @ ([ "A_GENERAL"; "D_EDFX" ] |> List.choose (fun s -> Map.tryFind (s, kid) selections |> Option.map (fun sel -> "SEL_" + s, sel |> List.filter (fun i -> List.contains i ids) |> List.distinct |> List.truncate kk)))
+            for (sname, chosen) in strategies do
+                let o = Nodes.JsonNode.Parse(e.GetRawText()).AsObject()
+                let kept = arr "evidence" e |> List.filter (fun x -> List.contains (strOr "" "id" x) chosen)
+                o.["evidence"] <- Nodes.JsonNode.Parse("[" + String.Join(",", kept |> List.map (fun x -> x.GetRawText())) + "]")
+                let note = sprintf "Evidence budget: only %d evidence items were collected for this case; other evidence exists but was not collected. Items whose evidence is not in the file must be judged on what was collected." chosen.Length
+                let text = sprintf "%s\n\n%s\n\n%s\n\nCASE FILE (JSON):\n%s\n\nReturn your answer through the structured output tool only. Answer every scored item exactly once. Use itemIds exactly as given." shared modul note (o.ToJsonString(JsonSerializerOptions(WriteIndented = true)))
+                File.WriteAllText(Path.Combine(outDir, sprintf "adapt2__%s__%s.txt" sname kid), text)
+                yield sprintf "adapt2|%s|%s|1" sname kid, String.Join(" ", chosen) ]
+    File.WriteAllLines(Path.Combine(outDir, "adapt2-selections.txt"), made |> List.map (fun (a, b) -> a + "|" + b))
+    printfn "%s" (JsonSerializer.Serialize(made |> List.map fst))
 | _ -> eprintfn "usage: validate <casesDir> | score <casesDir> <rawDir> <outDir> | stats <outDir> <split|all> <seed> <a,b;c,d>"; exit 2
