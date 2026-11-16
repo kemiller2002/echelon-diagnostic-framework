@@ -1,0 +1,34 @@
+{
+  "id": "EX-EDF-2026-OD1S",
+  "title": "Sequential evidence acquisition on OD1 held-out cases",
+  "mission": "EDF-IMPROVEMENT-2026-001",
+  "workItem": "WI-0013",
+  "date": "2026-11-16",
+  "status": "preregistered-before-runs",
+  "motivation": "OD1 found evidence acquisition to be the largest lever (model-chosen batch of 6 beat random by +11.6) but batch selection from a content-blind catalogue still lost 11.7 points vs full evidence. Literature (sequential diagnosis, value of information, optimal stopping) predicts that acquiring evidence one item at a time, updating after each read, should capture more decisive evidence with fewer items.",
+  "cases": "12 held-out OD1 cases (frozen, benchmarks/frozen-cases-heldout.sha256); truth sealed during runs",
+  "design": {
+    "start": "Analyzer sees the presenting request, organization, candidate items (request menu shuffled and relabeled X1..Xn), scored items and an evidence catalogue (id, stage, source, sourceType, file path); no evidence content.",
+    "acquisition": "Each Read of a catalogue file acquires one evidence item. The number of evidence files read is extracted from the agent transcript and is the measured evidence burden.",
+    "stopping": "Free conditions: analyzer decides when to stop (any number up to all items). Budget conditions: at most 6 items (same k as the OD1 batch experiment).",
+    "answering": "OD1 recognition output contract; scored with harness/Od1.fsx (plain-mean calibration)."
+  },
+  "conditions": {
+    "SEQ_A_GENERAL": "general prompt, free stopping (2 trials)",
+    "SEQ_B_EDF03": "EDF v0.3 module, free stopping",
+    "SEQ_C_KTNT": "Kepner-Tregoe + Nadler-Tushman module, free stopping",
+    "SEQ_D_EDFX": "variant D module, free stopping (2 trials)",
+    "SEQ_A_GENERAL_K6": "general prompt, budget 6",
+    "SEQ_D_EDFX_K6": "variant D module, budget 6"
+  },
+  "model": "sonnet tier",
+  "comparators": "OD1 held-out full-evidence runs (same conditions) and OD1 batch-selection runs (SEL_A_GENERAL, SEL_D_EDFX at k=6)",
+  "hypotheses": [
+    {"id": "HS-1", "statement": "Free sequential acquisition approaches full-evidence accuracy with fewer items.", "support": "for SEQ_D_EDFX and SEQ_A_GENERAL: mean score >= full-evidence score of the same condition minus 3, with mean items read <= 60% of catalogue"},
+    {"id": "HS-2", "statement": "Sequential acquisition at budget 6 beats batch selection at budget 6.", "support": "SEQ_*_K6 minus SEL_* (same module) >= +3 with paired bootstrap CI lower bound > 0"},
+    {"id": "HS-3", "statement": "EDF-derived methods (B, D) acquire evidence more efficiently than the general prompt.", "support": "two-sided; report score, items read, required-evidence coverage and score per item; a method is more efficient if it reaches equal score (within 2) with >= 2 fewer items on average, or higher score (CI > 0) with no more items"},
+    {"id": "HS-4", "statement": "Explicit sufficiency rules reduce over- and under-collection.", "support": "descriptive: distribution of items read and correlation of items read with case difficulty"}
+  ],
+  "statistics": "paired case-level bootstrap, 10000 resamples, seed 20261116; no multiplicity correction (exploratory); all raw outputs and transcripts preserved",
+  "stopRules": ["Freeze prompts (hash) before runs", "No edits to cases or truth", "Runs whose transcripts show reads outside the case's evidence directory are flagged and reported, not silently dropped"]
+}

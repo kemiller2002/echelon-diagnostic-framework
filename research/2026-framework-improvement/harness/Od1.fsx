@@ -612,4 +612,63 @@ match argv with
                 yield sprintf "adapt2|%s|%s|1" sname kid, String.Join(" ", chosen) ]
     File.WriteAllLines(Path.Combine(outDir, "adapt2-selections.txt"), made |> List.map (fun (a, b) -> a + "|" + b))
     printfn "%s" (JsonSerializer.Serialize(made |> List.map fst))
+| [ "seqbundle"; casesDir; promptsDir; bundleDir; evidenceRoot; conds; split; seed ] ->
+    // Sequential-acquisition bundles. conds like "A_GENERAL:FREE,D_EDFX:K6". One evidence file per item under
+    // evidenceRoot/<case>/<id>.txt; the task file holds request, candidates (relabeled menu), scored items and a catalogue.
+    let shared = File.ReadAllText(Path.Combine(promptsDir, "SHARED.txt"))
+    let caseFiles =
+        Directory.GetFiles(casesDir, "*.case.json") |> Array.sort |> List.ofArray
+        |> List.filter (fun p -> split = "all" || (readJson p |> strOr "" "split") = split)
+    let made =
+        [ for spec in conds.Split(',') do
+            let cid, mode = let a = spec.Split(':') in a.[0], a.[1]
+            let modul = File.ReadAllText(Path.Combine(promptsDir, cid + ".module.txt"))
+            let seqText = File.ReadAllText(Path.Combine(promptsDir, (if mode = "K6" then "SEQ_K6.txt" else "SEQ_FREE.txt")))
+            let condId = if mode = "K6" then cid + "_K6" else cid
+            for cf in caseFiles do
+                let e = readJson cf
+                let kid = strOr "" "id" e
+                let evDir = Path.Combine(evidenceRoot, kid)
+                Directory.CreateDirectory evDir |> ignore
+                arr "evidence" e |> List.iter (fun x -> File.WriteAllText(Path.Combine(evDir, strOr "" "id" x + ".txt"), x.GetRawText()))
+                let relabeled, rmap = relabelRequests (seedOf (seed + "|" + condId + "|" + kid)) (File.ReadAllText cf)
+                File.WriteAllText(Path.Combine(bundleDir, sprintf "seq__%s__%s.map.json" condId kid),
+                    "{" + String.Join(",", rmap |> List.map (fun (r, q) -> sprintf "\"%s\":\"%s\"" r q)) + "}")
+                let header = Nodes.JsonNode.Parse(relabeled).AsObject()
+                header.Remove("evidence") |> ignore
+                let catalogue =
+                    arr "evidence" e
+                    |> List.map (fun x -> sprintf "- %s [%s] source: %s (%s) -> file %s" (strOr "" "id" x) (strOr "" "stage" x) (strOr "" "source" x) (strOr "" "sourceType" x) (Path.Combine(evDir, strOr "" "id" x + ".txt")))
+                let text =
+                    sprintf "%s\n\n%s\n\n%s\n\nCASE FILE WITHOUT EVIDENCE CONTENT (JSON):\n%s\n\nEVIDENCE CATALOGUE:\n%s\n\nWhen you have finished collecting, return your answer through the structured output tool only. Answer every scored item exactly once. Use itemIds exactly as given; cite only evidence IDs you collected."
+                        shared modul seqText (header.ToJsonString(JsonSerializerOptions(WriteIndented = true))) (String.concat "\n" catalogue)
+                File.WriteAllText(Path.Combine(bundleDir, sprintf "seq__%s__%s.txt" condId kid), text)
+                yield sprintf "seq|%s|%s|1" condId kid ]
+    printfn "%s" (JsonSerializer.Serialize made)
+| [ "seqreads"; journals; evidenceRoot; outCsv ] ->
+    // Counts evidence files read per run from workflow agent transcripts (agentId from journal 'started' lines).
+    let rows =
+        journals.Split(',') |> List.ofArray
+        |> List.collect (fun j ->
+            let dir = Path.GetDirectoryName j
+            File.ReadAllLines j |> List.ofArray |> List.map (fun l -> JsonDocument.Parse(l).RootElement.Clone())
+            |> List.filter (fun e -> str "type" e = Some "started")
+            |> List.choose (fun e ->
+                match str "label" e, str "agentId" e with
+                | Some label, Some aid ->
+                    let tp = Path.Combine(dir, sprintf "agent-%s.jsonl" aid)
+                    if not (File.Exists tp) then None
+                    else
+                        let txt = File.ReadAllText tp
+                        let reads =
+                            Text.RegularExpressions.Regex.Matches(txt, "\"name\":\\s*\"Read\",\\s*\"input\":\\s*\\{\"file_path\":\\s*\"([^\"]+)\"")
+                            |> Seq.map (fun m -> m.Groups.[1].Value) |> List.ofSeq
+                        let kid = label.Split('|').[2]
+                        let evPrefix = Path.Combine(evidenceRoot, kid) + "/"
+                        let evReads = reads |> List.filter (fun r -> r.StartsWith evPrefix) |> List.map (fun r -> Path.GetFileNameWithoutExtension r)
+                        let others = reads |> List.filter (fun r -> not (r.StartsWith evPrefix) && not (r.Contains "/od1-bundles/seq__"))
+                        Some (sprintf "%s,%d,%d,%s,%s" label evReads.Length (evReads |> List.distinct |> List.length) (String.Join(" ", evReads)) (String.Join(" ", others)))
+                | _ -> None))
+    File.WriteAllLines(outCsv, "runId,reads,distinctReads,order,violations" :: rows)
+    printfn "runs=%d" rows.Length
 | _ -> eprintfn "usage: validate <casesDir> | score <casesDir> <rawDir> <outDir> | stats <outDir> <split|all> <seed> <a,b;c,d>"; exit 2
