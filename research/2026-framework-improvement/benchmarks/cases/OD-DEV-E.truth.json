@@ -1,0 +1,314 @@
+{
+  "caseId": "OD-DEV-E",
+  "groundTruthNarrative": "From 2026-05-01 Hartwell agents received a $150 monthly team bonus for a team AHT of 7.5 minutes or less. AHT is measured per agent call leg, so a transfer or an agent release counts as a short handled call. Agents learned to transfer long calls to tier 2, release calls near the 6-7.5 minute mark and ask customers to call back. Transfers rose from 11.2% to 19.6%, agent releases from 0.5% to 2.3%, and 7-day repeat contacts by about 40%, while control sites with the same coaching, knowledge tool and new product stayed flat. Total agent minutes per customer issue barely fell, and tier-2 waits and overtime rose. CSAT looked stable because the survey rule, unchanged since 2024, excludes transferred and released calls, which are exactly the outcomes that grew. Complaints, which the dashboard does not show, nearly tripled. The hailstorm came after the rise had begun and does not explain it. Hartwell attrition rose, but a better-paying local employer opened at the same time, so whether the bonus raised attrition is unknown. Repeat contacts are associated with lapse, but the link is confounded. Expanding the bonus or disabling the agent-release alert would make things worse.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "metric-gaming"
+      ],
+      "rationale": "Same-quality service in less time is contradicted. At Hartwell only, repeat contacts rose 41% against a flat control (E8), and transfers and agent releases rose sharply (E7). Tier-2 waits went from 2 to 9 minutes (E10), complaints nearly tripled (E12), and total agent minutes per customer issue fell only from 11.4 to 11.1 (E11). The stable CSAT that leadership cites (E1) is explained by the survey's eligibility rule (E5, E6), so it does not count in H1's favour."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E12",
+        "E17"
+      ],
+      "tags": [
+        "metric-gaming",
+        "hidden-problem",
+        "root-cause"
+      ],
+      "rationale": "Several independent records point the same way, and only at Hartwell. Transfers rose from 11.2% to 19.6% starting in May, before HomeCyber, which is only 1.4% of calls. Agent releases quadrupled, and 71% of them fall in the 6:00-7:30 window (E7). Repeat contacts rose 41%, and a growing share of them follow a transferred or released call (E8). Agents describe the practices themselves (E9). Tier 2 found 41% of Hartwell transfers needed no specialist (E10). The AHT definition makes transfers and releases count as short calls (E3)."
+    },
+    {
+      "itemId": "I3",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E12"
+      ],
+      "tags": [
+        "measurement-artifact",
+        "metric-gaming"
+      ],
+      "rationale": "The survey goes only to 'Resolved', non-transferred calls (E6), so the transferred and agent-released calls that grew (E7) can never be surveyed. Hartwell surveys sent fell even though call volume rose 9% (E5), which matches a shrinking eligible pool. Complaints about exactly these outcomes nearly tripled outside the survey (E12). The rule is old and the same at every site, so this is an artifact of design rather than tampering, but it does make the stable score uninformative about the outcomes that changed."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E8",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E7",
+        "E8",
+        "E13"
+      ],
+      "tags": [
+        "external-cause",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The hailstorm (2026-07-18, E13) is a real and plausible rival, but the repeat rate had already risen to 21.9% in May and 23.8% in June, before the storm. It stayed at 25.0% in October, after claims volume had returned to normal. Excluding the claims-status queue entirely, the rise is still 37% (E8). The storm cannot be the main explanation."
+    },
+    {
+      "itemId": "I5",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E14",
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Hartwell attrition did rise (9 leavers vs 5 a year earlier, just above its 2022-2026 range of 3-8) while other sites were flat (E14), so the claim is not contradicted. But a Hartwell-specific rival appeared at the same time: a better-paying 300-seat contact centre opened in Hartwell's town in June, and leavers' destinations are not recorded. The 3 exit interviews split between pressure, pay and relocation (E14), and pressure scores rose about equally at all sites after a company-wide restructuring announcement (E15). Agent comments about guilt over long calls (E9) make pressure plausible, but the evidence cannot separate the bonus from the local labour-market rival."
+    },
+    {
+      "itemId": "I6",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E7",
+        "E9"
+      ],
+      "tags": [
+        "metric-gaming",
+        "root-cause"
+      ],
+      "rationale": "This is a natural experiment. Only Hartwell got the bonus, from May 1 (E4). Hartwell AHT stepped down from May, while the three control sites, which had the same coaching, knowledge tool and product, moved from 9.5 to 9.4 (E3). The mechanism is documented: the leg-based definition plus transfers and releases (E3, E7, E9). The bonus caused the fall in reported AHT. That much of the fall is gaming does not make the link non-causal."
+    },
+    {
+      "itemId": "I7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E7",
+        "E8",
+        "E9",
+        "E10"
+      ],
+      "tags": [
+        "metric-gaming",
+        "side-effect"
+      ],
+      "rationale": "The timing fits (the rise starts in May, with the bonus), the rise is confined to the treated site, and the rival explanations are ruled out. HomeCyber launched everywhere on May 12 and explains only about 1.3-1.4 points everywhere. There was no telephony change at Hartwell (E4, E7). Releases cluster just under the 7.5 target (E7). Agents and tier 2 describe the mechanism (E9, E10)."
+    },
+    {
+      "itemId": "I8",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "tags": [
+        "staff-narrative",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The site manager credits coaching and PolicyFind (E2). But coaching finished, and PolicyFind was released, at all four sites by late April (E4). Hartwell's April AHT was still 9.6, and the control sites with the same interventions fell only 0.1 minute (E3). This evidence counts against these interventions explaining a fall from 9.6 to 7.2."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E8",
+        "E16"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Repeat callers do lapse more (4.8% vs 1.9%), so the two are associated. But the same gap existed before the bonus (4.5% vs 1.8%). Repeat callers are disproportionately customers with disputed claims or premium queries, a likely common cause, and the overall lapse rise occurred at control sites too after a company-wide premium increase (E16). Causation is not established, and nothing here counts against an association."
+    },
+    {
+      "itemId": "I10",
+      "expected": "harmful",
+      "weight": 3,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "iatrogenic-intervention",
+        "metric-gaming",
+        "leadership-narrative"
+      ],
+      "rationale": "The rollout is feasible and is what the client asked for. But the evidence shows the bonus causes transfers, releases and repeat contacts (E7, E8), worse tier-2 waits and more complaints (E10, E12), and little real saving (E11). The business case assumes volume stays flat, and it has not. Extending the bonus to the 348 agents at three more sites would multiply the harm, and it would reach a centralized tier-2 desk that is already on overtime."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "protective-control",
+        "root-cause"
+      ],
+      "rationale": "This action stops the spread of a demonstrated harm. It targets the cause, an incentive on a gameable single metric (E3, E7, E8), by gating payout on balancing measures. It also fixes the survey blind spot (E6) so future quality signals are valid. It is reversible, and the established findings H2, H3, R1 and R2 support it without depending on any open question."
+    },
+    {
+      "itemId": "I12",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E14",
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "causal-overclaim-trap"
+      ],
+      "rationale": "A pay rise targeted at bonus-driven attrition would be justified only if H5 were established. Hartwell attrition rose, but a better-paying local employer opened at the same time, exit-interview data are sparse and split, and pressure rose everywhere (E14, E15), so committing money on the stated rationale now is not justified. It would also leave the gaming mechanism untouched. It is not harmful in itself: if bonus-driven attrition were confirmed, it could be right."
+    },
+    {
+      "itemId": "I13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E17"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E7",
+        "E9",
+        "E17"
+      ],
+      "tags": [
+        "protective-control",
+        "organizational-silence"
+      ],
+      "rationale": "The alert is the only intraday control on agent-ended calls (E17). Its volume quadrupled because agent releases really did quadruple and cluster near the target (E7, E9). They are not noise. Switching it off at the one site where releases surged would disable a protective control and hide the very behaviour the incentive produces."
+    },
+    {
+      "itemId": "I14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E10",
+        "E11"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The controlled comparison across sites (E3, E4), the call-outcome and repeat-contact data (E7, E8) and the survey rule (E6) establish the main mechanism well enough to justify a substantive, reversible intervention: halting the rollout and redesigning the incentive (A2). The open questions, attrition (H5) and lapse causation (R4), bear on secondary decisions, not on the core one."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2"
+  ],
+  "lowValueRequests": [
+    "Q4",
+    "Q5"
+  ]
+}

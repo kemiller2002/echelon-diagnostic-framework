@@ -1,0 +1,35 @@
+{
+  "caseId": "OD-DEV-A",
+  "blindAgreement": 1.0,
+  "disputes": [
+    {
+      "itemId": "I14",
+      "original": "premature",
+      "issue": "E3 said three contracts require documented security review of each release touching customer data. A4 lets 'low-risk' categories skip AppSec sign-off, which a careful reader could read as a contract breach and so as 'harmful' (it disables a contractually required protective control). That made premature and harmful about equally defensible.",
+      "resolution": "Added to E3 that the contracts allow risk-tiered review depth if the tiering is documented and justified by review history. Reworded A4 so low-risk categories ship with a documented squad security checklist instead of no review. Premature is now the unique answer: tiering is allowed, but there is no review-history basis yet (E17). Updated the rationale and allowed evidence to match. Expected answer unchanged."
+    },
+    {
+      "itemId": "I1",
+      "original": "contradicted (requiredEvidence E5, E6, E7, E9)",
+      "issue": "Requiring four evidence items is more than the item needs. E12 refutes H1 as well as E6 does, so E6 is not strictly required.",
+      "resolution": "Reduced requiredEvidence to E5, E7 and E9. E6 and E12 stay in allowedEvidence. Expected answer unchanged."
+    },
+    {
+      "itemId": "I2/I6",
+      "original": "supported / causal",
+      "issue": "The case leaked the answer through wording. H2 and the 'from' node of R1 stated the conclusion ('lacks capacity for review demand', 'review capacity below demand') and were much more detailed than their rivals.",
+      "resolution": "Shortened H2 to 'Insufficient review capacity at the mandated security-review gate is the main cause...' Changed the 'from' node of R1 to 'Security-review gate review capacity (single reviewer)'. Expected answers unchanged."
+    },
+    {
+      "itemId": "I2/I3/I6",
+      "original": "supported / contradicted / causal",
+      "issue": "The figures contradicted each other. E2 has 22 feature releases in Q2-Q3, and E4 says 87% of them were gated, which leaves about 3 non-gated. E12 reported 11 non-gated Reporting releases at a 14-day cadence, and those would also have pulled E2's pooled median down. The control comparison rested on numbers that could not all be true.",
+      "resolution": "Rewrote E12: non-gated Reporting changes ship as report-patch/* releases, which are not counted as feature releases in E2. They still use the same monorepo, CI, QA stage and sprint process. Fixed the ambiguous E4 queue-depth list ('Jun 21', 'Aug 31: 12' read like dates) to month-end values."
+    }
+  ],
+  "schemaFixes": [
+    "Rationales cited evidence that was missing from allowedEvidence. Added E7 and E11 to I2 and I6, E6 to I13, and E9 and E11 to I15. Added E13 to I14.",
+    "Checked counts: 17 evidence items, 5 hypotheses, 5 edges, 4 actions, 1 SUFF, 6 evidence requests, 2 discriminating requests. Every candidate is covered by a scored item, every evidence id referenced exists, and requiredEvidence is a subset of allowedEvidence for every item."
+  ],
+  "verdict": "accepted-with-fixes"
+}

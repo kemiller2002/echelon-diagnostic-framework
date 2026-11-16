@@ -1,0 +1,408 @@
+{
+  "id": "OD-DEV-A",
+  "split": "dev",
+  "benchmarkClass": "A",
+  "title": "Feature release cadence slip at Meridale Invoicing",
+  "organization": {
+    "type": "private company, product-led B2B software vendor",
+    "industry": "B2B invoicing and accounts-receivable SaaS",
+    "size": "approx. 400 staff, of whom 138 are engineers in 12 squads across 4 product lines (Core App, Billing, Integrations, Reporting)"
+  },
+  "presentingRequest": "Over the last two quarters our feature release cadence has slipped from every two weeks to roughly every seven weeks. I'm convinced the engineering team has lost its discipline: tickets sit idle for weeks, sprints carry over, and nobody seems to feel any urgency. We would like your help designing an accountability program - stricter standups, individual velocity tracking, and real performance consequences for the bottom performers - so we can get back to a two-week cadence by Q1. - Daniel Okoro, CTO",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "CTO (interview, 2026-10-05)",
+      "sourceType": "leadership-account",
+      "text": "\"In Q1 we shipped every two weeks like clockwork. Now it's seven weeks. Look at the dashboard: idle tickets went through the roof and commits per engineer are down. When I walk the floor, people are on Slack, not shipping. We hired good people; they've just gotten comfortable. Security review? That's a day or two of paperwork at most - it can't explain five extra weeks.\""
+    },
+    {
+      "id": "E2",
+      "stage": "S2",
+      "source": "Production release log, all product lines (exported 2026-10-02)",
+      "sourceType": "system-record",
+      "text": "Median interval between consecutive feature releases, per product line, pooled: Q4 2025 14 days; Q1 2026 14 days; Q2 2026 31 days; Q3 2026 49 days. The definition of a 'feature release' (a production deployment tagged release/* from the main branch) has not changed since 2024. Number of feature releases: Q1 24, Q2 13, Q3 9. Of the 9 Q3 releases, 6 shipped between 2026-08-12 and 2026-08-28."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Security policy SEC-POL-14 'Pre-release security review' (effective 2026-04-06)",
+      "sourceType": "document",
+      "text": "Every release candidate (RC) that modifies authentication, payment, or customer-data code paths must receive written sign-off from Application Security before production deployment. Sign-off may be given only by the AppSec reviewer or a delegate named in writing by the Head of Security. Staffing note appended to the policy: 'AppSec currently has one reviewer (Senior AppSec Engineer). A second reviewer position (REQ-2291) was approved in principle but frozen in the February 2026 budget cycle.' Background section: the policy was introduced after a February 2026 enterprise-customer audit finding; three enterprise contracts (together 31% of ARR) now require documented security review of each release touching customer data. The contracts permit the depth of review to be risk-tiered by change category, provided the tiering criteria are documented and justified by review history."
+    },
+    {
+      "id": "E4",
+      "stage": "S2",
+      "source": "AppSec review queue export (ticketing system, 2026-04-06 to 2026-09-30)",
+      "sourceType": "system-record",
+      "text": "Queue depth (open RCs) at month end: April 11, May 17, June 21, July 24, August 12, September 27. Median wait from RC submission to sign-off: Apr 4 days, May 12, Jun 19, Jul 33, Sep 26 (RCs submitted in Sep that were signed off by export date; 14 still open). Median active reviewer time per review (logged effort): 3.0 h in Apr, 3.4 h in Sep. Reviews completed per week by the reviewer: between 4.3 and 4.6 every month. Submissions per week: Apr 6.8, May 6.0, Jun 5.5, Jul 5.2, 2026-08-22 to 09-30 7.9. 87% of Q2-Q3 feature releases touched gated paths."
+    },
+    {
+      "id": "E5",
+      "stage": "S2",
+      "source": "CI/CD pipeline stage timestamps, feature releases (median per stage)",
+      "sourceType": "system-record",
+      "text": "Q1 2026 (pre-gate): code freeze to RC built 3 days; RC to QA pass 2 days; QA pass to production 1 day. Q3 2026: code freeze to RC built 3 days; RC to QA pass 2 days; QA pass to AppSec sign-off 37 days; sign-off to production 1 day. Stages controlled by squads (freeze-to-RC, RC-to-QA) are unchanged; the added time sits entirely between QA pass and AppSec sign-off."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "source": "AppSec queue records and engineering-operations change log, 2026-08-10 to 2026-08-21 (reviewer on scheduled leave)",
+      "sourceType": "system-record",
+      "text": "During the Senior AppSec Engineer's two-week vacation, the Head of Security named a Staff Engineer from the Platform team as written delegate and released him from platform duties to review full time. The delegate completed 19 reviews in 10 working days (median 3.3 h active time per review), versus the reviewer's 4.4 per week in July. Queue depth fell from 24 to 7. RCs submitted in those two weeks waited a median of 3 days. Six feature releases shipped 2026-08-12 to 08-28, compared with 2 in the preceding four weeks. The engineering-operations change log shows no changes to squad staffing, sprint process, standup format, or branching policy between July and September. After the reviewer returned on 2026-08-24 and the delegate went back to Platform, the queue rose to 27 by 2026-09-30."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "source": "Version-control analytics, engineering-wide (per engineer per week, medians)",
+      "sourceType": "system-record",
+      "text": "Merged pull requests: Q1 7.2, Q2 7.0, Q3 6.9. Commits: Q1 23, Q2 22, Q3 21. Time from PR opened to first peer code review: Q1 5 h, Q3 5 h. Story points completed to 'code complete' per squad per sprint: Q1 41, Q2 40, Q3 42. Engineering headcount: 136 at Q1 end, 138 at Q3 end."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "CTO 'Engineering Health' dashboard slide presented to the executive team (2026-09-15)",
+      "sourceType": "document",
+      "text": "Headline metric: 'Tickets idle > 10 days' rose from 6% of open tickets (March) to 41% (August). Slide caption: 'Execution discipline problem - accountability program proposed for Q4.' The slide does not show ticket status."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "source": "Issue-tracker status breakdown of tickets idle > 10 days (snapshot 2026-09-30)",
+      "sourceType": "system-record",
+      "text": "Of 412 tickets idle more than 10 days: 363 (88%) in status 'Awaiting SecReview'; 27 (7%) 'Blocked - external vendor'; 22 (5%) 'In progress'. In the March snapshot, 'Awaiting SecReview' did not exist as a status."
+    },
+    {
+      "id": "E10",
+      "stage": "S1",
+      "source": "VP Platform Engineering (interview, 2026-10-07)",
+      "sourceType": "manager-account",
+      "text": "\"Honestly, the real problem is the monolith. We've been piling on tech debt for three years, the test suite is flaky, and every change touches six modules. That's what slows us down. If leadership funded a two-quarter re-architecture, cadence would come back. The security gate is annoying, but it's not the root cause.\""
+    },
+    {
+      "id": "E11",
+      "stage": "S2",
+      "source": "Static-analysis and CI health report (quarterly)",
+      "sourceType": "system-record",
+      "text": "Technical-debt index (tool-estimated remediation days): Q4 2025 1,840; Q3 2026 1,912 (+4%). Median CI build time: Q1 18 min; Q3 19 min. Flaky-test rate: Q1 2.1%; Q3 2.4%. Change failure rate (deploys causing rollback): Q1 4%; Q3 4%."
+    },
+    {
+      "id": "E12",
+      "stage": "S2",
+      "source": "Production release log, Reporting product line (non-gated subset)",
+      "sourceType": "system-record",
+      "text": "Reporting changes that fall entirely outside SEC-POL-14 scope (no authentication, payment or customer-data paths) ship as separate patch releases (tagged report-patch/*, so not counted as feature releases in the release log export). They are built from the same monorepo, pass through the same CI pipeline and QA stage, and are produced by squads following the same sprint process. Median interval between these non-gated releases: Q1 14 days; Q2 15 days; Q3 14 days (n = 11 across Q2-Q3)."
+    },
+    {
+      "id": "E13",
+      "stage": "S1",
+      "source": "Senior AppSec Engineer (interview, 2026-10-08)",
+      "sourceType": "staff-account",
+      "text": "\"I'm the only one who can sign off. Reviews are maybe 35% of my week - the rest is pen-test coordination, vendor security assessments and incident response, which the enterprise contracts also require. That's roughly 14 hours of review time a week. I raised the backlog with the Head of Security in May and again in July; REQ-2291 is still frozen. The August cover showed what happens when someone does it full time.\""
+    },
+    {
+      "id": "E14",
+      "stage": "S1",
+      "source": "Internal Q2 delivery retrospective, Engineering PMO (2026-07-09)",
+      "sourceType": "prior-report",
+      "text": "Sprint carry-over (tickets not reaching 'Done' within the sprint) rose from 9% in Q1 to 34% in Q2. Conclusion: 'Teams are over-committing and not closing out work; recommend stricter sprint discipline.' Appendix B notes that the team Definition of Done requires a ticket's change to be deployed to production. The report does not break carry-over down by ticket status."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "source": "Engineering engagement pulse survey (anonymous; March vs September 2026)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "Engineering engagement index: March 74, September 61 (response rate 78% and 81%). Free-text themes in September (coded by HR): compensation freeze 31% of comments; 'waiting on security review / can't ship' 22%; leadership communication 14%. Results are not reported below department level because of anonymity thresholds, so gated and non-gated squads cannot be compared."
+    },
+    {
+      "id": "E16",
+      "stage": "S1",
+      "source": "HR all-hands announcement (2026-05-12)",
+      "sourceType": "document",
+      "text": "Company-wide salary freeze for FY2026 and deferral of the mid-year promotion cycle to 2027, citing a slower sales pipeline."
+    },
+    {
+      "id": "E17",
+      "stage": "S1",
+      "source": "Head of Security (interview, 2026-10-09)",
+      "sourceType": "manager-account",
+      "text": "\"The gate is not optional - three enterprise contracts require it, and the audit finding was about an unauthenticated export endpoint we shipped in 2025. Reviews do send changes back, but we haven't tallied how often or by change category, so I can't yet tell you which kinds of changes are low-risk. We also haven't compiled production security-defect data since the gate started; the Q3 external pen-test report is due in December. I agree the queue is a problem; I named the August delegate because I could see it.\""
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "A decline in engineers' discipline and effort is the main cause of the release cadence slip."
+      },
+      {
+        "id": "H2",
+        "text": "Insufficient review capacity at the mandated security-review gate is the main cause of the release cadence slip."
+      },
+      {
+        "id": "H3",
+        "text": "Accumulated technical debt in the monolith is the main cause of the release cadence slip."
+      },
+      {
+        "id": "H4",
+        "text": "The AppSec reviewer is individually slow or over-thorough per review, and this personal performance is the main cause of the slip."
+      },
+      {
+        "id": "H5",
+        "text": "Falling engineer morale has reduced engineering output and is a material contributor to the release cadence slip."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Security-review gate review capacity (single reviewer)",
+        "to": "Release cadence slip (14 to 49 days)",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Decline in engineering discipline",
+        "to": "Rise in tickets idle > 10 days and sprint carry-over",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Growth in technical debt",
+        "to": "Release cadence slip (14 to 49 days)",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Release cadence slip / waiting on security review",
+        "to": "Decline in engineering engagement index (74 to 61)",
+        "relation": "causes"
+      },
+      {
+        "id": "R5",
+        "from": "Security-review gate",
+        "to": "Fewer security defects reaching production",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Raise sustained review capacity at the gate: unfreeze REQ-2291 for a second reviewer and, until filled, run a standing rotation of trained written delegates released from other duties (as in August), with queue wait time reported weekly to the CTO and Head of Security."
+      },
+      {
+        "id": "A2",
+        "text": "Launch the CTO's accountability program: enforced daily standups, individual velocity tracking, and performance-improvement plans for the bottom 10% of engineers by velocity."
+      },
+      {
+        "id": "A3",
+        "text": "Suspend the SEC-POL-14 security-review gate until release cadence returns to two weeks."
+      },
+      {
+        "id": "A4",
+        "text": "Redefine SEC-POL-14 scope now so that change categories judged 'low-risk' skip AppSec sign-off and instead ship with a documented security checklist completed by the squad."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Breakdown of AppSec review outcomes (changes requested, severity) by change category, April-September 2026"
+      },
+      {
+        "id": "Q2",
+        "text": "Production security-defect counts before vs after the gate, and the Q3 external pen-test report"
+      },
+      {
+        "id": "Q3",
+        "text": "Individual commit counts per engineer, by name, for Q1-Q3"
+      },
+      {
+        "id": "Q4",
+        "text": "Office badge-in and attendance records for engineering staff"
+      },
+      {
+        "id": "Q5",
+        "text": "Exit-interview notes for engineers who left in Q2-Q3"
+      },
+      {
+        "id": "Q6",
+        "text": "Full free-text comments from the September engagement pulse survey"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R5",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

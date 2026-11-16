@@ -1,0 +1,411 @@
+{
+  "caseId": "OD-DEV-H",
+  "groundTruthNarrative": "After Kestrel signed the Brightwell placement agreement (2 May 2025), the CEO told Sales to say yes to whatever Brightwell needed. Following each Brightwell business review, the Key Accounts Director committed new features in writing without involving Engineering, and those commitments entered the firmware backlog as 'clarification' tickets that rewrote existing stories without re-estimation. The VP Product, unwilling to reopen the PRD, told the Firmware Manager to absorb them and ignored his repeated written escalations. Because points never changed, the PMO scope line stayed flat and the firmware team appeared to complete only 60% of its commitments, with high reopen rates. In fact, the team delivers unchanged stories at 94%, in line with its Halo 3 record; the shortfall and the reopens are concentrated in stories modified by Sales-driven changes. Firmware is genuinely the critical path, but because that is where the churn lands, not because the team is slow. Hardware is on schedule. Whether the Key Accounts Director's new accelerator, as opposed to the CEO's directive, drove the commitments cannot be determined from the evidence.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "tags": [
+        "revision",
+        "leadership-narrative"
+      ],
+      "rationale": "Using only S1 evidence, the firmware team completes 60% of commitments against 91-94% for mobile and cloud (E3), accounts for 9 of 11 failed gate criteria (E4), and has a reopen rate of 31% against its own 12% on Halo 3 (E7). The obvious rivals are each countered at S1: hardware and supply are on schedule (E4); requirements are reported frozen, with a flat scope line and an unchanged feature count (E3, E5); and staffing is stable (E8). The manager accepts ownership of the estimates (E6). With every rival available at S1 countered, the evidence favours the claim, so 'supported' is the proportional S1 answer. 'Unknown' would ignore that the S1 record actively rules out the alternatives it contains."
+    },
+    {
+      "itemId": "I2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E12",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E7",
+        "E9",
+        "E11",
+        "E12",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "revision",
+        "leadership-narrative",
+        "measurement-artifact"
+      ],
+      "rationale": "S2 shows that on stories nobody changed, the same team completes 94% of points with a median cycle time of 6.1 days, and 90% even inside high-churn sprints. That matches its Halo 3 baseline of 91% and 6.4 days (E12). The shortfall and 84% of reopens sit in stories rewritten by clarification tickets, which consumed 3,960 hours against 1,450 estimated without being re-pointed (E9). The 60% figure therefore measures un-estimated added work, not slow delivery. The team delivers what should be expected for the work it is actually given, so the claim is contradicted, not merely unestablished."
+    },
+    {
+      "itemId": "I3",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "tags": [
+        "revision",
+        "symptom-not-cause"
+      ],
+      "rationale": "E4 records 9 of 11 failed gate criteria as firmware items across both gates, while hardware builds were on time. This is a direct record of where the program is blocked, and it does not depend on why firmware is late."
+    },
+    {
+      "itemId": "I4",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E9",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "revision",
+        "symptom-not-cause"
+      ],
+      "rationale": "Nothing in S2 changes the gate record (E4). S2 explains it: the failed items (onboarding, scheduling engine, demo mode) are the stories rewritten by Brightwell-driven clarifications (E9). Firmware remains the critical path, and over-revising this to 'contradicted' because the team turns out not to be slow would confuse where the delay sits with why it occurs. This is the anti-over-revision control. E4 alone establishes the claim; E9 explains it but is not required."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "E6"
+      ],
+      "tags": [
+        "revision",
+        "hidden-problem"
+      ],
+      "rationale": "At S1, the only evidence bearing on requirements churn counts against it. The VP Product states that the PRD is frozen and the 23-feature list is unchanged (E5), and the system-generated scope line moved only +1.6% (E3). The manager's mention of 'rework' (E6) is equally consistent with quality problems, which E7 seems to corroborate, and no S1 source mentions Sales commitments or changes. 'Supported' has no S1 basis; 'unknown' understates evidence that directly speaks against the claim."
+    },
+    {
+      "itemId": "I6",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E9",
+        "E11",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E16",
+        "E17"
+      ],
+      "tags": [
+        "revision",
+        "root-cause",
+        "hidden-problem"
+      ],
+      "rationale": "Forty-seven post-freeze changes rewrote 41 firmware stories, 38 of them requested by Sales (E9), following written Sales commitments to Brightwell (E10). Sprint completion is 92% when no changes land and 41% when three or more land (E11). The changed stories carry the shortfall, while unchanged stories are delivered at baseline (E12). The failed gate items are exactly the changed features (E4, E9). Staff (E17) and the manager's escalations (E13) independently describe the same mechanism. This outweighs the hardware, staffing and team-slowness rivals."
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4"
+      ],
+      "tags": [
+        "external-cause"
+      ],
+      "rationale": "The build log shows EVT on the planned date, DVT three days early, PVT on track, and component allocation at 100% (E4). Hardware accounts for none of the 11 failed gate criteria. The CEO's account (E1) agrees, and nothing in the case contradicts it."
+    },
+    {
+      "itemId": "I8",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E15",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E10",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "causal-overclaim-trap",
+        "confounded"
+      ],
+      "rationale": "A new $60,000 accelerator tied to Brightwell sell-in took effect before the commitments (E15), which makes the motive plausible. But three days after signing, the CEO explicitly instructed sales leadership, including the Key Accounts Director, to say yes to whatever Brightwell needed (E16), which would produce the same behaviour. No evidence speaks to the Director's motive or compares his conduct with incentive-free peers. Nothing counts against the claim, and nothing establishes it, so it is live but unestablished."
+    },
+    {
+      "itemId": "I9",
+      "expected": "supported",
+      "weight": 1,
+      "requiredEvidence": [
+        "E9",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E9",
+        "E12",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "measurement-artifact",
+        "hidden-problem"
+      ],
+      "rationale": "E9 states that none of the 41 modified stories was re-estimated, that logged effort was 3,960 hours against 1,450 estimated, and that this is why the scope line stayed flat (E3: +1.6%). E13 shows the instruction to absorb changes, and E17 records staff saying 'the charts don't count the rewrites'. The burn-down measures original points, not the work requested."
+    },
+    {
+      "itemId": "I10",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E11",
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "root-cause",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "All the elements of a causal case are present. On temporal order, tickets follow Brightwell reviews and land in specific sprints (E11). On covariation, completion is 92% in no-change sprints and 41% in high-change sprints (E11). On mechanism, rewritten acceptance criteria add un-estimated work, with 3,960 hours logged against 1,450 estimated (E9). The rival is ruled out within the same sprints: the same team completes untouched stories at 90% in the high-churn sprints, so team capacity or skill does not explain the drop (E12). 'Association-only' would ignore that within-sprint control."
+    },
+    {
+      "itemId": "I11",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E15",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E10",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The accelerator (effective 1 Apr, E15) precedes and co-occurs with a run of Sales commitments and tickets (E9, E10), so the two are associated. But the CEO's 5 May directive to say yes to Brightwell (E16) is a sufficient common driver that remains live, and there is no comparison account or variation in the incentive. Causation is not established, and no evidence counts against the link either."
+    },
+    {
+      "itemId": "I12",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E12"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E9",
+        "E11",
+        "E12",
+        "E13"
+      ],
+      "tags": [
+        "leadership-narrative"
+      ],
+      "rationale": "If estimation practice drove the shortfalls, untouched stories, which were estimated the same way, would also miss. They are completed at 94% with cycle times matching Halo 3 (E12), and sprints with no changes reach 92% (E11). The overrun is confined to stories whose scope changed after they were estimated (E9). The VP Engineering's 'estimates are fantasy' (E2) is countered by this record. The one estimation failure visible in the record, not re-pointing changed stories, was imposed on the team: the Firmware Manager asked to re-point them and was told to absorb them (E13)."
+    },
+    {
+      "itemId": "I13",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E9",
+        "E13",
+        "E17"
+      ],
+      "tags": [
+        "measurement-artifact"
+      ],
+      "rationale": "The mechanism is documented directly. Changes were logged as clarifications against existing stories without changing their points (E9), on the VP Product's explicit instruction to absorb them (E13). The scope line is computed from story points, so it stayed flat (+1.6%, E3) while effort nearly tripled. The tracker export (E9) states the link outright."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "tags": [
+        "revision",
+        "leadership-narrative"
+      ],
+      "rationale": "At S1 the evidence supports a team-level shortfall (E3, E7) but says nothing specific about the manager's capability. The VP Engineering's view (E2) is an opinion, the CEO frames it as an open question (E1), and the manager reports rework he has not yet explained (E6). Replacing leadership and outsourcing the backlog would be justified only if the hypothesis that the manager is the cause of the slowness were confirmed. Nothing at S1 shows it would worsen outcomes, so 'harmful' is not yet defensible, and committing to an irreversible personnel move on unexplained aggregate numbers is not justified, so it is not 'acceptable'. Moreover, the same team under the same manager delivered Halo 3 with a 12% reopen rate (E7, E8), so the S1 record shows that something changed between programs, not that the leader is deficient; the cause of the change is unexplained at S1."
+    },
+    {
+      "itemId": "I15",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E12",
+        "E13"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E17"
+      ],
+      "tags": [
+        "revision",
+        "iatrogenic-intervention",
+        "organizational-silence"
+      ],
+      "rationale": "By S2 the team delivers at its historical rate on stable work (E12), and the manager is the person who repeatedly escalated the real cause in writing, only to be told to absorb it (E13). Removing him punishes the wrong party and signals that raising schedule risk is penalised, in a team that already scores 2.4/5 on that item (E17). Handing the backlog to an outsider also leaves the change stream intact (E9, E11) while losing the team's context four months from the Brightwell deadline (E14)."
+    },
+    {
+      "itemId": "I16",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E9",
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E13"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "This action targets the established causal mechanism (R1 causal, R4 causal): un-estimated post-freeze changes admitted without engineering input (E9, E10, E13). It also restores the accuracy of the burn-down. It does not depend on any unresolved question, such as the Director's motive."
+    },
+    {
+      "itemId": "I17",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E14",
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E10",
+        "E12",
+        "E14",
+        "E16"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The retailer itself says that only 3 of the 12 commitments are contractual, that the other requests were optional, and that it prefers on-shelf by 9 Feb 2026 with those three (E14). Freezing scope on that basis directly removes the churn that drives the slips (E9, E12), protects the largest deal, and needs the CEO in the room because the CEO's directive enabled the commitments (E16)."
+    },
+    {
+      "itemId": "I18",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E15",
+        "E16"
+      ],
+      "allowedEvidence": [
+        "E10",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "This action would be right only if the accelerator drove the commitments (H5 and R2), which remain unknown and association-only because the CEO's directive (E16) is a live alternative driver. Changing pay mid-year on that basis is not yet justified. It is not 'harmful', because no evidence shows it would worsen outcomes. It is not 'acceptable', because it acts on an unconfirmed cause while the confirmed causes (scope and change control) have clearer remedies."
+    },
+    {
+      "itemId": "I19",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E9",
+        "E11",
+        "E12",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E16"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The main cause is established with a within-sprint control (E11, E12), its mechanism is documented (E9, E13), and the customer has stated which scope is contractual (E14). That is enough to commit to scope freeze and change control (A2, A3) now. The open questions (the Director's motive, compensation design) affect only the deferred action A4, not the substantive intervention."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "lowValueRequests": [
+    "Q4",
+    "Q5",
+    "Q6"
+  ]
+}

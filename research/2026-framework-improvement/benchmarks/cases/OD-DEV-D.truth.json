@@ -1,0 +1,315 @@
+{
+  "caseId": "OD-DEV-D",
+  "groundTruthNarrative": "On 2026-04-15 Harrowgate lowered its MQL threshold from 60 to 40 and began creating a sales opportunity automatically for every MQL reached by phone. Two weeks earlier it had switched its purchased-lead vendor to LeadSpring, whose leads score >=60 far less often (18% vs Fieldline's 55%, with the scoring model unchanged). The result is 60% more leads, but the share that qualifies on the old standard fell from 52% to 24%. In Q3, 750 low-score (40-59) opportunities entered the win-rate denominator and closed at 3.3%, most of them auto-closed as unresponsive. Win rates on comparable sources are unchanged: non-marketing sources moved from 31.8% to 30.9%, and high-score marketing leads stayed within their historical range. Excluding the new band, Q3 win rate is 29.4%, and won deals and bookings are flat. Rep activity rose, so the CEO's complacency story is wrong. Marketing's volume claim is true but irrelevant, and its scorecard rewards the inflation. The reps are right about lead mix but wrong about pay, which did not fall. The competitor's price cut came after the decline began. Whether LeadSpring's high-score leads are intrinsically worse, and whether slow response hurts, remain open.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "causal-overclaim-trap",
+        "measurement-artifact"
+      ],
+      "rationale": "If reps had slackened, the win rate on sources unaffected by the April changes would fall. It did not: non-marketing win rate went from 31.8% to 30.9% (E7), stayed at 29-32% monthly (E14), and was inside its historical 29-33% range (E8). Activity per rep rose 12%, quotes rose 9% and visits held steady (E9). The CEO's evidence is an artifact. Touches per opportunity fell 34% only because open opportunities per rep rose 70% with more total activity (E9). Slower response is explained by MQLs nearly doubling with flat headcount (E6, E9), not by less effort. Won deals and bookings are flat (E15)."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "root-cause",
+        "measurement-artifact",
+        "staff-narrative"
+      ],
+      "rationale": "E5 shows that from 2026-04-15, 40-59 leads became MQLs and every connected MQL became an opportunity automatically. E7 shows 750 such opportunities (44% of Q3 closed opportunities) winning 3.3%. Without them, Q3 win rate is 29.4% versus 31.0% in Q1, and won deals are unchanged at 310 (E7, E15). The monthly decline starts in May, right after the change (E14). No rival hypothesis accounts for the size of the fall."
+    },
+    {
+      "itemId": "I3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E7",
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "metric-gaming",
+        "local-optimization"
+      ],
+      "rationale": "Lead volume is up 60%, as claimed. But leads meeting the old qualification standard fell from 1,248 to 922 (E6), and won deals and bookings did not rise: 310 vs 310 deals, $4.31M vs $4.18M (E15). The added MQLs are the 40-59 band, which wins 3.3% at $2,100 per deal and absorbs 1,880 rep hours (E7, E15). The 'improvement' exists only in metrics on marketing's scorecard: MQL volume, MQL-to-opportunity conversion and cost per lead (E16). MQL-to-opportunity conversion is inflated by the auto-creation rule (E5)."
+    },
+    {
+      "itemId": "I4",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "tags": [
+        "staff-narrative",
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "LeadSpring's >=60 leads won 26.8% in Q3 versus Fieldline's 29.7% in Q1 (E7). The gap is small at these sample sizes (n=280, n=300). It falls within the 27-33% historical range (E8), and other marketing channels fell by a similar 2 pp in the same period (30.7% to 28.7%, E7). A mix-controlled comparison could not be done because LeadSpring's firmographics are incomplete (E8), and the South manager does not know (E4). The lower share of high-score leads (E6) is a different question from quality at a given score. The evidence does not settle the hypothesis either way."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E11"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E7",
+        "E9",
+        "E11",
+        "E12"
+      ],
+      "tags": [
+        "staff-narrative"
+      ],
+      "rationale": "The 'pay cut by a third' claim (E3) is refuted by payroll: the base rate is unchanged and median variable pay is up 3%, with only 3 of 44 reps below 70% of their prior-year pay (E11). Attrition did not rise (3 to 2, E11), intent to stay barely moved (81% vs 83%, E12) and activity rose (E9). The win rate on unaffected sources held (E7), so there is no win-rate effect for demotivation to explain. Fairness perceptions dipped slightly (E12), but that does not support the causal claim."
+    },
+    {
+      "itemId": "I6",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E7",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "root-cause",
+        "measurement-artifact"
+      ],
+      "rationale": "All the criteria for causation are met. Timing: the change took effect on 2026-04-15 and the monthly decline began in May (E5, E14). Mechanism: low-score leads enter the denominator through auto-created opportunities (E5). Size: the 40-59 band at 3.3% fully accounts for the fall, since Q3 excluding the band is 29.4% (E7). Rival ruled out: sources the change did not touch held steady (E7, E14). This band did not exist before the change, because under the old rule leads below 60 never reached sales (E5, E7)."
+    },
+    {
+      "itemId": "I7",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E10"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E9",
+        "E10"
+      ],
+      "tags": [
+        "confounded",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The covariation is real: contacted within 4 h won 33%, after 24 h won 22% (E10). But reps deliberately call quote requests first (E3), and quote-requested leads are 58% of the fast group versus 21% of the slow group (E10). Buyer intent therefore plausibly drives both speed and outcome. The CRM cannot stratify by the flag (E10), so confounding is not ruled out. Calling the link 'contradicted' or 'unknown' would ignore the observed association."
+    },
+    {
+      "itemId": "I8",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6"
+      ],
+      "tags": [
+        "contributing"
+      ],
+      "rationale": "The scoring model was unchanged (v4.2 since 2025-09, E5), so the scores are comparable. Within Q3, LeadSpring leads score >=60 at 18%, versus 55% for Fieldline in Q1. Other channels held at 47% to 45%, within 5% of their prior-year values (E6), which serves as a concurrent control. LeadSpring supplies 3,000 of the 3,840 leads, which arithmetically produces the 52%-to-24% fall. Timing matches the 2026-04-01 switch (E2, E5)."
+    },
+    {
+      "itemId": "I9",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E13",
+        "E14"
+      ],
+      "allowedEvidence": [
+        "E7",
+        "E13",
+        "E14"
+      ],
+      "tags": [
+        "external-cause",
+        "causal-overclaim-trap"
+      ],
+      "rationale": "The price cut took effect on 2026-06-10 (E13), but the win rate had already fallen to 21% in May (E14). Price-related losses on comparable sources were stable (22% vs 23%). The North and East regions, where the cut applied, held their win rate on non-marketing sources (31% vs 30%) (E14). The win-rate drop is fully located in the new low-score band (E7)."
+    },
+    {
+      "itemId": "I10",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E9"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "E5",
+        "E7",
+        "E9",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "iatrogenic-intervention"
+      ],
+      "rationale": "Targets and performance plans based on the blended win rate punish reps for a mix shift they do not control (E5, E7). Reps' win rate on comparable leads and their activity are normal or better (E7, E9). Any rep handed many 40-59 opportunities would fall below 20% regardless of effort. The program also rewards reps for avoiding or disqualifying marketing leads, which degrades the measurement further. This fits the definition of harmful: it punishes the wrong party and is likely to worsen outcomes."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "E7",
+        "E8",
+        "E16"
+      ],
+      "tags": [
+        "measurement-artifact"
+      ],
+      "rationale": "The leadership dispute exists because the blended rate hides a composition change (E7). The change log shows that auto-created opportunities enter the same denominator (E5). Segmenting by source and score band is cheap and reversible. It removes the measurement artifact that is driving the CEO's narrative and the planned program, so it is among the best next actions."
+    },
+    {
+      "itemId": "I12",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E8"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8"
+      ],
+      "tags": [
+        "causal-overclaim-trap"
+      ],
+      "rationale": "Returning to Fieldline would make sense only if LeadSpring's high-score leads are intrinsically worse (H4), which is currently unknown (E7, E8). The demonstrated damage comes from the threshold change and auto-creation, which can be fixed without changing vendors (E5, E7). Fieldline would cost $71 a lead plus a 45% increase (E2). Committing now is not justified, but the matched comparison could make this action correct."
+    },
+    {
+      "itemId": "I13",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7",
+        "E15"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "E7",
+        "E12",
+        "E15",
+        "E16"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "This acts directly on the established cause (I6). The 40-59 band yields 25 small deals ($52.5k) for 1,880 field-rep hours (E7, E15), and reps report wasted effort (E3, E12). Routing the band to the inside-sales desk, which has 31% spare capacity (E15), keeps those leads and their wins rather than discarding them. Tracking them separately and reviewing after one quarter makes the change measurable and reversible. The South manager had requested this and was refused for scorecard reasons (E4, E16)."
+    },
+    {
+      "itemId": "I14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "E7",
+        "E14",
+        "E15"
+      ],
+      "tags": [
+        "root-cause"
+      ],
+      "rationale": "The segmented CRM data (E7), together with the dated change log (E5) and the monthly series (E14), establishes the main cause well enough to justify a substantive, reversible intervention (A4). The open questions, vendor quality (H4) and response time (R2), bear on secondary choices such as vendor selection, not on the core intervention."
+    }
+  ],
+  "discriminatingRequests": [
+    "Q1",
+    "Q2"
+  ],
+  "lowValueRequests": [
+    "Q3",
+    "Q4",
+    "Q5"
+  ]
+}

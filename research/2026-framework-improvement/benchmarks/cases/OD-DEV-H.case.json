@@ -1,0 +1,184 @@
+{
+  "id": "OD-DEV-H",
+  "split": "dev",
+  "benchmarkClass": "H",
+  "title": "Twice-slipped smart thermostat launch at a consumer hardware company",
+  "organization": {
+    "type": "Private, venture-backed company",
+    "industry": "Consumer hardware (connected home devices)",
+    "size": "Approx. 420 employees; product engineering approx. 95 (firmware 14, mobile app 22, cloud 18, hardware/mechanical 26, QA 15)"
+  },
+  "presentingRequest": "Our flagship Kestrel Halo 4 smart thermostat has now slipped twice: from 15 September 2025 to 17 November 2025, and on 6 October we pushed it again to 2 March 2026. Hardware has hit every build date; firmware has missed every gate. We want an assessment of our firmware engineering organization (its leadership, estimation and execution) and a plan to get it delivering, including a view on whether we need new firmware leadership. (CEO, Kestrel Home Technologies, engagement request dated 20 October 2025)",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "CEO (interview, 21 Oct 2025)",
+      "sourceType": "leadership-account",
+      "text": "Hardware delivered EVT and DVT on schedule and our component supply is locked. Both times we missed a gate it was firmware items that weren't done. I don't doubt the firmware people are working hard, but I need to know whether we have the wrong firmware leadership. Brightwell Home & Hardware is the biggest retail deal in our history and every month we slip costs us shelf time."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "VP Engineering (interview, 21 Oct 2025)",
+      "sourceType": "leadership-account",
+      "text": "Look at the sprint numbers. Mobile and cloud complete 91 and 94 percent of what they commit to. Firmware completes about 60 percent, sprint after sprint, and their estimates are fantasy. The Firmware Engineering Manager is a strong engineer but I don't think he can run a program this size. I've told the CEO I think we need new firmware leadership, possibly bringing in an outside firmware firm to finish the remaining work."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "PMO release burn-down report, Halo 4 program, sprints 1-14 (17 Mar - 26 Sep 2025)",
+      "sourceType": "system-record",
+      "text": "Two-week sprints. Firmware: 532 story points committed across 14 sprints (including re-committed carryover), 318 completed (point-weighted completion 60%). Mobile app: 91%. Cloud services: 94%. Release scope line: 498 points at PRD v2.0 freeze (14 Mar 2025); 506 points as of 26 Sep 2025 (+1.6%). Feature count unchanged at 23. PMO commentary: 'Scope stable; shortfall is execution-driven, concentrated in firmware.'"
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Program milestone gate records and hardware build log",
+      "sourceType": "system-record",
+      "text": "Feature Complete gate (18 Jul 2025): 6 criteria failed, 5 of them firmware (scheduling engine, onboarding flow, OTA rollback, energy reports, HVAC compatibility wizard), 1 cloud (usage-data export). Beta Exit gate (3 Oct 2025): 5 criteria failed, 4 firmware (onboarding flow, scheduling engine, OTA rollback, in-store demo mode), 1 regulatory labelling. Total: 9 of 11 failed criteria are firmware. Hardware: EVT build planned 28 Apr, actual 28 Apr; DVT planned 14 Jul, actual 11 Jul; PVT planned 3 Nov, on track. Component allocation confirmed at 100% of launch forecast."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "VP Product (interview, 22 Oct 2025)",
+      "sourceType": "leadership-account",
+      "text": "Requirements were frozen at PRD v2.0 on 14 March and the feature list is the same 23 features it was then. We have not reopened the PRD. You can see it in the burn-down: the scope line has barely moved. Product is not the problem here."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Firmware Engineering Manager (interview, 22 Oct 2025)",
+      "sourceType": "manager-account",
+      "text": "We're behind, I won't pretend otherwise. We've had a lot of rework on the scheduling engine and the onboarding flow, and the team is averaging about 52 hours a week since August. I own our estimates and I'm not going to stand here making excuses."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "QA defect tracker export, firmware component",
+      "sourceType": "system-record",
+      "text": "Halo 4 program to 26 Sep 2025: 31% of firmware tickets resolved by engineering were reopened after QA verification. Same firmware team on the Halo 3 program (2023): 12% reopen rate."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "HR headcount report, firmware team",
+      "sourceType": "system-record",
+      "text": "Firmware headcount 14 throughout 2025 (one hire in February, no departures since January 2025). Median tenure 4.8 years. The current Firmware Engineering Manager has led the team since 2022, including throughout the Halo 3 program. No open requisitions; no extended leave during the program."
+    },
+    {
+      "id": "E9",
+      "stage": "S2",
+      "source": "Requirements change log (issue-tracker export of 'clarification' tickets linked to firmware epics, 14 Mar - 26 Sep 2025)",
+      "sourceType": "system-record",
+      "text": "47 clarification tickets modified the acceptance criteria of 41 existing firmware stories after the PRD freeze. Requester field: Key Accounts (Sales) 38, Product 6, Compliance 3. None of the 41 modified stories was re-estimated; each kept its original story points, which is why the release scope line stayed flat. Time logged against the 41 modified stories: 3,960 engineer-hours, versus 1,450 hours implied by their original estimates. Examples: 'Onboarding: add Brightwell-branded welcome flow and HomeRewards account link'; 'Scheduling engine: support utility time-of-use rebate windows for Brightwell rebate program'; 'Add in-store demo mode with 90-second loop'."
+    },
+    {
+      "id": "E10",
+      "stage": "S2",
+      "source": "Key Accounts Director follow-up emails to Brightwell buyer (May - Sep 2025)",
+      "sourceType": "document",
+      "text": "Twelve written feature commitments sent within two days after Brightwell business reviews, between 21 May and 17 Sep 2025, e.g. 21 May: 'Confirming Halo 4 will ship with Brightwell-branded onboarding and HomeRewards linking'; 10 Jul: 'We will support your utility rebate enrollment and Spanish-language UI at launch'; 18 Sep: 'Demo mode will be in the launch firmware for the in-store endcaps.' None of the emails copies Engineering or the PMO."
+    },
+    {
+      "id": "E11",
+      "stage": "S2",
+      "source": "Engagement analyst: change-request timing versus sprint completion (from E3 and E9 data)",
+      "sourceType": "independent-observation",
+      "text": "Brightwell business reviews took place on 20 May, 8 Jul, 29 Jul, 26 Aug and 16 Sep 2025. 31 of the 38 Sales-originated clarification tickets were opened within 10 calendar days after one of these reviews; 29 of the 31 cite the review in the ticket text. Firmware sprint completion (mean of sprint rates): sprints with no new clarification tickets (sprints 1-4, 8, 12; n=6) 92%; sprints in which 3 or more tickets landed (sprints 6, 7, 10, 11, 13, 14; n=6) 41%; remaining sprints (5, 9) 70%. Sprints 1-4 preceded the first Brightwell review."
+    },
+    {
+      "id": "E12",
+      "stage": "S2",
+      "source": "Issue-tracker story-level analysis, firmware (engagement analyst query, reviewed with PMO)",
+      "sourceType": "system-record",
+      "text": "Stories never touched by a clarification ticket: 214 points committed, 201 completed in the committed sprint (94%); median cycle time 6.1 days; reopen rate 11%. Within the six high-churn sprints alone, untouched stories were completed at 90% (63 of 70 points). Stories modified by a clarification ticket: 318 points committed (including re-commitments), 117 completed in the committed sprint (37%); median cycle time 19 days; these stories account for 84% of all firmware reopens. Reference: Halo 3 program firmware (2023, same team): 91% completion, median cycle time 6.4 days."
+    },
+    {
+      "id": "E13",
+      "stage": "S2",
+      "source": "Email thread, Firmware Engineering Manager and VP Product (Jun - Aug 2025)",
+      "sourceType": "document",
+      "text": "3 Jun: Firmware Manager to VP Product: 'The Brightwell onboarding and rebate changes roughly triple the scheduling and onboarding work. Can we re-point these stories and show the date impact?' 4 Jun, VP Product: 'These are clarifications within approved features. Absorb them; we can't reopen the PRD with the CEO right now.' The Firmware Manager raised the same request again on 15 Jul and 29 Aug, the second time attaching a list of 19 affected stories; neither message received a reply. No copy went to the CEO or VP Engineering."
+    },
+    {
+      "id": "E14",
+      "stage": "S2",
+      "source": "Brightwell Home & Hardware, connected-home category buyer (call with engagement team, 28 Oct 2025)",
+      "sourceType": "customer-account",
+      "text": "Under our placement agreement only three things are conditions of the Halo 4 slot: Brightwell-branded onboarding, the HomeRewards link and in-store demo mode. The rest were ideas we floated in reviews and your Key Accounts Director said yes to. We have lost the holiday set. We will hold the spring reset slot (640 stores) if product ships to our distribution centres by 9 February 2026 with those three features; I would much rather have it on shelf in February than wait for everything."
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "source": "Key Accounts Director FY2025 sales compensation plan",
+      "sourceType": "financial-record",
+      "text": "Plan effective 1 Apr 2025. Includes a one-time $60,000 accelerator payable on the first sell-in shipment of Halo 4 to Brightwell covering at least 600 stores. No accelerator of this kind appeared in the FY2024 plan. The plan contains no term relating to feature commitments or engineering cost."
+    },
+    {
+      "id": "E16",
+      "stage": "S2",
+      "source": "CEO email to sales leadership (5 May 2025, three days after the Brightwell placement agreement was signed)",
+      "sourceType": "document",
+      "text": "'Brightwell is our year. Whatever they need to make Halo 4 a success on their shelves, we say yes and we figure it out.' Copied to: VP Sales, Key Accounts Director, VP Product. Not copied to Engineering."
+    },
+    {
+      "id": "E17",
+      "stage": "S2",
+      "source": "Firmware team pulse survey (anonymous, September 2025, 13 of 14 responding)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "'Requirements for my work stay stable within a sprint': 1.9/5 (company average 3.7). 'I can raise schedule risk without negative consequences': 2.4/5 (company average 3.5). Free-text comments include: 'Stories get rewritten mid-sprint after the retailer meetings and the points never change'; 'We look slow on the charts because the charts don't count the rewrites.'"
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {"id": "H1", "text": "Firmware engineering is slow: the firmware team delivers materially less than should be expected for the work it is given (weak estimation and/or execution)."},
+      {"id": "H2", "text": "Firmware deliverables are on the program's critical path: unfinished firmware items account for most of the failed gate criteria behind both slips."},
+      {"id": "H3", "text": "Unplanned requirement changes after the PRD freeze, mostly originating from Sales commitments to Brightwell, are the main cause of the launch slips."},
+      {"id": "H4", "text": "Hardware build or component-supply delays are a major cause of the launch slips."},
+      {"id": "H5", "text": "The Key Accounts Director made the additional Brightwell feature commitments primarily to secure his personal Brightwell sales accelerator."},
+      {"id": "H6", "text": "The PMO burn-down understates the work actually asked of the firmware team, because post-freeze changes were absorbed into existing stories without re-estimation."}
+    ],
+    "edges": [
+      {"id": "R1", "from": "Sales-originated clarification tickets landing in a firmware sprint", "to": "Firmware sprint completion shortfall in that sprint", "relation": "causes"},
+      {"id": "R2", "from": "Key Accounts Director's $60,000 Brightwell sell-in accelerator", "to": "Volume of Sales-originated feature commitments and clarification tickets", "relation": "causes"},
+      {"id": "R3", "from": "Firmware team's estimation practice", "to": "Firmware sprint completion shortfalls", "relation": "causes"},
+      {"id": "R4", "from": "Absorbing post-freeze changes as un-estimated 'clarifications'", "to": "Flat release scope line in the PMO burn-down despite added work", "relation": "causes"}
+    ],
+    "actions": [
+      {"id": "A1", "text": "Replace the Firmware Engineering Manager now and hand the remaining Halo 4 firmware backlog to an outside firmware contractor."},
+      {"id": "A2", "text": "Institute post-freeze change control: every requested change to launch scope is logged as a separate item, re-estimated by the owning engineering team, and admitted to a sprint only after Product, Sales and Engineering jointly sign off on its schedule impact."},
+      {"id": "A3", "text": "Convene the CEO, Sales, Product and Engineering with Brightwell to separate contractual launch requirements from review-meeting requests, freeze the launch scope on that basis, and move the remaining requests to a post-launch firmware update."},
+      {"id": "A4", "text": "Restructure the Key Accounts compensation plan now to remove the Brightwell sell-in accelerator."}
+    ],
+    "evidenceRequests": [
+      {"id": "Q1", "text": "Email and chat correspondence between the CEO and the Key Accounts Director about Brightwell feature requests, May - Sep 2025"},
+      {"id": "Q2", "text": "Key Accounts compensation plans and feature-commitment records for other large retail accounts, FY2024 - FY2025"},
+      {"id": "Q3", "text": "Full Brightwell placement agreement, statements of work and any amendments"},
+      {"id": "Q4", "text": "Firmware code-review turnaround and static-analysis metrics, 2025"},
+      {"id": "Q5", "text": "Company-wide employee engagement survey results, all departments, 2025"},
+      {"id": "Q6", "text": "Hardware component supplier on-time delivery scorecards, 2025"}
+    ]
+  },
+  "scoredItems": [
+    {"itemId": "I1", "refId": "H1", "type": "hypothesis", "asOfStage": "S1", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I2", "refId": "H1", "type": "hypothesis", "asOfStage": "S2", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I3", "refId": "H2", "type": "hypothesis", "asOfStage": "S1", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I4", "refId": "H2", "type": "hypothesis", "asOfStage": "S2", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I5", "refId": "H3", "type": "hypothesis", "asOfStage": "S1", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I6", "refId": "H3", "type": "hypothesis", "asOfStage": "S2", "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I7", "refId": "H4", "type": "hypothesis", "asOfStage": null, "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I8", "refId": "H5", "type": "hypothesis", "asOfStage": null, "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I9", "refId": "H6", "type": "hypothesis", "asOfStage": null, "allowedAnswers": ["supported", "contradicted", "unknown"]},
+    {"itemId": "I10", "refId": "R1", "type": "edge", "asOfStage": null, "allowedAnswers": ["causal", "association-only", "contradicted", "unknown"]},
+    {"itemId": "I11", "refId": "R2", "type": "edge", "asOfStage": null, "allowedAnswers": ["causal", "association-only", "contradicted", "unknown"]},
+    {"itemId": "I12", "refId": "R3", "type": "edge", "asOfStage": null, "allowedAnswers": ["causal", "association-only", "contradicted", "unknown"]},
+    {"itemId": "I13", "refId": "R4", "type": "edge", "asOfStage": null, "allowedAnswers": ["causal", "association-only", "contradicted", "unknown"]},
+    {"itemId": "I14", "refId": "A1", "type": "action", "asOfStage": "S1", "allowedAnswers": ["preferred", "acceptable", "premature", "harmful"]},
+    {"itemId": "I15", "refId": "A1", "type": "action", "asOfStage": "S2", "allowedAnswers": ["preferred", "acceptable", "premature", "harmful"]},
+    {"itemId": "I16", "refId": "A2", "type": "action", "asOfStage": null, "allowedAnswers": ["preferred", "acceptable", "premature", "harmful"]},
+    {"itemId": "I17", "refId": "A3", "type": "action", "asOfStage": null, "allowedAnswers": ["preferred", "acceptable", "premature", "harmful"]},
+    {"itemId": "I18", "refId": "A4", "type": "action", "asOfStage": null, "allowedAnswers": ["preferred", "acceptable", "premature", "harmful"]},
+    {"itemId": "I19", "refId": "SUFF", "type": "sufficiency", "asOfStage": null, "allowedAnswers": ["sufficient", "insufficient"]}
+  ]
+}

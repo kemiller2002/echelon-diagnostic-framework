@@ -1,0 +1,414 @@
+{
+  "id": "OD-DEV-F",
+  "split": "dev",
+  "benchmarkClass": "F",
+  "title": "Rising incidents and an exhausted on-call rotation in Brindlewood Payments' platform engineering org",
+  "organization": {
+    "type": "operating subsidiary of a privately held holding company (Ostrander Holdings)",
+    "industry": "B2B payment processing for mid-market merchants",
+    "size": "approx. 540 staff; platform engineering org of 31 engineers at 2025-12-31 in 4 teams (Compute, Storage, Networking, Delivery), plus 38 senior and 71 non-senior engineers in product engineering"
+  },
+  "presentingRequest": "Incidents have gone up three quarters in a row and my on-call people are exhausted. The platform is simply bigger and busier than it was after the EU launch, and one responder per team can't keep up with the pages. We can't hire because Ostrander froze headcount. Our plan is to add a second concurrent primary on-call slot to every team's rotation from January, with the stipend paid for both, so no single responder is overwhelmed. We'd like your help designing the expanded rotation and the escalation policy. - Dana Reyes, VP Platform Engineering",
+  "evidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "VP Platform Engineering (interview, 2026-10-27)",
+      "sourceType": "leadership-account",
+      "text": "'Since the EU region went live the platform has more moving parts and more traffic, and the pager reflects that. When something breaks at 2 a.m. one person is triaging alerts, talking to the payments desk and trying to fix it all at once. A second primary per team splits that load. We know reliability projects keep slipping, but you can't do roadmap work while the house is on fire. Once the rotation is sized properly the fires will come down and the roadmap will catch up.'"
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Incident register export, 2025-04-01 to 2026-09-30 (pulled by the SRE lead, 2026-10-28)",
+      "sourceType": "system-record",
+      "text": "SEV1-SEV2 incidents by quarter: Q2 2025: 9; Q3 2025: 10; Q4 2025: 10; Q1 2026: 14; Q2 2026: 19; Q3 2026: 25. Monthly in Q1 2026: Jan 5, Feb 4, Mar 5. SEV1-SEV2 are declared manually by the on-call responder using criteria unchanged since 2024 (customer-facing impact longer than 5 minutes, or payment failure rate above 0.5%). SEV3-SEV4 incidents rose from 61 in Q4 2025 to 212 in Q1 2026; on 2026-01-12 the org migrated to a new incident tool that automatically opens a SEV4 for every paging alert. The tool does not create or reclassify SEV1-SEV2 incidents."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Finance: transaction volume and merchant SLA credits by quarter (2026-10-29)",
+      "sourceType": "financial-record",
+      "text": "Processed transactions: Q4 2025 = 412M; Q3 2026 = 441M (+7%). Merchant-facing degraded minutes (from the external status page): Q4 2025 96; Q1 2026 171; Q2 2026 268; Q3 2026 410. SLA credits paid to merchants: Q4 2025 $18k; Q1 2026 $41k; Q2 2026 $77k; Q3 2026 $134k. The EU region (live since 2025-11-03) carries 11% of Q3 2026 volume and was the location of 3 of the 25 Q3 SEV1-SEV2 incidents."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Engineering time accounting (Jira worklog categories) and reliability roadmap delivery report (2026-10-29)",
+      "sourceType": "system-record",
+      "text": "Share of platform engineering hours logged as unplanned/interrupt work: 2025 H1 average 19%; Q4 2025 24%; Q1 2026 33%; Q2 2026 41%; Q3 2026 48%. Reliability roadmap items delivered as a share of items planned for the quarter: 2025 H1 81%; Q3-Q4 2025 not applicable (roadmap paused, see E5); Q1 2026 38%; Q2 2026 24%; Q3 2026 17%. Engineers in their on-call week log a median of 1.5 hours of planned work."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Reliability roadmap deferral log, maintained by the platform program manager (2025-07-01 to 2026-09-30)",
+      "sourceType": "document",
+      "text": "2025-07-14: CTO pauses the reliability roadmap so all four platform teams can deliver Project Meridian (EU data-residency region), contractually due to go live 2025-11-03. 2025-12-01: roadmap formally resumed. Between 2026-01-01 and 2026-09-30, 52 planned reliability items were deferred; the logged reason was 'on-call/incident load' for 44, 'feature commitment to product teams' for 5 and 'other' for 3. Deferred items include connection-pool limits on the ledger database, a fix for certificate-rotation failures, and retry-storm protection in the payment gateway."
+    },
+    {
+      "id": "E6",
+      "stage": "S2",
+      "source": "Postmortem action-item tracker and SRE lead's recurrence analysis (2026-11-02)",
+      "sourceType": "system-record",
+      "text": "Open postmortem action items: 2025-06-30: 38; 2025-12-31: 71; 2026-06-30: 104; 2026-09-30: 126. Each Q3 2026 SEV1-SEV2 incident was matched by failure mode against previously filed action items: 15 of 25 (60%) recurred a failure mode whose fix was filed, open and past its due date (for example, 4 ledger connection-exhaustion incidents and 3 retry storms). The equivalent figure was 2 of 10 in Q4 2025 and 6 of 14 in Q1 2026. Median time from an action item's original due date to the recurrence: 4.6 months (range 2-8 months)."
+    },
+    {
+      "id": "E7",
+      "stage": "S2",
+      "source": "Storage team records and Storage team lead (interview, 2026-11-03)",
+      "sourceType": "system-record",
+      "text": "From 2026-04-20 to 2026-05-29 the Storage team lead obtained an exemption: 2 of the team's 8 engineers came off the rotation and off feature work to clear Storage's deferred action items. The other 6 covered the rotation (on-call frequency 1 week in 8 rising to 1 in 6 for those six weeks). 11 of Storage's 13 open action items were closed. Storage SEV1-SEV2 incidents: Q1 2026 4, Q2 2026 5, Q3 2026 1; the other three teams combined: 10, 14, 24. Storage pages per week fell from 31 in April to 12 in September. Storage's share of request traffic was unchanged (Q1 29%, Q3 29%). The other teams asked for the same exemption in June and were refused because of feature commitments."
+    },
+    {
+      "id": "E8",
+      "stage": "S1",
+      "source": "On-call scheduling tool and payroll overtime report (2026-10-30)",
+      "sourceType": "system-record",
+      "text": "Engineers in the rotation (one primary per team per week): 2025-12-31: 31; 2026-03-31: 31; 2026-06-30: 28; 2026-09-30: 25. Average on-call frequency per engineer moved from 1 week in 7.75 to 1 week in 6.25. Paid after-hours paged work across the org: Q4 2025 210 hours/month; Q1 2026 340; Q2 2026 520; Q3 2026 790. With two concurrent primaries per team and 25 engineers, frequency would be about 1 week in 3."
+    },
+    {
+      "id": "E9",
+      "stage": "S1",
+      "source": "Ostrander Holdings CFO memo (2026-02-09) and Brindlewood HR headcount record (2026-10-30)",
+      "sourceType": "document",
+      "text": "Memo: 'Effective immediately, all external hiring across portfolio companies, including backfills, is frozen through at least 2026-12-31. Exception requests will be considered at the Q1 2027 budget review and only for revenue-generating roles.' HR: four approved platform requisitions were cancelled on 2026-02-10; two were at offer stage with agreed start dates of 2026-03-02 and would have been eligible for the rotation after ramp-up in August 2026. Platform had no departures between 2025-10-01 and 2026-03-31. Six senior platform engineers left between 2026-04-03 and 2026-09-19 and none could be backfilled. HR's estimated ramp-up for a new platform hire is 5 months."
+    },
+    {
+      "id": "E10",
+      "stage": "S2",
+      "source": "HR exit-interview notes for the six departing senior platform engineers (2026-04 to 2026-09)",
+      "sourceType": "document",
+      "text": "4 of 6 cite on-call and after-hours burden as a reason for leaving; 5 of 6 cite compensation; 3 cite 'no progress on tech debt'. 4 of the 6 joined Halden Systems, an infrastructure software vendor that opened a local office in March 2026, at reported base pay 22-30% higher. Every leaver who cited on-call also cited compensation. Exit interviews are optional and conducted by the HR business partner."
+    },
+    {
+      "id": "E11",
+      "stage": "S2",
+      "source": "HR attrition and compensation benchmark report (2026-11-04)",
+      "sourceType": "system-record",
+      "text": "Senior engineer departures, 2026-01-01 to 2026-09-30: platform 6 of 14; product engineering 7 of 38. In calendar 2025: platform 1 of 14; product 3 of 37. Product engineers carry no after-hours on-call (platform handles all paging). Halden Systems has hired 9 Brindlewood engineers in 2026: 4 from platform, 5 from product. Compensation benchmark (2026-08): senior platform base pay sits at the 41st percentile of the local market for infrastructure roles; senior product base pay sits at the 58th percentile for application roles. No stay interviews or engagement data by on-call load are available."
+    },
+    {
+      "id": "E12",
+      "stage": "S2",
+      "source": "Networking team second-slot pilot: scheduling, incident and roadmap records, plus Networking team lead (interview, 2026-11-03)",
+      "sourceType": "system-record",
+      "text": "From 2026-05-04 Networking (7 engineers, 6 after a June departure) ran two concurrent primaries per week, the design now proposed for all teams. Median time-to-acknowledge for Networking pages: 3.1 minutes before, 2.9 minutes after. Networking reliability-roadmap completion: Q1 2026 30%; Q3 2026 9%. After-hours paged hours per Networking engineer rose 46% from Q1 to Q3. Networking SEV1-SEV2: Q1 3, Q2 4, Q3 7. Two Networking engineers filed internal transfer requests in August citing 'on call every third week'. Team lead: 'The second person mostly watches. The pages aren't the problem; nobody has time to fix the things that page.'"
+    },
+    {
+      "id": "E13",
+      "stage": "S1",
+      "source": "Incident response metrics dashboard (2026-10-28)",
+      "sourceType": "system-record",
+      "text": "SEV1-SEV2 pages acknowledged within 5 minutes: 2025 95%; Q3 2026 94%. Median time to mitigate SEV1-SEV2: Q4 2025 47 minutes; Q3 2026 112 minutes. Only 3 of the 25 Q3 2026 SEV1-SEV2 incidents overlapped in time with another active SEV1-SEV2 incident. Escalations from the primary to a secondary or subject-matter expert happened in 18 of 25 Q3 incidents; median wait for the escalation to join was 6 minutes."
+    },
+    {
+      "id": "E14",
+      "stage": "S1",
+      "source": "Anonymous platform pulse survey, 26 of 29 eligible engineers responding (2026-09-22)",
+      "sourceType": "anonymous-staff-survey",
+      "text": "81% agree 'In my last two non-on-call weeks I could not finish the reliability work I planned.' 69% are 'considering leaving within 12 months'. Most frequent free-text reasons for considering leaving: on-call load (17 mentions), pay (14), lack of progress on tech debt (12). Representative comment: 'Every postmortem files the same fix again. We know what's going to break next month.'"
+    },
+    {
+      "id": "E15",
+      "stage": "S2",
+      "source": "CTO (interview, 2026-11-05)",
+      "sourceType": "leadership-account",
+      "text": "'Pausing reliability work for Meridian was the right call; it was a contractual date with our two largest merchants and we'd make it again. Since then the EU region and transaction growth have made everything harder. I'm sceptical that old action items explain it. Postmortems always generate wish lists. Dana's rotation plan is the fastest thing we can do. Finance has told me the platform org's 2027 discretionary budget is $420k and I can put all of it into pay if that's what keeps people.'"
+    },
+    {
+      "id": "E16",
+      "stage": "S1",
+      "source": "Internal audit report on incident classification (2023-11)",
+      "sourceType": "prior-report",
+      "text": "In 2023 each platform team was given a quarterly SEV1-SEV2 count target linked to performance ratings. A later audit of that period found 19 incidents that met SEV2 criteria but had been recorded as SEV3, and two outages that were never declared. The targets were withdrawn in 2023-Q4. Declaration remains at the discretion of the on-call responder."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The rise in incidents is mainly driven by growth in transaction volume and the added load of the EU region."
+      },
+      {
+        "id": "H2",
+        "text": "Firefighting has displaced planned reliability work, and the growing backlog of unremediated failure modes is driving the incident rise in a self-reinforcing loop."
+      },
+      {
+        "id": "H3",
+        "text": "Senior platform attrition is driven primarily by below-market compensation rather than by on-call burden."
+      },
+      {
+        "id": "H4",
+        "text": "The parent company's hiring freeze is what started the rise in incidents."
+      },
+      {
+        "id": "H5",
+        "text": "The incident rise is largely a measurement artifact of the January 2026 incident-tool migration."
+      },
+      {
+        "id": "H6",
+        "text": "Insufficient simultaneous on-call responder coverage is the binding constraint on platform reliability."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Incident and interrupt load on platform engineers",
+        "to": "Deferral of planned reliability work",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Deferred reliability work (open, overdue postmortem action items)",
+        "to": "SEV1-SEV2 incident count, with a lag of roughly one to two quarters",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "On-call and after-hours overtime burden",
+        "to": "Senior platform engineer attrition",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Parent-company hiring freeze",
+        "to": "Higher on-call frequency per remaining platform engineer",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Add a second concurrent primary on-call slot to every team's rotation from January, staffed from the existing engineers."
+      },
+      {
+        "id": "A2",
+        "text": "For the next quarter, ring-fence two engineers per team away from the rotation and feature work to close the overdue action items linked to recurring incidents, ranked by recurrence, and negotiate a temporary reduction in feature commitments to product teams to pay for it."
+      },
+      {
+        "id": "A3",
+        "text": "Submit a hiring-freeze exception request to Ostrander Holdings to backfill the six senior platform departures."
+      },
+      {
+        "id": "A4",
+        "text": "Commit the platform org's entire $420k 2027 discretionary budget to a Halden-matching base-pay increase for senior platform engineers as the main retention response."
+      },
+      {
+        "id": "A5",
+        "text": "Give each platform team a quarterly SEV1-SEV2 incident-count reduction target linked to performance ratings."
+      }
+    ],
+    "evidenceRequests": [
+      {
+        "id": "Q1",
+        "text": "Confidential stay interviews with the eight remaining senior platform engineers, asking which change would make them stay and how any outside offers compare"
+      },
+      {
+        "id": "Q2",
+        "text": "Individual after-hours paged hours in the six months before departure for the six senior leavers, compared with the eight senior platform engineers who stayed"
+      },
+      {
+        "id": "Q3",
+        "text": "Transaction volume broken down by merchant tier and hour of day for 2025-2026"
+      },
+      {
+        "id": "Q4",
+        "text": "Vendor comparison of alternative incident-management tools"
+      },
+      {
+        "id": "Q5",
+        "text": "Per-incident time to mitigate broken down by the responder's seniority and tenure"
+      },
+      {
+        "id": "Q6",
+        "text": "Ostrander Holdings' draft 2027 portfolio budget assumptions"
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "H6",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I16",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}
