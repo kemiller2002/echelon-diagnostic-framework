@@ -18,3 +18,5 @@
 | WI-0009 | Move echelon-diagnostic-framework to Praxis 3.7.2, Ordo 1.4.2, Visual Engineering 1.0.1 and adopt Conditor | complete |  | medium |
 | WI-0010 | Move echelon-diagnostic-framework to Ordo 1.5.0 via echelon-current 1.2.0 (conditor upgrade --current) | complete |  | medium |
 | WI-0011 | Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current) | complete |  | medium |
+| WI-0012 | WI-0012 | complete |  |  |
+| WI-0013 | Commercial research 2026: EDF methodology audit, scientific foundations, customer demand, competitors, validation plan, commercial opportunities, strategic recommendation (mission ECHELON-BUSINESS-RESEARCH-2026-001) | ready |  | medium |
