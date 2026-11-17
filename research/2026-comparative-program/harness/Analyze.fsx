@@ -206,8 +206,101 @@ let tracks (scoredDir: string) (rawDir: string) (ratingsDir: string) (seed: int)
     File.WriteAllText(outPath, sb.ToString())
     printfn "%s" (sb.ToString())
 
+/// Preregistration §4 decision rule.
+let verdict (m: float) (lo: float) (hi: float) =
+    if m >= 5.0 && lo > 0.0 then "material advantage"
+    elif m <= -5.0 && hi < 0.0 then "material disadvantage"
+    elif lo >= -3.0 && hi <= 3.0 then "practically equivalent"
+    else "inconclusive"
+
+let verdicts (scoredDir: string) (seed: int) (outPath: string) =
+    let rows = readCsv (Path.Combine(scoredDir, "runs.csv"))
+    let items = readCsv (Path.Combine(scoredDir, "items.csv"))
+    let sb = StringBuilder()
+    let line (s: string) = sb.AppendLine s |> ignore
+    let score = fun (r: Map<string, string>) -> Some (fnum "score" r)
+    let acc = fun (r: Map<string, string>) -> Some (fnum "acc" r * 100.0)
+    let acq = fun (r: Map<string, string>) -> Some (fnum "acq" r * 100.0)
+    let sm = "@sonnet-medium"
+    let hl = "@haiku-low"
+    let tests =
+        [ "H1", "EDF vs no framework", "B_EDF03" + sm, "A_GENERAL" + sm
+          "H2", "EDF vs Kepner-Tregoe", "B_EDF03" + sm, "C_KT" + sm
+          "H3", "EDF vs KT+ACH", "B_EDF03" + sm, "D_KTACH" + sm
+          "H4", "gates+VOI vs EDF", "F_EDFG" + sm, "B_EDF03" + sm
+          "H5a", "System Context", "B_EDF03" + sm, "E_NOCTX" + sm
+          "H5b", "Origin Network + Propagation", "B_EDF03" + sm, "E_NOCAUSAL" + sm
+          "H5c", "Evidence evaluation", "B_EDF03" + sm, "E_NOEVID" + sm
+          "H5d", "Control Points + Ranking", "B_EDF03" + sm, "E_NOCTRL" + sm
+          "H5e", "Diagnostic Sufficiency", "B_EDF03" + sm, "E_NOSUFF" + sm
+          "H6", "Sequence", "B_EDF03" + sm, "E_NOSEQ" + sm
+          "H7a", "vote-of-5 (no framework) vs EDF", "A_VOTE5" + sm, "B_EDF03" + sm
+          "H9a", "Claude-selected method vs KT", "SEL_CLAUDE" + sm, "C_KT" + sm
+          "H9b", "EDF orchestrator vs EDF", "SEL_EDFO" + sm, "B_EDF03" + sm
+          "H11-H1", "Haiku: EDF vs no framework", "B_EDF03" + hl, "A_GENERAL" + hl
+          "H11-H2", "Haiku: EDF vs KT", "B_EDF03" + hl, "C_KT" + hl
+          "H11-H4", "Haiku: gates+VOI vs EDF", "F_EDFG" + hl, "B_EDF03" + hl ]
+    line "# OD2 preregistered verdicts"
+    line ""
+    line "Decision rule (preregistration §4): material advantage = Δ ≥ +5 and CI > 0; practically equivalent = CI within [−3, +3]; material disadvantage = Δ ≤ −5 and CI < 0; otherwise inconclusive. Accuracy and acquisition are on a 0–100 scale for comparability."
+    line ""
+    line "| id | comparison | contrast | cases | Δ score [95% CI] | verdict | Δ accuracy [95% CI] | Δ acquisition [95% CI] |"
+    line "|---|---|---|---|---|---|---|---|"
+    for (id, name, a, b) in tests do
+        match paired seed rows score a b with
+        | Some (n, m, lo, hi) ->
+            let f x = match paired seed rows x a b with Some (_, m2, l2, h2) -> sprintf "%+.2f [%.2f, %.2f]" m2 l2 h2 | None -> "-"
+            line (sprintf "| %s | %s | %s − %s | %d | %+.2f [%.2f, %.2f] | **%s** | %s | %s |" id name a b n m lo hi (verdict m lo hi) (f acc) (f acq))
+        | None -> line (sprintf "| %s | %s | %s − %s | 0 | - | not run | - | - |" id name a b)
+    line ""
+    // H10: test-retest
+    line "## H10 — item test–retest agreement (trials 1 vs 2, Sonnet-medium)"
+    line ""
+    line "| condition | item pairs | agreement [95% Wilson] |"
+    line "|---|---|---|"
+    for cond in [ "A_GENERAL"; "B_EDF03"; "C_KT"; "D_KTACH"; "F_EDFG"; "SEL_CLAUDE"; "SEL_EDFO" ] do
+        let mine = items |> List.filter (fun r -> r.["condition"] = cond && r.["tier"] = "sonnet" && r.["effort"] = "medium")
+        let byTrial t = mine |> List.filter (fun r -> r.["trial"] = t) |> List.map (fun r -> (r.["caseId"], r.["itemId"]), r.["given"]) |> Map.ofList
+        let t1, t2 = byTrial "1", byTrial "2"
+        let common = Set.intersect (t1 |> Map.keys |> Set.ofSeq) (t2 |> Map.keys |> Set.ofSeq)
+        if not common.IsEmpty then
+            let agree = common |> Set.filter (fun k -> t1.[k] = t2.[k]) |> Set.count
+            let lo, hi = wilson { Num = float agree; Den = float common.Count }
+            line (sprintf "| %s | %d | %.3f [%.3f, %.3f] |" cond common.Count (float agree / float common.Count) lo hi)
+    line ""
+    // class breakdown, B vs A and C vs A
+    line "## Class and domain breakdown (Sonnet-medium; case means, trials averaged)"
+    line ""
+    let conds = [ "A_GENERAL"; "B_EDF03"; "C_KT"; "D_KTACH"; "F_EDFG" ]
+    let classes = rows |> List.map (fun r -> r.["class"]) |> List.distinct |> List.sort
+    line ("| class | " + String.Join(" | ", conds |> List.map (fun c -> c + " score / acc")) + " |")
+    line ("|---|" + String.replicate conds.Length "---|")
+    for cl in classes @ [ "organizational"; "technical"; "cross-domain" ] do
+        let sel (r: Map<string, string>) = r.["class"] = cl || r.["domain"] = cl
+        let cells =
+            conds |> List.map (fun c ->
+                let rs = rows |> List.filter (fun r -> sel r && r.["condition"] = c && r.["tier"] = "sonnet" && r.["effort"] = "medium")
+                if rs.IsEmpty then "-" else sprintf "%.1f / %.2f" (rs |> List.averageBy (fnum "score")) (rs |> List.averageBy (fnum "acc")))
+        line (sprintf "| %s | %s |" cl (String.Join(" | ", cells)))
+    line ""
+    // mechanism M5: reads by class
+    line "## M5 — evidence collected by class (mean items read, Sonnet-medium)"
+    line ""
+    let mconds = [ "A_GENERAL"; "B_EDF03"; "E_NOSUFF"; "F_EDFG"; "C_KT" ]
+    line ("| class | " + String.Join(" | ", mconds) + " |")
+    line ("|---|" + String.replicate mconds.Length "---|")
+    for cl in classes do
+        let cells =
+            mconds |> List.map (fun c ->
+                let rs = rows |> List.filter (fun r -> r.["class"] = cl && r.["condition"] = c && r.["tier"] = "sonnet" && r.["effort"] = "medium")
+                if rs.IsEmpty then "-" else sprintf "%.2f" (rs |> List.averageBy (fnum "reads")))
+        line (sprintf "| %s | %s |" cl (String.Join(" | ", cells)))
+    File.WriteAllText(outPath, sb.ToString())
+    printfn "%s" (sb.ToString())
+
 match fsi.CommandLineArgs |> Array.toList |> List.tail with
 | [ "tracks"; scoredDir; rawDir; ratingsDir; seed; out ] -> tracks scoredDir rawDir ratingsDir (int seed) out
+| [ "verdicts"; scoredDir; seed; out ] -> verdicts scoredDir (int seed) out
 | _ ->
-    eprintfn "usage: tracks <scoredDir> <rawDir> <ratingsDir> <seed> <out.md>"
+    eprintfn "usage: tracks <scoredDir> <rawDir> <ratingsDir> <seed> <out.md> | verdicts <scoredDir> <seed> <out.md>"
     exit 2
