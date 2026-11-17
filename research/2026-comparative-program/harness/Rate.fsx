@@ -74,9 +74,10 @@ let parseLine (line: string) =
 match fsi.CommandLineArgs |> Array.toList |> List.tail with
 | "rate" :: scoredDir :: workRoot :: ratingsDir :: rest ->
     let filter = match rest with f :: _ -> f.Split(',') |> Set.ofArray | [] -> Set.empty
-    let lines = File.ReadAllLines(Path.Combine(scoredDir, "briefs.csv")) |> List.ofArray
-    let header = parseLine (List.head lines)
-    let rows = lines |> List.tail |> List.map (fun l -> List.zip header (parseLine l) |> Map.ofList)
+    let rows =
+        (readJson (Path.Combine(scoredDir, "briefs.json"))).EnumerateArray()
+        |> Seq.map (fun e -> [ "runId"; "condition"; "caseId"; "brief" ] |> List.map (fun k -> k, strOr "" k e) |> Map.ofList)
+        |> List.ofSeq
     let cases =
         [ "dev"; "dev2"; "heldout" ] |> List.filter (fun s -> Directory.Exists(sprintf "benchmark/cases/%s" s))
         |> List.collect (fun s -> Directory.GetFiles(sprintf "benchmark/cases/%s" s, "*.case.json") |> List.ofArray)

@@ -18,7 +18,7 @@ Machine-readable entries are in `source-register.csv`.
 
 Verification levels:
 - **fetched**: the primary page or abstract was read in this program, and the finding is stated from it.
-- **search-confirmed**: bibliographic existence and venue were confirmed by search results only.
+- **search-confirmed**: bibliographic existence and venue were confirmed by search results only. The finding attributed to the source is stated from general knowledge and has not yet been read in the primary text. Treat it as provisional until it is upgraded to *fetched*.
 - **not-yet-verified**: cited from general knowledge as a pointer. Claims rest on it only after verification.
 
 ## 1. Findings that bear directly on EDF
@@ -55,14 +55,17 @@ measures test–retest agreement, which is the noise prediction.
   20 datasets and 14 models, found that chain-of-thought gains concentrate in math
   and symbolic logic. On knowledge and reasoning benchmarks such as MMLU, direct
   answering is nearly as good (Sprague et al., ICLR 2025; fetched).
-- Chain-of-thought explanations can be systematically unfaithful: they can
-  rationalize answers driven by biasing features in the prompt without mentioning
-  them (Turpin et al., NeurIPS 2023; search-confirmed).
+- Chain-of-thought explanations can be systematically unfaithful. Biasing features
+  (for example, always placing the correct answer at "(A)" in few-shot examples)
+  cut accuracy by up to 36% on 13 BIG-Bench Hard tasks. The explanations
+  rationalized the biased answers without mentioning the bias (Turpin et al., 2023;
+  fetched abstract).
 - Without external feedback, LLMs do not reliably improve their reasoning by
   self-correction and can make it worse (Huang et al., ICLR 2024; search-confirmed).
 - Sampling several reasoning paths and taking the majority answer
-  (self-consistency) improves accuracy over single chain-of-thought (Wang et al.,
-  ICLR 2023; search-confirmed).
+  (self-consistency) improves accuracy over greedy chain-of-thought: +17.9 points on
+  GSM8K, +6.4 on StrategyQA and +3.9 on ARC-challenge (Wang et al., ICLR 2023;
+  fetched abstract). The gains are smaller on less symbolic tasks.
 - Allocating test-time compute adaptively can beat scaling model parameters, and
   the best allocation depends on problem difficulty (Snell et al., 2024;
   search-confirmed).

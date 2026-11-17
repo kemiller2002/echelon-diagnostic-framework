@@ -123,8 +123,14 @@ let writeOutputs (outDir: string) (scored: Scored list) =
                   (if Double.IsNaN conf then "" else sprintf "%.2f" conf) ] |> List.map csvEscape |> fun xs -> String.Join(",", xs)))
     File.WriteAllLines(Path.Combine(outDir, "items.csv"), "runId,condition,caseId,tier,effort,trial,itemId,given,expected,correct,confidence" :: items)
     let briefs =
-        scored |> List.map (fun s -> [ s.Run.RunId; s.Run.Condition; s.Run.CaseId; tierOf s.Run.Model; s.Run.Effort; string s.Run.Trial; sprintf "%.4f" s.Acc; s.Run.Brief ] |> List.map csvEscape |> fun xs -> String.Join(",", xs))
+        scored |> List.map (fun s -> [ s.Run.RunId; s.Run.Condition; s.Run.CaseId; tierOf s.Run.Model; s.Run.Effort; string s.Run.Trial; sprintf "%.4f" s.Acc; s.Run.Brief.Replace("\r", " ").Replace("\n", " ") ] |> List.map csvEscape |> fun xs -> String.Join(",", xs))
     File.WriteAllLines(Path.Combine(outDir, "briefs.csv"), "runId,condition,caseId,tier,effort,trial,acc,brief" :: briefs)
+    // briefs can contain line breaks, so the rater reads this JSON copy rather than the CSV
+    let briefJson =
+        scored |> List.map (fun s ->
+            dict [ "runId", box s.Run.RunId; "condition", box s.Run.Condition; "caseId", box s.Run.CaseId
+                   "tier", box (tierOf s.Run.Model); "effort", box s.Run.Effort; "trial", box s.Run.Trial; "brief", box s.Run.Brief ])
+    File.WriteAllText(Path.Combine(outDir, "briefs.json"), JsonSerializer.Serialize(briefJson, JsonSerializerOptions(WriteIndented = true)))
 
 // ---------- statistics over runs.csv ----------
 let readCsv (path: string) =
