@@ -1,0 +1,212 @@
+{
+  "runId": "pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2",
+  "phase": "pilot2",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV2-CONTRA",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C15",
+    "X3": "C12",
+    "X4": "C16",
+    "X5": "C6",
+    "X6": "C11",
+    "X7": "C8",
+    "X8": "C5",
+    "X9": "C9",
+    "X10": "C4",
+    "X11": "C7",
+    "X12": "C2",
+    "X13": "C10",
+    "X14": "C1",
+    "X15": "C3",
+    "X16": "C14"
+  },
+  "readLabels": [
+    "X14",
+    "X15",
+    "X16"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C14"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21014,
+    "cacheCreationTokens": 10897,
+    "outputTokens": 1926,
+    "thinkingTokens": 178,
+    "costUsd": 0.0649614,
+    "durationMs": 17907,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__F_EDFG__OD2-DEV2-CONTRA__sonnet-medium__t2/evidence/X16.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022The October shortfalls were not caused by Fenmarch\u0027s data. They trace to one change on 22 October. An Ardentra consultant applied a standard night template to the night premium rule. The template quietly moved the start of the premium window from 20:00 to 22:00. The change was logged as a \\\u0022label correction\\\u0022 with no testing. The platform\u0027s own audit trail records it, and Ardentra can\u0027t edit that trail. Internal audit recalculated pay for all 158 night workers. 147 were underpaid, and each shortfall equals the 20:00\u201322:00 premium exactly. The 11 paid correctly work 22:00\u201306:00. Setting the window back to 20:00 in a test copy gave correct pay for all 158. Flagged data records show no meaningful link: 86% of flagged night workers were underpaid, against 94% of unflagged. Release 7.4 made no rule changes. The bank file matched the payroll output.\\nI\u0027m fairly confident (about 90%). Do not suspend the HR team or reload the data. Do not roll back 7.4. Have Ardentra restore the 20:00 start and re-run October in test. Then make off-cycle payments to all 147 underpaid staff, including the 8 who never complained. Take the 22 October change up with Ardentra under the contract. The fall in night overtime cover may be partly due to the pay problem. The rota trial started on the same date, so the two can\u0027t be separated yet. Track cover after the fix before pausing the trial.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:40:30.0665952Z",
+    "finishedAt": "2026-11-17T14:40:51.0729923Z",
+    "output": {
+      "caseId": "OD2-DEV2-CONTRA",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X15",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "causal",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X15",
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X14",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "premature",
+          "confidence": 78,
+          "evidenceIds": [
+            "E6",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 65,
+          "evidenceIds": [
+            "X14",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "The October shortfalls were not caused by Fenmarch\u0027s data. They trace to one change on 22 October. An Ardentra consultant applied a standard night template to the night premium rule. The template quietly moved the start of the premium window from 20:00 to 22:00. The change was logged as a \u0022label correction\u0022 with no testing. The platform\u0027s own audit trail records it, and Ardentra can\u0027t edit that trail. Internal audit recalculated pay for all 158 night workers. 147 were underpaid, and each shortfall equals the 20:00\u201322:00 premium exactly. The 11 paid correctly work 22:00\u201306:00. Setting the window back to 20:00 in a test copy gave correct pay for all 158. Flagged data records show no meaningful link: 86% of flagged night workers were underpaid, against 94% of unflagged. Release 7.4 made no rule changes. The bank file matched the payroll output.\nI\u0027m fairly confident (about 90%). Do not suspend the HR team or reload the data. Do not roll back 7.4. Have Ardentra restore the 20:00 start and re-run October in test. Then make off-cycle payments to all 147 underpaid staff, including the 8 who never complained. Take the 22 October change up with Ardentra under the contract. The fall in night overtime cover may be partly due to the pay problem. The rota trial started on the same date, so the two can\u0027t be separated yet. Track cover after the fix before pausing the trial."
+    }
+  }
+}

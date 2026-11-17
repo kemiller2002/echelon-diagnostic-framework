@@ -1,14 +1,14 @@
-# OD2 case-authoring contract (v1.1, amendment 1)
+# OD2 case-authoring contract (v1.2, amendments 1-2)
 
 You are authoring one case for a benchmark that tests how well analysts diagnose
 problems in systems: organizations, technical systems, and systems that span both.
 Analysts will see a short initial evidence file and a catalogue of evidence they may
-collect, **at most three items**. They then classify frozen candidate items. A hidden
+collect, **at most two items**. They then classify frozen candidate items. A hidden
 answer key scores them mechanically.
 
 Your case must be **hard but fair**. A careful analyst who reads only the initial
 file should be likely to get the central question wrong or leave it unresolved.
-A careful analyst who collects the right one to three catalogue items should be able
+A careful analyst who collects the right two catalogue items should be able
 to answer every item correctly and defend each answer from the evidence alone.
 
 ## Your assignment
@@ -30,9 +30,10 @@ to answer every item correctly and defend each answer from the evidence alone.
 ## Truth convention
 
 Each expected answer is what a careful analyst would conclude after reading the
-initial file **plus the optimal read path** (at most three catalogue items, which you
+initial file **plus the optimal read path** (exactly two catalogue items, which you
 name in `optimalReadPath`). For classes INCOMPLETE and NOCONC, the expected answer is
-what the **whole catalogue** supports. For the leading question that is "unknown",
+what the **whole catalogue** supports (their optimal path is the two items that best show
+the question cannot be settled). For the leading question that is "unknown",
 and SUFF is "insufficient" unless no intervention is warranted.
 
 ## Rules
@@ -64,9 +65,11 @@ and SUFF is "insufficient" unless no intervention is warranted.
 12. `discriminatingReads` lists the catalogue items that change at least one expected
     answer relative to the initial file alone: **exactly two or three items** (empty for
     STOP; for INCOMPLETE and NOCONC, the items that show the leading question cannot be
-    settled, possibly empty). `lowValueReads` lists
-    items that change nothing and are clearly peripheral. `optimalReadPath` has at
-    most three items.
+    settled, possibly empty). Discriminating items must be **non-redundant**: each settles
+    at least one expected answer that no other catalogue item settles, so an analyst who
+    reads the wrong pair loses accuracy. `optimalReadPath` is exactly the two items that
+    together settle every key (for STOP it is empty). `lowValueReads` lists
+    items that change nothing and are clearly peripheral.
 13. Evidence citations: `requiredEvidence` lists the items needed to justify the
     answer; `allowedEvidence` is a superset that also lists items that legitimately
     bear on it.
@@ -82,7 +85,11 @@ and SUFF is "insufficient" unless no intervention is warranted.
     that fits neither definition cleanly.
 16. **Contradicted edges.** Key an edge *contradicted* only when evidence counts against
     the link itself, not merely because a rival explanation is supported.
-17. The case JSON includes `"readBudget": 3`.
+17. The case JSON includes `"readBudget": 2`.
+18. No quantifier claims ("mainly", "most", "largely", "primarily") in hypotheses or
+    edges unless the evidence states a magnitude that decides them.
+19. At most one action is keyed *preferred*, unless two actions are explicitly
+    complementary and the case says so.
 
 ## Output
 

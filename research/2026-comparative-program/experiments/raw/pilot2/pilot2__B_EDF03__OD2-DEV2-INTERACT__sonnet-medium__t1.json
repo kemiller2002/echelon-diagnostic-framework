@@ -1,0 +1,230 @@
+{
+  "runId": "pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1",
+  "phase": "pilot2",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV2-INTERACT",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C14",
+    "X2": "C12",
+    "X3": "C4",
+    "X4": "C3",
+    "X5": "C6",
+    "X6": "C8",
+    "X7": "C11",
+    "X8": "C7",
+    "X9": "C13",
+    "X10": "C15",
+    "X11": "C1",
+    "X12": "C5",
+    "X13": "C10",
+    "X14": "C9",
+    "X15": "C2"
+  },
+  "readLabels": [
+    "X15",
+    "X4",
+    "X7"
+  ],
+  "reads": [
+    "C2",
+    "C3",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20175,
+    "cacheCreationTokens": 9941,
+    "outputTokens": 2221,
+    "thinkingTokens": 372,
+    "costUsd": 0.0640035,
+    "durationMs": 17152,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:68,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S15\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022The stops are not mainly caused by temps, and the evidence doesn\u0027t support shortening the robots\u0027 protective fields. The bench test and the zone data point to an interaction. Firmware 6.4 keeps weak short-range returns that 6.3 discarded. The glossy new pallet film produces those returns at oblique angles. With both in place, 17 of 20 passes stopped. Changing either one brought it to 0 or 1 of 20. In the field, upgraded pallet robots in Zones A/B went from 3.2 to 15.6 stops per 100 robot-hours. Robots left on 6.3 in the same zones stayed flat, and tote robots on 6.4 in Zone C stayed flat. The temps were present for all of these robots, so they don\u0027t explain the difference. Missed cut-offs are partly linked to the stops. Volume also drove misses last year, and that effect hasn\u0027t been separated out. Recommended next steps: switch outbound pallets back to the matte film. Keep the robots on 6.4, because 6.3 loses security support on 31 October. Track stops weekly by zone and firmware group. Don\u0027t adopt the three-strike policy or the shorter fields. Don\u0027t rely on the December release until it has been tested against this film. I\u0027m fairly confident in this diagnosis. The main gap is that the film change hasn\u0027t been tried on the real floor yet.\u0022,\u0022methodChoice\u0022:\u0022EDF sequence with 3 targeted evidence items (X15, X4, X7)\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:41:09.6142633Z",
+    "finishedAt": "2026-11-17T14:41:27.7317256Z",
+    "output": {
+      "caseId": "OD2-DEV2-INTERACT",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X15",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "association-only",
+          "confidence": 68,
+          "evidenceIds": [
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S15",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S16",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "The stops are not mainly caused by temps, and the evidence doesn\u0027t support shortening the robots\u0027 protective fields. The bench test and the zone data point to an interaction. Firmware 6.4 keeps weak short-range returns that 6.3 discarded. The glossy new pallet film produces those returns at oblique angles. With both in place, 17 of 20 passes stopped. Changing either one brought it to 0 or 1 of 20. In the field, upgraded pallet robots in Zones A/B went from 3.2 to 15.6 stops per 100 robot-hours. Robots left on 6.3 in the same zones stayed flat, and tote robots on 6.4 in Zone C stayed flat. The temps were present for all of these robots, so they don\u0027t explain the difference. Missed cut-offs are partly linked to the stops. Volume also drove misses last year, and that effect hasn\u0027t been separated out. Recommended next steps: switch outbound pallets back to the matte film. Keep the robots on 6.4, because 6.3 loses security support on 31 October. Track stops weekly by zone and firmware group. Don\u0027t adopt the three-strike policy or the shorter fields. Don\u0027t rely on the December release until it has been tested against this film. I\u0027m fairly confident in this diagnosis. The main gap is that the film change hasn\u0027t been tried on the real floor yet.",
+      "methodChoice": "EDF sequence with 3 targeted evidence items (X15, X4, X7)"
+    }
+  }
+}

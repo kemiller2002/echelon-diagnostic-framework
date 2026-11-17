@@ -1,0 +1,213 @@
+{
+  "runId": "pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1",
+  "phase": "pilot2",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-DEV2-CONTRA",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C7",
+    "X3": "C13",
+    "X4": "C1",
+    "X5": "C11",
+    "X6": "C14",
+    "X7": "C2",
+    "X8": "C9",
+    "X9": "C10",
+    "X10": "C6",
+    "X11": "C4",
+    "X12": "C12",
+    "X13": "C15",
+    "X14": "C16",
+    "X15": "C5",
+    "X16": "C3"
+  },
+  "readLabels": [
+    "X4",
+    "X16",
+    "X6"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C14"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22950,
+    "cacheCreationTokens": 12824,
+    "outputTokens": 1964,
+    "thinkingTokens": 143,
+    "costUsd": 0.073243,
+    "durationMs": 13647,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X16.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__SEL_EDFO__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022methodChoice\u0022:\u0022Localizing deviation (KT-style specification), then competing hypotheses, with a provenance check on vendor-supplied evidence\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X16\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X16\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X16\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X16\u0022]}],\u0022brief\u0022:\u0022The October night premium errors were caused by a pay rule change, not by Fenmarch\u0027s data. On 22 Oct an Ardentra consultant applied a template to the night premium rule NSP-02. It moved the start of the premium window from 20:00 to 22:00. The change was logged as a \\\u0022label correction\\\u0022 with no calculation impact. The platform audit trail, which nobody can edit, shows it. Internal audit recalculated pay for all 158 night workers. 147 were underpaid by exactly the 20:00\u201322:00 premium. The 11 paid correctly were rostered from 22:00. Re-running October in the test tenant with the window set back to 20:00 matched expected pay for all 158. Flagged data records do not predict who was underpaid, so Ardentra\u0027s account does not hold up. Release 7.4 and the bank file are not implicated.\\n\\nDo not sign off Malcolm\u0027s proposal. Suspending the HR team and paying for a reload would punish the wrong party and leave the fault in place. Instead, have Ardentra restore the 20:00 start, verify it in test, and make off-cycle payments for the shortfall before 24 Nov. Challenge the clause 14.3 cost claim. Don\u0027t pause the rota trial yet. The fall in overtime cover could be caused by the pay dispute or by the trial, and the data can\u0027t separate them. Fixing the pay first will help show which. I\u0027m fairly confident.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:42:01.5620258Z",
+    "finishedAt": "2026-11-17T14:42:16.2458782Z",
+    "output": {
+      "caseId": "OD2-DEV2-CONTRA",
+      "methodChoice": "Localizing deviation (KT-style specification), then competing hypotheses, with a provenance check on vendor-supplied evidence",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X16",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "supported",
+          "confidence": 95,
+          "evidenceIds": [
+            "X4",
+            "X16",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X16",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "causal",
+          "confidence": 94,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "X6",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X16",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 72,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X16"
+          ]
+        }
+      ],
+      "brief": "The October night premium errors were caused by a pay rule change, not by Fenmarch\u0027s data. On 22 Oct an Ardentra consultant applied a template to the night premium rule NSP-02. It moved the start of the premium window from 20:00 to 22:00. The change was logged as a \u0022label correction\u0022 with no calculation impact. The platform audit trail, which nobody can edit, shows it. Internal audit recalculated pay for all 158 night workers. 147 were underpaid by exactly the 20:00\u201322:00 premium. The 11 paid correctly were rostered from 22:00. Re-running October in the test tenant with the window set back to 20:00 matched expected pay for all 158. Flagged data records do not predict who was underpaid, so Ardentra\u0027s account does not hold up. Release 7.4 and the bank file are not implicated.\n\nDo not sign off Malcolm\u0027s proposal. Suspending the HR team and paying for a reload would punish the wrong party and leave the fault in place. Instead, have Ardentra restore the 20:00 start, verify it in test, and make off-cycle payments for the shortfall before 24 Nov. Challenge the clause 14.3 cost claim. Don\u0027t pause the rota trial yet. The fall in overtime cover could be caused by the pay dispute or by the trial, and the data can\u0027t separate them. Fixing the pay first will help show which. I\u0027m fairly confident."
+    }
+  }
+}

@@ -1,0 +1,761 @@
+{
+  "label": "OD2-DEV2-CONTRA",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7725,
+  "cacheCreationTokens": 4300,
+  "outputTokens": 52999,
+  "thinkingTokens": 41085,
+  "costUsd": 1.0959409999999998,
+  "durationMs": 526853,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-DEV2-CONTRA/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022split\u0022:\u0022dev2\u0022,\u0022benchmarkClass\u0022:\u0022CONTRA\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:3,\u0022title\u0022:\u0022Night premium shortfalls after the Fenmarch Water payroll cutover\u0022,\u0022setting\u0022:\u0022Fenmarch Water is a regional water utility with 2,140 staff. In October 2026 it moved payroll from an in-house legacy system to PayLattice, a hosted payroll platform supplied and configured by Ardentra Ltd. Two parallel-run cycles (August and September) were signed off on 9 October, and a configuration freeze started that day. The board had brought go-live forward by one pay period. The first live payroll was calculated on 27 October and paid on 30 October. Within days, night-shift staff began reporting underpayments. The November calculation is due on 24 November.\u0022,\u0022presentingRequest\u0022:\u0022From Anika Rautio, Chief Operating Officer, 17 Nov: \u0027Ardentra says our data caused the October pay errors, and Malcolm wants to act on that before the November calculation on 24 Nov. Before I sign anything off, tell me what actually caused the errors, whether Ardentra\u0027s account holds up, and which of the proposed actions we should take.\u0027\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Ardentra incident report AR-INC-2291, G. Vos (Ardentra implementation lead), 10 Nov\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Summary: the October underpayments come from source data quality. Our post-incident data audit found 212 employee records with malformed shift-pattern codes (trailing spaces, legacy \u0027N/S\u0027 prefixes). In PayLattice, premium eligibility is driven by shift-pattern code. The production load on 24 Oct used a fresh legacy extract (MD-1023) taken on 23 Oct, which carried these anomalies into production. 18 of the 139 complainants hold flagged records. The rest may carry anomalies that our audit rules do not detect. No change affecting pay calculation was made after parallel-run sign-off (see change log: CR-118 was a label correction). Recommendation: Fenmarch to re-cleanse and reload employee master data before the November run. Under clause 14.3, fixing client-data defects is at Fenmarch\u0027s cost.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Ardentra-maintained change log extract, 9\u201328 Oct, supplied with AR-INC-2291\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CR-114 | 13 Oct | Bank file header field order corrected | calc impact: none | approved O. Calloway (Payroll Manager).\\nCR-118 | 22 Oct | NSP-02 (night shift premium): display label text correction \u0027Night Prem\u0027 \u2192 \u0027Night Shift Premium\u0027 | calc impact: none | test: not required | approved O. Calloway (CAB 21 Oct).\\nREL-7.4 | 24 Oct | PayLattice platform release 7.4, includes the statutory tax table update required from the November pay period | calc impact: platform | vendor regression pack passed.\\nCR-121 | 25 Oct | Payslip header logo replaced | calc impact: none.\\nNote: Ardentra consultants write the entries in this log when a change is requested.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Payroll helpdesk ticket summary, generated 12 Nov; finance bank reconciliation note, 31 Oct\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022October pay tickets: 139, from 139 individuals. Every ticket reports an underpayment, and none reports an overpayment. All 139 cite the night shift premium line. No tickets concern basic pay, overtime, tax or deductions. Shortfalls claimed: \u00A337\u2013\u00A3201 per person, median \u00A398. By directorate: Operations (treatment works shift teams) 124; Customer Contact overnight team 15. No tickets from staff who work days only. Finance bank reconciliation for the 30 Oct payment: the amounts credited matched the payroll output file for all 2,140 payees.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email, Malcolm Treharne (Programme Director) to COO, 11 Nov\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Ardentra\u0027s report makes it clear this is our data. I signed off the cleanse on the strength of the vendor\u0027s assurance, and I won\u0027t let the November run go wrong for the same reason. My proposal: (1) suspend edit rights for Hannah Lowe\u0027s HR data team while the cleanse undergoes a conduct review; (2) re-cleanse and reload the full master data before the 24 Nov calculation; (3) accept the clause 14.3 cost so we don\u0027t sour the relationship. Internal audit have asked to look into it, but I don\u0027t want to wait for them. Remember that the board brought go-live forward; we can\u0027t afford another slip.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, Priya Dandekar (payroll officer), 12 Nov, taken by internal audit\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022During the parallel run PD checked the night premium for about 40 night workers. All matched the legacy system \u0027to the penny\u0027. She says the hours on the October payslips she has looked at agree with the rosters: \u0027it\u0027s the premium amount that\u0027s short, not the hours.\u0027 She knows a few complainants whose shift codes \u0027have always been messy\u0027, but most of the complainants she knows have clean records. On 23 Oct she asked Ardentra whether CR-118 needed testing and was told by email it was \u0027cosmetic only\u0027. She thinks Ardentra may have reloaded data at cutover but does not know which extract was used.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email, Declan Hurst (Operations Manager) to COO, 14 Nov\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Voluntary night overtime cover across the treatment works has dropped from 88% of requested shifts (Sept\u2013Oct average) to 61% (1\u201313 Nov). The night teams are angry about the premium and say so. But the new four-on-four-off rota trial also started on 1 Nov for exactly these teams, and staff reps have complained about both. Honestly, I can\u0027t tell which one is driving it. Under the agreement with the reps, the rota trial can be paused at one week\u0027s notice. I\u0027m under pressure to pause it now.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022PayLattice platform configuration audit trail export, tenant FEN-PRD, 1\u201331 October\u0022,\u0022source\u0022:\u0022Platform audit trail, exported 13 Nov by T. Wierzba (Fenmarch system administrator)\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Append-only platform audit trail. Tenant users, including Ardentra consultants, cannot edit or delete entries (platform admin guide \u00A79.2). The export was run by Fenmarch\u0027s administrator under the read-only audit role. Pay-calculation rule edits, 9\u201328 Oct: one. 22 Oct 16:41, user imarchetti@ardentra, action \u0027apply template TPL-NIGHT-STD\u0027 to rule NSP-02. Fields changed: display_label \u0027Night Prem\u0027 \u2192 \u0027Night Shift Premium\u0027; window_start 20:00 \u2192 22:00. window_end 06:00 and multiplier 1.33 unchanged. Template TPL-NIGHT-STD (Ardentra library v2) contents: label \u0027Night Shift Premium\u0027, window 22:00\u201306:00, multiplier 1.33. Other entries: 13 Oct bank file layout (CR-114); 24 Oct release 7.4, \u0027no tenant rule changes\u0027; 25 Oct payslip image (CR-121). NSP-02 window_start was 20:00 throughout both parallel-run cycles.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Internal audit workpapers: parallel-run reconciliation and production data load history\u0022,\u0022source\u0022:\u0022Fenmarch Internal Audit (reports to the Audit Committee), workpaper IA-26-41, 14 Nov\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022The parallel run (August and September cycles) used master data snapshot MD-0915. Night premium was reconciled between legacy and PayLattice for every night-working employee in each cycle (151 in August, 155 in September). No difference exceeded \u00A30.01. 22 of the September night workers hold records on Ardentra\u0027s list of 212 flagged records, and all of them reconciled. Production load history (platform job log, extracted by internal audit): on 24 Oct, job LD-PRD-0003 loaded MD-0915 plus 31 starter, leaver and change transactions keyed by Fenmarch payroll. No extract named MD-1023 appears in the job log or in Fenmarch\u0027s file-transfer records. None of the 31 transactions relates to night-working staff.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Internal audit recalculation of October night premium for all night-working staff\u0022,\u0022source\u0022:\u0022Fenmarch Internal Audit, workpaper IA-26-42, 14 Nov\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Scope: all 158 staff with night hours in October, not only those who raised tickets. Timesheet hours agreed to the rostering system for 158 of 158. Expected premium follows the collective agreement: time-and-a-third for hours worked 20:00\u201306:00. Result: 147 underpaid, 11 paid correctly. For each of the 147, the shortfall equals 0.33 \u00D7 basic hourly rate \u00D7 hours worked between 20:00 and 22:00, to within \u00A30.01. 8 of the 147 had raised no ticket. The 11 paid correctly are Kelsey Road staff rostered 22:00\u201306:00. Ardentra flagged list: 19 of 22 flagged night workers were underpaid (86%), against 128 of 136 unflagged (94%). The 190 flagged day workers were paid correctly. Re-run in Ardentra\u0027s test tenant (release 7.4, copy of production data) with NSP-02 window_start set to 20:00: all 158 matched expected pay.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Ardentra data quality audit: field-level detail of 212 flagged employee records\u0022,\u0022source\u0022:\u0022Ardentra data quality team, 6 Nov\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Audit run on 6 Nov against the production tenant using Ardentra\u0027s standard data-quality rules. 212 records flagged: 141 shift-pattern codes with trailing spaces (e.g., \u0027NS4 \u0027); 49 with the legacy prefix \u0027N/S\u0027; 22 with a missing code effective date. By directorate: Operations 118, Customer Contact 31, Fleet 27, Corporate 36. Ardentra comment: \u0027Shift-pattern anomalies of this kind commonly cause premium miscalculation in the migrations we have supported.\u0027 The audit does not test pay outcomes for the flagged records.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Bank payment file and settlement reconciliation, 30 October payment\u0022,\u0022source\u0022:\u0022Fenmarch Finance treasury team, 3 Nov\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Payment file PF-1030 transmitted 28 Oct 14:02: 2,140 credits, total \u00A35,412,880.16. Bank settlement report, 30 Oct: 2,140 credits settled, identical total, no rejects or returns. Line-level comparison of the payment file with PayLattice net pay output: zero differences. The CR-114 header correction (13 Oct) was in effect, and the bank accepted the file at first submission.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Timesheet portal approval timestamps, October pay period\u0022,\u0022source\u0022:\u0022PayLattice timesheet module report, run by Fenmarch payroll, 13 Nov\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022October period, 2,140 staff. Timesheets approved after the 26 Oct soft cut-off: night teams 112 of 158 (71%); day teams 431 of 1,982 (22%). Every timesheet was approved before the 27 Oct 09:00 hard lock and processed in the 27 Oct calculation. Timesheets defaulted to contracted hours because they were not approved: 0. Night-team managers say they approve in batches after the last night shift of the period.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Written statement of the Ardentra consultant who raised CR-118\u0022,\u0022source\u0022:\u0022I. Marchetti (Ardentra senior consultant), statement supplied via Ardentra, 13 Nov\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022On 22 Oct I applied Ardentra\u0027s standard night template to NSP-02 so that the label matched our naming standard. I understood the template to set label text, and I did not review the other fields it carries. I described CR-118 as cosmetic in good faith. TPL-NIGHT-STD reflects the configuration most of our clients use. I was not asked to test the change, and the CAB agreed that no test was required. I do not accept that I misrepresented the change.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Collective agreement extract (night working), legacy night premium rule specification, and functional design FD-07\u0022,\u0022source\u0022:\u0022Fenmarch HR policy library and programme document store\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Collective agreement, Schedule C, para 4: \u0027A night working premium of time-and-a-third is payable for all hours worked between 20:00 and 06:00.\u0027 Legacy payroll rule NPREM (spec v3, 2019): premium = 0.33 \u00D7 basic hourly rate \u00D7 hours inside the 20:00\u201306:00 window. Eligibility depends on the presence of hours in the window. Ardentra functional design document FD-07, signed 2 June, specifies the NSP-02 window as 20:00\u201306:00.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Change advisory board minutes, 21 October\u0022,\u0022source\u0022:\u0022Programme CAB secretary\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Attendees: M. Treharne (chair), O. Calloway, G. Vos, I. Marchetti, IT service manager. Ardentra presented CR-118 as \u0027label text correction on NSP-02, no calculation impact, no test required\u0027. A configuration freeze exception was granted on that basis. O. Calloway asked whether payslips would show the new label and was told yes. No field-level preview of the change was presented, and the CAB template does not require one. Approved 4\u20130.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Programme plan revision history and go-live readiness checklist\u0022,\u0022source\u0022:\u0022Programme management office\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Plan v6 (15 Sept): the programme board brings go-live forward from the November to the October pay period. Readiness checklist signed 9 Oct: parallel run passed (2 cycles); data cleanse signed off by H. Lowe and M. Treharne; configuration freeze in force from 9 Oct, with exceptions through CAB only; hypercare team of 3 Ardentra consultants and 4 Fenmarch payroll staff. Risk R-31, \u0027compressed testing window after freeze\u0027, rated amber; owner M. Treharne.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022IT service desk incident log, cutover weekend 24\u201326 October\u0022,\u0022source\u0022:\u0022Fenmarch IT service desk\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022INC-5502, 25 Oct 07:12\u201307:53: timesheet portal unavailable during the release 7.4 deployment. Restored; transaction replay confirmed no lost or duplicated entries. INC-5507, 25 Oct: payslip PDF header misaligned after the logo change; fixed the same day (CR-121). INC-5511, 26 Oct: two managers unable to log in; passwords reset. No incidents were logged against pay calculation.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Sample of 20 payroll helpdesk call recordings, 30 Oct\u20135 Nov, with listener notes\u0022,\u0022source\u0022:\u0022Payroll helpdesk team leader\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u002220 calls sampled at random from the 139 ticket-raisers. 17 callers describe their night premium as \u0027short\u0027 or \u0027less than usual\u0027; 3 cannot say what is wrong. 9 calls are angry in tone. Two callers say a colleague told them \u0027it\u0027s the new system\u0027s data\u0027. Advice given by the helpdesk in every call: wait for the investigation, and a correction will follow if one is due.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Contract schedule 7: clause 14.3 and remediation cost provisions\u0022,\u0022source\u0022:\u0022Fenmarch procurement, Ardentra master services agreement\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u002214.3: \u0027Costs of remediating a Defect shall be borne by the party whose act or omission caused it. Where a Supplier change was approved by the Client on the basis of a materially accurate description, costs shall be shared equally.\u0027 14.4: disputes go first to the joint steering group, then to mediation. 14.5: neither party may withhold undisputed invoices while a dispute is open.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Operations overtime cover dashboard, September\u2013November\u0022,\u0022source\u0022:\u0022Operations performance team\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Treatment works night overtime, shifts requested and filled: Sept 214/190 (89%); Oct 226/197 (87%); 1\u201313 Nov 118/72 (61%). Day overtime over the same period: 91%, 90%, 88%. The dashboard records fills only and does not capture reasons for declines. Teams in the rota trial are not identified separately.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Payroll officer\u0027s parallel-run spot-check spreadsheet, September cycle\u0022,\u0022source\u0022:\u0022P. Dandekar, payroll officer\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Spreadsheet kept by P. Dandekar. 40 night workers chosen \u0027from teams I know\u0027. Legacy and PayLattice night premium compared for the September cycle: 40 of 40 equal to the penny. A column note records the data snapshot as \u0027MD-0915 (per Ardentra email)\u0027. The production load was not checked. No second person reviewed the spreadsheet.\u0022},{\u0022id\u0022:\u0022C16\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022October pension contribution file submitted 5 November\u0022,\u0022source\u0022:\u0022Fenmarch payroll, pension scheme submission\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Pension scheme submission for October: 1,912 members, total pensionable pay \u00A34.31m, with employer and employee contributions calculated by PayLattice. Under scheme rules, night premium is pensionable. The scheme administrator accepted the file on 6 Nov. Corrections to pensionable pay can go in the next monthly file.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The October pay errors stem from inaccurate employee records carried over from the legacy system in the data migration.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The October pay errors stem from how pay calculation rules are configured in the new payroll system.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022The October pay errors stem from hours or shift times recorded incorrectly in the new timesheet portal.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The October pay errors stem from the interface that transmits the payment file to the bank.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022The October pay errors stem from a defect in the new payroll platform\u0027s software code.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022CR-118 edit to night premium rule NSP-02 (22 Oct)\u0022,\u0022to\u0022:\u0022October night premium underpayments\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Malformed shift-pattern codes in migrated employee records\u0022,\u0022to\u0022:\u0022October night premium underpayments\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022PayLattice platform release 7.4 (24 Oct)\u0022,\u0022to\u0022:\u0022October night premium underpayments\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022October night premium underpayments\u0022,\u0022to\u0022:\u0022Fall in voluntary night overtime cover in November\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Accept Ardentra\u0027s attribution: suspend the HR data team\u0027s edit rights pending a conduct review, re-cleanse and reload the full employee master data before the 24 Nov calculation, and absorb the remediation cost under clause 14.3.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Before the 24 Nov calculation, have Ardentra restore NSP-02\u0027s night premium window to its parallel-run setting, verify it by re-running October in the test tenant, and pay every underpaid employee identified by recalculation through an off-cycle payment.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Pause the four-on-four-off rota trial now to restore night overtime cover.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Roll back PayLattice platform release 7.4 in the production tenant before the November pay run.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022groundTruthNarrative\u0022:\u0022On 22 Oct, after parallel-run sign-off and inside the configuration freeze, an Ardentra consultant applied the vendor\u0027s standard night template to rule NSP-02 under CR-118. The template changed the label, and it also moved the premium window start from 20:00 to 22:00. Ardentra wrote the change log entry, which recorded the change as a label correction with no calculation impact, and the CAB approved it without a test. The October run therefore left out the time-and-a-third premium for hours worked between 20:00 and 22:00. 147 of 158 night workers were underpaid by exactly that amount. The 11 Kelsey Road staff rostered 22:00\u201306:00 were unaffected. Ardentra\u0027s incident report blamed malformed legacy shift-pattern codes and a fresh extract, MD-1023. The append-only platform audit trail, the production job log and internal audit\u0027s recalculation contradict both claims. Production used the same MD-0915 snapshot that reconciled perfectly in the parallel run. Flagged records were underpaid no more often than clean ones. Restoring the 20:00 start in the test tenant on release 7.4 produced correct pay for all 158. Release 7.4, the timesheet portal and the bank interface played no part. Whether the consultant knew the template changed the window is not established. The fall in night overtime cover coincides with both the pay error and a new rota trial on the same teams, so it cannot be attributed to either.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C8\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022vendor-narrative\u0022,\u0022leadership-narrative\u0022,\u0022interested-party\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022Ardentra (E1) says production used a fresh extract MD-1023. The platform job log shows production loaded MD-0915, the snapshot that reconciled to the penny for every night worker in the parallel run, flagged records included (C2). No MD-1023 exists. Flagged night workers were underpaid no more often than unflagged ones (86% vs 94%). Every shortfall equals exactly the 20:00\u201322:00 premium, a pattern an eligibility failure would not produce. The same production data gives correct pay once the window is restored (C3).\u0022},{\u0022itemId\u0022:\u0022S2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C7\u0022,\u0022C8\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022contradicted-by-independent-record\u0022,\u0022gamed-record\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The append-only audit trail, exported by Fenmarch under a read-only role, shows that CR-118 moved NSP-02 window_start from 20:00 to 22:00 (C1). Ardentra\u0027s own change log (E2) called the change label-only. The shortfalls match that change exactly, staff working only 22:00\u201306:00 were unaffected, and restoring 20:00 in the test tenant fixes all 158 cases (C3).\u0022},{\u0022itemId\u0022:\u0022S3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022C3\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022Timesheet hours agreed to the rostering system for all 158 night workers (C3). The payroll officer says hours on payslips were right (E5). Late approvals (C6) did not change hours, and no timesheet defaulted to contracted hours.\u0022},{\u0022itemId\u0022:\u0022S4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C3\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022easy-exclusion\u0022],\u0022rationale\u0022:\u0022The bank credited exactly the payroll output for all 2,140 payees (E3, C5). The error is in the calculated premium line, upstream of the bank file.\u0022},{\u0022itemId\u0022:\u0022S5\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022E2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022temporal-coincidence\u0022],\u0022rationale\u0022:\u0022Release 7.4 went live at cutover, which makes it a plausible suspect from E2. But the test tenant on the same release 7.4 calculated correct pay for all 158 once only the window setting was restored (C3). The template applied its stored 22:00 value as designed (C1), so the platform code worked as intended.\u0022},{\u0022itemId\u0022:\u0022S6\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C7\u0022,\u0022C8\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022intervention\u0022,\u0022contradicted-by-independent-record\u0022],\u0022rationale\u0022:\u0022The edit (22 Oct) came before the calculation (27 Oct). The mechanism is clear: the window start moved by two hours (C1). Shortfalls match the 20:00\u201322:00 premium exactly, and the 22:00\u201306:00 staff were unaffected. Reversing the setting restores correct pay (C3), which rules out the data and release rivals.\u0022},{\u0022itemId\u0022:\u0022S7\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022vendor-narrative\u0022,\u0022interested-party\u0022],\u0022rationale\u0022:\u0022Flagged night workers were underpaid at no higher a rate than unflagged ones (C3). The same flagged records reconciled perfectly in the parallel run (C2). Correct pay results from the unchanged flagged data once the window is restored (C3). This is evidence against the link itself. C4 shows only that anomalies exist; it does not link them to pay outcomes.\u0022},{\u0022itemId\u0022:\u0022S8\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022E2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022temporal-coincidence\u0022],\u0022rationale\u0022:\u0022Restoring only the window, with release 7.4 unchanged, produces correct pay for all 158 (C3). The release made no tenant rule changes (C1).\u0022},{\u0022itemId\u0022:\u0022S9\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E6\u0022,\u0022C12\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022unknown-driver\u0022],\u0022rationale\u0022:\u0022Night overtime cover fell after the pay error (E6). But the rota trial started on 1 Nov for the same teams, and staff reps complain about both. Co-occurrence is shown, but the rival has not been separated out, and nothing in the catalogue gives reasons for declines.\u0022},{\u0022itemId\u0022:\u0022S10\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022,\u0022vendor-narrative\u0022],\u0022rationale\u0022:\u0022The data did not cause the errors (C2, C3). Suspending and investigating the HR data team punishes the wrong party. A full reload days before payroll adds risk and leaves the window setting uncorrected. Absorbing costs that the evidence places with the vendor\u0027s change is a financial loss. No live rival makes this action beneficial.\u0022},{\u0022itemId\u0022:\u0022S11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C8\u0022,\u0022C16\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022remedy\u0022],\u0022rationale\u0022:\u0022Restoring the window is directly supported by the intervention result (C3). It must happen before 24 Nov, or November will repeat the error. Recalculation identifies all 147 underpaid staff, including 8 who raised no ticket.\u0022},{\u0022itemId\u0022:\u0022S12\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E6\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022premature\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022Pausing the rota would help if the rota is what drives the declines, but that is unconfirmed: the pay error is a co-occurring rival (E6). The trial can be paused at one week\u0027s notice and resumed, so being wrong causes no lasting damage. Committing now is not justified. Asking staff why they decline would discriminate cheaply.\u0022},{\u0022itemId\u0022:\u0022S13\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022temporal-coincidence\u0022],\u0022rationale\u0022:\u0022Release 7.4 is excluded as a cause (C3), so rolling it back leaves the error in place. It would also remove the statutory tax table update required from the November pay period (E2), putting tax wrong for all staff. With no live rival under which the rollback helps, it is harmful.\u0022},{\u0022itemId\u0022:\u0022S14\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022E3\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022The independent audit trail identifies the change, the recalculation quantifies its effect, and the test-tenant intervention confirms the fix. That is enough to commit to A2 before 24 Nov.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022lowValueReads\u0022:[\u0022C5\u0022,\u0022C11\u0022,\u0022C12\u0022,\u0022C13\u0022,\u0022C14\u0022,\u0022C16\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022CONTRA structure: the interested party is Ardentra, which faces clause 14.3 cost exposure. Its incident report (E1) and its self-written change log (E2) are contradicted by three independent records: the append-only platform audit trail exported by Fenmarch\u0027s administrator (C1), the production job log in internal audit\u0027s workpapers (C2), and internal audit\u0027s full-population recalculation and test-tenant intervention (C3). The Programme Director (E4) endorses the vendor narrative. He has his own interest: he signed off the compressed go-live and the freeze exception. From the initial file alone, E5 hints that the parallel run was fine, but E1\u0027s fresh-extract claim neutralises that hint, and E2 says CR-118 was cosmetic. Data, configuration and release therefore all remain live, and the leadership narrative pulls toward H1. Fairness: every trap is countered. C4\u0027s anomaly list is answered by C3\u0027s stratified rates. C6\u0027s late-approval association is answered within C6 itself (no defaults) and by C3 (hours agree to rosters). C7\u0027s good-faith claim leaves the consultant\u0027s knowledge unresolved; this is deliberately unscored. The release 7.4 timing is answered by the C3 re-run on 7.4. Skeptical review: (a) Could the template behaviour count as a software defect? C1 shows the template stores 22:00 and applied it as designed, so H5 is contradicted. (b) Could R4 be \u0027unknown\u0027? E6 documents co-occurrence on the same teams, so association is shown; causation is confounded by the rota trial. (c) A3 versus acceptable: the manager states that the driver is unknown, and pausing commits to one hypothesis, so it is premature. It is not harmful because the pause is reversible at one week\u0027s notice. (d) A4 is harmful only because E2 records the statutory November tax update inside 7.4. (e) Numbers reconcile: 158 = 147 \u002B 11; flagged night workers 22 = 19 \u002B 3; unflagged 136 = 128 \u002B 8; flagged total 212 = 22 \u002B 190; tickets 139 \u002B 8 silent = 147; 18 flagged complainants (E1) out of 19 flagged underpaid.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:30:47.3097619Z",
+  "finishedAt": "2026-11-17T14:39:35.8301988Z",
+  "output": {
+    "case": {
+      "id": "OD2-DEV2-CONTRA",
+      "split": "dev2",
+      "benchmarkClass": "CONTRA",
+      "domain": "technical",
+      "readBudget": 3,
+      "title": "Night premium shortfalls after the Fenmarch Water payroll cutover",
+      "setting": "Fenmarch Water is a regional water utility with 2,140 staff. In October 2026 it moved payroll from an in-house legacy system to PayLattice, a hosted payroll platform supplied and configured by Ardentra Ltd. Two parallel-run cycles (August and September) were signed off on 9 October, and a configuration freeze started that day. The board had brought go-live forward by one pay period. The first live payroll was calculated on 27 October and paid on 30 October. Within days, night-shift staff began reporting underpayments. The November calculation is due on 24 November.",
+      "presentingRequest": "From Anika Rautio, Chief Operating Officer, 17 Nov: \u0027Ardentra says our data caused the October pay errors, and Malcolm wants to act on that before the November calculation on 24 Nov. Before I sign anything off, tell me what actually caused the errors, whether Ardentra\u0027s account holds up, and which of the proposed actions we should take.\u0027",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Ardentra incident report AR-INC-2291, G. Vos (Ardentra implementation lead), 10 Nov",
+          "sourceType": "vendor-account",
+          "text": "Summary: the October underpayments come from source data quality. Our post-incident data audit found 212 employee records with malformed shift-pattern codes (trailing spaces, legacy \u0027N/S\u0027 prefixes). In PayLattice, premium eligibility is driven by shift-pattern code. The production load on 24 Oct used a fresh legacy extract (MD-1023) taken on 23 Oct, which carried these anomalies into production. 18 of the 139 complainants hold flagged records. The rest may carry anomalies that our audit rules do not detect. No change affecting pay calculation was made after parallel-run sign-off (see change log: CR-118 was a label correction). Recommendation: Fenmarch to re-cleanse and reload employee master data before the November run. Under clause 14.3, fixing client-data defects is at Fenmarch\u0027s cost."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Ardentra-maintained change log extract, 9\u201328 Oct, supplied with AR-INC-2291",
+          "sourceType": "change-record",
+          "text": "CR-114 | 13 Oct | Bank file header field order corrected | calc impact: none | approved O. Calloway (Payroll Manager).\nCR-118 | 22 Oct | NSP-02 (night shift premium): display label text correction \u0027Night Prem\u0027 \u2192 \u0027Night Shift Premium\u0027 | calc impact: none | test: not required | approved O. Calloway (CAB 21 Oct).\nREL-7.4 | 24 Oct | PayLattice platform release 7.4, includes the statutory tax table update required from the November pay period | calc impact: platform | vendor regression pack passed.\nCR-121 | 25 Oct | Payslip header logo replaced | calc impact: none.\nNote: Ardentra consultants write the entries in this log when a change is requested."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Payroll helpdesk ticket summary, generated 12 Nov; finance bank reconciliation note, 31 Oct",
+          "sourceType": "system-record",
+          "text": "October pay tickets: 139, from 139 individuals. Every ticket reports an underpayment, and none reports an overpayment. All 139 cite the night shift premium line. No tickets concern basic pay, overtime, tax or deductions. Shortfalls claimed: \u00A337\u2013\u00A3201 per person, median \u00A398. By directorate: Operations (treatment works shift teams) 124; Customer Contact overnight team 15. No tickets from staff who work days only. Finance bank reconciliation for the 30 Oct payment: the amounts credited matched the payroll output file for all 2,140 payees."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Email, Malcolm Treharne (Programme Director) to COO, 11 Nov",
+          "sourceType": "leadership-account",
+          "text": "Ardentra\u0027s report makes it clear this is our data. I signed off the cleanse on the strength of the vendor\u0027s assurance, and I won\u0027t let the November run go wrong for the same reason. My proposal: (1) suspend edit rights for Hannah Lowe\u0027s HR data team while the cleanse undergoes a conduct review; (2) re-cleanse and reload the full master data before the 24 Nov calculation; (3) accept the clause 14.3 cost so we don\u0027t sour the relationship. Internal audit have asked to look into it, but I don\u0027t want to wait for them. Remember that the board brought go-live forward; we can\u0027t afford another slip."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Interview notes, Priya Dandekar (payroll officer), 12 Nov, taken by internal audit",
+          "sourceType": "staff-account",
+          "text": "During the parallel run PD checked the night premium for about 40 night workers. All matched the legacy system \u0027to the penny\u0027. She says the hours on the October payslips she has looked at agree with the rosters: \u0027it\u0027s the premium amount that\u0027s short, not the hours.\u0027 She knows a few complainants whose shift codes \u0027have always been messy\u0027, but most of the complainants she knows have clean records. On 23 Oct she asked Ardentra whether CR-118 needed testing and was told by email it was \u0027cosmetic only\u0027. She thinks Ardentra may have reloaded data at cutover but does not know which extract was used."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Email, Declan Hurst (Operations Manager) to COO, 14 Nov",
+          "sourceType": "manager-account",
+          "text": "Voluntary night overtime cover across the treatment works has dropped from 88% of requested shifts (Sept\u2013Oct average) to 61% (1\u201313 Nov). The night teams are angry about the premium and say so. But the new four-on-four-off rota trial also started on 1 Nov for exactly these teams, and staff reps have complained about both. Honestly, I can\u0027t tell which one is driving it. Under the agreement with the reps, the rota trial can be paused at one week\u0027s notice. I\u0027m under pressure to pause it now."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "PayLattice platform configuration audit trail export, tenant FEN-PRD, 1\u201331 October",
+          "source": "Platform audit trail, exported 13 Nov by T. Wierzba (Fenmarch system administrator)",
+          "sourceType": "log",
+          "text": "Append-only platform audit trail. Tenant users, including Ardentra consultants, cannot edit or delete entries (platform admin guide \u00A79.2). The export was run by Fenmarch\u0027s administrator under the read-only audit role. Pay-calculation rule edits, 9\u201328 Oct: one. 22 Oct 16:41, user imarchetti@ardentra, action \u0027apply template TPL-NIGHT-STD\u0027 to rule NSP-02. Fields changed: display_label \u0027Night Prem\u0027 \u2192 \u0027Night Shift Premium\u0027; window_start 20:00 \u2192 22:00. window_end 06:00 and multiplier 1.33 unchanged. Template TPL-NIGHT-STD (Ardentra library v2) contents: label \u0027Night Shift Premium\u0027, window 22:00\u201306:00, multiplier 1.33. Other entries: 13 Oct bank file layout (CR-114); 24 Oct release 7.4, \u0027no tenant rule changes\u0027; 25 Oct payslip image (CR-121). NSP-02 window_start was 20:00 throughout both parallel-run cycles."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Internal audit workpapers: parallel-run reconciliation and production data load history",
+          "source": "Fenmarch Internal Audit (reports to the Audit Committee), workpaper IA-26-41, 14 Nov",
+          "sourceType": "document",
+          "text": "The parallel run (August and September cycles) used master data snapshot MD-0915. Night premium was reconciled between legacy and PayLattice for every night-working employee in each cycle (151 in August, 155 in September). No difference exceeded \u00A30.01. 22 of the September night workers hold records on Ardentra\u0027s list of 212 flagged records, and all of them reconciled. Production load history (platform job log, extracted by internal audit): on 24 Oct, job LD-PRD-0003 loaded MD-0915 plus 31 starter, leaver and change transactions keyed by Fenmarch payroll. No extract named MD-1023 appears in the job log or in Fenmarch\u0027s file-transfer records. None of the 31 transactions relates to night-working staff."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Internal audit recalculation of October night premium for all night-working staff",
+          "source": "Fenmarch Internal Audit, workpaper IA-26-42, 14 Nov",
+          "sourceType": "document",
+          "text": "Scope: all 158 staff with night hours in October, not only those who raised tickets. Timesheet hours agreed to the rostering system for 158 of 158. Expected premium follows the collective agreement: time-and-a-third for hours worked 20:00\u201306:00. Result: 147 underpaid, 11 paid correctly. For each of the 147, the shortfall equals 0.33 \u00D7 basic hourly rate \u00D7 hours worked between 20:00 and 22:00, to within \u00A30.01. 8 of the 147 had raised no ticket. The 11 paid correctly are Kelsey Road staff rostered 22:00\u201306:00. Ardentra flagged list: 19 of 22 flagged night workers were underpaid (86%), against 128 of 136 unflagged (94%). The 190 flagged day workers were paid correctly. Re-run in Ardentra\u0027s test tenant (release 7.4, copy of production data) with NSP-02 window_start set to 20:00: all 158 matched expected pay."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Ardentra data quality audit: field-level detail of 212 flagged employee records",
+          "source": "Ardentra data quality team, 6 Nov",
+          "sourceType": "vendor-account",
+          "text": "Audit run on 6 Nov against the production tenant using Ardentra\u0027s standard data-quality rules. 212 records flagged: 141 shift-pattern codes with trailing spaces (e.g., \u0027NS4 \u0027); 49 with the legacy prefix \u0027N/S\u0027; 22 with a missing code effective date. By directorate: Operations 118, Customer Contact 31, Fleet 27, Corporate 36. Ardentra comment: \u0027Shift-pattern anomalies of this kind commonly cause premium miscalculation in the migrations we have supported.\u0027 The audit does not test pay outcomes for the flagged records."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Bank payment file and settlement reconciliation, 30 October payment",
+          "source": "Fenmarch Finance treasury team, 3 Nov",
+          "sourceType": "financial-record",
+          "text": "Payment file PF-1030 transmitted 28 Oct 14:02: 2,140 credits, total \u00A35,412,880.16. Bank settlement report, 30 Oct: 2,140 credits settled, identical total, no rejects or returns. Line-level comparison of the payment file with PayLattice net pay output: zero differences. The CR-114 header correction (13 Oct) was in effect, and the bank accepted the file at first submission."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Timesheet portal approval timestamps, October pay period",
+          "source": "PayLattice timesheet module report, run by Fenmarch payroll, 13 Nov",
+          "sourceType": "system-record",
+          "text": "October period, 2,140 staff. Timesheets approved after the 26 Oct soft cut-off: night teams 112 of 158 (71%); day teams 431 of 1,982 (22%). Every timesheet was approved before the 27 Oct 09:00 hard lock and processed in the 27 Oct calculation. Timesheets defaulted to contracted hours because they were not approved: 0. Night-team managers say they approve in batches after the last night shift of the period."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Written statement of the Ardentra consultant who raised CR-118",
+          "source": "I. Marchetti (Ardentra senior consultant), statement supplied via Ardentra, 13 Nov",
+          "sourceType": "vendor-account",
+          "text": "On 22 Oct I applied Ardentra\u0027s standard night template to NSP-02 so that the label matched our naming standard. I understood the template to set label text, and I did not review the other fields it carries. I described CR-118 as cosmetic in good faith. TPL-NIGHT-STD reflects the configuration most of our clients use. I was not asked to test the change, and the CAB agreed that no test was required. I do not accept that I misrepresented the change."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Collective agreement extract (night working), legacy night premium rule specification, and functional design FD-07",
+          "source": "Fenmarch HR policy library and programme document store",
+          "sourceType": "document",
+          "text": "Collective agreement, Schedule C, para 4: \u0027A night working premium of time-and-a-third is payable for all hours worked between 20:00 and 06:00.\u0027 Legacy payroll rule NPREM (spec v3, 2019): premium = 0.33 \u00D7 basic hourly rate \u00D7 hours inside the 20:00\u201306:00 window. Eligibility depends on the presence of hours in the window. Ardentra functional design document FD-07, signed 2 June, specifies the NSP-02 window as 20:00\u201306:00."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Change advisory board minutes, 21 October",
+          "source": "Programme CAB secretary",
+          "sourceType": "document",
+          "text": "Attendees: M. Treharne (chair), O. Calloway, G. Vos, I. Marchetti, IT service manager. Ardentra presented CR-118 as \u0027label text correction on NSP-02, no calculation impact, no test required\u0027. A configuration freeze exception was granted on that basis. O. Calloway asked whether payslips would show the new label and was told yes. No field-level preview of the change was presented, and the CAB template does not require one. Approved 4\u20130."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Programme plan revision history and go-live readiness checklist",
+          "source": "Programme management office",
+          "sourceType": "document",
+          "text": "Plan v6 (15 Sept): the programme board brings go-live forward from the November to the October pay period. Readiness checklist signed 9 Oct: parallel run passed (2 cycles); data cleanse signed off by H. Lowe and M. Treharne; configuration freeze in force from 9 Oct, with exceptions through CAB only; hypercare team of 3 Ardentra consultants and 4 Fenmarch payroll staff. Risk R-31, \u0027compressed testing window after freeze\u0027, rated amber; owner M. Treharne."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "IT service desk incident log, cutover weekend 24\u201326 October",
+          "source": "Fenmarch IT service desk",
+          "sourceType": "log",
+          "text": "INC-5502, 25 Oct 07:12\u201307:53: timesheet portal unavailable during the release 7.4 deployment. Restored; transaction replay confirmed no lost or duplicated entries. INC-5507, 25 Oct: payslip PDF header misaligned after the logo change; fixed the same day (CR-121). INC-5511, 26 Oct: two managers unable to log in; passwords reset. No incidents were logged against pay calculation."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Sample of 20 payroll helpdesk call recordings, 30 Oct\u20135 Nov, with listener notes",
+          "source": "Payroll helpdesk team leader",
+          "sourceType": "staff-account",
+          "text": "20 calls sampled at random from the 139 ticket-raisers. 17 callers describe their night premium as \u0027short\u0027 or \u0027less than usual\u0027; 3 cannot say what is wrong. 9 calls are angry in tone. Two callers say a colleague told them \u0027it\u0027s the new system\u0027s data\u0027. Advice given by the helpdesk in every call: wait for the investigation, and a correction will follow if one is due."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Contract schedule 7: clause 14.3 and remediation cost provisions",
+          "source": "Fenmarch procurement, Ardentra master services agreement",
+          "sourceType": "document",
+          "text": "14.3: \u0027Costs of remediating a Defect shall be borne by the party whose act or omission caused it. Where a Supplier change was approved by the Client on the basis of a materially accurate description, costs shall be shared equally.\u0027 14.4: disputes go first to the joint steering group, then to mediation. 14.5: neither party may withhold undisputed invoices while a dispute is open."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Operations overtime cover dashboard, September\u2013November",
+          "source": "Operations performance team",
+          "sourceType": "telemetry",
+          "text": "Treatment works night overtime, shifts requested and filled: Sept 214/190 (89%); Oct 226/197 (87%); 1\u201313 Nov 118/72 (61%). Day overtime over the same period: 91%, 90%, 88%. The dashboard records fills only and does not capture reasons for declines. Teams in the rota trial are not identified separately."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Payroll officer\u0027s parallel-run spot-check spreadsheet, September cycle",
+          "source": "P. Dandekar, payroll officer",
+          "sourceType": "staff-account",
+          "text": "Spreadsheet kept by P. Dandekar. 40 night workers chosen \u0027from teams I know\u0027. Legacy and PayLattice night premium compared for the September cycle: 40 of 40 equal to the penny. A column note records the data snapshot as \u0027MD-0915 (per Ardentra email)\u0027. The production load was not checked. No second person reviewed the spreadsheet."
+        },
+        {
+          "id": "C16",
+          "stage": "S1",
+          "title": "October pension contribution file submitted 5 November",
+          "source": "Fenmarch payroll, pension scheme submission",
+          "sourceType": "financial-record",
+          "text": "Pension scheme submission for October: 1,912 members, total pensionable pay \u00A34.31m, with employer and employee contributions calculated by PayLattice. Under scheme rules, night premium is pensionable. The scheme administrator accepted the file on 6 Nov. Corrections to pensionable pay can go in the next monthly file."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The October pay errors stem from inaccurate employee records carried over from the legacy system in the data migration."
+          },
+          {
+            "id": "H2",
+            "text": "The October pay errors stem from how pay calculation rules are configured in the new payroll system."
+          },
+          {
+            "id": "H3",
+            "text": "The October pay errors stem from hours or shift times recorded incorrectly in the new timesheet portal."
+          },
+          {
+            "id": "H4",
+            "text": "The October pay errors stem from the interface that transmits the payment file to the bank."
+          },
+          {
+            "id": "H5",
+            "text": "The October pay errors stem from a defect in the new payroll platform\u0027s software code."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "CR-118 edit to night premium rule NSP-02 (22 Oct)",
+            "to": "October night premium underpayments",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Malformed shift-pattern codes in migrated employee records",
+            "to": "October night premium underpayments",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "PayLattice platform release 7.4 (24 Oct)",
+            "to": "October night premium underpayments",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "October night premium underpayments",
+            "to": "Fall in voluntary night overtime cover in November",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Accept Ardentra\u0027s attribution: suspend the HR data team\u0027s edit rights pending a conduct review, re-cleanse and reload the full employee master data before the 24 Nov calculation, and absorb the remediation cost under clause 14.3."
+          },
+          {
+            "id": "A2",
+            "text": "Before the 24 Nov calculation, have Ardentra restore NSP-02\u0027s night premium window to its parallel-run setting, verify it by re-running October in the test tenant, and pay every underpaid employee identified by recalculation through an off-cycle payment."
+          },
+          {
+            "id": "A3",
+            "text": "Pause the four-on-four-off rota trial now to restore night overtime cover."
+          },
+          {
+            "id": "A4",
+            "text": "Roll back PayLattice platform release 7.4 in the production tenant before the November pay run."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "S1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-DEV2-CONTRA",
+      "groundTruthNarrative": "On 22 Oct, after parallel-run sign-off and inside the configuration freeze, an Ardentra consultant applied the vendor\u0027s standard night template to rule NSP-02 under CR-118. The template changed the label, and it also moved the premium window start from 20:00 to 22:00. Ardentra wrote the change log entry, which recorded the change as a label correction with no calculation impact, and the CAB approved it without a test. The October run therefore left out the time-and-a-third premium for hours worked between 20:00 and 22:00. 147 of 158 night workers were underpaid by exactly that amount. The 11 Kelsey Road staff rostered 22:00\u201306:00 were unaffected. Ardentra\u0027s incident report blamed malformed legacy shift-pattern codes and a fresh extract, MD-1023. The append-only platform audit trail, the production job log and internal audit\u0027s recalculation contradict both claims. Production used the same MD-0915 snapshot that reconciled perfectly in the parallel run. Flagged records were underpaid no more often than clean ones. Restoring the 20:00 start in the test tenant on release 7.4 produced correct pay for all 158. Release 7.4, the timesheet portal and the bank interface played no part. Whether the consultant knew the template changed the window is not established. The fall in night overtime cover coincides with both the pay error and a new rota trial on the same teams, so it cannot be attributed to either.",
+      "answers": [
+        {
+          "itemId": "S1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C8",
+            "C15"
+          ],
+          "tags": [
+            "vendor-narrative",
+            "leadership-narrative",
+            "interested-party",
+            "misleading-signal"
+          ],
+          "rationale": "Ardentra (E1) says production used a fresh extract MD-1023. The platform job log shows production loaded MD-0915, the snapshot that reconciled to the penny for every night worker in the parallel run, flagged records included (C2). No MD-1023 exists. Flagged night workers were underpaid no more often than unflagged ones (86% vs 94%). Every shortfall equals exactly the 20:00\u201322:00 premium, a pattern an eligibility failure would not produce. The same production data gives correct pay once the window is restored (C3)."
+        },
+        {
+          "itemId": "S2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E5",
+            "C1",
+            "C3",
+            "C7",
+            "C8",
+            "C9"
+          ],
+          "tags": [
+            "contradicted-by-independent-record",
+            "gamed-record",
+            "central"
+          ],
+          "rationale": "The append-only audit trail, exported by Fenmarch under a read-only role, shows that CR-118 moved NSP-02 window_start from 20:00 to 22:00 (C1). Ardentra\u0027s own change log (E2) called the change label-only. The shortfalls match that change exactly, staff working only 22:00\u201306:00 were unaffected, and restoring 20:00 in the test tenant fixes all 158 cases (C3)."
+        },
+        {
+          "itemId": "S3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E5",
+            "C3",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "misleading-signal"
+          ],
+          "rationale": "Timesheet hours agreed to the rostering system for all 158 night workers (C3). The payroll officer says hours on payslips were right (E5). Late approvals (C6) did not change hours, and no timesheet defaulted to contracted hours."
+        },
+        {
+          "itemId": "S4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C3",
+            "C5"
+          ],
+          "tags": [
+            "easy-exclusion"
+          ],
+          "rationale": "The bank credited exactly the payroll output for all 2,140 payees (E3, C5). The error is in the calculated premium line, upstream of the bank file."
+        },
+        {
+          "itemId": "S5",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C3"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C3",
+            "E2",
+            "C11"
+          ],
+          "tags": [
+            "misleading-signal",
+            "temporal-coincidence"
+          ],
+          "rationale": "Release 7.4 went live at cutover, which makes it a plausible suspect from E2. But the test tenant on the same release 7.4 calculated correct pay for all 158 once only the window setting was restored (C3). The template applied its stored 22:00 value as designed (C1), so the platform code worked as intended."
+        },
+        {
+          "itemId": "S6",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C3",
+            "C7",
+            "C8",
+            "C9"
+          ],
+          "tags": [
+            "central",
+            "intervention",
+            "contradicted-by-independent-record"
+          ],
+          "rationale": "The edit (22 Oct) came before the calculation (27 Oct). The mechanism is clear: the window start moved by two hours (C1). Shortfalls match the 20:00\u201322:00 premium exactly, and the 22:00\u201306:00 staff were unaffected. Reversing the setting restores correct pay (C3), which rules out the data and release rivals."
+        },
+        {
+          "itemId": "S7",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "C2",
+            "C3",
+            "C4",
+            "C15"
+          ],
+          "tags": [
+            "vendor-narrative",
+            "interested-party"
+          ],
+          "rationale": "Flagged night workers were underpaid at no higher a rate than unflagged ones (C3). The same flagged records reconciled perfectly in the parallel run (C2). Correct pay results from the unchanged flagged data once the window is restored (C3). This is evidence against the link itself. C4 shows only that anomalies exist; it does not link them to pay outcomes."
+        },
+        {
+          "itemId": "S8",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C3"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C3",
+            "E2",
+            "C11"
+          ],
+          "tags": [
+            "temporal-coincidence"
+          ],
+          "rationale": "Restoring only the window, with release 7.4 unchanged, produces correct pay for all 158 (C3). The release made no tenant rule changes (C1)."
+        },
+        {
+          "itemId": "S9",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E6",
+            "C12",
+            "C14"
+          ],
+          "tags": [
+            "confounded",
+            "unknown-driver"
+          ],
+          "rationale": "Night overtime cover fell after the pay error (E6). But the rota trial started on 1 Nov for the same teams, and staff reps complain about both. Co-occurrence is shown, but the rival has not been separated out, and nothing in the catalogue gives reasons for declines."
+        },
+        {
+          "itemId": "S10",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "C1",
+            "C2",
+            "C3",
+            "C13"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative",
+            "vendor-narrative"
+          ],
+          "rationale": "The data did not cause the errors (C2, C3). Suspending and investigating the HR data team punishes the wrong party. A full reload days before payroll adds risk and leaves the window setting uncorrected. Absorbing costs that the evidence places with the vendor\u0027s change is a financial loss. No live rival makes this action beneficial."
+        },
+        {
+          "itemId": "S11",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C3",
+            "C8",
+            "C16"
+          ],
+          "tags": [
+            "central",
+            "remedy"
+          ],
+          "rationale": "Restoring the window is directly supported by the intervention result (C3). It must happen before 24 Nov, or November will repeat the error. Recalculation identifies all 147 underpaid staff, including 8 who raised no ticket."
+        },
+        {
+          "itemId": "S12",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E6",
+            "C14"
+          ],
+          "tags": [
+            "premature",
+            "confounded"
+          ],
+          "rationale": "Pausing the rota would help if the rota is what drives the declines, but that is unconfirmed: the pay error is a co-occurring rival (E6). The trial can be paused at one week\u0027s notice and resumed, so being wrong causes no lasting damage. Committing now is not justified. Asking staff why they decline would discriminate cheaply."
+        },
+        {
+          "itemId": "S13",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C3",
+            "C11"
+          ],
+          "tags": [
+            "protective-control",
+            "temporal-coincidence"
+          ],
+          "rationale": "Release 7.4 is excluded as a cause (C3), so rolling it back leaves the error in place. It would also remove the statutory tax table update required from the November pay period (E2), putting tax wrong for all staff. With no live rival under which the rollback helps, it is harmful."
+        },
+        {
+          "itemId": "S14",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C2",
+            "C3",
+            "E3"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "The independent audit trail identifies the change, the recalculation quantifies its effect, and the test-tenant intervention confirms the fix. That is enough to commit to A2 before 24 Nov."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "lowValueReads": [
+        "C5",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C16"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C3",
+        "C2"
+      ],
+      "authoringNotes": "CONTRA structure: the interested party is Ardentra, which faces clause 14.3 cost exposure. Its incident report (E1) and its self-written change log (E2) are contradicted by three independent records: the append-only platform audit trail exported by Fenmarch\u0027s administrator (C1), the production job log in internal audit\u0027s workpapers (C2), and internal audit\u0027s full-population recalculation and test-tenant intervention (C3). The Programme Director (E4) endorses the vendor narrative. He has his own interest: he signed off the compressed go-live and the freeze exception. From the initial file alone, E5 hints that the parallel run was fine, but E1\u0027s fresh-extract claim neutralises that hint, and E2 says CR-118 was cosmetic. Data, configuration and release therefore all remain live, and the leadership narrative pulls toward H1. Fairness: every trap is countered. C4\u0027s anomaly list is answered by C3\u0027s stratified rates. C6\u0027s late-approval association is answered within C6 itself (no defaults) and by C3 (hours agree to rosters). C7\u0027s good-faith claim leaves the consultant\u0027s knowledge unresolved; this is deliberately unscored. The release 7.4 timing is answered by the C3 re-run on 7.4. Skeptical review: (a) Could the template behaviour count as a software defect? C1 shows the template stores 22:00 and applied it as designed, so H5 is contradicted. (b) Could R4 be \u0027unknown\u0027? E6 documents co-occurrence on the same teams, so association is shown; causation is confounded by the rota trial. (c) A3 versus acceptable: the manager states that the driver is unknown, and pausing commits to one hypothesis, so it is premature. It is not harmful because the pause is reversible at one week\u0027s notice. (d) A4 is harmful only because E2 records the statutory November tax update inside 7.4. (e) Numbers reconcile: 158 = 147 \u002B 11; flagged night workers 22 = 19 \u002B 3; unflagged 136 = 128 \u002B 8; flagged total 212 = 22 \u002B 190; tickets 139 \u002B 8 silent = 147; 18 flagged complainants (E1) out of 19 flagged underpaid."
+    }
+  }
+}

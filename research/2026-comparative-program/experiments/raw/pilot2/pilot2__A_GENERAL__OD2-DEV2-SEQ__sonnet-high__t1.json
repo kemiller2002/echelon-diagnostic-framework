@@ -1,0 +1,238 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-SEQ",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C6",
+    "X3": "C12",
+    "X4": "C2",
+    "X5": "C1",
+    "X6": "C8",
+    "X7": "C11",
+    "X8": "C3",
+    "X9": "C13",
+    "X10": "C4",
+    "X11": "C5",
+    "X12": "C15",
+    "X13": "C10",
+    "X14": "C14",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X5",
+    "X8",
+    "X4",
+    "X15"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C2",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 10,
+    "cacheReadTokens": 39150,
+    "cacheCreationTokens": 8334,
+    "outputTokens": 2902,
+    "thinkingTokens": 816,
+    "costUsd": 0.066291,
+    "durationMs": 20971,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-high__t1/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-SEQ\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidence Ids\u0022:[],\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X8\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X8\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The slowdown is mostly in one place. The cause is not the Corvane system, the new hires or the valuation firm. It is the May credit policy refresh. Clause 6.3 lowered the threshold for a mandatory full property appraisal from $500k to $150k, and no one assessed its effect on processing time. Full appraisals took about 8.6 days at the valuer, against about 1.2 for desktop valuations. Full appraisals rose from about 30 a month to about 80. The median valuation stage for property-secured loans went from 1.7 days in April to 7.6 in June and 8.4 in August. Unsecured loans, which the policy change doesn\u0027t touch, are back to about 5.9 days. Underwriting time is flat. Document collection at the new hires\u0027 branches matches the other branches. The valuer\u0027s turnaround is unchanged, and valuation stage times were unchanged in April, after its contract renewed. Corvane caused a short April bump that has since cleared.\\n\\nRecommendation: don\u0027t withhold Corvane\u0027s payment or revert to the legacy workflow. Don\u0027t put the new hires on improvement plans. Take the measured delay and the audit rationale (desktop valuations ran 12% above full appraisals) to the credit risk committee, and let it decide on the $150k threshold. Add a by-stage breakdown to the dashboard.\\n\\nWithdrawals are uncertain. Part of the rise comes from the new 30-day auto-close rule, which the legacy system didn\u0027t have. Some customers did go elsewhere. I\u0027d hold off on a fee rebate until that\u0027s sorted out.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:41:56.3355254Z",
+    "finishedAt": "2026-11-17T14:42:18.1913529Z",
+    "output": {
+      "caseId": "OD2-DEV2-SEQ",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidence Ids": [],
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X8",
+            "X4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "X8",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X8",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4",
+            "X5",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The slowdown is mostly in one place. The cause is not the Corvane system, the new hires or the valuation firm. It is the May credit policy refresh. Clause 6.3 lowered the threshold for a mandatory full property appraisal from $500k to $150k, and no one assessed its effect on processing time. Full appraisals took about 8.6 days at the valuer, against about 1.2 for desktop valuations. Full appraisals rose from about 30 a month to about 80. The median valuation stage for property-secured loans went from 1.7 days in April to 7.6 in June and 8.4 in August. Unsecured loans, which the policy change doesn\u0027t touch, are back to about 5.9 days. Underwriting time is flat. Document collection at the new hires\u0027 branches matches the other branches. The valuer\u0027s turnaround is unchanged, and valuation stage times were unchanged in April, after its contract renewed. Corvane caused a short April bump that has since cleared.\n\nRecommendation: don\u0027t withhold Corvane\u0027s payment or revert to the legacy workflow. Don\u0027t put the new hires on improvement plans. Take the measured delay and the audit rationale (desktop valuations ran 12% above full appraisals) to the credit risk committee, and let it decide on the $150k threshold. Add a by-stage breakdown to the dashboard.\n\nWithdrawals are uncertain. Part of the rise comes from the new 30-day auto-close rule, which the legacy system didn\u0027t have. Some customers did go elsewhere. I\u0027d hold off on a fee rebate until that\u0027s sorted out."
+    }
+  }
+}

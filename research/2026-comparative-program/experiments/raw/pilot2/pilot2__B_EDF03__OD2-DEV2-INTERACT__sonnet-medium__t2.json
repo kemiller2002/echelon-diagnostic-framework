@@ -1,0 +1,231 @@
+{
+  "runId": "pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2",
+  "phase": "pilot2",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV2-INTERACT",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C9",
+    "X3": "C10",
+    "X4": "C8",
+    "X5": "C11",
+    "X6": "C15",
+    "X7": "C14",
+    "X8": "C1",
+    "X9": "C6",
+    "X10": "C13",
+    "X11": "C5",
+    "X12": "C3",
+    "X13": "C7",
+    "X14": "C12",
+    "X15": "C4"
+  },
+  "readLabels": [
+    "X1",
+    "X12",
+    "X8"
+  ],
+  "reads": [
+    "C2",
+    "C3",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20173,
+    "cacheCreationTokens": 9989,
+    "outputTokens": 2213,
+    "thinkingTokens": 397,
+    "costUsd": 0.0641153,
+    "durationMs": 22836,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-INTERACT__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X1\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S15\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X1\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The stop increase comes from an interaction between two changes. The new firmware (6.4) now treats faint short-range reflections as obstacles, and the glossy stretch film on outbound pallets produces those reflections at oblique angles. Neither change causes the problem alone.\\n\\nEvidence: upgraded pallet robots in Zones A/B went from 3.2 to 15.6 stops per 100 robot-hours. Robots still on 6.3 in the same zones stayed flat at about 3.2. Tote robots on 6.4 in Zone C, which has no wrapped pallets, were also flat. The bench test with no people present gave 17 of 20 stops for 6.4 with gloss film. It gave 0 or 1 of 20 for every other combination. About 93% of the added stops have no person\u0027s badge within 3 m, so the temps are not the driver.\\n\\nWhat to do: switch outbound pallets back to the previous matte film, keep firmware as is, and track stops by zone and firmware group. Don\u0027t adopt the three-strike policy or the 20% shorter protective fields. Don\u0027t rely on Halvane\u0027s December release until it is tested against the gloss film. Rolling back to 6.3 is a fallback only. Security support for 6.3 ends 31 October.\\n\\nConfidence is high on the mechanism. It is lower on how much the stops contribute to the missed cut-offs, which also track the 18% volume increase.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:42:42.6540856Z",
+    "finishedAt": "2026-11-17T14:43:06.3035764Z",
+    "output": {
+      "caseId": "OD2-DEV2-INTERACT",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12",
+            "X1",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E4",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S15",
+          "answer": "premature",
+          "confidence": 82,
+          "evidenceIds": [
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S16",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X1",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The stop increase comes from an interaction between two changes. The new firmware (6.4) now treats faint short-range reflections as obstacles, and the glossy stretch film on outbound pallets produces those reflections at oblique angles. Neither change causes the problem alone.\n\nEvidence: upgraded pallet robots in Zones A/B went from 3.2 to 15.6 stops per 100 robot-hours. Robots still on 6.3 in the same zones stayed flat at about 3.2. Tote robots on 6.4 in Zone C, which has no wrapped pallets, were also flat. The bench test with no people present gave 17 of 20 stops for 6.4 with gloss film. It gave 0 or 1 of 20 for every other combination. About 93% of the added stops have no person\u0027s badge within 3 m, so the temps are not the driver.\n\nWhat to do: switch outbound pallets back to the previous matte film, keep firmware as is, and track stops by zone and firmware group. Don\u0027t adopt the three-strike policy or the 20% shorter protective fields. Don\u0027t rely on Halvane\u0027s December release until it is tested against the gloss film. Rolling back to 6.3 is a fallback only. Security support for 6.3 ends 31 October.\n\nConfidence is high on the mechanism. It is lower on how much the stops contribute to the missed cut-offs, which also track the 18% volume increase."
+    }
+  }
+}

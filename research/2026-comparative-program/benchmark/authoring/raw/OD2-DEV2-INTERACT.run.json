@@ -1,0 +1,824 @@
+{
+  "label": "OD2-DEV2-INTERACT",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7725,
+  "cacheCreationTokens": 4301,
+  "outputTokens": 41076,
+  "thinkingTokens": 30274,
+  "costUsd": 0.8574890000000001,
+  "durationMs": 411754,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-DEV2-INTERACT/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022split\u0022:\u0022dev2\u0022,\u0022benchmarkClass\u0022:\u0022INTERACT\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:3,\u0022title\u0022:\u0022Larkfield DC: robot collision stops tripled in September\u0022,\u0022setting\u0022:\u0022Larkfield Distribution Centre is a fictional regional warehouse run by Corrin Freight Logistics. It operates 58 Halvane HR-7 autonomous mobile robots. Thirty-eight pallet-handling robots work the outbound marshalling Zones A and B, where wrapped outbound pallets are staged. Twenty tote robots work carton Zone C. A robot logs a \u0027collision stop\u0027 (protective stop) whenever an obstacle enters its protective field. The analysis date is 20 October 2026.\u0022,\u0022presentingRequest\u0022:\u0022The regional operations director writes: \u0027Larkfield\u0027s robot collision stops have roughly tripled since early September, in the middle of peak season. The GM wants a disciplinary policy for agency temps, and Halvane suggests shortening the robots\u0027 protective fields. Tell me what is actually driving the stops and what the site should do now.\u0027\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Fleet management system, weekly safety KPI extract\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Larkfield DC: protective (\u0027collision\u0027) stops, all 58 HR-7 robots, by ISO week 2026: wk30 201, wk31 209, wk32 198, wk33 212, wk34 207, wk35 203, wk36 412, wk37 640, wk38 655, wk39 662, wk40 648, wk41 651. A stop is logged whenever an obstacle enters a robot\u0027s protective field; the robot halts until the field clears, typically for 20\u201390 seconds. Physical contacts with people or equipment: 1 in weeks 30\u201335, 1 in weeks 37\u201341. Robot operating hours were roughly constant across the period.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Dana Okafor, General Manager, to site leadership, 5 October\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: Robot stops. \u0027The timing tells the story. We brought in 46 agency temps on 31 August and the stops tripled that same week. These people don\u0027t know the lane rules and they wander into robot aisles. I want a three-strike policy live by Monday. Every collision stop gets matched to the temps rostered in that zone during that hour, each match counts as a strike, and after three strikes the agency replaces the person. Engineering keeps telling me it\u0027s the software, but Halvane says their update runs fine at other sites, so let\u0027s stop chasing that.\u0027\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Change record CHG-2026-0412\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Fleet firmware upgrade, HR-7 6.3 to 6.4. Implemented 2\u20134 September 2026 on 50 of 58 robots. Exception: eight pallet-handling robots with the older battery module (units P31\u2013P38) stay on 6.3 until a compatible module arrives. They continue in normal mixed duty. Vendor release summary: \u0027Revised near-field return filtering for improved detection of low-profile obstacles; navigation and charging fixes; security patches.\u0027 Halvane lifecycle notice: security support for 6.3 ends 31 October 2026. The eight exception units are covered by a time-limited waiver.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Halvane Robotics Customer Support (Tier 2), 25 September\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022\u0027We\u0027ve reviewed your ticket. Firmware 6.4 has been live at three other customer sites since July with no change in protective-stop rates, so we don\u0027t see the firmware as the cause. Increases like this are usually environmental: people, layout, clutter. If the stops are hurting throughput, a common remedy is to shorten the protective field by 20%, and we can push that profile to your fleet remotely. Our next release, 6.4.2, is planned for early December and includes further filtering refinements.\u0027\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, R. Szabo, robot maintenance technician, 12 October\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027Most of the stops I get called out to are in the marshalling lanes, A and B, where outbound pallets are staged. There are hardly any in C, the tote zone. Usually by the time I get there the field\u0027s clear and nobody\u0027s around, but people walk off, so I can\u0027t say who it was. Somebody asked me about the new shiny pallet wrap; procurement switched suppliers at the start of August. I don\u0027t buy it. We had that wrap for a month before the stops went up and nothing changed. If it was the wrap, August would have been bad too.\u0027\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Outbound performance dashboard, weeks 30\u201341\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Missed carrier cut-offs averaged 2 per week in weeks 30\u201335 and 9 per week in weeks 37\u201341. Outbound pallet volume has been up 18% since week 35 as the seasonal peak ramped. Comparison row for the same weeks in 2025: cut-off misses rose from 2 to 7 per week during that peak, while collision stops stayed near 200 per week. Dashboard note: robot stop time is not linked to wave completion data.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Collision-stop event log with badge-tag proximity field, weeks 30\u201341\u0022,\u0022source\u0022:\u0022Fleet management system export with HR roster note\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Each stop record shows the nearest UWB badge tag within 3 m at the moment of the stop. All floor staff and forklifts carry tags. Weekly averages: stops with a tag nearby were 41 in weeks 30\u201335 and 44 in weeks 37\u201341. Stops with no tag nearby were 164 in weeks 30\u201335 and 607 in weeks 37\u201341. September gate audits found 99.2% of floor entries tagged, agency temps included; temps receive tags at induction. HR roster note: from 31 August the 46 temps were spread across zones roughly in proportion to headcount: Zone A 17, Zone B 15, Zone C 14.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Collision-stop rates by firmware group and zone, weeks 33\u201341\u0022,\u0022source\u0022:\u0022Site engineering analysis of fleet telemetry\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Stops per 100 robot-hours, weeks 33\u201335 compared with weeks 37\u201341. Week 36 is excluded as the rollout week. Pallet robots upgraded to 6.4 in Zones A/B (30 units): 3.2 to 15.6. Pallet robots kept on 6.3 in Zones A/B (units P31\u2013P38): 3.1 to 3.3. Tote robots upgraded to 6.4 in Zone C (20 units): 2.4 to 2.5. Mission assignment in A/B is dynamic and ignores firmware version. P31\u2013P38 logged 21% of A/B robot-hours both before and after, on all three shifts, in line with their share of the units (8 of 38). Zone C handles cartons in open totes, and no stretch-wrapped pallets are staged there.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Bench test of protective stops against staged outbound pallets, 14 October\u0022,\u0022source\u0022:\u0022Test record co-signed by site engineering lead and Halvane field engineer\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Setup: one HR-7 driven past a row of staged outbound pallets at 0.6 m/s, at approach angles of 20\u201350\u00B0 to the pallet face, 20 passes per condition, with no people in the area. Protective stops: firmware 6.4 with current gloss film, 17/20; 6.3 with gloss film, 1/20; 6.4 with the previous supplier\u0027s matte film, 0/20; 6.3 with matte film, 0/20. Field engineer\u0027s note: 6.4 keeps weak short-range returns that 6.3 discarded, so that it can catch thin obstacles such as fork tines. At oblique angles the gloss film throws short specular returns that 6.4 now treats as an obstacle. Release 6.4.2 is intended to reclassify such returns but has not been tested against this film.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Agency temp induction and safety-training records, August\u2013September\u0022,\u0022source\u0022:\u0022HR and staffing agency records\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u002246 agency temps were inducted 27\u201331 August. Induction included the 40-minute robot-lane safety module and a supervised floor walk. Completion: 46/46 for the module and 45/46 for the floor walk (one completed it on 2 September). The quiz pass mark is 80%, and the median score was 90%. Two temps received verbal reminders in September for crossing a lane outside a marked crossing. There are no other conduct records. The agency reports that 4 temps left by mid-October and were replaced through the same induction.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Lidar window cleaning and calibration log, July\u2013October\u0022,\u0022source\u0022:\u0022Maintenance management system\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Scanner windows on all 58 robots were cleaned weekly from July to October, except week 38, when cleaning slipped to the Monday of week 39. All monthly calibration checks passed within tolerance. Two scanner heads were replaced: P07 in July after impact damage and T12 in September for a connector fault. No changes were made to cleaning materials or procedure in the period.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Wi-Fi access-point and fleet-server latency logs, weeks 30\u201341\u0022,\u0022source\u0022:\u0022IT network monitoring\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Median round-trip latency between robots and the fleet server was 18 ms, with a 99th percentile of 84 ms, unchanged across weeks 30\u201341. Access-point firmware was unchanged. Three brief outages occurred in week 34 (11 minutes in total) and none afterwards. Protective stops are computed on board each robot. A network loss triggers a separate \u0027comms hold\u0027 category, which averaged 6 per week throughout.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Halvane statement on 6.4 stop rates at other customer sites\u0022,\u0022source\u0022:\u0022Halvane Robotics account manager\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Three customer sites have run 6.4 since July. Stops per 100 robot-hours before and after the upgrade: Site R 2.9 to 3.0, Site M 3.6 to 3.4, Site T 2.2 to 2.3. Site environments vary: R is a parcel sortation hub, M is a cold store and T is a spare-parts warehouse. Halvane does not collect data on customers\u0027 load types or packaging. \u0027We remain confident 6.4 performs as designed across varied environments.\u0027\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Stretch film technical data sheets, current and previous supplier\u0022,\u0022source\u0022:\u0022Packaging suppliers\u0027 published specifications\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Current film, Pellucid ClearCast 20: cast stretch film, 20 \u00B5m, high clarity, gloss 90 GU at 45\u00B0, haze 0.8%, pre-stretch up to 250%. Recommended for retail-ready loads where labels must be scanned through the film. Previous film, Northmoor HandiBlown 23: blown stretch film, 23 \u00B5m, gloss 55 GU, haze 6%, pre-stretch up to 200%. Neither sheet says anything about compatibility with automated equipment.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Procurement record for the outbound stretch film change, July\u2013August\u0022,\u0022source\u0022:\u0022Procurement system\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022A purchase change was approved on 28 July to switch outbound stretch film from Northmoor to Pellucid from 4 August, for a 6% unit-cost saving and better scanning through the film. All outbound wrappers were converted by 11 August. The Northmoor frame agreement stays active for two other company sites, and Larkfield can call off stock within three working days at the old price. No other packaging changes were made.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Robot-related near-miss and contact incident reports, weeks 30\u201341\u0022,\u0022source\u0022:\u0022Site safety reporting system\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Self-reported near-miss forms involving robots: 3 in weeks 30\u201335 and 4 in weeks 37\u201341, two of the latter filed by agency temps. Contact incidents: one in each period. In week 33 a robot nudged an empty pallet, and in week 39 a robot brushed a cage trolley. There were no injuries. The safety lead notes that reporting rates are typical for the site.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Wave-level analysis of missed carrier cut-offs, weeks 37\u201341\u0022,\u0022source\u0022:\u0022Outbound planning analyst\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Of 45 missed cut-offs in weeks 37\u201341, 31 were on the two largest carriers\u0027 evening waves, which grew most with peak volume (\u002B26%). Missed waves had more robot collision stops in the preceding two hours than on-time waves (median 61 against 49), but they were also the largest waves. Analyst\u0027s note: \u0027I have not yet tried to separate the volume effect from the stop effect, and robot wait time isn\u0027t recorded per wave.\u0027\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Robot battery health telemetry, July\u2013October\u0022,\u0022source\u0022:\u0022Fleet management system\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Average battery state of health: 91% for robots with the new module and 84% for the older-module units P31\u2013P38. No stops were attributed to low battery. Charging cycles per robot per day were stable at 3.1\u20133.4. Two chargers in Zone C were relocated in week 31, with no change in charge queue times. Halvane expects compatible replacement modules for P31\u2013P38 in January.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Warehouse lighting work orders, January\u2013October\u0022,\u0022source\u0022:\u0022Facilities management system\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022High-bay LED replacement in Zone A was completed 15\u201319 June (week 25). Zone B replacement is scheduled for November. There have been no lighting changes in Zone C since 2024. Monthly emergency-lighting tests passed. Two dock-door light fittings in Zone B were repaired in September after a storm. No work orders mention robots.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Site safety committee minutes, 8 October\u0022,\u0022source\u0022:\u0022Safety committee secretary\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Item 3, vendor proposal to shorten the protective field by 20%: site risk assessment RA-114 sets the current field length as the minimum for mixed pedestrian and robot lanes at 1.2 m/s. A 20% cut would need a lower top speed or a full reassessment. The committee did not endorse the proposal. Item 4, the GM\u0027s three-strike proposal: the union representative objected that strikes would be assigned by matching rosters to stops, not by observed conduct. The item was referred to the GM for decision.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Fleet configuration and map change history, July\u2013October\u0022,\u0022source\u0022:\u0022Fleet manager audit trail\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Map edits: two charging stations moved in Zone C in week 31. Speed limits were unchanged (1.2 m/s in A/B, 1.0 m/s in C). Protective field profiles have been unchanged since March 2025. Mission-priority and traffic rules were unchanged. Firmware events in the period: CHG-2026-0412 only. No configuration rollbacks were recorded.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The September fleet firmware update, on its own, caused the rise in collision stops.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The August change of outbound pallet stretch film, on its own, caused the rise in collision stops.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Seasonal agency temps entering robot lanes caused the rise in collision stops.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The September firmware update and the August film change together caused the rise in collision stops; neither would have produced it alone.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022The September firmware update and the arrival of the agency temps together caused the rise in collision stops; neither would have produced it alone.\u0022},{\u0022id\u0022:\u0022H6\u0022,\u0022text\u0022:\u0022Halvane\u0027s planned December release would, on its own, bring stop rates back to the pre-September level while the current film stays in use.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Fleet firmware update from 6.3 to 6.4 (2\u20134 September)\u0022,\u0022to\u0022:\u0022Tripling of weekly collision stops\u0022,\u0022relation\u0022:\u0022contributes to\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Switch to the new outbound stretch film (August)\u0022,\u0022to\u0022:\u0022Tripling of weekly collision stops\u0022,\u0022relation\u0022:\u0022contributes to\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Arrival of 46 agency temps on the floor (31 August)\u0022,\u0022to\u0022:\u0022Tripling of weekly collision stops\u0022,\u0022relation\u0022:\u0022contributes to\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Tripling of weekly collision stops\u0022,\u0022to\u0022:\u0022Rise in missed carrier cut-offs\u0022,\u0022relation\u0022:\u0022contributes to\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Switch outbound pallets back to the previous supplier\u0027s stretch film, keep all robots on their current firmware, and track weekly stop rates by zone and firmware group against the September\u2013October figures.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Roll the 30 upgraded pallet-handling robots back to firmware 6.3 under a temporary waiver until Halvane issues a corrected release, leaving the tote robots on 6.4.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Accept Halvane\u0027s offer to shorten the protective field by 20% on all robots to cut stop frequency during peak.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Introduce the GM\u0027s three-strike policy: match each collision stop to temps rostered in that zone and hour, and have the agency replace any temp who reaches three strikes.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Keep the current film and adopt Halvane\u0027s planned December release as the permanent fix, scheduling fleet-wide installation as soon as it ships.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022refId\u0022:\u0022H6\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S15\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S16\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022groundTruthNarrative\u0022:\u0022The tripling of collision stops at Larkfield comes from two changes acting together. Firmware 6.4 began keeping weak short-range lidar returns so that it could detect thin obstacles. The high-gloss cast stretch film introduced in August produces exactly such returns when a robot passes a wrapped pallet at an oblique angle. Neither change is enough alone. The film was in use for four weeks on 6.3 with flat stop rates. The eight robots held back on 6.3 work the same lanes, film, shifts and temps, and their rate stayed flat. Robots on 6.4 in the tote zone, where no wrapped pallets are staged, are also flat, as are other vendor sites on 6.4. A co-signed bench test isolates the interaction: 17/20 stops for 6.4 with gloss film against 0\u20131/20 for every other combination. The GM\u0027s account that agency temps caused it fits only the timing. Stops with a badge nearby are flat, and temps worked every zone, including the zones with no rise. Halvane\u0027s denial and its advice to shorten the protective field are both wrong, and shortening the field would cut a safety margin set by the site\u0027s risk assessment. Reverting to the still-available matte film removes the trigger and keeps 6.4\u0027s improvements. Whether Halvane\u0027s December release would fix the problem with the gloss film is untested. The link from the stops to missed cut-offs is confounded by peak volume and remains association only.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C7\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022single-cause-fix\u0022,\u0022contrast-case\u0022,\u0022joint-cause\u0022],\u0022rationale\u0022:\u00226.4 robots in Zone C show no rise (2.4 to 2.5 per 100 h), and in the bench test 6.4 with matte film produced 0/20 stops. Firmware alone does not produce the rise; it does so only together with the gloss film.\u0022},{\u0022itemId\u0022:\u0022S02\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C8\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022single-cause-fix\u0022,\u0022contrast-case\u0022,\u0022joint-cause\u0022],\u0022rationale\u0022:\u0022The film was in full use from week 33 while stops stayed near 205 per week. The 6.3 holdback robots in the same lanes with the same film stayed flat (3.1 to 3.3), and the bench test gave 1/20 stops for 6.3 with gloss film.\u0022},{\u0022itemId\u0022:\u0022S03\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C10\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022The temps\u0027 arrival coincides with the rise, but stops with a badge nearby are flat (41 to 44) while stops with no badge nearby quadrupled. Temps worked Zone C and alongside the 6.3 holdback robots, and neither group shows a rise.\u0022},{\u0022itemId\u0022:\u0022S04\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C8\u0022,\u0022C9\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022joint-cause\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022Only the combination of 6.4 and gloss-film pallets shows the rise: 15.6 per 100 h for upgraded robots in Zones A/B against flat rates for the holdbacks and for Zone C. The bench test reproduces the effect only for 6.4 with gloss film and gives a plausible mechanism.\u0022},{\u0022itemId\u0022:\u0022S05\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022joint-cause-decoy\u0022],\u0022rationale\u0022:\u0022Zone C has 6.4 robots and 14 temps, yet its rate is flat. The added stops occur with no badge nearby, and the bench test produced them with no people present.\u0022},{\u0022itemId\u0022:\u0022S06\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022vendor-claim\u0022,\u0022untested-remedy\u0022],\u0022rationale\u0022:\u0022Halvane says 6.4.2 includes filtering refinements and is intended to reclassify these returns, but the co-signed test record states it has not been tested against this film. Halvane also wrongly denied any firmware role earlier. The claim is plausible but unestablished.\u0022},{\u0022itemId\u0022:\u0022S07\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022natural-experiment\u0022,\u0022joint-cause\u0022],\u0022rationale\u0022:\u0022The holdback group is a natural experiment: same lanes, film, shifts and staff, with firmware as the only difference, giving 15.6 against 3.3. The bench test confirms the mechanism. The flat rates in Zone C and at vendor sites show the firmware is not enough alone, not that it plays no part.\u0022},{\u0022itemId\u0022:\u0022S08\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C8\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022contrast-case\u0022,\u0022joint-cause\u0022,\u0022intervention\u0022],\u0022rationale\u0022:\u0022The bench test swaps only the film on 6.4 (17/20 stops against 0/20), which amounts to an intervention. The quiet August, which E5 cites against the film, reflects the film acting before 6.4 was installed, so it does not count against the link.\u0022},{\u0022itemId\u0022:\u0022S09\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022coincident-timing\u0022],\u0022rationale\u0022:\u0022Stops with a badge nearby did not rise, and robots exposed to the same temps (6.3 holdbacks in Zones A/B, 6.4 robots in Zone C) show no increase. This evidence counts against the link itself.\u0022},{\u0022itemId\u0022:\u0022S10\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022confounded\u0022],\u0022rationale\u0022:\u0022Cut-off misses and stops rose together, but peak volume (\u002B18%) is a strong rival. Last year\u0027s peak raised misses to 7 per week with no change in stops, and no analysis separates the two effects.\u0022},{\u0022itemId\u0022:\u0022S11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022joint-cause\u0022,\u0022reversible-fix\u0022],\u0022rationale\u0022:\u0022Removing the gloss film removes one necessary factor. The bench test gave 0/20 stops for 6.4 with matte film, the switch keeps 6.4\u0027s thin-obstacle detection and security patches, the old film can be supplied within three days, and tracking stop rates verifies the effect.\u0022},{\u0022itemId\u0022:\u0022S12\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022second-best\u0022],\u0022rationale\u0022:\u0022Running 6.3 in Zones A/B would remove the stops, as the holdback robots show. However, it gives up 6.4\u0027s low-profile obstacle detection and runs robots past the end of 6.3 security support under a waiver, so it is reasonable but inferior to reverting the film.\u0022},{\u0022itemId\u0022:\u0022S13\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022vendor-claim\u0022],\u0022rationale\u0022:\u0022Under every hypothesis, cutting the protective field reduces pedestrian safety margin to hide a symptom. The site risk assessment treats the current field length as the minimum for mixed lanes.\u0022},{\u0022itemId\u0022:\u0022S14\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Most stops occur with no person nearby. Strikes assigned by matching rosters to stops would penalise temps for stops caused by firmware and film, and could discourage incident reporting.\u0022},{\u0022itemId\u0022:\u0022S15\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022untested-remedy\u0022,\u0022single-cause-fix\u0022],\u0022rationale\u0022:\u0022If 6.4.2 is confirmed to handle gloss-film returns, keeping the cheaper film would be beneficial. The release is untested against this film, and committing now is unjustified. If it fails, the film can still be reverted later without lasting damage.\u0022},{\u0022itemId\u0022:\u0022S16\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C3\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022A natural experiment, a bench intervention and a mechanism all point to the joint cause. Reverting the film is cheap, reversible and monitored, so committing to it is justified.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022lowValueReads\u0022:[\u0022C6\u0022,\u0022C12\u0022,\u0022C13\u0022],\u0022optimalReadPath\u0022:[\u0022C2\u0022,\u0022C3\u0022,\u0022C1\u0022],\u0022authoringNotes\u0022:\u0022The initial file presents a contrast case against each cause alone: Halvane reports other 6.4 sites flat and the tote zone is quiet (against firmware), and the film was in use for a month before any rise (against film). The temps\u0027 arrival in the same week as the update makes the GM\u0027s account the most tempting reading. C2 provides the natural experiment (6.3 holdbacks in the same lanes, 6.4 in a zone without film), C3 the bench intervention and mechanism, and C1 rules out the people explanation. Decoys: C7 repeats the vendor\u0027s contrast case, C8/C9 confirm the film details without linking them to stops, and C11 keeps the cut-off link confounded by volume. A2 is acceptable rather than preferred because the rollback gives up 6.4\u0027s detection improvements and security support. H6 and A5 are left untested on purpose.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:30:47.3095407Z",
+  "finishedAt": "2026-11-17T14:37:41.1263131Z",
+  "output": {
+    "case": {
+      "id": "OD2-DEV2-INTERACT",
+      "split": "dev2",
+      "benchmarkClass": "INTERACT",
+      "domain": "technical",
+      "readBudget": 3,
+      "title": "Larkfield DC: robot collision stops tripled in September",
+      "setting": "Larkfield Distribution Centre is a fictional regional warehouse run by Corrin Freight Logistics. It operates 58 Halvane HR-7 autonomous mobile robots. Thirty-eight pallet-handling robots work the outbound marshalling Zones A and B, where wrapped outbound pallets are staged. Twenty tote robots work carton Zone C. A robot logs a \u0027collision stop\u0027 (protective stop) whenever an obstacle enters its protective field. The analysis date is 20 October 2026.",
+      "presentingRequest": "The regional operations director writes: \u0027Larkfield\u0027s robot collision stops have roughly tripled since early September, in the middle of peak season. The GM wants a disciplinary policy for agency temps, and Halvane suggests shortening the robots\u0027 protective fields. Tell me what is actually driving the stops and what the site should do now.\u0027",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Fleet management system, weekly safety KPI extract",
+          "sourceType": "system-record",
+          "text": "Larkfield DC: protective (\u0027collision\u0027) stops, all 58 HR-7 robots, by ISO week 2026: wk30 201, wk31 209, wk32 198, wk33 212, wk34 207, wk35 203, wk36 412, wk37 640, wk38 655, wk39 662, wk40 648, wk41 651. A stop is logged whenever an obstacle enters a robot\u0027s protective field; the robot halts until the field clears, typically for 20\u201390 seconds. Physical contacts with people or equipment: 1 in weeks 30\u201335, 1 in weeks 37\u201341. Robot operating hours were roughly constant across the period."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email from Dana Okafor, General Manager, to site leadership, 5 October",
+          "sourceType": "leadership-account",
+          "text": "Subject: Robot stops. \u0027The timing tells the story. We brought in 46 agency temps on 31 August and the stops tripled that same week. These people don\u0027t know the lane rules and they wander into robot aisles. I want a three-strike policy live by Monday. Every collision stop gets matched to the temps rostered in that zone during that hour, each match counts as a strike, and after three strikes the agency replaces the person. Engineering keeps telling me it\u0027s the software, but Halvane says their update runs fine at other sites, so let\u0027s stop chasing that.\u0027"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Change record CHG-2026-0412",
+          "sourceType": "change-record",
+          "text": "Fleet firmware upgrade, HR-7 6.3 to 6.4. Implemented 2\u20134 September 2026 on 50 of 58 robots. Exception: eight pallet-handling robots with the older battery module (units P31\u2013P38) stay on 6.3 until a compatible module arrives. They continue in normal mixed duty. Vendor release summary: \u0027Revised near-field return filtering for improved detection of low-profile obstacles; navigation and charging fixes; security patches.\u0027 Halvane lifecycle notice: security support for 6.3 ends 31 October 2026. The eight exception units are covered by a time-limited waiver."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Email from Halvane Robotics Customer Support (Tier 2), 25 September",
+          "sourceType": "vendor-account",
+          "text": "\u0027We\u0027ve reviewed your ticket. Firmware 6.4 has been live at three other customer sites since July with no change in protective-stop rates, so we don\u0027t see the firmware as the cause. Increases like this are usually environmental: people, layout, clutter. If the stops are hurting throughput, a common remedy is to shorten the protective field by 20%, and we can push that profile to your fleet remotely. Our next release, 6.4.2, is planned for early December and includes further filtering refinements.\u0027"
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Interview notes, R. Szabo, robot maintenance technician, 12 October",
+          "sourceType": "staff-account",
+          "text": "\u0027Most of the stops I get called out to are in the marshalling lanes, A and B, where outbound pallets are staged. There are hardly any in C, the tote zone. Usually by the time I get there the field\u0027s clear and nobody\u0027s around, but people walk off, so I can\u0027t say who it was. Somebody asked me about the new shiny pallet wrap; procurement switched suppliers at the start of August. I don\u0027t buy it. We had that wrap for a month before the stops went up and nothing changed. If it was the wrap, August would have been bad too.\u0027"
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Outbound performance dashboard, weeks 30\u201341",
+          "sourceType": "system-record",
+          "text": "Missed carrier cut-offs averaged 2 per week in weeks 30\u201335 and 9 per week in weeks 37\u201341. Outbound pallet volume has been up 18% since week 35 as the seasonal peak ramped. Comparison row for the same weeks in 2025: cut-off misses rose from 2 to 7 per week during that peak, while collision stops stayed near 200 per week. Dashboard note: robot stop time is not linked to wave completion data."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Collision-stop event log with badge-tag proximity field, weeks 30\u201341",
+          "source": "Fleet management system export with HR roster note",
+          "sourceType": "log",
+          "text": "Each stop record shows the nearest UWB badge tag within 3 m at the moment of the stop. All floor staff and forklifts carry tags. Weekly averages: stops with a tag nearby were 41 in weeks 30\u201335 and 44 in weeks 37\u201341. Stops with no tag nearby were 164 in weeks 30\u201335 and 607 in weeks 37\u201341. September gate audits found 99.2% of floor entries tagged, agency temps included; temps receive tags at induction. HR roster note: from 31 August the 46 temps were spread across zones roughly in proportion to headcount: Zone A 17, Zone B 15, Zone C 14."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Collision-stop rates by firmware group and zone, weeks 33\u201341",
+          "source": "Site engineering analysis of fleet telemetry",
+          "sourceType": "telemetry",
+          "text": "Stops per 100 robot-hours, weeks 33\u201335 compared with weeks 37\u201341. Week 36 is excluded as the rollout week. Pallet robots upgraded to 6.4 in Zones A/B (30 units): 3.2 to 15.6. Pallet robots kept on 6.3 in Zones A/B (units P31\u2013P38): 3.1 to 3.3. Tote robots upgraded to 6.4 in Zone C (20 units): 2.4 to 2.5. Mission assignment in A/B is dynamic and ignores firmware version. P31\u2013P38 logged 21% of A/B robot-hours both before and after, on all three shifts, in line with their share of the units (8 of 38). Zone C handles cartons in open totes, and no stretch-wrapped pallets are staged there."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Bench test of protective stops against staged outbound pallets, 14 October",
+          "source": "Test record co-signed by site engineering lead and Halvane field engineer",
+          "sourceType": "document",
+          "text": "Setup: one HR-7 driven past a row of staged outbound pallets at 0.6 m/s, at approach angles of 20\u201350\u00B0 to the pallet face, 20 passes per condition, with no people in the area. Protective stops: firmware 6.4 with current gloss film, 17/20; 6.3 with gloss film, 1/20; 6.4 with the previous supplier\u0027s matte film, 0/20; 6.3 with matte film, 0/20. Field engineer\u0027s note: 6.4 keeps weak short-range returns that 6.3 discarded, so that it can catch thin obstacles such as fork tines. At oblique angles the gloss film throws short specular returns that 6.4 now treats as an obstacle. Release 6.4.2 is intended to reclassify such returns but has not been tested against this film."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Agency temp induction and safety-training records, August\u2013September",
+          "source": "HR and staffing agency records",
+          "sourceType": "document",
+          "text": "46 agency temps were inducted 27\u201331 August. Induction included the 40-minute robot-lane safety module and a supervised floor walk. Completion: 46/46 for the module and 45/46 for the floor walk (one completed it on 2 September). The quiz pass mark is 80%, and the median score was 90%. Two temps received verbal reminders in September for crossing a lane outside a marked crossing. There are no other conduct records. The agency reports that 4 temps left by mid-October and were replaced through the same induction."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Lidar window cleaning and calibration log, July\u2013October",
+          "source": "Maintenance management system",
+          "sourceType": "log",
+          "text": "Scanner windows on all 58 robots were cleaned weekly from July to October, except week 38, when cleaning slipped to the Monday of week 39. All monthly calibration checks passed within tolerance. Two scanner heads were replaced: P07 in July after impact damage and T12 in September for a connector fault. No changes were made to cleaning materials or procedure in the period."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Wi-Fi access-point and fleet-server latency logs, weeks 30\u201341",
+          "source": "IT network monitoring",
+          "sourceType": "log",
+          "text": "Median round-trip latency between robots and the fleet server was 18 ms, with a 99th percentile of 84 ms, unchanged across weeks 30\u201341. Access-point firmware was unchanged. Three brief outages occurred in week 34 (11 minutes in total) and none afterwards. Protective stops are computed on board each robot. A network loss triggers a separate \u0027comms hold\u0027 category, which averaged 6 per week throughout."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Halvane statement on 6.4 stop rates at other customer sites",
+          "source": "Halvane Robotics account manager",
+          "sourceType": "vendor-account",
+          "text": "Three customer sites have run 6.4 since July. Stops per 100 robot-hours before and after the upgrade: Site R 2.9 to 3.0, Site M 3.6 to 3.4, Site T 2.2 to 2.3. Site environments vary: R is a parcel sortation hub, M is a cold store and T is a spare-parts warehouse. Halvane does not collect data on customers\u0027 load types or packaging. \u0027We remain confident 6.4 performs as designed across varied environments.\u0027"
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Stretch film technical data sheets, current and previous supplier",
+          "source": "Packaging suppliers\u0027 published specifications",
+          "sourceType": "document",
+          "text": "Current film, Pellucid ClearCast 20: cast stretch film, 20 \u00B5m, high clarity, gloss 90 GU at 45\u00B0, haze 0.8%, pre-stretch up to 250%. Recommended for retail-ready loads where labels must be scanned through the film. Previous film, Northmoor HandiBlown 23: blown stretch film, 23 \u00B5m, gloss 55 GU, haze 6%, pre-stretch up to 200%. Neither sheet says anything about compatibility with automated equipment."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Procurement record for the outbound stretch film change, July\u2013August",
+          "source": "Procurement system",
+          "sourceType": "financial-record",
+          "text": "A purchase change was approved on 28 July to switch outbound stretch film from Northmoor to Pellucid from 4 August, for a 6% unit-cost saving and better scanning through the film. All outbound wrappers were converted by 11 August. The Northmoor frame agreement stays active for two other company sites, and Larkfield can call off stock within three working days at the old price. No other packaging changes were made."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Robot-related near-miss and contact incident reports, weeks 30\u201341",
+          "source": "Site safety reporting system",
+          "sourceType": "system-record",
+          "text": "Self-reported near-miss forms involving robots: 3 in weeks 30\u201335 and 4 in weeks 37\u201341, two of the latter filed by agency temps. Contact incidents: one in each period. In week 33 a robot nudged an empty pallet, and in week 39 a robot brushed a cage trolley. There were no injuries. The safety lead notes that reporting rates are typical for the site."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Wave-level analysis of missed carrier cut-offs, weeks 37\u201341",
+          "source": "Outbound planning analyst",
+          "sourceType": "document",
+          "text": "Of 45 missed cut-offs in weeks 37\u201341, 31 were on the two largest carriers\u0027 evening waves, which grew most with peak volume (\u002B26%). Missed waves had more robot collision stops in the preceding two hours than on-time waves (median 61 against 49), but they were also the largest waves. Analyst\u0027s note: \u0027I have not yet tried to separate the volume effect from the stop effect, and robot wait time isn\u0027t recorded per wave.\u0027"
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Robot battery health telemetry, July\u2013October",
+          "source": "Fleet management system",
+          "sourceType": "telemetry",
+          "text": "Average battery state of health: 91% for robots with the new module and 84% for the older-module units P31\u2013P38. No stops were attributed to low battery. Charging cycles per robot per day were stable at 3.1\u20133.4. Two chargers in Zone C were relocated in week 31, with no change in charge queue times. Halvane expects compatible replacement modules for P31\u2013P38 in January."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Warehouse lighting work orders, January\u2013October",
+          "source": "Facilities management system",
+          "sourceType": "change-record",
+          "text": "High-bay LED replacement in Zone A was completed 15\u201319 June (week 25). Zone B replacement is scheduled for November. There have been no lighting changes in Zone C since 2024. Monthly emergency-lighting tests passed. Two dock-door light fittings in Zone B were repaired in September after a storm. No work orders mention robots."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Site safety committee minutes, 8 October",
+          "source": "Safety committee secretary",
+          "sourceType": "document",
+          "text": "Item 3, vendor proposal to shorten the protective field by 20%: site risk assessment RA-114 sets the current field length as the minimum for mixed pedestrian and robot lanes at 1.2 m/s. A 20% cut would need a lower top speed or a full reassessment. The committee did not endorse the proposal. Item 4, the GM\u0027s three-strike proposal: the union representative objected that strikes would be assigned by matching rosters to stops, not by observed conduct. The item was referred to the GM for decision."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Fleet configuration and map change history, July\u2013October",
+          "source": "Fleet manager audit trail",
+          "sourceType": "change-record",
+          "text": "Map edits: two charging stations moved in Zone C in week 31. Speed limits were unchanged (1.2 m/s in A/B, 1.0 m/s in C). Protective field profiles have been unchanged since March 2025. Mission-priority and traffic rules were unchanged. Firmware events in the period: CHG-2026-0412 only. No configuration rollbacks were recorded."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The September fleet firmware update, on its own, caused the rise in collision stops."
+          },
+          {
+            "id": "H2",
+            "text": "The August change of outbound pallet stretch film, on its own, caused the rise in collision stops."
+          },
+          {
+            "id": "H3",
+            "text": "Seasonal agency temps entering robot lanes caused the rise in collision stops."
+          },
+          {
+            "id": "H4",
+            "text": "The September firmware update and the August film change together caused the rise in collision stops; neither would have produced it alone."
+          },
+          {
+            "id": "H5",
+            "text": "The September firmware update and the arrival of the agency temps together caused the rise in collision stops; neither would have produced it alone."
+          },
+          {
+            "id": "H6",
+            "text": "Halvane\u0027s planned December release would, on its own, bring stop rates back to the pre-September level while the current film stays in use."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Fleet firmware update from 6.3 to 6.4 (2\u20134 September)",
+            "to": "Tripling of weekly collision stops",
+            "relation": "contributes to"
+          },
+          {
+            "id": "R2",
+            "from": "Switch to the new outbound stretch film (August)",
+            "to": "Tripling of weekly collision stops",
+            "relation": "contributes to"
+          },
+          {
+            "id": "R3",
+            "from": "Arrival of 46 agency temps on the floor (31 August)",
+            "to": "Tripling of weekly collision stops",
+            "relation": "contributes to"
+          },
+          {
+            "id": "R4",
+            "from": "Tripling of weekly collision stops",
+            "to": "Rise in missed carrier cut-offs",
+            "relation": "contributes to"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Switch outbound pallets back to the previous supplier\u0027s stretch film, keep all robots on their current firmware, and track weekly stop rates by zone and firmware group against the September\u2013October figures."
+          },
+          {
+            "id": "A2",
+            "text": "Roll the 30 upgraded pallet-handling robots back to firmware 6.3 under a temporary waiver until Halvane issues a corrected release, leaving the tote robots on 6.4."
+          },
+          {
+            "id": "A3",
+            "text": "Accept Halvane\u0027s offer to shorten the protective field by 20% on all robots to cut stop frequency during peak."
+          },
+          {
+            "id": "A4",
+            "text": "Introduce the GM\u0027s three-strike policy: match each collision stop to temps rostered in that zone and hour, and have the agency replace any temp who reaches three strikes."
+          },
+          {
+            "id": "A5",
+            "text": "Keep the current film and adopt Halvane\u0027s planned December release as the permanent fix, scheduling fleet-wide installation as soon as it ships."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "S01",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "refId": "H6",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S15",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S16",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-DEV2-INTERACT",
+      "groundTruthNarrative": "The tripling of collision stops at Larkfield comes from two changes acting together. Firmware 6.4 began keeping weak short-range lidar returns so that it could detect thin obstacles. The high-gloss cast stretch film introduced in August produces exactly such returns when a robot passes a wrapped pallet at an oblique angle. Neither change is enough alone. The film was in use for four weeks on 6.3 with flat stop rates. The eight robots held back on 6.3 work the same lanes, film, shifts and temps, and their rate stayed flat. Robots on 6.4 in the tote zone, where no wrapped pallets are staged, are also flat, as are other vendor sites on 6.4. A co-signed bench test isolates the interaction: 17/20 stops for 6.4 with gloss film against 0\u20131/20 for every other combination. The GM\u0027s account that agency temps caused it fits only the timing. Stops with a badge nearby are flat, and temps worked every zone, including the zones with no rise. Halvane\u0027s denial and its advice to shorten the protective field are both wrong, and shortening the field would cut a safety margin set by the site\u0027s risk assessment. Reverting to the still-available matte film removes the trigger and keeps 6.4\u0027s improvements. Whether Halvane\u0027s December release would fix the problem with the gloss film is untested. The link from the stops to missed cut-offs is confounded by peak volume and remains association only.",
+      "answers": [
+        {
+          "itemId": "S01",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "E5",
+            "C2",
+            "C3",
+            "C7",
+            "C15"
+          ],
+          "tags": [
+            "single-cause-fix",
+            "contrast-case",
+            "joint-cause"
+          ],
+          "rationale": "6.4 robots in Zone C show no rise (2.4 to 2.5 per 100 h), and in the bench test 6.4 with matte film produced 0/20 stops. Firmware alone does not produce the rise; it does so only together with the gloss film."
+        },
+        {
+          "itemId": "S02",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E1",
+            "E5",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "C2",
+            "C3",
+            "C8",
+            "C9"
+          ],
+          "tags": [
+            "single-cause-fix",
+            "contrast-case",
+            "joint-cause"
+          ],
+          "rationale": "The film was in full use from week 33 while stops stayed near 205 per week. The 6.3 holdback robots in the same lanes with the same film stayed flat (3.1 to 3.3), and the bench test gave 1/20 stops for 6.3 with gloss film."
+        },
+        {
+          "itemId": "S03",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C1",
+            "C2",
+            "C4",
+            "C10",
+            "C14"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal",
+            "confounded"
+          ],
+          "rationale": "The temps\u0027 arrival coincides with the rise, but stops with a badge nearby are flat (41 to 44) while stops with no badge nearby quadrupled. Temps worked Zone C and alongside the 6.3 holdback robots, and neither group shows a rise."
+        },
+        {
+          "itemId": "S04",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "C1",
+            "C2",
+            "C3",
+            "C8",
+            "C9",
+            "C15"
+          ],
+          "tags": [
+            "joint-cause",
+            "central"
+          ],
+          "rationale": "Only the combination of 6.4 and gloss-film pallets shows the rise: 15.6 per 100 h for upgraded robots in Zones A/B against flat rates for the holdbacks and for Zone C. The bench test reproduces the effect only for 6.4 with gloss film and gives a plausible mechanism."
+        },
+        {
+          "itemId": "S05",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C3"
+          ],
+          "tags": [
+            "joint-cause-decoy"
+          ],
+          "rationale": "Zone C has 6.4 robots and 14 temps, yet its rate is flat. The added stops occur with no badge nearby, and the bench test produced them with no people present."
+        },
+        {
+          "itemId": "S06",
+          "expected": "unknown",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C3"
+          ],
+          "tags": [
+            "vendor-claim",
+            "untested-remedy"
+          ],
+          "rationale": "Halvane says 6.4.2 includes filtering refinements and is intended to reclassify these returns, but the co-signed test record states it has not been tested against this film. Halvane also wrongly denied any firmware role earlier. The claim is plausible but unestablished."
+        },
+        {
+          "itemId": "S07",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C2",
+            "C3",
+            "C15"
+          ],
+          "tags": [
+            "natural-experiment",
+            "joint-cause"
+          ],
+          "rationale": "The holdback group is a natural experiment: same lanes, film, shifts and staff, with firmware as the only difference, giving 15.6 against 3.3. The bench test confirms the mechanism. The flat rates in Zone C and at vendor sites show the firmware is not enough alone, not that it plays no part."
+        },
+        {
+          "itemId": "S08",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C2",
+            "C3",
+            "C8",
+            "C9"
+          ],
+          "tags": [
+            "misleading-signal",
+            "contrast-case",
+            "joint-cause",
+            "intervention"
+          ],
+          "rationale": "The bench test swaps only the film on 6.4 (17/20 stops against 0/20), which amounts to an intervention. The quiet August, which E5 cites against the film, reflects the film acting before 6.4 was installed, so it does not count against the link."
+        },
+        {
+          "itemId": "S09",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C2",
+            "C4",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "coincident-timing"
+          ],
+          "rationale": "Stops with a badge nearby did not rise, and robots exposed to the same temps (6.3 holdbacks in Zones A/B, 6.4 robots in Zone C) show no increase. This evidence counts against the link itself."
+        },
+        {
+          "itemId": "S10",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E1",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E6",
+            "C11"
+          ],
+          "tags": [
+            "confounded"
+          ],
+          "rationale": "Cut-off misses and stops rose together, but peak volume (\u002B18%) is a strong rival. Last year\u0027s peak raised misses to 7 per week with no change in stops, and no analysis separates the two effects."
+        },
+        {
+          "itemId": "S11",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C2",
+            "C3",
+            "C9"
+          ],
+          "tags": [
+            "joint-cause",
+            "reversible-fix"
+          ],
+          "rationale": "Removing the gloss film removes one necessary factor. The bench test gave 0/20 stops for 6.4 with matte film, the switch keeps 6.4\u0027s thin-obstacle detection and security patches, the old film can be supplied within three days, and tracking stop rates verifies the effect."
+        },
+        {
+          "itemId": "S12",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C2",
+            "C3"
+          ],
+          "tags": [
+            "second-best"
+          ],
+          "rationale": "Running 6.3 in Zones A/B would remove the stops, as the holdback robots show. However, it gives up 6.4\u0027s low-profile obstacle detection and runs robots past the end of 6.3 security support under a waiver, so it is reasonable but inferior to reverting the film."
+        },
+        {
+          "itemId": "S13",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "C14"
+          ],
+          "tags": [
+            "protective-control",
+            "vendor-claim"
+          ],
+          "rationale": "Under every hypothesis, cutting the protective field reduces pedestrian safety margin to hide a symptom. The site risk assessment treats the current field length as the minimum for mixed lanes."
+        },
+        {
+          "itemId": "S14",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C2",
+            "C14"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "Most stops occur with no person nearby. Strikes assigned by matching rosters to stops would penalise temps for stops caused by firmware and film, and could discourage incident reporting."
+        },
+        {
+          "itemId": "S15",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C3"
+          ],
+          "tags": [
+            "untested-remedy",
+            "single-cause-fix"
+          ],
+          "rationale": "If 6.4.2 is confirmed to handle gloss-film returns, keeping the cheaper film would be beneficial. The release is untested against this film, and committing now is unjustified. If it fails, the film can still be reverted later without lasting damage."
+        },
+        {
+          "itemId": "S16",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2",
+            "C3"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C2",
+            "C3",
+            "C9"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "A natural experiment, a bench intervention and a mechanism all point to the joint cause. Reverting the film is cheap, reversible and monitored, so committing to it is justified."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "lowValueReads": [
+        "C6",
+        "C12",
+        "C13"
+      ],
+      "optimalReadPath": [
+        "C2",
+        "C3",
+        "C1"
+      ],
+      "authoringNotes": "The initial file presents a contrast case against each cause alone: Halvane reports other 6.4 sites flat and the tote zone is quiet (against firmware), and the film was in use for a month before any rise (against film). The temps\u0027 arrival in the same week as the update makes the GM\u0027s account the most tempting reading. C2 provides the natural experiment (6.3 holdbacks in the same lanes, 6.4 in a zone without film), C3 the bench intervention and mechanism, and C1 rules out the people explanation. Decoys: C7 repeats the vendor\u0027s contrast case, C8/C9 confirm the film details without linking them to stops, and C11 keeps the cut-off link confounded by volume. A2 is acceptable rather than preferred because the rollback gives up 6.4\u0027s detection improvements and security support. H6 and A5 are left untested on purpose."
+    }
+  }
+}

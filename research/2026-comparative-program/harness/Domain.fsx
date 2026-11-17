@@ -135,6 +135,8 @@ let validate (c: Case) (t: Truth) : string list =
       let catLo, catHi = if c.ReadBudget <= 3 then 14, 16 else 10, 14
       if not (between catLo catHi c.Catalogue.Length) then yield sprintf "catalogue count %d" c.Catalogue.Length
       if c.ReadBudget <= 3 && not (List.contains c.Class [ "STOP"; "INCOMPLETE"; "NOCONC" ]) && not (between 2 3 t.Discriminating.Count) then yield sprintf "discriminating reads %d (need 2-3)" t.Discriminating.Count
+      if c.ReadBudget <= 2 && not (List.contains c.Class [ "STOP"; "INCOMPLETE"; "NOCONC" ]) && t.OptimalPath.Length <> 2 then yield sprintf "optimal path length %d (need 2)" t.OptimalPath.Length
+      if c.ReadBudget <= 2 && (t.Keys |> List.filter (fun k -> (c.Items |> List.exists (fun i -> i.ItemId = k.ItemId && i.Kind = "action")) && k.Expected = "preferred") |> List.length) > 1 then yield "more than one preferred action"
       if not (between 4 6 c.Hypotheses.Length) then yield sprintf "hypothesis count %d" c.Hypotheses.Length
       if not (between 3 5 c.Edges.Length) then yield sprintf "edge count %d" c.Edges.Length
       if not (between 4 5 c.Actions.Length) then yield sprintf "action count %d" c.Actions.Length

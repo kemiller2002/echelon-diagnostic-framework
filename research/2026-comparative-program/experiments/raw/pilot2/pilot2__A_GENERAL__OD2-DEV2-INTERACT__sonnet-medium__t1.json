@@ -1,0 +1,233 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-INTERACT",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C11",
+    "X3": "C2",
+    "X4": "C14",
+    "X5": "C12",
+    "X6": "C8",
+    "X7": "C5",
+    "X8": "C9",
+    "X9": "C13",
+    "X10": "C3",
+    "X11": "C10",
+    "X12": "C15",
+    "X13": "C4",
+    "X14": "C7",
+    "X15": "C1"
+  },
+  "readLabels": [
+    "X3",
+    "X10",
+    "X15"
+  ],
+  "reads": [
+    "C2",
+    "C3",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17848,
+    "cacheCreationTokens": 7642,
+    "outputTokens": 2230,
+    "thinkingTokens": 308,
+    "costUsd": 0.0546648,
+    "durationMs": 15515,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-INTERACT__sonnet-medium__t1/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S15\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022The stop increase comes from the firmware upgrade and the new gloss stretch film acting together. It does not come from the temps. Firmware 6.4 keeps weak short-range returns that 6.3 discarded. At oblique angles the gloss film throws those returns back, and 6.4 treats them as obstacles. A bench test with no people present showed 17 of 20 stops for 6.4 with gloss film. The other three combinations gave 0 or 1 stops out of 20. In the field, only upgraded pallet robots in the outbound pallet zones (A and B) rose, from 3.2 to 15.6 stops per 100 robot-hours. Pallet robots still on 6.3 in the same zones stayed flat at about 3.1 to 3.3, and so did the tote robots in Zone C. Nearly all the extra stops had no person nearby, and temps were spread across all zones, including Zone C. I\u0027m fairly confident, though only one bench test and one site\u0027s telemetry back this.\\n\\nWhat to do now:\\n- Switch outbound pallets back to the previous matte film, and track stops by zone and firmware group.\\n- Don\u0027t adopt the three-strike policy. It would punish people for stops they didn\u0027t cause.\\n- Don\u0027t shorten the protective fields. That cuts safety margin and doesn\u0027t fix the cause.\\n- Hold off treating the December release as the fix until it\u0027s tested against the gloss film.\\n- Treat rolling the 30 upgraded pallet robots back to 6.3 as a fallback only. Security support for 6.3 ends 31 October, so it would need the waiver.\\n- The link between stops and missed cut-offs isn\u0027t established. Cut-offs also rose last year with stops flat.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:40:49.3608530Z",
+    "finishedAt": "2026-11-17T14:41:06.9552100Z",
+    "output": {
+      "caseId": "OD2-DEV2-INTERACT",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X15",
+            "X3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "E4",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X15",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S15",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S16",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X3",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "The stop increase comes from the firmware upgrade and the new gloss stretch film acting together. It does not come from the temps. Firmware 6.4 keeps weak short-range returns that 6.3 discarded. At oblique angles the gloss film throws those returns back, and 6.4 treats them as obstacles. A bench test with no people present showed 17 of 20 stops for 6.4 with gloss film. The other three combinations gave 0 or 1 stops out of 20. In the field, only upgraded pallet robots in the outbound pallet zones (A and B) rose, from 3.2 to 15.6 stops per 100 robot-hours. Pallet robots still on 6.3 in the same zones stayed flat at about 3.1 to 3.3, and so did the tote robots in Zone C. Nearly all the extra stops had no person nearby, and temps were spread across all zones, including Zone C. I\u0027m fairly confident, though only one bench test and one site\u0027s telemetry back this.\n\nWhat to do now:\n- Switch outbound pallets back to the previous matte film, and track stops by zone and firmware group.\n- Don\u0027t adopt the three-strike policy. It would punish people for stops they didn\u0027t cause.\n- Don\u0027t shorten the protective fields. That cuts safety margin and doesn\u0027t fix the cause.\n- Hold off treating the December release as the fix until it\u0027s tested against the gloss film.\n- Treat rolling the 30 upgraded pallet robots back to 6.3 as a fallback only. Security support for 6.3 ends 31 October, so it would need the waiver.\n- The link between stops and missed cut-offs isn\u0027t established. Cut-offs also rose last year with stops flat."
+    }
+  }
+}
