@@ -1,0 +1,746 @@
+{
+  "label": "OD2-HO-CROSS-1",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7723,
+  "cacheCreationTokens": 4501,
+  "outputTokens": 47486,
+  "thinkingTokens": 35990,
+  "costUsd": 0.9872886,
+  "durationMs": 462834,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-CROSS-1/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022CROSS\u0022,\u0022domain\u0022:\u0022cross-domain\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Delayed alarm responses in an adult ICU\u0022,\u0022setting\u0022:\u0022Kestrel Bay Regional Hospital (fictional). Unit 5 East is a 20-bed adult ICU with four pods of five beds (Pod A beds 1-5, Pod B 6-10, Pod C 11-15, Pod D 16-20). Bedside monitors sound locally, report to a central station, and send alarms through a clinical alert relay server to nurses\u0027 handheld phones. Analysis date: 17 November 2026.\u0022,\u0022presentingRequest\u0022:\u0022The Chief Nursing Officer asks: why have delayed alarm response incidents on 5 East risen since August, and should she approve the Director of Critical Care Nursing\u0027s proposal to cap agency nurse use and open performance reviews for the nurses involved?\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from the Director of Critical Care Nursing to the CNO, 3 November\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: 5 East alarm incidents, proposal. Delayed alarm response incidents have roughly quadrupled since the summer. The obvious change is staffing. The Larkfield agency contract went live on 5 August, and since then we have had a steady flow of nurses who don\u0027t know our pods, plus four new graduates from 1 September. Two of the September incidents involved agency nurses who went to the wrong room. I\u0027m asking for approval to cap agency use at 10% of RN shifts from December and to open performance reviews for every nurse named in a delayed-response report. Our nurses need to know this is being taken seriously.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Incident reporting system extract, category \u0027alarm response delayed \u003E2 min or not acknowledged\u0027, 5 East\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Monthly counts: May 5, Jun 6, Jul 6, Aug 16, Sep 24, Oct 26. Weekly view: 1-2 per week up to and including the week beginning 3 August; 4 in the week beginning 10 August; 5-7 every week from then to 31 October, with no further step change. Harm grading: three moderate-harm events (9 Sep, 3 Oct, 22 Oct); the rest no or low harm. Patient-days per month ranged 588-614 across May-October. The charge nurse usually files the report, and each report names the nurse assigned to the patient.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Nursing workforce report, 5 East, prepared by the finance business partner\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022RN shifts filled by agency: Jun 7%, Jul 8%, Aug 14%, Sep 21%, Oct 24%. Core RN sick leave (% of rostered hours): Jun 3.0, Jul 3.2, Aug 3.4, Sep 6.1, Oct 6.9. Hospital-wide nursing sick leave over the same months rose from 3.1 to 4.4. Resignations: one in September, one in October. Note: the Larkfield contract started 5 August to cover summer annual leave; from September, agency shifts also backfilled sick leave and the two vacancies. Occupational Health bulletin, 28 August: an early respiratory virus season is under way and staff absence is rising across the hospital.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Night charge nurse\u0027s huddle notes, 5 East, 2 October\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Raised at huddle: \u0027The phones haven\u0027t stopped since the summer. I get the same desat three times and by the time I look the sats are back to 96.\u0027 \u0027I\u0027ve started glancing at the phone instead of reading it.\u0027 Agency RN: \u0027At my other ICU the phones are much quieter for the same kind of patients.\u0027 \u0027Room 14: sometimes my phone doesn\u0027t ring at all and I hear the bedside alarm first.\u0027 Pod D nurses said they hadn\u0027t really noticed a difference. Reminder given: the central station is unstaffed most nights; for rooms you are not in, the phone is how you hear an alarm.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022IT service notice and closure note, clinical alert relay\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Notice, 9 August: \u0027The clinical alert relay server, which forwards bedside monitor alarms to nurse phones, will move to new hardware on 12 August, 01:00-03:00. This is a like-for-like refresh. No user-facing changes are expected. Bedside monitors and the central station are not affected.\u0027 Closure note, 12 August 03:40: \u0027Completed successfully. Configuration imported. Smoke test passed: test alarms from beds 1 and 6 delivered to phones within 3 seconds. No incidents logged.\u0027\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from the ICU medical director to the CNO, 7 October\u0022,\u0022sourceType\u0022:\u0022expert-account\u0022,\u0022text\u0022:\u0022Before we pin this on the nurses: our case mix has been heavier this autumn, with more cardiac surgery overflow and more patients on high-flow oxygen, so I\u0027m not surprised alarms are up. Also, Biomedical Engineering installed the monitor vendor\u0027s software update (v7.2) on all 20 bedside monitors on 23-24 September, and the vendor says it changes how SpO2 problems are alarmed. I\u0027d want both looked at before anyone is disciplined.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Clinical alert relay message-log extract, 1 July-31 October, by pod and nurse group\u0022,\u0022source\u0022:\u0022Clinical informatics team, extract dated 4 November\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Bedside alarm events received from monitors (all priorities) per patient-day: July 96; 1-11 Aug 95; 12-31 Aug 97; Sept 96; Oct 94; no step around 23-24 Sept. Phone notifications dispatched per nurse per 12-hour shift: Pods A-C 37-39 until 11 Aug, 79-86 from 12 Aug onward; Pod D 35-39 throughout. Median phone acknowledgement time: Pods A-C 34 s before 12 Aug, 71 s after; Pod D 33-36 s throughout. Delayed-response incidents per 100 nurse-shifts, Pods A-C, before -\u003E after 12 Aug: core RNs (2\u002B years on unit) 0.8 -\u003E 3.9; agency 0.9 -\u003E 4.1; new graduates (4 nurses, from 1 Sept) 4.0. Pod D, all staff: 0.9 -\u003E 0.9. Agency share of shifts, Sep-Oct: Pods A-C 23%, Pod D 21%. Logs record dispatch to the phone system, not receipt by a handset.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Change record CHG-20417 and configuration comparison, clinical alert relay server\u0022,\u0022source\u0022:\u0022IT change management record with Clinical Engineering addendum dated 4 November\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CHG-20417: relay server hardware refresh, implemented 12 August; risk rated low; test plan \u0027confirm delivery from two beds\u0027. Addendum, configuration comparison by Clinical Engineering, 4 November: the old server ran 14 forwarding rules, including a 15-second hold-off so that SpO2-low alarms resolving within 15 s are not sent to phones, suppression of repeat notifications for the same alarm within 60 s, and routing of probe-off and leads-off technical alarms to the pod charge phone only. The new server has 3 active rules (priority mapping). The other 11 sat in a rules file the import tool skipped because of a version-format mismatch; it logged a warning but reported success. Beds 16-20 (Pod D) were deferred to phase 2 and still forward through the old server. Re-import after format conversion: vendor estimate 4 hours plus clinical validation.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Unit census and acuity scores, 5 East, June-October\u0022,\u0022source\u0022:\u0022Nursing acuity system report\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Average daily census: 19.4-19.8 patients in each month June-October. Mean nursing acuity score (1-5 scale): Jun 3.1, Jul 3.2, Aug 3.3, Sep 3.4, Oct 3.4. Patient-days on high-flow oxygen: Jul 112, Aug 118, Sep 124, Oct 131. Post-cardiac-surgery overflow admissions: Jul 4, Aug 5, Sep 9, Oct 8. Ventilated patient-days broadly flat at 210-226 per month. Acuity is scored by the charge nurse at 06:00 each day and is used for staffing allocation.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Agency nurse orientation and competency sign-off records, 5 August-31 October\u0022,\u0022source\u0022:\u0022Unit education coordinator\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Larkfield agency nurses deployed to 5 East, 5 Aug-31 Oct: 41. Completed the 5 East unit orientation (pod layout, phone sign-on, alarm escalation module): 38. Outstanding: 3, all first deployed in October. Mean prior ICU experience 6.2 years (range 1-19). Orientation consists of one supervised 3-hour period on shift plus a 20-minute e-learning module; competency sign-off is by the charge nurse on duty, and no practical alarm-response assessment is included.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Bedside monitor software v7.2 release notes and installation record\u0022,\u0022source\u0022:\u0022Monitor vendor release notes with Biomedical Engineering installation log\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Summary of changes in v7.2: security patches to the network stack; SpO2 probe-off technical alarm now annunciated after 10 s of signal loss (previously 20 s) \u0027to speed detection of disconnected sensors\u0027; improved ECG lead-label display; printer driver update. \u0027Default physiological alarm limits and alarm priority assignments are unchanged.\u0027 Installation log: all 20 5 East monitors updated 23-24 September by Biomedical Engineering. No post-installation measurement of alarm volume was performed.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Exit interview notes, two core nurses who resigned September-October\u0022,\u0022source\u0022:\u0022Human Resources\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022RN A (resigned September, 7 years on unit): moving to a day-surgery unit nearer home; said \u0027nights have got harder since the summer, the phone is relentless\u0027; also said the 9 September event had shaken her. RN B (resigned October, 3 years on unit): leaving to start a nurse practitioner course; no complaints about the unit beyond \u0027the usual workload\u0027. Both rated team support as \u0027good\u0027 and said they would consider returning.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Nurse-to-patient assignment ratios by shift, 5 East, July-October\u0022,\u0022source\u0022:\u0022Rostering system report\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Mean patients per RN, day/night: July 1.6/1.7; August 1.6/1.7; September 1.6/1.8; October 1.6/1.7. One-to-one assignments for ventilated or unstable patients were maintained on 97-99% of shifts in every month. The charge nurse held no patient assignment on 92-95% of shifts throughout the period. No shift fell below the hospital\u0027s minimum staffing standard.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with the Director of Critical Care Nursing, 6 November\u0022,\u0022source\u0022:\u0022Interview notes, review team\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022\u0027I read every one of those reports, and most of them name nurses I didn\u0027t recognise, agency or new.\u0027 Asked whether she had compared incident rates with the number of shifts each group worked: \u0027No, but I don\u0027t need a spreadsheet to know my unit.\u0027 She described the phone system as \u0027IT\u0027s business\u0027 and said IT had confirmed nothing changed. She has drafted performance-review letters and wants them sent before the December roster is published.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with the IT clinical applications manager, 6 November\u0022,\u0022source\u0022:\u0022Interview notes, review team\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022\u0027It was a like-for-like move. We exported the whole configuration from the old box and the import completed with a green tick. Smoke test passed. If the alarm rules had broken, the phones would have stopped getting alarms, and they clearly haven\u0027t.\u0027 No service desk tickets were logged about the relay between 12 August and 31 October. He confirmed he had not reviewed the import log beyond its completion status.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Ten delayed-response incident reports forwarded by the Director of Critical Care Nursing\u0022,\u0022source\u0022:\u0022Incident reporting system, reports selected by the Director\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Ten reports dated 14 August-20 October. Assigned nurse: agency 6, core 3, new graduate 1. Free-text excerpts: \u0027Phone showed several alerts queued for bed 8; attended after 3 min.\u0027 \u0027Thought it was another short desat.\u0027 \u0027Agency RN unfamiliar with Pod C layout, went to wrong room first.\u0027 \u0027Two phones in Pod B alarming at once for the same patient.\u0027 Times to attend ranged from 2.5 to 7 minutes. Selection criteria for the ten reports were not recorded.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Patient safety committee minutes, 19 September and 17 October\u0022,\u0022source\u0022:\u0022Hospital patient safety committee\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u002219 September: committee noted rising delayed-response incidents on 5 East; the Director attributed them to agency onboarding; agreed action: orientation refresher for agency nurses. 17 October: incidents still elevated; action: Director to bring staffing proposals; the medical director asked for the monitor update to be reviewed, but no owner was assigned. No data on alarm or notification volumes were presented at either meeting.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Nurse phone fleet inventory and maintenance log, 5 East, 2026\u0022,\u0022source\u0022:\u0022Telecoms asset register\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u002230 handsets in service, single model, firmware 4.8 installed March 2026 and unchanged since. Battery replacements July-October: 5. Two handsets returned for cracked screens in September and replaced from the spare pool (4 spares). Handsets are assigned to a nurse at shift start through a sign-on screen; the register does not record signal or call-quality data.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Occupational Health absence reason codes, 5 East and hospital-wide, September-October\u0022,\u0022source\u0022:\u0022Occupational Health\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Reason codes are self-declared and optional for absences of three days or fewer. 5 East core RN sick-leave days, Sep-Oct: respiratory 38%, other/personal or not stated 47%, musculoskeletal 9%, stress/anxiety 6%. Hospital-wide nursing, same period: respiratory 41%, other/not stated 44%, musculoskeletal 10%, stress/anxiety 5%. No breakdown by shift pattern or by pod is available.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u00225 East alarm management policy, March 2024 revision\u0022,\u0022source\u0022:\u0022Unit policy library\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Bedside default limits follow the adult ICU profile; nurses may individualise limits with a documented rationale. Phone forwarding \u0027follows the forwarding configuration approved by the Unit Alarm Committee and maintained by Clinical Engineering; changes require committee sign-off\u0027. The central station is to be staffed \u0027when staffing allows\u0027. Unacknowledged high-priority alarms re-route to the charge nurse\u0027s phone after 60 seconds.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Bedside monitor alarm-limit and alarm-pause audit trail, July-October\u0022,\u0022source\u0022:\u0022Monitor network audit log, Biomedical Engineering\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Nurse-initiated alarm-limit changes per patient-day: July 0.9, August 1.0, September 0.9, October 1.0. Audio-pause events longer than 2 minutes per patient-day: 0.3-0.4 in every month. No monitor had alarms disabled for more than 10 minutes at any point in the period. Limit changes were documented with a rationale in 88-91% of cases each month.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The growing share of agency and newly graduated nurses on the unit has worsened alarm response.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022A change to the system that forwards bedside alarms to nurses\u0027 phones has increased the alarm notification load on nurses.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Rising patient acuity has increased the number of alarms generated by the bedside monitors.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The bedside monitor software update has changed alarm behaviour and increased the alarm load on nurses.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Gaps in wireless coverage in parts of the unit stop some phone alarm notifications from reaching nurses.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Move of the clinical alert relay server to new hardware (12 August)\u0022,\u0022to\u0022:\u0022Increase in phone alarm notifications per nurse\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Increase in phone alarm notifications per nurse\u0022,\u0022to\u0022:\u0022Rise in delayed alarm response incidents\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Rise in the agency nurse share of RN shifts\u0022,\u0022to\u0022:\u0022Rise in delayed alarm response incidents\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Increase in phone alarm notifications per nurse\u0022,\u0022to\u0022:\u0022Rise in core nurse sick leave\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Restore the relay server\u0027s alarm-forwarding configuration to its pre-August state, with Clinical Engineering validation and Unit Alarm Committee sign-off, then track phone notifications per nurse and acknowledgement times weekly.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Cap agency nurses at 10% of RN shifts and open performance reviews for every nurse named in a delayed-response incident report.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Stop forwarding SpO2 and technical alarms to nurses\u0027 phones until the review is complete, relying on bedside and central-station alarms in the meantime.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Install additional wireless access points around the rooms where nurses report phones failing to ring.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022groundTruthNarrative\u0022:\u0022On 12 August IT moved 5 East\u0027s clinical alert relay server to new hardware. The notice said the move was like-for-like with no user-facing changes. In fact the import tool silently skipped 11 of the 14 forwarding rules. That removed the 15-second SpO2 hold-off and the suppression of repeat notifications, and it stopped sending technical alarms only to the charge phone. Bedside alarm generation did not change. But in Pods A-C the notifications reaching each nurse roughly doubled, median acknowledgement time doubled, and delayed-response incidents rose about fivefold. The rise was the same for core, agency and new-graduate nurses. Pod D\u0027s beds were left for a later phase and still use the old server. Pod D saw no change in notifications, acknowledgement time or incidents, even though its agency share was similar. The symptom looks like a nursing performance problem, but the cause is an IT configuration change. Several things happened around the same time and confuse the picture: the agency contract started on 5 August, acuity rose gently, and the monitor software was updated on 23-24 September. The evidence counts against each of them. Core-nurse sick leave rose after the change, but an early respiratory season was under way, so that link is only an association. Whether wireless gaps cause some missed notifications has not been tested. The right step is to restore and validate the forwarding rules. Capping agency staff, starting performance reviews or turning off phone forwarding would cause harm.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C8\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022confounded\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022C1 shows that in Pods A-C the delayed-response rate per 100 nurse-shifts rose almost identically for core RNs with 2\u002B years on the unit (0.8 to 3.9), agency nurses (0.9 to 4.1) and new graduates (4.0). Pod D had a similar agency share (21% vs 23%) and its rate stayed at 0.9. So the staffing mix does not explain the rise. The leadership claim in E1 and C8 rests on raw counts that were not adjusted for shifts worked, and C10 is a set of reports chosen by the Director.\u0022},{\u0022itemId\u0022:\u0022S02\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022external-cause\u0022,\u0022cross-domain\u0022,\u0022gamed-record\u0022],\u0022rationale\u0022:\u0022C1 shows phone notifications per nurse stepped up from 37-39 to 79-86 per shift on 12 August, while bedside alarm events stayed flat. C2 shows that 11 of 14 forwarding rules (hold-off, repeat suppression, technical-alarm routing) were silently dropped during the 12 August migration. Pod D still uses the old server and saw no change. The IT notice (E5) and the IT manager\u0027s interview (C9) claim nothing changed, but C2 counters both.\u0022},{\u0022itemId\u0022:\u0022S03\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E6\u0022,\u0022C1\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022expert-claim\u0022],\u0022rationale\u0022:\u0022Acuity did rise gently (C3). But C1 shows bedside alarm events per patient-day were flat at 94-97 from July to October. The claimed increase in alarms generated at the bedside did not happen. The rise is in forwarded notifications, not in alarms the monitors generated.\u0022},{\u0022itemId\u0022:\u0022S04\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022vendor-claim\u0022,\u0022timing\u0022],\u0022rationale\u0022:\u0022Incidents stepped up in the week beginning 10 August, six weeks before the 23-24 September update, with no further step afterwards (E2). C1 shows no change around 23-24 September in either bedside alarm events or notifications. The faster probe-off alarm in the release notes (C5) is a plausible lure, but no effect is visible in the data.\u0022},{\u0022itemId\u0022:\u0022S05\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C12\u0022],\u0022tags\u0022:[\u0022untested\u0022,\u0022anecdote\u0022],\u0022rationale\u0022:\u0022The only evidence is one anecdote about room 14 (E4). C1 says the relay logs record dispatch, not receipt by a handset. No item measures wireless coverage or handset receipt (C12 has no signal data). The claim is live but untested. The rise is explained by H2, but that does not count against coverage gaps.\u0022},{\u0022itemId\u0022:\u0022S06\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022natural-experiment\u0022,\u0022mechanism\u0022,\u0022cross-domain\u0022],\u0022rationale\u0022:\u0022The pieces line up: the notification step occurs exactly on 12 August (C1), C2 gives the mechanism (forwarding rules skipped on import), and bedside alarm generation stayed flat, which rules out acuity. Pod D works as a natural experiment: its beds still use the old server (C2) and its notification volume did not change (C1). Without C2, the link would be only a timing coincidence that IT denies.\u0022},{\u0022itemId\u0022:\u0022S07\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022mechanism\u0022,\u0022natural-experiment\u0022,\u0022rival-ruled-out\u0022],\u0022rationale\u0022:\u0022In Pods A-C, notifications, acknowledgement time and incident rates all stepped up together on 12 August. In Pod D, all three stayed flat. The main rival, staffing mix, is ruled out by the equal rise across core and agency nurses and by Pod D\u0027s similar agency share (C1). E4 gives the mechanism: duplicate and self-resolving desaturation alerts lead nurses to glance at the phone rather than read it.\u0022},{\u0022itemId\u0022:\u0022S08\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C8\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022confounded\u0022,\u0022spurious-correlation\u0022],\u0022rationale\u0022:\u0022The monthly agency share and incident counts rise together (E2, E3), but the link itself fails. Core nurses\u0027 rates rose as much as agency nurses\u0027 rates. Pod D had a comparable agency share and no rise. The incident step aligns with 12 August, not with the gradual agency ramp from 5 August (C1, E2). Much of the later agency growth was backfill for sick leave and vacancies (E3).\u0022},{\u0022itemId\u0022:\u0022S09\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022,\u0022C6\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022association\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022Core sick leave rose in September-October, after the notification increase (C1, E3), and more than the hospital-wide rise. But the hospital-wide early respiratory season (E3) has not been ruled out. Reason codes are optional and largely unstated (C13), and one exit interview is an anecdote (C6). The two co-occur, but causation is not established.\u0022},{\u0022itemId\u0022:\u0022S10\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022targeted-fix\u0022],\u0022rationale\u0022:\u0022This action addresses the established mechanism directly. C2 shows the missing rules can be re-imported in about 4 hours plus validation. Weekly tracking against C1\u0027s baseline gives verification. It does no harm under H5.\u0022},{\u0022itemId\u0022:\u0022S11\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C8\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Under the supported hypothesis, this punishes nurses for a system-induced failure that affected core and agency staff alike (C1). Under the live rival H5 it is just as misdirected. Agency nurses fill about 24% of shifts and backfill sick leave of 6.9% (E3), so a 10% cap would open staffing gaps on an ICU in any scenario.\u0022},{\u0022itemId\u0022:\u0022S12\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022suppress-information\u0022],\u0022rationale\u0022:\u0022Phone forwarding is the main way nurses hear alarms from rooms they are not in, because the central station is unstaffed most nights (E4). The pre-migration rules still forwarded sustained desaturations (C2). Turning forwarding off would remove genuine alerts, when a fix that restores filtering is available within hours. It is harmful under H2 and worse under H5.\u0022},{\u0022itemId\u0022:\u0022S13\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C12\u0022],\u0022tags\u0022:[\u0022premature\u0022,\u0022untested-hypothesis\u0022],\u0022rationale\u0022:\u0022If coverage gaps were confirmed, adding access points would clearly help, and if H5 is wrong the only loss is cost. But H5 rests on one anecdote, and no evidence about receipt or coverage exists (C1, C12). Committing now is not justified.\u0022},{\u0022itemId\u0022:\u0022S14\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022With C1 and C2, the mechanism, timing, a natural control group (Pod D) and the ruling-out of the staffing, acuity and monitor-update rivals are all established. That is enough to commit to restoring the forwarding rules (A1), which is low-risk and reversible. From the initial file alone the evidence would be insufficient.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022lowValueReads\u0022:[\u0022C7\u0022,\u0022C11\u0022,\u0022C12\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022Design: the symptom is in nursing practice (delayed alarm responses) and the cause is in IT/clinical engineering (forwarding rules silently dropped during a server migration). Traps in the initial file: the agency contract started on 5 August, one week before the 12 August migration. The Director\u0027s memo pushes the staffing story. The medical director raises acuity and the September monitor update. The IT notice and closure note say nothing changed. Subtle fair clues: the incident step falls in the week of 10 August, Pod D nurses noticed nothing, and nurses describe duplicate and self-resolving desaturation alerts. Non-redundancy: C1 alone settles H1, H3, H4, R3 and the staffing comparison, but without C2 it cannot explain why Pod D differs or show a mechanism, so R1 would be only association. C2 alone settles the mechanism, the Pod D natural experiment, A1 and SUFF, but not H1 or R3. No other item contains the per-group rates or the rule comparison. C9 (IT manager) and C10 (incident reports chosen by the Director) are interested or selected sources, countered by C2 and C1. C3 shows a gentle acuity rise, which makes H3\u0027s premise look true, but C1\u0027s flat bedside counts counter it. C5\u0027s faster probe-off alarm is a lure for H4, countered by C1. No item measures handset receipt or coverage, so H5 stays unknown and A4 premature. Nothing rules out the respiratory season, so R4 stays association-only. Self-review: I checked each item for a defensible alternative answer. A3 could be argued as an interim measure, but E4 (central station unstaffed at night) and C2 (rules forwarded sustained desaturations; a fix takes about 4 hours) make it harmful. The Pod D agency share is given explicitly so that H1 and R3 are not keyed contradicted only because a rival is supported. New-graduate rates are set equal to the others to avoid partial support for H1.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:16:45.8184679Z",
+  "finishedAt": "2026-11-17T15:24:29.5635063Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-CROSS-1",
+      "split": "heldout",
+      "benchmarkClass": "CROSS",
+      "domain": "cross-domain",
+      "readBudget": 2,
+      "title": "Delayed alarm responses in an adult ICU",
+      "setting": "Kestrel Bay Regional Hospital (fictional). Unit 5 East is a 20-bed adult ICU with four pods of five beds (Pod A beds 1-5, Pod B 6-10, Pod C 11-15, Pod D 16-20). Bedside monitors sound locally, report to a central station, and send alarms through a clinical alert relay server to nurses\u0027 handheld phones. Analysis date: 17 November 2026.",
+      "presentingRequest": "The Chief Nursing Officer asks: why have delayed alarm response incidents on 5 East risen since August, and should she approve the Director of Critical Care Nursing\u0027s proposal to cap agency nurse use and open performance reviews for the nurses involved?",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from the Director of Critical Care Nursing to the CNO, 3 November",
+          "sourceType": "leadership-account",
+          "text": "Subject: 5 East alarm incidents, proposal. Delayed alarm response incidents have roughly quadrupled since the summer. The obvious change is staffing. The Larkfield agency contract went live on 5 August, and since then we have had a steady flow of nurses who don\u0027t know our pods, plus four new graduates from 1 September. Two of the September incidents involved agency nurses who went to the wrong room. I\u0027m asking for approval to cap agency use at 10% of RN shifts from December and to open performance reviews for every nurse named in a delayed-response report. Our nurses need to know this is being taken seriously."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Incident reporting system extract, category \u0027alarm response delayed \u003E2 min or not acknowledged\u0027, 5 East",
+          "sourceType": "system-record",
+          "text": "Monthly counts: May 5, Jun 6, Jul 6, Aug 16, Sep 24, Oct 26. Weekly view: 1-2 per week up to and including the week beginning 3 August; 4 in the week beginning 10 August; 5-7 every week from then to 31 October, with no further step change. Harm grading: three moderate-harm events (9 Sep, 3 Oct, 22 Oct); the rest no or low harm. Patient-days per month ranged 588-614 across May-October. The charge nurse usually files the report, and each report names the nurse assigned to the patient."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Nursing workforce report, 5 East, prepared by the finance business partner",
+          "sourceType": "financial-record",
+          "text": "RN shifts filled by agency: Jun 7%, Jul 8%, Aug 14%, Sep 21%, Oct 24%. Core RN sick leave (% of rostered hours): Jun 3.0, Jul 3.2, Aug 3.4, Sep 6.1, Oct 6.9. Hospital-wide nursing sick leave over the same months rose from 3.1 to 4.4. Resignations: one in September, one in October. Note: the Larkfield contract started 5 August to cover summer annual leave; from September, agency shifts also backfilled sick leave and the two vacancies. Occupational Health bulletin, 28 August: an early respiratory virus season is under way and staff absence is rising across the hospital."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Night charge nurse\u0027s huddle notes, 5 East, 2 October",
+          "sourceType": "staff-account",
+          "text": "Raised at huddle: \u0027The phones haven\u0027t stopped since the summer. I get the same desat three times and by the time I look the sats are back to 96.\u0027 \u0027I\u0027ve started glancing at the phone instead of reading it.\u0027 Agency RN: \u0027At my other ICU the phones are much quieter for the same kind of patients.\u0027 \u0027Room 14: sometimes my phone doesn\u0027t ring at all and I hear the bedside alarm first.\u0027 Pod D nurses said they hadn\u0027t really noticed a difference. Reminder given: the central station is unstaffed most nights; for rooms you are not in, the phone is how you hear an alarm."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "IT service notice and closure note, clinical alert relay",
+          "sourceType": "change-record",
+          "text": "Notice, 9 August: \u0027The clinical alert relay server, which forwards bedside monitor alarms to nurse phones, will move to new hardware on 12 August, 01:00-03:00. This is a like-for-like refresh. No user-facing changes are expected. Bedside monitors and the central station are not affected.\u0027 Closure note, 12 August 03:40: \u0027Completed successfully. Configuration imported. Smoke test passed: test alarms from beds 1 and 6 delivered to phones within 3 seconds. No incidents logged.\u0027"
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Email from the ICU medical director to the CNO, 7 October",
+          "sourceType": "expert-account",
+          "text": "Before we pin this on the nurses: our case mix has been heavier this autumn, with more cardiac surgery overflow and more patients on high-flow oxygen, so I\u0027m not surprised alarms are up. Also, Biomedical Engineering installed the monitor vendor\u0027s software update (v7.2) on all 20 bedside monitors on 23-24 September, and the vendor says it changes how SpO2 problems are alarmed. I\u0027d want both looked at before anyone is disciplined."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Clinical alert relay message-log extract, 1 July-31 October, by pod and nurse group",
+          "source": "Clinical informatics team, extract dated 4 November",
+          "sourceType": "telemetry",
+          "text": "Bedside alarm events received from monitors (all priorities) per patient-day: July 96; 1-11 Aug 95; 12-31 Aug 97; Sept 96; Oct 94; no step around 23-24 Sept. Phone notifications dispatched per nurse per 12-hour shift: Pods A-C 37-39 until 11 Aug, 79-86 from 12 Aug onward; Pod D 35-39 throughout. Median phone acknowledgement time: Pods A-C 34 s before 12 Aug, 71 s after; Pod D 33-36 s throughout. Delayed-response incidents per 100 nurse-shifts, Pods A-C, before -\u003E after 12 Aug: core RNs (2\u002B years on unit) 0.8 -\u003E 3.9; agency 0.9 -\u003E 4.1; new graduates (4 nurses, from 1 Sept) 4.0. Pod D, all staff: 0.9 -\u003E 0.9. Agency share of shifts, Sep-Oct: Pods A-C 23%, Pod D 21%. Logs record dispatch to the phone system, not receipt by a handset."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Change record CHG-20417 and configuration comparison, clinical alert relay server",
+          "source": "IT change management record with Clinical Engineering addendum dated 4 November",
+          "sourceType": "change-record",
+          "text": "CHG-20417: relay server hardware refresh, implemented 12 August; risk rated low; test plan \u0027confirm delivery from two beds\u0027. Addendum, configuration comparison by Clinical Engineering, 4 November: the old server ran 14 forwarding rules, including a 15-second hold-off so that SpO2-low alarms resolving within 15 s are not sent to phones, suppression of repeat notifications for the same alarm within 60 s, and routing of probe-off and leads-off technical alarms to the pod charge phone only. The new server has 3 active rules (priority mapping). The other 11 sat in a rules file the import tool skipped because of a version-format mismatch; it logged a warning but reported success. Beds 16-20 (Pod D) were deferred to phase 2 and still forward through the old server. Re-import after format conversion: vendor estimate 4 hours plus clinical validation."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Unit census and acuity scores, 5 East, June-October",
+          "source": "Nursing acuity system report",
+          "sourceType": "system-record",
+          "text": "Average daily census: 19.4-19.8 patients in each month June-October. Mean nursing acuity score (1-5 scale): Jun 3.1, Jul 3.2, Aug 3.3, Sep 3.4, Oct 3.4. Patient-days on high-flow oxygen: Jul 112, Aug 118, Sep 124, Oct 131. Post-cardiac-surgery overflow admissions: Jul 4, Aug 5, Sep 9, Oct 8. Ventilated patient-days broadly flat at 210-226 per month. Acuity is scored by the charge nurse at 06:00 each day and is used for staffing allocation."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Agency nurse orientation and competency sign-off records, 5 August-31 October",
+          "source": "Unit education coordinator",
+          "sourceType": "document",
+          "text": "Larkfield agency nurses deployed to 5 East, 5 Aug-31 Oct: 41. Completed the 5 East unit orientation (pod layout, phone sign-on, alarm escalation module): 38. Outstanding: 3, all first deployed in October. Mean prior ICU experience 6.2 years (range 1-19). Orientation consists of one supervised 3-hour period on shift plus a 20-minute e-learning module; competency sign-off is by the charge nurse on duty, and no practical alarm-response assessment is included."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Bedside monitor software v7.2 release notes and installation record",
+          "source": "Monitor vendor release notes with Biomedical Engineering installation log",
+          "sourceType": "vendor-account",
+          "text": "Summary of changes in v7.2: security patches to the network stack; SpO2 probe-off technical alarm now annunciated after 10 s of signal loss (previously 20 s) \u0027to speed detection of disconnected sensors\u0027; improved ECG lead-label display; printer driver update. \u0027Default physiological alarm limits and alarm priority assignments are unchanged.\u0027 Installation log: all 20 5 East monitors updated 23-24 September by Biomedical Engineering. No post-installation measurement of alarm volume was performed."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Exit interview notes, two core nurses who resigned September-October",
+          "source": "Human Resources",
+          "sourceType": "staff-account",
+          "text": "RN A (resigned September, 7 years on unit): moving to a day-surgery unit nearer home; said \u0027nights have got harder since the summer, the phone is relentless\u0027; also said the 9 September event had shaken her. RN B (resigned October, 3 years on unit): leaving to start a nurse practitioner course; no complaints about the unit beyond \u0027the usual workload\u0027. Both rated team support as \u0027good\u0027 and said they would consider returning."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Nurse-to-patient assignment ratios by shift, 5 East, July-October",
+          "source": "Rostering system report",
+          "sourceType": "system-record",
+          "text": "Mean patients per RN, day/night: July 1.6/1.7; August 1.6/1.7; September 1.6/1.8; October 1.6/1.7. One-to-one assignments for ventilated or unstable patients were maintained on 97-99% of shifts in every month. The charge nurse held no patient assignment on 92-95% of shifts throughout the period. No shift fell below the hospital\u0027s minimum staffing standard."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Interview with the Director of Critical Care Nursing, 6 November",
+          "source": "Interview notes, review team",
+          "sourceType": "leadership-account",
+          "text": "\u0027I read every one of those reports, and most of them name nurses I didn\u0027t recognise, agency or new.\u0027 Asked whether she had compared incident rates with the number of shifts each group worked: \u0027No, but I don\u0027t need a spreadsheet to know my unit.\u0027 She described the phone system as \u0027IT\u0027s business\u0027 and said IT had confirmed nothing changed. She has drafted performance-review letters and wants them sent before the December roster is published."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Interview with the IT clinical applications manager, 6 November",
+          "source": "Interview notes, review team",
+          "sourceType": "manager-account",
+          "text": "\u0027It was a like-for-like move. We exported the whole configuration from the old box and the import completed with a green tick. Smoke test passed. If the alarm rules had broken, the phones would have stopped getting alarms, and they clearly haven\u0027t.\u0027 No service desk tickets were logged about the relay between 12 August and 31 October. He confirmed he had not reviewed the import log beyond its completion status."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Ten delayed-response incident reports forwarded by the Director of Critical Care Nursing",
+          "source": "Incident reporting system, reports selected by the Director",
+          "sourceType": "system-record",
+          "text": "Ten reports dated 14 August-20 October. Assigned nurse: agency 6, core 3, new graduate 1. Free-text excerpts: \u0027Phone showed several alerts queued for bed 8; attended after 3 min.\u0027 \u0027Thought it was another short desat.\u0027 \u0027Agency RN unfamiliar with Pod C layout, went to wrong room first.\u0027 \u0027Two phones in Pod B alarming at once for the same patient.\u0027 Times to attend ranged from 2.5 to 7 minutes. Selection criteria for the ten reports were not recorded."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Patient safety committee minutes, 19 September and 17 October",
+          "source": "Hospital patient safety committee",
+          "sourceType": "document",
+          "text": "19 September: committee noted rising delayed-response incidents on 5 East; the Director attributed them to agency onboarding; agreed action: orientation refresher for agency nurses. 17 October: incidents still elevated; action: Director to bring staffing proposals; the medical director asked for the monitor update to be reviewed, but no owner was assigned. No data on alarm or notification volumes were presented at either meeting."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Nurse phone fleet inventory and maintenance log, 5 East, 2026",
+          "source": "Telecoms asset register",
+          "sourceType": "system-record",
+          "text": "30 handsets in service, single model, firmware 4.8 installed March 2026 and unchanged since. Battery replacements July-October: 5. Two handsets returned for cracked screens in September and replaced from the spare pool (4 spares). Handsets are assigned to a nurse at shift start through a sign-on screen; the register does not record signal or call-quality data."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Occupational Health absence reason codes, 5 East and hospital-wide, September-October",
+          "source": "Occupational Health",
+          "sourceType": "system-record",
+          "text": "Reason codes are self-declared and optional for absences of three days or fewer. 5 East core RN sick-leave days, Sep-Oct: respiratory 38%, other/personal or not stated 47%, musculoskeletal 9%, stress/anxiety 6%. Hospital-wide nursing, same period: respiratory 41%, other/not stated 44%, musculoskeletal 10%, stress/anxiety 5%. No breakdown by shift pattern or by pod is available."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "5 East alarm management policy, March 2024 revision",
+          "source": "Unit policy library",
+          "sourceType": "document",
+          "text": "Bedside default limits follow the adult ICU profile; nurses may individualise limits with a documented rationale. Phone forwarding \u0027follows the forwarding configuration approved by the Unit Alarm Committee and maintained by Clinical Engineering; changes require committee sign-off\u0027. The central station is to be staffed \u0027when staffing allows\u0027. Unacknowledged high-priority alarms re-route to the charge nurse\u0027s phone after 60 seconds."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Bedside monitor alarm-limit and alarm-pause audit trail, July-October",
+          "source": "Monitor network audit log, Biomedical Engineering",
+          "sourceType": "log",
+          "text": "Nurse-initiated alarm-limit changes per patient-day: July 0.9, August 1.0, September 0.9, October 1.0. Audio-pause events longer than 2 minutes per patient-day: 0.3-0.4 in every month. No monitor had alarms disabled for more than 10 minutes at any point in the period. Limit changes were documented with a rationale in 88-91% of cases each month."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The growing share of agency and newly graduated nurses on the unit has worsened alarm response."
+          },
+          {
+            "id": "H2",
+            "text": "A change to the system that forwards bedside alarms to nurses\u0027 phones has increased the alarm notification load on nurses."
+          },
+          {
+            "id": "H3",
+            "text": "Rising patient acuity has increased the number of alarms generated by the bedside monitors."
+          },
+          {
+            "id": "H4",
+            "text": "The bedside monitor software update has changed alarm behaviour and increased the alarm load on nurses."
+          },
+          {
+            "id": "H5",
+            "text": "Gaps in wireless coverage in parts of the unit stop some phone alarm notifications from reaching nurses."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Move of the clinical alert relay server to new hardware (12 August)",
+            "to": "Increase in phone alarm notifications per nurse",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Increase in phone alarm notifications per nurse",
+            "to": "Rise in delayed alarm response incidents",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Rise in the agency nurse share of RN shifts",
+            "to": "Rise in delayed alarm response incidents",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Increase in phone alarm notifications per nurse",
+            "to": "Rise in core nurse sick leave",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Restore the relay server\u0027s alarm-forwarding configuration to its pre-August state, with Clinical Engineering validation and Unit Alarm Committee sign-off, then track phone notifications per nurse and acknowledgement times weekly."
+          },
+          {
+            "id": "A2",
+            "text": "Cap agency nurses at 10% of RN shifts and open performance reviews for every nurse named in a delayed-response incident report."
+          },
+          {
+            "id": "A3",
+            "text": "Stop forwarding SpO2 and technical alarms to nurses\u0027 phones until the review is complete, relying on bedside and central-station alarms in the meantime."
+          },
+          {
+            "id": "A4",
+            "text": "Install additional wireless access points around the rooms where nurses report phones failing to ring."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "S01",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-CROSS-1",
+      "groundTruthNarrative": "On 12 August IT moved 5 East\u0027s clinical alert relay server to new hardware. The notice said the move was like-for-like with no user-facing changes. In fact the import tool silently skipped 11 of the 14 forwarding rules. That removed the 15-second SpO2 hold-off and the suppression of repeat notifications, and it stopped sending technical alarms only to the charge phone. Bedside alarm generation did not change. But in Pods A-C the notifications reaching each nurse roughly doubled, median acknowledgement time doubled, and delayed-response incidents rose about fivefold. The rise was the same for core, agency and new-graduate nurses. Pod D\u0027s beds were left for a later phase and still use the old server. Pod D saw no change in notifications, acknowledgement time or incidents, even though its agency share was similar. The symptom looks like a nursing performance problem, but the cause is an IT configuration change. Several things happened around the same time and confuse the picture: the agency contract started on 5 August, acuity rose gently, and the monitor software was updated on 23-24 September. The evidence counts against each of them. Core-nurse sick leave rose after the change, but an early respiratory season was under way, so that link is only an association. Whether wireless gaps cause some missed notifications has not been tested. The right step is to restore and validate the forwarding rules. Capping agency staff, starting performance reviews or turning off phone forwarding would cause harm.",
+      "answers": [
+        {
+          "itemId": "S01",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C4",
+            "C8",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "confounded",
+            "misleading-signal"
+          ],
+          "rationale": "C1 shows that in Pods A-C the delayed-response rate per 100 nurse-shifts rose almost identically for core RNs with 2\u002B years on the unit (0.8 to 3.9), agency nurses (0.9 to 4.1) and new graduates (4.0). Pod D had a similar agency share (21% vs 23%) and its rate stayed at 0.9. So the staffing mix does not explain the rise. The leadership claim in E1 and C8 rests on raw counts that were not adjusted for shifts worked, and C10 is a set of reports chosen by the Director."
+        },
+        {
+          "itemId": "S02",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2",
+            "C9",
+            "C10",
+            "C14"
+          ],
+          "tags": [
+            "external-cause",
+            "cross-domain",
+            "gamed-record"
+          ],
+          "rationale": "C1 shows phone notifications per nurse stepped up from 37-39 to 79-86 per shift on 12 August, while bedside alarm events stayed flat. C2 shows that 11 of 14 forwarding rules (hold-off, repeat suppression, technical-alarm routing) were silently dropped during the 12 August migration. Pod D still uses the old server and saw no change. The IT notice (E5) and the IT manager\u0027s interview (C9) claim nothing changed, but C2 counters both."
+        },
+        {
+          "itemId": "S03",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E6",
+            "C1",
+            "C3"
+          ],
+          "tags": [
+            "misleading-signal",
+            "expert-claim"
+          ],
+          "rationale": "Acuity did rise gently (C3). But C1 shows bedside alarm events per patient-day were flat at 94-97 from July to October. The claimed increase in alarms generated at the bedside did not happen. The rise is in forwarded notifications, not in alarms the monitors generated."
+        },
+        {
+          "itemId": "S04",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E6",
+            "C1",
+            "C5"
+          ],
+          "tags": [
+            "misleading-signal",
+            "vendor-claim",
+            "timing"
+          ],
+          "rationale": "Incidents stepped up in the week beginning 10 August, six weeks before the 23-24 September update, with no further step afterwards (E2). C1 shows no change around 23-24 September in either bedside alarm events or notifications. The faster probe-off alarm in the release notes (C5) is a plausible lure, but no effect is visible in the data."
+        },
+        {
+          "itemId": "S05",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C12"
+          ],
+          "tags": [
+            "untested",
+            "anecdote"
+          ],
+          "rationale": "The only evidence is one anecdote about room 14 (E4). C1 says the relay logs record dispatch, not receipt by a handset. No item measures wireless coverage or handset receipt (C12 has no signal data). The claim is live but untested. The rise is explained by H2, but that does not count against coverage gaps."
+        },
+        {
+          "itemId": "S06",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C1",
+            "C2",
+            "C9"
+          ],
+          "tags": [
+            "natural-experiment",
+            "mechanism",
+            "cross-domain"
+          ],
+          "rationale": "The pieces line up: the notification step occurs exactly on 12 August (C1), C2 gives the mechanism (forwarding rules skipped on import), and bedside alarm generation stayed flat, which rules out acuity. Pod D works as a natural experiment: its beds still use the old server (C2) and its notification volume did not change (C1). Without C2, the link would be only a timing coincidence that IT denies."
+        },
+        {
+          "itemId": "S07",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2",
+            "C10"
+          ],
+          "tags": [
+            "mechanism",
+            "natural-experiment",
+            "rival-ruled-out"
+          ],
+          "rationale": "In Pods A-C, notifications, acknowledgement time and incident rates all stepped up together on 12 August. In Pod D, all three stayed flat. The main rival, staffing mix, is ruled out by the equal rise across core and agency nurses and by Pod D\u0027s similar agency share (C1). E4 gives the mechanism: duplicate and self-resolving desaturation alerts lead nurses to glance at the phone rather than read it."
+        },
+        {
+          "itemId": "S08",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C8",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "confounded",
+            "spurious-correlation"
+          ],
+          "rationale": "The monthly agency share and incident counts rise together (E2, E3), but the link itself fails. Core nurses\u0027 rates rose as much as agency nurses\u0027 rates. Pod D had a comparable agency share and no rise. The incident step aligns with 12 August, not with the gradual agency ramp from 5 August (C1, E2). Much of the later agency growth was backfill for sick leave and vacancies (E3)."
+        },
+        {
+          "itemId": "S09",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C1",
+            "C6",
+            "C13"
+          ],
+          "tags": [
+            "association",
+            "confounded"
+          ],
+          "rationale": "Core sick leave rose in September-October, after the notification increase (C1, E3), and more than the hospital-wide rise. But the hospital-wide early respiratory season (E3) has not been ruled out. Reason codes are optional and largely unstated (C13), and one exit interview is an anecdote (C6). The two co-occur, but causation is not established."
+        },
+        {
+          "itemId": "S10",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C2",
+            "C14"
+          ],
+          "tags": [
+            "targeted-fix"
+          ],
+          "rationale": "This action addresses the established mechanism directly. C2 shows the missing rules can be re-imported in about 4 hours plus validation. Weekly tracking against C1\u0027s baseline gives verification. It does no harm under H5."
+        },
+        {
+          "itemId": "S11",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C1",
+            "C8"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "Under the supported hypothesis, this punishes nurses for a system-induced failure that affected core and agency staff alike (C1). Under the live rival H5 it is just as misdirected. Agency nurses fill about 24% of shifts and backfill sick leave of 6.9% (E3), so a 10% cap would open staffing gaps on an ICU in any scenario."
+        },
+        {
+          "itemId": "S12",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2",
+            "C14"
+          ],
+          "tags": [
+            "protective-control",
+            "suppress-information"
+          ],
+          "rationale": "Phone forwarding is the main way nurses hear alarms from rooms they are not in, because the central station is unstaffed most nights (E4). The pre-migration rules still forwarded sustained desaturations (C2). Turning forwarding off would remove genuine alerts, when a fix that restores filtering is available within hours. It is harmful under H2 and worse under H5."
+        },
+        {
+          "itemId": "S13",
+          "expected": "premature",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C12"
+          ],
+          "tags": [
+            "premature",
+            "untested-hypothesis"
+          ],
+          "rationale": "If coverage gaps were confirmed, adding access points would clearly help, and if H5 is wrong the only loss is cost. But H5 rests on one anecdote, and no evidence about receipt or coverage exists (C1, C12). Committing now is not justified."
+        },
+        {
+          "itemId": "S14",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "With C1 and C2, the mechanism, timing, a natural control group (Pod D) and the ruling-out of the staffing, acuity and monitor-update rivals are all established. That is enough to commit to restoring the forwarding rules (A1), which is low-risk and reversible. From the initial file alone the evidence would be insufficient."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2"
+      ],
+      "lowValueReads": [
+        "C7",
+        "C11",
+        "C12",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C2"
+      ],
+      "authoringNotes": "Design: the symptom is in nursing practice (delayed alarm responses) and the cause is in IT/clinical engineering (forwarding rules silently dropped during a server migration). Traps in the initial file: the agency contract started on 5 August, one week before the 12 August migration. The Director\u0027s memo pushes the staffing story. The medical director raises acuity and the September monitor update. The IT notice and closure note say nothing changed. Subtle fair clues: the incident step falls in the week of 10 August, Pod D nurses noticed nothing, and nurses describe duplicate and self-resolving desaturation alerts. Non-redundancy: C1 alone settles H1, H3, H4, R3 and the staffing comparison, but without C2 it cannot explain why Pod D differs or show a mechanism, so R1 would be only association. C2 alone settles the mechanism, the Pod D natural experiment, A1 and SUFF, but not H1 or R3. No other item contains the per-group rates or the rule comparison. C9 (IT manager) and C10 (incident reports chosen by the Director) are interested or selected sources, countered by C2 and C1. C3 shows a gentle acuity rise, which makes H3\u0027s premise look true, but C1\u0027s flat bedside counts counter it. C5\u0027s faster probe-off alarm is a lure for H4, countered by C1. No item measures handset receipt or coverage, so H5 stays unknown and A4 premature. Nothing rules out the respiratory season, so R4 stays association-only. Self-review: I checked each item for a defensible alternative answer. A3 could be argued as an interim measure, but E4 (central station unstaffed at night) and C2 (rules forwarded sustained desaturations; a fix takes about 4 hours) make it harmful. The Pod D agency share is given explicitly so that H1 and R3 are not keyed contradicted only because a rival is supported. New-graduate rates are set equal to the others to avoid partial support for H1."
+    }
+  }
+}

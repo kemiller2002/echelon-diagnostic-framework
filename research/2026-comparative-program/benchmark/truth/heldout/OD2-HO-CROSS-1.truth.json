@@ -1,0 +1,307 @@
+{
+  "caseId": "OD2-HO-CROSS-1",
+  "groundTruthNarrative": "On 12 August IT moved 5 East\u0027s clinical alert relay server to new hardware. The notice said the move was like-for-like with no user-facing changes. In fact the import tool silently skipped 11 of the 14 forwarding rules. That removed the 15-second SpO2 hold-off and the suppression of repeat notifications, and it stopped sending technical alarms only to the charge phone. Bedside alarm generation did not change. But in Pods A-C the notifications reaching each nurse roughly doubled, median acknowledgement time doubled, and delayed-response incidents rose about fivefold. The rise was the same for core, agency and new-graduate nurses. Pod D\u0027s beds were left for a later phase and still use the old server. Pod D saw no change in notifications, acknowledgement time or incidents, even though its agency share was similar. The symptom looks like a nursing performance problem, but the cause is an IT configuration change. Several things happened around the same time and confuse the picture: the agency contract started on 5 August, acuity rose gently, and the monitor software was updated on 23-24 September. The evidence counts against each of them. Core-nurse sick leave rose after the change, but an early respiratory season was under way, so that link is only an association. Whether wireless gaps cause some missed notifications has not been tested. The right step is to restore and validate the forwarding rules. Capping agency staff, starting performance reviews or turning off phone forwarding would cause harm.",
+  "answers": [
+    {
+      "itemId": "S01",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C4",
+        "C8",
+        "C10"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded",
+        "misleading-signal"
+      ],
+      "rationale": "C1 shows that in Pods A-C the delayed-response rate per 100 nurse-shifts rose almost identically for core RNs with 2\u002B years on the unit (0.8 to 3.9), agency nurses (0.9 to 4.1) and new graduates (4.0). Pod D had a similar agency share (21% vs 23%) and its rate stayed at 0.9. So the staffing mix does not explain the rise. The leadership claim in E1 and C8 rests on raw counts that were not adjusted for shifts worked, and C10 is a set of reports chosen by the Director."
+    },
+    {
+      "itemId": "S02",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "C1",
+        "C2",
+        "C9",
+        "C10",
+        "C14"
+      ],
+      "tags": [
+        "external-cause",
+        "cross-domain",
+        "gamed-record"
+      ],
+      "rationale": "C1 shows phone notifications per nurse stepped up from 37-39 to 79-86 per shift on 12 August, while bedside alarm events stayed flat. C2 shows that 11 of 14 forwarding rules (hold-off, repeat suppression, technical-alarm routing) were silently dropped during the 12 August migration. Pod D still uses the old server and saw no change. The IT notice (E5) and the IT manager\u0027s interview (C9) claim nothing changed, but C2 counters both."
+    },
+    {
+      "itemId": "S03",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C1",
+        "C3"
+      ],
+      "tags": [
+        "misleading-signal",
+        "expert-claim"
+      ],
+      "rationale": "Acuity did rise gently (C3). But C1 shows bedside alarm events per patient-day were flat at 94-97 from July to October. The claimed increase in alarms generated at the bedside did not happen. The rise is in forwarded notifications, not in alarms the monitors generated."
+    },
+    {
+      "itemId": "S04",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E6",
+        "C1",
+        "C5"
+      ],
+      "tags": [
+        "misleading-signal",
+        "vendor-claim",
+        "timing"
+      ],
+      "rationale": "Incidents stepped up in the week beginning 10 August, six weeks before the 23-24 September update, with no further step afterwards (E2). C1 shows no change around 23-24 September in either bedside alarm events or notifications. The faster probe-off alarm in the release notes (C5) is a plausible lure, but no effect is visible in the data."
+    },
+    {
+      "itemId": "S05",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C12"
+      ],
+      "tags": [
+        "untested",
+        "anecdote"
+      ],
+      "rationale": "The only evidence is one anecdote about room 14 (E4). C1 says the relay logs record dispatch, not receipt by a handset. No item measures wireless coverage or handset receipt (C12 has no signal data). The claim is live but untested. The rise is explained by H2, but that does not count against coverage gaps."
+    },
+    {
+      "itemId": "S06",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1",
+        "C2",
+        "C9"
+      ],
+      "tags": [
+        "natural-experiment",
+        "mechanism",
+        "cross-domain"
+      ],
+      "rationale": "The pieces line up: the notification step occurs exactly on 12 August (C1), C2 gives the mechanism (forwarding rules skipped on import), and bedside alarm generation stayed flat, which rules out acuity. Pod D works as a natural experiment: its beds still use the old server (C2) and its notification volume did not change (C1). Without C2, the link would be only a timing coincidence that IT denies."
+    },
+    {
+      "itemId": "S07",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2",
+        "C10"
+      ],
+      "tags": [
+        "mechanism",
+        "natural-experiment",
+        "rival-ruled-out"
+      ],
+      "rationale": "In Pods A-C, notifications, acknowledgement time and incident rates all stepped up together on 12 August. In Pod D, all three stayed flat. The main rival, staffing mix, is ruled out by the equal rise across core and agency nurses and by Pod D\u0027s similar agency share (C1). E4 gives the mechanism: duplicate and self-resolving desaturation alerts lead nurses to glance at the phone rather than read it."
+    },
+    {
+      "itemId": "S08",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C1",
+        "C8",
+        "C10"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded",
+        "spurious-correlation"
+      ],
+      "rationale": "The monthly agency share and incident counts rise together (E2, E3), but the link itself fails. Core nurses\u0027 rates rose as much as agency nurses\u0027 rates. Pod D had a comparable agency share and no rise. The incident step aligns with 12 August, not with the gradual agency ramp from 5 August (C1, E2). Much of the later agency growth was backfill for sick leave and vacancies (E3)."
+    },
+    {
+      "itemId": "S09",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C1",
+        "C6",
+        "C13"
+      ],
+      "tags": [
+        "association",
+        "confounded"
+      ],
+      "rationale": "Core sick leave rose in September-October, after the notification increase (C1, E3), and more than the hospital-wide rise. But the hospital-wide early respiratory season (E3) has not been ruled out. Reason codes are optional and largely unstated (C13), and one exit interview is an anecdote (C6). The two co-occur, but causation is not established."
+    },
+    {
+      "itemId": "S10",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C14"
+      ],
+      "tags": [
+        "targeted-fix"
+      ],
+      "rationale": "This action addresses the established mechanism directly. C2 shows the missing rules can be re-imported in about 4 hours plus validation. Weekly tracking against C1\u0027s baseline gives verification. It does no harm under H5."
+    },
+    {
+      "itemId": "S11",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C1",
+        "C8"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "Under the supported hypothesis, this punishes nurses for a system-induced failure that affected core and agency staff alike (C1). Under the live rival H5 it is just as misdirected. Agency nurses fill about 24% of shifts and backfill sick leave of 6.9% (E3), so a 10% cap would open staffing gaps on an ICU in any scenario."
+    },
+    {
+      "itemId": "S12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2",
+        "C14"
+      ],
+      "tags": [
+        "protective-control",
+        "suppress-information"
+      ],
+      "rationale": "Phone forwarding is the main way nurses hear alarms from rooms they are not in, because the central station is unstaffed most nights (E4). The pre-migration rules still forwarded sustained desaturations (C2). Turning forwarding off would remove genuine alerts, when a fix that restores filtering is available within hours. It is harmful under H2 and worse under H5."
+    },
+    {
+      "itemId": "S13",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C12"
+      ],
+      "tags": [
+        "premature",
+        "untested-hypothesis"
+      ],
+      "rationale": "If coverage gaps were confirmed, adding access points would clearly help, and if H5 is wrong the only loss is cost. But H5 rests on one anecdote, and no evidence about receipt or coverage exists (C1, C12). Committing now is not justified."
+    },
+    {
+      "itemId": "S14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "With C1 and C2, the mechanism, timing, a natural control group (Pod D) and the ruling-out of the staffing, acuity and monitor-update rivals are all established. That is enough to commit to restoring the forwarding rules (A1), which is low-risk and reversible. From the initial file alone the evidence would be insufficient."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2"
+  ],
+  "lowValueReads": [
+    "C7",
+    "C11",
+    "C12",
+    "C14",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C2"
+  ],
+  "authoringNotes": "Design: the symptom is in nursing practice (delayed alarm responses) and the cause is in IT/clinical engineering (forwarding rules silently dropped during a server migration). Traps in the initial file: the agency contract started on 5 August, one week before the 12 August migration. The Director\u0027s memo pushes the staffing story. The medical director raises acuity and the September monitor update. The IT notice and closure note say nothing changed. Subtle fair clues: the incident step falls in the week of 10 August, Pod D nurses noticed nothing, and nurses describe duplicate and self-resolving desaturation alerts. Non-redundancy: C1 alone settles H1, H3, H4, R3 and the staffing comparison, but without C2 it cannot explain why Pod D differs or show a mechanism, so R1 would be only association. C2 alone settles the mechanism, the Pod D natural experiment, A1 and SUFF, but not H1 or R3. No other item contains the per-group rates or the rule comparison. C9 (IT manager) and C10 (incident reports chosen by the Director) are interested or selected sources, countered by C2 and C1. C3 shows a gentle acuity rise, which makes H3\u0027s premise look true, but C1\u0027s flat bedside counts counter it. C5\u0027s faster probe-off alarm is a lure for H4, countered by C1. No item measures handset receipt or coverage, so H5 stays unknown and A4 premature. Nothing rules out the respiratory season, so R4 stays association-only. Self-review: I checked each item for a defensible alternative answer. A3 could be argued as an interim measure, but E4 (central station unstaffed at night) and C2 (rules forwarded sustained desaturations; a fix takes about 4 hours) make it harmful. The Pod D agency share is given explicitly so that H1 and R3 are not keyed contradicted only because a rival is supported. New-graduate rates are set equal to the others to avoid partial support for H1."
+}

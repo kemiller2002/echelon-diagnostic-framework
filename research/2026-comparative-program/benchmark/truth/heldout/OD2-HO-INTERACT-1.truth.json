@@ -1,0 +1,282 @@
+{
+  "caseId": "OD2-HO-INTERACT-1",
+  "groundTruthNarrative": "The VX reject rise needs two conditions at once. Dryer D5 has been degraded since late July (failing regeneration heater, overdue desiccant), and its alarm was relaxed in week 31. Quillan resin arrives dry enough (0.11\u20130.14%) that even the weak D5 brings it below the 0.20% molding limit (0.13\u20130.16%), so Press 5 ran normally through August. Arnholt resin, released to both presses in week 37, arrives much wetter (0.27\u20130.33%). That is still within Arnholt\u0027s own 0.35% certificate spec. The healthy D7 dries it to 0.07%, which is why the Press 7 trial and later Press 7 production were clean. D5 cannot dry it: Arnholt leaves D5 at 0.25\u20130.31%, and the wet nylon degrades in the barrel, giving splay and brittle latches. Rejects are about 10% in the Press 5/Arnholt cell and under 1% in every other cell. Drying the same Arnholt lot in a portable dryer and molding it on Press 5 removed the rejects. The second-shift excess is an artefact: Press 7 runs VX only on first shift, so all second-shift VX comes from Press 5. Within each press-and-resin cell, new hires perform the same as experienced operators. Why Arnholt resin is wetter, whether from the supplier or from storage in the humid annex, is not established. The fix is to restore D5 and its alarm and to contain Arnholt away from D5 until it is verified.",
+  "answers": [
+    {
+      "itemId": "I-H1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "contrast-case",
+        "single-cause",
+        "leadership-narrative"
+      ],
+      "rationale": "Arnholt resin ran at 0.7% rejects in the Press 7 trial (E3). It ran at 0.8% on Press 7 in production, weeks 37\u201342 (C1). Dried in PD-1, it gave 0.8% even on Press 5 (C2). The claim that Arnholt produces rejects whichever press and dryer it goes through is therefore contradicted."
+    },
+    {
+      "itemId": "I-H2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C1",
+        "C2",
+        "C6"
+      ],
+      "tags": [
+        "contrast-case",
+        "single-cause",
+        "interested-source-right-on-fact"
+      ],
+      "rationale": "D5 was degraded from late July, yet rejects stayed at 0.7\u20130.8% through weeks 30\u201336 (E1, E4). Press 5 on Quillan ran at 0.9% in weeks 37\u201342 (C1), and D5 brings Quillan below the limit (C2). Degraded drying alone does not produce the rejects."
+    },
+    {
+      "itemId": "I-H3",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "joint-cause",
+        "central"
+      ],
+      "rationale": "C1 shows rejects confined to the Press 5/Arnholt cell (9.9%), with the other three cells at 0.7\u20130.9%. C2 supplies the mechanism: only Arnholt dried in D5 exceeds the moisture limit. C2 also gives an intervention: the same Arnholt lot dried properly on Press 5 gave 0.8% rejects. From the initial file alone this is live but unestablished, because there is no breakdown by press and resin."
+    },
+    {
+      "itemId": "I-H4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E5",
+        "C1",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal",
+        "confounded",
+        "leadership-narrative",
+        "wrong-party"
+      ],
+      "rationale": "The second-shift excess in E1 is confounded by press: all second-shift VX is made on Press 5 (C1). Within each press-and-resin cell, first and second shift match (9.7% vs 10.1%; 0.9% vs 0.9%). New hires match experienced operators (9.9% vs 10.3% on Arnholt, 0.9% vs 0.9% on Quillan)."
+    },
+    {
+      "itemId": "I-R1",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "joint-cause",
+        "mechanism"
+      ],
+      "rationale": "Arnholt leaves D5 at 0.25\u20130.31% but leaves D7 at 0.07%. Quillan leaves D5 at 0.13\u20130.16%. The same Arnholt lot dried in PD-1 measured 0.08%. Covariation, mechanism and a direct dryer substitution establish the link. Without C2 there is no moisture data."
+    },
+    {
+      "itemId": "I-R2",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "mechanism",
+        "intervention",
+        "central"
+      ],
+      "rationale": "The datasheet mechanism, the fact that only the over-limit cell has high rejects, and the PD-1 intervention (same lot and press: 10.4% when wet vs 0.8% when dried) establish causation (C2). C1 rules out the main rival, operators, and shows the reject-code mix is unchanged."
+    },
+    {
+      "itemId": "I-R3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E5",
+        "C1"
+      ],
+      "tags": [
+        "misleading-signal",
+        "confounded",
+        "wrong-party"
+      ],
+      "rationale": "The timing and the shift difference make the link look associated in the initial file. C1 counts against the link itself: new hires running Quillan on Press 5 have 0.9% rejects, and on Arnholt they are no worse than experienced operators."
+    },
+    {
+      "itemId": "I-R4",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C2",
+        "C7"
+      ],
+      "tags": [
+        "confounded",
+        "unresolved-subcause"
+      ],
+      "rationale": "Resin held in the annex (all of it Arnholt) is wetter at the dryer inlet than resin held in the main warehouse (all of it Quillan). But storage location is perfectly confounded with supplier, and C2 notes that no Arnholt material has been held in conditioned storage. Annex humidity (C7) makes the link plausible but does not separate it from supplier origin."
+    },
+    {
+      "itemId": "I-A1",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1",
+        "C4"
+      ],
+      "tags": [
+        "wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "C1 shows the new hires perform no worse than experienced operators. Disciplining them punishes the wrong party and does nothing about the Press 5/Arnholt rejects under the supported hypothesis. No live rival makes it useful."
+    },
+    {
+      "itemId": "I-A2",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2",
+        "C6",
+        "C12",
+        "C14"
+      ],
+      "tags": [
+        "protective-control",
+        "joint-cause",
+        "central"
+      ],
+      "rationale": "This removes the failing condition (D5), restores the protective alarm that was relaxed in week 31, and contains the risky combination until D5 is verified. It also adds a moisture check that would catch wet resin from either supplier. It does not depend on whether the D5 fault is the heater or the desiccant, because it addresses both."
+    },
+    {
+      "itemId": "I-A3",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "containment-only"
+      ],
+      "rationale": "C1 and C2 show Arnholt is fine on Press 7 and Quillan is fine on Press 5, so this stops the rejects. But it leaves D5 degraded with a relaxed alarm and thin margin (Quillan leaves D5 at 0.13\u20130.16% against a 0.20% limit). It is reasonable but clearly inferior to A2."
+    },
+    {
+      "itemId": "I-A4",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C2",
+        "C7"
+      ],
+      "tags": [
+        "single-cause",
+        "unconfirmed-subcause"
+      ],
+      "rationale": "This would help if annex storage is what makes Arnholt resin wet, but that is only an association confounded with supplier (R4). If Arnholt resin arrives wet, the move costs rental and disruption without lasting harm. Committing to it now is not justified."
+    },
+    {
+      "itemId": "I-SUFF",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "joint-cause",
+        "decision"
+      ],
+      "rationale": "The highest-ranked action is A2. The cross-tab (C1) and the moisture measurements with the dryer-substitution trial (C2) together establish the interaction and show that restoring drying removes the rejects, so committing to A2 is justified. The unresolved storage question does not affect A2."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2"
+  ],
+  "lowValueReads": [
+    "C3",
+    "C8",
+    "C10",
+    "C13",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C2"
+  ],
+  "authoringNotes": "Initial file: each single cause has an apparent contrast case. Arnholt was clean in the Press 7 trial (E3); D5 was degraded while rejects stayed normal on Quillan (E4, E1). The dashboard\u0027s shift split plus the week-36 hiring (E1, E2, E5) steers readers toward H4. Without reads, H3 is unknown and H4 looks plausible. C1 alone settles H4 and R3 (the shift confound and the operator comparison); no other item breaks results down by press, resin or operator. C2 alone settles R1, R2 and R4 (moisture data, the intervention, and the storage confound); no other item measures resin moisture. Reading only one leaves either the mechanism edges or the operator trap unresolved. Distractors such as C4, C6, C7, C9, C11, C12 and C14 are plausible requests but change no key: C6, C12 and C14 restate what E4 already says, and C7 gives humidity without any resin measurement. Both A2\u0027s routing option and A3 are possible because Press 7 has spare first-shift VX capacity. A4 is the single-cause fix keyed premature."
+}

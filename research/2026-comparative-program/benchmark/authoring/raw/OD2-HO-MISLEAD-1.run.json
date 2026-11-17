@@ -1,0 +1,754 @@
+{
+  "label": "OD2-HO-MISLEAD-1",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7721,
+  "cacheCreationTokens": 4497,
+  "outputTokens": 47885,
+  "thinkingTokens": 36990,
+  "costUsd": 0.9952362,
+  "durationMs": 474943,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-MISLEAD-1/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022MISLEAD\u0022,\u0022domain\u0022:\u0022organizational\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Marrowbridge University: who lost the Fall 2026 first-year class?\u0022,\u0022setting\u0022:\u0022Marrowbridge University is a fictional private university that enrols about 2,000 first-year students a year through two admission rounds: early action (EA) and regular decision (RD). In January 2026 the Admissions Office moved from its legacy system to a new application portal from Quillstone Systems. In October 2025 the Board\u0027s finance committee approved a revised merit scholarship schedule for students entering in Fall 2026. First-year enrolment for Fall 2026 came in well below the previous year, and the provost holds the Admissions Office responsible.\u0022,\u0022presentingRequest\u0022:\u0022The president asks you to assess whether the Admissions Office is responsible for the fall in first-year enrolment and what the university should do before next cycle\u0027s admission and award letters go out. You may collect at most two items from the catalogue.\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Provost Daniel Arvidsson to the President, 2 Oct 2026\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: Fall intake. We closed first-year enrolment at 1,810, down from 2,140 last fall. That is 330 fewer students and a serious hole in the tuition budget for four years. I\u0027ve read the counsellor complaints. The January switch to the Quillstone portal was badly managed, regular-decision answers went out weeks late, and families noticed. I don\u0027t think we can go into the next cycle with the same leadership in Admissions. I\u0027d like your support to make a change in the director role before autumn recruitment travel begins.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Admissions operations dashboard, entering classes Fall 2025 vs Fall 2026, extracted 28 Sep 2026\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Completed applications: 9,850 \u2192 10,240. Admits: 5,120 \u2192 5,270. Admit rate: 52.0% \u2192 51.5%. Mean admitted high-school GPA: 3.61 \u2192 3.63. Enrolled first-years (census): 2,140 \u2192 1,810. Yield (enrolled \u00F7 admits): 41.8% \u2192 34.3%. Early action: deadline 1 Nov; decisions released 15 Dec in both years, processed on the legacy system. Regular decision: deadline 15 Jan; median days from complete file to decision 17 \u2192 31 (2026 processed on Quillstone, live from 6 Jan). Enrolment deposit deadline: 1 May in both years.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Gareth Pell, college counsellor at Westcombe High School, to the Admissions Office, 20 Mar 2026\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Three of my students now have transcripts showing as \u0027missing\u0027 on your new portal, even though I uploaded them in early January and have the confirmation screens. One of them is a strong student. She was finally admitted with a merit award in mid-March, after weeks of waiting for a regular-decision answer, and she has now committed to another university because, in her words, \u0027they actually wanted me.\u0027 I have been sending students to Marrowbridge for twelve years, and this is the worst service I have seen.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Chief of staff\u0027s notes from an interview with Director of Admissions Renata Solberg, 6 Oct 2026\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Solberg accepts that regular-decision answers were slow. Merit-eligible files (candidates for Dean\u0027s or Merit awards) go through a scholarship-scoring step run by the merit-review team. That team fell from six readers to four when two posts were frozen in December, and the Quillstone scoring module was also late and unstable. \u0027Both happened at once; nobody has measured which mattered more.\u0027 Presidential candidates are scored off-system by the honours committee, and files not eligible for merit review skip the step, so those decisions \u0027went out on time.\u0027 On the missing transcripts: \u0027I\u0027m told by the team every file was complete before review; the status page lagged.\u0027 She calls the yield drop \u0027a market thing\u0027 and says no one has looked at it by segment.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Minutes of the Board finance committee, 14 Oct 2025, item 6\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Undergraduate discount rate. The committee noted that the first-year institutional discount rate of 47% was above the peer median. Approved: a rebalanced merit scholarship schedule for Fall 2026 entrants, with Presidential awards unchanged; need-based grant policy unchanged. Projected effect: net tuition revenue per first-year \u002B6%. The VP Finance advised that any effect on yield was expected to be small, based on the enrolment consultant\u0027s 2021 price-elasticity estimate. Admissions to be informed of the new award amounts before early-action decisions are released.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Yield by admission round (early action vs regular decision), Fall 2025 and Fall 2026 entering classes\u0022,\u0022source\u0022:\u0022Office of Institutional Research extract, 12 Oct 2026\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Early action (decisions released 15 Dec in both years, legacy system): admits 2,300 \u2192 2,380; enrolled 1,040 \u2192 900; yield 45.2% \u2192 37.8%. Regular decision (2026 processed on Quillstone): admits 2,820 \u2192 2,890; enrolled 1,100 \u2192 910; yield 39.0% \u2192 31.5%. Share of admits who were merit-eligible (scored by the merit-review team): EA 54% in both years; RD 52% in both years. Median days from complete file to decision for merit-eligible files, 2026: EA 16, RD 38. IR note: early-action admits received their decisions and award letters on the prior-year timetable.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Admits, enrolments and award amounts by scholarship tier, Fall 2025 and Fall 2026 entering classes\u0022,\u0022source\u0022:\u0022Joint Institutional Research and Financial Aid extract, 14 Oct 2026\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Tier eligibility criteria were the same in both years. Presidential (award $20,000 both years): admits 410 \u2192 420; enrolled 150 \u2192 152; yield 36.6% \u2192 36.2%. Dean\u0027s ($14,000 \u2192 $9,000): admits 1,150 \u2192 1,190; enrolled 520 \u2192 380; yield 45.2% \u2192 31.9%. Merit ($9,000 \u2192 $5,000): admits 1,560 \u2192 1,610; enrolled 700 \u2192 520; yield 44.9% \u2192 32.3%. No merit award (need-based grants only or full pay; policy unchanged): admits 2,000 \u2192 2,050; enrolled 770 \u2192 758; yield 38.5% \u2192 37.0%. Totals: admits 5,120 \u2192 5,270; enrolled 2,140 \u2192 1,810. The extract does not separate early-action and regular-decision admits.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Survey of admitted students who did not enrol, spring 2026, with spring 2025 comparison\u0022,\u0022source\u0022:\u0022Admissions Office survey of admits who declined or had not paid a deposit by 15 May\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Responses: 2025, n=540 (18% of non-enrolling admits); 2026, n=610 (18%). \u0027Most important reason for not enrolling\u0027 (one choice): cost or financial aid 39% \u2192 46%; school closer to home 17% \u2192 15%; academic programme 21% \u2192 17%; slow or confusing communication from Admissions 8% \u2192 13%; campus visit experience 6% \u2192 5%; other 9% \u2192 4%. Results are not broken out by admission round or award tier. Free-text comments include \u0027took forever to hear back\u0027 and \u0027the other offer was better.\u0027\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Quillstone portal support ticket log, 6 Jan \u2013 31 Mar 2026\u0022,\u0022source\u0022:\u0022Quillstone support desk export\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Applicants and counsellors opened 212 tickets. Categories: login or password 71; document shown as \u0027missing\u0027 or \u0027pending\u0027 64; application fee payment 29; staff-side reading queue or scoring module 33; other 15. Of the 64 document-status tickets, 51 were closed as \u0027document present after status refresh\u0027. The other 13 were auto-closed after 14 days with no resolution note. The export does not include applicant file contents or the time each file was marked complete.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Vendor statement on the January 2026 portal go-live\u0022,\u0022source\u0022:\u0022Statement from the Quillstone Systems account manager, 9 Oct 2026\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022\u0027From go-live on 6 January the platform met its contracted availability target (99.6% measured, 99.5% required). We delivered the scholarship-scoring module three weeks after the original date because in December Marrowbridge changed the award amounts in its scoring rubric. Document status displays refresh on a cycle and can briefly show an upload as pending. In our experience, decision delays of this kind reflect client staffing levels rather than the software.\u0027\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Merit-review queue and reader staffing records, Dec 2025 \u2013 Apr 2026\u0022,\u0022source\u0022:\u0022Admissions operations records\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Merit-review readers on staff: six until 19 Dec 2025 and four after that (two posts frozen under the hiring pause). Scoring module unavailable 8\u201316 Jan 2026 (vendor incident ticket QS-0412). Merit-review backlog: 410 files on 15 Jan, 1,880 on 9 Feb, 620 on 6 Mar, 0 on 27 Mar. Overtime logged by the merit team in Feb 2026: 212 hours. The records do not separate reader time spent waiting on the module from time spent scoring. There is no period with four readers on the legacy system to compare against.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Regional projections of high-school graduates, 2024\u20132030\u0022,\u0022source\u0022:\u0022State education department projections, published March 2026\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Public and private high-school graduates in the university\u0027s four main recruiting states: 412,300 (2024 actual); 409,800 (2025 actual); 407,100 (2026 projected); 391,500 (2030 projected). According to the projections, most of the decline comes after 2027, and college-going rates stay flat over the period.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Published tuition and scholarship announcements of five competitor universities, 2026\u201327\u0022,\u0022source\u0022:\u0022Compiled by the admissions marketing team from public websites, Sep 2026\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Covers the five universities that Marrowbridge admits most often name as alternatives. Published tuition for 2026\u201327 rose between 2.9% and 4.4% (Marrowbridge: 3.5%). None announced a new scholarship programme or a change to its published merit award amounts for 2026 entrants. Two expanded their honours colleges. The net prices actually offered to individual admits are not published.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Admitted-student event registrations and attendance, spring 2025 and spring 2026\u0022,\u0022source\u0022:\u0022Admissions events records\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022In-person Admitted Student Day (April): 1,320 families attended in 2025 and 1,290 in 2026. Virtual admitted-student sessions: registrations 2,040 \u2192 2,210. Overnight visit programme: 310 \u2192 298 students. Event satisfaction score (1\u20135): 4.4 in both years. These records do not link attendance to admission round or award tier.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Admissions Office operating and marketing budget, FY2025\u2013FY2026\u0022,\u0022source\u0022:\u0022University budget office summary\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Admissions operating budget: $4.82m in FY2025, $4.79m in FY2026. Recruitment travel and marketing: $1.21m \u2192 $1.18m. Purchased prospect lists: 92,000 \u2192 95,000 names. Quillstone licence and implementation cost $0.64m in FY2026, replacing a legacy licence of $0.31m. The staffing budget was reduced by two frozen posts from December 2025.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Enrolment deposit portal availability and transaction log, 1 Apr \u2013 5 May 2026\u0022,\u0022source\u0022:\u0022Quillstone deposit module logs, with 2025 legacy deposit page comparison\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Availability 99.9%, with one 40-minute outage on 22 Apr (14:10\u201314:50). Deposit transactions attempted: 1,904; completed: 1,881; failed: 23, of which 19 were retried successfully within 24 hours. Prior-year legacy deposit page: 2,237 attempted, 2,209 completed. Help-desk calls about deposits: 37 (2025: 41).\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Internal audit report on the Admissions Office, 2023\u0022,\u0022source\u0022:\u0022Internal Audit report IA-2023-07\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022Scope: applicant data retention, fee-waiver approvals, and user access to the legacy admissions system. Findings: three medium-risk issues. The retention schedule was not applied to 2017 files; fee-waiver approvals were undocumented in 6 of 40 samples; and two staff who had left still had active accounts. All three issues were marked closed by June 2024. The audit made no findings on decision timeliness or yield.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Anonymous pulse survey of Admissions Office staff, March 2026\u0022,\u0022source\u0022:\u0022HR pulse survey, 18\u201325 Mar 2026 (31 of 38 staff responded)\u0022,\u0022sourceType\u0022:\u0022anonymous-staff-survey\u0022,\u0022text\u0022:\u0022\u0027I have the tools to do my job\u0027 (1\u20135): 3.9 in Mar 2025 \u2192 2.6. \u0027My workload is manageable\u0027: 3.4 \u2192 2.1. Comments: \u0027the scoring module freezes on every third file\u0027; \u0027we\u0027re two readers short and nobody will say when the posts unfreeze\u0027; \u0027families keep asking why their award is smaller than their older sibling\u0027s was\u0027; \u0027we\u0027ll get blamed for whatever happens in May.\u0027\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview notes, Director of Financial Aid, 8 Oct 2026\u0022,\u0022source\u0022:\u0022Chief of staff\u0027s notes from an interview with Director of Financial Aid Marisol Dunne\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Merit awards are generated from the admissions tier and printed on the admission letter. Financial Aid applies whatever amounts the finance committee sets. Need-based packages went out on 1 March for early action and 1 April for regular decision, the same dates as in 2025. Award appeals rose from about 150 to \u0027roughly 400\u0027. Dunne says the office logs appeals by date, not by tier or outcome, and she \u0027couldn\u0027t tell you who appealed and then came anyway.\u0027\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022First-year net tuition revenue report, Fall 2026 census\u0022,\u0022source\u0022:\u0022Office of the VP Finance\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Published tuition: $41,200 (\u002B3.5%). Net tuition per enrolled first-year (after all institutional aid): $22,950 in Fall 2025 \u2192 $24,310 in Fall 2026 (\u002B5.9%). Total first-year net tuition: $49.1m \u2192 $44.0m (\u221210.4%). First-year institutional discount rate: 47% \u2192 41%. The report does not break out revenue or aid by award tier or admission round.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Slower regular-decision turnaround after the January move to the new application portal lowered the share of admitted students who enrolled.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The revised merit scholarship schedule for Fall 2026 entrants lowered the share of admitted students who enrolled.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022A smaller or academically weaker applicant pool reduced the number of first-year students the university could enrol.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The new application portal failed to record some documents that applicants had submitted.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022A general softening in demand, affecting all groups of admitted students alike, lowered the share of admitted students who enrolled.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Slower regular-decision turnaround after the January portal migration\u0022,\u0022to\u0022:\u0022Fall in yield among admitted students\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Revised merit scholarship schedule for Fall 2026 entrants\u0022,\u0022to\u0022:\u0022Fall in yield among admitted students\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Two merit-review reader posts frozen in December 2025\u0022,\u0022to\u0022:\u0022Slower regular-decision turnaround\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022A smaller or academically weaker applicant pool\u0022,\u0022to\u0022:\u0022Fall in first-year enrolment\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Replace the Director of Admissions before the next recruitment cycle, citing the enrolment shortfall.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Take the merit scholarship schedule back to the finance committee with a proposal to restore award levels in the tiers whose yield fell, with the net-revenue trade-off modelled, before next cycle\u0027s award letters go out.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Set a decision-turnaround target for next cycle\u0027s regular-decision files and have Admissions report progress against it to the provost each month.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Instruct the portal vendor to rebuild the document-upload module under the contract\u0027s remediation clause before the next cycle opens.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022groundTruthNarrative\u0022:\u0022The Fall 2026 enrolment shortfall happened after admission, not before it. Applications and admits both rose and the admit profile held steady, but yield fell from 41.8% to 34.3%. The cause was the finance committee\u0027s revised merit schedule. It cut Dean\u0027s awards from $14,000 to $9,000 and Merit awards from $9,000 to $5,000, and left Presidential awards and need-based policy unchanged. Yield fell about 13 points in the two cut tiers and stayed within 1.5 points in the Presidential and no-award groups (C2). The salient signal points the other way. Regular-decision turnaround nearly doubled after the Quillstone migration, and the slowdown hit exactly the merit-eligible files. Those are the same Dean\u0027s and Merit students whose awards were cut, so the tier table alone cannot separate the two explanations. The round comparison (C1) does. Early-action admits got their decisions and award letters on the old timetable, the merit-eligible share was the same in both rounds, and yet EA yield fell as much as RD yield (7.4 vs 7.5 points). Slowness therefore added nothing measurable. The slowdown was real; with the evidence available, nobody can separate the effect of the frozen reader posts from that of the late scoring module. Whether the portal actually lost documents is still unresolved. Removing the admissions director would punish the wrong party. The best step is to take the award schedule back to the finance committee.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022leadership-narrative\u0022,\u0022natural-experiment\u0022],\u0022rationale\u0022:\u0022C1: early-action admits got decisions and award letters on the prior-year timetable, with a merit-eligible median of 16 days, yet their yield fell 7.4 points. Regular-decision admits, whose merit-eligible files took 38 days, fell 7.5 points. The merit-eligible share was the same in both rounds (54% EA, 52% RD, both years). If slower turnaround lowered yield, RD would have fallen more than EA, and it did not. The slowdown was real (E2, E4) but does not covary with the yield drop.\u0022},{\u0022itemId\u0022:\u0022S02\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C13\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022hidden-cause\u0022,\u0022confounded\u0022,\u0022tier-covariation\u0022],\u0022rationale\u0022:\u0022E5 shows the schedule was revised before EA decisions. C2 shows yield fell about 13 points only in the two tiers whose awards were cut (Dean\u0027s, Merit), with eligibility criteria unchanged. The Presidential tier (unchanged award) and admits with no merit award (unchanged policy) stayed within 1.5 points. On its own C2 is confounded, because the cut tiers are also the merit-eligible files that were slowed in RD (E4). C1 removes that confound by showing that turnaround made no difference. Together these support H2 over its rivals.\u0022},{\u0022itemId\u0022:\u0022S03\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022ruled-out-early\u0022],\u0022rationale\u0022:\u0022E2: completed applications rose 4.0% and admits rose 2.9%, and mean admitted GPA rose slightly. Enrolment fell because yield fell, not because there were fewer or weaker applicants.\u0022},{\u0022itemId\u0022:\u0022S04\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022conflicting-accounts\u0022,\u0022interested-source\u0022,\u0022unresolved\u0022],\u0022rationale\u0022:\u0022The counsellor (E3) reports transcripts that showed as missing despite confirmed uploads. The director (E4) relays second-hand that every file was complete before review and blames a status-page lag. Neither account is verified, and C1/C2 say nothing about documents. Even the off-path ticket log (C4) leaves 13 tickets unresolved and has no file contents. The claim is live but not established.\u0022},{\u0022itemId\u0022:\u0022S05\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C8\u0022],\u0022tags\u0022:[\u0022manager-narrative\u0022,\u0022external-cause\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022The director\u0027s \u0027market thing\u0027 account needs the decline to hit all admit groups alike. C2 shows Presidential and no-award yields almost unchanged (\u22120.4 and \u22121.5 points) while the cut tiers fell about 13 points. C1 alone (equal drops across rounds) is consistent with H5, so C2 is what decides it.\u0022},{\u0022itemId\u0022:\u0022S06\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022natural-experiment\u0022],\u0022rationale\u0022:\u0022Evidence counts against the link itself: the same fall in yield appears among EA admits who never experienced the slowdown, with the same merit-eligible mix. The E3 anecdote and the rise in \u0027slow communication\u0027 in the survey (C3, off-path) are self-reports and do not outweigh the behavioural comparison.\u0022},{\u0022itemId\u0022:\u0022S07\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022hidden-cause\u0022,\u0022tier-covariation\u0022,\u0022rival-ruled-out\u0022],\u0022rationale\u0022:\u0022Temporal order: approved in Oct 2025 and applied to all Fall 2026 offers (E5). Mechanism: awards cut by $4,000\u2013$5,000. Covariation: only the cut tiers fell, under unchanged eligibility criteria (C2). Main rival ruled out: turnaround had no differential effect (C1). Applicant-pool and general-market explanations are also excluded (E2, C2).\u0022},{\u0022itemId\u0022:\u0022S08\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022joint-cause-unresolved\u0022],\u0022rationale\u0022:\u0022The two posts were frozen in December and the merit-review slowdown followed in January (E2, E4), so the two co-occur. But the scoring module was late and unstable over the same period, and the director says nobody has measured which mattered more. The concurrent rival is not ruled out, so causation is not established. The off-path staffing records (C6) explicitly cannot separate the two.\u0022},{\u0022itemId\u0022:\u0022S09\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022ruled-out-early\u0022],\u0022rationale\u0022:\u0022Applications, admits and admit profile all held or rose (E2), and the whole shortfall arises in yield after admission (E2, C1, C2). Evidence counts against the applicant pool driving the fall.\u0022},{\u0022itemId\u0022:\u0022S10\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Under the supported explanation (H2), the finance committee set the award amounts (E5) and Admissions only applied them. Removing the director punishes the wrong party, disrupts the next cycle, and leaves the actual cause in place. The only other live hypothesis (H4, document handling) does not make the director responsible for the enrolment fall either.\u0022},{\u0022itemId\u0022:\u0022S11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022targets-supported-cause\u0022],\u0022rationale\u0022:\u0022This action addresses the established cause directly and in time for the next cycle\u0027s letters. Modelling the trade-off is prudent because E5\u0027s original elasticity assumption proved wrong. It is the single best substantive action.\u0022},{\u0022itemId\u0022:\u0022S12\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022],\u0022tags\u0022:[\u0022real-but-secondary-problem\u0022],\u0022rationale\u0022:\u0022The slowdown is real and harmed counsellor relationships (E2, E3), so a turnaround target is reasonable and cheap. It is not among the best actions because C1 shows turnaround did not drive the yield fall.\u0022},{\u0022itemId\u0022:\u0022S13\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022unconfirmed-hypothesis\u0022],\u0022rationale\u0022:\u0022This would clearly help if H4 were confirmed, and under the remediation clause a needless rebuild costs the university little and does no lasting harm. But whether documents were actually lost is unresolved (conflicting accounts in E3 and E4), so committing to a rebuild now is not justified.\u0022},{\u0022itemId\u0022:\u0022S14\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022commit\u0022],\u0022rationale\u0022:\u0022With C1 and C2, the scholarship explanation has temporal order, mechanism, tier-specific covariation, and its main rival ruled out. That is enough to commit to A2, the highest-ranked substantive action.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022lowValueReads\u0022:[\u0022C7\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C12\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022Misleading signal: the provost\u0027s narrative, the counsellor\u0027s anecdote and a real doubling of RD turnaround all point at Admissions. The trap works because the slowdown fell on merit-eligible (Dean\u0027s/Merit) files, the same students whose awards were cut. That is why C2 alone is confounded with H1, and C1 alone (equal EA/RD drops) only rules out H1 without showing which tiers fell. Non-redundancy: C1 alone settles H1/R1 (contradicted). C2 alone settles H5 (contradicted). Only the pair settles H2 (supported), R2 (causal) and SUFF. No other catalogue item breaks out yield by round or tier. Tempting distractors: C3 (cost and \u0027slow communication\u0027 complaints both rise, no breakdown), C14 (appeals up, not by tier), C15 (net revenue per student up, total down, no tier breakdown), C13 (sibling-award comment is suggestive only), C6 (cannot separate staffing from the module, keeping R3 association-only), C4 (13 unresolved tickets, keeping H4 unknown), C11 (deposit portal fine). Initial-only reading: H1 is likely judged supported or unknown, H2 and H5 unknown, and A2 premature. Arithmetic checked: tier and round totals both reconcile to 5,120/2,140 and 5,270/1,810.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:53:15.7614780Z",
+  "finishedAt": "2026-11-17T15:01:12.6386910Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-MISLEAD-1",
+      "split": "heldout",
+      "benchmarkClass": "MISLEAD",
+      "domain": "organizational",
+      "readBudget": 2,
+      "title": "Marrowbridge University: who lost the Fall 2026 first-year class?",
+      "setting": "Marrowbridge University is a fictional private university that enrols about 2,000 first-year students a year through two admission rounds: early action (EA) and regular decision (RD). In January 2026 the Admissions Office moved from its legacy system to a new application portal from Quillstone Systems. In October 2025 the Board\u0027s finance committee approved a revised merit scholarship schedule for students entering in Fall 2026. First-year enrolment for Fall 2026 came in well below the previous year, and the provost holds the Admissions Office responsible.",
+      "presentingRequest": "The president asks you to assess whether the Admissions Office is responsible for the fall in first-year enrolment and what the university should do before next cycle\u0027s admission and award letters go out. You may collect at most two items from the catalogue.",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from Provost Daniel Arvidsson to the President, 2 Oct 2026",
+          "sourceType": "leadership-account",
+          "text": "Subject: Fall intake. We closed first-year enrolment at 1,810, down from 2,140 last fall. That is 330 fewer students and a serious hole in the tuition budget for four years. I\u0027ve read the counsellor complaints. The January switch to the Quillstone portal was badly managed, regular-decision answers went out weeks late, and families noticed. I don\u0027t think we can go into the next cycle with the same leadership in Admissions. I\u0027d like your support to make a change in the director role before autumn recruitment travel begins."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Admissions operations dashboard, entering classes Fall 2025 vs Fall 2026, extracted 28 Sep 2026",
+          "sourceType": "system-record",
+          "text": "Completed applications: 9,850 \u2192 10,240. Admits: 5,120 \u2192 5,270. Admit rate: 52.0% \u2192 51.5%. Mean admitted high-school GPA: 3.61 \u2192 3.63. Enrolled first-years (census): 2,140 \u2192 1,810. Yield (enrolled \u00F7 admits): 41.8% \u2192 34.3%. Early action: deadline 1 Nov; decisions released 15 Dec in both years, processed on the legacy system. Regular decision: deadline 15 Jan; median days from complete file to decision 17 \u2192 31 (2026 processed on Quillstone, live from 6 Jan). Enrolment deposit deadline: 1 May in both years."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Email from Gareth Pell, college counsellor at Westcombe High School, to the Admissions Office, 20 Mar 2026",
+          "sourceType": "customer-account",
+          "text": "Three of my students now have transcripts showing as \u0027missing\u0027 on your new portal, even though I uploaded them in early January and have the confirmation screens. One of them is a strong student. She was finally admitted with a merit award in mid-March, after weeks of waiting for a regular-decision answer, and she has now committed to another university because, in her words, \u0027they actually wanted me.\u0027 I have been sending students to Marrowbridge for twelve years, and this is the worst service I have seen."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Chief of staff\u0027s notes from an interview with Director of Admissions Renata Solberg, 6 Oct 2026",
+          "sourceType": "manager-account",
+          "text": "Solberg accepts that regular-decision answers were slow. Merit-eligible files (candidates for Dean\u0027s or Merit awards) go through a scholarship-scoring step run by the merit-review team. That team fell from six readers to four when two posts were frozen in December, and the Quillstone scoring module was also late and unstable. \u0027Both happened at once; nobody has measured which mattered more.\u0027 Presidential candidates are scored off-system by the honours committee, and files not eligible for merit review skip the step, so those decisions \u0027went out on time.\u0027 On the missing transcripts: \u0027I\u0027m told by the team every file was complete before review; the status page lagged.\u0027 She calls the yield drop \u0027a market thing\u0027 and says no one has looked at it by segment."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Minutes of the Board finance committee, 14 Oct 2025, item 6",
+          "sourceType": "document",
+          "text": "Undergraduate discount rate. The committee noted that the first-year institutional discount rate of 47% was above the peer median. Approved: a rebalanced merit scholarship schedule for Fall 2026 entrants, with Presidential awards unchanged; need-based grant policy unchanged. Projected effect: net tuition revenue per first-year \u002B6%. The VP Finance advised that any effect on yield was expected to be small, based on the enrolment consultant\u0027s 2021 price-elasticity estimate. Admissions to be informed of the new award amounts before early-action decisions are released."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Yield by admission round (early action vs regular decision), Fall 2025 and Fall 2026 entering classes",
+          "source": "Office of Institutional Research extract, 12 Oct 2026",
+          "sourceType": "system-record",
+          "text": "Early action (decisions released 15 Dec in both years, legacy system): admits 2,300 \u2192 2,380; enrolled 1,040 \u2192 900; yield 45.2% \u2192 37.8%. Regular decision (2026 processed on Quillstone): admits 2,820 \u2192 2,890; enrolled 1,100 \u2192 910; yield 39.0% \u2192 31.5%. Share of admits who were merit-eligible (scored by the merit-review team): EA 54% in both years; RD 52% in both years. Median days from complete file to decision for merit-eligible files, 2026: EA 16, RD 38. IR note: early-action admits received their decisions and award letters on the prior-year timetable."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Admits, enrolments and award amounts by scholarship tier, Fall 2025 and Fall 2026 entering classes",
+          "source": "Joint Institutional Research and Financial Aid extract, 14 Oct 2026",
+          "sourceType": "financial-record",
+          "text": "Tier eligibility criteria were the same in both years. Presidential (award $20,000 both years): admits 410 \u2192 420; enrolled 150 \u2192 152; yield 36.6% \u2192 36.2%. Dean\u0027s ($14,000 \u2192 $9,000): admits 1,150 \u2192 1,190; enrolled 520 \u2192 380; yield 45.2% \u2192 31.9%. Merit ($9,000 \u2192 $5,000): admits 1,560 \u2192 1,610; enrolled 700 \u2192 520; yield 44.9% \u2192 32.3%. No merit award (need-based grants only or full pay; policy unchanged): admits 2,000 \u2192 2,050; enrolled 770 \u2192 758; yield 38.5% \u2192 37.0%. Totals: admits 5,120 \u2192 5,270; enrolled 2,140 \u2192 1,810. The extract does not separate early-action and regular-decision admits."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Survey of admitted students who did not enrol, spring 2026, with spring 2025 comparison",
+          "source": "Admissions Office survey of admits who declined or had not paid a deposit by 15 May",
+          "sourceType": "customer-account",
+          "text": "Responses: 2025, n=540 (18% of non-enrolling admits); 2026, n=610 (18%). \u0027Most important reason for not enrolling\u0027 (one choice): cost or financial aid 39% \u2192 46%; school closer to home 17% \u2192 15%; academic programme 21% \u2192 17%; slow or confusing communication from Admissions 8% \u2192 13%; campus visit experience 6% \u2192 5%; other 9% \u2192 4%. Results are not broken out by admission round or award tier. Free-text comments include \u0027took forever to hear back\u0027 and \u0027the other offer was better.\u0027"
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Quillstone portal support ticket log, 6 Jan \u2013 31 Mar 2026",
+          "source": "Quillstone support desk export",
+          "sourceType": "log",
+          "text": "Applicants and counsellors opened 212 tickets. Categories: login or password 71; document shown as \u0027missing\u0027 or \u0027pending\u0027 64; application fee payment 29; staff-side reading queue or scoring module 33; other 15. Of the 64 document-status tickets, 51 were closed as \u0027document present after status refresh\u0027. The other 13 were auto-closed after 14 days with no resolution note. The export does not include applicant file contents or the time each file was marked complete."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Vendor statement on the January 2026 portal go-live",
+          "source": "Statement from the Quillstone Systems account manager, 9 Oct 2026",
+          "sourceType": "vendor-account",
+          "text": "\u0027From go-live on 6 January the platform met its contracted availability target (99.6% measured, 99.5% required). We delivered the scholarship-scoring module three weeks after the original date because in December Marrowbridge changed the award amounts in its scoring rubric. Document status displays refresh on a cycle and can briefly show an upload as pending. In our experience, decision delays of this kind reflect client staffing levels rather than the software.\u0027"
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Merit-review queue and reader staffing records, Dec 2025 \u2013 Apr 2026",
+          "source": "Admissions operations records",
+          "sourceType": "system-record",
+          "text": "Merit-review readers on staff: six until 19 Dec 2025 and four after that (two posts frozen under the hiring pause). Scoring module unavailable 8\u201316 Jan 2026 (vendor incident ticket QS-0412). Merit-review backlog: 410 files on 15 Jan, 1,880 on 9 Feb, 620 on 6 Mar, 0 on 27 Mar. Overtime logged by the merit team in Feb 2026: 212 hours. The records do not separate reader time spent waiting on the module from time spent scoring. There is no period with four readers on the legacy system to compare against."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Regional projections of high-school graduates, 2024\u20132030",
+          "source": "State education department projections, published March 2026",
+          "sourceType": "external-data",
+          "text": "Public and private high-school graduates in the university\u0027s four main recruiting states: 412,300 (2024 actual); 409,800 (2025 actual); 407,100 (2026 projected); 391,500 (2030 projected). According to the projections, most of the decline comes after 2027, and college-going rates stay flat over the period."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Published tuition and scholarship announcements of five competitor universities, 2026\u201327",
+          "source": "Compiled by the admissions marketing team from public websites, Sep 2026",
+          "sourceType": "external-data",
+          "text": "Covers the five universities that Marrowbridge admits most often name as alternatives. Published tuition for 2026\u201327 rose between 2.9% and 4.4% (Marrowbridge: 3.5%). None announced a new scholarship programme or a change to its published merit award amounts for 2026 entrants. Two expanded their honours colleges. The net prices actually offered to individual admits are not published."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Admitted-student event registrations and attendance, spring 2025 and spring 2026",
+          "source": "Admissions events records",
+          "sourceType": "system-record",
+          "text": "In-person Admitted Student Day (April): 1,320 families attended in 2025 and 1,290 in 2026. Virtual admitted-student sessions: registrations 2,040 \u2192 2,210. Overnight visit programme: 310 \u2192 298 students. Event satisfaction score (1\u20135): 4.4 in both years. These records do not link attendance to admission round or award tier."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Admissions Office operating and marketing budget, FY2025\u2013FY2026",
+          "source": "University budget office summary",
+          "sourceType": "financial-record",
+          "text": "Admissions operating budget: $4.82m in FY2025, $4.79m in FY2026. Recruitment travel and marketing: $1.21m \u2192 $1.18m. Purchased prospect lists: 92,000 \u2192 95,000 names. Quillstone licence and implementation cost $0.64m in FY2026, replacing a legacy licence of $0.31m. The staffing budget was reduced by two frozen posts from December 2025."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Enrolment deposit portal availability and transaction log, 1 Apr \u2013 5 May 2026",
+          "source": "Quillstone deposit module logs, with 2025 legacy deposit page comparison",
+          "sourceType": "log",
+          "text": "Availability 99.9%, with one 40-minute outage on 22 Apr (14:10\u201314:50). Deposit transactions attempted: 1,904; completed: 1,881; failed: 23, of which 19 were retried successfully within 24 hours. Prior-year legacy deposit page: 2,237 attempted, 2,209 completed. Help-desk calls about deposits: 37 (2025: 41)."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Internal audit report on the Admissions Office, 2023",
+          "source": "Internal Audit report IA-2023-07",
+          "sourceType": "prior-report",
+          "text": "Scope: applicant data retention, fee-waiver approvals, and user access to the legacy admissions system. Findings: three medium-risk issues. The retention schedule was not applied to 2017 files; fee-waiver approvals were undocumented in 6 of 40 samples; and two staff who had left still had active accounts. All three issues were marked closed by June 2024. The audit made no findings on decision timeliness or yield."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Anonymous pulse survey of Admissions Office staff, March 2026",
+          "source": "HR pulse survey, 18\u201325 Mar 2026 (31 of 38 staff responded)",
+          "sourceType": "anonymous-staff-survey",
+          "text": "\u0027I have the tools to do my job\u0027 (1\u20135): 3.9 in Mar 2025 \u2192 2.6. \u0027My workload is manageable\u0027: 3.4 \u2192 2.1. Comments: \u0027the scoring module freezes on every third file\u0027; \u0027we\u0027re two readers short and nobody will say when the posts unfreeze\u0027; \u0027families keep asking why their award is smaller than their older sibling\u0027s was\u0027; \u0027we\u0027ll get blamed for whatever happens in May.\u0027"
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Interview notes, Director of Financial Aid, 8 Oct 2026",
+          "source": "Chief of staff\u0027s notes from an interview with Director of Financial Aid Marisol Dunne",
+          "sourceType": "manager-account",
+          "text": "Merit awards are generated from the admissions tier and printed on the admission letter. Financial Aid applies whatever amounts the finance committee sets. Need-based packages went out on 1 March for early action and 1 April for regular decision, the same dates as in 2025. Award appeals rose from about 150 to \u0027roughly 400\u0027. Dunne says the office logs appeals by date, not by tier or outcome, and she \u0027couldn\u0027t tell you who appealed and then came anyway.\u0027"
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "First-year net tuition revenue report, Fall 2026 census",
+          "source": "Office of the VP Finance",
+          "sourceType": "financial-record",
+          "text": "Published tuition: $41,200 (\u002B3.5%). Net tuition per enrolled first-year (after all institutional aid): $22,950 in Fall 2025 \u2192 $24,310 in Fall 2026 (\u002B5.9%). Total first-year net tuition: $49.1m \u2192 $44.0m (\u221210.4%). First-year institutional discount rate: 47% \u2192 41%. The report does not break out revenue or aid by award tier or admission round."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Slower regular-decision turnaround after the January move to the new application portal lowered the share of admitted students who enrolled."
+          },
+          {
+            "id": "H2",
+            "text": "The revised merit scholarship schedule for Fall 2026 entrants lowered the share of admitted students who enrolled."
+          },
+          {
+            "id": "H3",
+            "text": "A smaller or academically weaker applicant pool reduced the number of first-year students the university could enrol."
+          },
+          {
+            "id": "H4",
+            "text": "The new application portal failed to record some documents that applicants had submitted."
+          },
+          {
+            "id": "H5",
+            "text": "A general softening in demand, affecting all groups of admitted students alike, lowered the share of admitted students who enrolled."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Slower regular-decision turnaround after the January portal migration",
+            "to": "Fall in yield among admitted students",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Revised merit scholarship schedule for Fall 2026 entrants",
+            "to": "Fall in yield among admitted students",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Two merit-review reader posts frozen in December 2025",
+            "to": "Slower regular-decision turnaround",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "A smaller or academically weaker applicant pool",
+            "to": "Fall in first-year enrolment",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Replace the Director of Admissions before the next recruitment cycle, citing the enrolment shortfall."
+          },
+          {
+            "id": "A2",
+            "text": "Take the merit scholarship schedule back to the finance committee with a proposal to restore award levels in the tiers whose yield fell, with the net-revenue trade-off modelled, before next cycle\u0027s award letters go out."
+          },
+          {
+            "id": "A3",
+            "text": "Set a decision-turnaround target for next cycle\u0027s regular-decision files and have Admissions report progress against it to the provost each month."
+          },
+          {
+            "id": "A4",
+            "text": "Instruct the portal vendor to rebuild the document-upload module under the contract\u0027s remediation clause before the next cycle opens."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "S01",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "groundTruthNarrative": "The Fall 2026 enrolment shortfall happened after admission, not before it. Applications and admits both rose and the admit profile held steady, but yield fell from 41.8% to 34.3%. The cause was the finance committee\u0027s revised merit schedule. It cut Dean\u0027s awards from $14,000 to $9,000 and Merit awards from $9,000 to $5,000, and left Presidential awards and need-based policy unchanged. Yield fell about 13 points in the two cut tiers and stayed within 1.5 points in the Presidential and no-award groups (C2). The salient signal points the other way. Regular-decision turnaround nearly doubled after the Quillstone migration, and the slowdown hit exactly the merit-eligible files. Those are the same Dean\u0027s and Merit students whose awards were cut, so the tier table alone cannot separate the two explanations. The round comparison (C1) does. Early-action admits got their decisions and award letters on the old timetable, the merit-eligible share was the same in both rounds, and yet EA yield fell as much as RD yield (7.4 vs 7.5 points). Slowness therefore added nothing measurable. The slowdown was real; with the evidence available, nobody can separate the effect of the frozen reader posts from that of the late scoring module. Whether the portal actually lost documents is still unresolved. Removing the admissions director would punish the wrong party. The best step is to take the award schedule back to the finance committee.",
+      "answers": [
+        {
+          "itemId": "S01",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "E2",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C3",
+            "C6"
+          ],
+          "tags": [
+            "misleading-signal",
+            "leadership-narrative",
+            "natural-experiment"
+          ],
+          "rationale": "C1: early-action admits got decisions and award letters on the prior-year timetable, with a merit-eligible median of 16 days, yet their yield fell 7.4 points. Regular-decision admits, whose merit-eligible files took 38 days, fell 7.5 points. The merit-eligible share was the same in both rounds (54% EA, 52% RD, both years). If slower turnaround lowered yield, RD would have fallen more than EA, and it did not. The slowdown was real (E2, E4) but does not covary with the yield drop."
+        },
+        {
+          "itemId": "S02",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C1",
+            "C2",
+            "C3",
+            "C13",
+            "C14",
+            "C15"
+          ],
+          "tags": [
+            "hidden-cause",
+            "confounded",
+            "tier-covariation"
+          ],
+          "rationale": "E5 shows the schedule was revised before EA decisions. C2 shows yield fell about 13 points only in the two tiers whose awards were cut (Dean\u0027s, Merit), with eligibility criteria unchanged. The Presidential tier (unchanged award) and admits with no merit award (unchanged policy) stayed within 1.5 points. On its own C2 is confounded, because the cut tiers are also the merit-eligible files that were slowed in RD (E4). C1 removes that confound by showing that turnaround made no difference. Together these support H2 over its rivals."
+        },
+        {
+          "itemId": "S03",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C1",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "ruled-out-early"
+          ],
+          "rationale": "E2: completed applications rose 4.0% and admits rose 2.9%, and mean admitted GPA rose slightly. Enrolment fell because yield fell, not because there were fewer or weaker applicants."
+        },
+        {
+          "itemId": "S04",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "conflicting-accounts",
+            "interested-source",
+            "unresolved"
+          ],
+          "rationale": "The counsellor (E3) reports transcripts that showed as missing despite confirmed uploads. The director (E4) relays second-hand that every file was complete before review and blames a status-page lag. Neither account is verified, and C1/C2 say nothing about documents. Even the off-path ticket log (C4) leaves 13 tickets unresolved and has no file contents. The claim is live but not established."
+        },
+        {
+          "itemId": "S05",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C1",
+            "C2",
+            "C3",
+            "C8"
+          ],
+          "tags": [
+            "manager-narrative",
+            "external-cause",
+            "misleading-signal"
+          ],
+          "rationale": "The director\u0027s \u0027market thing\u0027 account needs the decline to hit all admit groups alike. C2 shows Presidential and no-award yields almost unchanged (\u22120.4 and \u22121.5 points) while the cut tiers fell about 13 points. C1 alone (equal drops across rounds) is consistent with H5, so C2 is what decides it."
+        },
+        {
+          "itemId": "S06",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C3"
+          ],
+          "tags": [
+            "misleading-signal",
+            "natural-experiment"
+          ],
+          "rationale": "Evidence counts against the link itself: the same fall in yield appears among EA admits who never experienced the slowdown, with the same merit-eligible mix. The E3 anecdote and the rise in \u0027slow communication\u0027 in the survey (C3, off-path) are self-reports and do not outweigh the behavioural comparison."
+        },
+        {
+          "itemId": "S07",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C1",
+            "C2",
+            "C3",
+            "C14",
+            "C15"
+          ],
+          "tags": [
+            "hidden-cause",
+            "tier-covariation",
+            "rival-ruled-out"
+          ],
+          "rationale": "Temporal order: approved in Oct 2025 and applied to all Fall 2026 offers (E5). Mechanism: awards cut by $4,000\u2013$5,000. Covariation: only the cut tiers fell, under unchanged eligibility criteria (C2). Main rival ruled out: turnaround had no differential effect (C1). Applicant-pool and general-market explanations are also excluded (E2, C2)."
+        },
+        {
+          "itemId": "S08",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C5",
+            "C6",
+            "C13"
+          ],
+          "tags": [
+            "confounded",
+            "joint-cause-unresolved"
+          ],
+          "rationale": "The two posts were frozen in December and the merit-review slowdown followed in January (E2, E4), so the two co-occur. But the scoring module was late and unstable over the same period, and the director says nobody has measured which mattered more. The concurrent rival is not ruled out, so causation is not established. The off-path staffing records (C6) explicitly cannot separate the two."
+        },
+        {
+          "itemId": "S09",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "ruled-out-early"
+          ],
+          "rationale": "Applications, admits and admit profile all held or rose (E2), and the whole shortfall arises in yield after admission (E2, C1, C2). Evidence counts against the applicant pool driving the fall."
+        },
+        {
+          "itemId": "S10",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "E5",
+            "C1",
+            "C2",
+            "C14"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "Under the supported explanation (H2), the finance committee set the award amounts (E5) and Admissions only applied them. Removing the director punishes the wrong party, disrupts the next cycle, and leaves the actual cause in place. The only other live hypothesis (H4, document handling) does not make the director responsible for the enrolment fall either."
+        },
+        {
+          "itemId": "S11",
+          "expected": "preferred",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C1",
+            "C2",
+            "C14",
+            "C15"
+          ],
+          "tags": [
+            "targets-supported-cause"
+          ],
+          "rationale": "This action addresses the established cause directly and in time for the next cycle\u0027s letters. Modelling the trade-off is prudent because E5\u0027s original elasticity assumption proved wrong. It is the single best substantive action."
+        },
+        {
+          "itemId": "S12",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C1"
+          ],
+          "tags": [
+            "real-but-secondary-problem"
+          ],
+          "rationale": "The slowdown is real and harmed counsellor relationships (E2, E3), so a turnaround target is reasonable and cheap. It is not among the best actions because C1 shows turnaround did not drive the yield fall."
+        },
+        {
+          "itemId": "S13",
+          "expected": "premature",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "unconfirmed-hypothesis"
+          ],
+          "rationale": "This would clearly help if H4 were confirmed, and under the remediation clause a needless rebuild costs the university little and does no lasting harm. But whether documents were actually lost is unresolved (conflicting accounts in E3 and E4), so committing to a rebuild now is not justified."
+        },
+        {
+          "itemId": "S14",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C1",
+            "C2",
+            "C15"
+          ],
+          "tags": [
+            "commit"
+          ],
+          "rationale": "With C1 and C2, the scholarship explanation has temporal order, mechanism, tier-specific covariation, and its main rival ruled out. That is enough to commit to A2, the highest-ranked substantive action."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2"
+      ],
+      "lowValueReads": [
+        "C7",
+        "C9",
+        "C10",
+        "C12"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C2"
+      ],
+      "authoringNotes": "Misleading signal: the provost\u0027s narrative, the counsellor\u0027s anecdote and a real doubling of RD turnaround all point at Admissions. The trap works because the slowdown fell on merit-eligible (Dean\u0027s/Merit) files, the same students whose awards were cut. That is why C2 alone is confounded with H1, and C1 alone (equal EA/RD drops) only rules out H1 without showing which tiers fell. Non-redundancy: C1 alone settles H1/R1 (contradicted). C2 alone settles H5 (contradicted). Only the pair settles H2 (supported), R2 (causal) and SUFF. No other catalogue item breaks out yield by round or tier. Tempting distractors: C3 (cost and \u0027slow communication\u0027 complaints both rise, no breakdown), C14 (appeals up, not by tier), C15 (net revenue per student up, total down, no tier breakdown), C13 (sibling-award comment is suggestive only), C6 (cannot separate staffing from the module, keeping R3 association-only), C4 (13 unresolved tickets, keeping H4 unknown), C11 (deposit portal fine). Initial-only reading: H1 is likely judged supported or unknown, H2 and H5 unknown, and A2 premature. Arithmetic checked: tier and round totals both reconcile to 5,120/2,140 and 5,270/1,810."
+    }
+  }
+}

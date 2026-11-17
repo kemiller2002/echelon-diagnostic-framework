@@ -1,0 +1,699 @@
+{
+  "label": "OD2-HO-INTERACT-1",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7724,
+  "cacheCreationTokens": 4510,
+  "outputTokens": 44461,
+  "thinkingTokens": 33443,
+  "costUsd": 0.9268608,
+  "durationMs": 432039,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-INTERACT-1/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022INTERACT\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Rising latch-crack and splay rejects on the VX housing family, Line B, Tollbridge plant\u0022,\u0022setting\u0022:\u0022Marrowgate Components (fictional) is a contract molder. At its Tollbridge plant, Line B molds the VX family of connector housings (VX-12, VX-18, VX-24) from glass-filled nylon (PA66-GF30) on injection Presses 5 and 7. All other Line B product families are polypropylene. Each press has its own desiccant resin dryer: D5 feeds Press 5 and D7 feeds Press 7. Until week 36, all VX resin came from Quillan Polymers. In week 37 a second supplier, Arnholt Resins, was released for general use. VX rejects at final snap-fit and visual inspection have risen every week since then.\u0022,\u0022presentingRequest\u0022:\u0022The operations director writes: \u0027VX rejects are close to 4% and climbing, and a customer has opened an 8D. I have three people giving me three different stories. Tell me what is actually driving this and what we should do this week. The ops manager wants to act on the new second-shift operators, the plant manager\u0027s instinct is to drop Arnholt, and maintenance say the dryers are fine.\u0027\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Line B quality dashboard export, generated Monday of week 43\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022VX family (VX-12/18/24), % of parts rejected at final snap-fit and visual inspection, all presses combined: wks 30\u201336: 0.7\u20130.8% each week; wk 37 1.3; wk 38 1.9; wk 39 2.5; wk 40 3.0; wk 41 3.4; wk 42 3.7. Rejects by shift, wks 37\u201342: first shift 2.1% of 72,000 parts; second shift 3.7% of 36,000 parts. Reject codes, wks 37\u201342: latch crack at snap-fit 61%, splay/silver streaks 32%, short shot 7%. Polypropylene families on Line B: flat at 0.4\u20130.6% throughout. No engineering change to VX drawings, materials specification or test limits since March.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from R. Valdez-Hunt, Operations Manager, to the Operations Director, week 43\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Subject: VX rejects \u2013 my read. Second shift is running nearly double first shift\u0027s reject rate. It started the week after we brought on six new operators (wk 36). Nothing else lines up. Arnholt resin came through a three-week trial with no issues, and maintenance confirm the dryers are not the problem: Press 5 ran clean all summer. I propose putting the six on performance improvement plans and taking them off VX until they are re-certified. The plant manager\u0027s first instinct was to drop Arnholt, but the trial data doesn\u0027t support that and procurement would fight it. I\u0027d rather fix the people side now than wait for another study.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Supplier Quality memo SQ-0912, T. Brennan (Supplier Quality Engineer), week 36\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Arnholt Resins PA66-GF30 production trial, wks 34\u201336, run on Press 7 only (Press 7 is Line B\u0027s designated trial press). Result: 7,800 VX parts, 0.7% rejects against the 0.8% Quillan baseline. Dimensional and snap-fit results are equivalent. The certificates of analysis for all three trial lots state moisture \u0027conforms, spec \u22640.35%\u0027. Recommendation: approve Arnholt as second source and release it to general use from wk 37 on both VX presses, issued FIFO by stores. Logistics note: Arnholt ships in 1-tonne octabins that do not fit the main-warehouse racks, so stores will hold them in the north annex.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, Line B maintenance technician, week 43\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027D5 has been running wet dew points since late July: \u221215 to \u221220 instead of \u221240. The regeneration heater trips now and then, and the desiccant is due. It alarmed constantly and kept stopping the press, so in wk 31 we put it through the change board and moved the alarm limit to \u221215. But look: Press 5 ran Quillan the whole of August into mid-September at normal rejects with D5 exactly like that. If the dryer were the problem it would have shown up then. D7 is fine; it reads \u221242.\u0027 Interviewer note: the heater work order is open and no desiccant change is scheduled.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022HR onboarding summary, Line B, week 37\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Six new molding operators started on Line B second shift on the Monday of wk 36. Before that they completed a two-week classroom and shadowing programme. All six were signed off on the VX and polypropylene work instructions by the end of wk 37. Line B second-shift headcount rose from 9 to 15. First-shift staffing did not change between wks 30 and 42, and neither did supervision on either shift. Exit interviews and absence for the period show nothing unusual.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022MES reject records for VX parts by press, resin supplier, shift and operator group, weeks 37\u201342\u0022,\u0022source\u0022:\u0022Manufacturing execution system query run by Quality, week 43\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022MES query, VX parts, wks 37\u201342; rejects / parts made (rate). Press 5, Arnholt lots: 2,120 / 21,400 (9.9%). First shift 1,030 / 10,600 (9.7%); second shift 1,090 / 10,800 (10.1%). Press 5, Quillan lots: 460 / 50,600 (0.9%). First shift 229 / 25,400; second shift 231 / 25,200 (0.9% each). Press 7, Arnholt lots: 90 / 11,200 (0.8%). Press 7, Quillan lots: 180 / 24,800 (0.7%). Press 7 runs VX on first shift only and polypropylene caps on second shift, so all second-shift VX comes from Press 5. Second-shift Press 5 by operator group: the six new hires 9.9% on Arnholt and 0.9% on Quillan; experienced operators 10.3% and 0.9%. The reject-code mix in the Press 5/Arnholt cell matches the line-wide mix.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Process engineering dryer dew-point and feed-throat resin moisture measurements, Presses 5 and 7, weeks 41\u201342\u0022,\u0022source\u0022:\u0022Process engineering study file\u0022,\u0022sourceType\u0022:\u0022independent-observation\u0022,\u0022text\u0022:\u0022Moisture analyser, % water by weight. Resin datasheet: mold PA66-GF30 at \u22640.20%. Wetter resin degrades in the barrel, which causes splay and brittle snap features. Dryer inlet: Quillan 0.11\u20130.14%; Arnholt 0.27\u20130.33%. D7 outlet (dew point \u221242 \u00B0C): Quillan 0.05%, Arnholt 0.07%. D5 outlet (dew point \u221216 to \u221219 \u00B0C): Quillan 0.13\u20130.16%, Arnholt 0.25\u20130.31%. Wk 42 day-shift trial: Arnholt lot A-2291 was dried in portable dryer PD-1 (\u221240 \u00B0C) and fed to Press 5. It measured 0.08% at the throat and gave 0.8% rejects on 2,400 parts. The same lot run through D5 on the previous day shift gave 10.4% rejects. Caveat: every Arnholt sample came from octabins held in the north annex and every Quillan sample from bags in the main warehouse. No Arnholt material has been held in conditioned storage.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Supplier audit report on Arnholt Resins compounding site, June\u0022,\u0022source\u0022:\u0022Marrowgate supplier audit SA-26-044\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022Audit of the Arnholt Resins compounding site, 11 June. Scope: quality management system, lot traceability, change control, calibration, packaging and labelling. Findings: one minor non-conformance (two gauges in the finished-goods warehouse past their calibration date, corrected during the audit). The lot traceability test passed in 20 minutes. Packaging and labelling conform to Marrowgate requirements. Overall rating: B (approved, routine surveillance). Recommendation: proceed to a production trial subject to part approval. Lead auditor: J. Lindqvist.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Training and sign-off records for the six new second-shift operators\u0022,\u0022source\u0022:\u0022Line B training file summary, week 37\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Operators 2231\u20132236. Classroom modules (safety, molding basics, resin handling, defect recognition): all passed, scores 78\u201394%. Shadowing: 40 hours each alongside experienced second-shift operators. VX work-instruction sign-off: all six by Friday of wk 37. Operator 2234 re-signed after missing a step in the purge procedure during observation. Polypropylene work-instruction sign-off: all six. Trainer comment: \u0027Group is competent on standard work; still slow on mold changes and needs pairing for those for a few more weeks.\u0027\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022VX mold tool preventive maintenance log, Presses 5 and 7, weeks 28\u201342\u0022,\u0022source\u0022:\u0022Toolroom maintenance log\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Tools T-VX-05 (Press 5) and T-VX-07 (Press 7), 4 cavities each. PM interval 150,000 shots: vents cleaned, ejectors lubricated, parting line and cavities inspected. T-VX-05 PM in wk 32 and wk 39; T-VX-07 PM in wk 31 and wk 38. The tools were not swapped between presses at any point. Notes: \u0027light vent residue\u0027 on T-VX-05 at wk 39, cleaned. No cracks, wear or damage recorded on either tool. Cavity-pressure sensor checks within limits at every PM.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Line B preventive maintenance compliance report, Q3\u0022,\u0022source\u0022:\u0022Maintenance management system report\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Q3 PM compliance on Line B: 87% (target 95%). Items overdue at quarter end: D5 desiccant replacement (due wk 33, parts on order); D5 regeneration heater repair (work order open since wk 30, awaiting element); Press 7 hydraulic filter change (due wk 38). D7 desiccant was last replaced in wk 26. Maintenance planner comment: \u0027D5 items deferred because the press was running and rejects were normal; will schedule when parts arrive.\u0027\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Temperature and humidity logs for main warehouse, north annex and molding hall, August\u2013October\u0022,\u0022source\u0022:\u0022Facilities environmental loggers\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Weekly mean relative humidity and temperature. Main warehouse (conditioned): 41\u201346% RH, 21\u201322 \u00B0C throughout. North annex (unconditioned): August 68\u201374% RH, September 63\u201370% RH, October 58\u201366% RH; 14\u201326 \u00B0C. Molding hall: 45\u201352% RH, 24\u201327 \u00B0C. The annex logger was out of service 2\u20138 September. No resin or product measurements are part of this record.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022VX customer complaint and field return log, July\u2013October\u0022,\u0022source\u0022:\u0022Customer quality log\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Wk 30: one shipment mislabelled (VX-18 labels on VX-12 cartons), closed. Wk 39: customer reports silver streaks on 40 parts in one carton, accepted under a cosmetic deviation. Wk 41: customer assembly line reports two latches cracking during insertion; 8D opened, containment by 100% snap-fit re-test of finished stock at Marrowgate. No safety-related escalations and no returns from end users in the period.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Press 5 and Press 7 process parameter logs for VX, weeks 30\u201342\u0022,\u0022source\u0022:\u0022Press controller data historian\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022VX setpoints on both presses have not changed since tool qualification: barrel zones 285\u2013295 \u00B0C, mold 85 \u00B0C, hold pressure 650 bar, cycle 31.5 s. Actual values stayed within \u00B12% of setpoint on both presses for the whole period. From wk 38, Press 5 shows peak injection pressure 4\u20136% lower on some runs, within the alarm band. Press 7 stable. No parameter edits recorded in the audit trail for either press.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Procurement dual-sourcing business case for PA66-GF30 resin, May\u0022,\u0022source\u0022:\u0022Procurement department\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Quillan list price is up 14% year on year. Arnholt quote is 11% below current Quillan pricing. Target: 50/50 volume split by Q1 next year. Projected saving \u20AC410k a year, plus supply-risk reduction from dual sourcing. Risk section: \u0027Technical equivalence to be confirmed by production trial; logistics to confirm storage for octabin format.\u0027 Approved by the finance committee on 28 May.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with Line B second-shift lead\u0022,\u0022source\u0022:\u0022Interview notes, week 43\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027The six new starters are coming along. Two of them are still slow on mold changes, so I pair them with a senior operator for those. Press 5 is throwing more cracked latches than it used to. I\u0027ve had the night maintenance man look at the dryer twice and he says it\u0027s within its alarm. I don\u0027t have a view on the cause. We don\u0027t get the MES reports on nights, only the dashboard, so I can\u0027t see which jobs the rejects come from.\u0027\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Line B change-control records, weeks 28\u201342\u0022,\u0022source\u0022:\u0022Change board register\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CR-3107, wk 31: D5 dew-point alarm limit changed from \u221235 \u00B0C to \u221215 \u00B0C. Reason: \u0027nuisance alarms stopping press; heater repair pending.\u0027 CR-3118, wk 33: Press 7 robot gripper pads replaced. CR-3122, wk 34: temporary Arnholt trial on Press 7. CR-3131, wk 37: Arnholt approved as second source for both VX presses. CR-3140, wk 40: Line B second-shift break times changed. No other changes recorded to VX presses, dryers, tools or test equipment.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Snap-fit test fixture calibration and gauge repeatability records, weeks 30\u201342\u0022,\u0022source\u0022:\u0022Metrology lab\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Fixture F-SF-2 is the single snap-fit fixture used for VX parts from both presses. Calibrated in wk 30 and wk 39, in tolerance both times. Gauge repeatability and reproducibility study in wk 39: 8% of tolerance, acceptable. Visual inspection boundary samples refreshed in wk 35. No metrology changes or out-of-tolerance findings in the period.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Dryer manufacturer service desk advice on D5 dew-point drift\u0022,\u0022source\u0022:\u0022Email from dryer manufacturer service desk, week 42\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Re: unit D5, installed 2019. \u0027On this model, dew points warmer than \u221230 \u00B0C usually mean either a failing regeneration heater or exhausted desiccant, sometimes both. Without a site visit we can\u0027t tell you which. For a unit of this age our standard recommendation is to replace the heater element and the desiccant together, then recheck the dew point after 24 hours. We would not advise widening the alarm limit beyond \u221230 \u00B0C.\u0027\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Line B OEE and downtime summary, weeks 28\u201342\u0022,\u0022source\u0022:\u0022Production reporting\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Press 5 availability: wks 28\u201331, 81\u201384% (dryer dew-point alarm stops of 6\u20139 hours a week); wks 32\u201342, 91\u201393% (no dryer alarm stops). Press 7 availability 90\u201394% throughout. Line B OEE: 72% in Q3 against 70% in Q2. Top downtime causes in Q3: mold changes, material changeovers, and a hydraulic leak on Press 7 in wk 38.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Resin from the new supplier, Arnholt, is defective and produces the VX rejects whichever press and dryer it is run through.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Degraded drying in D5 produces the VX rejects whichever supplier\u0027s resin it is drying.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022The VX rejects come from Arnholt resin being dried in D5 while D5 is degraded. Neither the new resin nor the degraded dryer raises rejects on its own.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022Errors by the six operators who joined second shift in week 36 produce the VX rejects.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Arnholt resin dried in D5 while D5 is degraded\u0022,\u0022to\u0022:\u0022Resin entering Press 5 wetter than the molding moisture limit\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Resin entering the press wetter than the molding moisture limit\u0022,\u0022to\u0022:\u0022Latch-crack and splay rejects on VX parts\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Six new operators joining second shift in week 36\u0022,\u0022to\u0022:\u0022Rise in the VX reject rate\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Resin held in the unconditioned north annex\u0022,\u0022to\u0022:\u0022Higher moisture in resin arriving at the dryer inlet\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Put the six operators who joined second shift in week 36 on formal performance improvement plans and take them off VX production until they are re-certified.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Repair D5 (regeneration heater and desiccant) and confirm its dew point is back to \u221240 \u00B0C. Restore the original D5 alarm limit. Until D5 is verified, keep Arnholt lots off D5 by routing them to Press 7 or drying them in a verified dryer. Add a feed-throat moisture check for every VX resin lot.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022As the only response, send all Arnholt lots to Press 7 and run Press 5 on Quillan resin only, leaving D5 and its alarm limit as they are.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Move all Arnholt octabins out of the north annex into the conditioned main warehouse, renting outside space for the finished goods this displaces, to lower the moisture of Arnholt resin reaching the dryers.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022groundTruthNarrative\u0022:\u0022The VX reject rise needs two conditions at once. Dryer D5 has been degraded since late July (failing regeneration heater, overdue desiccant), and its alarm was relaxed in week 31. Quillan resin arrives dry enough (0.11\u20130.14%) that even the weak D5 brings it below the 0.20% molding limit (0.13\u20130.16%), so Press 5 ran normally through August. Arnholt resin, released to both presses in week 37, arrives much wetter (0.27\u20130.33%). That is still within Arnholt\u0027s own 0.35% certificate spec. The healthy D7 dries it to 0.07%, which is why the Press 7 trial and later Press 7 production were clean. D5 cannot dry it: Arnholt leaves D5 at 0.25\u20130.31%, and the wet nylon degrades in the barrel, giving splay and brittle latches. Rejects are about 10% in the Press 5/Arnholt cell and under 1% in every other cell. Drying the same Arnholt lot in a portable dryer and molding it on Press 5 removed the rejects. The second-shift excess is an artefact: Press 7 runs VX only on first shift, so all second-shift VX comes from Press 5. Within each press-and-resin cell, new hires perform the same as experienced operators. Why Arnholt resin is wetter, whether from the supplier or from storage in the humid annex, is not established. The fix is to restore D5 and its alarm and to contain Arnholt away from D5 until it is verified.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022contrast-case\u0022,\u0022single-cause\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Arnholt resin ran at 0.7% rejects in the Press 7 trial (E3). It ran at 0.8% on Press 7 in production, weeks 37\u201342 (C1). Dried in PD-1, it gave 0.8% even on Press 5 (C2). The claim that Arnholt produces rejects whichever press and dryer it goes through is therefore contradicted.\u0022},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022contrast-case\u0022,\u0022single-cause\u0022,\u0022interested-source-right-on-fact\u0022],\u0022rationale\u0022:\u0022D5 was degraded from late July, yet rejects stayed at 0.7\u20130.8% through weeks 30\u201336 (E1, E4). Press 5 on Quillan ran at 0.9% in weeks 37\u201342 (C1), and D5 brings Quillan below the limit (C2). Degraded drying alone does not produce the rejects.\u0022},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022joint-cause\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022C1 shows rejects confined to the Press 5/Arnholt cell (9.9%), with the other three cells at 0.7\u20130.9%. C2 supplies the mechanism: only Arnholt dried in D5 exceeds the moisture limit. C2 also gives an intervention: the same Arnholt lot dried properly on Press 5 gave 0.8% rejects. From the initial file alone this is live but unestablished, because there is no breakdown by press and resin.\u0022},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022confounded\u0022,\u0022leadership-narrative\u0022,\u0022wrong-party\u0022],\u0022rationale\u0022:\u0022The second-shift excess in E1 is confounded by press: all second-shift VX is made on Press 5 (C1). Within each press-and-resin cell, first and second shift match (9.7% vs 10.1%; 0.9% vs 0.9%). New hires match experienced operators (9.9% vs 10.3% on Arnholt, 0.9% vs 0.9% on Quillan).\u0022},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022joint-cause\u0022,\u0022mechanism\u0022],\u0022rationale\u0022:\u0022Arnholt leaves D5 at 0.25\u20130.31% but leaves D7 at 0.07%. Quillan leaves D5 at 0.13\u20130.16%. The same Arnholt lot dried in PD-1 measured 0.08%. Covariation, mechanism and a direct dryer substitution establish the link. Without C2 there is no moisture data.\u0022},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022mechanism\u0022,\u0022intervention\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The datasheet mechanism, the fact that only the over-limit cell has high rejects, and the PD-1 intervention (same lot and press: 10.4% when wet vs 0.8% when dried) establish causation (C2). C1 rules out the main rival, operators, and shows the reject-code mix is unchanged.\u0022},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022confounded\u0022,\u0022wrong-party\u0022],\u0022rationale\u0022:\u0022The timing and the shift difference make the link look associated in the initial file. C1 counts against the link itself: new hires running Quillan on Press 5 have 0.9% rejects, and on Arnholt they are no worse than experienced operators.\u0022},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022unresolved-subcause\u0022],\u0022rationale\u0022:\u0022Resin held in the annex (all of it Arnholt) is wetter at the dryer inlet than resin held in the main warehouse (all of it Quillan). But storage location is perfectly confounded with supplier, and C2 notes that no Arnholt material has been held in conditioned storage. Annex humidity (C7) makes the link plausible but does not separate it from supplier origin.\u0022},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022C1 shows the new hires perform no worse than experienced operators. Disciplining them punishes the wrong party and does nothing about the Press 5/Arnholt rejects under the supported hypothesis. No live rival makes it useful.\u0022},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C6\u0022,\u0022C12\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022joint-cause\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022This removes the failing condition (D5), restores the protective alarm that was relaxed in week 31, and contains the risky combination until D5 is verified. It also adds a moisture check that would catch wet resin from either supplier. It does not depend on whether the D5 fault is the heater or the desiccant, because it addresses both.\u0022},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022containment-only\u0022],\u0022rationale\u0022:\u0022C1 and C2 show Arnholt is fine on Press 7 and Quillan is fine on Press 5, so this stops the rejects. But it leaves D5 degraded with a relaxed alarm and thin margin (Quillan leaves D5 at 0.13\u20130.16% against a 0.20% limit). It is reasonable but clearly inferior to A2.\u0022},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022single-cause\u0022,\u0022unconfirmed-subcause\u0022],\u0022rationale\u0022:\u0022This would help if annex storage is what makes Arnholt resin wet, but that is only an association confounded with supplier (R4). If Arnholt resin arrives wet, the move costs rental and disruption without lasting harm. Committing to it now is not justified.\u0022},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022joint-cause\u0022,\u0022decision\u0022],\u0022rationale\u0022:\u0022The highest-ranked action is A2. The cross-tab (C1) and the moisture measurements with the dryer-substitution trial (C2) together establish the interaction and show that restoring drying removes the rejects, so committing to A2 is justified. The unresolved storage question does not affect A2.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022lowValueReads\u0022:[\u0022C3\u0022,\u0022C8\u0022,\u0022C10\u0022,\u0022C13\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022Initial file: each single cause has an apparent contrast case. Arnholt was clean in the Press 7 trial (E3); D5 was degraded while rejects stayed normal on Quillan (E4, E1). The dashboard\u0027s shift split plus the week-36 hiring (E1, E2, E5) steers readers toward H4. Without reads, H3 is unknown and H4 looks plausible. C1 alone settles H4 and R3 (the shift confound and the operator comparison); no other item breaks results down by press, resin or operator. C2 alone settles R1, R2 and R4 (moisture data, the intervention, and the storage confound); no other item measures resin moisture. Reading only one leaves either the mechanism edges or the operator trap unresolved. Distractors such as C4, C6, C7, C9, C11, C12 and C14 are plausible requests but change no key: C6, C12 and C14 restate what E4 already says, and C7 gives humidity without any resin measurement. Both A2\u0027s routing option and A3 are possible because Press 7 has spare first-shift VX capacity. A4 is the single-cause fix keyed premature.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:53:14.7517320Z",
+  "finishedAt": "2026-11-17T15:00:28.4490247Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-INTERACT-1",
+      "split": "heldout",
+      "benchmarkClass": "INTERACT",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "Rising latch-crack and splay rejects on the VX housing family, Line B, Tollbridge plant",
+      "setting": "Marrowgate Components (fictional) is a contract molder. At its Tollbridge plant, Line B molds the VX family of connector housings (VX-12, VX-18, VX-24) from glass-filled nylon (PA66-GF30) on injection Presses 5 and 7. All other Line B product families are polypropylene. Each press has its own desiccant resin dryer: D5 feeds Press 5 and D7 feeds Press 7. Until week 36, all VX resin came from Quillan Polymers. In week 37 a second supplier, Arnholt Resins, was released for general use. VX rejects at final snap-fit and visual inspection have risen every week since then.",
+      "presentingRequest": "The operations director writes: \u0027VX rejects are close to 4% and climbing, and a customer has opened an 8D. I have three people giving me three different stories. Tell me what is actually driving this and what we should do this week. The ops manager wants to act on the new second-shift operators, the plant manager\u0027s instinct is to drop Arnholt, and maintenance say the dryers are fine.\u0027",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Line B quality dashboard export, generated Monday of week 43",
+          "sourceType": "system-record",
+          "text": "VX family (VX-12/18/24), % of parts rejected at final snap-fit and visual inspection, all presses combined: wks 30\u201336: 0.7\u20130.8% each week; wk 37 1.3; wk 38 1.9; wk 39 2.5; wk 40 3.0; wk 41 3.4; wk 42 3.7. Rejects by shift, wks 37\u201342: first shift 2.1% of 72,000 parts; second shift 3.7% of 36,000 parts. Reject codes, wks 37\u201342: latch crack at snap-fit 61%, splay/silver streaks 32%, short shot 7%. Polypropylene families on Line B: flat at 0.4\u20130.6% throughout. No engineering change to VX drawings, materials specification or test limits since March."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email from R. Valdez-Hunt, Operations Manager, to the Operations Director, week 43",
+          "sourceType": "manager-account",
+          "text": "Subject: VX rejects \u2013 my read. Second shift is running nearly double first shift\u0027s reject rate. It started the week after we brought on six new operators (wk 36). Nothing else lines up. Arnholt resin came through a three-week trial with no issues, and maintenance confirm the dryers are not the problem: Press 5 ran clean all summer. I propose putting the six on performance improvement plans and taking them off VX until they are re-certified. The plant manager\u0027s first instinct was to drop Arnholt, but the trial data doesn\u0027t support that and procurement would fight it. I\u0027d rather fix the people side now than wait for another study."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Supplier Quality memo SQ-0912, T. Brennan (Supplier Quality Engineer), week 36",
+          "sourceType": "document",
+          "text": "Arnholt Resins PA66-GF30 production trial, wks 34\u201336, run on Press 7 only (Press 7 is Line B\u0027s designated trial press). Result: 7,800 VX parts, 0.7% rejects against the 0.8% Quillan baseline. Dimensional and snap-fit results are equivalent. The certificates of analysis for all three trial lots state moisture \u0027conforms, spec \u22640.35%\u0027. Recommendation: approve Arnholt as second source and release it to general use from wk 37 on both VX presses, issued FIFO by stores. Logistics note: Arnholt ships in 1-tonne octabins that do not fit the main-warehouse racks, so stores will hold them in the north annex."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Interview notes, Line B maintenance technician, week 43",
+          "sourceType": "staff-account",
+          "text": "\u0027D5 has been running wet dew points since late July: \u221215 to \u221220 instead of \u221240. The regeneration heater trips now and then, and the desiccant is due. It alarmed constantly and kept stopping the press, so in wk 31 we put it through the change board and moved the alarm limit to \u221215. But look: Press 5 ran Quillan the whole of August into mid-September at normal rejects with D5 exactly like that. If the dryer were the problem it would have shown up then. D7 is fine; it reads \u221242.\u0027 Interviewer note: the heater work order is open and no desiccant change is scheduled."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "HR onboarding summary, Line B, week 37",
+          "sourceType": "system-record",
+          "text": "Six new molding operators started on Line B second shift on the Monday of wk 36. Before that they completed a two-week classroom and shadowing programme. All six were signed off on the VX and polypropylene work instructions by the end of wk 37. Line B second-shift headcount rose from 9 to 15. First-shift staffing did not change between wks 30 and 42, and neither did supervision on either shift. Exit interviews and absence for the period show nothing unusual."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "MES reject records for VX parts by press, resin supplier, shift and operator group, weeks 37\u201342",
+          "source": "Manufacturing execution system query run by Quality, week 43",
+          "sourceType": "system-record",
+          "text": "MES query, VX parts, wks 37\u201342; rejects / parts made (rate). Press 5, Arnholt lots: 2,120 / 21,400 (9.9%). First shift 1,030 / 10,600 (9.7%); second shift 1,090 / 10,800 (10.1%). Press 5, Quillan lots: 460 / 50,600 (0.9%). First shift 229 / 25,400; second shift 231 / 25,200 (0.9% each). Press 7, Arnholt lots: 90 / 11,200 (0.8%). Press 7, Quillan lots: 180 / 24,800 (0.7%). Press 7 runs VX on first shift only and polypropylene caps on second shift, so all second-shift VX comes from Press 5. Second-shift Press 5 by operator group: the six new hires 9.9% on Arnholt and 0.9% on Quillan; experienced operators 10.3% and 0.9%. The reject-code mix in the Press 5/Arnholt cell matches the line-wide mix."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Process engineering dryer dew-point and feed-throat resin moisture measurements, Presses 5 and 7, weeks 41\u201342",
+          "source": "Process engineering study file",
+          "sourceType": "independent-observation",
+          "text": "Moisture analyser, % water by weight. Resin datasheet: mold PA66-GF30 at \u22640.20%. Wetter resin degrades in the barrel, which causes splay and brittle snap features. Dryer inlet: Quillan 0.11\u20130.14%; Arnholt 0.27\u20130.33%. D7 outlet (dew point \u221242 \u00B0C): Quillan 0.05%, Arnholt 0.07%. D5 outlet (dew point \u221216 to \u221219 \u00B0C): Quillan 0.13\u20130.16%, Arnholt 0.25\u20130.31%. Wk 42 day-shift trial: Arnholt lot A-2291 was dried in portable dryer PD-1 (\u221240 \u00B0C) and fed to Press 5. It measured 0.08% at the throat and gave 0.8% rejects on 2,400 parts. The same lot run through D5 on the previous day shift gave 10.4% rejects. Caveat: every Arnholt sample came from octabins held in the north annex and every Quillan sample from bags in the main warehouse. No Arnholt material has been held in conditioned storage."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Supplier audit report on Arnholt Resins compounding site, June",
+          "source": "Marrowgate supplier audit SA-26-044",
+          "sourceType": "prior-report",
+          "text": "Audit of the Arnholt Resins compounding site, 11 June. Scope: quality management system, lot traceability, change control, calibration, packaging and labelling. Findings: one minor non-conformance (two gauges in the finished-goods warehouse past their calibration date, corrected during the audit). The lot traceability test passed in 20 minutes. Packaging and labelling conform to Marrowgate requirements. Overall rating: B (approved, routine surveillance). Recommendation: proceed to a production trial subject to part approval. Lead auditor: J. Lindqvist."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Training and sign-off records for the six new second-shift operators",
+          "source": "Line B training file summary, week 37",
+          "sourceType": "document",
+          "text": "Operators 2231\u20132236. Classroom modules (safety, molding basics, resin handling, defect recognition): all passed, scores 78\u201394%. Shadowing: 40 hours each alongside experienced second-shift operators. VX work-instruction sign-off: all six by Friday of wk 37. Operator 2234 re-signed after missing a step in the purge procedure during observation. Polypropylene work-instruction sign-off: all six. Trainer comment: \u0027Group is competent on standard work; still slow on mold changes and needs pairing for those for a few more weeks.\u0027"
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "VX mold tool preventive maintenance log, Presses 5 and 7, weeks 28\u201342",
+          "source": "Toolroom maintenance log",
+          "sourceType": "log",
+          "text": "Tools T-VX-05 (Press 5) and T-VX-07 (Press 7), 4 cavities each. PM interval 150,000 shots: vents cleaned, ejectors lubricated, parting line and cavities inspected. T-VX-05 PM in wk 32 and wk 39; T-VX-07 PM in wk 31 and wk 38. The tools were not swapped between presses at any point. Notes: \u0027light vent residue\u0027 on T-VX-05 at wk 39, cleaned. No cracks, wear or damage recorded on either tool. Cavity-pressure sensor checks within limits at every PM."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Line B preventive maintenance compliance report, Q3",
+          "source": "Maintenance management system report",
+          "sourceType": "system-record",
+          "text": "Q3 PM compliance on Line B: 87% (target 95%). Items overdue at quarter end: D5 desiccant replacement (due wk 33, parts on order); D5 regeneration heater repair (work order open since wk 30, awaiting element); Press 7 hydraulic filter change (due wk 38). D7 desiccant was last replaced in wk 26. Maintenance planner comment: \u0027D5 items deferred because the press was running and rejects were normal; will schedule when parts arrive.\u0027"
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Temperature and humidity logs for main warehouse, north annex and molding hall, August\u2013October",
+          "source": "Facilities environmental loggers",
+          "sourceType": "telemetry",
+          "text": "Weekly mean relative humidity and temperature. Main warehouse (conditioned): 41\u201346% RH, 21\u201322 \u00B0C throughout. North annex (unconditioned): August 68\u201374% RH, September 63\u201370% RH, October 58\u201366% RH; 14\u201326 \u00B0C. Molding hall: 45\u201352% RH, 24\u201327 \u00B0C. The annex logger was out of service 2\u20138 September. No resin or product measurements are part of this record."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "VX customer complaint and field return log, July\u2013October",
+          "source": "Customer quality log",
+          "sourceType": "customer-account",
+          "text": "Wk 30: one shipment mislabelled (VX-18 labels on VX-12 cartons), closed. Wk 39: customer reports silver streaks on 40 parts in one carton, accepted under a cosmetic deviation. Wk 41: customer assembly line reports two latches cracking during insertion; 8D opened, containment by 100% snap-fit re-test of finished stock at Marrowgate. No safety-related escalations and no returns from end users in the period."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Press 5 and Press 7 process parameter logs for VX, weeks 30\u201342",
+          "source": "Press controller data historian",
+          "sourceType": "log",
+          "text": "VX setpoints on both presses have not changed since tool qualification: barrel zones 285\u2013295 \u00B0C, mold 85 \u00B0C, hold pressure 650 bar, cycle 31.5 s. Actual values stayed within \u00B12% of setpoint on both presses for the whole period. From wk 38, Press 5 shows peak injection pressure 4\u20136% lower on some runs, within the alarm band. Press 7 stable. No parameter edits recorded in the audit trail for either press."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Procurement dual-sourcing business case for PA66-GF30 resin, May",
+          "source": "Procurement department",
+          "sourceType": "financial-record",
+          "text": "Quillan list price is up 14% year on year. Arnholt quote is 11% below current Quillan pricing. Target: 50/50 volume split by Q1 next year. Projected saving \u20AC410k a year, plus supply-risk reduction from dual sourcing. Risk section: \u0027Technical equivalence to be confirmed by production trial; logistics to confirm storage for octabin format.\u0027 Approved by the finance committee on 28 May."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Interview with Line B second-shift lead",
+          "source": "Interview notes, week 43",
+          "sourceType": "staff-account",
+          "text": "\u0027The six new starters are coming along. Two of them are still slow on mold changes, so I pair them with a senior operator for those. Press 5 is throwing more cracked latches than it used to. I\u0027ve had the night maintenance man look at the dryer twice and he says it\u0027s within its alarm. I don\u0027t have a view on the cause. We don\u0027t get the MES reports on nights, only the dashboard, so I can\u0027t see which jobs the rejects come from.\u0027"
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Line B change-control records, weeks 28\u201342",
+          "source": "Change board register",
+          "sourceType": "change-record",
+          "text": "CR-3107, wk 31: D5 dew-point alarm limit changed from \u221235 \u00B0C to \u221215 \u00B0C. Reason: \u0027nuisance alarms stopping press; heater repair pending.\u0027 CR-3118, wk 33: Press 7 robot gripper pads replaced. CR-3122, wk 34: temporary Arnholt trial on Press 7. CR-3131, wk 37: Arnholt approved as second source for both VX presses. CR-3140, wk 40: Line B second-shift break times changed. No other changes recorded to VX presses, dryers, tools or test equipment."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Snap-fit test fixture calibration and gauge repeatability records, weeks 30\u201342",
+          "source": "Metrology lab",
+          "sourceType": "document",
+          "text": "Fixture F-SF-2 is the single snap-fit fixture used for VX parts from both presses. Calibrated in wk 30 and wk 39, in tolerance both times. Gauge repeatability and reproducibility study in wk 39: 8% of tolerance, acceptable. Visual inspection boundary samples refreshed in wk 35. No metrology changes or out-of-tolerance findings in the period."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Dryer manufacturer service desk advice on D5 dew-point drift",
+          "source": "Email from dryer manufacturer service desk, week 42",
+          "sourceType": "vendor-account",
+          "text": "Re: unit D5, installed 2019. \u0027On this model, dew points warmer than \u221230 \u00B0C usually mean either a failing regeneration heater or exhausted desiccant, sometimes both. Without a site visit we can\u0027t tell you which. For a unit of this age our standard recommendation is to replace the heater element and the desiccant together, then recheck the dew point after 24 hours. We would not advise widening the alarm limit beyond \u221230 \u00B0C.\u0027"
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Line B OEE and downtime summary, weeks 28\u201342",
+          "source": "Production reporting",
+          "sourceType": "system-record",
+          "text": "Press 5 availability: wks 28\u201331, 81\u201384% (dryer dew-point alarm stops of 6\u20139 hours a week); wks 32\u201342, 91\u201393% (no dryer alarm stops). Press 7 availability 90\u201394% throughout. Line B OEE: 72% in Q3 against 70% in Q2. Top downtime causes in Q3: mold changes, material changeovers, and a hydraulic leak on Press 7 in wk 38."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Resin from the new supplier, Arnholt, is defective and produces the VX rejects whichever press and dryer it is run through."
+          },
+          {
+            "id": "H2",
+            "text": "Degraded drying in D5 produces the VX rejects whichever supplier\u0027s resin it is drying."
+          },
+          {
+            "id": "H3",
+            "text": "The VX rejects come from Arnholt resin being dried in D5 while D5 is degraded. Neither the new resin nor the degraded dryer raises rejects on its own."
+          },
+          {
+            "id": "H4",
+            "text": "Errors by the six operators who joined second shift in week 36 produce the VX rejects."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Arnholt resin dried in D5 while D5 is degraded",
+            "to": "Resin entering Press 5 wetter than the molding moisture limit",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Resin entering the press wetter than the molding moisture limit",
+            "to": "Latch-crack and splay rejects on VX parts",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Six new operators joining second shift in week 36",
+            "to": "Rise in the VX reject rate",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Resin held in the unconditioned north annex",
+            "to": "Higher moisture in resin arriving at the dryer inlet",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Put the six operators who joined second shift in week 36 on formal performance improvement plans and take them off VX production until they are re-certified."
+          },
+          {
+            "id": "A2",
+            "text": "Repair D5 (regeneration heater and desiccant) and confirm its dew point is back to \u221240 \u00B0C. Restore the original D5 alarm limit. Until D5 is verified, keep Arnholt lots off D5 by routing them to Press 7 or drying them in a verified dryer. Add a feed-throat moisture check for every VX resin lot."
+          },
+          {
+            "id": "A3",
+            "text": "As the only response, send all Arnholt lots to Press 7 and run Press 5 on Quillan resin only, leaving D5 and its alarm limit as they are."
+          },
+          {
+            "id": "A4",
+            "text": "Move all Arnholt octabins out of the north annex into the conditioned main warehouse, renting outside space for the finished goods this displaces, to lower the moisture of Arnholt resin reaching the dryers."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "I-H1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-INTERACT-1",
+      "groundTruthNarrative": "The VX reject rise needs two conditions at once. Dryer D5 has been degraded since late July (failing regeneration heater, overdue desiccant), and its alarm was relaxed in week 31. Quillan resin arrives dry enough (0.11\u20130.14%) that even the weak D5 brings it below the 0.20% molding limit (0.13\u20130.16%), so Press 5 ran normally through August. Arnholt resin, released to both presses in week 37, arrives much wetter (0.27\u20130.33%). That is still within Arnholt\u0027s own 0.35% certificate spec. The healthy D7 dries it to 0.07%, which is why the Press 7 trial and later Press 7 production were clean. D5 cannot dry it: Arnholt leaves D5 at 0.25\u20130.31%, and the wet nylon degrades in the barrel, giving splay and brittle latches. Rejects are about 10% in the Press 5/Arnholt cell and under 1% in every other cell. Drying the same Arnholt lot in a portable dryer and molding it on Press 5 removed the rejects. The second-shift excess is an artefact: Press 7 runs VX only on first shift, so all second-shift VX comes from Press 5. Within each press-and-resin cell, new hires perform the same as experienced operators. Why Arnholt resin is wetter, whether from the supplier or from storage in the humid annex, is not established. The fix is to restore D5 and its alarm and to contain Arnholt away from D5 until it is verified.",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "contrast-case",
+            "single-cause",
+            "leadership-narrative"
+          ],
+          "rationale": "Arnholt resin ran at 0.7% rejects in the Press 7 trial (E3). It ran at 0.8% on Press 7 in production, weeks 37\u201342 (C1). Dried in PD-1, it gave 0.8% even on Press 5 (C2). The claim that Arnholt produces rejects whichever press and dryer it goes through is therefore contradicted."
+        },
+        {
+          "itemId": "I-H2",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E4",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "C1",
+            "C2",
+            "C6"
+          ],
+          "tags": [
+            "contrast-case",
+            "single-cause",
+            "interested-source-right-on-fact"
+          ],
+          "rationale": "D5 was degraded from late July, yet rejects stayed at 0.7\u20130.8% through weeks 30\u201336 (E1, E4). Press 5 on Quillan ran at 0.9% in weeks 37\u201342 (C1), and D5 brings Quillan below the limit (C2). Degraded drying alone does not produce the rejects."
+        },
+        {
+          "itemId": "I-H3",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "joint-cause",
+            "central"
+          ],
+          "rationale": "C1 shows rejects confined to the Press 5/Arnholt cell (9.9%), with the other three cells at 0.7\u20130.9%. C2 supplies the mechanism: only Arnholt dried in D5 exceeds the moisture limit. C2 also gives an intervention: the same Arnholt lot dried properly on Press 5 gave 0.8% rejects. From the initial file alone this is live but unestablished, because there is no breakdown by press and resin."
+        },
+        {
+          "itemId": "I-H4",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E5",
+            "C1",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "misleading-signal",
+            "confounded",
+            "leadership-narrative",
+            "wrong-party"
+          ],
+          "rationale": "The second-shift excess in E1 is confounded by press: all second-shift VX is made on Press 5 (C1). Within each press-and-resin cell, first and second shift match (9.7% vs 10.1%; 0.9% vs 0.9%). New hires match experienced operators (9.9% vs 10.3% on Arnholt, 0.9% vs 0.9% on Quillan)."
+        },
+        {
+          "itemId": "I-R1",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "joint-cause",
+            "mechanism"
+          ],
+          "rationale": "Arnholt leaves D5 at 0.25\u20130.31% but leaves D7 at 0.07%. Quillan leaves D5 at 0.13\u20130.16%. The same Arnholt lot dried in PD-1 measured 0.08%. Covariation, mechanism and a direct dryer substitution establish the link. Without C2 there is no moisture data."
+        },
+        {
+          "itemId": "I-R2",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "mechanism",
+            "intervention",
+            "central"
+          ],
+          "rationale": "The datasheet mechanism, the fact that only the over-limit cell has high rejects, and the PD-1 intervention (same lot and press: 10.4% when wet vs 0.8% when dried) establish causation (C2). C1 rules out the main rival, operators, and shows the reject-code mix is unchanged."
+        },
+        {
+          "itemId": "I-R3",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E5",
+            "C1"
+          ],
+          "tags": [
+            "misleading-signal",
+            "confounded",
+            "wrong-party"
+          ],
+          "rationale": "The timing and the shift difference make the link look associated in the initial file. C1 counts against the link itself: new hires running Quillan on Press 5 have 0.9% rejects, and on Arnholt they are no worse than experienced operators."
+        },
+        {
+          "itemId": "I-R4",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "confounded",
+            "unresolved-subcause"
+          ],
+          "rationale": "Resin held in the annex (all of it Arnholt) is wetter at the dryer inlet than resin held in the main warehouse (all of it Quillan). But storage location is perfectly confounded with supplier, and C2 notes that no Arnholt material has been held in conditioned storage. Annex humidity (C7) makes the link plausible but does not separate it from supplier origin."
+        },
+        {
+          "itemId": "I-A1",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C1",
+            "C4"
+          ],
+          "tags": [
+            "wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "C1 shows the new hires perform no worse than experienced operators. Disciplining them punishes the wrong party and does nothing about the Press 5/Arnholt rejects under the supported hypothesis. No live rival makes it useful."
+        },
+        {
+          "itemId": "I-A2",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2",
+            "C6",
+            "C12",
+            "C14"
+          ],
+          "tags": [
+            "protective-control",
+            "joint-cause",
+            "central"
+          ],
+          "rationale": "This removes the failing condition (D5), restores the protective alarm that was relaxed in week 31, and contains the risky combination until D5 is verified. It also adds a moisture check that would catch wet resin from either supplier. It does not depend on whether the D5 fault is the heater or the desiccant, because it addresses both."
+        },
+        {
+          "itemId": "I-A3",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "containment-only"
+          ],
+          "rationale": "C1 and C2 show Arnholt is fine on Press 7 and Quillan is fine on Press 5, so this stops the rejects. But it leaves D5 degraded with a relaxed alarm and thin margin (Quillan leaves D5 at 0.13\u20130.16% against a 0.20% limit). It is reasonable but clearly inferior to A2."
+        },
+        {
+          "itemId": "I-A4",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "single-cause",
+            "unconfirmed-subcause"
+          ],
+          "rationale": "This would help if annex storage is what makes Arnholt resin wet, but that is only an association confounded with supplier (R4). If Arnholt resin arrives wet, the move costs rental and disruption without lasting harm. Committing to it now is not justified."
+        },
+        {
+          "itemId": "I-SUFF",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "joint-cause",
+            "decision"
+          ],
+          "rationale": "The highest-ranked action is A2. The cross-tab (C1) and the moisture measurements with the dryer-substitution trial (C2) together establish the interaction and show that restoring drying removes the rejects, so committing to A2 is justified. The unresolved storage question does not affect A2."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2"
+      ],
+      "lowValueReads": [
+        "C3",
+        "C8",
+        "C10",
+        "C13",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C2"
+      ],
+      "authoringNotes": "Initial file: each single cause has an apparent contrast case. Arnholt was clean in the Press 7 trial (E3); D5 was degraded while rejects stayed normal on Quillan (E4, E1). The dashboard\u0027s shift split plus the week-36 hiring (E1, E2, E5) steers readers toward H4. Without reads, H3 is unknown and H4 looks plausible. C1 alone settles H4 and R3 (the shift confound and the operator comparison); no other item breaks results down by press, resin or operator. C2 alone settles R1, R2 and R4 (moisture data, the intervention, and the storage confound); no other item measures resin moisture. Reading only one leaves either the mechanism edges or the operator trap unresolved. Distractors such as C4, C6, C7, C9, C11, C12 and C14 are plausible requests but change no key: C6, C12 and C14 restate what E4 already says, and C7 gives humidity without any resin measurement. Both A2\u0027s routing option and A3 are possible because Press 7 has spare first-shift VX capacity. A4 is the single-cause fix keyed premature."
+    }
+  }
+}

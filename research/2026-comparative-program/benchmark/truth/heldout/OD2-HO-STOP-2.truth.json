@@ -1,0 +1,344 @@
+{
+  "caseId": "OD2-HO-STOP-2",
+  "groundTruthNarrative": "Analyzer B produced a single 1-3s potassium violation at Level 2 on 11 November. Every check in the initial file points to an isolated event. The Level 1 and Level 3 results in the same run passed. A repeat from the same vial passed. Thirty days of QC show no other rule violation, and the QC means did not move after the 9 November reagent lot change. Forty-three patient samples re-run on Analyzer A, which is still on the old lot, agreed within allowable limits. The patient moving median was flat. One chance 1-3s flag a month is expected at this QC volume. All scheduled QC ran despite short staffing. The exact trigger cannot be determined: a sampling glitch that this module cannot detect and plain statistical chance both remain possible, but neither changes the decision. Analyzer B should be returned to service with no amendments. The operations manager\u0027s recall would force about 2,900 unnecessary recollections. His proposal to widen the limits would weaken a working control. The Ward 6 cluster of high potassium results is split evenly across both analyzers, so it is not an Analyzer B problem. It coincides with transport delays during the tube outage, but renal overflow patients are a live rival explanation, so that link is association only. No catalogue item changes any conclusion.",
+  "answers": [
+    {
+      "itemId": "I-H1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "C1",
+        "C2",
+        "C4",
+        "C5",
+        "C6",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "misleading-signal",
+        "stop-early"
+      ],
+      "rationale": "In the same run, Level 1 and Level 3 passed and the Level 2 repeat passed (E1). Thirty days of QC show no other violation (E2). Forty-three patient samples re-run on Analyzer A agree within 0.20 mmol/L, with a mean difference of \u002B0.02, and the moving median is flat (E3). This evidence directly counts against a systematic fault affecting patient results."
+    },
+    {
+      "itemId": "I-H2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "C2",
+        "C3",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal"
+      ],
+      "rationale": "After the lot change, the Level 2 QC mean is 5.80 against 5.81 before, and the other levels agree within 0.01 (E2). Patient samples on Analyzer B with the new lot match Analyzer A with the old lot (E3). The manager\u0027s claim in E4 is assertion only."
+    },
+    {
+      "itemId": "I-H3",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "C1",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "stop-early"
+      ],
+      "rationale": "The excursion was a single measurement. Adjacent levels and the immediate repeat passed (E1). There was no trend or other rule violation, and the chance rate is one to two flags a month (E2). Patient-sample comparisons show no effect (E3). Together these support an isolated event over a systematic one."
+    },
+    {
+      "itemId": "I-H4",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6",
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E6",
+        "C1",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "undeterminable-cause",
+        "stop-early"
+      ],
+      "rationale": "The module cannot detect partial aspirations, so the absence of flags neither confirms nor excludes a sampling disturbance (E6). Pure statistical chance is an equally live explanation at the expected 1-3s rate (E2). No item, including the vendor reply in C4, can tell the two apart. The claim is live but unestablished."
+    },
+    {
+      "itemId": "I-H5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "E6",
+        "C7"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "organizational"
+      ],
+      "rationale": "The QC software shows 182 of 182 scheduled runs completed, each timestamped (E2). The shift note confirms every run was within 15 minutes of its slot (E6). Short staffing did happen (E4, C7), but QC was not skipped or delayed."
+    },
+    {
+      "itemId": "I-R1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C2",
+        "C3",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal"
+      ],
+      "rationale": "The link itself is countered. On the new lot, 23 Level 2 QC results before and after the excursion are on target (E2). The repeat 21 minutes later on the same lot passed (E1). Patient samples on the new lot agree with the old lot (E3). The lot does not produce the excursion."
+    },
+    {
+      "itemId": "I-R2",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C13"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "The documented rule QC-HOLD-K fired two seconds after the 1-3s violation and imposed the hold (E1). The mechanism, the order of events and the rule trigger establish the causal link."
+    },
+    {
+      "itemId": "I-R3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "C12",
+        "C15"
+      ],
+      "tags": [
+        "misleading-signal",
+        "customer-complaint"
+      ],
+      "rationale": "The Ward 6 high results are split 7 and 7 between Analyzer A and Analyzer B (E5). Analyzer B patient results match Analyzer A (E3). This counts against Analyzer B measurement producing the cluster."
+    },
+    {
+      "itemId": "I-R4",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C10",
+        "C12",
+        "C15"
+      ],
+      "tags": [
+        "confounded",
+        "association"
+      ],
+      "rationale": "Eleven of the 14 high results had transport delays over 3 h, against 17 of 47 for the others, and the cluster coincides with the tube outage (E5). That is an association. However, four renal overflow patients arrived the same day and no repeats were taken, so the main rival, genuine hyperkalaemia from a changed case mix, is not ruled out. Causation is not established."
+    },
+    {
+      "itemId": "I-A1",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "C4",
+        "C11",
+        "C13"
+      ],
+      "tags": [
+        "central",
+        "stop-early"
+      ],
+      "rationale": "The investigation required by the hold rule is complete and shows no systematic error and no patient impact (E1-E3). Restoring service and closing with documentation is the best decision. Keeping Analyzer B suspended costs capacity for no benefit."
+    },
+    {
+      "itemId": "I-A2",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "C3",
+        "C6"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "harmful-overreaction"
+      ],
+      "rationale": "Stored samples older than 24 h are invalid for potassium, so the recall would mean recollecting about 2,900 patients (E3). Quarantining the lot removes Analyzer B\u0027s potassium capacity. Both are damage under every live explanation: isolated chance, or a transient sampling glitch. The lot and systematic-fault hypotheses are contradicted (E2, E3)."
+    },
+    {
+      "itemId": "I-A3",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E4",
+        "C11",
+        "C14"
+      ],
+      "tags": [
+        "protective-control",
+        "leadership-narrative"
+      ],
+      "rationale": "The analyzer does not flag \u0027far too often\u0027: there was one flag in 546 measurements, in line with the expected chance rate (E2). Widening the limits would weaken a control that worked as designed. That reduces detection of real shifts under every hypothesis."
+    },
+    {
+      "itemId": "I-A4",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E6",
+        "C1",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "premature-attribution"
+      ],
+      "rationale": "If a sampling disturbance were confirmed, recording it and adding a line inspection would be sensible and harmless. But H4 is unknown: the module cannot detect it and chance is equally plausible (E6, E2). Recording it as the confirmed cause is not yet justified, and doing so causes no lasting harm if wrong."
+    },
+    {
+      "itemId": "I-A5",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "tags": [
+        "extra-caution"
+      ],
+      "rationale": "Extra Level 2 QC after the return to service is low-cost and reasonable reassurance. However, the evidence already shows no systematic problem (E2, E3), so it is not among the best actions and does not replace closing the investigation."
+    },
+    {
+      "itemId": "I-SUFF",
+      "expected": "sufficient",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E5",
+        "E6",
+        "C4"
+      ],
+      "tags": [
+        "stop-early",
+        "central"
+      ],
+      "rationale": "The top action (A1) is substantive. It is fully justified by the same-run results, the 30-day QC history, the patient comparisons and the QC completion record in the initial file. The unresolved trigger (H4) and the Ward 6 association (R4) do not affect that decision. No catalogue item would change it."
+    }
+  ],
+  "discriminatingReads": [],
+  "lowValueReads": [
+    "C3",
+    "C5",
+    "C8",
+    "C9",
+    "C10",
+    "C14"
+  ],
+  "optimalReadPath": [],
+  "authoringNotes": "STOP design. The initial file holds the decisive QC record (E1), the 30-day QC history including completion counts and the expected chance rate (E2), the cross-analyzer patient comparison and recall cost (E3), and the Ward 6 split across analyzers (E5). Together these settle every key. The catalogue is deliberately redundant: C1, C2, C4, C6, C11 and C13 corroborate but do not change any answer. C4 and C11 reinforce that the trigger cannot be determined, keeping H4 unknown. C10, C12 and C15 add colour on Ward 6 but neither break nor confirm the R4 confound, because the renal overflow rival stays live and there are no repeat samples. C7 confirms the staffing shortfall but not skipped QC. The traps are the operations manager\u0027s lot narrative and his demands to recall and widen limits (E4), and the consultant\u0027s complaint, which invites blaming Analyzer B. The required non-definitive items are H4 unknown, R4 association-only and A4 premature. Reviewer checks: A2 is harmful under both live rivals because of forced recollections and lost capacity. A4\u0027s \u0027confirmed cause\u0027 wording separates it from an acceptable optional step. A5 is extra monitoring, not the best action, so A1 is the only preferred action. The hypotheses all carry dates and components drawn from the initial file only."
+}

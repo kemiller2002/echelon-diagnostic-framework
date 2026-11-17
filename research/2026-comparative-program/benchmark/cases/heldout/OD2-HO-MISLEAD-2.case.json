@@ -1,0 +1,408 @@
+{
+  "id": "OD2-HO-MISLEAD-2",
+  "split": "heldout",
+  "benchmarkClass": "MISLEAD",
+  "domain": "technical",
+  "readBudget": 2,
+  "title": "GET latency regression after gateway 5.8 at Tarnfield Object Storage",
+  "setting": "Quillon Cloud runs Tarnfield, a fictional object storage service. Stateless gateways terminate client requests, check request signatures, look up metadata and fetch object chunks from storage nodes. The fleet is organised as 12 cells across three regions (us-e, ap-s, eu-w). Gateway software ships through a release pipeline that posts to a shared change calendar. Storage-node settings are changed through a separate fleet configuration system.",
+  "presentingRequest": "The VP of Platform Engineering wants a decision today on rolling gateway 5.8 back to 5.7 across the fleet. You have been asked to assess what is driving the GET latency regression and which of the proposed actions should be taken. You may collect at most two items from the catalogue.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Priya Halvorsen, VP Platform Engineering, email to incident channel, 4 Nov 09:12",
+      "sourceType": "leadership-account",
+      "text": "GET p99 has been stuck near 300 ms since the gateway 5.8 rollout on the night of 2\u20133 Nov. Before that it was 90 ms. The dashboard shows it climbing as the rollout went out. 5.8 changed the read path, and gateway CPU is up 18%. I want a fleet-wide rollback to 5.7 today. Security has objected because of the signature fix, but customer latency comes first and we can re-ship the fix later. The storage and network teams have confirmed nothing of theirs is involved."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Fleet latency dashboard export with deployment annotations",
+      "sourceType": "telemetry",
+      "text": "Fleet GET p99, hourly average of 5-minute p99 values (ms), night of 2\u20133 Nov. Annotation: \u0027gateway 5.8 rollout 22:05\u201304:10 (us-e 22:05\u201323:30, ap-s 23:35\u201301:50, eu-w 02:30\u201304:10)\u0027. 20:00 90; 21:00 91; 22:00 93; 23:00 139; 00:00 284; 01:00 291; 02:00 296; 03:00 301; 04:00 298; 05:00 297. Daily median p99: 1 Nov 90, 2 Nov 91, 4 Nov 296, 6 Nov 294, 8 Nov 297. The shared change calendar for 2\u20133 Nov has one entry: gateway 5.8 rollout."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Gateway 5.8 release notes (approved 30 Oct)",
+      "sourceType": "change-record",
+      "text": "Changes: (1) Fixes SEC-2291, a request-signature replay weakness reported by external auditors. Versions 5.7 and earlier remain exposed, and audit closure requires 5.8 across the fleet by 30 Nov. (2) Read path: parallel range-fetch fan-out raised from 4 to 8 for large objects. (3) TLS library upgrade. Known effect: gateway CPU \u002B15\u201320% from the added signature checks. Rollback procedure: redeploy 5.7, about 4 hours across the fleet."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, storage platform manager, 4 Nov",
+      "sourceType": "manager-account",
+      "text": "\u0027We pushed a routine compaction tuning change through the fleet config system on the evening of 2 Nov, because backlog alerts had been firing since about 31 Oct. Fleet config pushes don\u0027t go on the shared change calendar and never have. Compaction is background work and yields to client reads, so it can\u0027t be behind a read-latency problem. And to be clear, we never pause compaction. Once backlog passes about 15% of extents, read amplification climbs and nodes start running toward disk-full.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Network on-call handover note, 3 Nov 08:00",
+      "sourceType": "staff-account",
+      "text": "\u0027Elevated TCP retransmits on us-e spine-2 from 02:10 to 04:50 on 3 Nov, traced to a flapping optic. We replaced the optic at 04:50 and retransmits have been at baseline since. Nothing comparable in ap-s or eu-w. Gateway-to-storage round-trip time medians are 0.4\u20130.6 ms in all three regions, same as last week. We don\u0027t see a network angle on the GET latency issue.\u0027"
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Customer success note and traffic summary, 4 Nov",
+      "sourceType": "document",
+      "text": "On 30 Oct Orrin Media began migrating its archive into Tarnfield, writing about 18 TB/day across all three regions. It is a background copy with a 15 Dec deadline and is currently ahead of schedule. Orrin\u0027s contract allows temporary ingest rate limits with 24 hours\u0027 notice, and their technical lead has said pacing is fine. Fleet traffic, 28 Oct to 4 Nov: GET requests/s rose 6%, gradually across the week. PUT requests/s rose 14%."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Gateway 5.8 code review record and test summary",
+      "source": "Code review system, GW-5.8",
+      "sourceType": "document",
+      "text": "Code review record, GW-5.8. 41 merged changes, each with two approvals. Unit and integration suites passed (2,318 tests). The range-fetch fan-out change applies to objects above 64 MiB. The signature check adds an HMAC verification and a nonce-cache lookup per request. Reviewer comment: \u0027possible CPU cost; no storage-side effect expected.\u0027 Integration tests run against an in-memory storage stub, not real storage nodes."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Pre-release staging load test results, gateway 5.7 vs 5.8",
+      "source": "Release engineering, load-test report, 28 Oct",
+      "sourceType": "system-record",
+      "text": "Pre-release load test, staging, 28 Oct. 40-minute runs at 70% of production peak GET rate, first gateway 5.7 then 5.8, against six staging storage nodes holding synthetic data (about 2% of production volume, lightly loaded). GET p99: 5.7 84 ms, 5.8 87 ms. Gateway CPU: 5.7 31%, 5.8 37%. Test owner\u0027s note: \u0027staging storage is not representative of production disk load; treat storage-side numbers as indicative only.\u0027"
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Customer support tickets mentioning latency, 3\u20138 Nov",
+      "source": "Support queue extract",
+      "sourceType": "customer-account",
+      "text": "Support queue extract, 3\u20138 Nov. 64 tickets mention slow downloads or timeouts, from 41 accounts across all three regions. 11 cite SDK timeouts at 250 ms. Two enterprise accounts asked for an incident declaration and confirmation of SLA credits. Agents tagged 52 tickets \u0027gateway 5.8\u0027 after the internal status note named the release. No ticket pins down when the slowness started more precisely than \u0027overnight on the 2nd\u0027."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Gateway host metrics (CPU, memory, connection pools), 1\u20138 Nov",
+      "source": "Gateway fleet monitoring",
+      "sourceType": "telemetry",
+      "text": "Gateway fleet metrics, 1\u20138 Nov. CPU median 34% before 2 Nov, 40% after. Peak 52% (previously 44%). Memory flat. In-use connections from gateways to storage nodes rose from about 1,900 to about 5,800 per region overnight on 2\u20133 Nov. The pool limit is 8,000, with no exhaustion events. Gateway request queue depth was zero throughout, and no gateway host exceeded 60% CPU."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Distributed trace sample, GET requests, 3 Nov",
+      "source": "Tracing system export",
+      "sourceType": "log",
+      "text": "Trace sample, 3 Nov 10:00\u201310:20: 40 GET traces from us-e, all served by gateway 5.8. Median span times: authentication and signature check 4 ms. Metadata lookup 6 ms. Storage fetch 271 ms (gateway-side span, includes network and storage-node time). Response streaming 12 ms. Traces are kept for 24 hours, so there are no pre-release traces to compare against."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Per-cell GET p99 latency with deployment and configuration timestamps, 1\u20138 Nov",
+      "source": "SRE analytics export",
+      "sourceType": "system-record",
+      "text": "SRE analytics export, per cell. Fields: gateway 5.8 arrival; fleet config push FC-7710 applied; first 5-minute window with GET p99 above 150 ms; median GET p99 1\u20132 Nov \u2192 4\u20138 Nov (ms). Times are for 2\u20133 Nov.\nuse-1: 22:05; 23:38; 23:40; 89\u2192296\nuse-2: 22:31; 23:39; 23:45; 90\u2192301\nuse-3: 22:58; 23:41; 23:45; 92\u2192289\nuse-4: 23:27; 23:42; 23:50; 88\u2192294\naps-1: 23:35; 23:44; 23:50; 93\u2192305\naps-2: 00:20; 23:45; 23:50; 91\u2192298\naps-3: 01:05; skipped (change freeze before 9 Nov disk replacement; hardware unchanged); none; 91\u219294\naps-4: 01:48; 23:47; 23:55; 90\u2192292\neuw-1: 02:30; 23:49; 23:55; 87\u2192291\neuw-2: 03:05; 23:50; 23:55; 89\u2192299\neuw-3: 03:40; 23:51; 00:00; 92\u2192302\neuw-4: 04:10; 23:52; 00:05; 90\u2192297\nGET requests/s, 28 Oct\u21924 Nov: fleet \u002B6%, aps-3 \u002B7%.\nTest, 6 Nov 10:00\u201313:00: euw-1 gateways rolled back to 5.7. p99 291 before, 297 during, 293 after."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Network fabric interface counters, all regions, 1\u20138 Nov",
+      "source": "Network monitoring export",
+      "sourceType": "telemetry",
+      "text": "Network fabric export, 1\u20138 Nov, all regions. Interface error counters at baseline except us-e spine-2 (02:10\u201304:50 on 3 Nov; optic replaced). Peak link utilisation 41%, no congestion drops. Cross-rack traffic up 9% from 3 Nov in all regions. The network team attributes this to client retries and has not looked into it further."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Storage fleet configuration change ticket for the 2 Nov compaction tuning",
+      "source": "Fleet configuration system, ticket FC-7710",
+      "sourceType": "change-record",
+      "text": "Ticket FC-7710, filed 2 Nov 18:20 by storage on-call and approved by the storage platform manager. Change: compaction worker threads 2 \u2192 6 on all storage nodes. Reason: \u0027compaction backlog 11% and rising, alert threshold 8%.\u0027 Expected client impact: \u0027negligible; compaction yields to foreground reads.\u0027 Rollout: automatic via the fleet config system. Rollback: set threads to 2, which takes effect within 5 minutes per cell. Calendar link: none."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Orrin Media migration runbook",
+      "source": "Runbook v2, shared with customer",
+      "sourceType": "document",
+      "text": "Orrin Media migration runbook v2. Source archive 6.1 PB, objects mostly 8\u2013200 MiB. Orrin\u0027s tooling copies it via PUT at a target of 18 TB/day across us-e, ap-s and eu-w, in proportion to Orrin\u0027s existing footprint. Started 30 Oct, completion target 15 Dec. On 7 Nov progress was 9% ahead of plan. Orrin does not expect to read migrated data before January."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Interview notes, gateway team lead, 5 Nov",
+      "source": "Incident review interviewer",
+      "sourceType": "staff-account",
+      "text": "\u0027The fan-out change only applies to objects over 64 MiB, which is about 3% of GETs. The signature check costs CPU, not much latency: we measured 1\u20132 ms in staging. I don\u0027t see how 5.8 adds 200 ms to fleet p99, but I can\u0027t rule it out until someone shows me a cell where the timing doesn\u0027t line up. Rolling back hurts us too: the SEC-2291 audit deadline is 30 Nov and 5.7 is still exposed.\u0027"
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Storage-node host and compaction metrics, 28 Oct\u20138 Nov",
+      "source": "Storage observability export",
+      "sourceType": "telemetry",
+      "text": "Storage observability export, 28 Oct\u20138 Nov. Node medians across the 11 cells that applied FC-7710.\nCompaction worker threads: 2 before the push, 6 after.\nCompaction share of disk bytes: 38% before, 71% after.\nDisk utilisation: 41% before, 97% after. It crossed 90% within 5 minutes of the push in each of the 11 cells.\nDisk read queue wait: 9 ms before, 205 ms after.\nNode-side GET service time (timed on the node, excludes network): 61 ms before, 262 ms after.\nCompaction backlog, share of extents awaiting compaction (fleet): 3.1% on 29 Oct; 11.2% at 22:00 on 2 Nov; 4.0% on 8 Nov.\nAnnotations: Orrin Media migration writes began 30 Oct. A cold-tier lifecycle-expiry sweep ran 29 Oct\u20131 Nov, writing deletion markers that compaction must process. Backlog growth has not been attributed by source or by node."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Post-incident review PIR-118 (March)",
+      "source": "Platform engineering review archive",
+      "sourceType": "prior-report",
+      "text": "PIR-118, March. Gateway 5.3 added a synchronous metadata call to the GET path. Fleet GET p99 rose from 85 ms to 160 ms within an hour of rollout and stayed there for nine days, until a rollback and fix. Contributing factor: staging did not exercise metadata latency. Action item adopted by platform leadership: \u0027treat any post-release latency change as release-caused until shown otherwise.\u0027"
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Client SDK telemetry: retries and versions, 1\u20138 Nov",
+      "source": "SDK telemetry pipeline",
+      "sourceType": "telemetry",
+      "text": "Client SDK telemetry (opt-in, about 40% of GET traffic), 1\u20138 Nov. Retried GETs as a share of all GETs: 0.5% before 2 Nov 23:00, 2.9% from 3 Nov 00:00 onward. SDK default timeout 250 ms. SDK version mix unchanged over the period (v3.x 81%, v2.x 19%). Hourly resolution only."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Disk vendor firmware advisory and fleet asset inventory",
+      "source": "Drive vendor advisory DV-22-41 with inventory extract",
+      "sourceType": "vendor-account",
+      "text": "Vendor advisory DV-22-41: firmware 3.2 on the vendor\u0027s 15.36 TB data-centre drives can produce multi-second read stalls under sustained mixed workloads. Fixed in 3.3. Attached asset inventory extract: all Tarnfield storage nodes report firmware 3.4, installed in August. No drive firmware changes since then."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Finance estimate of SLA credit exposure",
+      "source": "Finance, 7 Nov",
+      "sourceType": "financial-record",
+      "text": "Finance estimate, 7 Nov. If GET p99 stays above the 250 ms SLA objective through 30 Nov, service credits owed come to roughly $1.9M across 312 enterprise accounts. About $0.4M has already accrued for 3\u20137 Nov. The estimate assumes every eligible customer files a claim."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The gateway 5.8 release, rolled out overnight on 2\u20133 Nov, caused the GET latency regression."
+      },
+      {
+        "id": "H2",
+        "text": "The storage-node compaction tuning change made on the evening of 2 Nov caused the GET latency regression."
+      },
+      {
+        "id": "H3",
+        "text": "Growth in customer request traffic, including the Orrin Media migration, overloaded the service and caused the GET latency regression."
+      },
+      {
+        "id": "H4",
+        "text": "Degraded network transport between gateways and storage nodes caused the GET latency regression."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Gateway 5.8 release (rolled out 2\u20133 Nov)",
+        "to": "GET p99 regression (about 90 ms to about 300 ms)",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "2 Nov storage-node compaction tuning change",
+        "to": "Storage-node disk saturation",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Storage-node disk saturation",
+        "to": "GET p99 regression (about 90 ms to about 300 ms)",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Orrin Media migration writes (from 30 Oct)",
+        "to": "Growth in compaction backlog before 2 Nov",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Roll the gateway back to version 5.7 across the fleet until the latency regression is resolved."
+      },
+      {
+        "id": "A2",
+        "text": "Revert the 2 Nov compaction tuning change in one cell first, watching GET p99 and compaction backlog, before extending the revert to the remaining cells."
+      },
+      {
+        "id": "A3",
+        "text": "Temporarily rate-limit Orrin Media\u0027s migration ingest, giving the contractual notice, to slow compaction backlog growth."
+      },
+      {
+        "id": "A4",
+        "text": "Pause compaction on all storage nodes for the rest of the incident (expected to be one to two weeks) to free storage-node disk I/O for client reads."
+      },
+      {
+        "id": "A5",
+        "text": "Have the gateway team profile 5.8\u0027s higher CPU use in staging before the next gateway release."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "S-H1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-H2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-H3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-H4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-R1",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-R2",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-R3",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-R4",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S-A1",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S-A2",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S-A3",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S-A4",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S-A5",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S-SUFF",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

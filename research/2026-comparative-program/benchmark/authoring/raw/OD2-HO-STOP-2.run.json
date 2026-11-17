@@ -1,0 +1,799 @@
+{
+  "label": "OD2-HO-STOP-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7717,
+  "cacheCreationTokens": 4503,
+  "outputTokens": 37378,
+  "thinkingTokens": 25601,
+  "costUsd": 0.7851434000000002,
+  "durationMs": 354755,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-STOP-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-STOP-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022STOP\u0022,\u0022domain\u0022:\u0022cross-domain\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022One potassium QC flag on Analyzer B\u0022,\u0022setting\u0022:\u0022Calder Vale Hospital core laboratory runs two Torvane CS-60 chemistry analyzers (A and B). Analyzer B switched to a new ISE reagent lot on Monday 9 November 2026; Analyzer A is still on the previous lot. On Wednesday 11 November a single Level 2 potassium QC result on Analyzer B fell outside its limits. Analyzer B potassium testing has been suspended since then, and Analyzer A is carrying the load. Separately, the Ward 6 pneumatic tube station has been out of service since 10 November, and the ward\u0027s consultant has asked about high potassium results.\u0022,\u0022presentingRequest\u0022:\u0022From Dr Selwyn Marrable, laboratory director, 12 Nov: \u0027Analyzer B potassium has been suspended since one QC failure yesterday afternoon. Our operations manager wants every potassium since the lot change recalled, the lot quarantined and the limits widened. The section lead wants to close it with no amendments. Ward 6 is asking whether our analyzers are giving false highs. Tell me what is actually going on and what I should sign off.\u0027\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Middleware QC exception record QX-2026-1187\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022QC EXCEPTION QX-2026-1187 | Analyzer B (Torvane CS-60) | 11 Nov 2026 14:10:22. Potassium, QC lot 4471. Level 1: 3.52 mmol/L (target 3.50, SD 0.04, \u002B0.5 SD) PASS. Level 2: 6.03 (target 5.80, SD 0.06, \u002B3.8 SD) FAIL 1-3s. Level 3: 7.86 (target 7.90, SD 0.08, -0.5 SD) PASS. Sodium and chloride, all three levels, same run: PASS. Middleware rule QC-HOLD-K fired 14:10:24: new potassium results from Analyzer B held; 186 potassium results reported since last accepted QC (10:03) flagged for review. Repeat Level 2, re-poured from the same vial, 14:31:05: 5.82 (\u002B0.3 SD) PASS. Hold remains until supervisor sign-off; 23 samples held at time of repeat; routine potassium work rerouted to Analyzer A.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022QC software monthly summary, Analyzer B potassium\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022QC software summary, Analyzer B potassium, 12 Oct-12 Nov 2026. Schedule: three levels every 4 h; 182 scheduled runs, 182 completed (546 measurements), each logged with timestamp and operator ID. Westgard violations: one 1-3s (Level 2, 11 Nov 14:10). No 2-2s, R-4s, 4-1s or 10x violations at any level. Reagent lot changed 9 Nov 07:40; calibration accepted 07:58. Level 2 mean: 5.81 before the change (158 measurements), 5.80 after (23 measurements, excluding 14:10). Level 1 and Level 3 means before and after the change agree within 0.01. QC plan note: the 1-3s rule\u0027s expected false-rejection rate is about 0.3% per measurement, i.e. roughly one or two chance flags a month at this volume.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Investigation worksheet, chemistry section lead\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Investigation worksheet QX-2026-1187, Dr Mirela Santos-Hart, chemistry section lead, 11 Nov 17:40. Re-ran on Analyzer A (previous reagent lot; QC in control all day) all 23 held samples and 20 randomly chosen of the 186 flagged results, each within 4 h of collection. Difference B - A: mean \u002B0.02 mmol/L, range -0.08 to \u002B0.10; all within our 0.20 allowable difference. The 23 held samples were reported from the Analyzer A values. Analyzer B patient moving median (blocks of 50) on 11 Nov: 4.21-4.29, against 4.18-4.31 over the prior 30 days. For any recall: under SOP CH-4.2, stored samples older than 24 h are invalid for potassium, so re-testing results since 9 Nov (about 2,900) means recollecting every patient. Recommend closing with no amendments. Analyzer B potassium suspended pending director sign-off.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Glen Ashworth, laboratory operations manager\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022From: Glen Ashworth, Laboratory Operations Manager. To: chemistry section; cc lab director. 12 Nov 08:15. Subject: Analyzer B potassium. I said on Monday the new reagent lot would be trouble, and now we have a QC failure. Dr Larkby on Ward 6 has also emailed about a run of high potassiums this week. We were two short on day shift on Tuesday and Wednesday, so I suspect QC was rushed or skipped. I want every potassium from Analyzer B since the lot change recalled and re-tested, the lot quarantined, and the Level 2 limits widened to plus or minus 4 SD. This analyzer flags far too often and it is costing us turnaround.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022LIS query, quality officer\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022LIS query by Hana Brizic, quality officer, 12 Nov 11:00. Ward 6 potassium results of 5.5 mmol/L or more: 10-12 Nov, 14 of 61 results; 3-5 Nov, 6 of 58. Of the 14 high results, 7 were analysed on Analyzer A and 7 on Analyzer B. Collection-to-receipt time over 3 h: 11 of the 14 high results, 17 of the 47 others. The pneumatic tube station serving Ward 6 has been out of service since 10 Nov 07:45; samples are walked down in porter batches. Bed management note: Ward 6 took four overflow patients from the renal unit on 10 Nov. No repeat samples have been requested for any of the 14 high results.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Shift note, Tomasz Rendell, biomedical scientist\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Shift note, Tomasz Rendell, biomedical scientist, 11 Nov 15:05. All scheduled Analyzer B QC ran on 9, 10 and 11 Nov, each within 15 minutes of its slot; QC log printout attached, signed by me or Ama Oduya. At 14:10 I saw the Level 2 potassium 1-3s and checked the instrument event log: no clot, sample-level or ISE flags. Vendor bulletin TB-ISE-07 says this module does not flag partial aspirations on the ISE line, so a short sample or bubble cannot be excluded. The vial was opened 7 Nov, inside its 7-day limit. I re-poured and re-ran at 14:31 and it passed. Honestly I cannot tell whether it was a sampling glitch or a chance outlier.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Analyzer B instrument event log, 11 Nov 2026 13:30-15:00\u0022,\u0022source\u0022:\u0022Analyzer B onboard event log export\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u002213:31 ISE reagent pack (K/Na/Cl) level 64%. 13:58 sample probe wash cycle complete. 14:02 ISE auto-calibration: K slope 57.6 mV/decade (spec 52-62) PASS. 14:10:19 QC L1/L2/L3 aspirated, rack 90, positions 1-3. No clot detect, no liquid-level error, no ISE noise flags. 14:31:02 QC L2 aspirated, rack 90, position 2. No flags. 14:44 routine samples resumed on analyzer (potassium results held by middleware). No error-class entries between 13:30 and 15:00.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Analyzer B potassium calibration records, 1-14 Nov 2026\u0022,\u0022source\u0022:\u0022Analyzer B calibration history\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Potassium ISE calibrations, Analyzer B. 2 Nov: slope 57.9 mV/decade, PASS. 9 Nov 07:58 (after reagent lot change): slope 57.7, PASS; calibrator recovery 4.02 and 6.98 mmol/L against targets 4.00 and 7.00. Automatic calibrations every 8 h, 9-14 Nov: slopes 57.4-58.0, all PASS. No calibration failures, repeats or manual overrides recorded in the period.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Certificate of analysis for the ISE reagent lot introduced on 9 Nov\u0022,\u0022source\u0022:\u0022Torvane Diagnostics quality assurance\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Torvane Diagnostics certificate of analysis, ISE reagent pack lot R-30962. Release testing: potassium recovery on reference panel 99.6-100.4%; between-pack CV 0.6%; ionic strength within specification. Shelf life to 31 May 2027. Storage 2-25 C. Released 14 Sept 2026 with QA signature. No field safety notices issued against this lot as of the document date.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Vendor technical support correspondence, case 88-2214, 13 Nov 2026\u0022,\u0022source\u0022:\u0022Torvane field applications specialist\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Reply from Torvane field applications specialist, case 88-2214: \u0027We have no other customer reports of potassium shifts on lot R-30962. From the event log you sent, the instrument recorded no hardware or aspiration errors at 14:10. As noted in TB-ISE-07, the ISE line has no partial-aspiration detection, so we cannot say from logs whether a short sample occurred. A single 1-3s with a passing repeat and passing adjacent levels does not by itself indicate an instrument fault. No service visit recommended unless further violations occur.\u0027\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022External quality assessment reports, potassium, Analyzer B, last three cycles\u0022,\u0022source\u0022:\u0022Regional EQA scheme\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Regional EQA scheme, chemistry panel, Analyzer B potassium. Cycle 2026-4 (June): three samples, deviation from method mean -0.6% to \u002B0.9%, score acceptable. Cycle 2026-5 (August): -0.3% to \u002B1.1%, acceptable. Cycle 2026-6 (October): -0.8% to \u002B0.4%, acceptable. Cycle 2026-7 samples received 16 Nov; results due 4 Dec.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Analyzer A potassium QC data, 12 Oct-12 Nov 2026\u0022,\u0022source\u0022:\u0022QC software monthly summary, Analyzer A\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022QC software summary, Analyzer A potassium, QC lot 4471, previous reagent lot (change scheduled 16 Nov). 182 scheduled runs, 182 completed. Westgard violations: none. Level 2 mean 5.79 (SD 0.06). Level 1 mean 3.50; Level 3 mean 7.91. Daily means on 10, 11 and 12 Nov within 0.02 of the monthly mean at each level.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Chemistry day-shift staffing rota, 9-12 Nov 2026\u0022,\u0022source\u0022:\u0022Laboratory rota system\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Planned establishment: 6 biomedical scientists on day shift. 9 Nov: 6 present. 10 Nov: 4 (one sick, one vacancy unfilled). 11 Nov: 4 (same). 12 Nov: 5. Bank cover requested for 10-11 Nov, not filled. Rota note: QC duty assigned to T. Rendell on 10 and 11 Nov and to A. Oduya on 9 and 12 Nov. Overtime approved 11 Nov 15:00-18:00 for backlog.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Training and competency records, staff on QC duty 9-12 Nov\u0022,\u0022source\u0022:\u0022Laboratory training database\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022T. Rendell: chemistry analyzer competency signed off 3 Mar 2026; QC interpretation module completed 18 Apr 2026; annual reassessment due Mar 2027. A. Oduya: competency signed off 12 Jan 2025, reassessed 20 Jan 2026; QC interpretation module completed 2024. No competency concerns logged for either person in the last 12 months.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022QC material refrigerator temperature log, 1-12 Nov 2026\u0022,\u0022source\u0022:\u0022Fridge CH-F3 continuous logger\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Fridge CH-F3 (QC and calibrator storage), continuous logger, 15-minute readings. Range 1-12 Nov: 3.2-5.6 C (limits 2-8 C). No alarms. Door-open events: 6-14 per day, longest 2 min 40 s (11 Nov 06:02). Logger calibration certificate valid to February 2027.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Pneumatic tube system fault ticket and repair schedule\u0022,\u0022source\u0022:\u0022Estates helpdesk ticket PT-5530\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Estates ticket PT-5530. Reported 10 Nov 07:45: station W6 (Ward 6) blower fault, carriers not dispatching. Station isolated 08:10. Diagnosis 10 Nov: blower motor failure; part ordered. Interim arrangement: porter collection from Ward 6 at 09:00, 12:00, 15:00 and 18:00 and on request. Expected return to service 19 Nov. Other stations unaffected.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Prior potassium QC exception reports, January-October 2026\u0022,\u0022source\u0022:\u0022Quality management system\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022Summary of QC exceptions, potassium, both analyzers. Analyzer A: 1-3s Level 3, 14 Feb; 1-3s Level 1, 30 Jul. Analyzer B: 1-3s Level 2, 9 May; 1-3s Level 1, 22 Aug. In each case adjacent levels passed, the repeat passed, patient comparison was within allowable difference, no amendments were issued and there was no recurrence within 30 days. Cause recorded as \u0027not determined\u0027 in all four. No multi-rule violations recorded in the period.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview notes, Ward 6 charge nurse, 13 Nov 2026\u0022,\u0022source\u0022:\u0022Interview by H. Brizic, quality officer\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Interview with Ward 6 charge nurse by H. Brizic. \u0027Since the tube went down, bloods sit in the specimen box until the porter round, sometimes two or three hours, longer if a round is missed. We have also got the four renal overflow patients, and some of them run high potassiums anyway. I could not tell you which of the high ones were the overflow patients without going through the notes. Nobody has asked us to repeat anything yet.\u0027\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Middleware rule configuration, QC-HOLD-K\u0022,\u0022source\u0022:\u0022Middleware configuration export\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Rule QC-HOLD-K, version 3, approved 2 Jun 2026. Trigger: any potassium QC result on Analyzer A or B violating 1-3s, 2-2s or R-4s. Action: hold all subsequent potassium results from that analyzer; flag all results reported since the last accepted QC for review. Release: supervisor or director sign-off after documented investigation. Audit: last functional test of the rule 5 Oct 2026, passed.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Laboratory quality committee minutes, 17 Sept 2026\u0022,\u0022source\u0022:\u0022Quality committee secretary\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Item 4: QC design review, potassium. Sigma metric for potassium on both analyzers estimated at 4.1 using last EQA bias and internal CV. Committee confirmed the current multirule set (1-3s/2-2s/R-4s/4-1s) and current limits. Proposal from operations to widen Level 2 limits to reduce reruns: not adopted; reviewer noted wider limits would reduce detection of real shifts at this sigma. Action: re-review March 2027.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Email from Ward 6 consultant, 11 Nov 2026\u0022,\u0022source\u0022:\u0022Dr Ifeoma Larkby, consultant physician\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022From Dr Ifeoma Larkby, consultant physician, Ward 6, 11 Nov 09:40: \u0027I have had at least six potassiums over 5.5 since Monday that do not fit the clinical picture, and one patient was nearly started on treatment. Is there a problem with one of your analyzers? I realise we have renal overflow patients with us at the moment, so some may be genuine, but I would like this looked at. Please let me know whether we should be repeating samples.\u0027\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Analyzer B has a systematic potassium measurement fault that affected patient results reported around the 11 November excursion.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The reagent lot introduced on Analyzer B on 9 November shifted its potassium results.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022The out-of-range Level 2 result was an isolated event confined to the 14:10 QC measurement on 11 November.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022A transient sampling disturbance during the 14:10 Level 2 measurement on 11 November produced the out-of-range result.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Short staffing led to scheduled potassium QC being skipped or delayed on Analyzer B in the days before the 11 November excursion.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Reagent lot change on Analyzer B (9 Nov)\u0022,\u0022to\u0022:\u0022Level 2 potassium QC excursion on Analyzer B (11 Nov 14:10)\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Level 2 potassium QC excursion on Analyzer B (11 Nov 14:10)\u0022,\u0022to\u0022:\u0022Middleware hold on Analyzer B potassium results\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Analyzer B potassium measurement\u0022,\u0022to\u0022:\u0022Elevated Ward 6 potassium results, 10-12 Nov\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Prolonged collection-to-receipt time during the Ward 6 pneumatic tube outage\u0022,\u0022to\u0022:\u0022Elevated Ward 6 potassium results, 10-12 Nov\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Return Analyzer B to potassium service, close the review of the 186 flagged results with no amendments, and document the event as an isolated QC excursion.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Recall and re-test every potassium result from Analyzer B since the 9 November lot change, and quarantine the reagent lot.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Widen Analyzer B\u0027s Level 2 potassium acceptance limits to plus or minus 4 SD to reduce QC flags.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Record a transient sampling disturbance as the confirmed cause of the excursion in the exception log and add a pre-run ISE sample-line inspection to Analyzer B\u0027s QC procedure.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022After returning Analyzer B to service, run an additional Level 2 potassium QC at the start of each shift for the next week alongside the routine schedule.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-STOP-2\u0022,\u0022groundTruthNarrative\u0022:\u0022Analyzer B produced a single 1-3s potassium violation at Level 2 on 11 November. Every check in the initial file points to an isolated event. The Level 1 and Level 3 results in the same run passed. A repeat from the same vial passed. Thirty days of QC show no other rule violation, and the QC means did not move after the 9 November reagent lot change. Forty-three patient samples re-run on Analyzer A, which is still on the old lot, agreed within allowable limits. The patient moving median was flat. One chance 1-3s flag a month is expected at this QC volume. All scheduled QC ran despite short staffing. The exact trigger cannot be determined: a sampling glitch that this module cannot detect and plain statistical chance both remain possible, but neither changes the decision. Analyzer B should be returned to service with no amendments. The operations manager\u0027s recall would force about 2,900 unnecessary recollections. His proposal to widen the limits would weaken a working control. The Ward 6 cluster of high potassium results is split evenly across both analyzers, so it is not an Analyzer B problem. It coincides with transport delays during the tube outage, but renal overflow patients are a live rival explanation, so that link is association only. No catalogue item changes any conclusion.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022misleading-signal\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022In the same run, Level 1 and Level 3 passed and the Level 2 repeat passed (E1). Thirty days of QC show no other violation (E2). Forty-three patient samples re-run on Analyzer A agree within 0.20 mmol/L, with a mean difference of \u002B0.02, and the moving median is flat (E3). This evidence directly counts against a systematic fault affecting patient results.\u0022},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022After the lot change, the Level 2 QC mean is 5.80 against 5.81 before, and the other levels agree within 0.01 (E2). Patient samples on Analyzer B with the new lot match Analyzer A with the old lot (E3). The manager\u0027s claim in E4 is assertion only.\u0022},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022The excursion was a single measurement. Adjacent levels and the immediate repeat passed (E1). There was no trend or other rule violation, and the chance rate is one to two flags a month (E2). Patient-sample comparisons show no effect (E3). Together these support an isolated event over a systematic one.\u0022},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E6\u0022,\u0022E1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022undeterminable-cause\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022The module cannot detect partial aspirations, so the absence of flags neither confirms nor excludes a sampling disturbance (E6). Pure statistical chance is an equally live explanation at the expected 1-3s rate (E2). No item, including the vendor reply in C4, can tell the two apart. The claim is live but unestablished.\u0022},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022organizational\u0022],\u0022rationale\u0022:\u0022The QC software shows 182 of 182 scheduled runs completed, each timestamped (E2). The shift note confirms every run was within 15 minutes of its slot (E6). Short staffing did happen (E4, C7), but QC was not skipped or delayed.\u0022},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022The link itself is countered. On the new lot, 23 Level 2 QC results before and after the excursion are on target (E2). The repeat 21 minutes later on the same lot passed (E1). Patient samples on the new lot agree with the old lot (E3). The lot does not produce the excursion.\u0022},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022protective-control\u0022],\u0022rationale\u0022:\u0022The documented rule QC-HOLD-K fired two seconds after the 1-3s violation and imposed the hold (E1). The mechanism, the order of events and the rule trigger establish the causal link.\u0022},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C12\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022customer-complaint\u0022],\u0022rationale\u0022:\u0022The Ward 6 high results are split 7 and 7 between Analyzer A and Analyzer B (E5). Analyzer B patient results match Analyzer A (E3). This counts against Analyzer B measurement producing the cluster.\u0022},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C10\u0022,\u0022C12\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022association\u0022],\u0022rationale\u0022:\u0022Eleven of the 14 high results had transport delays over 3 h, against 17 of 47 for the others, and the cluster coincides with the tube outage (E5). That is an association. However, four renal overflow patients arrived the same day and no repeats were taken, so the main rival, genuine hyperkalaemia from a changed case mix, is not ruled out. Causation is not established.\u0022},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022,\u0022C4\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022The investigation required by the hold rule is complete and shows no systematic error and no patient impact (E1-E3). Restoring service and closing with documentation is the best decision. Keeping Analyzer B suspended costs capacity for no benefit.\u0022},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C3\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022harmful-overreaction\u0022],\u0022rationale\u0022:\u0022Stored samples older than 24 h are invalid for potassium, so the recall would mean recollecting about 2,900 patients (E3). Quarantining the lot removes Analyzer B\u0027s potassium capacity. Both are damage under every live explanation: isolated chance, or a transient sampling glitch. The lot and systematic-fault hypotheses are contradicted (E2, E3).\u0022},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022C11\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022The analyzer does not flag \u0027far too often\u0027: there was one flag in 546 measurements, in line with the expected chance rate (E2). Widening the limits would weaken a control that worked as designed. That reduces detection of real shifts under every hypothesis.\u0022},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022premature-attribution\u0022],\u0022rationale\u0022:\u0022If a sampling disturbance were confirmed, recording it and adding a line inspection would be sensible and harmless. But H4 is unknown: the module cannot detect it and chance is equally plausible (E6, E2). Recording it as the confirmed cause is not yet justified, and doing so causes no lasting harm if wrong.\u0022},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022],\u0022tags\u0022:[\u0022extra-caution\u0022],\u0022rationale\u0022:\u0022Extra Level 2 QC after the return to service is low-cost and reasonable reassurance. However, the evidence already shows no systematic problem (E2, E3), so it is not among the best actions and does not replace closing the investigation.\u0022},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022stop-early\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The top action (A1) is substantive. It is fully justified by the same-run results, the 30-day QC history, the patient comparisons and the QC completion record in the initial file. The unresolved trigger (H4) and the Ward 6 association (R4) do not affect that decision. No catalogue item would change it.\u0022}],\u0022discriminatingReads\u0022:[],\u0022lowValueReads\u0022:[\u0022C3\u0022,\u0022C5\u0022,\u0022C8\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C14\u0022],\u0022optimalReadPath\u0022:[],\u0022authoringNotes\u0022:\u0022STOP design. The initial file holds the decisive QC record (E1), the 30-day QC history including completion counts and the expected chance rate (E2), the cross-analyzer patient comparison and recall cost (E3), and the Ward 6 split across analyzers (E5). Together these settle every key. The catalogue is deliberately redundant: C1, C2, C4, C6, C11 and C13 corroborate but do not change any answer. C4 and C11 reinforce that the trigger cannot be determined, keeping H4 unknown. C10, C12 and C15 add colour on Ward 6 but neither break nor confirm the R4 confound, because the renal overflow rival stays live and there are no repeat samples. C7 confirms the staffing shortfall but not skipped QC. The traps are the operations manager\u0027s lot narrative and his demands to recall and widen limits (E4), and the consultant\u0027s complaint, which invites blaming Analyzer B. The required non-definitive items are H4 unknown, R4 association-only and A4 premature. Reviewer checks: A2 is harmful under both live rivals because of forced recollections and lost capacity. A4\u0027s \u0027confirmed cause\u0027 wording separates it from an acceptable optional step. A5 is extra monitoring, not the best action, so A1 is the only preferred action. The hypotheses all carry dates and components drawn from the initial file only.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:16:30.1467888Z",
+  "finishedAt": "2026-11-17T15:22:25.8005282Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-STOP-2",
+      "split": "heldout",
+      "benchmarkClass": "STOP",
+      "domain": "cross-domain",
+      "readBudget": 2,
+      "title": "One potassium QC flag on Analyzer B",
+      "setting": "Calder Vale Hospital core laboratory runs two Torvane CS-60 chemistry analyzers (A and B). Analyzer B switched to a new ISE reagent lot on Monday 9 November 2026; Analyzer A is still on the previous lot. On Wednesday 11 November a single Level 2 potassium QC result on Analyzer B fell outside its limits. Analyzer B potassium testing has been suspended since then, and Analyzer A is carrying the load. Separately, the Ward 6 pneumatic tube station has been out of service since 10 November, and the ward\u0027s consultant has asked about high potassium results.",
+      "presentingRequest": "From Dr Selwyn Marrable, laboratory director, 12 Nov: \u0027Analyzer B potassium has been suspended since one QC failure yesterday afternoon. Our operations manager wants every potassium since the lot change recalled, the lot quarantined and the limits widened. The section lead wants to close it with no amendments. Ward 6 is asking whether our analyzers are giving false highs. Tell me what is actually going on and what I should sign off.\u0027",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Middleware QC exception record QX-2026-1187",
+          "sourceType": "log",
+          "text": "QC EXCEPTION QX-2026-1187 | Analyzer B (Torvane CS-60) | 11 Nov 2026 14:10:22. Potassium, QC lot 4471. Level 1: 3.52 mmol/L (target 3.50, SD 0.04, \u002B0.5 SD) PASS. Level 2: 6.03 (target 5.80, SD 0.06, \u002B3.8 SD) FAIL 1-3s. Level 3: 7.86 (target 7.90, SD 0.08, -0.5 SD) PASS. Sodium and chloride, all three levels, same run: PASS. Middleware rule QC-HOLD-K fired 14:10:24: new potassium results from Analyzer B held; 186 potassium results reported since last accepted QC (10:03) flagged for review. Repeat Level 2, re-poured from the same vial, 14:31:05: 5.82 (\u002B0.3 SD) PASS. Hold remains until supervisor sign-off; 23 samples held at time of repeat; routine potassium work rerouted to Analyzer A."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "QC software monthly summary, Analyzer B potassium",
+          "sourceType": "telemetry",
+          "text": "QC software summary, Analyzer B potassium, 12 Oct-12 Nov 2026. Schedule: three levels every 4 h; 182 scheduled runs, 182 completed (546 measurements), each logged with timestamp and operator ID. Westgard violations: one 1-3s (Level 2, 11 Nov 14:10). No 2-2s, R-4s, 4-1s or 10x violations at any level. Reagent lot changed 9 Nov 07:40; calibration accepted 07:58. Level 2 mean: 5.81 before the change (158 measurements), 5.80 after (23 measurements, excluding 14:10). Level 1 and Level 3 means before and after the change agree within 0.01. QC plan note: the 1-3s rule\u0027s expected false-rejection rate is about 0.3% per measurement, i.e. roughly one or two chance flags a month at this volume."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Investigation worksheet, chemistry section lead",
+          "sourceType": "document",
+          "text": "Investigation worksheet QX-2026-1187, Dr Mirela Santos-Hart, chemistry section lead, 11 Nov 17:40. Re-ran on Analyzer A (previous reagent lot; QC in control all day) all 23 held samples and 20 randomly chosen of the 186 flagged results, each within 4 h of collection. Difference B - A: mean \u002B0.02 mmol/L, range -0.08 to \u002B0.10; all within our 0.20 allowable difference. The 23 held samples were reported from the Analyzer A values. Analyzer B patient moving median (blocks of 50) on 11 Nov: 4.21-4.29, against 4.18-4.31 over the prior 30 days. For any recall: under SOP CH-4.2, stored samples older than 24 h are invalid for potassium, so re-testing results since 9 Nov (about 2,900) means recollecting every patient. Recommend closing with no amendments. Analyzer B potassium suspended pending director sign-off."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Email from Glen Ashworth, laboratory operations manager",
+          "sourceType": "manager-account",
+          "text": "From: Glen Ashworth, Laboratory Operations Manager. To: chemistry section; cc lab director. 12 Nov 08:15. Subject: Analyzer B potassium. I said on Monday the new reagent lot would be trouble, and now we have a QC failure. Dr Larkby on Ward 6 has also emailed about a run of high potassiums this week. We were two short on day shift on Tuesday and Wednesday, so I suspect QC was rushed or skipped. I want every potassium from Analyzer B since the lot change recalled and re-tested, the lot quarantined, and the Level 2 limits widened to plus or minus 4 SD. This analyzer flags far too often and it is costing us turnaround."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "LIS query, quality officer",
+          "sourceType": "system-record",
+          "text": "LIS query by Hana Brizic, quality officer, 12 Nov 11:00. Ward 6 potassium results of 5.5 mmol/L or more: 10-12 Nov, 14 of 61 results; 3-5 Nov, 6 of 58. Of the 14 high results, 7 were analysed on Analyzer A and 7 on Analyzer B. Collection-to-receipt time over 3 h: 11 of the 14 high results, 17 of the 47 others. The pneumatic tube station serving Ward 6 has been out of service since 10 Nov 07:45; samples are walked down in porter batches. Bed management note: Ward 6 took four overflow patients from the renal unit on 10 Nov. No repeat samples have been requested for any of the 14 high results."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Shift note, Tomasz Rendell, biomedical scientist",
+          "sourceType": "staff-account",
+          "text": "Shift note, Tomasz Rendell, biomedical scientist, 11 Nov 15:05. All scheduled Analyzer B QC ran on 9, 10 and 11 Nov, each within 15 minutes of its slot; QC log printout attached, signed by me or Ama Oduya. At 14:10 I saw the Level 2 potassium 1-3s and checked the instrument event log: no clot, sample-level or ISE flags. Vendor bulletin TB-ISE-07 says this module does not flag partial aspirations on the ISE line, so a short sample or bubble cannot be excluded. The vial was opened 7 Nov, inside its 7-day limit. I re-poured and re-ran at 14:31 and it passed. Honestly I cannot tell whether it was a sampling glitch or a chance outlier."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Analyzer B instrument event log, 11 Nov 2026 13:30-15:00",
+          "source": "Analyzer B onboard event log export",
+          "sourceType": "log",
+          "text": "13:31 ISE reagent pack (K/Na/Cl) level 64%. 13:58 sample probe wash cycle complete. 14:02 ISE auto-calibration: K slope 57.6 mV/decade (spec 52-62) PASS. 14:10:19 QC L1/L2/L3 aspirated, rack 90, positions 1-3. No clot detect, no liquid-level error, no ISE noise flags. 14:31:02 QC L2 aspirated, rack 90, position 2. No flags. 14:44 routine samples resumed on analyzer (potassium results held by middleware). No error-class entries between 13:30 and 15:00."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Analyzer B potassium calibration records, 1-14 Nov 2026",
+          "source": "Analyzer B calibration history",
+          "sourceType": "system-record",
+          "text": "Potassium ISE calibrations, Analyzer B. 2 Nov: slope 57.9 mV/decade, PASS. 9 Nov 07:58 (after reagent lot change): slope 57.7, PASS; calibrator recovery 4.02 and 6.98 mmol/L against targets 4.00 and 7.00. Automatic calibrations every 8 h, 9-14 Nov: slopes 57.4-58.0, all PASS. No calibration failures, repeats or manual overrides recorded in the period."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Certificate of analysis for the ISE reagent lot introduced on 9 Nov",
+          "source": "Torvane Diagnostics quality assurance",
+          "sourceType": "vendor-account",
+          "text": "Torvane Diagnostics certificate of analysis, ISE reagent pack lot R-30962. Release testing: potassium recovery on reference panel 99.6-100.4%; between-pack CV 0.6%; ionic strength within specification. Shelf life to 31 May 2027. Storage 2-25 C. Released 14 Sept 2026 with QA signature. No field safety notices issued against this lot as of the document date."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Vendor technical support correspondence, case 88-2214, 13 Nov 2026",
+          "source": "Torvane field applications specialist",
+          "sourceType": "vendor-account",
+          "text": "Reply from Torvane field applications specialist, case 88-2214: \u0027We have no other customer reports of potassium shifts on lot R-30962. From the event log you sent, the instrument recorded no hardware or aspiration errors at 14:10. As noted in TB-ISE-07, the ISE line has no partial-aspiration detection, so we cannot say from logs whether a short sample occurred. A single 1-3s with a passing repeat and passing adjacent levels does not by itself indicate an instrument fault. No service visit recommended unless further violations occur.\u0027"
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "External quality assessment reports, potassium, Analyzer B, last three cycles",
+          "source": "Regional EQA scheme",
+          "sourceType": "external-data",
+          "text": "Regional EQA scheme, chemistry panel, Analyzer B potassium. Cycle 2026-4 (June): three samples, deviation from method mean -0.6% to \u002B0.9%, score acceptable. Cycle 2026-5 (August): -0.3% to \u002B1.1%, acceptable. Cycle 2026-6 (October): -0.8% to \u002B0.4%, acceptable. Cycle 2026-7 samples received 16 Nov; results due 4 Dec."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Analyzer A potassium QC data, 12 Oct-12 Nov 2026",
+          "source": "QC software monthly summary, Analyzer A",
+          "sourceType": "telemetry",
+          "text": "QC software summary, Analyzer A potassium, QC lot 4471, previous reagent lot (change scheduled 16 Nov). 182 scheduled runs, 182 completed. Westgard violations: none. Level 2 mean 5.79 (SD 0.06). Level 1 mean 3.50; Level 3 mean 7.91. Daily means on 10, 11 and 12 Nov within 0.02 of the monthly mean at each level."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Chemistry day-shift staffing rota, 9-12 Nov 2026",
+          "source": "Laboratory rota system",
+          "sourceType": "document",
+          "text": "Planned establishment: 6 biomedical scientists on day shift. 9 Nov: 6 present. 10 Nov: 4 (one sick, one vacancy unfilled). 11 Nov: 4 (same). 12 Nov: 5. Bank cover requested for 10-11 Nov, not filled. Rota note: QC duty assigned to T. Rendell on 10 and 11 Nov and to A. Oduya on 9 and 12 Nov. Overtime approved 11 Nov 15:00-18:00 for backlog."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Training and competency records, staff on QC duty 9-12 Nov",
+          "source": "Laboratory training database",
+          "sourceType": "document",
+          "text": "T. Rendell: chemistry analyzer competency signed off 3 Mar 2026; QC interpretation module completed 18 Apr 2026; annual reassessment due Mar 2027. A. Oduya: competency signed off 12 Jan 2025, reassessed 20 Jan 2026; QC interpretation module completed 2024. No competency concerns logged for either person in the last 12 months."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "QC material refrigerator temperature log, 1-12 Nov 2026",
+          "source": "Fridge CH-F3 continuous logger",
+          "sourceType": "log",
+          "text": "Fridge CH-F3 (QC and calibrator storage), continuous logger, 15-minute readings. Range 1-12 Nov: 3.2-5.6 C (limits 2-8 C). No alarms. Door-open events: 6-14 per day, longest 2 min 40 s (11 Nov 06:02). Logger calibration certificate valid to February 2027."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Pneumatic tube system fault ticket and repair schedule",
+          "source": "Estates helpdesk ticket PT-5530",
+          "sourceType": "change-record",
+          "text": "Estates ticket PT-5530. Reported 10 Nov 07:45: station W6 (Ward 6) blower fault, carriers not dispatching. Station isolated 08:10. Diagnosis 10 Nov: blower motor failure; part ordered. Interim arrangement: porter collection from Ward 6 at 09:00, 12:00, 15:00 and 18:00 and on request. Expected return to service 19 Nov. Other stations unaffected."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Prior potassium QC exception reports, January-October 2026",
+          "source": "Quality management system",
+          "sourceType": "prior-report",
+          "text": "Summary of QC exceptions, potassium, both analyzers. Analyzer A: 1-3s Level 3, 14 Feb; 1-3s Level 1, 30 Jul. Analyzer B: 1-3s Level 2, 9 May; 1-3s Level 1, 22 Aug. In each case adjacent levels passed, the repeat passed, patient comparison was within allowable difference, no amendments were issued and there was no recurrence within 30 days. Cause recorded as \u0027not determined\u0027 in all four. No multi-rule violations recorded in the period."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Interview notes, Ward 6 charge nurse, 13 Nov 2026",
+          "source": "Interview by H. Brizic, quality officer",
+          "sourceType": "staff-account",
+          "text": "Interview with Ward 6 charge nurse by H. Brizic. \u0027Since the tube went down, bloods sit in the specimen box until the porter round, sometimes two or three hours, longer if a round is missed. We have also got the four renal overflow patients, and some of them run high potassiums anyway. I could not tell you which of the high ones were the overflow patients without going through the notes. Nobody has asked us to repeat anything yet.\u0027"
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Middleware rule configuration, QC-HOLD-K",
+          "source": "Middleware configuration export",
+          "sourceType": "document",
+          "text": "Rule QC-HOLD-K, version 3, approved 2 Jun 2026. Trigger: any potassium QC result on Analyzer A or B violating 1-3s, 2-2s or R-4s. Action: hold all subsequent potassium results from that analyzer; flag all results reported since the last accepted QC for review. Release: supervisor or director sign-off after documented investigation. Audit: last functional test of the rule 5 Oct 2026, passed."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Laboratory quality committee minutes, 17 Sept 2026",
+          "source": "Quality committee secretary",
+          "sourceType": "document",
+          "text": "Item 4: QC design review, potassium. Sigma metric for potassium on both analyzers estimated at 4.1 using last EQA bias and internal CV. Committee confirmed the current multirule set (1-3s/2-2s/R-4s/4-1s) and current limits. Proposal from operations to widen Level 2 limits to reduce reruns: not adopted; reviewer noted wider limits would reduce detection of real shifts at this sigma. Action: re-review March 2027."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Email from Ward 6 consultant, 11 Nov 2026",
+          "source": "Dr Ifeoma Larkby, consultant physician",
+          "sourceType": "customer-account",
+          "text": "From Dr Ifeoma Larkby, consultant physician, Ward 6, 11 Nov 09:40: \u0027I have had at least six potassiums over 5.5 since Monday that do not fit the clinical picture, and one patient was nearly started on treatment. Is there a problem with one of your analyzers? I realise we have renal overflow patients with us at the moment, so some may be genuine, but I would like this looked at. Please let me know whether we should be repeating samples.\u0027"
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Analyzer B has a systematic potassium measurement fault that affected patient results reported around the 11 November excursion."
+          },
+          {
+            "id": "H2",
+            "text": "The reagent lot introduced on Analyzer B on 9 November shifted its potassium results."
+          },
+          {
+            "id": "H3",
+            "text": "The out-of-range Level 2 result was an isolated event confined to the 14:10 QC measurement on 11 November."
+          },
+          {
+            "id": "H4",
+            "text": "A transient sampling disturbance during the 14:10 Level 2 measurement on 11 November produced the out-of-range result."
+          },
+          {
+            "id": "H5",
+            "text": "Short staffing led to scheduled potassium QC being skipped or delayed on Analyzer B in the days before the 11 November excursion."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Reagent lot change on Analyzer B (9 Nov)",
+            "to": "Level 2 potassium QC excursion on Analyzer B (11 Nov 14:10)",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Level 2 potassium QC excursion on Analyzer B (11 Nov 14:10)",
+            "to": "Middleware hold on Analyzer B potassium results",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Analyzer B potassium measurement",
+            "to": "Elevated Ward 6 potassium results, 10-12 Nov",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Prolonged collection-to-receipt time during the Ward 6 pneumatic tube outage",
+            "to": "Elevated Ward 6 potassium results, 10-12 Nov",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Return Analyzer B to potassium service, close the review of the 186 flagged results with no amendments, and document the event as an isolated QC excursion."
+          },
+          {
+            "id": "A2",
+            "text": "Recall and re-test every potassium result from Analyzer B since the 9 November lot change, and quarantine the reagent lot."
+          },
+          {
+            "id": "A3",
+            "text": "Widen Analyzer B\u0027s Level 2 potassium acceptance limits to plus or minus 4 SD to reduce QC flags."
+          },
+          {
+            "id": "A4",
+            "text": "Record a transient sampling disturbance as the confirmed cause of the excursion in the exception log and add a pre-run ISE sample-line inspection to Analyzer B\u0027s QC procedure."
+          },
+          {
+            "id": "A5",
+            "text": "After returning Analyzer B to service, run an additional Level 2 potassium QC at the start of each shift for the next week alongside the routine schedule."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "I-H1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-STOP-2",
+      "groundTruthNarrative": "Analyzer B produced a single 1-3s potassium violation at Level 2 on 11 November. Every check in the initial file points to an isolated event. The Level 1 and Level 3 results in the same run passed. A repeat from the same vial passed. Thirty days of QC show no other rule violation, and the QC means did not move after the 9 November reagent lot change. Forty-three patient samples re-run on Analyzer A, which is still on the old lot, agreed within allowable limits. The patient moving median was flat. One chance 1-3s flag a month is expected at this QC volume. All scheduled QC ran despite short staffing. The exact trigger cannot be determined: a sampling glitch that this module cannot detect and plain statistical chance both remain possible, but neither changes the decision. Analyzer B should be returned to service with no amendments. The operations manager\u0027s recall would force about 2,900 unnecessary recollections. His proposal to widen the limits would weaken a working control. The Ward 6 cluster of high potassium results is split evenly across both analyzers, so it is not an Analyzer B problem. It coincides with transport delays during the tube outage, but renal overflow patients are a live rival explanation, so that link is association only. No catalogue item changes any conclusion.",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E6",
+            "C1",
+            "C2",
+            "C4",
+            "C5",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "central",
+            "misleading-signal",
+            "stop-early"
+          ],
+          "rationale": "In the same run, Level 1 and Level 3 passed and the Level 2 repeat passed (E1). Thirty days of QC show no other violation (E2). Forty-three patient samples re-run on Analyzer A agree within 0.20 mmol/L, with a mean difference of \u002B0.02, and the moving median is flat (E3). This evidence directly counts against a systematic fault affecting patient results."
+        },
+        {
+          "itemId": "I-H2",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "C2",
+            "C3",
+            "C4",
+            "C6"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "After the lot change, the Level 2 QC mean is 5.80 against 5.81 before, and the other levels agree within 0.01 (E2). Patient samples on Analyzer B with the new lot match Analyzer A with the old lot (E3). The manager\u0027s claim in E4 is assertion only."
+        },
+        {
+          "itemId": "I-H3",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E6",
+            "C1",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "central",
+            "stop-early"
+          ],
+          "rationale": "The excursion was a single measurement. Adjacent levels and the immediate repeat passed (E1). There was no trend or other rule violation, and the chance rate is one to two flags a month (E2). Patient-sample comparisons show no effect (E3). Together these support an isolated event over a systematic one."
+        },
+        {
+          "itemId": "I-H4",
+          "expected": "unknown",
+          "weight": 2,
+          "requiredEvidence": [
+            "E6",
+            "E1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E6",
+            "C1",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "undeterminable-cause",
+            "stop-early"
+          ],
+          "rationale": "The module cannot detect partial aspirations, so the absence of flags neither confirms nor excludes a sampling disturbance (E6). Pure statistical chance is an equally live explanation at the expected 1-3s rate (E2). No item, including the vendor reply in C4, can tell the two apart. The claim is live but unestablished."
+        },
+        {
+          "itemId": "I-H5",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "E6",
+            "C7"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "organizational"
+          ],
+          "rationale": "The QC software shows 182 of 182 scheduled runs completed, each timestamped (E2). The shift note confirms every run was within 15 minutes of its slot (E6). Short staffing did happen (E4, C7), but QC was not skipped or delayed."
+        },
+        {
+          "itemId": "I-R1",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C2",
+            "C3",
+            "C4",
+            "C6"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "The link itself is countered. On the new lot, 23 Level 2 QC results before and after the excursion are on target (E2). The repeat 21 minutes later on the same lot passed (E1). Patient samples on the new lot agree with the old lot (E3). The lot does not produce the excursion."
+        },
+        {
+          "itemId": "I-R2",
+          "expected": "causal",
+          "weight": 1,
+          "requiredEvidence": [
+            "E1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "C13"
+          ],
+          "tags": [
+            "protective-control"
+          ],
+          "rationale": "The documented rule QC-HOLD-K fired two seconds after the 1-3s violation and imposed the hold (E1). The mechanism, the order of events and the rule trigger establish the causal link."
+        },
+        {
+          "itemId": "I-R3",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "E5",
+            "C12",
+            "C15"
+          ],
+          "tags": [
+            "misleading-signal",
+            "customer-complaint"
+          ],
+          "rationale": "The Ward 6 high results are split 7 and 7 between Analyzer A and Analyzer B (E5). Analyzer B patient results match Analyzer A (E3). This counts against Analyzer B measurement producing the cluster."
+        },
+        {
+          "itemId": "I-R4",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C10",
+            "C12",
+            "C15"
+          ],
+          "tags": [
+            "confounded",
+            "association"
+          ],
+          "rationale": "Eleven of the 14 high results had transport delays over 3 h, against 17 of 47 for the others, and the cluster coincides with the tube outage (E5). That is an association. However, four renal overflow patients arrived the same day and no repeats were taken, so the main rival, genuine hyperkalaemia from a changed case mix, is not ruled out. Causation is not established."
+        },
+        {
+          "itemId": "I-A1",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E6",
+            "C4",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "central",
+            "stop-early"
+          ],
+          "rationale": "The investigation required by the hold rule is complete and shows no systematic error and no patient impact (E1-E3). Restoring service and closing with documentation is the best decision. Keeping Analyzer B suspended costs capacity for no benefit."
+        },
+        {
+          "itemId": "I-A2",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "C3",
+            "C6"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "harmful-overreaction"
+          ],
+          "rationale": "Stored samples older than 24 h are invalid for potassium, so the recall would mean recollecting about 2,900 patients (E3). Quarantining the lot removes Analyzer B\u0027s potassium capacity. Both are damage under every live explanation: isolated chance, or a transient sampling glitch. The lot and systematic-fault hypotheses are contradicted (E2, E3)."
+        },
+        {
+          "itemId": "I-A3",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E4",
+            "C11",
+            "C14"
+          ],
+          "tags": [
+            "protective-control",
+            "leadership-narrative"
+          ],
+          "rationale": "The analyzer does not flag \u0027far too often\u0027: there was one flag in 546 measurements, in line with the expected chance rate (E2). Widening the limits would weaken a control that worked as designed. That reduces detection of real shifts under every hypothesis."
+        },
+        {
+          "itemId": "I-A4",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E6",
+            "C1",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "premature-attribution"
+          ],
+          "rationale": "If a sampling disturbance were confirmed, recording it and adding a line inspection would be sensible and harmless. But H4 is unknown: the module cannot detect it and chance is equally plausible (E6, E2). Recording it as the confirmed cause is not yet justified, and doing so causes no lasting harm if wrong."
+        },
+        {
+          "itemId": "I-A5",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "tags": [
+            "extra-caution"
+          ],
+          "rationale": "Extra Level 2 QC after the return to service is low-cost and reasonable reassurance. However, the evidence already shows no systematic problem (E2, E3), so it is not among the best actions and does not replace closing the investigation."
+        },
+        {
+          "itemId": "I-SUFF",
+          "expected": "sufficient",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "C4"
+          ],
+          "tags": [
+            "stop-early",
+            "central"
+          ],
+          "rationale": "The top action (A1) is substantive. It is fully justified by the same-run results, the 30-day QC history, the patient comparisons and the QC completion record in the initial file. The unresolved trigger (H4) and the Ward 6 association (R4) do not affect that decision. No catalogue item would change it."
+        }
+      ],
+      "discriminatingReads": [],
+      "lowValueReads": [
+        "C3",
+        "C5",
+        "C8",
+        "C9",
+        "C10",
+        "C14"
+      ],
+      "optimalReadPath": [],
+      "authoringNotes": "STOP design. The initial file holds the decisive QC record (E1), the 30-day QC history including completion counts and the expected chance rate (E2), the cross-analyzer patient comparison and recall cost (E3), and the Ward 6 split across analyzers (E5). Together these settle every key. The catalogue is deliberately redundant: C1, C2, C4, C6, C11 and C13 corroborate but do not change any answer. C4 and C11 reinforce that the trigger cannot be determined, keeping H4 unknown. C10, C12 and C15 add colour on Ward 6 but neither break nor confirm the R4 confound, because the renal overflow rival stays live and there are no repeat samples. C7 confirms the staffing shortfall but not skipped QC. The traps are the operations manager\u0027s lot narrative and his demands to recall and widen limits (E4), and the consultant\u0027s complaint, which invites blaming Analyzer B. The required non-definitive items are H4 unknown, R4 association-only and A4 premature. Reviewer checks: A2 is harmful under both live rivals because of forced recollections and lost capacity. A4\u0027s \u0027confirmed cause\u0027 wording separates it from an acceptable optional step. A5 is extra monitoring, not the best action, so A1 is the only preferred action. The hypotheses all carry dates and components drawn from the initial file only."
+    }
+  }
+}

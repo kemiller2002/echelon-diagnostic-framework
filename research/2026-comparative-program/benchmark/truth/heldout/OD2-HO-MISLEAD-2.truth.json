@@ -1,0 +1,307 @@
+{
+  "caseId": "OD2-HO-MISLEAD-2",
+  "groundTruthNarrative": "The GET latency regression was caused by storage fleet config change FC-7710. Between 23:38 and 23:52 on 2 Nov it raised compaction worker threads from 2 to 6 on storage nodes in 11 of the 12 cells. Gateway 5.8 happened to be rolling out over the same night (22:05\u201304:10). Leadership, the hourly fleet dashboard, the shared change calendar (which never lists fleet config pushes) and a prior incident precedent all pointed at the release. The per-cell export breaks the coincidence. In every pushed cell, latency rose within minutes of that cell\u0027s push, even in seven cells that did not get 5.8 until later. Cell aps-3 had 5.8 from 01:05 and comparable traffic growth, but its push was skipped by a maintenance freeze, and it stayed at about 94 ms. Rolling euw-1 back to 5.7 for three hours changed nothing. Storage-node metrics give the mechanism. Compaction\u0027s share of disk bytes rose from 38% to 71% and utilisation from 41% to 97%. Disk read queue wait rose by about 196 ms, which matches the increase in node-side GET service time and p99. Network transport was unaffected. Why the backlog grew before 2 Nov (Orrin\u0027s migration writes, a lifecycle-expiry sweep, or both) is unresolved. The best next step is a staged, monitored revert of the compaction change. Rolling back the gateway would re-open the SEC-2291 security weakness with no latency benefit. Pausing compaction for weeks would push backlog past the 15% danger threshold.",
+  "answers": [
+    {
+      "itemId": "S-H1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C6",
+        "C2",
+        "C4",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "tags": [
+        "misleading-signal",
+        "leadership-narrative",
+        "natural-experiment",
+        "intervention-result"
+      ],
+      "rationale": "C6 shows the regression began in each cell within minutes of that cell\u0027s FC-7710 push, before 5.8 arrived in seven cells. aps-3 ran 5.8 from 01:05 without the push and stayed at 91\u219294 ms. Rolling euw-1 back to 5.7 for three hours left p99 unchanged (291/297/293). The release does not covary with the regression, and removing it does not help. The rollout alignment in E1 and E2 is a coincidence in timing."
+    },
+    {
+      "itemId": "S-H2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E4",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "hidden-change",
+        "natural-experiment",
+        "interested-source"
+      ],
+      "rationale": "E4 places a compaction tuning change on the evening of 2 Nov. C6 shows onset in every pushed cell 2\u201313 minutes after its push, regardless of gateway version. The one cell without the push (aps-3, hardware unchanged, similar traffic) did not regress. C11 adds the disk-saturation mechanism. The storage manager\u0027s claim that compaction \u0027can\u0027t\u0027 affect reads is an interested assertion, and the data contradict it."
+    },
+    {
+      "itemId": "S-H3",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E6",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E6",
+        "C6",
+        "C9",
+        "C11",
+        "C13"
+      ],
+      "tags": [
+        "confounded",
+        "plausible-rival"
+      ],
+      "rationale": "Traffic rose gradually (GET \u002B6% over a week; E6), but latency stepped up within minutes in each cell (E2, C6). aps-3 saw comparable GET growth (\u002B7%) and kept its baseline latency. Traffic growth without the config push did not produce the regression."
+    },
+    {
+      "itemId": "S-H4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C5",
+        "C6",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "plausible-rival"
+      ],
+      "rationale": "Retransmits were confined to us-e between 02:10 and 04:50. That is after the regression began at about 23:40 (E2), and the regression persisted after the optic was replaced and appeared in regions with no network anomaly. Gateway-to-storage RTT was unchanged at 0.4\u20130.6 ms. C11 confirms the added time is on the storage node, excluding network."
+    },
+    {
+      "itemId": "S-R1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C2",
+        "C6",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal",
+        "intervention-result"
+      ],
+      "rationale": "Several pieces of evidence count against the link itself: 5.8 present without the regression (aps-3), the regression present before 5.8 arrived (aps-2 and all eu-w cells), and a rollback with no effect (euw-1, 6 Nov). This goes beyond a rival being supported: the release itself is shown not to drive the regression."
+    },
+    {
+      "itemId": "S-R2",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "mechanism"
+      ],
+      "rationale": "C11 shows compaction threads tripled at the push. Compaction\u0027s share of disk bytes rose from 38% to 71%, and utilisation went from 41% to 97%, crossing 90% within 5 minutes of the push in each of the 11 cells. Temporal order, mechanism and attribution of the extra disk load to compaction establish the link. No other catalogue item has disk data."
+    },
+    {
+      "itemId": "S-R3",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C5",
+        "C6",
+        "C11"
+      ],
+      "tags": [
+        "mechanism",
+        "rival-excluded"
+      ],
+      "rationale": "C11: disk read queue wait rose by 196 ms (9\u2192205), matching the rise in node-side service time (61\u2192262 ms) and in cell p99 (about \u002B200 ms). C6 rules out the main rival (the gateway release) and shows that the one unpushed cell did not regress. E5 rules out the network. Temporal order, mechanism and covariation, with the rival excluded, make the link causal."
+    },
+    {
+      "itemId": "S-R4",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "E6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E6",
+        "C8",
+        "C9",
+        "C11"
+      ],
+      "tags": [
+        "confounded",
+        "unresolved"
+      ],
+      "rationale": "The backlog grew from 3.1% to 11.2% while Orrin\u0027s migration writes were running (from 30 Oct). Over the same period a lifecycle-expiry sweep (29 Oct\u20131 Nov) was writing deletion markers that compaction must process. C11 states that the backlog has not been attributed by source or node. The two co-occur, but the competing driver is not ruled out."
+    },
+    {
+      "itemId": "S-A1",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C6",
+        "C10"
+      ],
+      "tags": [
+        "misleading-signal",
+        "protective-control",
+        "leadership-narrative"
+      ],
+      "rationale": "The rollback test in C6 shows 5.7 gives no latency benefit, and H1 is contradicted, so no live hypothesis is served by the rollback. It would re-expose the fleet to the SEC-2291 signature-replay weakness and put the 30 Nov audit closure at risk (E3). It removes a protective security fix for no gain."
+    },
+    {
+      "itemId": "S-A2",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "targeted-fix",
+        "reversible"
+      ],
+      "rationale": "The evidence identifies the compaction change as the cause. A one-cell-first revert is reversible (C8: takes effect within 5 minutes). Monitoring backlog guards against the read-amplification risk in E4, and the backlog is now 4.0% (C11), well below 15%. This is the single best next action."
+    },
+    {
+      "itemId": "S-A3",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E6",
+        "C9",
+        "C11"
+      ],
+      "tags": [
+        "unconfirmed-hypothesis"
+      ],
+      "rationale": "Pacing Orrin\u0027s ingest would help keep the backlog down if Orrin\u0027s writes drive it (R4), but that link is only an association, and the lifecycle sweep is an unexcluded rival. The contract permits temporary rate limits with notice, the migration is ahead of schedule and the customer accepts pacing (E6, C9), so a wrong call leaves no lasting damage. It is not justified yet."
+    },
+    {
+      "itemId": "S-A4",
+      "expected": "harmful",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "Compaction is a protective process. At the old 2-thread setting the backlog grew about 8 points in 4 days (C11), so with compaction stopped for one to two weeks it would pass the 15% threshold. Past that point read amplification raises GET latency and nodes head toward disk-full (E4). A short-term latency gain turns into a worse outcome."
+    },
+    {
+      "itemId": "S-A5",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C1",
+        "C2",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "secondary-issue"
+      ],
+      "rationale": "The CPU increase is real (E3, C4) and worth understanding for capacity planning. It is low cost and harmless, but C6 shows 5.8 is not behind the regression, so this does nothing for the incident. Reasonable, but not among the best next actions."
+    },
+    {
+      "itemId": "S-SUFF",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "decision-readiness"
+      ],
+      "rationale": "The top-ranked substantive action is the staged revert of the compaction change (A2). It rests on a natural experiment (aps-3), onset matching each cell\u0027s push time, a negative rollback test, and a disk-saturation mechanism whose size matches the regression. That is enough to commit to a reversible, monitored revert."
+    }
+  ],
+  "discriminatingReads": [
+    "C6",
+    "C11"
+  ],
+  "lowValueReads": [
+    "C3",
+    "C14",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C6",
+    "C11"
+  ],
+  "authoringNotes": "Misleading signal: the hourly fleet dashboard (E2) and the VP (E1) tie the regression to the gateway 5.8 rollout. The release notes (E3) list a read-path change and higher CPU, the change calendar lists only the release, and the storage manager (E4) dismisses compaction as unable to affect reads. From the initial file alone, a careful analyst would likely mark H1 supported or unknown, H2 unknown, R1 association-only, R2/R3 unknown, A1 preferred or premature, A2 premature and SUFF insufficient. E2 holds a fair but non-decisive hint: the 22:00 hour stays at 93 ms even though us-e cells had 5.8 from 22:05. Non-redundancy: C6 alone settles H1, R1 and A1, with its per-cell timing, the aps-3 natural experiment and the euw-1 rollback test. No other item has per-cell latency or a version comparison. C11 alone settles R2 (disk saturation attributed to compaction); no other item has disk data. R3 needs both. Other items are plausible but non-decisive. C4 (connection growth) and C5 (post-release traces, no baseline) fit either story. C8 states the change but not its effect. C10 is an interested and inconclusive account. C12 is a misleading base rate. C7 only repeats E5. aps-3 is a clean control: its freeze was for a future disk swap with hardware unchanged, it got 5.8 through the separate release pipeline, and its traffic growth is comparable. Only A2 is preferred. A1 is harmful because H1 is contradicted and the rollback re-opens SEC-2291. A3 is premature because R4 is association-only and pacing is contractually allowed and reversible. A4 is harmful because it disables a protective process for weeks."
+}
