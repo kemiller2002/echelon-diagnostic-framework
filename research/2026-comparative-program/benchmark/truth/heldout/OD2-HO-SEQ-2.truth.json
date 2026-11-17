@@ -1,0 +1,295 @@
+{
+  "caseId": "OD2-HO-SEQ-2",
+  "groundTruthNarrative": "On 3 Oct at 16:42, Regulatory Affairs entered an approved future shelf life of 36 months for both Veltranol SKUs under CC-309. The entry was valid only for lots manufactured from 1 Mar 2027. The ERP kept 24 months as the value in effect, so batch-record headers stayed correct. PackBridge reads SHELF_LIFE_M when a job is created, and it took up the 36-month value from the next job onward (4 Oct 22:10). It did this despite the vendor\u0027s claim and the USE_VALID_FROM setting. Every Veltranol job from then until 10 Nov was sent an expiry 12 months too late. Operators made no overrides. The printers printed exactly what they received, and the camera passed the cartons because they matched the job data. The link to the night shift is a scheduling coincidence. Agency operators ran correct jobs from 30 Sep to 3 Oct, and permanent day-shift staff on Line 1 produced two faulty lots. The firmware change on 28 Sep came before six days of correct prints. Jobs before 4 Oct were all correct, so the fault did not exist earlier. Two other products got future-dated shelf-life values on 20 Oct. Whether they have been packed since, and so misprinted, is not established. The site director\u0027s plan targets the wrong people. The right response is to remove the future value from the read path, extend the hold, add an independent expiry check against the batch record, and inspect the other products.",
+  "answers": [
+    {
+      "itemId": "I-H1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "E2",
+        "E4",
+        "C3",
+        "C4",
+        "C9",
+        "C15"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal",
+        "confounded"
+      ],
+      "rationale": "C1 records override = N and a printed string identical to the PackBridge payload on all 47 jobs. Agency operators ran correct jobs from 30 Sep to 3 Oct, and permanent day-shift staff produced two faulty lots. C15 confirms the printer audit trail is protected and reliable. The operators\u0027 hesitancy (C3, C9, E4) is real but did not result in any edit."
+    },
+    {
+      "itemId": "I-H2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "E3",
+        "C5",
+        "C15"
+      ],
+      "tags": [
+        "misleading-signal",
+        "coincident-change"
+      ],
+      "rationale": "The firmware went in on 28 Sep, and four jobs after that printed correctly. The errors start only on 4 Oct, and in every job the printed string equals the payload string, so the printer did not alter dates. The \u0027date/time library updated\u0027 note in C5 is a red herring that C1 rules out."
+    },
+    {
+      "itemId": "I-H3",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C8",
+        "E4",
+        "E5"
+      ],
+      "tags": [
+        "central",
+        "revision"
+      ],
+      "rationale": "C1 shows the PackBridge payload already carried SHELF_LIFE_M = 36 and the late expiry before any operator action, with no override. C2 shows where the 36 came from. This refutes the vendor\u0027s claim in E5."
+    },
+    {
+      "itemId": "I-H4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "E6",
+        "C7"
+      ],
+      "tags": [
+        "misleading-signal",
+        "manager-claim"
+      ],
+      "rationale": "The QA manager\u0027s suspicion (E6) is plausible from the initial file. But C1 shows all 30 Veltranol jobs from 2 Jun to 3 Oct used a 24-month basis and matched the batch records. C2 shows the 24-month value had been in place since 2023."
+    },
+    {
+      "itemId": "I-H5",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C2",
+        "C1",
+        "E1",
+        "C7"
+      ],
+      "tags": [
+        "scope",
+        "live-unestablished"
+      ],
+      "rationale": "C2 shows HX-15-30 and MR-05-14 received future-dated shelf-life values on 20 Oct, so the same fault could affect them. However, C2 says packing history is not included, and nothing else shows whether those products were packed since. Kestrel buys only Veltranol (E1), so the lack of complaints about other products tells us nothing. The claim is live but unestablished."
+    },
+    {
+      "itemId": "I-R1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "C4",
+        "C9",
+        "E2",
+        "E4"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded"
+      ],
+      "rationale": "The evidence counts against the link itself. No overrides occurred, agency-run jobs before 4 Oct were correct, and permanent day staff produced the same error. The night-shift pattern comes from scheduling, not from who staffed the line."
+    },
+    {
+      "itemId": "I-R2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C5",
+        "E3"
+      ],
+      "tags": [
+        "coincident-change"
+      ],
+      "rationale": "The upgraded printers printed correct dates for six days, and in every job the printed output equals the received payload. So the firmware did not produce the wrong dates."
+    },
+    {
+      "itemId": "I-R3",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C8",
+        "C11",
+        "C15",
+        "E3",
+        "E5"
+      ],
+      "tags": [
+        "central",
+        "joint-cause",
+        "sequential-read"
+      ],
+      "rationale": "The order of events fits: the edit was entered 3 Oct 16:42 and the first faulty job ran 4 Oct 22:10. There is a mechanism: PackBridge reads SHELF_LIFE_M at job creation (E5, C8), and the payload field changes from 24 to 36. The covariation is clean, with 24 before the edit and 36 after it. The main rivals (operator override, firmware) are ruled out by C1, and no PackBridge change was recorded (E3). PackBridge ignoring the valid-from date is a co-cause, but it does not weaken the link."
+    },
+    {
+      "itemId": "I-A1",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "E2",
+        "C3",
+        "C9"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "Operators did not cause the errors. Warnings punish the wrong party, signal to the client a false explanation, and leave the real fault in place. No live rival hypothesis involves operators."
+    },
+    {
+      "itemId": "I-A2",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "E1",
+        "E4",
+        "C10",
+        "C7"
+      ],
+      "tags": [
+        "central",
+        "containment"
+      ],
+      "rationale": "Only C2 shows that the Veltranol ERP record holds a not-yet-effective 36-month value that PackBridge is reading. That makes the reset correct, and 3 Oct is the date from which the hold should run. The second-person check against the batch record is an independent check that the camera and the work-order check lack. Inspecting other products addresses H5 without assuming its outcome. Without C2 the reset would be premature."
+    },
+    {
+      "itemId": "I-A3",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "E6"
+      ],
+      "tags": [
+        "over-broad"
+      ],
+      "rationale": "Reasonable diligence that does no damage. But C1 and C2 bound the fault to jobs created after the October edits, so a 12-month site-wide review is slower and less targeted than A2. It is not among the best actions."
+    },
+    {
+      "itemId": "I-A4",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C2",
+        "C1"
+      ],
+      "tags": [
+        "premature",
+        "scope"
+      ],
+      "rationale": "This would be right if H5 were confirmed. But it is not yet established that other products were packed with wrong dates, and inspecting retained cartons would settle that quickly. Over-labelling with correct dates would cause no lasting damage if H5 proves false."
+    },
+    {
+      "itemId": "I-A5",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C6",
+        "E3",
+        "C1"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "The camera passed the faulty cartons only because they matched the job data. It still rejects smudged and truncated codes, about three in a thousand (E4), including 412 truncated codes (C6). Switching it off removes a working protection, whichever hypothesis is true."
+    },
+    {
+      "itemId": "I-SUFF",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C8",
+        "E5"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "C1 and C2 together establish the source, the start date and the scope for Veltranol, which is enough to commit to A2. The open question of why PackBridge ignored the valid-from date does not block A2, because the reset plus the independent QA check works whatever the answer is."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2"
+  ],
+  "lowValueReads": [
+    "C12",
+    "C13",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C2"
+  ],
+  "authoringNotes": "Sequential design: the initial file steers away from master data. Batch-record headers generated from the ERP are correct (E1), the vendor says PackBridge cannot send future values (E5), CC-309 looks routine, and the leadership and supervisor accounts point to operators. The natural first read is the printer job records (C1), which E4 says exist. C1 moves the fault upstream (payload already wrong, no overrides) and shows the payload shelf-life basis switching from 24 to 36 between 3 and 4 Oct. That date falls inside the CC-309 master-data window in E3, which identifies C2 as the discriminating second read rather than the tempting PackBridge configuration (C8). C8 shows USE_VALID_FROM = Y, so reading it leaves R3 at association-only and A2 at premature. Non-redundancy: only C1 settles H1, H2, H4, R1, R2 and A1 (no other item records overrides or payload versus print). Only C2 settles R3 (causal) and A2 (preferred), because no other item shows the VT edit, its time or its valid-from date. C11 deliberately omits edit values. C10 omits work-order printouts. C4 omits the product schedule, so H5 stays unknown across the whole catalogue. C2 read alone, together with E5 and C8, leaves operator override live. Reading in the order C2 then C1 also reaches the key, but nothing in the initial file makes C2 the obvious first pick. Traps: night-shift confound, firmware date-library note, QA manager\u0027s long-standing theory, vendor and impact-assessment assurances, signs of hesitant operators."
+}

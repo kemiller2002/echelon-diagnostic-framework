@@ -1,0 +1,354 @@
+{
+  "caseId": "OD2-DEV2-INTERACT",
+  "groundTruthNarrative": "The tripling of collision stops at Larkfield comes from two changes acting together. Firmware 6.4 began keeping weak short-range lidar returns so that it could detect thin obstacles. The high-gloss cast stretch film introduced in August produces exactly such returns when a robot passes a wrapped pallet at an oblique angle. Neither change is enough alone. The film was in use for four weeks on 6.3 with flat stop rates. The eight robots held back on 6.3 work the same lanes, film, shifts and temps, and their rate stayed flat. Robots on 6.4 in the tote zone, where no wrapped pallets are staged, are also flat, as are other vendor sites on 6.4. A co-signed bench test isolates the interaction: 17/20 stops for 6.4 with gloss film against 0\u20131/20 for every other combination. The GM\u0027s account that agency temps caused it fits only the timing. Stops with a badge nearby are flat, and temps worked every zone, including the zones with no rise. Halvane\u0027s denial and its advice to shorten the protective field are both wrong, and shortening the field would cut a safety margin set by the site\u0027s risk assessment. Reverting to the still-available matte film removes the trigger and keeps 6.4\u0027s improvements. Whether Halvane\u0027s December release would fix the problem with the gloss film is untested. The link from the stops to missed cut-offs is confounded by peak volume and remains association only.",
+  "answers": [
+    {
+      "itemId": "S01",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "C2",
+        "C3",
+        "C7",
+        "C15"
+      ],
+      "tags": [
+        "single-cause-fix",
+        "contrast-case",
+        "joint-cause"
+      ],
+      "rationale": "6.4 robots in Zone C show no rise (2.4 to 2.5 per 100 h), and in the bench test 6.4 with matte film produced 0/20 stops. Firmware alone does not produce the rise; it does so only together with the gloss film."
+    },
+    {
+      "itemId": "S02",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "E5",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C2",
+        "C3",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "single-cause-fix",
+        "contrast-case",
+        "joint-cause"
+      ],
+      "rationale": "The film was in full use from week 33 while stops stayed near 205 per week. The 6.3 holdback robots in the same lanes with the same film stayed flat (3.1 to 3.3), and the bench test gave 1/20 stops for 6.3 with gloss film."
+    },
+    {
+      "itemId": "S03",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1",
+        "C2",
+        "C4",
+        "C10",
+        "C14"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal",
+        "confounded"
+      ],
+      "rationale": "The temps\u0027 arrival coincides with the rise, but stops with a badge nearby are flat (41 to 44) while stops with no badge nearby quadrupled. Temps worked Zone C and alongside the 6.3 holdback robots, and neither group shows a rise."
+    },
+    {
+      "itemId": "S04",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E5",
+        "C1",
+        "C2",
+        "C3",
+        "C8",
+        "C9",
+        "C15"
+      ],
+      "tags": [
+        "joint-cause",
+        "central"
+      ],
+      "rationale": "Only the combination of 6.4 and gloss-film pallets shows the rise: 15.6 per 100 h for upgraded robots in Zones A/B against flat rates for the holdbacks and for Zone C. The bench test reproduces the effect only for 6.4 with gloss film and gives a plausible mechanism."
+    },
+    {
+      "itemId": "S05",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "tags": [
+        "joint-cause-decoy"
+      ],
+      "rationale": "Zone C has 6.4 robots and 14 temps, yet its rate is flat. The added stops occur with no badge nearby, and the bench test produced them with no people present."
+    },
+    {
+      "itemId": "S06",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C3"
+      ],
+      "tags": [
+        "vendor-claim",
+        "untested-remedy"
+      ],
+      "rationale": "Halvane says 6.4.2 includes filtering refinements and is intended to reclassify these returns, but the co-signed test record states it has not been tested against this film. Halvane also wrongly denied any firmware role earlier. The claim is plausible but unestablished."
+    },
+    {
+      "itemId": "S07",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C2",
+        "C3",
+        "C15"
+      ],
+      "tags": [
+        "natural-experiment",
+        "joint-cause"
+      ],
+      "rationale": "The holdback group is a natural experiment: same lanes, film, shifts and staff, with firmware as the only difference, giving 15.6 against 3.3. The bench test confirms the mechanism. The flat rates in Zone C and at vendor sites show the firmware is not enough alone, not that it plays no part."
+    },
+    {
+      "itemId": "S08",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C2",
+        "C3",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "misleading-signal",
+        "contrast-case",
+        "joint-cause",
+        "intervention"
+      ],
+      "rationale": "The bench test swaps only the film on 6.4 (17/20 stops against 0/20), which amounts to an intervention. The quiet August, which E5 cites against the film, reflects the film acting before 6.4 was installed, so it does not count against the link."
+    },
+    {
+      "itemId": "S09",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "C1",
+        "C2",
+        "C4",
+        "C10"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "coincident-timing"
+      ],
+      "rationale": "Stops with a badge nearby did not rise, and robots exposed to the same temps (6.3 holdbacks in Zones A/B, 6.4 robots in Zone C) show no increase. This evidence counts against the link itself."
+    },
+    {
+      "itemId": "S10",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E1",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E6",
+        "C11"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "Cut-off misses and stops rose together, but peak volume (\u002B18%) is a strong rival. Last year\u0027s peak raised misses to 7 per week with no change in stops, and no analysis separates the two effects."
+    },
+    {
+      "itemId": "S11",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C2",
+        "C3",
+        "C9"
+      ],
+      "tags": [
+        "joint-cause",
+        "reversible-fix"
+      ],
+      "rationale": "Removing the gloss film removes one necessary factor. The bench test gave 0/20 stops for 6.4 with matte film, the switch keeps 6.4\u0027s thin-obstacle detection and security patches, the old film can be supplied within three days, and tracking stop rates verifies the effect."
+    },
+    {
+      "itemId": "S12",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C2",
+        "C3"
+      ],
+      "tags": [
+        "second-best"
+      ],
+      "rationale": "Running 6.3 in Zones A/B would remove the stops, as the holdback robots show. However, it gives up 6.4\u0027s low-profile obstacle detection and runs robots past the end of 6.3 security support under a waiver, so it is reasonable but inferior to reverting the film."
+    },
+    {
+      "itemId": "S13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C14"
+      ],
+      "tags": [
+        "protective-control",
+        "vendor-claim"
+      ],
+      "rationale": "Under every hypothesis, cutting the protective field reduces pedestrian safety margin to hide a symptom. The site risk assessment treats the current field length as the minimum for mixed lanes."
+    },
+    {
+      "itemId": "S14",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "C1",
+        "C2",
+        "C14"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "Most stops occur with no person nearby. Strikes assigned by matching rosters to stops would penalise temps for stops caused by firmware and film, and could discourage incident reporting."
+    },
+    {
+      "itemId": "S15",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C3"
+      ],
+      "tags": [
+        "untested-remedy",
+        "single-cause-fix"
+      ],
+      "rationale": "If 6.4.2 is confirmed to handle gloss-film returns, keeping the cheaper film would be beneficial. The release is untested against this film, and committing now is unjustified. If it fails, the film can still be reverted later without lasting damage."
+    },
+    {
+      "itemId": "S16",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C3",
+        "C9"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "A natural experiment, a bench intervention and a mechanism all point to the joint cause. Reverting the film is cheap, reversible and monitored, so committing to it is justified."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "lowValueReads": [
+    "C6",
+    "C12",
+    "C13"
+  ],
+  "optimalReadPath": [
+    "C2",
+    "C3",
+    "C1"
+  ],
+  "authoringNotes": "The initial file presents a contrast case against each cause alone: Halvane reports other 6.4 sites flat and the tote zone is quiet (against firmware), and the film was in use for a month before any rise (against film). The temps\u0027 arrival in the same week as the update makes the GM\u0027s account the most tempting reading. C2 provides the natural experiment (6.3 holdbacks in the same lanes, 6.4 in a zone without film), C3 the bench intervention and mechanism, and C1 rules out the people explanation. Decoys: C7 repeats the vendor\u0027s contrast case, C8/C9 confirm the film details without linking them to stops, and C11 keeps the cut-off link confounded by volume. A2 is acceptable rather than preferred because the rollback gives up 6.4\u0027s detection improvements and security support. H6 and A5 are left untested on purpose."
+}

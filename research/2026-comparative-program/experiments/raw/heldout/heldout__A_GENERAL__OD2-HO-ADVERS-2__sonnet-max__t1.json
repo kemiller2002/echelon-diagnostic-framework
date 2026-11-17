@@ -1,0 +1,219 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-ADVERS-2__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-ADVERS-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C5",
+    "X3": "C11",
+    "X4": "C8",
+    "X5": "C4",
+    "X6": "C14",
+    "X7": "C2",
+    "X8": "C9",
+    "X9": "C13",
+    "X10": "C6",
+    "X11": "C1",
+    "X12": "C12",
+    "X13": "C10",
+    "X14": "C15",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X5",
+    "X3"
+  ],
+  "reads": [
+    "C4",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-ADVERS-2__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 49103,
+    "cacheCreationTokens": 79522,
+    "outputTokens": 94098,
+    "thinkingTokens": 92069,
+    "costUsd": 1.2639943000000002,
+    "durationMs": 688760,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-ADVERS-2__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-ADVERS-2__sonnet-max__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-ADVERS-2__sonnet-max__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-2\u0022,\u0022methodChoice\u0022:\u0022Compared the reported fall against case-creation and field-change records, then tested the bug and auto-triage explanations against the integration token\u0027s request log. Collected X5 then X3 and stopped there.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:83,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:63,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:58,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:52,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:87,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022Owen, the fall is not real. Don\u0027t sign off the retainer cut or the bonus on Thursday.\\n\\nAbout 37 incidents a month were confirmed in September and October, same as before. But 47 were then relabelled \u0027monitoring\u0027 about 3\u00BD hours in, just before the 4-hour containment deadline. That removes them from the incident and containment statistics, producing the reported 14 and 12, faster containment and \u0027100% within deadline\u0027. All 47 had analyst notes confirming real activity; none has a containment timestamp.\\n\\nA script on a Brackwater analyst machine did it, checking every five minutes for cases nearing the deadline; the connector made no category changes, so a software fault is very unlikely. I\u0027m very confident of that. Who wrote the script and why is unknown; the bonus and credit terms are an obvious motive but that\u0027s inference. Whether the dropped detection rules created gaps is unchecked.\\n\\nNext: restore the 47 as incidents; have our team and Halvard verify containment on each; remove Brackwater\u0027s category-edit rights (the connector never uses them); bring report compilation back in-house; hold the bonus and renewal; get Brackwater\u0027s written explanation and check the contract before claiming credits.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:04:55.2521812Z",
+    "finishedAt": "2026-11-17T16:16:24.6398306Z",
+    "output": {
+      "caseId": "OD2-HO-ADVERS-2",
+      "methodChoice": "Compared the reported fall against case-creation and field-change records, then tested the bug and auto-triage explanations against the integration token\u0027s request log. Collected X5 then X3 and stopped there.",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X5",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "contradicted",
+          "confidence": 83,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 95,
+          "evidenceIds": [
+            "X5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "contradicted",
+          "confidence": 94,
+          "evidenceIds": [
+            "X3",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "causal",
+          "confidence": 95,
+          "evidenceIds": [
+            "X5",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "unknown",
+          "confidence": 63,
+          "evidenceIds": [
+            "E3",
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X5",
+            "X3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3",
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 58,
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "acceptable",
+          "confidence": 52,
+          "evidenceIds": [
+            "X3",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 87,
+          "evidenceIds": [
+            "X5",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "Owen, the fall is not real. Don\u0027t sign off the retainer cut or the bonus on Thursday.\n\nAbout 37 incidents a month were confirmed in September and October, same as before. But 47 were then relabelled \u0027monitoring\u0027 about 3\u00BD hours in, just before the 4-hour containment deadline. That removes them from the incident and containment statistics, producing the reported 14 and 12, faster containment and \u0027100% within deadline\u0027. All 47 had analyst notes confirming real activity; none has a containment timestamp.\n\nA script on a Brackwater analyst machine did it, checking every five minutes for cases nearing the deadline; the connector made no category changes, so a software fault is very unlikely. I\u0027m very confident of that. Who wrote the script and why is unknown; the bonus and credit terms are an obvious motive but that\u0027s inference. Whether the dropped detection rules created gaps is unchecked.\n\nNext: restore the 47 as incidents; have our team and Halvard verify containment on each; remove Brackwater\u0027s category-edit rights (the connector never uses them); bring report compilation back in-house; hold the bonus and renewal; get Brackwater\u0027s written explanation and check the contract before claiming credits."
+    }
+  }
+}

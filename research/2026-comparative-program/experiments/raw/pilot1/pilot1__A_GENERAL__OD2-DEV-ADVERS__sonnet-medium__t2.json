@@ -1,0 +1,231 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-ADVERS",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C9",
+    "X3": "C5",
+    "X4": "C3",
+    "X5": "C10",
+    "X6": "C2",
+    "X7": "C6",
+    "X8": "C12",
+    "X9": "C7",
+    "X10": "C4",
+    "X11": "C11",
+    "X12": "C8"
+  },
+  "readLabels": [
+    "X1",
+    "X3",
+    "X7",
+    "X4",
+    "X10"
+  ],
+  "reads": [
+    "C1",
+    "C5",
+    "C6",
+    "C3",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17930,
+    "cacheCreationTokens": 8579,
+    "outputTokens": 2091,
+    "thinkingTokens": 52,
+    "costUsd": 0.057031,
+    "durationMs": 20203,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-ADVERS__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-ADVERS\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E5\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X4\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The 80% pipeline jump is mostly not real buying activity. On 29 Sept, 212 records worth $6.2M were bulk-loaded from a partner spreadsheet, run under Sales Ops user Okafor. They have no calls, emails or meetings. 171 of them copy 2024 closed-lost deals with the close date moved to Q4. Rep-created pipeline was flat ($8.1M to $8.4M). Win rates on rep-created deals were steady at 23\u201325%, and the four reps Dana named are within the normal range. The webinars created only $0.46M of pipeline. Their $5.9M \\\u0022influenced\\\u0022 figure is mostly the imported records. Coverage without the import is about 1.9x, below the 3.0x gate. So do not put the four reps on plans, and do not release the requisitions on the 3.3x figure. Quarantine the imported records, restate coverage and tell the hiring committee. Separately, preserve the import file and job record and examine the file\u0027s author metadata. Interview the channel members to find who prepared the file. Dana\u0027s 28 Sept email pressed for deals before the snapshot, but nothing yet shows she supplied the file. The chat messages are gone. Don\u0027t remove or discipline anyone until the file\u0027s origin is established.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:54.4464966Z",
+    "finishedAt": "2026-11-17T14:28:15.5957974Z",
+    "output": {
+      "caseId": "OD2-DEV-ADVERS",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 93,
+          "evidenceIds": [
+            "X1",
+            "E5",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 72,
+          "evidenceIds": [
+            "X1",
+            "X4",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The 80% pipeline jump is mostly not real buying activity. On 29 Sept, 212 records worth $6.2M were bulk-loaded from a partner spreadsheet, run under Sales Ops user Okafor. They have no calls, emails or meetings. 171 of them copy 2024 closed-lost deals with the close date moved to Q4. Rep-created pipeline was flat ($8.1M to $8.4M). Win rates on rep-created deals were steady at 23\u201325%, and the four reps Dana named are within the normal range. The webinars created only $0.46M of pipeline. Their $5.9M \u0022influenced\u0022 figure is mostly the imported records. Coverage without the import is about 1.9x, below the 3.0x gate. So do not put the four reps on plans, and do not release the requisitions on the 3.3x figure. Quarantine the imported records, restate coverage and tell the hiring committee. Separately, preserve the import file and job record and examine the file\u0027s author metadata. Interview the channel members to find who prepared the file. Dana\u0027s 28 Sept email pressed for deals before the snapshot, but nothing yet shows she supplied the file. The chat messages are gone. Don\u0027t remove or discipline anyone until the file\u0027s origin is established."
+    }
+  }
+}

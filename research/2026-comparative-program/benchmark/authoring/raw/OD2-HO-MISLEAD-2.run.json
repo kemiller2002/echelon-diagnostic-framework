@@ -1,0 +1,747 @@
+{
+  "label": "OD2-HO-MISLEAD-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7726,
+  "cacheCreationTokens": 4499,
+  "outputTokens": 55457,
+  "thinkingTokens": 43911,
+  "costUsd": 1.1466932000000003,
+  "durationMs": 537443,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-MISLEAD-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022MISLEAD\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022GET latency regression after gateway 5.8 at Tarnfield Object Storage\u0022,\u0022setting\u0022:\u0022Quillon Cloud runs Tarnfield, a fictional object storage service. Stateless gateways terminate client requests, check request signatures, look up metadata and fetch object chunks from storage nodes. The fleet is organised as 12 cells across three regions (us-e, ap-s, eu-w). Gateway software ships through a release pipeline that posts to a shared change calendar. Storage-node settings are changed through a separate fleet configuration system.\u0022,\u0022presentingRequest\u0022:\u0022The VP of Platform Engineering wants a decision today on rolling gateway 5.8 back to 5.7 across the fleet. You have been asked to assess what is driving the GET latency regression and which of the proposed actions should be taken. You may collect at most two items from the catalogue.\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Priya Halvorsen, VP Platform Engineering, email to incident channel, 4 Nov 09:12\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022GET p99 has been stuck near 300 ms since the gateway 5.8 rollout on the night of 2\u20133 Nov. Before that it was 90 ms. The dashboard shows it climbing as the rollout went out. 5.8 changed the read path, and gateway CPU is up 18%. I want a fleet-wide rollback to 5.7 today. Security has objected because of the signature fix, but customer latency comes first and we can re-ship the fix later. The storage and network teams have confirmed nothing of theirs is involved.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Fleet latency dashboard export with deployment annotations\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Fleet GET p99, hourly average of 5-minute p99 values (ms), night of 2\u20133 Nov. Annotation: \u0027gateway 5.8 rollout 22:05\u201304:10 (us-e 22:05\u201323:30, ap-s 23:35\u201301:50, eu-w 02:30\u201304:10)\u0027. 20:00 90; 21:00 91; 22:00 93; 23:00 139; 00:00 284; 01:00 291; 02:00 296; 03:00 301; 04:00 298; 05:00 297. Daily median p99: 1 Nov 90, 2 Nov 91, 4 Nov 296, 6 Nov 294, 8 Nov 297. The shared change calendar for 2\u20133 Nov has one entry: gateway 5.8 rollout.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Gateway 5.8 release notes (approved 30 Oct)\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Changes: (1) Fixes SEC-2291, a request-signature replay weakness reported by external auditors. Versions 5.7 and earlier remain exposed, and audit closure requires 5.8 across the fleet by 30 Nov. (2) Read path: parallel range-fetch fan-out raised from 4 to 8 for large objects. (3) TLS library upgrade. Known effect: gateway CPU \u002B15\u201320% from the added signature checks. Rollback procedure: redeploy 5.7, about 4 hours across the fleet.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, storage platform manager, 4 Nov\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022\u0027We pushed a routine compaction tuning change through the fleet config system on the evening of 2 Nov, because backlog alerts had been firing since about 31 Oct. Fleet config pushes don\u0027t go on the shared change calendar and never have. Compaction is background work and yields to client reads, so it can\u0027t be behind a read-latency problem. And to be clear, we never pause compaction. Once backlog passes about 15% of extents, read amplification climbs and nodes start running toward disk-full.\u0027\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Network on-call handover note, 3 Nov 08:00\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027Elevated TCP retransmits on us-e spine-2 from 02:10 to 04:50 on 3 Nov, traced to a flapping optic. We replaced the optic at 04:50 and retransmits have been at baseline since. Nothing comparable in ap-s or eu-w. Gateway-to-storage round-trip time medians are 0.4\u20130.6 ms in all three regions, same as last week. We don\u0027t see a network angle on the GET latency issue.\u0027\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Customer success note and traffic summary, 4 Nov\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022On 30 Oct Orrin Media began migrating its archive into Tarnfield, writing about 18 TB/day across all three regions. It is a background copy with a 15 Dec deadline and is currently ahead of schedule. Orrin\u0027s contract allows temporary ingest rate limits with 24 hours\u0027 notice, and their technical lead has said pacing is fine. Fleet traffic, 28 Oct to 4 Nov: GET requests/s rose 6%, gradually across the week. PUT requests/s rose 14%.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Gateway 5.8 code review record and test summary\u0022,\u0022source\u0022:\u0022Code review system, GW-5.8\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Code review record, GW-5.8. 41 merged changes, each with two approvals. Unit and integration suites passed (2,318 tests). The range-fetch fan-out change applies to objects above 64 MiB. The signature check adds an HMAC verification and a nonce-cache lookup per request. Reviewer comment: \u0027possible CPU cost; no storage-side effect expected.\u0027 Integration tests run against an in-memory storage stub, not real storage nodes.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Pre-release staging load test results, gateway 5.7 vs 5.8\u0022,\u0022source\u0022:\u0022Release engineering, load-test report, 28 Oct\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Pre-release load test, staging, 28 Oct. 40-minute runs at 70% of production peak GET rate, first gateway 5.7 then 5.8, against six staging storage nodes holding synthetic data (about 2% of production volume, lightly loaded). GET p99: 5.7 84 ms, 5.8 87 ms. Gateway CPU: 5.7 31%, 5.8 37%. Test owner\u0027s note: \u0027staging storage is not representative of production disk load; treat storage-side numbers as indicative only.\u0027\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Customer support tickets mentioning latency, 3\u20138 Nov\u0022,\u0022source\u0022:\u0022Support queue extract\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Support queue extract, 3\u20138 Nov. 64 tickets mention slow downloads or timeouts, from 41 accounts across all three regions. 11 cite SDK timeouts at 250 ms. Two enterprise accounts asked for an incident declaration and confirmation of SLA credits. Agents tagged 52 tickets \u0027gateway 5.8\u0027 after the internal status note named the release. No ticket pins down when the slowness started more precisely than \u0027overnight on the 2nd\u0027.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Gateway host metrics (CPU, memory, connection pools), 1\u20138 Nov\u0022,\u0022source\u0022:\u0022Gateway fleet monitoring\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Gateway fleet metrics, 1\u20138 Nov. CPU median 34% before 2 Nov, 40% after. Peak 52% (previously 44%). Memory flat. In-use connections from gateways to storage nodes rose from about 1,900 to about 5,800 per region overnight on 2\u20133 Nov. The pool limit is 8,000, with no exhaustion events. Gateway request queue depth was zero throughout, and no gateway host exceeded 60% CPU.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Distributed trace sample, GET requests, 3 Nov\u0022,\u0022source\u0022:\u0022Tracing system export\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Trace sample, 3 Nov 10:00\u201310:20: 40 GET traces from us-e, all served by gateway 5.8. Median span times: authentication and signature check 4 ms. Metadata lookup 6 ms. Storage fetch 271 ms (gateway-side span, includes network and storage-node time). Response streaming 12 ms. Traces are kept for 24 hours, so there are no pre-release traces to compare against.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Per-cell GET p99 latency with deployment and configuration timestamps, 1\u20138 Nov\u0022,\u0022source\u0022:\u0022SRE analytics export\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022SRE analytics export, per cell. Fields: gateway 5.8 arrival; fleet config push FC-7710 applied; first 5-minute window with GET p99 above 150 ms; median GET p99 1\u20132 Nov \u2192 4\u20138 Nov (ms). Times are for 2\u20133 Nov.\\nuse-1: 22:05; 23:38; 23:40; 89\u2192296\\nuse-2: 22:31; 23:39; 23:45; 90\u2192301\\nuse-3: 22:58; 23:41; 23:45; 92\u2192289\\nuse-4: 23:27; 23:42; 23:50; 88\u2192294\\naps-1: 23:35; 23:44; 23:50; 93\u2192305\\naps-2: 00:20; 23:45; 23:50; 91\u2192298\\naps-3: 01:05; skipped (change freeze before 9 Nov disk replacement; hardware unchanged); none; 91\u219294\\naps-4: 01:48; 23:47; 23:55; 90\u2192292\\neuw-1: 02:30; 23:49; 23:55; 87\u2192291\\neuw-2: 03:05; 23:50; 23:55; 89\u2192299\\neuw-3: 03:40; 23:51; 00:00; 92\u2192302\\neuw-4: 04:10; 23:52; 00:05; 90\u2192297\\nGET requests/s, 28 Oct\u21924 Nov: fleet \u002B6%, aps-3 \u002B7%.\\nTest, 6 Nov 10:00\u201313:00: euw-1 gateways rolled back to 5.7. p99 291 before, 297 during, 293 after.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Network fabric interface counters, all regions, 1\u20138 Nov\u0022,\u0022source\u0022:\u0022Network monitoring export\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Network fabric export, 1\u20138 Nov, all regions. Interface error counters at baseline except us-e spine-2 (02:10\u201304:50 on 3 Nov; optic replaced). Peak link utilisation 41%, no congestion drops. Cross-rack traffic up 9% from 3 Nov in all regions. The network team attributes this to client retries and has not looked into it further.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Storage fleet configuration change ticket for the 2 Nov compaction tuning\u0022,\u0022source\u0022:\u0022Fleet configuration system, ticket FC-7710\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Ticket FC-7710, filed 2 Nov 18:20 by storage on-call and approved by the storage platform manager. Change: compaction worker threads 2 \u2192 6 on all storage nodes. Reason: \u0027compaction backlog 11% and rising, alert threshold 8%.\u0027 Expected client impact: \u0027negligible; compaction yields to foreground reads.\u0027 Rollout: automatic via the fleet config system. Rollback: set threads to 2, which takes effect within 5 minutes per cell. Calendar link: none.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Orrin Media migration runbook\u0022,\u0022source\u0022:\u0022Runbook v2, shared with customer\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Orrin Media migration runbook v2. Source archive 6.1 PB, objects mostly 8\u2013200 MiB. Orrin\u0027s tooling copies it via PUT at a target of 18 TB/day across us-e, ap-s and eu-w, in proportion to Orrin\u0027s existing footprint. Started 30 Oct, completion target 15 Dec. On 7 Nov progress was 9% ahead of plan. Orrin does not expect to read migrated data before January.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview notes, gateway team lead, 5 Nov\u0022,\u0022source\u0022:\u0022Incident review interviewer\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027The fan-out change only applies to objects over 64 MiB, which is about 3% of GETs. The signature check costs CPU, not much latency: we measured 1\u20132 ms in staging. I don\u0027t see how 5.8 adds 200 ms to fleet p99, but I can\u0027t rule it out until someone shows me a cell where the timing doesn\u0027t line up. Rolling back hurts us too: the SEC-2291 audit deadline is 30 Nov and 5.7 is still exposed.\u0027\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Storage-node host and compaction metrics, 28 Oct\u20138 Nov\u0022,\u0022source\u0022:\u0022Storage observability export\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Storage observability export, 28 Oct\u20138 Nov. Node medians across the 11 cells that applied FC-7710.\\nCompaction worker threads: 2 before the push, 6 after.\\nCompaction share of disk bytes: 38% before, 71% after.\\nDisk utilisation: 41% before, 97% after. It crossed 90% within 5 minutes of the push in each of the 11 cells.\\nDisk read queue wait: 9 ms before, 205 ms after.\\nNode-side GET service time (timed on the node, excludes network): 61 ms before, 262 ms after.\\nCompaction backlog, share of extents awaiting compaction (fleet): 3.1% on 29 Oct; 11.2% at 22:00 on 2 Nov; 4.0% on 8 Nov.\\nAnnotations: Orrin Media migration writes began 30 Oct. A cold-tier lifecycle-expiry sweep ran 29 Oct\u20131 Nov, writing deletion markers that compaction must process. Backlog growth has not been attributed by source or by node.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Post-incident review PIR-118 (March)\u0022,\u0022source\u0022:\u0022Platform engineering review archive\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022PIR-118, March. Gateway 5.3 added a synchronous metadata call to the GET path. Fleet GET p99 rose from 85 ms to 160 ms within an hour of rollout and stayed there for nine days, until a rollback and fix. Contributing factor: staging did not exercise metadata latency. Action item adopted by platform leadership: \u0027treat any post-release latency change as release-caused until shown otherwise.\u0027\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Client SDK telemetry: retries and versions, 1\u20138 Nov\u0022,\u0022source\u0022:\u0022SDK telemetry pipeline\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Client SDK telemetry (opt-in, about 40% of GET traffic), 1\u20138 Nov. Retried GETs as a share of all GETs: 0.5% before 2 Nov 23:00, 2.9% from 3 Nov 00:00 onward. SDK default timeout 250 ms. SDK version mix unchanged over the period (v3.x 81%, v2.x 19%). Hourly resolution only.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Disk vendor firmware advisory and fleet asset inventory\u0022,\u0022source\u0022:\u0022Drive vendor advisory DV-22-41 with inventory extract\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Vendor advisory DV-22-41: firmware 3.2 on the vendor\u0027s 15.36 TB data-centre drives can produce multi-second read stalls under sustained mixed workloads. Fixed in 3.3. Attached asset inventory extract: all Tarnfield storage nodes report firmware 3.4, installed in August. No drive firmware changes since then.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Finance estimate of SLA credit exposure\u0022,\u0022source\u0022:\u0022Finance, 7 Nov\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Finance estimate, 7 Nov. If GET p99 stays above the 250 ms SLA objective through 30 Nov, service credits owed come to roughly $1.9M across 312 enterprise accounts. About $0.4M has already accrued for 3\u20137 Nov. The estimate assumes every eligible customer files a claim.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The gateway 5.8 release, rolled out overnight on 2\u20133 Nov, caused the GET latency regression.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The storage-node compaction tuning change made on the evening of 2 Nov caused the GET latency regression.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Growth in customer request traffic, including the Orrin Media migration, overloaded the service and caused the GET latency regression.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022Degraded network transport between gateways and storage nodes caused the GET latency regression.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Gateway 5.8 release (rolled out 2\u20133 Nov)\u0022,\u0022to\u0022:\u0022GET p99 regression (about 90 ms to about 300 ms)\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u00222 Nov storage-node compaction tuning change\u0022,\u0022to\u0022:\u0022Storage-node disk saturation\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Storage-node disk saturation\u0022,\u0022to\u0022:\u0022GET p99 regression (about 90 ms to about 300 ms)\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Orrin Media migration writes (from 30 Oct)\u0022,\u0022to\u0022:\u0022Growth in compaction backlog before 2 Nov\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Roll the gateway back to version 5.7 across the fleet until the latency regression is resolved.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Revert the 2 Nov compaction tuning change in one cell first, watching GET p99 and compaction backlog, before extending the revert to the remaining cells.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Temporarily rate-limit Orrin Media\u0027s migration ingest, giving the contractual notice, to slow compaction backlog growth.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Pause compaction on all storage nodes for the rest of the incident (expected to be one to two weeks) to free storage-node disk I/O for client reads.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Have the gateway team profile 5.8\u0027s higher CPU use in staging before the next gateway release.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022groundTruthNarrative\u0022:\u0022The GET latency regression was caused by storage fleet config change FC-7710. Between 23:38 and 23:52 on 2 Nov it raised compaction worker threads from 2 to 6 on storage nodes in 11 of the 12 cells. Gateway 5.8 happened to be rolling out over the same night (22:05\u201304:10). Leadership, the hourly fleet dashboard, the shared change calendar (which never lists fleet config pushes) and a prior incident precedent all pointed at the release. The per-cell export breaks the coincidence. In every pushed cell, latency rose within minutes of that cell\u0027s push, even in seven cells that did not get 5.8 until later. Cell aps-3 had 5.8 from 01:05 and comparable traffic growth, but its push was skipped by a maintenance freeze, and it stayed at about 94 ms. Rolling euw-1 back to 5.7 for three hours changed nothing. Storage-node metrics give the mechanism. Compaction\u0027s share of disk bytes rose from 38% to 71% and utilisation from 41% to 97%. Disk read queue wait rose by about 196 ms, which matches the increase in node-side GET service time and p99. Network transport was unaffected. Why the backlog grew before 2 Nov (Orrin\u0027s migration writes, a lifecycle-expiry sweep, or both) is unresolved. The best next step is a staged, monitored revert of the compaction change. Rolling back the gateway would re-open the SEC-2291 security weakness with no latency benefit. Pausing compaction for weeks would push backlog past the 15% danger threshold.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C6\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C10\u0022,\u0022C11\u0022,\u0022C12\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022leadership-narrative\u0022,\u0022natural-experiment\u0022,\u0022intervention-result\u0022],\u0022rationale\u0022:\u0022C6 shows the regression began in each cell within minutes of that cell\u0027s FC-7710 push, before 5.8 arrived in seven cells. aps-3 ran 5.8 from 01:05 without the push and stayed at 91\u219294 ms. Rolling euw-1 back to 5.7 for three hours left p99 unchanged (291/297/293). The release does not covary with the regression, and removing it does not help. The rollout alignment in E1 and E2 is a coincidence in timing.\u0022},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022hidden-change\u0022,\u0022natural-experiment\u0022,\u0022interested-source\u0022],\u0022rationale\u0022:\u0022E4 places a compaction tuning change on the evening of 2 Nov. C6 shows onset in every pushed cell 2\u201313 minutes after its push, regardless of gateway version. The one cell without the push (aps-3, hardware unchanged, similar traffic) did not regress. C11 adds the disk-saturation mechanism. The storage manager\u0027s claim that compaction \u0027can\u0027t\u0027 affect reads is an interested assertion, and the data contradict it.\u0022},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E6\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C9\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022plausible-rival\u0022],\u0022rationale\u0022:\u0022Traffic rose gradually (GET \u002B6% over a week; E6), but latency stepped up within minutes in each cell (E2, C6). aps-3 saw comparable GET growth (\u002B7%) and kept its baseline latency. Traffic growth without the config push did not produce the regression.\u0022},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C7\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022plausible-rival\u0022],\u0022rationale\u0022:\u0022Retransmits were confined to us-e between 02:10 and 04:50. That is after the regression began at about 23:40 (E2), and the regression persisted after the optic was replaced and appeared in regions with no network anomaly. Gateway-to-storage RTT was unchanged at 0.4\u20130.6 ms. C11 confirms the added time is on the storage node, excluding network.\u0022},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C2\u0022,\u0022C6\u0022,\u0022C10\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022intervention-result\u0022],\u0022rationale\u0022:\u0022Several pieces of evidence count against the link itself: 5.8 present without the regression (aps-3), the regression present before 5.8 arrived (aps-2 and all eu-w cells), and a rollback with no effect (euw-1, 6 Nov). This goes beyond a rival being supported: the release itself is shown not to drive the regression.\u0022},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022mechanism\u0022],\u0022rationale\u0022:\u0022C11 shows compaction threads tripled at the push. Compaction\u0027s share of disk bytes rose from 38% to 71%, and utilisation went from 41% to 97%, crossing 90% within 5 minutes of the push in each of the 11 cells. Temporal order, mechanism and attribution of the extra disk load to compaction establish the link. No other catalogue item has disk data.\u0022},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022mechanism\u0022,\u0022rival-excluded\u0022],\u0022rationale\u0022:\u0022C11: disk read queue wait rose by 196 ms (9\u2192205), matching the rise in node-side service time (61\u2192262 ms) and in cell p99 (about \u002B200 ms). C6 rules out the main rival (the gateway release) and shows that the one unpushed cell did not regress. E5 rules out the network. Temporal order, mechanism and covariation, with the rival excluded, make the link causal.\u0022},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022E6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E6\u0022,\u0022C8\u0022,\u0022C9\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022unresolved\u0022],\u0022rationale\u0022:\u0022The backlog grew from 3.1% to 11.2% while Orrin\u0027s migration writes were running (from 30 Oct). Over the same period a lifecycle-expiry sweep (29 Oct\u20131 Nov) was writing deletion markers that compaction must process. C11 states that the backlog has not been attributed by source or node. The two co-occur, but the competing driver is not ruled out.\u0022},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C6\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022protective-control\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022The rollback test in C6 shows 5.7 gives no latency benefit, and H1 is contradicted, so no live hypothesis is served by the rollback. It would re-expose the fleet to the SEC-2291 signature-replay weakness and put the 30 Nov audit closure at risk (E3). It removes a protective security fix for no gain.\u0022},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022targeted-fix\u0022,\u0022reversible\u0022],\u0022rationale\u0022:\u0022The evidence identifies the compaction change as the cause. A one-cell-first revert is reversible (C8: takes effect within 5 minutes). Monitoring backlog guards against the read-amplification risk in E4, and the backlog is now 4.0% (C11), well below 15%. This is the single best next action.\u0022},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E6\u0022,\u0022C9\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022unconfirmed-hypothesis\u0022],\u0022rationale\u0022:\u0022Pacing Orrin\u0027s ingest would help keep the backlog down if Orrin\u0027s writes drive it (R4), but that link is only an association, and the lifecycle sweep is an unexcluded rival. The contract permits temporary rate limits with notice, the migration is ahead of schedule and the customer accepts pacing (E6, C9), so a wrong call leaves no lasting damage. It is not justified yet.\u0022},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022protective-control\u0022],\u0022rationale\u0022:\u0022Compaction is a protective process. At the old 2-thread setting the backlog grew about 8 points in 4 days (C11), so with compaction stopped for one to two weeks it would pass the 15% threshold. Past that point read amplification raises GET latency and nodes head toward disk-full (E4). A short-term latency gain turns into a worse outcome.\u0022},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022secondary-issue\u0022],\u0022rationale\u0022:\u0022The CPU increase is real (E3, C4) and worth understanding for capacity planning. It is low cost and harmless, but C6 shows 5.8 is not behind the regression, so this does nothing for the incident. Reasonable, but not among the best next actions.\u0022},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022decision-readiness\u0022],\u0022rationale\u0022:\u0022The top-ranked substantive action is the staged revert of the compaction change (A2). It rests on a natural experiment (aps-3), onset matching each cell\u0027s push time, a negative rollback test, and a disk-saturation mechanism whose size matches the regression. That is enough to commit to a reversible, monitored revert.\u0022}],\u0022discriminatingReads\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022lowValueReads\u0022:[\u0022C3\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022authoringNotes\u0022:\u0022Misleading signal: the hourly fleet dashboard (E2) and the VP (E1) tie the regression to the gateway 5.8 rollout. The release notes (E3) list a read-path change and higher CPU, the change calendar lists only the release, and the storage manager (E4) dismisses compaction as unable to affect reads. From the initial file alone, a careful analyst would likely mark H1 supported or unknown, H2 unknown, R1 association-only, R2/R3 unknown, A1 preferred or premature, A2 premature and SUFF insufficient. E2 holds a fair but non-decisive hint: the 22:00 hour stays at 93 ms even though us-e cells had 5.8 from 22:05. Non-redundancy: C6 alone settles H1, R1 and A1, with its per-cell timing, the aps-3 natural experiment and the euw-1 rollback test. No other item has per-cell latency or a version comparison. C11 alone settles R2 (disk saturation attributed to compaction); no other item has disk data. R3 needs both. Other items are plausible but non-decisive. C4 (connection growth) and C5 (post-release traces, no baseline) fit either story. C8 states the change but not its effect. C10 is an interested and inconclusive account. C12 is a misleading base rate. C7 only repeats E5. aps-3 is a clean control: its freeze was for a future disk swap with hardware unchanged, it got 5.8 through the separate release pipeline, and its traffic growth is comparable. Only A2 is preferred. A1 is harmful because H1 is contradicted and the rollback re-opens SEC-2291. A3 is premature because R4 is association-only and pacing is contractually allowed and reversible. A4 is harmful because it disables a protective process for weeks.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:53:16.2684288Z",
+  "finishedAt": "2026-11-17T15:02:15.2828735Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-MISLEAD-2",
+      "split": "heldout",
+      "benchmarkClass": "MISLEAD",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "GET latency regression after gateway 5.8 at Tarnfield Object Storage",
+      "setting": "Quillon Cloud runs Tarnfield, a fictional object storage service. Stateless gateways terminate client requests, check request signatures, look up metadata and fetch object chunks from storage nodes. The fleet is organised as 12 cells across three regions (us-e, ap-s, eu-w). Gateway software ships through a release pipeline that posts to a shared change calendar. Storage-node settings are changed through a separate fleet configuration system.",
+      "presentingRequest": "The VP of Platform Engineering wants a decision today on rolling gateway 5.8 back to 5.7 across the fleet. You have been asked to assess what is driving the GET latency regression and which of the proposed actions should be taken. You may collect at most two items from the catalogue.",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Priya Halvorsen, VP Platform Engineering, email to incident channel, 4 Nov 09:12",
+          "sourceType": "leadership-account",
+          "text": "GET p99 has been stuck near 300 ms since the gateway 5.8 rollout on the night of 2\u20133 Nov. Before that it was 90 ms. The dashboard shows it climbing as the rollout went out. 5.8 changed the read path, and gateway CPU is up 18%. I want a fleet-wide rollback to 5.7 today. Security has objected because of the signature fix, but customer latency comes first and we can re-ship the fix later. The storage and network teams have confirmed nothing of theirs is involved."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Fleet latency dashboard export with deployment annotations",
+          "sourceType": "telemetry",
+          "text": "Fleet GET p99, hourly average of 5-minute p99 values (ms), night of 2\u20133 Nov. Annotation: \u0027gateway 5.8 rollout 22:05\u201304:10 (us-e 22:05\u201323:30, ap-s 23:35\u201301:50, eu-w 02:30\u201304:10)\u0027. 20:00 90; 21:00 91; 22:00 93; 23:00 139; 00:00 284; 01:00 291; 02:00 296; 03:00 301; 04:00 298; 05:00 297. Daily median p99: 1 Nov 90, 2 Nov 91, 4 Nov 296, 6 Nov 294, 8 Nov 297. The shared change calendar for 2\u20133 Nov has one entry: gateway 5.8 rollout."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Gateway 5.8 release notes (approved 30 Oct)",
+          "sourceType": "change-record",
+          "text": "Changes: (1) Fixes SEC-2291, a request-signature replay weakness reported by external auditors. Versions 5.7 and earlier remain exposed, and audit closure requires 5.8 across the fleet by 30 Nov. (2) Read path: parallel range-fetch fan-out raised from 4 to 8 for large objects. (3) TLS library upgrade. Known effect: gateway CPU \u002B15\u201320% from the added signature checks. Rollback procedure: redeploy 5.7, about 4 hours across the fleet."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Interview notes, storage platform manager, 4 Nov",
+          "sourceType": "manager-account",
+          "text": "\u0027We pushed a routine compaction tuning change through the fleet config system on the evening of 2 Nov, because backlog alerts had been firing since about 31 Oct. Fleet config pushes don\u0027t go on the shared change calendar and never have. Compaction is background work and yields to client reads, so it can\u0027t be behind a read-latency problem. And to be clear, we never pause compaction. Once backlog passes about 15% of extents, read amplification climbs and nodes start running toward disk-full.\u0027"
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Network on-call handover note, 3 Nov 08:00",
+          "sourceType": "staff-account",
+          "text": "\u0027Elevated TCP retransmits on us-e spine-2 from 02:10 to 04:50 on 3 Nov, traced to a flapping optic. We replaced the optic at 04:50 and retransmits have been at baseline since. Nothing comparable in ap-s or eu-w. Gateway-to-storage round-trip time medians are 0.4\u20130.6 ms in all three regions, same as last week. We don\u0027t see a network angle on the GET latency issue.\u0027"
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Customer success note and traffic summary, 4 Nov",
+          "sourceType": "document",
+          "text": "On 30 Oct Orrin Media began migrating its archive into Tarnfield, writing about 18 TB/day across all three regions. It is a background copy with a 15 Dec deadline and is currently ahead of schedule. Orrin\u0027s contract allows temporary ingest rate limits with 24 hours\u0027 notice, and their technical lead has said pacing is fine. Fleet traffic, 28 Oct to 4 Nov: GET requests/s rose 6%, gradually across the week. PUT requests/s rose 14%."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Gateway 5.8 code review record and test summary",
+          "source": "Code review system, GW-5.8",
+          "sourceType": "document",
+          "text": "Code review record, GW-5.8. 41 merged changes, each with two approvals. Unit and integration suites passed (2,318 tests). The range-fetch fan-out change applies to objects above 64 MiB. The signature check adds an HMAC verification and a nonce-cache lookup per request. Reviewer comment: \u0027possible CPU cost; no storage-side effect expected.\u0027 Integration tests run against an in-memory storage stub, not real storage nodes."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Pre-release staging load test results, gateway 5.7 vs 5.8",
+          "source": "Release engineering, load-test report, 28 Oct",
+          "sourceType": "system-record",
+          "text": "Pre-release load test, staging, 28 Oct. 40-minute runs at 70% of production peak GET rate, first gateway 5.7 then 5.8, against six staging storage nodes holding synthetic data (about 2% of production volume, lightly loaded). GET p99: 5.7 84 ms, 5.8 87 ms. Gateway CPU: 5.7 31%, 5.8 37%. Test owner\u0027s note: \u0027staging storage is not representative of production disk load; treat storage-side numbers as indicative only.\u0027"
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Customer support tickets mentioning latency, 3\u20138 Nov",
+          "source": "Support queue extract",
+          "sourceType": "customer-account",
+          "text": "Support queue extract, 3\u20138 Nov. 64 tickets mention slow downloads or timeouts, from 41 accounts across all three regions. 11 cite SDK timeouts at 250 ms. Two enterprise accounts asked for an incident declaration and confirmation of SLA credits. Agents tagged 52 tickets \u0027gateway 5.8\u0027 after the internal status note named the release. No ticket pins down when the slowness started more precisely than \u0027overnight on the 2nd\u0027."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Gateway host metrics (CPU, memory, connection pools), 1\u20138 Nov",
+          "source": "Gateway fleet monitoring",
+          "sourceType": "telemetry",
+          "text": "Gateway fleet metrics, 1\u20138 Nov. CPU median 34% before 2 Nov, 40% after. Peak 52% (previously 44%). Memory flat. In-use connections from gateways to storage nodes rose from about 1,900 to about 5,800 per region overnight on 2\u20133 Nov. The pool limit is 8,000, with no exhaustion events. Gateway request queue depth was zero throughout, and no gateway host exceeded 60% CPU."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Distributed trace sample, GET requests, 3 Nov",
+          "source": "Tracing system export",
+          "sourceType": "log",
+          "text": "Trace sample, 3 Nov 10:00\u201310:20: 40 GET traces from us-e, all served by gateway 5.8. Median span times: authentication and signature check 4 ms. Metadata lookup 6 ms. Storage fetch 271 ms (gateway-side span, includes network and storage-node time). Response streaming 12 ms. Traces are kept for 24 hours, so there are no pre-release traces to compare against."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Per-cell GET p99 latency with deployment and configuration timestamps, 1\u20138 Nov",
+          "source": "SRE analytics export",
+          "sourceType": "system-record",
+          "text": "SRE analytics export, per cell. Fields: gateway 5.8 arrival; fleet config push FC-7710 applied; first 5-minute window with GET p99 above 150 ms; median GET p99 1\u20132 Nov \u2192 4\u20138 Nov (ms). Times are for 2\u20133 Nov.\nuse-1: 22:05; 23:38; 23:40; 89\u2192296\nuse-2: 22:31; 23:39; 23:45; 90\u2192301\nuse-3: 22:58; 23:41; 23:45; 92\u2192289\nuse-4: 23:27; 23:42; 23:50; 88\u2192294\naps-1: 23:35; 23:44; 23:50; 93\u2192305\naps-2: 00:20; 23:45; 23:50; 91\u2192298\naps-3: 01:05; skipped (change freeze before 9 Nov disk replacement; hardware unchanged); none; 91\u219294\naps-4: 01:48; 23:47; 23:55; 90\u2192292\neuw-1: 02:30; 23:49; 23:55; 87\u2192291\neuw-2: 03:05; 23:50; 23:55; 89\u2192299\neuw-3: 03:40; 23:51; 00:00; 92\u2192302\neuw-4: 04:10; 23:52; 00:05; 90\u2192297\nGET requests/s, 28 Oct\u21924 Nov: fleet \u002B6%, aps-3 \u002B7%.\nTest, 6 Nov 10:00\u201313:00: euw-1 gateways rolled back to 5.7. p99 291 before, 297 during, 293 after."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Network fabric interface counters, all regions, 1\u20138 Nov",
+          "source": "Network monitoring export",
+          "sourceType": "telemetry",
+          "text": "Network fabric export, 1\u20138 Nov, all regions. Interface error counters at baseline except us-e spine-2 (02:10\u201304:50 on 3 Nov; optic replaced). Peak link utilisation 41%, no congestion drops. Cross-rack traffic up 9% from 3 Nov in all regions. The network team attributes this to client retries and has not looked into it further."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Storage fleet configuration change ticket for the 2 Nov compaction tuning",
+          "source": "Fleet configuration system, ticket FC-7710",
+          "sourceType": "change-record",
+          "text": "Ticket FC-7710, filed 2 Nov 18:20 by storage on-call and approved by the storage platform manager. Change: compaction worker threads 2 \u2192 6 on all storage nodes. Reason: \u0027compaction backlog 11% and rising, alert threshold 8%.\u0027 Expected client impact: \u0027negligible; compaction yields to foreground reads.\u0027 Rollout: automatic via the fleet config system. Rollback: set threads to 2, which takes effect within 5 minutes per cell. Calendar link: none."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Orrin Media migration runbook",
+          "source": "Runbook v2, shared with customer",
+          "sourceType": "document",
+          "text": "Orrin Media migration runbook v2. Source archive 6.1 PB, objects mostly 8\u2013200 MiB. Orrin\u0027s tooling copies it via PUT at a target of 18 TB/day across us-e, ap-s and eu-w, in proportion to Orrin\u0027s existing footprint. Started 30 Oct, completion target 15 Dec. On 7 Nov progress was 9% ahead of plan. Orrin does not expect to read migrated data before January."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Interview notes, gateway team lead, 5 Nov",
+          "source": "Incident review interviewer",
+          "sourceType": "staff-account",
+          "text": "\u0027The fan-out change only applies to objects over 64 MiB, which is about 3% of GETs. The signature check costs CPU, not much latency: we measured 1\u20132 ms in staging. I don\u0027t see how 5.8 adds 200 ms to fleet p99, but I can\u0027t rule it out until someone shows me a cell where the timing doesn\u0027t line up. Rolling back hurts us too: the SEC-2291 audit deadline is 30 Nov and 5.7 is still exposed.\u0027"
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Storage-node host and compaction metrics, 28 Oct\u20138 Nov",
+          "source": "Storage observability export",
+          "sourceType": "telemetry",
+          "text": "Storage observability export, 28 Oct\u20138 Nov. Node medians across the 11 cells that applied FC-7710.\nCompaction worker threads: 2 before the push, 6 after.\nCompaction share of disk bytes: 38% before, 71% after.\nDisk utilisation: 41% before, 97% after. It crossed 90% within 5 minutes of the push in each of the 11 cells.\nDisk read queue wait: 9 ms before, 205 ms after.\nNode-side GET service time (timed on the node, excludes network): 61 ms before, 262 ms after.\nCompaction backlog, share of extents awaiting compaction (fleet): 3.1% on 29 Oct; 11.2% at 22:00 on 2 Nov; 4.0% on 8 Nov.\nAnnotations: Orrin Media migration writes began 30 Oct. A cold-tier lifecycle-expiry sweep ran 29 Oct\u20131 Nov, writing deletion markers that compaction must process. Backlog growth has not been attributed by source or by node."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Post-incident review PIR-118 (March)",
+          "source": "Platform engineering review archive",
+          "sourceType": "prior-report",
+          "text": "PIR-118, March. Gateway 5.3 added a synchronous metadata call to the GET path. Fleet GET p99 rose from 85 ms to 160 ms within an hour of rollout and stayed there for nine days, until a rollback and fix. Contributing factor: staging did not exercise metadata latency. Action item adopted by platform leadership: \u0027treat any post-release latency change as release-caused until shown otherwise.\u0027"
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Client SDK telemetry: retries and versions, 1\u20138 Nov",
+          "source": "SDK telemetry pipeline",
+          "sourceType": "telemetry",
+          "text": "Client SDK telemetry (opt-in, about 40% of GET traffic), 1\u20138 Nov. Retried GETs as a share of all GETs: 0.5% before 2 Nov 23:00, 2.9% from 3 Nov 00:00 onward. SDK default timeout 250 ms. SDK version mix unchanged over the period (v3.x 81%, v2.x 19%). Hourly resolution only."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Disk vendor firmware advisory and fleet asset inventory",
+          "source": "Drive vendor advisory DV-22-41 with inventory extract",
+          "sourceType": "vendor-account",
+          "text": "Vendor advisory DV-22-41: firmware 3.2 on the vendor\u0027s 15.36 TB data-centre drives can produce multi-second read stalls under sustained mixed workloads. Fixed in 3.3. Attached asset inventory extract: all Tarnfield storage nodes report firmware 3.4, installed in August. No drive firmware changes since then."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Finance estimate of SLA credit exposure",
+          "source": "Finance, 7 Nov",
+          "sourceType": "financial-record",
+          "text": "Finance estimate, 7 Nov. If GET p99 stays above the 250 ms SLA objective through 30 Nov, service credits owed come to roughly $1.9M across 312 enterprise accounts. About $0.4M has already accrued for 3\u20137 Nov. The estimate assumes every eligible customer files a claim."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The gateway 5.8 release, rolled out overnight on 2\u20133 Nov, caused the GET latency regression."
+          },
+          {
+            "id": "H2",
+            "text": "The storage-node compaction tuning change made on the evening of 2 Nov caused the GET latency regression."
+          },
+          {
+            "id": "H3",
+            "text": "Growth in customer request traffic, including the Orrin Media migration, overloaded the service and caused the GET latency regression."
+          },
+          {
+            "id": "H4",
+            "text": "Degraded network transport between gateways and storage nodes caused the GET latency regression."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Gateway 5.8 release (rolled out 2\u20133 Nov)",
+            "to": "GET p99 regression (about 90 ms to about 300 ms)",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "2 Nov storage-node compaction tuning change",
+            "to": "Storage-node disk saturation",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Storage-node disk saturation",
+            "to": "GET p99 regression (about 90 ms to about 300 ms)",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Orrin Media migration writes (from 30 Oct)",
+            "to": "Growth in compaction backlog before 2 Nov",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Roll the gateway back to version 5.7 across the fleet until the latency regression is resolved."
+          },
+          {
+            "id": "A2",
+            "text": "Revert the 2 Nov compaction tuning change in one cell first, watching GET p99 and compaction backlog, before extending the revert to the remaining cells."
+          },
+          {
+            "id": "A3",
+            "text": "Temporarily rate-limit Orrin Media\u0027s migration ingest, giving the contractual notice, to slow compaction backlog growth."
+          },
+          {
+            "id": "A4",
+            "text": "Pause compaction on all storage nodes for the rest of the incident (expected to be one to two weeks) to free storage-node disk I/O for client reads."
+          },
+          {
+            "id": "A5",
+            "text": "Have the gateway team profile 5.8\u0027s higher CPU use in staging before the next gateway release."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "S-H1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S-A5",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-MISLEAD-2",
+      "groundTruthNarrative": "The GET latency regression was caused by storage fleet config change FC-7710. Between 23:38 and 23:52 on 2 Nov it raised compaction worker threads from 2 to 6 on storage nodes in 11 of the 12 cells. Gateway 5.8 happened to be rolling out over the same night (22:05\u201304:10). Leadership, the hourly fleet dashboard, the shared change calendar (which never lists fleet config pushes) and a prior incident precedent all pointed at the release. The per-cell export breaks the coincidence. In every pushed cell, latency rose within minutes of that cell\u0027s push, even in seven cells that did not get 5.8 until later. Cell aps-3 had 5.8 from 01:05 and comparable traffic growth, but its push was skipped by a maintenance freeze, and it stayed at about 94 ms. Rolling euw-1 back to 5.7 for three hours changed nothing. Storage-node metrics give the mechanism. Compaction\u0027s share of disk bytes rose from 38% to 71% and utilisation from 41% to 97%. Disk read queue wait rose by about 196 ms, which matches the increase in node-side GET service time and p99. Network transport was unaffected. Why the backlog grew before 2 Nov (Orrin\u0027s migration writes, a lifecycle-expiry sweep, or both) is unresolved. The best next step is a staged, monitored revert of the compaction change. Rolling back the gateway would re-open the SEC-2291 security weakness with no latency benefit. Pausing compaction for weeks would push backlog past the 15% danger threshold.",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C6",
+            "C2",
+            "C4",
+            "C10",
+            "C11",
+            "C12"
+          ],
+          "tags": [
+            "misleading-signal",
+            "leadership-narrative",
+            "natural-experiment",
+            "intervention-result"
+          ],
+          "rationale": "C6 shows the regression began in each cell within minutes of that cell\u0027s FC-7710 push, before 5.8 arrived in seven cells. aps-3 ran 5.8 from 01:05 without the push and stayed at 91\u219294 ms. Rolling euw-1 back to 5.7 for three hours left p99 unchanged (291/297/293). The release does not covary with the regression, and removing it does not help. The rollout alignment in E1 and E2 is a coincidence in timing."
+        },
+        {
+          "itemId": "S-H2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E4",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C6",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "hidden-change",
+            "natural-experiment",
+            "interested-source"
+          ],
+          "rationale": "E4 places a compaction tuning change on the evening of 2 Nov. C6 shows onset in every pushed cell 2\u201313 minutes after its push, regardless of gateway version. The one cell without the push (aps-3, hardware unchanged, similar traffic) did not regress. C11 adds the disk-saturation mechanism. The storage manager\u0027s claim that compaction \u0027can\u0027t\u0027 affect reads is an interested assertion, and the data contradict it."
+        },
+        {
+          "itemId": "S-H3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E6",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E6",
+            "C6",
+            "C9",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "confounded",
+            "plausible-rival"
+          ],
+          "rationale": "Traffic rose gradually (GET \u002B6% over a week; E6), but latency stepped up within minutes in each cell (E2, C6). aps-3 saw comparable GET growth (\u002B7%) and kept its baseline latency. Traffic growth without the config push did not produce the regression."
+        },
+        {
+          "itemId": "S-H4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C5",
+            "C6",
+            "C7",
+            "C11"
+          ],
+          "tags": [
+            "plausible-rival"
+          ],
+          "rationale": "Retransmits were confined to us-e between 02:10 and 04:50. That is after the regression began at about 23:40 (E2), and the regression persisted after the optic was replaced and appeared in regions with no network anomaly. Gateway-to-storage RTT was unchanged at 0.4\u20130.6 ms. C11 confirms the added time is on the storage node, excluding network."
+        },
+        {
+          "itemId": "S-R1",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C2",
+            "C6",
+            "C10",
+            "C11"
+          ],
+          "tags": [
+            "misleading-signal",
+            "intervention-result"
+          ],
+          "rationale": "Several pieces of evidence count against the link itself: 5.8 present without the regression (aps-3), the regression present before 5.8 arrived (aps-2 and all eu-w cells), and a rollback with no effect (euw-1, 6 Nov). This goes beyond a rival being supported: the release itself is shown not to drive the regression."
+        },
+        {
+          "itemId": "S-R2",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C6",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "mechanism"
+          ],
+          "rationale": "C11 shows compaction threads tripled at the push. Compaction\u0027s share of disk bytes rose from 38% to 71%, and utilisation went from 41% to 97%, crossing 90% within 5 minutes of the push in each of the 11 cells. Temporal order, mechanism and attribution of the extra disk load to compaction establish the link. No other catalogue item has disk data."
+        },
+        {
+          "itemId": "S-R3",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C5",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "mechanism",
+            "rival-excluded"
+          ],
+          "rationale": "C11: disk read queue wait rose by 196 ms (9\u2192205), matching the rise in node-side service time (61\u2192262 ms) and in cell p99 (about \u002B200 ms). C6 rules out the main rival (the gateway release) and shows that the one unpushed cell did not regress. E5 rules out the network. Temporal order, mechanism and covariation, with the rival excluded, make the link causal."
+        },
+        {
+          "itemId": "S-R4",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4",
+            "E6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E6",
+            "C8",
+            "C9",
+            "C11"
+          ],
+          "tags": [
+            "confounded",
+            "unresolved"
+          ],
+          "rationale": "The backlog grew from 3.1% to 11.2% while Orrin\u0027s migration writes were running (from 30 Oct). Over the same period a lifecycle-expiry sweep (29 Oct\u20131 Nov) was writing deletion markers that compaction must process. C11 states that the backlog has not been attributed by source or node. The two co-occur, but the competing driver is not ruled out."
+        },
+        {
+          "itemId": "S-A1",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C6",
+            "C10"
+          ],
+          "tags": [
+            "misleading-signal",
+            "protective-control",
+            "leadership-narrative"
+          ],
+          "rationale": "The rollback test in C6 shows 5.7 gives no latency benefit, and H1 is contradicted, so no live hypothesis is served by the rollback. It would re-expose the fleet to the SEC-2291 signature-replay weakness and put the 30 Nov audit closure at risk (E3). It removes a protective security fix for no gain."
+        },
+        {
+          "itemId": "S-A2",
+          "expected": "preferred",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C6",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "targeted-fix",
+            "reversible"
+          ],
+          "rationale": "The evidence identifies the compaction change as the cause. A one-cell-first revert is reversible (C8: takes effect within 5 minutes). Monitoring backlog guards against the read-amplification risk in E4, and the backlog is now 4.0% (C11), well below 15%. This is the single best next action."
+        },
+        {
+          "itemId": "S-A3",
+          "expected": "premature",
+          "weight": 1,
+          "requiredEvidence": [
+            "E6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E6",
+            "C9",
+            "C11"
+          ],
+          "tags": [
+            "unconfirmed-hypothesis"
+          ],
+          "rationale": "Pacing Orrin\u0027s ingest would help keep the backlog down if Orrin\u0027s writes drive it (R4), but that link is only an association, and the lifecycle sweep is an unexcluded rival. The contract permits temporary rate limits with notice, the migration is ahead of schedule and the customer accepts pacing (E6, C9), so a wrong call leaves no lasting damage. It is not justified yet."
+        },
+        {
+          "itemId": "S-A4",
+          "expected": "harmful",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "protective-control"
+          ],
+          "rationale": "Compaction is a protective process. At the old 2-thread setting the backlog grew about 8 points in 4 days (C11), so with compaction stopped for one to two weeks it would pass the 15% threshold. Past that point read amplification raises GET latency and nodes head toward disk-full (E4). A short-term latency gain turns into a worse outcome."
+        },
+        {
+          "itemId": "S-A5",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C1",
+            "C2",
+            "C4",
+            "C6"
+          ],
+          "tags": [
+            "secondary-issue"
+          ],
+          "rationale": "The CPU increase is real (E3, C4) and worth understanding for capacity planning. It is low cost and harmless, but C6 shows 5.8 is not behind the regression, so this does nothing for the incident. Reasonable, but not among the best next actions."
+        },
+        {
+          "itemId": "S-SUFF",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C6",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "decision-readiness"
+          ],
+          "rationale": "The top-ranked substantive action is the staged revert of the compaction change (A2). It rests on a natural experiment (aps-3), onset matching each cell\u0027s push time, a negative rollback test, and a disk-saturation mechanism whose size matches the regression. That is enough to commit to a reversible, monitored revert."
+        }
+      ],
+      "discriminatingReads": [
+        "C6",
+        "C11"
+      ],
+      "lowValueReads": [
+        "C3",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C6",
+        "C11"
+      ],
+      "authoringNotes": "Misleading signal: the hourly fleet dashboard (E2) and the VP (E1) tie the regression to the gateway 5.8 rollout. The release notes (E3) list a read-path change and higher CPU, the change calendar lists only the release, and the storage manager (E4) dismisses compaction as unable to affect reads. From the initial file alone, a careful analyst would likely mark H1 supported or unknown, H2 unknown, R1 association-only, R2/R3 unknown, A1 preferred or premature, A2 premature and SUFF insufficient. E2 holds a fair but non-decisive hint: the 22:00 hour stays at 93 ms even though us-e cells had 5.8 from 22:05. Non-redundancy: C6 alone settles H1, R1 and A1, with its per-cell timing, the aps-3 natural experiment and the euw-1 rollback test. No other item has per-cell latency or a version comparison. C11 alone settles R2 (disk saturation attributed to compaction); no other item has disk data. R3 needs both. Other items are plausible but non-decisive. C4 (connection growth) and C5 (post-release traces, no baseline) fit either story. C8 states the change but not its effect. C10 is an interested and inconclusive account. C12 is a misleading base rate. C7 only repeats E5. aps-3 is a clean control: its freeze was for a future disk swap with hardware unchanged, it got 5.8 through the separate release pipeline, and its traffic growth is comparable. Only A2 is preferred. A1 is harmful because H1 is contradicted and the rollback re-opens SEC-2291. A3 is premature because R4 is association-only and pacing is contractually allowed and reversible. A4 is harmful because it disables a protective process for weeks."
+    }
+  }
+}

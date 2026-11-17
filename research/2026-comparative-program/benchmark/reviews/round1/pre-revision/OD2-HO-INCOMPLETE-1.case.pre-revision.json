@@ -1,0 +1,407 @@
+{
+  "id": "OD2-HO-INCOMPLETE-1",
+  "split": "heldout",
+  "benchmarkClass": "INCOMPLETE",
+  "domain": "technical",
+  "readBudget": 2,
+  "title": "Chiller-plant electricity up 15% with flat production",
+  "setting": "Velmora Plastics\u0027 \u00D8strand site extrudes plastic profiles and moulds small components. A central plant of three 1,400 kW water-cooled centrifugal chillers (CH-1 to CH-3), two cooling towers and variable-speed secondary pumps supplies 7 \u00B0C process chilled water to the extrusion lines and other process users. The chiller plant\u0027s electricity (chillers, pumps, tower fans) is submetered at MCC-4. The site energy coordinator has escalated a sustained year-on-year rise in chiller-plant electricity that nobody on site can account for.",
+  "presentingRequest": "The site director asks: why has chiller-plant electricity risen about 15% year on year when production is flat, and should she approve the chiller service vendor\u0027s \u20AC38,400 condenser cleaning now? She wants a recommendation this week.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Energy summary prepared by the site energy coordinator, 3 Nov 2026",
+      "sourceType": "financial-record",
+      "text": "Chiller plant (MCC-4 submeter: chillers, pumps, tower fans), Apr\u2013Oct: 2025 1,412 MWh; 2026 1,628 MWh (\u002B15.3%). Change vs same month of prior year: Jan \u002B1%, Feb 0%, Mar \u002B2%, Apr \u002B4%, May \u002B9%, Jun \u002B14%, Jul \u002B17%, Aug \u002B18%, Sep \u002B19%, Oct \u002B20%. Site utility revenue meter, Apr\u2013Oct: 3,520 \u2192 3,738 MWh (\u002B218 MWh). Site total minus MCC-4: 2,108 \u2192 2,110 MWh. Weather, Tarnby airfield station: cooling degree-days Apr\u2013Oct 2% lower in 2026 than 2025; mean daily wet-bulb 0.3 K lower. Extra chiller-plant cost for the period at current tariff \u2248 \u20AC41,000."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "BMS \u0027Plant Efficiency\u0027 dashboard export, pulled 4 Nov 2026",
+      "sourceType": "telemetry",
+      "text": "Plant efficiency = MCC-4 kWe \u00F7 kW of cooling delivered. Apr\u2013Oct 2025 average 0.182 (monthly values 0.180\u20130.184). Apr\u2013Oct 2026 average 0.209 (\u002B15%). Monthly 2026: Apr 0.190, May 0.199, Jun 0.208, Jul 0.214, Aug 0.215, Sep 0.217, Oct 0.219. Cooling delivered, period average: 2025 1,510 kW; 2026 1,517 kW (\u002B0.5%). Dashboard footnote: \u0027Cooling delivered = chilled-water header flow (FT-201) \u00D7 (return temperature TT-202 \u2212 supply temperature TT-201) \u00D7 fluid constant. Values shown as recorded.\u0027"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Kestrel Cooling Services field service report, visit of 18 Sep 2026",
+      "sourceType": "vendor-account",
+      "text": "Visit to CH-1 at customer request. Readings at 92% load: leaving condenser water 29.4 \u00B0C, condensing temperature 31.3 \u00B0C, approach 1.9 K. The 2019 start-up sheet records an approach of 1.1 K; load at start-up is not recorded on our copy. Approach normally rises with load, but in our experience a 0.8 K increase points to tube fouling, likely following the change of water-treatment contractor in January. Tubes last brushed February 2025. CH-2 and CH-3 not measured this visit. Recommendation: mechanical brushing of all three condensers, \u20AC38,400, plus enrolment in our Performance Assurance contract (\u20AC14,200/yr) to prevent recurrence."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, Tomas Reiner, production manager, 5 Nov 2026",
+      "sourceType": "manager-account",
+      "text": "Shipped tonnage Apr\u2013Oct is within 1% of last year and the product mix hasn\u0027t moved. We haven\u0027t added anything to the chilled-water loop. The moulding cell moved from Building C to the new Building F between April and June, but that was like-for-like, same presses, and Building F was designed with its own cooling. Please don\u0027t touch the water temperature: extrusion and the moulds need 7 \u00B0C supply. When it drifted to 8.5 \u00B0C for a week in 2024 we had a scrap spike on lines 2 and 3 and missed two customer deliveries."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "BMS change log excerpt and trend summary, Jan\u2013Oct 2026",
+      "sourceType": "change-record",
+      "text": "14 Mar 2026 09:12: SP-CHW (chilled-water supply setpoint) 7.0 \u2192 6.0 \u00B0C, user \u0027ctrl-contractor\u0027, ticket 2231, comment \u0027trial for extrusion line 3 cooling\u0027. 17 Mar 2026 15:40: SP-CHW 6.0 \u2192 7.0 \u00B0C, same ticket, comment \u0027trial ended, no benefit\u0027. No further SP-CHW changes to 31 Oct. Trend summary, supply temperature TT-201, monthly mean Apr\u2013Oct: 2025 7.0 \u00B0C; 2026 7.1 \u00B0C. Chiller staging parameters: no changes logged since 2023."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Email from plant shift lead to energy coordinator, 30 Oct 2026",
+      "sourceType": "staff-account",
+      "text": "From about June we\u0027ve had all three chillers on most afternoons. Last summer two usually carried it into the evening and CH-3 only came on in heat spells. Nothing is alarming. Header water has been in spec apart from a few late afternoons when line 3 grumbled about warm water. Honestly it feels like the machines are working harder for the same job; the dashboard says the same thing."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Utility revenue-meter invoices and half-hourly interval data, Jan\u2013Oct 2025 and 2026",
+      "source": "Northmere Energy invoices and data portal export",
+      "sourceType": "financial-record",
+      "text": "Invoiced consumption Apr\u2013Oct: 2025 3,519.6 MWh; 2026 3,737.9 MWh. Half-hourly data reconciles to the site\u0027s own summary within 0.2%. The increase is concentrated in 07:00\u201319:00 half-hours; night-time consumption is up about 4%. Meter serial and CT ratio unchanged since 2021. Supplier\u0027s annual meter accuracy test passed, March 2026."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Tarnby airfield weather station daily dry-bulb and wet-bulb summaries, Apr\u2013Oct 2025 and 2026",
+      "source": "National weather service data download",
+      "sourceType": "external-data",
+      "text": "Apr\u2013Oct mean dry-bulb: 2025 15.8 \u00B0C, 2026 15.5 \u00B0C. Mean daily maximum wet-bulb: 2025 15.9 \u00B0C, 2026 15.6 \u00B0C. Hours with wet-bulb above 20 \u00B0C: 2025 212, 2026 188. Station is 14 km from site at similar elevation. Data-quality flags clear for both periods; no gaps longer than 3 hours."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Cooling-water treatment contractor service visit sheets, Jan\u2013Oct 2026",
+      "source": "Saltmere Water Services visit reports",
+      "sourceType": "vendor-account",
+      "text": "Contract started 6 Jan 2026. Target cycles of concentration raised from 4.0 (previous contractor) to 5.0 to reduce make-up water. Conductivity within control band every month except 9\u201323 March (blowdown valve stuck, repaired 23 March). Inhibitor residual in range on 9 of 10 visits. Corrosion coupon rates acceptable. Calculated scaling index \u0027slightly positive, monitor\u0027 in July and August, neutral otherwise. Note on every sheet: \u0027Cannot comment on condenser tube surfaces without a waterbox being opened.\u0027"
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Chiller controller alarm and event logs, CH-1 to CH-3, Apr\u2013Oct 2025 and 2026",
+      "source": "Chiller controller exports",
+      "sourceType": "log",
+      "text": "Events Apr\u2013Oct: 2025 38, 2026 41. No high-condenser-pressure warnings or trips on any unit in either year. No surge events. CH-3: oil heater fault 11 Jul 2026, cleared after contactor replacement. CH-1: two \u0027low evaporator flow\u0027 warnings on 2 Aug 2026 during a secondary pump changeover, each cleared within 90 seconds. Remaining events are routine start/stop and sensor-check messages."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Chiller run-hours and starts by unit, Apr\u2013Oct 2025 and 2026",
+      "source": "BMS run-hour counters",
+      "sourceType": "system-record",
+      "text": "Run-hours Apr\u2013Oct, 2025 / 2026: CH-1 4,410 / 4,520; CH-2 4,180 / 4,390; CH-3 1,020 / 2,240. Starts: CH-3 96 / 171. Staging rule: add a chiller when running units exceed 90% of rated load (by motor current) for 15 minutes; rule unchanged since 2023. Average running-unit load at 2026 staging events: 91%."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Calibration certificates and work-order history for chilled-water header flowmeter FT-201, 2022\u20132026",
+      "source": "CMMS records and controls contractor job sheets",
+      "sourceType": "system-record",
+      "text": "Last verified calibration of FT-201: June 2022. WO-5512, opened 14 Nov 2025: \u0027FT-201 reading drifts, jumps about \u00B115% intermittently.\u0027 Deferred. 2 Apr 2026: FT-201 converter failed after a power dip; replaced with a different-model converter by the controls contractor. Job sheet: \u0027Sensor calibration factor for existing flow tube not on file; default factor entered from datasheet. No wet verification performed; no reference meter available.\u0027 WO-5512 closed 3 Apr 2026 as \u0027converter replaced\u0027. Note from controls engineer: secondary pumps are variable-speed on differential pressure, so header flow varies with demand and cannot be inferred from pump status."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Condenser maintenance history, CH-1 to CH-3, 2019\u20132026",
+      "source": "CMMS asset history",
+      "sourceType": "system-record",
+      "text": "Condensers brushed Feb 2023 and Feb 2025 under a 24-month contract interval; next brushing due Feb 2027. Eddy-current tube test Feb 2023: no tubes plugged, wall loss under 10% on all units. Feb 2025 brushing record: \u0027light soft deposit, removed.\u0027 No condenser waterbox opened since Feb 2025. CH-2 annual service outage booked 8\u201310 Dec 2026; planner notes a waterbox could be opened for a visual check within that window."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "ERP production summary by line and product family, Apr\u2013Oct 2025 and 2026",
+      "source": "ERP report run by production planning",
+      "sourceType": "system-record",
+      "text": "Extrusion output: 2025 18,240 t; 2026 18,390 t. Moulded parts: 2025 4.11 million pieces; 2026 4.08 million. Product families unchanged; top-10 SKUs 71% of volume in 2025, 72% in 2026. Extrusion line run-hours: 2025 13,980 h; 2026 14,050 h. Moulding press count unchanged at 18."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Cooling-tower BMS trends: condenser-water temperature, tower approach and fan speed, Apr\u2013Oct 2025 and 2026",
+      "source": "BMS trend export and tower inspection sheet",
+      "sourceType": "telemetry",
+      "text": "Monthly means Apr\u2013Oct, 2025 / 2026: condenser-water supply temperature 24.8 / 24.9 \u00B0C; tower approach to ambient wet-bulb 4.1 / 4.6 K; tower fan VFD average speed 55% / 62%. Condenser-water flow is not metered. Tower fill inspected May 2026: \u0027clean, minor algae on distribution deck, cleaned.\u0027"
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Controls contractor ticket list and BMS parameter audit, chilled-water plant, Jan\u2013Oct 2026",
+      "source": "Controls contractor service portal and audit report",
+      "sourceType": "change-record",
+      "text": "Tickets: #2231 supply setpoint trial 14\u201317 Mar (closed, setpoint restored); #2307 graphics update, May; #2312 alarm text corrections, June; #2355 add tower fan speed to dashboard, Aug. Parameter audit 20 Oct 2026: SP-CHW 7.0 \u00B0C; chiller staging rule, secondary pump differential-pressure setpoint (1.2 bar) and tower fan logic all match the 2023 baseline file."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Facilities capital-project file CP-24-07, Building F mould-shop relocation, 2024\u20132026",
+      "source": "Facilities project folder",
+      "sourceType": "document",
+      "text": "Design basis (2024): tool-cooling trim for Building F via dedicated 450 kW air-cooled chiller AC-F1. Change note CN-14, 12 Mar 2026: AC-F1 delivery slipped; interim arrangement approved by facilities manager: plate heat exchanger HX-F1 tied into the central chilled-water header, maximum transfer 400 kW, control valve modulated by the mould temperature units. Presses relocated in three phases: 6 on 8 Apr, 6 on 13 May, 6 on 10 Jun. HX-F1 commissioning sheet: \u0027valve stroked, flow observed.\u0027 No heat meter; valve position not trended; as-built drawings not yet issued. Production manager not on CN-14 distribution. AC-F1 now expected January 2027."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Energy consultant desk review of chiller-plant performance, August 2026",
+      "source": "Corvane Energy Advisory memo, 22 Aug 2026",
+      "sourceType": "prior-report",
+      "text": "Desk review from BMS exports only; no site visit. \u0027Plant kWe/kWr has risen from 0.18 to 0.21 while delivered cooling is flat, a classic efficiency-degradation signature. Likely condenser fouling or refrigerant undercharge. Restoring design efficiency would save an estimated \u20AC60\u201370k per year.\u0027 Data sources listed: BMS Plant Efficiency dashboard; MCC-4 submeter. Instrument validation: \u0027not in scope.\u0027"
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Site electrical submeter breakdown for non-chiller loads, Apr\u2013Oct 2025 and 2026",
+      "source": "Energy monitoring system export",
+      "sourceType": "system-record",
+      "text": "Apr\u2013Oct, 2025 \u2192 2026 (MWh): extrusion 1,184 \u2192 1,191; moulding (Building C in 2025; Buildings C and F in 2026) 402 \u2192 405; compressed air 286 \u2192 281; lighting and HVAC 172 \u2192 169; other 64 \u2192 64. Total 2,108 \u2192 2,110. Building F office HVAC is on the lighting and HVAC meter."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Statutory refrigerant leak-check log, CH-1 to CH-3, 2021\u20132026",
+      "source": "Site refrigerant register",
+      "sourceType": "document",
+      "text": "Leak checks March and September each year by certified technician (Kestrel Cooling Services). 2026 checks: no leaks detected on any unit. Recorded charge 410 kg per unit; no refrigerant added to any unit since 2021. Electronic detector calibration certificate attached for each visit."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Plant operator shift logbook excerpts, June\u2013August 2026",
+      "source": "Plant-room shift logbook",
+      "sourceType": "staff-account",
+      "text": "\u002714 Jun: 3 chillers on from 13:20, header 7.2 \u00B0C.\u0027 \u00272 Jul: line 3 reports warm water 15:00\u201317:00, header read 7.6 \u00B0C, CH-1 and CH-2 at 97%.\u0027 \u002729 Jul: all three on, CH-1 at 96%.\u0027 \u002711 Jul: CH-3 tripped, oil heater, reset after contactor swap.\u0027 \u002719 Aug: quiet shift, two on until 12:40.\u0027 No entries mention setpoint changes."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The growth in chiller-plant electricity is explained by a decline in chiller efficiency (more electricity used per unit of cooling delivered)."
+      },
+      {
+        "id": "H2",
+        "text": "The growth in chiller-plant electricity is explained by an increase in the cooling load the plant serves."
+      },
+      {
+        "id": "H3",
+        "text": "The reported growth is a metering artifact; actual chiller-plant electricity consumption has not risen."
+      },
+      {
+        "id": "H4",
+        "text": "Warmer or more humid weather in 2026 explains the growth in chiller-plant electricity."
+      },
+      {
+        "id": "H5",
+        "text": "A lowered chilled-water supply temperature setpoint has increased chiller work and explains the growth."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Decline in chiller efficiency",
+        "to": "Year-on-year growth in chiller-plant electricity",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Additional process heat load connected to the chilled-water loop",
+        "to": "Year-on-year growth in chiller-plant electricity",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "March 2026 chilled-water supply setpoint change",
+        "to": "Year-on-year growth in chiller-plant electricity",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Change of water-treatment contractor in January 2026",
+        "to": "Decline in chiller efficiency",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Before committing to maintenance or capital work, run a two-to-three-week measurement campaign: verify chilled-water header flow with an independently calibrated temporary meter, add temporary flow and temperature logging on every branch and connection drawing from the loop, and log per-chiller power."
+      },
+      {
+        "id": "A2",
+        "text": "Approve the vendor\u0027s \u20AC38,400 brushing of all three condensers now as the corrective action for the energy growth."
+      },
+      {
+        "id": "A3",
+        "text": "Raise the chilled-water supply setpoint from 7 \u00B0C to 9 \u00B0C plant-wide to cut chiller electricity while the cause is investigated."
+      },
+      {
+        "id": "A4",
+        "text": "Open one condenser waterbox for a visual tube inspection at the next scheduled single-chiller service outage."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "S1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S14",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

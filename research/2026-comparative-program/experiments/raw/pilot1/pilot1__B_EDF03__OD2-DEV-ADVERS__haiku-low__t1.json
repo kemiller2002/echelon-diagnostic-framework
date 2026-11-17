@@ -1,0 +1,246 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-ADVERS__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-ADVERS",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C3",
+    "X3": "C8",
+    "X4": "C7",
+    "X5": "C10",
+    "X6": "C6",
+    "X7": "C9",
+    "X8": "C5",
+    "X9": "C4",
+    "X10": "C2",
+    "X11": "C12",
+    "X12": "C1"
+  },
+  "readLabels": [
+    "X12",
+    "X2",
+    "X8",
+    "X9",
+    "X6"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C5",
+    "C4",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-ADVERS__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 10,
+    "cacheReadTokens": 47473,
+    "cacheCreationTokens": 11164,
+    "outputTokens": 3284,
+    "thinkingTokens": 1432,
+    "costUsd": 0.00435053,
+    "durationMs": 21815,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-ADVERS\u0022,\u0022methodChoice\u0022:\u0022EDF-2 style analysis; evidence limited to E1-E6 plus X12, X2, X8, X9, X6 (5 collected)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022,\u0022E2\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E1\u0022,\u0022E5\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X6\u0022,\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E1\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X2\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:68,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X2\u0022,\u0022X9\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022What is going on: most of the Q3 pipeline jump is not real selling activity. On 29 Sept, 212 partner-tagged records worth $6.2M were bulk-loaded under Jun Okafor\u0027s account from a file that arrived in a team chat with the note \\\u0022load before snapshot.\\\u0022 171 of the 212 are duplicates of 2024 deals that were lost, with close dates moved into Q4. None has a logged call or email. Rep-created pipeline in the same window was normal, and reps\u0027 win rates (about 25%) are unchanged, so the flat bookings are not a closing problem. The webinar explains only a small part of the number.\\n\\nHow sure: fairly sure the import inflated the figures. Who wrote and requested the file is not established. Dana Wexley\u0027s 28 Sept \\\u0022every partner deal in the system\\\u0022 email is a plausible trigger, but she denies preparing the file, and the chat messages are gone.\\n\\nWhat to do: restate the 30 Sept coverage using rep-created records only (about 1.9x, below the 3.0x gate). Hold the two Q4 requisitions. Do not put the four reps on performance plans; their win rates are normal and they were assigned most of the imported records. Preserve the source file and job record, and interview the channel members before any personnel decision about Wexley.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:15.0745775Z",
+    "finishedAt": "2026-11-17T14:27:38.8888975Z",
+    "output": {
+      "caseId": "OD2-DEV-ADVERS",
+      "methodChoice": "EDF-2 style analysis; evidence limited to E1-E6 plus X12, X2, X8, X9, X6 (5 collected)",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12",
+            "X2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X6",
+            "X8",
+            "E2",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X12",
+            "X2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E1",
+            "E5",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X6",
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X2",
+            "E1",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X2",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X6",
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X12",
+            "X8",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 68,
+          "evidenceIds": [
+            "X12",
+            "X2",
+            "X9",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "What is going on: most of the Q3 pipeline jump is not real selling activity. On 29 Sept, 212 partner-tagged records worth $6.2M were bulk-loaded under Jun Okafor\u0027s account from a file that arrived in a team chat with the note \u0022load before snapshot.\u0022 171 of the 212 are duplicates of 2024 deals that were lost, with close dates moved into Q4. None has a logged call or email. Rep-created pipeline in the same window was normal, and reps\u0027 win rates (about 25%) are unchanged, so the flat bookings are not a closing problem. The webinar explains only a small part of the number.\n\nHow sure: fairly sure the import inflated the figures. Who wrote and requested the file is not established. Dana Wexley\u0027s 28 Sept \u0022every partner deal in the system\u0022 email is a plausible trigger, but she denies preparing the file, and the chat messages are gone.\n\nWhat to do: restate the 30 Sept coverage using rep-created records only (about 1.9x, below the 3.0x gate). Hold the two Q4 requisitions. Do not put the four reps on performance plans; their win rates are normal and they were assigned most of the imported records. Preserve the source file and job record, and interview the channel members before any personnel decision about Wexley."
+    }
+  }
+}

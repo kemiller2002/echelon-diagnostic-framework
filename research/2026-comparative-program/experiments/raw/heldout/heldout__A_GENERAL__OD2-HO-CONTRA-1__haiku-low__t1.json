@@ -1,0 +1,218 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-CONTRA-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C1",
+    "X3": "C2",
+    "X4": "C5",
+    "X5": "C7",
+    "X6": "C6",
+    "X7": "C9",
+    "X8": "C10",
+    "X9": "C15",
+    "X10": "C13",
+    "X11": "C12",
+    "X12": "C11",
+    "X13": "C14",
+    "X14": "C3",
+    "X15": "C4"
+  },
+  "readLabels": [
+    "X3",
+    "X7"
+  ],
+  "reads": [
+    "C2",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-CONTRA-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17898,
+    "cacheCreationTokens": 7150,
+    "outputTokens": 3546,
+    "thinkingTokens": 2196,
+    "costUsd": 0.0033825799999999996,
+    "durationMs": 19948,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022E5\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022,\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022,\u0022E4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022,\u0022E5\u0022,\u0022E2\u0022]}],\u0022brief\u0022:\u0022The slip was mainly caused by Callerby\u0027s own decision to take the tower crane off the Corran Valley site from October 2025 to March 2026 and move it to Kestrel. Its own ledger, the superintendent\u0027s account, and Halden\u0027s letter agree on this. The steel was already on the ground and the frame crew was moved too. The architect was not the problem: the audit-stamped RFI record shows 62 of 64 answers within the contract period, and the 41 \u0027late\u0027 RFIs were mostly held in Callerby\u0027s own draft stage for 9 to 47 days. Owner design changes (CO-09) probably added some delay, but the records do not show how much. I am fairly confident about the crane and the RFI findings, less so on the design-change share and on why the crane was moved. Do not submit the 1 December claim as drafted; it relies on RFI dates the audit trail contradicts and omits the crane. Commission an independent delay analysis now, and ask whether the claims consultant\u0027s fee (6% of recoveries) affects their advice. Do not discipline the superintendent for answering Halden\u0027s questions honestly. Settlement and the incentive scheme should wait for that analysis.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:59:42.8867315Z",
+    "finishedAt": "2026-11-17T16:00:03.5280321Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E6",
+            "E5",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "E5",
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "E5",
+            "E4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "E6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "X3",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "X7",
+            "E5",
+            "E2"
+          ]
+        }
+      ],
+      "brief": "The slip was mainly caused by Callerby\u0027s own decision to take the tower crane off the Corran Valley site from October 2025 to March 2026 and move it to Kestrel. Its own ledger, the superintendent\u0027s account, and Halden\u0027s letter agree on this. The steel was already on the ground and the frame crew was moved too. The architect was not the problem: the audit-stamped RFI record shows 62 of 64 answers within the contract period, and the 41 \u0027late\u0027 RFIs were mostly held in Callerby\u0027s own draft stage for 9 to 47 days. Owner design changes (CO-09) probably added some delay, but the records do not show how much. I am fairly confident about the crane and the RFI findings, less so on the design-change share and on why the crane was moved. Do not submit the 1 December claim as drafted; it relies on RFI dates the audit trail contradicts and omits the crane. Commission an independent delay analysis now, and ask whether the claims consultant\u0027s fee (6% of recoveries) affects their advice. Do not discipline the superintendent for answering Halden\u0027s questions honestly. Settlement and the incentive scheme should wait for that analysis."
+    }
+  }
+}

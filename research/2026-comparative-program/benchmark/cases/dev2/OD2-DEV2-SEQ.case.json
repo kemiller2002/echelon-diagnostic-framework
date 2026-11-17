@@ -1,0 +1,431 @@
+{
+  "id": "OD2-DEV2-SEQ",
+  "split": "dev2",
+  "benchmarkClass": "SEQ",
+  "domain": "organizational",
+  "readBudget": 3,
+  "title": "Hollin Vale Bank: small-business loan approvals nearly double",
+  "setting": "Hollin Vale Bank is a fictional regional lender with 19 branches across the Maddern Valley. Branch loan officers take in small-business (SME) loan applications and collect the documents. All SME credit decisions are made centrally by the Credit Hub in Kestwick. In the second quarter the bank moved to a new loan-origination system (Corvane Origination), renewed its contract with its only valuation panel firm, refreshed its credit policy, and replaced five departing SME loan officers.",
+  "presentingRequest": "The COO wants to know why SME loan approvals have taken longer since the spring and what the bank should do. Her month-end decision paper covers the Corvane contract and the performance of the new hires.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Email from Imogen Raye, COO, to the executive team, 1 September",
+      "sourceType": "leadership-account",
+      "text": "Subject: SME approvals. Since we switched to Corvane in April, our small-business approval times have nearly doubled: 13 days in August against 7 in March. On top of that we lost five experienced loan officers in Q2, and the replacements are still learning. By month-end I want two things. First, a decision paper on whether we withhold Corvane\u0027s final milestone payment and go back to the legacy workflow. Second, a plan from HR, with targets, to get the new hires up to speed. Customers are noticing, and withdrawals are up too."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Monthly lending dashboard, SME loans, March\u2013August",
+      "sourceType": "system-record",
+      "text": "Median business days from application to decision, Mar\u2013Aug: 7.2, 8.0, 9.6, 11.8, 13.1, 13.4. Applications received: 212, 205, 219, 224, 231, 228. Withdrawn before decision: 6.1%, 6.4%, 7.0%, 8.2%, 8.9%, 8.5%. Consumer loans (same branches, on Corvane since April), median days: 3.9, 4.6, 4.2, 4.0, 4.1, 4.0. The SME median rose at 18 of 19 branches. Footnote: since the Corvane cutover (14 April), SME applications with no customer document upload for 30 calendar days are auto-closed and counted as withdrawn. The legacy system left such files open indefinitely."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "HR summary for the COO, 22 August",
+      "sourceType": "document",
+      "text": "SME loan officers: 34 at 1 April. Leavers April\u2013June: 5 (3 retirements, 2 resignations to a competitor), average tenure 14 years. Replacements started between 6 May and 17 June at Ashby North, Brenmoor, Calder Quay, Hythe Lane and Overstrand. Two are internal transfers from consumer lending. All five completed the three-week Corvane and credit-procedures induction. Headcount was back to 34 by 17 June. Branch lending authorities are unchanged: the Credit Hub still makes all SME credit decisions centrally."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, Dev Okafor, Brenmoor branch manager, 26 August",
+      "sourceType": "manager-account",
+      "text": "\u0027Corvane was painful in April. We were scanning everything twice and logins kept dropping. That\u0027s mostly settled now. The real problem starts once a file goes to the Hub. The status just says \u0022With Credit Hub\u0022, it sits there a week or more, and then it comes back approved. Nobody tells us what they\u0027re doing. My new officer is fine on paperwork; on the system she\u0027s quicker than the man she replaced.\u0027 Asked whether all SME files are affected equally: \u0027Feels like it, but I haven\u0027t checked.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Operations change calendar, Q2 (extract)",
+      "sourceType": "change-record",
+      "text": "1 Apr \u2013 Valuation panel contract renewed with Pellow \u0026 Strand Valuers (sole panel firm). New fee schedule; service levels unchanged. 14 Apr \u2013 Corvane Origination goes live at all branches for consumer and SME lending. 1 May \u2013 Credit Policy v14 takes effect (annual refresh). Credit Policy Unit note: \u0027Largely editorial; no change to approval authorities or pricing.\u0027 6 May\u201317 Jun \u2013 five replacement SME loan officers start (see HR summary). 3 Jun \u2013 one Credit Hub SME underwriter goes on parental leave; a contractor covers until November."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Corvane stage timestamps, decided SME loans, March\u2013August",
+      "source": "Corvane management-information report, run by the Credit Hub analyst",
+      "sourceType": "system-record",
+      "text": "Median business days per workflow stage. Columns Mar|Apr|Jun|Aug; March is reconstructed from legacy timestamps. Stages run in sequence: underwriting cannot start until any required valuation report has arrived. The branch status \u0027With Credit Hub\u0027 covers valuation, underwriting and decision. Property-secured loans (55\u201358% of decisions): intake 1.3|1.9|1.4|1.3; document collection 2.3|2.7|2.4|2.4; collateral valuation (requested to report received) 1.6|1.7|7.6|8.4; underwriting 2.1|2.2|2.2|2.3; decision 0.6|0.6|0.7|0.6; sum 7.9|9.1|14.3|15.0. Unsecured loans: intake 1.2|1.8|1.3|1.2; document collection 2.0|2.4|2.1|2.1; underwriting 1.9|2.0|2.0|2.1; decision 0.5|0.5|0.5|0.5; sum 5.6|6.7|5.9|5.9. Document collection at the five branches with Q2 hires was 2.4 in March and 2.4 in August, against 2.3 and 2.3 elsewhere."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Collateral valuation order register, March\u2013August",
+      "source": "Credit Hub valuation desk order register",
+      "sourceType": "system-record",
+      "text": "Property-secured SME applications, Mar|Apr|May|Jun|Jul|Aug. Orders: 112|108|121|118|124|119. Full appraisals: 31|29|74|79|83|80. Desktop valuations: 81|79|47|39|41|39. Median days from valuation requested in Corvane to order placed with Pellow \u0026 Strand: 0.3 every month. Median firm turnaround for full appraisals: 8.6|8.4|8.8|8.7|8.9|8.6; for desktop valuations: 1.2|1.1|1.2|1.2|1.2|1.1. Loans above $500k had full appraisals throughout; their valuation stage was 8.5 days in March and 8.7 in August. From 2 May, every order for exposures between $150k and $500k carries the code \u0027POL14-6.3 full appraisal mandatory\u0027. Before May, this band was valued by desktop. Orders under $150k are still desktop valuations."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Credit Policy v13 to v14 clause-change list",
+      "source": "Credit Policy Unit",
+      "sourceType": "document",
+      "text": "23 clauses changed. 19 are wording, cross-reference or renumbering changes. \u00A74.2: KYC document list updated (adds a beneficial-ownership form already collected in practice). \u00A75.7: pricing grid reference updated. \u00A76.3: mandatory full (inspection) appraisal of property collateral now applies to exposures above $150k (previously above $500k); desktop valuation is still permitted below that. Rationale: internal audit finding IA-23-11 found that desktop valuations of owner-occupied commercial premises exceeded later full appraisals by a median 12%. \u00A78.1: delegated authority table reformatted, limits unchanged. Effective 1 May. Impact assessment on processing times: \u0027not assessed\u0027."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Pellow \u0026 Strand quarterly service review letter, Q2",
+      "source": "Account director, Pellow \u0026 Strand Valuers, 15 July",
+      "sourceType": "vendor-account",
+      "text": "\u0027Q2 service-level compliance for Hollin Vale was 97% (Q1: 99%). Since May, instruction volumes have run above the forecast in our renewal proposal, and we have added one appraiser to the Maddern Valley team. Two late reports in June were caused by access delays at borrower premises. Given the change in instruction mix, we would welcome a review of the fee schedule. We remain committed to our 10-business-day standard for full appraisals.\u0027"
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Exit interview summaries, five departed SME loan officers",
+      "source": "HR business partner",
+      "sourceType": "staff-account",
+      "text": "Exit interviews, April\u2013June. The three retirees describe their retirements as planned; one says, \u0027Corvane training came too late for me to bother.\u0027 The two who left for Tremont Mutual cite pay (\u002B9%) and hybrid working. Four of the five rate their branch manager \u0027good\u0027 or \u0027very good\u0027. None mentions credit policy or valuations. One says the Hub \u0027has always been slow on anything with property attached.\u0027"
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Induction and training completion records, Q2 SME hires",
+      "source": "Learning and development team",
+      "sourceType": "document",
+      "text": "Learning records for the five Q2 SME hires. Corvane SME module: 5/5 complete (scores 82\u201396%). Credit procedures v14: 5/5 complete. KYC refresher: 5/5 complete. Shadowing days with an experienced officer: 4, 6, 5, 3 and 5 (target 5). Two hires are internal transfers with 4 and 7 years in consumer lending. Training coordinator\u0027s note: \u0027All cleared to originate independently by 1 July.\u0027"
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Corvane service-desk ticket log, 14 April\u201331 August",
+      "source": "Corvane Systems service desk export",
+      "sourceType": "log",
+      "text": "Tickets raised by Hollin Vale users: April (from the 14th) 46, May 18, June 11, July 9, August 12. Categories: document scanning or duplicate upload 31; login or session timeout 22; reporting 17; workflow routing 16; other 10. A scanning defect was patched on 20 May. Open at 31 August: 3 tickets, all workflow routing. One reads \u0027branch users cannot see the sub-status of files with Credit Hub\u0027 (priority: medium)."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Credit Hub SME underwriter roster and caseload, March\u2013August",
+      "source": "Credit Hub team lead",
+      "sourceType": "system-record",
+      "text": "SME underwriting team: 6 FTE March\u2013May; from 3 June, 5 permanent staff plus 1 contractor. Files entering underwriting per underwriter per month: Mar 35, Apr 34, May 36, Jun 37, Jul 39, Aug 38. The contractor handled 24\u201329 files a month in the first two months (team average 37). Overtime hours: Q1 44, Q2 51. Team lead\u0027s comment: \u0027We\u0027re stretched but keeping up.\u0027"
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Withdrawn SME applications: closure reason codes, May\u2013August",
+      "source": "Corvane closure-code extract",
+      "sourceType": "system-record",
+      "text": "SME applications closed without a decision, May\u2013August (n=73). Auto-closed after 30 days with no customer document upload: 32. Customer withdrew \u2013 financed elsewhere: 14. Customer withdrew \u2013 project cancelled or deferred: 12. Customer withdrew \u2013 no reason given: 11. Branch closed \u2013 duplicate application: 4. The legacy system did not record closure reasons, so there is no pre-April comparison. Of the 14 \u0027financed elsewhere\u0027 cases, 8 were property-secured."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "SME customer complaints log, March\u2013August",
+      "source": "Customer relations team",
+      "sourceType": "customer-account",
+      "text": "SME lending complaints: Mar 4, Apr 9, May 7, Jun 11, Jul 14, Aug 15. Main themes, June\u2013August: no progress updates while the file is \u0027with the bank\u0027 (19); asked for the same document twice (6); valuation fee higher than expected (7); relationship manager changed (4); other (4). Sample, August: \u0027Told it was with head office for ten days and nobody could say why.\u0027"
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Branch lending staff pulse survey, July",
+      "source": "People analytics team",
+      "sourceType": "anonymous-staff-survey",
+      "text": "Quarterly pulse survey of branch lending staff, July (71% response). \u0027I have the tools to do my job\u0027: 52% agree (January: 68%). \u0027Corvane makes my work easier\u0027: 31% agree. \u0027I understand why SME files take as long as they do\u0027: 24% agree. Free-text themes: Corvane screens (41 mentions), Hub communication (33), workload after colleagues left (18), policy changes (5)."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Regional peer benchmark of SME decision times, first half-year",
+      "source": "Regional lenders\u0027 benchmarking consortium",
+      "sourceType": "external-data",
+      "text": "First-half report, 7 regional lenders, anonymised. Median SME application-to-decision time: 8.5 business days (second half of last year: 8.3). Range 5.9\u201312.4. Hollin Vale, first half: 8.7. Note: participants define start and end points differently, and secured and unsecured loans are not reported separately."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Conduct supervisor\u0027s letter on SME lending, June",
+      "source": "Regional conduct supervisor, circular to all lenders, 12 June",
+      "sourceType": "regulator-record",
+      "text": "The letter reminds lenders to tell small-business applicants clearly how long a decision is expected to take and what fees they will be charged, including third-party valuation costs. It asks for complaint volumes by year end. It contains no findings specific to Hollin Vale and sets no deadline for changes to processes."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Interview notes, four further branch managers",
+      "source": "COO\u0027s office, interviews 27\u201329 August",
+      "sourceType": "manager-account",
+      "text": "Ashby North: \u0027Corvane slowed everything in spring, and new staff need more hand-holding.\u0027 Hythe Lane: \u0027Files sit with the Hub. The underwriters have been short-handed since June.\u0027 Pendle Cross: \u0027No new hires here and we\u0027re slower too, so I don\u0027t buy the staffing story.\u0027 Overstrand: \u0027Customers complain about not knowing where things are. I assume the Hub is swamped.\u0027 None of the four had looked at stage-level data."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "SME lending income and fee summary, Q1\u2013Q2",
+      "source": "Finance business partner, retail lending",
+      "sourceType": "financial-record",
+      "text": "SME net interest income, Q2 against Q1: \u002B3%. Arrangement fee income: flat. Valuation fees are passed through to applicants in full and do not appear in bank income. SME loan book balance: \u002B2.1% over the quarter. Provisions charge: unchanged. Finance note: \u0027No material P\u0026L effect visible yet from longer processing times.\u0027"
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The main driver of the longer SME approval times is the loss of experienced loan officers and their replacement by new hires."
+      },
+      {
+        "id": "H2",
+        "text": "The main driver of the longer SME approval times is the April migration to the new loan-origination system."
+      },
+      {
+        "id": "H3",
+        "text": "The main driver of the longer SME approval times is a change to credit policy requirements that took effect during the second quarter."
+      },
+      {
+        "id": "H4",
+        "text": "The main driver of the longer SME approval times is slower turnaround by the bank\u0027s external valuation firm."
+      },
+      {
+        "id": "H5",
+        "text": "The longer approval times are causing more small-business applicants to abandon their applications."
+      },
+      {
+        "id": "H6",
+        "text": "The main driver of the longer SME approval times is higher application volume combined with reduced underwriting capacity at the Credit Hub."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Credit Policy v14 refresh (effective 1 May)",
+        "to": "Longer collateral-valuation stage for property-secured SME loans",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Longer SME approval times",
+        "to": "Higher share of SME applications withdrawn before decision",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Corvane go-live (14 April)",
+        "to": "Sustained rise in SME approval times from May onward",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Valuation panel contract renewal (1 April)",
+        "to": "Longer collateral-valuation stage for property-secured SME loans",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Ask the credit risk committee to decide whether to amend the collateral-valuation provisions of the May credit policy refresh, presenting the measured delay alongside the policy\u0027s risk rationale."
+      },
+      {
+        "id": "A2",
+        "text": "Put the SME loan officers hired in Q2 on performance-improvement plans with approval-time targets."
+      },
+      {
+        "id": "A3",
+        "text": "Launch a fee-rebate offer for small-business applicants to win back customers lost to slower approvals."
+      },
+      {
+        "id": "A4",
+        "text": "Withhold Corvane\u0027s final milestone payment and instruct the vendor to restore the legacy SME approval workflow."
+      },
+      {
+        "id": "A5",
+        "text": "Add a by-stage breakdown of SME approval times to the monthly management dashboard."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q-H1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-H2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-H3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-H4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-H5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-H6",
+      "refId": "H6",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-R1",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-R2",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-R3",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-R4",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q-A1",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q-A2",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q-A3",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q-A4",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q-A5",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q-SUFF",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

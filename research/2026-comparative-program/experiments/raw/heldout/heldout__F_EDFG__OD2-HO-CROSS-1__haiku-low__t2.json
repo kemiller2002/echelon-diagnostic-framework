@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-CROSS-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C6",
+    "X3": "C8",
+    "X4": "C14",
+    "X5": "C3",
+    "X6": "C5",
+    "X7": "C7",
+    "X8": "C1",
+    "X9": "C12",
+    "X10": "C9",
+    "X11": "C11",
+    "X12": "C2",
+    "X13": "C10",
+    "X14": "C13",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X8",
+    "X12"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-CROSS-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 10,
+    "cacheReadTokens": 47824,
+    "cacheCreationTokens": 12624,
+    "outputTokens": 3674,
+    "thinkingTokens": 1157,
+    "costUsd": 0.0048410400000000004,
+    "durationMs": 22359,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022__unparsedToolInput\u0022:{\u0022raw\u0022:\u0022{\\\u0022caseId\\\u0022: \\\u0022OD2-HO-CROSS-1\\\u0022, \\\u0022methodChoice\\\u0022: \\\u0022EDF-2 with evidence collected by value of information (X8, X12)\\\u0022, \\\u0022answers\\\u0022: [{\\\u0022itemId\\\u0022:\\\u0022S01\\\u0022,\\\u0022answer\\\u0022:\\\u0022contradicted\\\u0022,\\\u0022confidence\\\u0022:80,\\\u0022evidenceIds\\\u0022:[\\\u0022E3\\\u0022,\\\u0022X8\\\u0022,\\\u0022X12\\\u0022],\\\u0022}\\\u0022],\\\u0022x\\\u0022:0},{\\\u0022itemId\\\u0022:\\\u0022S02\\\u0022,\\\u0022answer\\\u0022:\\\u0022supported\\\u0022,\\\u0022confidence\\\u0022:80,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022X12\\\u0022,\\\u0022E5\\\u0022,\\\u0022E2\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S03\\\u0022,\\\u0022answer\\\u0022:\\\u0022contradicted\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022E2\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S04\\\u0022,\\\u0022answer\\\u0022:\\\u0022contradicted\\\u0022,\\\u0022confidence\\\u0022:80,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022E6\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S05\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:60,\\\u0022evidenceIds\\\u0022:[\\\u0022E4\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S06\\\u0022,\\\u0022answer\\\u0022:\\\u0022causal\\\u0022,\\\u0022confidence\\\u0022:70,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022X12\\\u0022,\\\u0022E5\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S07\\\u0022,\\\u0022answer\\\u0022:\\\u0022association-only\\\u0022,\\\u0022confidence\\\u0022:55,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022E2\\\u0022,\\\u0022E4\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S08\\\u0022,\\\u0022answer\\\u0022:\\\u0022contradicted\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X8\\\u0022,\\\u0022E3\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S09\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:60,\\\u0022evidenceIds\\\u0022:[\\\u0022E3\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S10\\\u0022,\\\u0022answer\\\u0022:\\\u0022preferred\\\u0022,\\\u0022confidence\\\u0022:80,\\\u0022evidenceIds\\\u0022:[\\\u0022X12\\\u0022,\\\u0022X8\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S11\\\u0022,\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022,\\\u0022confidence\\\u0022:80,\\\u0022evidenceIds\\\u0022:[\\\u0022E1\\\u0022,\\\u0022X8\\\u0022,\\\u0022X12\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S12\\\u0022,\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X12\\\u0022,\\\u0022E4\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S13\\\u0022,\\\u0022answer\\\u0022:\\\u0022premature\\\u0022,\\\u0022confidence\\\u0022:65,\\\u0022evidenceIds\\\u0022:[\\\u0022E4\\\u0022,\\\u0022X8\\\u0022]},{\\\u0022itemId\\\u0022:\\\u0022S14\\\u0022,\\\u0022answer\\\u0022:\\\u0022sufficient\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X12\\\u0022,\\\u0022X8\\\u0022]}], \\\u0022brief\\\u0022: \\\u0022The relay server move on 12 August is the most likely cause. Its change record shows 11 of 14 forwarding rules were silently skipped during import, including a hold-off that stopped brief SpO2 alarms reaching phones and a repeat-suppression rule. Phone alerts per nurse roughly doubled from that date in Pods A-C only, and delayed responses rose there in core, agency and new nurses alike. Pod D still uses the old server and stayed flat, even with a similar agency share. Bedside alarm volume did not change, and the September software update shows no step. Staffing and acuity do not explain the pattern. Confidence is moderate-to-good; the mechanism is documented but not yet tested live. Next: restore the lost rules with Clinical Engineerin\u0022,\u0022len\u0022:2263}}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022EDF-2; collected X8 and X12 (2 of 2 allowed items)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The most likely cause is the alert relay server move on 12 August. The change record shows 11 of the 14 forwarding rules were silently skipped during import. Those rules included a 15-second hold-off that filtered brief SpO2 alarms and a rule that suppressed repeat notifications. Phone notifications per nurse roughly doubled from 12 August in Pods A-C only. Delayed responses rose there across core, agency and new nurses. Pod D still uses the old server and stayed flat, even with a similar agency share. Bedside alarm volume did not change, and the September software update shows no step. Staffing and acuity do not explain the pattern. Confidence is moderate to good. The mechanism is documented but not yet tested live. Next steps: restore the lost rules with Clinical Engineering validation and Alarm Committee sign-off, then track notifications and acknowledgement times weekly. Do not approve the agency cap or the nurse reviews. Do not stop phone alarms.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:00:57.1342855Z",
+    "finishedAt": "2026-11-17T16:01:20.3088554Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "EDF-2; collected X8 and X12 (2 of 2 allowed items)",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3",
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X12",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E1",
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The most likely cause is the alert relay server move on 12 August. The change record shows 11 of the 14 forwarding rules were silently skipped during import. Those rules included a 15-second hold-off that filtered brief SpO2 alarms and a rule that suppressed repeat notifications. Phone notifications per nurse roughly doubled from 12 August in Pods A-C only. Delayed responses rose there across core, agency and new nurses. Pod D still uses the old server and stayed flat, even with a similar agency share. Bedside alarm volume did not change, and the September software update shows no step. Staffing and acuity do not explain the pattern. Confidence is moderate to good. The mechanism is documented but not yet tested live. Next steps: restore the lost rules with Clinical Engineering validation and Alarm Committee sign-off, then track notifications and acknowledgement times weekly. Do not approve the agency cap or the nurse reviews. Do not stop phone alarms."
+    }
+  }
+}

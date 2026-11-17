@@ -1,0 +1,234 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-ADVERS",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C12",
+    "X3": "C4",
+    "X4": "C1",
+    "X5": "C5",
+    "X6": "C3",
+    "X7": "C10",
+    "X8": "C11",
+    "X9": "C7",
+    "X10": "C2",
+    "X11": "C8",
+    "X12": "C9"
+  },
+  "readLabels": [
+    "X4",
+    "X1",
+    "X5",
+    "X3",
+    "X6"
+  ],
+  "reads": [
+    "C1",
+    "C6",
+    "C5",
+    "C4",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20247,
+    "cacheCreationTokens": 10893,
+    "outputTokens": 2108,
+    "thinkingTokens": 49,
+    "costUsd": 0.0666887,
+    "durationMs": 15221,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-ADVERS__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-ADVERS\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X5\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X5\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X6\u0022,\u0022X3\u0022,\u0022X5\u0022]}],\u0022brief\u0022:\u0022The reported pipeline jump is mostly not real buying activity. On 29 Sept at 23:14\u201323:21, an import job loaded 212 \\\u0022partner\\\u0022 records worth $6.2M. It ran under the sales-ops analyst\u0027s login, from a file posted in a team chat. None of the records has any logged activity. 171 of them match 2024 closed-lost deals, with the close date moved to Q4. Reps\u0027 own win rates were steady at 23\u201325%, and the four reps Dana named are within the normal range. They were assigned 129 of the imported records, which is what dragged their conversion ratio down. The webinar series directly produced only $0.46M. Its $5.9M \\\u0022influenced\\\u0022 figure mostly counts the imported records. Without the import, coverage is about 1.9x, below the 3.0x threshold.\\n\\nDon\u0027t put anyone on a performance plan, and don\u0027t release the requisitions on the 3.3x figure. Don\u0027t remove Dana yet. She told the team to log \\\u0022real\\\u0022 deals, but nothing shows who prepared the file, and the chat messages are gone. Next steps: quarantine the 212 records and restate coverage, and tell the hiring committee. Then examine the file\u0027s author metadata and the import job record, and interview Okafor and the other channel members. I\u0027m fairly confident about the import. I\u0027m uncertain about who is responsible.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:28:10.4895210Z",
+    "finishedAt": "2026-11-17T14:28:26.6079664Z",
+    "output": {
+      "caseId": "OD2-DEV-ADVERS",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "X5",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "E5",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X1",
+            "X5",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X5",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "X6",
+            "X3",
+            "X5"
+          ]
+        }
+      ],
+      "brief": "The reported pipeline jump is mostly not real buying activity. On 29 Sept at 23:14\u201323:21, an import job loaded 212 \u0022partner\u0022 records worth $6.2M. It ran under the sales-ops analyst\u0027s login, from a file posted in a team chat. None of the records has any logged activity. 171 of them match 2024 closed-lost deals, with the close date moved to Q4. Reps\u0027 own win rates were steady at 23\u201325%, and the four reps Dana named are within the normal range. They were assigned 129 of the imported records, which is what dragged their conversion ratio down. The webinar series directly produced only $0.46M. Its $5.9M \u0022influenced\u0022 figure mostly counts the imported records. Without the import, coverage is about 1.9x, below the 3.0x threshold.\n\nDon\u0027t put anyone on a performance plan, and don\u0027t release the requisitions on the 3.3x figure. Don\u0027t remove Dana yet. She told the team to log \u0022real\u0022 deals, but nothing shows who prepared the file, and the chat messages are gone. Next steps: quarantine the 212 records and restate coverage, and tell the hiring committee. Then examine the file\u0027s author metadata and the import job record, and interview Okafor and the other channel members. I\u0027m fairly confident about the import. I\u0027m uncertain about who is responsible."
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "caseId": "OD2-DEV-MISLEAD",
+  "blindAgreement": "13/13",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "In the C1 canary, v4.11 and v4.12 pods failed at the same rate (3.7% vs 3.6%); C3 shows failure clusters from 09:00, before the 10:40 deploy; and C2 shows no pool saturation, timeouts or latency change."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "supported",
+        "confidence": 93,
+        "justification": "C4 shows settle-recon search bursts of 360\u2013430/min against a 300/min per-credential limit, with 429s only in burst minutes and scoped to the credential; C5 confirms the schedule change; C3 matches the quarter-hour pattern and shows no clusters during the 13:00\u201315:00 pause; C1 shows 341 of 351 v4.11 failures were HTTP 429."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "C4 shows issuer declines steady at 0.3\u20130.4%; only 10 of 351 failures in C1 were 402 card declines; C8 shows no change in 3-D Secure or fraud screening; and in E6, banks had no record of the authorisation attempts."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "E4 shows a green status page and no platform-wide incidents; the 429s are scoped to Fernhollow\u0027s credential (C4) and follow its own job schedule, stopping when the job paused (C3)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Failures began before the deploy (C3), and rolling half the fleet back to v4.11 left the failure rate unchanged (C1), so the timing link in E2 is not causal."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The order of events (C5 effective 3 March, 429s start 09:00 per C4), the mechanism (bursts above the 300/min credential limit), exact minute-level matching (C3, C4) and a natural pause in the 13:00\u201315:00 window (C3) together establish causation."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "C1 shows most failed payments were 429s; E3 shows every non-2xx response is shown to customers as \u0027Your card was declined\u0027; and E6 shows banks never saw the attempts, consistent with rejection at the gateway."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "association-only",
+        "confidence": 65,
+        "justification": "The failures and the revenue drop overlap in time, but C6 (clearance week as baseline, lower conversion from display traffic, lower average order value) and C9 (most customers completed on retry) point to large confounders, so causation is not established."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "C1 shows a rollback does not reduce failures, and per E3 and C11 it would bring back the SEC-2291 card-number logging, triggering a report to the acquiring bank, while a release freeze punishes the wrong team."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "C5 says reverting the cron schedule takes effect from the next run, C3 shows failures stop when the job pauses, and the action includes monitoring to confirm recovery plus a fix (a separate credential) for the shared-credential root cause."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "premature",
+        "confidence": 55,
+        "justification": "The revenue attribution is unestablished: C6\u0027s confounders (end of Winter Clearance, lower conversion and order value) and C9\u0027s retry successes suggest the payment failures explain only a small part of the 9%, so giving the board this figure and restating the forecast is unjustified now."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "acceptable",
+        "confidence": 65,
+        "justification": "Raising the limit would relieve the throttling (C4), but it takes 3\u20135 business days, costs money, and treats the symptom rather than the internal schedule change (C5) that A2 fixes immediately."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "sufficient",
+        "confidence": 87,
+        "justification": "C1, C3, C4 and C5 together identify the shared-credential rate limiting with a confirming natural experiment, which is enough to commit to reverting the settle-recon schedule and declining the rollback."
+      }
+    ],
+    "ambiguousItems": [
+      "Q11: premature vs harmful \u2014 C6 roughly explains the 9% fall without the payment failures (sessions \u002B24% \u00D7 conversion 2.5/3.1 \u00D7 order value 68/74 \u2248 \u22128%), so reporting the incident as the cause and restating the forecast could fairly be called harmful misreporting.",
+      "Q12: acceptable vs premature \u2014 the slow, chargeable limit increase is a reasonable stopgap, but some reviewers might rank it lower because A2 fixes the cause faster and at no cost.",
+      "Q8: association-only vs unknown \u2014 whether simply happening in the same week counts as an established association."
+    ],
+    "caseProblems": [
+      "C3 says no clusters occurred during the \u0027finance ERP maintenance window\u0027, but never states that settle-recon was paused then; the reader has to infer it.",
+      "C1 is very decisive (a direct split-traffic canary with raw 429 counts), and together with C4\u0027s precise per-minute numbers it makes the case close to trivial once read; this is acceptable for a MISLEAD case but leaves little difficulty.",
+      "No catalogue title leaks the answer outright, though C4\u0027s title (\u0027API usage report for credential fernhollow-prod-01\u0027) and C5\u0027s (\u0027Finance Systems change log\u0027) point fairly directly to the root cause."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q11",
+        "ruling": "ambiguous",
+        "explanation": "The key\u0027s case for \u0027premature\u0027 rests on A3 depending on R4, which is not yet established. But A3 does not just say the incident contributed to the fall. It tells the board the incident caused the whole 9% and restates the Q1 forecast on that basis. The initial file already caps how much the incident could explain. E1 puts the extra failure rate at about 3.3\u20133.5 percentage points of attempts, and E1 and E6 say retries a few minutes later often succeed. Even if no failed customer ever retried, the incident could not account for a 9% revenue fall. If C6 is read, the rise in sessions combined with lower conversion and lower order value (1.24 \u00D7 2.5/3.1 \u00D7 68/74 \u2248 0.92) explains roughly an 8% fall without the incident. The order-value drop alone accounts for about 8%, and payment failures cannot cause that. C9 adds that only 6 of 50 sampled customers abandoned. So confirming that the incident contributed something would still not make A3\u0027s claim right. Putting that claim to the board and restating the forecast on it would misreport to leadership and hide the real drivers: the mix of new display-ad traffic and lower order value. That fits \u0027harmful\u0027 (worsens outcomes, suppresses information). \u0027Premature\u0027 also stays defensible under the item\u0027s own framing, because the authoring notes and the R4 edge treat A3 as hinging on R4. Both answers can be defended.",
+        "fix": "Reword A3 so that confirming R4 would actually make it correct and it no longer claims the full 9% or restates the forecast. For example: \u0027Tell the board in Monday\u0027s pack that the payment incident was a material contributor to the week\u0027s revenue fall and include an estimated incident-loss figure.\u0027 Keep the key as \u0027premature\u0027. (Alternatively, keep A3 as written, change the key to \u0027harmful\u0027, and give the magnitude bound from E1 and C6 as the rationale.)"
+      },
+      {
+        "itemId": "Q12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Premature\u0027 means the action could be right if a still-unconfirmed hypothesis were confirmed. A4 does not depend on any unconfirmed hypothesis. C1, C4 and C5 establish that H2 is the cause and that the throttling is credential-scoped, so a higher limit would directly relieve the 429s. The rival\u0027s point, that A2 is faster and free, is exactly why A4 is not among the best actions. That argues for \u0027acceptable\u0027 over \u0027preferred\u0027, not for \u0027premature\u0027. A4 is not \u0027harmful\u0027 either: it is costly and slow (3\u20135 business days, chargeable), but it does not worsen outcomes or disable a control. \u0027Acceptable\u0027 is the only answer that fits the definitions.",
+        "fix": "None needed. Optionally, add a line to the rationale saying \u0027premature\u0027 does not apply because the cause A4 targets (credential-level throttling) is already established."
+      },
+      {
+        "itemId": "Q8",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The edge definitions settle this. \u0027Association-only\u0027 explicitly covers cases where the two conditions \u0027co-occur or correlate in the evidence\u0027. \u0027Unknown\u0027 is reserved for evidence \u0027insufficient even to show association\u0027. E5 directly documents the co-occurrence: revenue fell 9% in the same week the failure rate rose from about 0.4% to about 3.7% (E1). So association is shown. Causation is not: E5 names the end of Winter Clearance and the Spring Trail Sale launch as confounders, and C6 adds the shift in traffic mix and order value. \u0027Contradicted\u0027 also does not fit, because some contribution is still plausible: C9 shows 6 of 50 sampled customers abandoned. \u0027Unknown\u0027 would mean ignoring the definition\u0027s own co-occurrence criterion.",
+        "fix": "None needed."
+      }
+    ]
+  },
+  "needsRevision": true
+}

@@ -1,0 +1,802 @@
+{
+  "label": "OD2-HO-CONTRA-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7722,
+  "cacheCreationTokens": 4512,
+  "outputTokens": 52443,
+  "thinkingTokens": 40193,
+  "costUsd": 1.0865163999999998,
+  "durationMs": 511043,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-CONTRA-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022CONTRA\u0022,\u0022domain\u0022:\u0022cross-domain\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Chilled spoilage write-offs at Brackenford DC\u0022,\u0022setting\u0022:\u0022Tallowmere Foods is a regional food distributor. Its Brackenford distribution centre (DC) receives chilled, frozen and ambient lines from suppliers and delivers to supermarket and wholesale customers. Chilled product is received at the dock, probed, and put away into three chilled chambers (CH1\u2013CH3) before being picked for store deliveries. Haverlow Dairy is the largest chilled supplier and delivers overnight. Pellridge Foods supplies dairy and ready meals. Corriebank Stores is the largest chilled customer. A cost programme (\u0027Phase 2\u0027) went live at the DC in late July.\u0022,\u0022presentingRequest\u0022:\u0022The Operations Director asks: what is behind the jump in chilled spoiled-product write-offs since early August? The site General Manager wants a temperature-abuse chargeback raised against Haverlow Dairy and a third of Haverlow\u0027s volume moved to Pellridge. Which single next action should lead, and is the evidence good enough to commit to it?\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Finance: weekly shrink report, Brackenford DC\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Chilled spoiled-product write-offs, Brackenford DC. Weeks 26\u201331 average: \u00A38,600/week (DC-stage write-offs \u00A36,200; customer spoilage credits \u00A32,400). Weeks 32\u201338 average: \u00A327,000/week (DC-stage \u00A321,900; customer credits \u00A35,100). DC-stage write-offs are product found out of condition or below minimum remaining life at pick, QA hold or cycle count. Frozen and ambient write-offs flat across the period (\u00B16%). By supplier, weeks 32\u201338 DC-stage chilled write-off value: Haverlow Dairy 58%, Pellridge Foods 21%, own-label salads 14%, other 7%. All three named lines are up on weeks 26\u201331; Haverlow is up most in absolute terms.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email, Gareth Oyelaran, General Manager, Brackenford DC, to Procurement Director, 22 Sep\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Subject: Haverlow temperature failures. \u0027Our receiving probes show Haverlow loads coming in at 6.5\u20138\u00B0C most nights since early August. Extract attached; spec is 5\u00B0C. The chambers have held 2\u20134\u00B0C throughout (dashboard attached), so this is not a storage problem. Haverlow is 58% of our chilled write-off value. Phase 2 went in cleanly in late July and is delivering its labour saving with no service impact. I want a temperature-abuse chargeback raised for August and September, and I recommend we move a third of Haverlow\u0027s volume to Pellridge from October.\u0027\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022WMS receipt-confirmation export attached to E2 (filter: supplier = Haverlow Dairy, week 35)\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Header note: \u0027Core probe at unload per SOP REC-04. Spec \u22645.0\u00B0C.\u0027 Rows: night of 24 Aug, load HVD-4471, receipt confirmed 02:52, probe 7.4\u00B0C, accepted on concession (QA on-call). Night of 25 Aug, HVD-4486, confirmed 03:18, 6.9\u00B0C, concession. Night of 26 Aug, HVD-4502, confirmed 02:31, 7.9\u00B0C, concession. Night of 27 Aug, HVD-4519, confirmed 03:05, 6.6\u00B0C, concession. Footer: Haverlow mean receipt probe weeks 26\u201330 3.4\u00B0C (n=27); weeks 32\u201338 7.1\u00B0C (n=38). Probe values are keyed by the receiving operative on the handheld at the receipt-confirmation step.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Letter, Ines Marchetti, Quality Manager, Haverlow Dairy, 24 Sep\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Reply to Tallowmere\u0027s chargeback notice. \u0027Every load is core-probed at dispatch; August\u2013September readings were 2.6\u20133.4\u00B0C, the same as in spring. Our loads travel on Vantline trailers set to 2\u00B0C, with the same haulier and routes since March. Nothing in our process has changed. Your own receipt records showed our product at 3\u20134\u00B0C until late July. We do not accept the chargeback, and we ask you to share whatever evidence shows our product arriving warm.\u0027\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Change record CR-2231, \u0027Phase 2 labour optimisation\u0027\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Sponsor: G. Oyelaran. Effective Monday 27 July (week 31). Change: night receiving team (22:00\u201306:00) reduced from six to four operatives; two operatives redeployed to day-shift picking. Inbound delivery slot schedule unchanged. Day receiving team unchanged at five. Projected saving \u00A32,300/week. Risk assessment: \u0027Low. Night inbound volume (~120 pallets/shift) is within the capacity of four operatives at standard handling rates.\u0027 Status: implemented; benefits confirmed by Finance in week 34.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Chamber temperature dashboard attached to E2\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Chilled chambers CH1\u2013CH3 (setpoint 2\u00B0C), weeks 26\u201338. Hourly mean air temperature range: CH1 1.7\u20133.6\u00B0C, CH2 1.9\u20133.9\u00B0C, CH3 1.8\u20133.5\u00B0C. High-temperature alarms (\u003E5\u00B0C for 15 min): two in the period, both in CH2 during defrost cycles in week 29, each cleared within 20 minutes. Same alarm count as weeks 13\u201325. Probes calibrated in June per the maintenance schedule. The dashboard covers chamber air only; dock and marshalling areas are not instrumented on this system.\u0022},{\u0022id\u0022:\u0022E7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email, Tom Hesketh, Key Account Manager (Corriebank Stores), 18 Sep\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022\u0027FYI: from 3 August Corriebank moved its stores to self-certified spoilage credits. Claims under \u00A350 no longer need a photo or the product returned. Their spoilage credits with us were about \u00A31,250 a week in July and have averaged \u00A33,100 a week since. Corriebank is our biggest chilled customer, roughly 55% of chilled sales. I\u0027d guess some stores are being generous with claims now it\u0027s easy, but I\u0027ve no hard evidence either way.\u0027\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Haverlow Dairy dispatch QA temperature records, weeks 28\u201338\u0022,\u0022source\u0022:\u0022Haverlow Dairy quality department\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Haverlow\u0027s dispatch log for Brackenford loads, supplied at Tallowmere\u0027s request. Each load is core-probed on two pallets at the loading bay before the trailer doors close. Weeks 28\u201338: 61 loads, readings 2.6\u20133.4\u00B0C, mean 3.0\u00B0C, no weekly mean above 3.2\u00B0C. Probe IDs and calibration certificates attached (last calibrated May). Dispatch times 19:40\u201320:30 for the Brackenford run. The log is kept by Haverlow\u0027s own QA technicians.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Refrigeration contractor service reports, chilled and frozen chambers, weeks 26\u201338\u0022,\u0022source\u0022:\u0022Kelmore Refrigeration Services\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Planned maintenance visits in weeks 28, 32 and 36 to chilled chambers CH1\u2013CH3 and frozen chamber F1. Week 30 reactive visit: defrost timer replaced on the CH2 evaporator after a fault code; post-repair pull-down test normal. All visits: refrigerant pressures, superheat and compressor amps within limits; evaporator coils clean. Door strip curtains on CH1 and CH3 noted as worn; replacement quoted. No faults outstanding at the week 36 visit. The dock area is outside the contract scope.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Laboratory results on retained samples from written-off chilled lots, September\u0022,\u0022source\u0022:\u0022Mossgate Laboratories (contract food-testing lab)\u0022,\u0022sourceType\u0022:\u0022expert-account\u0022,\u0022text\u0022:\u0022Twelve retained samples from lots written off in weeks 35\u201337 (Haverlow yoghurt \u00D75, Pellridge ready meals \u00D74, own-label salad \u00D73). Total viable counts and lactic acid bacteria were elevated against the products\u0027 expected profile at that age in 10 of 12 samples; no pathogens detected. Lab comment: \u0027Profiles are consistent with a period of temperature abuse at some point after manufacture. Testing cannot identify where in the chain the abuse occurred or how long it lasted.\u0027\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Formal customer complaint log, chilled lines, weeks 26\u201338\u0022,\u0022source\u0022:\u0022Tallowmere Customer Service\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Formal complaints, logged separately from routine spoilage credits. Weeks 26\u201331: 9 complaints; weeks 32\u201338: 14. Themes: short remaining shelf life on arrival at store (8), blown or swollen packs (4), off odour (2). Complaints came from Corriebank (6), Hollin Co-operative (5) and independent wholesalers (3). Products named: Haverlow yoghurts and milk, Pellridge ready meals, own-label salads. No complaint mentioned delivery vehicle temperature.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Outbound delivery fleet telematics, Brackenford chilled store routes, weeks 26\u201338\u0022,\u0022source\u0022:\u0022Reefwatch portal export, Vantline trailers on Tallowmere outbound contract\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Data for the 14 Vantline trailers on Tallowmere\u0027s chilled store-delivery routes. Return-air temperatures during delivery legs 1.8\u20134.4\u00B0C. Three excursions above 5\u00B0C in the period, each under 25 minutes and during multi-drop door openings, against four in weeks 13\u201325. Average route length and drops per route unchanged. No refrigeration unit faults logged.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Vantline trailer refrigeration telematics, Haverlow inbound loads to Brackenford, weeks 28\u201338\u0022,\u0022source\u0022:\u0022Reefwatch portal export pulled by Brackenford transport planner (Vantline also runs Tallowmere\u0027s outbound fleet)\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Data written by the trailer refrigeration units at 5-minute intervals, with door-sensor events; records cannot be edited in the portal. 61 Haverlow loads, weeks 28\u201338. Return-air temperature in the hour before door-open: 1.9\u20133.6\u00B0C on every load, with no trend from July to September. Product probe channel (front pallet) at door-open: 2.4\u20133.5\u00B0C. Week 35 loads: HVD-4471 door-open 22:41, doors closed with trailer empty 23:19; HVD-4486 open 23:06, closed 23:47; HVD-4502 open 22:18, closed 22:55; HVD-4519 open 22:52, closed 23:30. No reefer alarms or power interruptions logged on any load.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Regional weather station daily records, July\u2013September\u0022,\u0022source\u0022:\u0022Public met-station 9 km from the DC\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Daily maximums: July average 22.4\u00B0C; August average 25.1\u00B0C, including a five-day spell of 29\u201331\u00B0C (17\u201321 August, week 34); 1\u201320 September average 20.3\u00B0C. Overnight minimums 11\u201317\u00B0C through August and 8\u201313\u00B0C in September. Rainfall near the seasonal normal throughout.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Haverlow Dairy supply agreement, quality and chargeback schedule\u0022,\u0022source\u0022:\u0022Tallowmere Procurement contract file\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Schedule 4 of the current supply agreement. Product must be \u22645.0\u00B0C core on arrival. Chargebacks for temperature non-conformance require the buyer to notify the supplier within 24 hours of receipt and to keep the non-conforming product for joint inspection. Volume commitment: Tallowmere takes at least 80% of forecast volume through next March; any shortfall attracts a capacity fee. Either party may request a joint cold-chain audit at shared cost.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Annual staff engagement survey results, Brackenford DC, June\u0022,\u0022source\u0022:\u0022Tallowmere HR\u0022,\u0022sourceType\u0022:\u0022anonymous-staff-survey\u0022,\u0022text\u0022:\u0022Run 2\u201313 June; response rate 64% (n=141). Engagement index 61 site-wide, 58 night shift, 63 day shift. Top comment themes: canteen opening hours, fairness of overtime allocation, car park lighting. \u0027I have the resources to do my job well\u0027: 66% agree site-wide, 62% on night shift. The survey predates the Phase 2 changes.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Internal audit report: stock-count accuracy, Brackenford DC, issued last November\u0022,\u0022source\u0022:\u0022Tallowmere Internal Audit\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022Scope: cycle-count accuracy and stock adjustment controls. Findings: count accuracy 98.7% against a 99.0% target; two medium findings on late posting of adjustments in frozen; no findings in chilled. The recommendation on adjustment approval thresholds was implemented in February. Receiving and temperature controls were out of scope.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022WMS scan-event analysis: dock-to-chamber times and DC-stage write-off rates by receiving shift, weeks 26\u201338\u0022,\u0022source\u0022:\u0022Inventory Control analyst, Finance (from WMS scan timestamps)\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Prepared by Inventory Control from WMS scan timestamps (first unload label scan to chamber location scan). Median dock-to-chamber time, chilled pallets: day receiving (06:00\u201322:00) 38 min in weeks 26\u201330, 41 min in weeks 31\u201338; night receiving (22:00\u201306:00) 44 min in weeks 26\u201330, 3 h 05 min in week 31, 3 h 52 min in weeks 32\u201338. Night pallets received per shift: 118 before, 121 after. DC-stage write-off rate, lots traced to receiving shift (customer credits cannot be traced and are excluded), weeks 26\u201330 vs 32\u201338: day 0.5% \u2192 0.6%; night 0.6% \u2192 2.9%. Night, weeks 32\u201338: Haverlow 3.0%, Pellridge 2.8%, own-label 2.9%. Day: Pellridge 0.6%, own-label 0.5%; Haverlow delivers nights only. Both shifts put away into CH1\u2013CH3. Dock staging lanes are unrefrigerated; facilities BMS dock sensor averaged 15\u201317\u00B0C overnight, August\u2013September.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Write-off approval audit trail, chilled lines, weeks 26\u201338\u0022,\u0022source\u0022:\u0022WMS approval log\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Every chilled write-off line needs QA approval in the WMS. Weeks 26\u201338: 2,214 lines, all approved by one of four QA technicians; 97% approved within 24 hours of the hold. Reason codes: \u0027out of condition\u0027 61%, \u0027below minimum life\u0027 34%, \u0027damaged\u0027 5%; the mix is similar before and after week 31. No lines approved by users outside QA; no bulk or back-dated approvals found.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Corriebank Stores supplier notice on spoilage credit procedure, 20 July\u0022,\u0022source\u0022:\u0022Corriebank Stores category team\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Notice to all chilled suppliers. From 3 August, store managers may self-certify spoilage credit claims below \u00A350 per line without photographs or product return; claims above \u00A350 still need a photograph. Corriebank\u0027s category team will \u0027monitor claim rates and review the process at the end of Q4\u0027. Suppliers may request a claim-level extract on 10 working days\u0027 notice.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Supplier quality scorecards, Pellridge Foods and Haverlow Dairy, Q2\u0022,\u0022source\u0022:\u0022Tallowmere Procurement\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Scorecard for April\u2013June. Pellridge: on-time in full 96.8%; arrival temperature conformance 99.1% (2 of 223 loads above 5\u00B0C, both day deliveries during June heat); label accuracy 99.6%; overall rating Green. Haverlow: on-time in full 97.9%; arrival temperature conformance 100%; label accuracy 99.8%; overall rating Green.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Procurement supplier market review, chilled dairy, May\u0022,\u0022source\u0022:\u0022Tallowmere Procurement\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Prepared in May for the annual tender. Alternative chilled dairy capacity for Brackenford: Pellridge could absorb up to 30% of Haverlow\u0027s current volume from October at an estimated 4\u20136% higher unit cost; one further regional dairy could supply from January. Switching would need new delivery slots and pallet configurations. Recommendation (May): keep Haverlow as primary supplier through the next tender.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Haverlow Dairy\u0027s product is reaching the DC above the chilled temperature specification.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Chilled product is warming inside the DC before it is placed in the storage chambers.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022The DC\u0027s chilled storage chambers are not holding their set temperature.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The DC\u0027s recorded receiving temperatures reflect the condition of product as it came off the trailer.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Some of the increase in customer spoilage credits reflects claims for product that was not actually spoiled.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Night receiving team cut from six to four operatives (CR-2231, week 31)\u0022,\u0022to\u0022:\u0022Longer dock-to-chamber time for night-received chilled pallets\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Longer dock-to-chamber time for chilled pallets\u0022,\u0022to\u0022:\u0022Increase in DC-stage spoiled-product write-offs\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Temperature of Haverlow loads on arrival at the DC\u0022,\u0022to\u0022:\u0022Increase in DC-stage spoiled-product write-offs\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Corriebank\u0027s move to self-certified spoilage credits (from 3 August)\u0022,\u0022to\u0022:\u0022Increase in customer spoilage credits\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Raise a temperature-abuse chargeback against Haverlow Dairy for August\u2013September and move a third of its volume to Pellridge from October.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Restore the night receiving team to six operatives and set a maximum dock-to-chamber time for chilled pallets, monitored weekly from WMS scan data.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Ask Corriebank to reinstate photo evidence on all spoilage credit claims, on the basis that over-claiming is behind the rise in credits.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Request Corriebank\u0027s claim-level extract and reconcile a sample of claims against delivery lots and receiving shift before reviewing credit terms.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Drop the receiving temperature probe for night loads so that operatives can put pallets away faster.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022groundTruthNarrative\u0022:\u0022In week 31 the General Manager\u0027s own cost change (CR-2231) cut the night receiving team from six to four operatives. Inbound volume and slots did not change. Night-received chilled pallets now wait a median of almost four hours on unrefrigerated dock lanes at 15\u201317\u00B0C before put-away, against about 40 minutes before; day receiving is unchanged. Operatives key the \u0027receiving\u0027 probe at the receipt-confirmation step, which in practice happens at put-away. So the 6.6\u20137.9\u00B0C readings the GM cites measure product that has already warmed on the dock, not product as it arrived. Independent trailer telematics show Haverlow loads arriving at 2\u20133.5\u00B0C with no change since July. Haverlow is over-represented in write-offs only because it delivers nights only. Night-received Pellridge and own-label product spoils at the same rate, and day-received product from the same suppliers, stored in the same chambers, does not. The chambers hold temperature. Corriebank\u0027s self-certified credit policy coincides with a rise in customer credits, but no evidence separates over-claiming from genuinely shortened shelf life, so that question stays open. The fix is to restore night put-away capacity and cap dock-to-chamber time. The chargeback would punish a supplier that did nothing wrong and would not stop the losses.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C6\u0022,\u0022C11\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022interested-party\u0022,\u0022misleading-signal\u0022,\u0022independent-record\u0022],\u0022rationale\u0022:\u0022The GM\u0027s claim rests on E3, the DC\u0027s own probe entries. C6 is unit-logged, uneditable trailer telematics, pulled by Tallowmere\u0027s own planner from a haulier that also serves Tallowmere\u0027s outbound fleet. It shows every Haverlow load at 1.9\u20133.6\u00B0C return air and 2.4\u20133.5\u00B0C product probe at door-open, with no trend since July. C11 adds that Haverlow\u0027s night write-off rate equals that of other night-received suppliers. E4 and C1 are consistent with this but come from an interested party.\u0022},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C3\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central-mechanism\u0022,\u0022revision\u0022],\u0022rationale\u0022:\u0022C6 shows product arriving at about 3\u00B0C and trailers emptied by around 23:20. E3 shows the same loads reading 6.6\u20137.9\u00B0C when confirmed at about 02:30\u201303:20. C11 shows night pallets sitting a median of 3 h 52 min on unrefrigerated dock lanes at 15\u201317\u00B0C, and night-received product written off at 2.9% against 0.6% for day-received product. Initial file alone cannot establish this.\u0022},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022C2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022rival-ruled-out\u0022],\u0022rationale\u0022:\u0022E6 shows the chambers at 1.7\u20133.9\u00B0C, with calibrated probes and the normal alarm count. C11 shows day-received product put into the same CH1\u2013CH3 chambers keeping a 0.5\u20130.6% write-off rate, which a chamber fault would not allow. The GM is right on this point; his error lies elsewhere.\u0022},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022gamed-record\u0022,\u0022provenance\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022E3\u0027s header says the probe is taken at unload, but C6 puts door-open at 22:18\u201323:06 and the trailers empty by 22:55\u201323:47. Receipt confirmation, where the temperature is keyed, comes 3.5\u20134 hours later. Product at 2.4\u20133.5\u00B0C at door-open cannot be the 6.6\u20137.9\u00B0C product recorded, so the entries do not reflect condition off the trailer. Only C6 supplies the door-open times.\u0022},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022,\u0022C4\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022live-but-unestablished\u0022,\u0022customer-claims\u0022],\u0022rationale\u0022:\u0022E7 gives a plausible opportunity and a rise in Corriebank credits, but only anecdotal suspicion. C11 explicitly excludes customer credits because they cannot be traced to a receiving shift. No item tests claim validity, and genuine shelf-life loss from dock warming is an equally live explanation.\u0022},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C9\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022natural-experiment\u0022,\u0022interested-party-change\u0022],\u0022rationale\u0022:\u0022E5 cuts the night crew only, from week 31, with slots unchanged. C11 shows night dock-to-chamber time stepping from 44 min to 3 h 05 min in week 31 and 3 h 52 min afterwards. Night volume is flat (118 to 121 pallets) and day receiving, with an unchanged crew, stays at about 40 min. Temporal order, mechanism and a within-site comparison that rules out a volume rise together establish causation.\u0022},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C3\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central-mechanism\u0022,\u0022confounded\u0022,\u0022natural-experiment\u0022],\u0022rationale\u0022:\u0022C11 traces lots to receiving shift. Night-received write-offs rose from 0.6% to 2.9%; day-received stayed at 0.6% for the same suppliers (Pellridge, own-label) and the same chambers. That rules out supplier and storage rivals. The mechanism is unrefrigerated dock lanes at 15\u201317\u00B0C for about four hours, consistent with the warm probe readings in E3. C6 independently removes arrival temperature as a rival.\u0022},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022confounded\u0022,\u0022independent-record\u0022],\u0022rationale\u0022:\u0022The link itself fails. C6 shows Haverlow arrival temperatures unchanged and within spec on every load before and during the spike, so arrival temperature cannot have driven the increase. C11 shows Haverlow\u0027s write-off rate matching other night-received suppliers. Its large share in E1 reflects night-only delivery, not arrival condition.\u0022},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022,\u0022C4\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022association-only\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022The policy started on 3 August, and Corriebank credits rose from about \u00A31,250 to \u00A33,100 a week at the same time (E7; E1 totals). That shows co-occurrence. However, dock warming began in the same weeks and would genuinely shorten shelf life at stores (C11, C4). No customer comparison or claim-level validation separates the two, so causation is not established.\u0022},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C11\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Independent telematics clear Haverlow, so the chargeback punishes the wrong party. Moving volume to Pellridge fixes nothing, because Pellridge\u0027s night-received product spoils at the same rate. It also adds 4\u20136% cost and possible capacity fees (C15, C8). This holds whether or not the live rival H5 is true, because over-claiming would not implicate Haverlow either.\u0022},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central-action\u0022,\u0022reversal-of-change\u0022],\u0022rationale\u0022:\u0022It directly reverses the established cause, the night crew cut that produced long dock times and spoilage. It costs about \u00A32,300 a week (E5) against a roughly \u00A315,700 a week rise in DC-stage write-offs (E1), and it builds in monitoring. It is the single action addressing the confirmed, larger driver, and it helps whatever the answer on H5.\u0022},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E7\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022,\u0022C4\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022premature\u0022,\u0022live-but-unestablished\u0022],\u0022rationale\u0022:\u0022If over-claiming were confirmed, reinstating photo evidence would clearly help, and asking for it does little lasting damage if wrong. However, its stated basis (H5) is unestablished. The credit rise co-occurs with genuine dock warming, so committing now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E7\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E7\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022evidence-gathering\u0022],\u0022rationale\u0022:\u0022Reconciling claims is a reasonable, low-cost way to test H5 on the smaller credit component (about \u00A32,700 a week of the rise). It does not address the established and larger DC-stage driver, so it is not the action that should lead.\u0022},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022protective-control\u0022],\u0022rationale\u0022:\u0022It removes the only check that would detect warm product. It would hide the dock-warming signal, and it would also hide any real supplier excursion. It worsens outcomes under every live hypothesis.\u0022},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C6\u0022,\u0022C11\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022With C6 and C11, the chain from crew cut to dock time to warming to write-offs is established. The supplier and chamber rivals are excluded, and the action is cheap and reversible relative to the losses. The open question on credit claims (H5) does not bear on whether to restore night put-away capacity.\u0022}],\u0022discriminatingReads\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022lowValueReads\u0022:[\u0022C5\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C6\u0022,\u0022C11\u0022],\u0022authoringNotes\u0022:\u0022Interested party: the GM, who sponsored CR-2231 and claims it had no service impact. He builds his supplier-blame case on the DC\u0027s own probe entries (E3) and a chamber dashboard (E6) that is accurate but irrelevant. Independent record: Haverlow\u0027s trailer telematics (C6), which are unit-logged, uneditable and pulled by Tallowmere\u0027s own staff. They contradict the claim of warm arrivals and expose the timing of the probe entries. Confound: Haverlow delivers nights only, so supplier identity tracks receiving shift. C11 breaks this by comparing the same suppliers and chambers across shifts. Non-redundancy: only C6 settles H4, because it alone gives door-open times to set against E3\u0027s confirmation times. It also gives the decisive independent evidence on H1 and R3. Only C11 settles R1, R2, A2 and SUFF, because it alone gives dock times, shift-level write-off rates and the dock temperature. No other catalogue item reports arrival times, dock dwell or shift-level spoilage. C1 is the accused supplier\u0027s own dispatch data and does not cover arrival. C2 and C12 confirm points already settled. C3 cannot locate the abuse. C13 restates E7. Initial-file traps: E3\u0027s SOP header (\u0027probe at unload\u0027), the 58% Haverlow share, and E6\u0027s clean chambers all point to the supplier. Fair counter-signals in the initial file: other suppliers are also up (E1), Haverlow\u0027s denial (E4), the timing of CR-2231 (E5), the note that probes are keyed at receipt confirmation (E3), and the dock lying outside the dashboard (E6). H5 and R4 are deliberately left unresolved by every catalogue item, because credits are excluded from the shift tracing in C11. Only A2 is preferred; the case asks for the single leading action.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:02:14.6412895Z",
+  "finishedAt": "2026-11-17T15:10:46.7485095Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-CONTRA-2",
+      "split": "heldout",
+      "benchmarkClass": "CONTRA",
+      "domain": "cross-domain",
+      "readBudget": 2,
+      "title": "Chilled spoilage write-offs at Brackenford DC",
+      "setting": "Tallowmere Foods is a regional food distributor. Its Brackenford distribution centre (DC) receives chilled, frozen and ambient lines from suppliers and delivers to supermarket and wholesale customers. Chilled product is received at the dock, probed, and put away into three chilled chambers (CH1\u2013CH3) before being picked for store deliveries. Haverlow Dairy is the largest chilled supplier and delivers overnight. Pellridge Foods supplies dairy and ready meals. Corriebank Stores is the largest chilled customer. A cost programme (\u0027Phase 2\u0027) went live at the DC in late July.",
+      "presentingRequest": "The Operations Director asks: what is behind the jump in chilled spoiled-product write-offs since early August? The site General Manager wants a temperature-abuse chargeback raised against Haverlow Dairy and a third of Haverlow\u0027s volume moved to Pellridge. Which single next action should lead, and is the evidence good enough to commit to it?",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Finance: weekly shrink report, Brackenford DC",
+          "sourceType": "financial-record",
+          "text": "Chilled spoiled-product write-offs, Brackenford DC. Weeks 26\u201331 average: \u00A38,600/week (DC-stage write-offs \u00A36,200; customer spoilage credits \u00A32,400). Weeks 32\u201338 average: \u00A327,000/week (DC-stage \u00A321,900; customer credits \u00A35,100). DC-stage write-offs are product found out of condition or below minimum remaining life at pick, QA hold or cycle count. Frozen and ambient write-offs flat across the period (\u00B16%). By supplier, weeks 32\u201338 DC-stage chilled write-off value: Haverlow Dairy 58%, Pellridge Foods 21%, own-label salads 14%, other 7%. All three named lines are up on weeks 26\u201331; Haverlow is up most in absolute terms."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email, Gareth Oyelaran, General Manager, Brackenford DC, to Procurement Director, 22 Sep",
+          "sourceType": "manager-account",
+          "text": "Subject: Haverlow temperature failures. \u0027Our receiving probes show Haverlow loads coming in at 6.5\u20138\u00B0C most nights since early August. Extract attached; spec is 5\u00B0C. The chambers have held 2\u20134\u00B0C throughout (dashboard attached), so this is not a storage problem. Haverlow is 58% of our chilled write-off value. Phase 2 went in cleanly in late July and is delivering its labour saving with no service impact. I want a temperature-abuse chargeback raised for August and September, and I recommend we move a third of Haverlow\u0027s volume to Pellridge from October.\u0027"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "WMS receipt-confirmation export attached to E2 (filter: supplier = Haverlow Dairy, week 35)",
+          "sourceType": "system-record",
+          "text": "Header note: \u0027Core probe at unload per SOP REC-04. Spec \u22645.0\u00B0C.\u0027 Rows: night of 24 Aug, load HVD-4471, receipt confirmed 02:52, probe 7.4\u00B0C, accepted on concession (QA on-call). Night of 25 Aug, HVD-4486, confirmed 03:18, 6.9\u00B0C, concession. Night of 26 Aug, HVD-4502, confirmed 02:31, 7.9\u00B0C, concession. Night of 27 Aug, HVD-4519, confirmed 03:05, 6.6\u00B0C, concession. Footer: Haverlow mean receipt probe weeks 26\u201330 3.4\u00B0C (n=27); weeks 32\u201338 7.1\u00B0C (n=38). Probe values are keyed by the receiving operative on the handheld at the receipt-confirmation step."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Letter, Ines Marchetti, Quality Manager, Haverlow Dairy, 24 Sep",
+          "sourceType": "vendor-account",
+          "text": "Reply to Tallowmere\u0027s chargeback notice. \u0027Every load is core-probed at dispatch; August\u2013September readings were 2.6\u20133.4\u00B0C, the same as in spring. Our loads travel on Vantline trailers set to 2\u00B0C, with the same haulier and routes since March. Nothing in our process has changed. Your own receipt records showed our product at 3\u20134\u00B0C until late July. We do not accept the chargeback, and we ask you to share whatever evidence shows our product arriving warm.\u0027"
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Change record CR-2231, \u0027Phase 2 labour optimisation\u0027",
+          "sourceType": "change-record",
+          "text": "Sponsor: G. Oyelaran. Effective Monday 27 July (week 31). Change: night receiving team (22:00\u201306:00) reduced from six to four operatives; two operatives redeployed to day-shift picking. Inbound delivery slot schedule unchanged. Day receiving team unchanged at five. Projected saving \u00A32,300/week. Risk assessment: \u0027Low. Night inbound volume (~120 pallets/shift) is within the capacity of four operatives at standard handling rates.\u0027 Status: implemented; benefits confirmed by Finance in week 34."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Chamber temperature dashboard attached to E2",
+          "sourceType": "telemetry",
+          "text": "Chilled chambers CH1\u2013CH3 (setpoint 2\u00B0C), weeks 26\u201338. Hourly mean air temperature range: CH1 1.7\u20133.6\u00B0C, CH2 1.9\u20133.9\u00B0C, CH3 1.8\u20133.5\u00B0C. High-temperature alarms (\u003E5\u00B0C for 15 min): two in the period, both in CH2 during defrost cycles in week 29, each cleared within 20 minutes. Same alarm count as weeks 13\u201325. Probes calibrated in June per the maintenance schedule. The dashboard covers chamber air only; dock and marshalling areas are not instrumented on this system."
+        },
+        {
+          "id": "E7",
+          "stage": "S1",
+          "source": "Email, Tom Hesketh, Key Account Manager (Corriebank Stores), 18 Sep",
+          "sourceType": "manager-account",
+          "text": "\u0027FYI: from 3 August Corriebank moved its stores to self-certified spoilage credits. Claims under \u00A350 no longer need a photo or the product returned. Their spoilage credits with us were about \u00A31,250 a week in July and have averaged \u00A33,100 a week since. Corriebank is our biggest chilled customer, roughly 55% of chilled sales. I\u0027d guess some stores are being generous with claims now it\u0027s easy, but I\u0027ve no hard evidence either way.\u0027"
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Haverlow Dairy dispatch QA temperature records, weeks 28\u201338",
+          "source": "Haverlow Dairy quality department",
+          "sourceType": "vendor-account",
+          "text": "Haverlow\u0027s dispatch log for Brackenford loads, supplied at Tallowmere\u0027s request. Each load is core-probed on two pallets at the loading bay before the trailer doors close. Weeks 28\u201338: 61 loads, readings 2.6\u20133.4\u00B0C, mean 3.0\u00B0C, no weekly mean above 3.2\u00B0C. Probe IDs and calibration certificates attached (last calibrated May). Dispatch times 19:40\u201320:30 for the Brackenford run. The log is kept by Haverlow\u0027s own QA technicians."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Refrigeration contractor service reports, chilled and frozen chambers, weeks 26\u201338",
+          "source": "Kelmore Refrigeration Services",
+          "sourceType": "vendor-account",
+          "text": "Planned maintenance visits in weeks 28, 32 and 36 to chilled chambers CH1\u2013CH3 and frozen chamber F1. Week 30 reactive visit: defrost timer replaced on the CH2 evaporator after a fault code; post-repair pull-down test normal. All visits: refrigerant pressures, superheat and compressor amps within limits; evaporator coils clean. Door strip curtains on CH1 and CH3 noted as worn; replacement quoted. No faults outstanding at the week 36 visit. The dock area is outside the contract scope."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Laboratory results on retained samples from written-off chilled lots, September",
+          "source": "Mossgate Laboratories (contract food-testing lab)",
+          "sourceType": "expert-account",
+          "text": "Twelve retained samples from lots written off in weeks 35\u201337 (Haverlow yoghurt \u00D75, Pellridge ready meals \u00D74, own-label salad \u00D73). Total viable counts and lactic acid bacteria were elevated against the products\u0027 expected profile at that age in 10 of 12 samples; no pathogens detected. Lab comment: \u0027Profiles are consistent with a period of temperature abuse at some point after manufacture. Testing cannot identify where in the chain the abuse occurred or how long it lasted.\u0027"
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Formal customer complaint log, chilled lines, weeks 26\u201338",
+          "source": "Tallowmere Customer Service",
+          "sourceType": "customer-account",
+          "text": "Formal complaints, logged separately from routine spoilage credits. Weeks 26\u201331: 9 complaints; weeks 32\u201338: 14. Themes: short remaining shelf life on arrival at store (8), blown or swollen packs (4), off odour (2). Complaints came from Corriebank (6), Hollin Co-operative (5) and independent wholesalers (3). Products named: Haverlow yoghurts and milk, Pellridge ready meals, own-label salads. No complaint mentioned delivery vehicle temperature."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Outbound delivery fleet telematics, Brackenford chilled store routes, weeks 26\u201338",
+          "source": "Reefwatch portal export, Vantline trailers on Tallowmere outbound contract",
+          "sourceType": "telemetry",
+          "text": "Data for the 14 Vantline trailers on Tallowmere\u0027s chilled store-delivery routes. Return-air temperatures during delivery legs 1.8\u20134.4\u00B0C. Three excursions above 5\u00B0C in the period, each under 25 minutes and during multi-drop door openings, against four in weeks 13\u201325. Average route length and drops per route unchanged. No refrigeration unit faults logged."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Vantline trailer refrigeration telematics, Haverlow inbound loads to Brackenford, weeks 28\u201338",
+          "source": "Reefwatch portal export pulled by Brackenford transport planner (Vantline also runs Tallowmere\u0027s outbound fleet)",
+          "sourceType": "telemetry",
+          "text": "Data written by the trailer refrigeration units at 5-minute intervals, with door-sensor events; records cannot be edited in the portal. 61 Haverlow loads, weeks 28\u201338. Return-air temperature in the hour before door-open: 1.9\u20133.6\u00B0C on every load, with no trend from July to September. Product probe channel (front pallet) at door-open: 2.4\u20133.5\u00B0C. Week 35 loads: HVD-4471 door-open 22:41, doors closed with trailer empty 23:19; HVD-4486 open 23:06, closed 23:47; HVD-4502 open 22:18, closed 22:55; HVD-4519 open 22:52, closed 23:30. No reefer alarms or power interruptions logged on any load."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Regional weather station daily records, July\u2013September",
+          "source": "Public met-station 9 km from the DC",
+          "sourceType": "external-data",
+          "text": "Daily maximums: July average 22.4\u00B0C; August average 25.1\u00B0C, including a five-day spell of 29\u201331\u00B0C (17\u201321 August, week 34); 1\u201320 September average 20.3\u00B0C. Overnight minimums 11\u201317\u00B0C through August and 8\u201313\u00B0C in September. Rainfall near the seasonal normal throughout."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Haverlow Dairy supply agreement, quality and chargeback schedule",
+          "source": "Tallowmere Procurement contract file",
+          "sourceType": "document",
+          "text": "Schedule 4 of the current supply agreement. Product must be \u22645.0\u00B0C core on arrival. Chargebacks for temperature non-conformance require the buyer to notify the supplier within 24 hours of receipt and to keep the non-conforming product for joint inspection. Volume commitment: Tallowmere takes at least 80% of forecast volume through next March; any shortfall attracts a capacity fee. Either party may request a joint cold-chain audit at shared cost."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Annual staff engagement survey results, Brackenford DC, June",
+          "source": "Tallowmere HR",
+          "sourceType": "anonymous-staff-survey",
+          "text": "Run 2\u201313 June; response rate 64% (n=141). Engagement index 61 site-wide, 58 night shift, 63 day shift. Top comment themes: canteen opening hours, fairness of overtime allocation, car park lighting. \u0027I have the resources to do my job well\u0027: 66% agree site-wide, 62% on night shift. The survey predates the Phase 2 changes."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Internal audit report: stock-count accuracy, Brackenford DC, issued last November",
+          "source": "Tallowmere Internal Audit",
+          "sourceType": "prior-report",
+          "text": "Scope: cycle-count accuracy and stock adjustment controls. Findings: count accuracy 98.7% against a 99.0% target; two medium findings on late posting of adjustments in frozen; no findings in chilled. The recommendation on adjustment approval thresholds was implemented in February. Receiving and temperature controls were out of scope."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "WMS scan-event analysis: dock-to-chamber times and DC-stage write-off rates by receiving shift, weeks 26\u201338",
+          "source": "Inventory Control analyst, Finance (from WMS scan timestamps)",
+          "sourceType": "system-record",
+          "text": "Prepared by Inventory Control from WMS scan timestamps (first unload label scan to chamber location scan). Median dock-to-chamber time, chilled pallets: day receiving (06:00\u201322:00) 38 min in weeks 26\u201330, 41 min in weeks 31\u201338; night receiving (22:00\u201306:00) 44 min in weeks 26\u201330, 3 h 05 min in week 31, 3 h 52 min in weeks 32\u201338. Night pallets received per shift: 118 before, 121 after. DC-stage write-off rate, lots traced to receiving shift (customer credits cannot be traced and are excluded), weeks 26\u201330 vs 32\u201338: day 0.5% \u2192 0.6%; night 0.6% \u2192 2.9%. Night, weeks 32\u201338: Haverlow 3.0%, Pellridge 2.8%, own-label 2.9%. Day: Pellridge 0.6%, own-label 0.5%; Haverlow delivers nights only. Both shifts put away into CH1\u2013CH3. Dock staging lanes are unrefrigerated; facilities BMS dock sensor averaged 15\u201317\u00B0C overnight, August\u2013September."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Write-off approval audit trail, chilled lines, weeks 26\u201338",
+          "source": "WMS approval log",
+          "sourceType": "system-record",
+          "text": "Every chilled write-off line needs QA approval in the WMS. Weeks 26\u201338: 2,214 lines, all approved by one of four QA technicians; 97% approved within 24 hours of the hold. Reason codes: \u0027out of condition\u0027 61%, \u0027below minimum life\u0027 34%, \u0027damaged\u0027 5%; the mix is similar before and after week 31. No lines approved by users outside QA; no bulk or back-dated approvals found."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Corriebank Stores supplier notice on spoilage credit procedure, 20 July",
+          "source": "Corriebank Stores category team",
+          "sourceType": "document",
+          "text": "Notice to all chilled suppliers. From 3 August, store managers may self-certify spoilage credit claims below \u00A350 per line without photographs or product return; claims above \u00A350 still need a photograph. Corriebank\u0027s category team will \u0027monitor claim rates and review the process at the end of Q4\u0027. Suppliers may request a claim-level extract on 10 working days\u0027 notice."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Supplier quality scorecards, Pellridge Foods and Haverlow Dairy, Q2",
+          "source": "Tallowmere Procurement",
+          "sourceType": "document",
+          "text": "Scorecard for April\u2013June. Pellridge: on-time in full 96.8%; arrival temperature conformance 99.1% (2 of 223 loads above 5\u00B0C, both day deliveries during June heat); label accuracy 99.6%; overall rating Green. Haverlow: on-time in full 97.9%; arrival temperature conformance 100%; label accuracy 99.8%; overall rating Green."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Procurement supplier market review, chilled dairy, May",
+          "source": "Tallowmere Procurement",
+          "sourceType": "document",
+          "text": "Prepared in May for the annual tender. Alternative chilled dairy capacity for Brackenford: Pellridge could absorb up to 30% of Haverlow\u0027s current volume from October at an estimated 4\u20136% higher unit cost; one further regional dairy could supply from January. Switching would need new delivery slots and pallet configurations. Recommendation (May): keep Haverlow as primary supplier through the next tender."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Haverlow Dairy\u0027s product is reaching the DC above the chilled temperature specification."
+          },
+          {
+            "id": "H2",
+            "text": "Chilled product is warming inside the DC before it is placed in the storage chambers."
+          },
+          {
+            "id": "H3",
+            "text": "The DC\u0027s chilled storage chambers are not holding their set temperature."
+          },
+          {
+            "id": "H4",
+            "text": "The DC\u0027s recorded receiving temperatures reflect the condition of product as it came off the trailer."
+          },
+          {
+            "id": "H5",
+            "text": "Some of the increase in customer spoilage credits reflects claims for product that was not actually spoiled."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Night receiving team cut from six to four operatives (CR-2231, week 31)",
+            "to": "Longer dock-to-chamber time for night-received chilled pallets",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Longer dock-to-chamber time for chilled pallets",
+            "to": "Increase in DC-stage spoiled-product write-offs",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Temperature of Haverlow loads on arrival at the DC",
+            "to": "Increase in DC-stage spoiled-product write-offs",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Corriebank\u0027s move to self-certified spoilage credits (from 3 August)",
+            "to": "Increase in customer spoilage credits",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Raise a temperature-abuse chargeback against Haverlow Dairy for August\u2013September and move a third of its volume to Pellridge from October."
+          },
+          {
+            "id": "A2",
+            "text": "Restore the night receiving team to six operatives and set a maximum dock-to-chamber time for chilled pallets, monitored weekly from WMS scan data."
+          },
+          {
+            "id": "A3",
+            "text": "Ask Corriebank to reinstate photo evidence on all spoilage credit claims, on the basis that over-claiming is behind the rise in credits."
+          },
+          {
+            "id": "A4",
+            "text": "Request Corriebank\u0027s claim-level extract and reconcile a sample of claims against delivery lots and receiving shift before reviewing credit terms."
+          },
+          {
+            "id": "A5",
+            "text": "Drop the receiving temperature probe for night loads so that operatives can put pallets away faster."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-CONTRA-2",
+      "groundTruthNarrative": "In week 31 the General Manager\u0027s own cost change (CR-2231) cut the night receiving team from six to four operatives. Inbound volume and slots did not change. Night-received chilled pallets now wait a median of almost four hours on unrefrigerated dock lanes at 15\u201317\u00B0C before put-away, against about 40 minutes before; day receiving is unchanged. Operatives key the \u0027receiving\u0027 probe at the receipt-confirmation step, which in practice happens at put-away. So the 6.6\u20137.9\u00B0C readings the GM cites measure product that has already warmed on the dock, not product as it arrived. Independent trailer telematics show Haverlow loads arriving at 2\u20133.5\u00B0C with no change since July. Haverlow is over-represented in write-offs only because it delivers nights only. Night-received Pellridge and own-label product spoils at the same rate, and day-received product from the same suppliers, stored in the same chambers, does not. The chambers hold temperature. Corriebank\u0027s self-certified credit policy coincides with a rise in customer credits, but no evidence separates over-claiming from genuinely shortened shelf life, so that question stays open. The fix is to restore night put-away capacity and cap dock-to-chamber time. The chargeback would punish a supplier that did nothing wrong and would not stop the losses.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "E3",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "C1",
+            "C6",
+            "C11",
+            "C14"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "interested-party",
+            "misleading-signal",
+            "independent-record"
+          ],
+          "rationale": "The GM\u0027s claim rests on E3, the DC\u0027s own probe entries. C6 is unit-logged, uneditable trailer telematics, pulled by Tallowmere\u0027s own planner from a haulier that also serves Tallowmere\u0027s outbound fleet. It shows every Haverlow load at 1.9\u20133.6\u00B0C return air and 2.4\u20133.5\u00B0C product probe at door-open, with no trend since July. C11 adds that Haverlow\u0027s night write-off rate equals that of other night-received suppliers. E4 and C1 are consistent with this but come from an interested party."
+        },
+        {
+          "itemId": "Q2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E3",
+            "C6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E5",
+            "E6",
+            "C3",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "central-mechanism",
+            "revision"
+          ],
+          "rationale": "C6 shows product arriving at about 3\u00B0C and trailers emptied by around 23:20. E3 shows the same loads reading 6.6\u20137.9\u00B0C when confirmed at about 02:30\u201303:20. C11 shows night pallets sitting a median of 3 h 52 min on unrefrigerated dock lanes at 15\u201317\u00B0C, and night-received product written off at 2.9% against 0.6% for day-received product. Initial file alone cannot establish this."
+        },
+        {
+          "itemId": "Q3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E6",
+            "C2",
+            "C11"
+          ],
+          "tags": [
+            "rival-ruled-out"
+          ],
+          "rationale": "E6 shows the chambers at 1.7\u20133.9\u00B0C, with calibrated probes and the normal alarm count. C11 shows day-received product put into the same CH1\u2013CH3 chambers keeping a 0.5\u20130.6% write-off rate, which a chamber fault would not allow. The GM is right on this point; his error lies elsewhere."
+        },
+        {
+          "itemId": "Q4",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "gamed-record",
+            "provenance",
+            "misleading-signal"
+          ],
+          "rationale": "E3\u0027s header says the probe is taken at unload, but C6 puts door-open at 22:18\u201323:06 and the trailers empty by 22:55\u201323:47. Receipt confirmation, where the temperature is keyed, comes 3.5\u20134 hours later. Product at 2.4\u20133.5\u00B0C at door-open cannot be the 6.6\u20137.9\u00B0C product recorded, so the entries do not reflect condition off the trailer. Only C6 supplies the door-open times."
+        },
+        {
+          "itemId": "Q5",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E1",
+            "E7"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E7",
+            "C4",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "live-but-unestablished",
+            "customer-claims"
+          ],
+          "rationale": "E7 gives a plausible opportunity and a rise in Corriebank credits, but only anecdotal suspicion. C11 explicitly excludes customer credits because they cannot be traced to a receiving shift. No item tests claim validity, and genuine shelf-life loss from dock warming is an equally live explanation."
+        },
+        {
+          "itemId": "Q6",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C9",
+            "C11"
+          ],
+          "tags": [
+            "natural-experiment",
+            "interested-party-change"
+          ],
+          "rationale": "E5 cuts the night crew only, from week 31, with slots unchanged. C11 shows night dock-to-chamber time stepping from 44 min to 3 h 05 min in week 31 and 3 h 52 min afterwards. Night volume is flat (118 to 121 pallets) and day receiving, with an unchanged crew, stays at about 40 min. Temporal order, mechanism and a within-site comparison that rules out a volume rise together establish causation."
+        },
+        {
+          "itemId": "Q7",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "E6",
+            "C3",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "central-mechanism",
+            "confounded",
+            "natural-experiment"
+          ],
+          "rationale": "C11 traces lots to receiving shift. Night-received write-offs rose from 0.6% to 2.9%; day-received stayed at 0.6% for the same suppliers (Pellridge, own-label) and the same chambers. That rules out supplier and storage rivals. The mechanism is unrefrigerated dock lanes at 15\u201317\u00B0C for about four hours, consistent with the warm probe readings in E3. C6 independently removes arrival temperature as a rival."
+        },
+        {
+          "itemId": "Q8",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "confounded",
+            "independent-record"
+          ],
+          "rationale": "The link itself fails. C6 shows Haverlow arrival temperatures unchanged and within spec on every load before and during the spike, so arrival temperature cannot have driven the increase. C11 shows Haverlow\u0027s write-off rate matching other night-received suppliers. Its large share in E1 reflects night-only delivery, not arrival condition."
+        },
+        {
+          "itemId": "Q9",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E1",
+            "E7"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E7",
+            "C4",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "association-only",
+            "confounded"
+          ],
+          "rationale": "The policy started on 3 August, and Corriebank credits rose from about \u00A31,250 to \u00A33,100 a week at the same time (E7; E1 totals). That shows co-occurrence. However, dock warming began in the same weeks and would genuinely shorten shelf life at stores (C11, C4). No customer comparison or claim-level validation separates the two, so causation is not established."
+        },
+        {
+          "itemId": "Q10",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C6",
+            "C8",
+            "C11",
+            "C15"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "Independent telematics clear Haverlow, so the chargeback punishes the wrong party. Moving volume to Pellridge fixes nothing, because Pellridge\u0027s night-received product spoils at the same rate. It also adds 4\u20136% cost and possible capacity fees (C15, C8). This holds whether or not the live rival H5 is true, because over-claiming would not implicate Haverlow either."
+        },
+        {
+          "itemId": "Q11",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "E6",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "central-action",
+            "reversal-of-change"
+          ],
+          "rationale": "It directly reverses the established cause, the night crew cut that produced long dock times and spoilage. It costs about \u00A32,300 a week (E5) against a roughly \u00A315,700 a week rise in DC-stage write-offs (E1), and it builds in monitoring. It is the single action addressing the confirmed, larger driver, and it helps whatever the answer on H5."
+        },
+        {
+          "itemId": "Q12",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E7"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E7",
+            "C4",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "premature",
+            "live-but-unestablished"
+          ],
+          "rationale": "If over-claiming were confirmed, reinstating photo evidence would clearly help, and asking for it does little lasting damage if wrong. However, its stated basis (H5) is unestablished. The credit rise co-occurs with genuine dock warming, so committing now is not justified."
+        },
+        {
+          "itemId": "Q13",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E7",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E7",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "evidence-gathering"
+          ],
+          "rationale": "Reconciling claims is a reasonable, low-cost way to test H5 on the smaller credit component (about \u00A32,700 a week of the rise). It does not address the established and larger DC-stage driver, so it is not the action that should lead."
+        },
+        {
+          "itemId": "Q14",
+          "expected": "harmful",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "protective-control"
+          ],
+          "rationale": "It removes the only check that would detect warm product. It would hide the dock-warming signal, and it would also hide any real supplier excursion. It worsens outcomes under every live hypothesis."
+        },
+        {
+          "itemId": "Q15",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C6",
+            "C11",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "E6",
+            "C6",
+            "C11"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "With C6 and C11, the chain from crew cut to dock time to warming to write-offs is established. The supplier and chamber rivals are excluded, and the action is cheap and reversible relative to the losses. The open question on credit claims (H5) does not bear on whether to restore night put-away capacity."
+        }
+      ],
+      "discriminatingReads": [
+        "C6",
+        "C11"
+      ],
+      "lowValueReads": [
+        "C5",
+        "C7",
+        "C9",
+        "C10",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C6",
+        "C11"
+      ],
+      "authoringNotes": "Interested party: the GM, who sponsored CR-2231 and claims it had no service impact. He builds his supplier-blame case on the DC\u0027s own probe entries (E3) and a chamber dashboard (E6) that is accurate but irrelevant. Independent record: Haverlow\u0027s trailer telematics (C6), which are unit-logged, uneditable and pulled by Tallowmere\u0027s own staff. They contradict the claim of warm arrivals and expose the timing of the probe entries. Confound: Haverlow delivers nights only, so supplier identity tracks receiving shift. C11 breaks this by comparing the same suppliers and chambers across shifts. Non-redundancy: only C6 settles H4, because it alone gives door-open times to set against E3\u0027s confirmation times. It also gives the decisive independent evidence on H1 and R3. Only C11 settles R1, R2, A2 and SUFF, because it alone gives dock times, shift-level write-off rates and the dock temperature. No other catalogue item reports arrival times, dock dwell or shift-level spoilage. C1 is the accused supplier\u0027s own dispatch data and does not cover arrival. C2 and C12 confirm points already settled. C3 cannot locate the abuse. C13 restates E7. Initial-file traps: E3\u0027s SOP header (\u0027probe at unload\u0027), the 58% Haverlow share, and E6\u0027s clean chambers all point to the supplier. Fair counter-signals in the initial file: other suppliers are also up (E1), Haverlow\u0027s denial (E4), the timing of CR-2231 (E5), the note that probes are keyed at receipt confirmation (E3), and the dock lying outside the dashboard (E6). H5 and R4 are deliberately left unresolved by every catalogue item, because credits are excluded from the shift tracing in C11. Only A2 is preferred; the case asks for the single leading action."
+    }
+  }
+}

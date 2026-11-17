@@ -1,0 +1,153 @@
+{
+  "caseId": "OD2-HO-CHANGE-1",
+  "blindAgreement": "14/15",
+  "weightedBlindAgreement": 0.9333333333333333,
+  "disagreements": [
+    {
+      "itemId": "I02",
+      "key": "supported",
+      "blind": "unknown"
+    }
+  ],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I01",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "In C5, Founders-locked accounts that got no price rise churned almost exactly like repriced accounts in the same connector cell (Quillbook 5.9% vs 6.2%), and repriced accounts with no connector stayed flat in every seat band (1.8\u21921.9%), so price does not explain the rise."
+      },
+      {
+        "itemId": "I02",
+        "answer": "unknown",
+        "confidence": 62,
+        "justification": "At S1 the price story rests on survey answers and a seat-band gradient (E1, E2, E3, C2), but E3 lumps Founders and repriced accounts together and is confounded by account size, while E4 shows sync tickets rising at the same time, so S1 evidence cannot separate price from rival causes."
+      },
+      {
+        "itemId": "I03",
+        "answer": "supported",
+        "confidence": 92,
+        "justification": "Quillbook-connected accounts churned at about 6% whatever their pricing cohort while others stayed flat (C5); the failures began when v2 was retired on 30 March and went unseen because they were logged at WARN (C6, C12, C13); and affected accounts cancelled at 34% vs 8% for unaffected ones (C6)."
+      },
+      {
+        "itemId": "I04",
+        "answer": "unknown",
+        "confidence": 65,
+        "justification": "At S1 there are only hints: sync tickets more than doubled, with missing or doubled invoices (E4), plus a few invoice comments (C2). There is no breakdown by connector, so H2 is live but unproven."
+      },
+      {
+        "itemId": "I05",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "The Tallymarsh cells are tiny and their change is within normal variation (C5), its log has not been reviewed and it is not on the health panel (C6, C13), and two cancellations cited missing invoices (C6), so the evidence does not discriminate."
+      },
+      {
+        "itemId": "I06",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "April\u2013July churn in earlier years was 1.7\u20131.9% against 2.4\u20133.1% in 2026 (E5, E6), and the rise is confined to Quillbook-connected accounts rather than spread across the base (C5)."
+      },
+      {
+        "itemId": "I07",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The 5.0 update was forced on all accounts, yet no-connector accounts did not change (C5); mobile tickets stayed flat (C7), ratings recovered after 5.0.2 (C4, E4), and failures hit web and mobile invoices alike (C6)."
+      },
+      {
+        "itemId": "I08",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "Comparing price-locked Founders with repriced accounts inside each connector cell shows no price effect (C5: 5.9% vs 6.2%; 1.8% vs 1.9%), and E3\u0027s dose-response disappears once connector is controlled for (C5 seat bands)."
+      },
+      {
+        "itemId": "I09",
+        "answer": "causal",
+        "confidence": 82,
+        "justification": "The order of events (v2 retired 30 March, C6), a clear mechanism (silent success and double posting, C6, C12), covariation within Quillbook accounts (34% vs 8%, C6) and the main rival, price, ruled out by the Founders comparison (C5) together support causation."
+      },
+      {
+        "itemId": "I10",
+        "answer": "association-only",
+        "confidence": 75,
+        "justification": "Cancelled accounts had slower first responses (E4), but sync tickets are both the ones escalated to the slow Tier 2 queue (C7) and the ones tied to the cause (C6), so ticket type confounds the link."
+      },
+      {
+        "itemId": "I11",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "Fixing the identified cause (C6: v3 fix in 3\u20134 weeks, still unscheduled), with Quillbook\u0027s offer of a partner engineer (C12), and contacting affected accounts targets the real driver shown in C5 and C6."
+      },
+      {
+        "itemId": "I12",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "The hold has kept 3,870 duplicates out of customers\u0027 books (C6); switching it off disables a protective control and would corrupt more books."
+      },
+      {
+        "itemId": "I13",
+        "answer": "harmful",
+        "confidence": 75,
+        "justification": "Price is not driving churn (C5), so a rollback gives up about $220k a month (E6) without touching the cause, which worsens outcomes."
+      },
+      {
+        "itemId": "I14",
+        "answer": "premature",
+        "confidence": 65,
+        "justification": "H3 is unestablished (C5 noise; C6 log unreviewed); reviewing the Tallymarsh log and adding it to the panel (C13) should come before committing a six-week rebuild."
+      },
+      {
+        "itemId": "I15",
+        "answer": "sufficient",
+        "confidence": 82,
+        "justification": "C5, C6 and C12 together establish the Quillbook failure as the driver and rule out price, which is enough to commit to A1."
+      }
+    ],
+    "ambiguousItems": [
+      "I02: at S1 a reviewer could argue \u0027supported\u0027 from the survey shift (E2: price 31%\u219249%) and the predicted churn uplift (C3), although E3 is confounded",
+      "I13: \u0027premature\u0027 is also defensible as an alternative to \u0027harmful\u0027, although C5 counts strongly against H1",
+      "I14: \u0027acceptable\u0027 is also defensible because the team is separate and the work touches nothing else (E6), so the opportunity cost is low",
+      "I04: \u0027unknown\u0027 vs \u0027supported\u0027 at S1 is a judgement call, given that E4 shows sync tickets more than doubling around the time of the change"
+    ],
+    "caseProblems": [
+      "No serious inconsistencies: the cohort counts in C5 roughly reproduce the overall churn in E5 and E6, the 467 Quillbook cancellations in C6 fit the C5 rates, and the 484 cancellations in E2 match the April\u2013May rates.",
+      "Minor cueing: the wording in E6 (\u0027in case it is affected too\u0027) and C5\u0027s analyst note on the size of the Tallymarsh cells hint strongly at the intended answers for H3 and A4.",
+      "The C5 catalogue title (\u0027by pricing cohort, accounting connector and seat band\u0027) signals that a comparison by connector and by Founders status is the key discriminating evidence, though it does not state the answer."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I02",
+        "ruling": "ambiguous",
+        "explanation": "At S1 only E1\u2013E5 count (C5 and C6, the optimal reads, are both S2). For \u0027supported\u0027, the key can point to the timing, the jump in price-citers (about 30 a month in Q1 to about 97 a month in Apr\u2013May), the account managers\u0027 reports and the seat gradient. But the S1 file itself undercuts two of these. First, E3 says outright that repriced and Founders accounts are combined and that the increase is computed as seats \u00D7 $10 for every account, including 2,100 accounts whose price did not rise (E5). So the \u0027dose-response\u0027 is visibly mis-specified, and a careful analyst would discount it. Second, the single-choice label \u0027Price / not worth the cost\u0027 merges price with dissatisfaction about value. Meanwhile E4 shows a live rival with a plausible mechanism (sync tickets up from about 30 to about 70 a week, invoices missing or doubled) at the same time. Discounting E3 leaves timing, a self-reported label and anecdote. A careful analyst could reasonably conclude that the S1 evidence does not separate price from rival causes, which is the blind \u0027unknown\u0027. \u0027Supported\u0027 also remains defensible, because H1 has more direct evidence than any rival at S1. Both readings hold up, so the key is not uniquely defensible.",
+        "fix": "Make E3 a clean-looking S1 signal by restricting it to repriced accounts. Replace \u0027Repriced and Founders accounts are combined, and the increase is computed as seats \u00D7 $10 for every account\u0027 with \u0027Repriced accounts only (Founders excluded); increase = seats \u00D7 $10\u0027. Adjust the figures to the repriced cohort. A gradient will still appear, because Quillbook accounts are larger, and C5\u0027s seat bands still expose the confound at S2. Without the self-declared flaw, price clearly beats its rivals at S1 and \u0027supported\u0027 becomes uniquely defensible. The alternative is to change the I02 key to \u0027unknown\u0027."
+      },
+      {
+        "itemId": "I02: at S1 a reviewer could argue \u0027supported\u0027 from the survey shift (E2: price 31%\u219249%) and the predicted churn uplift (C3), although E3 is confounded",
+        "ruling": "ambiguous",
+        "explanation": "This flag is the same issue as I02 above. \u0027Supported\u0027 is defensible from the survey shift and timing, so the key is not wrong. The case for \u0027unknown\u0027 is equally defensible, for three reasons. E3 discloses its own mis-specification (Founders accounts are mixed into the increase calculation). The survey category conflates price with \u0027not worth the cost\u0027. E4 shows a co-timed sync-failure rival. C3 also cuts both ways: the observed uplift at S1 (0.6\u20131.0 points) is two to five times the modelled 0.2\u20130.4, which suggests something beyond price. Also, C3 is not in the optimal read path.",
+        "fix": "Same as I02: restrict E3 to repriced accounts so it no longer flags its own flaw at S1. The alternative is to rekey I02 to \u0027unknown\u0027."
+      },
+      {
+        "itemId": "I13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Premature\u0027 requires that the action could be right if a still-unconfirmed hypothesis were confirmed. H1 is not unconfirmed. C5 contradicts it with a natural experiment. Price-locked Quillbook accounts rose almost exactly as much as repriced ones (1.9%\u21925.9% vs 2.0%\u21926.2%). Unconnected accounts stayed at baseline in both cohorts and in every seat band. No live hypothesis under which a price rollback reduces churn remains, so the action gives up about $220k a month (E6) for no benefit. That is \u0027likely to worsen outcomes\u0027, which is \u0027harmful\u0027.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "I14",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A4 fits the definition of \u0027premature\u0027 exactly. It would help if H3 (Tallymarsh failures) were confirmed, but H3 is unestablished: the C5 change is within noise at about seven cancellations a month, and C6 shows the Tallymarsh log has never been reviewed. A cheap, decisive check is available, namely reviewing the existing log. Low opportunity cost (E6: a separate team that touches nothing else) explains why the action is not \u0027harmful\u0027. It does not make committing six weeks of rebuild work \u0027reasonable\u0027 before a free diagnostic is run. \u0027Acceptable\u0027 would ignore the hypothesis-contingency that the \u0027premature\u0027 category exists to capture.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "I04",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "At S1, E4 shows sync tickets doubling, with invoices missing or doubled. That keeps H2 live, but nothing in E1\u2013E5 links cancellations to connector use. Several points cut against it at S1: the tag covers both connectors, the tickets were triaged Sev-3 with a working re-sync, and the \u0027Product problems or bugs\u0027 survey share was flat (6%\u21927%). The response-time gap in E4 links slow support to cancellation, not sync failures to cancellation. Co-timed ticket volume alone does not let H2 beat its rivals, so \u0027supported\u0027 is not defensible. Equally, nothing counts against H2, so \u0027contradicted\u0027 is not defensible either. That leaves \u0027unknown\u0027.",
+        "fix": "No change needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

@@ -1,0 +1,127 @@
+{
+  "caseId": "OD2-DEV2-CONTRA",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S1",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "Production loaded the parallel-run snapshot MD-0915 and there is no MD-1023 (C2). Flagged records were underpaid at a lower rate than unflagged ones (86% vs 94%), and flagged day workers and flagged parallel-run night workers were paid correctly (C3, C2)."
+      },
+      {
+        "itemId": "S2",
+        "answer": "supported",
+        "confidence": 93,
+        "justification": "The append-only audit trail shows NSP-02\u0027s window_start changed from 20:00 to 22:00 on 22 Oct (C1). Every shortfall equals 0.33 \u00D7 rate \u00D7 hours worked between 20:00 and 22:00, and restoring 20:00 fixes all 158 cases (C3), against the 20:00 window set by the agreement and FD-07 (C8)."
+      },
+      {
+        "itemId": "S3",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "Hours agreed to the rosters for 158 of 158 staff (C3, E5), no timesheets defaulted to contracted hours (C6), and the portal outage lost no entries (C11)."
+      },
+      {
+        "itemId": "S4",
+        "answer": "contradicted",
+        "confidence": 95,
+        "justification": "The payment file and bank settlement matched PayLattice net pay with zero differences and no rejects (C5, E3), so the bank interface faithfully passed on already-wrong amounts."
+      },
+      {
+        "itemId": "S5",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Release 7.4 made no tenant rule changes (C1), and with release 7.4 still running, setting window_start back to 20:00 in the test tenant gave correct pay for all 158 (C3), so the fault is configuration, not platform code."
+      },
+      {
+        "itemId": "S6",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The edit came before the payroll (C1), the shortfall matches the 20:00\u201322:00 hours exactly and spares Kelsey Road staff rostered 22:00\u201306:00 (C3), the data rival is ruled out (C2, C3), and reversing the change in the test tenant fixes every case (C3)."
+      },
+      {
+        "itemId": "S7",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Flagged records were not over-represented among the underpaid (C3), flagged day workers and 22 flagged parallel-run night workers were paid correctly (C3, C2), and the claimed MD-1023 load never happened (C2)."
+      },
+      {
+        "itemId": "S8",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Release 7.4 made no tenant rule changes (C1), and October recalculated correctly under 7.4 once the window was fixed (C3)."
+      },
+      {
+        "itemId": "S9",
+        "answer": "association-only",
+        "confidence": 60,
+        "justification": "Night overtime cover fell after the underpayments while day cover held (C14, E6), but the rota trial for the same teams started on the same date and the dashboard cannot separate them or record reasons (E6, C14)."
+      },
+      {
+        "itemId": "S10",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "It punishes the HR data team for errors the data did not cause (C2, C3), leaves the NSP-02 misconfiguration in place for November (C1), and accepts costs that clause 14.3 would place on Ardentra or at least share (C13, C7, C9)."
+      },
+      {
+        "itemId": "S11",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "It fixes the confirmed cause (C1, C3) using a verification method already shown to work (C3), and the off-cycle payment based on recalculation covers the 8 underpaid staff who raised no ticket (C3)."
+      },
+      {
+        "itemId": "S12",
+        "answer": "premature",
+        "confidence": 65,
+        "justification": "The overtime drop cannot yet be pinned on the rota trial rather than the pay errors (E6, C14), so pausing the trial now commits to an unconfirmed explanation."
+      },
+      {
+        "itemId": "S13",
+        "answer": "harmful",
+        "confidence": 78,
+        "justification": "Release 7.4 did not cause the errors (C1, C3), and it carries the statutory tax table update required from the November period (E2), so rolling it back would introduce tax errors."
+      },
+      {
+        "itemId": "S14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The tamper-proof audit trail (C1), the exact recalculation and test-tenant re-run (C3), and the ruling-out of the data explanation (C2) are enough to commit to A2 before 24 Nov."
+      }
+    ],
+    "ambiguousItems": [
+      "S9: \u0027association-only\u0027 or \u0027unknown\u0027 are both defensible, because the overtime drop is confounded with the rota trial and there is no team-level split (C14, E6).",
+      "S12: \u0027premature\u0027 or \u0027acceptable\u0027 are both defensible, because pausing the rota trial is low-cost and reversible at one week\u0027s notice (E6), even though its causal role is unconfirmed.",
+      "S5: \u0027contradicted\u0027 or \u0027unknown\u0027 are both defensible, since evidence against a code defect rests mainly on one test-tenant re-run (C3) plus the release log (C1)."
+    ],
+    "caseProblems": [
+      "C3\u0027s title, \u0027recalculation of October night premium for all night-working staff\u0027, together with its \u0027Re-run in Ardentra\u0027s test tenant\u0027 finding, effectively resolves H2, R1 and the A2 verification in a single item, so the case depends heavily on one decisive workpaper.",
+      "A2 does not mention correcting pensionable pay in the next pension file (C16), so a fully correct remediation is somewhat underspecified; this is minor.",
+      "Minor numerical check: E1 says 18 of 139 complainants hold flagged records, while C3 shows 19 flagged night workers underpaid. This is consistent if one non-complainant is flagged, but the reader has to infer that."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S9",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 means the evidence cannot even show association, and that test is clearly met here. E6 records that night overtime cover fell from 88% to 61% on exactly the teams that were underpaid, right after the pay error. Night staff say openly that they are angry about the premium. C14 adds a contrast: day overtime, where nobody was underpaid, held steady at 91%, 90% and 88%. So the pay error and the drop do co-occur, both in time and across groups. The rota trial that started on 1 Nov on the same teams, and the missing team-level split in C14, are confounders. They stop us calling the link causal, but they do not remove the association. Confounding is exactly the situation \u0027association-only\u0027 is meant for. \u0027Unknown\u0027 would wrongly treat a confounded association as no association at all, so only \u0027association-only\u0027 is defensible.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "S12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A3 is aimed at restoring overtime cover, so it only works if the rota trial is what drives the declines. The manager says outright that he cannot tell which factor it is (E6), and C14 does not show reasons for declines or separate out the trial teams. That fits the rubric\u0027s definition of \u0027premature\u0027: it could be right if a hypothesis still to be confirmed turned out true, but committing now is not justified. Being cheap and reversible at one week\u0027s notice is why A3 is not \u0027harmful\u0027. It does not make A3 \u0027acceptable\u0027, because \u0027premature\u0027 already covers actions that are reversible but unjustified. Pausing has a further cost: A2 will fix the pay before 24 Nov, and if the trial were paused at about the same time, the two possible drivers would stay mixed up and the chance to tell them apart would be lost. Asking staff why they decline would discriminate cheaply first. The evidence gives no urgent safety or operational cost of 61% cover that would justify acting before knowing the driver. So only \u0027premature\u0027 is defensible.",
+        "fix": "No change needed. Optionally, E6 could state that no minimum-cover safety threshold has been breached, to close off any \u0027act now as a hedge\u0027 argument for \u0027acceptable\u0027."
+      },
+      {
+        "itemId": "S5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The flag calls C3 \u0027one test-tenant re-run\u0027, which undersells it. C3 is a full-population intervention covering all 158 night workers. It ran on the same release 7.4, with production data, and changed only one variable, the NSP-02 window_start. With that change, all 158 matched expected pay. Before the fix, every one of the 147 shortfalls equalled exactly 0.33 \u00D7 basic hourly rate \u00D7 hours worked between 20:00 and 22:00, to within \u00A30.01. That is a fully deterministic configuration signature, with nothing left over for a code defect to explain. C1 shows the template held a stored 22:00 value and applied it as designed, and that release 7.4 made no tenant rule changes. C11 shows no incidents logged against pay calculation. Taken together, this evidence counts against H5 rather than failing to tell the options apart, so \u0027contradicted\u0027 is the only defensible answer.",
+        "fix": "No change needed."
+      }
+    ]
+  },
+  "needsRevision": false
+}

@@ -1,0 +1,202 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-NOCONC-1__sonnet-medium__t5",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-NOCONC-1",
+  "trial": 5,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C15",
+    "X3": "C13",
+    "X4": "C2",
+    "X5": "C4",
+    "X6": "C14",
+    "X7": "C7",
+    "X8": "C12",
+    "X9": "C10",
+    "X10": "C5",
+    "X11": "C11",
+    "X12": "C9",
+    "X13": "C8",
+    "X14": "C3",
+    "X15": "C6"
+  },
+  "readLabels": [
+    "X9",
+    "X3"
+  ],
+  "reads": [
+    "C10",
+    "C13"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-NOCONC-1__sonnet-medium__t5",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17692,
+    "cacheCreationTokens": 7047,
+    "outputTokens": 1666,
+    "thinkingTokens": 110,
+    "costUsd": 0.04662920000000001,
+    "durationMs": 11929,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-NOCONC-1__sonnet-medium__t5/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-NOCONC-1__sonnet-medium__t5/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-NOCONC-1__sonnet-medium__t5/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:35,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022Store 14\u0027s rise is not yet shown to be real. The Q1\u2013Q3 figures are estimates from partial cycle counts, with an error of about \u00B10.6 points per quarter. Across the chain, about half of the stores that showed two straight rises were not confirmed by the year-end full count. Store 14\u0027s past full-count results were steady at 1.5\u20131.8%. The shoplifting log count rose chain-wide after the incident app launched on 1 April, while chain shrink stayed flat, so the store\u0027s own increase proves little. Self-checkout and the bus interchange both fit the timing, but nothing here separates them from estimate noise. The ethics-line tip was checked on CCTV and was ordinary cardboard bale runs, so the evidence doesn\u0027t support suspending the stocker. The neighbouring stores show no matching rise, which fits a store-specific effect or noise and doesn\u0027t settle which. Sales mix is ruled out because it barely changed. What to do next: keep store 14 in the 7 December full count and do not drop it, because that is the one measurement that will show whether the loss is real. Hold off on a guard, on pulling or staffing the lanes, and on any personnel action until the count result is compared with the interim figures. If the loss is confirmed, then look at the front-end, the dock and staffing records. I\u0027m fairly sure of this, though not certain.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:16:47.4857558Z",
+    "finishedAt": "2026-11-17T16:17:00.4526486Z",
+    "output": {
+      "caseId": "OD2-HO-NOCONC-1",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 35,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E5",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X9",
+            "E4",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "Store 14\u0027s rise is not yet shown to be real. The Q1\u2013Q3 figures are estimates from partial cycle counts, with an error of about \u00B10.6 points per quarter. Across the chain, about half of the stores that showed two straight rises were not confirmed by the year-end full count. Store 14\u0027s past full-count results were steady at 1.5\u20131.8%. The shoplifting log count rose chain-wide after the incident app launched on 1 April, while chain shrink stayed flat, so the store\u0027s own increase proves little. Self-checkout and the bus interchange both fit the timing, but nothing here separates them from estimate noise. The ethics-line tip was checked on CCTV and was ordinary cardboard bale runs, so the evidence doesn\u0027t support suspending the stocker. The neighbouring stores show no matching rise, which fits a store-specific effect or noise and doesn\u0027t settle which. Sales mix is ruled out because it barely changed. What to do next: keep store 14 in the 7 December full count and do not drop it, because that is the one measurement that will show whether the loss is real. Hold off on a guard, on pulling or staffing the lanes, and on any personnel action until the count result is compared with the interim figures. If the loss is confirmed, then look at the front-end, the dock and staffing records. I\u0027m fairly sure of this, though not certain."
+    }
+  }
+}

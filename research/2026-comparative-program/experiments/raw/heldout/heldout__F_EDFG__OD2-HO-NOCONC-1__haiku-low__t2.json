@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-NOCONC-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-NOCONC-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C14",
+    "X2": "C10",
+    "X3": "C5",
+    "X4": "C11",
+    "X5": "C13",
+    "X6": "C2",
+    "X7": "C4",
+    "X8": "C9",
+    "X9": "C15",
+    "X10": "C1",
+    "X11": "C12",
+    "X12": "C6",
+    "X13": "C7",
+    "X14": "C3",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X2",
+    "X3"
+  ],
+  "reads": [
+    "C10",
+    "C5"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-NOCONC-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33482,
+    "cacheCreationTokens": 10360,
+    "outputTokens": 3179,
+    "thinkingTokens": 1959,
+    "costUsd": 0.00399712,
+    "durationMs": 19218,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-1\u0022,\u0022methodChoice\u0022:\u0022EDF analysis; collected 2 items (X2, X3) of max 2.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E4\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The rise at store 14 is probably not yet proven to be real loss. The interim figures are estimates with about \u00B10.6 points of error per quarter, and about half of comparable two-quarter rises were not confirmed by the full year-end count. Store 14\u0027s full-count results have been flat (1.5\u20131.8%). Recorded shoplifting jumped chain-wide when a new incident app launched in April, and chain shrink stayed flat, so the incident counts are a reporting effect. Self-checkout is unlikely to be the cause: the lanes were offline from April to late June, yet shrink kept rising. The night-stocker tip was checked on CCTV and found to be ordinary bale runs. Confidence is moderate. Next: keep store 14 in the 7 December full count, do not drop it, and do not suspend anyone. Remove the self-checkout and guard plans from the immediate agenda. Compare the full-count result with the interim figures before any store-specific action.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:39:49.0699899Z",
+    "finishedAt": "2026-11-17T16:40:09.0130650Z",
+    "output": {
+      "caseId": "OD2-HO-NOCONC-1",
+      "methodChoice": "EDF analysis; collected 2 items (X2, X3) of max 2.",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "X2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "E1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "supported",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "E1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X2",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2",
+            "E4",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The rise at store 14 is probably not yet proven to be real loss. The interim figures are estimates with about \u00B10.6 points of error per quarter, and about half of comparable two-quarter rises were not confirmed by the full year-end count. Store 14\u0027s full-count results have been flat (1.5\u20131.8%). Recorded shoplifting jumped chain-wide when a new incident app launched in April, and chain shrink stayed flat, so the incident counts are a reporting effect. Self-checkout is unlikely to be the cause: the lanes were offline from April to late June, yet shrink kept rising. The night-stocker tip was checked on CCTV and found to be ordinary bale runs. Confidence is moderate. Next: keep store 14 in the 7 December full count, do not drop it, and do not suspend anyone. Remove the self-checkout and guard plans from the immediate agenda. Compare the full-count result with the interim figures before any store-specific action."
+    }
+  }
+}

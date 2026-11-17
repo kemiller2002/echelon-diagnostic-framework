@@ -1,0 +1,127 @@
+{
+  "caseId": "OD2-HO-OBVWRONG-1",
+  "blindAgreement": "13/14",
+  "weightedBlindAgreement": 0.9629629629629629,
+  "disagreements": [
+    {
+      "itemId": "Q12",
+      "key": "acceptable",
+      "blind": "preferred"
+    }
+  ],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "In C2, every non-5.2 client served by Tessaline buffers at 0.6\u20130.7%, the pre-migration level. The Dravia dogfood TVs on Corvane showed the same 5.7% on 5.2 (C3). Tessaline met all SLA metrics with spare capacity (C1), and the probe shift is small (C9). So the CDN does not explain the rise."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "supported",
+        "confidence": 92,
+        "justification": "Smart-TV 5.2 buffers at 5.9% against 0.6\u20130.7% for all other clients, including 5.1 TVs with auto-update off, on every ISP (C2). 5.2 was rolled out to 100% of Kestria only, from 9 Oct (C3). Its buffer targets were lowered, and the 5.2 dogfood test on Corvane in Dravia showed 5.7% rebuffering (C3). A 40% viewing share at 5.9% reproduces the ~2.7% country figure (E3, C2)."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Non-5.2 clients on Kestnet, Ostral and Brevi are all at 0.6\u20130.7%, and 5.2 is equally bad on all three ISPs (C2). The Kestnet link shows no loss alarms (C5), and the regulator reports no outages and only a mild evening slowdown (C12)."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Rebuffering jumped on 9\u201310 Oct, before the 11 Oct handball launch, and match nights were no worse (E3, C11 \u0027no worse tonight\u0027). Peak demand of 412 Gbps sat well below the 900 Gbps capacity (C1)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Same-CDN clients other than 5.2 did not degrade (C2), and 5.2 degraded on Corvane in the Dravia dogfood (C3). The CDN migration\u0027s timing is confounded by the app rollout, which happened on the same day (C3, E2)."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "There is a temporal match (C3, E3), a mechanism (lower startup and up-switch buffer targets, C3), and covariation within the same CDN, ISP and market (C2). The auto-update-off 5.1 TVs act as a natural control (C2), and the effect was replicated on another CDN (C3 dogfood)."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "association-only",
+        "confidence": 65,
+        "justification": "Cancellations rose in the same month as the rebuffering (C6, E4). But the 1 Oct price rise is a live confounder: \u0027Price\u0027 was the top exit reason, and the survey offers no quality option and has an 8% response rate (C6). One ticket also links the problem to the price change (C4)."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The rise started two days before the launch (E3, E6, C11), and match nights showed no further increase (E3). The CDN had ample capacity headroom (C1)."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "It punishes a vendor that met its SLA (C1) and is not the cause (C2, C3). Moving traffic back to Corvane would not fix the 5.2 regression, which also occurs on Corvane (C3 dogfood)."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "It targets the established cause (C2, C3). It can be reverted per market via remote config within about an hour, with no new build (C3), and it stops the regression from reaching all markets on 20 Nov (C3)."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "It rests on the unestablished claim that buffering drove cancellations, which the price rise confounds (C6, E4). It could be justified if a cancellation analysis confirmed the link."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "preferred",
+        "confidence": 72,
+        "justification": "The country-only dashboard (E3) and the mostly blank device field (E1) hid the client-specific cause. That led to misattributing the problem to the CDN and standing engineering down (C11). Adding these breakdowns is cheap and protects the 20 Nov rollout."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "harmful",
+        "confidence": 92,
+        "justification": "It disables a protective control on an ongoing real regression (E3, C2), and the request rests on a wrong causal belief (E4)."
+      },
+      {
+        "itemId": "Q14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The C2 breakdown by client, ISP and period, plus the C3 release config and the cross-CDN dogfood result, are enough to commit to the reversible A2 config revert now."
+      }
+    ],
+    "ambiguousItems": [
+      "Q7: \u0027association-only\u0027 vs \u0027unknown\u0027 \u2014 the evidence is only same-month co-occurrence of rebuffering and cancellations, with no subscriber-level link, so \u0027unknown\u0027 is also defensible.",
+      "Q12: \u0027preferred\u0027 vs \u0027acceptable\u0027 \u2014 A4 is valuable for detection but does not itself fix the problem."
+    ],
+    "caseProblems": [
+      "C2 settles the case almost on its own: it gives a clean by-client, by-ISP and pre/post breakdown, plus a natural control group of TVs with auto-update off. Together with the C3 dogfood result, the case is very easy once the relevant items are read. That is realistic, but it leaves little difficulty.",
+      "C3\u0027s catalogue title (\u0027Release record and rollout configuration for smart-TV app 5.2\u0027) points toward the app, though it does not state a conclusion. C2\u0027s title (\u0027broken down by client app, app version and ISP\u0027) also hints at which breakdown matters.",
+      "E5 says 5.2 is \u0027live in all markets\u0027 with \u0027no playback regressions reported\u0027, which C3 contradicts (Kestria-only rollout gate, failed dogfood). This looks like an intentional trap rather than an error, but it is worth confirming."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q7",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The rubric defines \u0027association-only\u0027 as \u0027co-occur or correlate in the evidence\u0027 and \u0027unknown\u0027 as \u0027insufficient even to show association.\u0027 The evidence shows co-occurrence in the same market and month. E3 has Kestria rebuffering rising from about 0.6% to 2.6\u20132.9% from 9 October onward. E4 (and C6) have Kestria cancellations at 3.4% in October against 2.1% in September. That meets the stated bar for association. The objection is that there is no subscriber-level link, but that is an argument against causation, not against association. Causation is ruled out as a firm conclusion by the 1 October price rise named in E4. C6 also cannot attribute cancellations to quality, because its answer options do not include streaming quality, and C4 has one customer tying the problem to the price change. \u0027Causal\u0027 therefore fails, while \u0027unknown\u0027 would ignore co-occurrence that the rubric explicitly counts. \u0027Contradicted\u0027 is not supported either: nothing shows buffering failed to drive cancellations. Only \u0027association-only\u0027 fits.",
+        "fix": "No change needed. Optionally, to head off the objection, add one clause to E4 or C6 saying the cancellation rise was concentrated in October, the same month the rebuffering rose. This makes the co-occurrence explicit."
+      },
+      {
+        "itemId": "Q12",
+        "ruling": "ambiguous",
+        "explanation": "\u0027Preferred\u0027 means \u0027among the best next actions,\u0027 which does not require the action to be the immediate fix. Several actions can be preferred. Of the five candidates, A1 and A5 are harmful and A3 is premature, so A4 is clearly the second-best option, and the evidence ties it directly to this incident. The country-only dashboard in E3 (\u0027no breakdown below country level\u0027) and the blank device field in E1 (71% of tickets) hid a client-version regression. That led to the CDN misattribution and to engineering standing down in C11. C2 shows the per-client data already exists in the beacon warehouse, so adding the breakdowns looks cheap. C3 shows another version-gated stage is due on 20 November, so per-version alerting would protect it. On this reading \u0027preferred\u0027 is defensible. The key\u0027s reading is also defensible: A4 does not stop the stalls, A2 already holds the 20 November stage, and so A4 is a reasonable improvement rather than one of the best next actions. Nothing in the evidence about cost, timing or urgency separates the two readings.",
+        "fix": "Smallest evidence edit to make \u0027acceptable\u0027 the only defensible answer: add a sentence to E3 (or to C2\u0027s data-engineering note). It should say that per-client breakdowns can be queried ad hoc from the beacon warehouse, but that adding app version and device type to the dashboard and its alerts requires the dashboard pipeline rebuild already scheduled for Q1 2027, estimated at about six weeks of data-engineering work. A4 then stays worthwhile but cannot affect the current incident or the 20 November decision, so it is not among the best next actions. If the evidence is left unchanged, change the key to accept both \u0027preferred\u0027 and \u0027acceptable\u0027 for Q12."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

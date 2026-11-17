@@ -1,0 +1,222 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-CONTRA-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-CONTRA-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C4",
+    "X3": "C5",
+    "X4": "C9",
+    "X5": "C10",
+    "X6": "C14",
+    "X7": "C13",
+    "X8": "C3",
+    "X9": "C1",
+    "X10": "C2",
+    "X11": "C11",
+    "X12": "C12",
+    "X13": "C15",
+    "X14": "C6",
+    "X15": "C7"
+  },
+  "readLabels": [
+    "X11",
+    "X14"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-CONTRA-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 23240,
+    "cacheCreationTokens": 12775,
+    "outputTokens": 2054,
+    "thinkingTokens": 341,
+    "costUsd": 0.07397599999999999,
+    "durationMs": 13967,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CONTRA-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CONTRA-2__sonnet-medium__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CONTRA-2__sonnet-medium__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022methodChoice\u0022:\u0022Evidence-ledger provenance check, then Kepner-Tregoe is/is-not distinctions, then competing-hypotheses weighing\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X14\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X11\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X11\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X14\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The jump in write-offs comes mainly from inside the DC, not from Haverlow. Since the night receiving team was cut from six to four (27 July), chilled pallets wait about 3 h 52 min on an unrefrigerated dock, instead of 44 min. The dock averages 15\u201317\u00B0C overnight. Night write-off rates rose from 0.6% to 2.9% for every supplier, Pellridge and own-label included. Haverlow\u0027s trailer data shows product at 2.4\u20133.5\u00B0C when the doors open, with no trend. The 6.5\u20138\u00B0C receipt probes are keyed after the long dock wait, so they measure warming on site. The chambers are fine. A chargeback and volume move against Haverlow would punish the wrong party and leave the cause in place. Do not drop the night probe either, because that would hide the problem. Restore night receiving staff, or otherwise cut dock-to-chamber time, and set a maximum time monitored weekly from scan data. Separately, a smaller part of the rise is in customer credits. These roughly doubled after Corriebank\u0027s self-certified claims began on 3 August. Whether any claims are inflated is not established. Sample Corriebank\u0027s claims against lots before changing credit terms. I\u0027m confident in the main diagnosis. The credit question is still open.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:01:20.3115321Z",
+    "finishedAt": "2026-11-17T16:01:35.1097607Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-2",
+      "methodChoice": "Evidence-ledger provenance check, then Kepner-Tregoe is/is-not distinctions, then competing-hypotheses weighing",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "E4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X11",
+            "X14",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "E6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "X11",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7",
+            "E1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X11",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 75,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X11",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X11",
+            "X14",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The jump in write-offs comes mainly from inside the DC, not from Haverlow. Since the night receiving team was cut from six to four (27 July), chilled pallets wait about 3 h 52 min on an unrefrigerated dock, instead of 44 min. The dock averages 15\u201317\u00B0C overnight. Night write-off rates rose from 0.6% to 2.9% for every supplier, Pellridge and own-label included. Haverlow\u0027s trailer data shows product at 2.4\u20133.5\u00B0C when the doors open, with no trend. The 6.5\u20138\u00B0C receipt probes are keyed after the long dock wait, so they measure warming on site. The chambers are fine. A chargeback and volume move against Haverlow would punish the wrong party and leave the cause in place. Do not drop the night probe either, because that would hide the problem. Restore night receiving staff, or otherwise cut dock-to-chamber time, and set a maximum time monitored weekly from scan data. Separately, a smaller part of the rise is in customer credits. These roughly doubled after Corriebank\u0027s self-certified claims began on 3 August. Whether any claims are inflated is not established. Sample Corriebank\u0027s claims against lots before changing credit terms. I\u0027m confident in the main diagnosis. The credit question is still open."
+    }
+  }
+}

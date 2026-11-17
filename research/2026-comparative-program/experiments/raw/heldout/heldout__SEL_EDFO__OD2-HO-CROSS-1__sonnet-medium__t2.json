@@ -1,0 +1,204 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C6",
+    "X3": "C10",
+    "X4": "C9",
+    "X5": "C11",
+    "X6": "C2",
+    "X7": "C14",
+    "X8": "C15",
+    "X9": "C4",
+    "X10": "C1",
+    "X11": "C13",
+    "X12": "C3",
+    "X13": "C12",
+    "X14": "C5",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X6",
+    "X10"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22496,
+    "cacheCreationTokens": 11999,
+    "outputTokens": 1711,
+    "thinkingTokens": 83,
+    "costUsd": 0.0673676,
+    "durationMs": 12274,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t2/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe specification/distinctions (pod and date), then evidence-ledger check and competing-hypotheses weighing\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The rise in delayed alarm responses is most likely caused by the 12 August relay server move, not by agency nurses. The hardware refresh was reported as a success, but only 3 of the 14 forwarding rules came across. The lost rules included the 15-second hold-off on brief SpO2 alarms, suppression of repeat notifications, and sending probe-off alarms to the charge phone only. Phone notifications per nurse in Pods A\u2013C doubled (about 38 to about 82 per shift) and acknowledgement time doubled (34 s to 71 s) from 12 August. Pod D was still on the old server and saw no change in notifications, response time or incidents. Core nurses, agency nurses and new graduates all show similar incident rates under the same load. Raw alarm events from the monitors were flat, so acuity and the September monitor software update don\u0027t explain it. The agency share was similar in both pod groups. Don\u0027t approve the agency cap or the performance reviews: they would punish the wrong party and discourage reporting. Restore the full rule set, with clinical validation, and track notifications per nurse and acknowledgement times weekly. Don\u0027t switch off phone forwarding of alarms. I\u0027m fairly confident. Two things remain unchecked: whether Room 14 has any coverage problem, and the link to sick leave.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:57:43.9483446Z",
+    "finishedAt": "2026-11-17T15:57:57.1636377Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "Kepner-Tregoe specification/distinctions (pod and date), then evidence-ledger check and competing-hypotheses weighing",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 95,
+          "evidenceIds": [
+            "X6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The rise in delayed alarm responses is most likely caused by the 12 August relay server move, not by agency nurses. The hardware refresh was reported as a success, but only 3 of the 14 forwarding rules came across. The lost rules included the 15-second hold-off on brief SpO2 alarms, suppression of repeat notifications, and sending probe-off alarms to the charge phone only. Phone notifications per nurse in Pods A\u2013C doubled (about 38 to about 82 per shift) and acknowledgement time doubled (34 s to 71 s) from 12 August. Pod D was still on the old server and saw no change in notifications, response time or incidents. Core nurses, agency nurses and new graduates all show similar incident rates under the same load. Raw alarm events from the monitors were flat, so acuity and the September monitor software update don\u0027t explain it. The agency share was similar in both pod groups. Don\u0027t approve the agency cap or the performance reviews: they would punish the wrong party and discourage reporting. Restore the full rule set, with clinical validation, and track notifications per nurse and acknowledgement times weekly. Don\u0027t switch off phone forwarding of alarms. I\u0027m fairly confident. Two things remain unchecked: whether Room 14 has any coverage problem, and the link to sick leave."
+    }
+  }
+}

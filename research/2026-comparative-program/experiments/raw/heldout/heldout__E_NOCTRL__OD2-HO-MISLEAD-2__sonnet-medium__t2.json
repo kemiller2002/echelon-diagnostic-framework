@@ -1,0 +1,203 @@
+{
+  "runId": "heldout__E_NOCTRL__OD2-HO-MISLEAD-2__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "E_NOCTRL",
+  "caseId": "OD2-HO-MISLEAD-2",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C7",
+    "X3": "C14",
+    "X4": "C2",
+    "X5": "C15",
+    "X6": "C12",
+    "X7": "C3",
+    "X8": "C1",
+    "X9": "C13",
+    "X10": "C11",
+    "X11": "C9",
+    "X12": "C4",
+    "X13": "C10",
+    "X14": "C8",
+    "X15": "C6"
+  },
+  "readLabels": [
+    "X15",
+    "X10"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOCTRL__OD2-HO-MISLEAD-2__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19862,
+    "cacheCreationTokens": 9549,
+    "outputTokens": 1838,
+    "thinkingTokens": 264,
+    "costUsd": 0.05857420000000001,
+    "durationMs": 12173,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTRL__OD2-HO-MISLEAD-2__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTRL__OD2-HO-MISLEAD-2__sonnet-medium__t2/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTRL__OD2-HO-MISLEAD-2__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The gateway 5.8 release is not the cause. The slowdown came from the storage compaction tuning change pushed the evening of 2 Nov. It raised compaction threads from 2 to 6. Disk use jumped from 41% to 97% within minutes of the push, and disk read waits went from 9 ms to 205 ms. In every cell the slowdown began within minutes of that push, regardless of when 5.8 arrived. One cell (aps-3) got 5.8 but skipped the push because of a change freeze. Its latency stayed at about 94 ms. Rolling back 5.8 in one cell (euw-1) changed nothing. The network shows no problem. Traffic growth is too small to explain it. I\u0027m fairly confident (about 90%). What remains unknown is which source drove the earlier backlog growth: Orrin Media\u0027s migration or the lifecycle-expiry sweep. That attribution is due 10 Nov. Next steps: do not roll back the gateway, because it would reopen the security hole and fix nothing. Revert the compaction change in one cell first and watch p99 and backlog, then extend it to the rest. Do not pause compaction. Hold the Orrin rate limit until the attribution is in. Profile 5.8\u0027s CPU use later as routine work.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:33:44.5406635Z",
+    "finishedAt": "2026-11-17T16:33:57.7646747Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-2",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "supported",
+          "confidence": 94,
+          "evidenceIds": [
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "E5",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X10",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "premature",
+          "confidence": 72,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E4",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A5",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The gateway 5.8 release is not the cause. The slowdown came from the storage compaction tuning change pushed the evening of 2 Nov. It raised compaction threads from 2 to 6. Disk use jumped from 41% to 97% within minutes of the push, and disk read waits went from 9 ms to 205 ms. In every cell the slowdown began within minutes of that push, regardless of when 5.8 arrived. One cell (aps-3) got 5.8 but skipped the push because of a change freeze. Its latency stayed at about 94 ms. Rolling back 5.8 in one cell (euw-1) changed nothing. The network shows no problem. Traffic growth is too small to explain it. I\u0027m fairly confident (about 90%). What remains unknown is which source drove the earlier backlog growth: Orrin Media\u0027s migration or the lifecycle-expiry sweep. That attribution is due 10 Nov. Next steps: do not roll back the gateway, because it would reopen the security hole and fix nothing. Revert the compaction change in one cell first and watch p99 and backlog, then extend it to the rest. Do not pause compaction. Hold the Orrin rate limit until the attribution is in. Profile 5.8\u0027s CPU use later as routine work."
+    }
+  }
+}

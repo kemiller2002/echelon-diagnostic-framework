@@ -1,0 +1,238 @@
+{
+  "runId": "pilot2__B_EDF03__OD2-DEV2-SEQ__haiku-low__t1",
+  "phase": "pilot2",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV2-SEQ",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C7",
+    "X3": "C1",
+    "X4": "C13",
+    "X5": "C8",
+    "X6": "C14",
+    "X7": "C3",
+    "X8": "C4",
+    "X9": "C12",
+    "X10": "C5",
+    "X11": "C6",
+    "X12": "C10",
+    "X13": "C2",
+    "X14": "C11",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X3",
+    "X8",
+    "X7"
+  ],
+  "reads": [
+    "C1",
+    "C4",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__B_EDF03__OD2-DEV2-SEQ__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 10,
+    "cacheReadTokens": 45405,
+    "cacheCreationTokens": 9985,
+    "outputTokens": 3549,
+    "thinkingTokens": 2110,
+    "costUsd": 0.00422655,
+    "durationMs": 22930,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-SEQ\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The longer SME approval times are mostly explained by one stage: collateral valuation for property-secured loans. That stage went from about 1.7 to 7.6\u20138.4 business days from June onward; other stages barely moved. The likely trigger is Credit Policy v14 (effective 1 May), which lowered the threshold for mandatory full appraisals from $500k to $150k. That raised valuation volume, and the valuation firm reports volumes above forecast. Corvane, the Q2 hires, and the valuation contract renewal look unlikely as main drivers: consumer loans on Corvane are flat, the new hires\u0027 branch stages match other branches, and the vendor still meets 97% of its service levels. Withdrawals are partly inflated by Corvane\u0027s auto-closure of files after 30 days, so that effect is uncertain. I am moderately confident, not certain; the policy-to-volume link is inferred. Next: ask the credit risk committee to review the \u00A76.3 threshold against its audit rationale, and add a by-stage breakdown to the monthly dashboard. Do not withhold the Corvane payment or put new hires on improvement plans.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:41:05.0628238Z",
+    "finishedAt": "2026-11-17T14:41:28.9600814Z",
+    "output": {
+      "caseId": "OD2-DEV2-SEQ",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "supported",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 55,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E2",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E5",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "preferred",
+          "confidence": 60,
+          "evidenceIds": [
+            "X3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 50,
+          "evidenceIds": [
+            "X3",
+            "X7",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The longer SME approval times are mostly explained by one stage: collateral valuation for property-secured loans. That stage went from about 1.7 to 7.6\u20138.4 business days from June onward; other stages barely moved. The likely trigger is Credit Policy v14 (effective 1 May), which lowered the threshold for mandatory full appraisals from $500k to $150k. That raised valuation volume, and the valuation firm reports volumes above forecast. Corvane, the Q2 hires, and the valuation contract renewal look unlikely as main drivers: consumer loans on Corvane are flat, the new hires\u0027 branch stages match other branches, and the vendor still meets 97% of its service levels. Withdrawals are partly inflated by Corvane\u0027s auto-closure of files after 30 days, so that effect is uncertain. I am moderately confident, not certain; the policy-to-volume link is inferred. Next: ask the credit risk committee to review the \u00A76.3 threshold against its audit rationale, and add a by-stage breakdown to the monthly dashboard. Do not withhold the Corvane payment or put new hires on improvement plans."
+    }
+  }
+}

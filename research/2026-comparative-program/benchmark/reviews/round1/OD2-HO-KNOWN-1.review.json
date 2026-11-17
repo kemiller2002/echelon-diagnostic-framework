@@ -1,0 +1,153 @@
+{
+  "caseId": "OD2-HO-KNOWN-1",
+  "blindAgreement": "15/16",
+  "weightedBlindAgreement": 0.96875,
+  "disagreements": [
+    {
+      "itemId": "Q-H5",
+      "key": "unknown",
+      "blind": "contradicted"
+    }
+  ],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q-H1",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "C1 shows the same post-3 March success rate (about 88.4%) on every app version, including 6.11 and older, 6.12 and 6.13, while 6.14 made up only 5% of attempts. C4 shows no login-related crash cluster, and C3/C10 show 6.14 passed the regression suite."
+      },
+      {
+        "itemId": "Q-H2",
+        "answer": "supported",
+        "confidence": 93,
+        "justification": "In C2, rule pack 2026.03.1 went live at 10:38 and new rule AUTO-LIB-17 blocked nettle-http password requests from 10:41, the same minute failures began in C1. About 9,700 blocks a day matches the added 403 failures in C1, and 92% of blocked installs had logged in successfully before. iOS and quick-unlock had zero hits (C2, C12), and origin outcomes are unchanged (C2, C5)."
+      },
+      {
+        "itemId": "Q-H3",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "E5 says script traffic sends no telemetry and is not counted in the KPI. The blocked requests came from 41,300 real app installs, 92% with earlier successful logins (C2). C7 found mobile traffic normal during the 28 February web attack."
+      },
+      {
+        "itemId": "Q-H4",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "C1 shows identical post-period success (88.4%) whether or not the March security patch is installed, and Android 11\u201315 all fall between 88.2% and 88.6%. Quick-unlock, which would depend on the keystore, is unchanged."
+      },
+      {
+        "itemId": "Q-H5",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "The added failures are server 403s, not credential rejections (C1). The origin 401 rate for forwarded Android password requests is unchanged at 1.9% (C2, C5), and the drop is identical on versions without the new screen (C1)."
+      },
+      {
+        "itemId": "Q-H6",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Failures began at 10:41 (C1, C2), before the 14:00 token change (E3). The token change applied to iOS too, yet iOS is flat (C12). Auth-service outcomes are unchanged (C5), and the rejections come from the edge, not the origin (C2)."
+      },
+      {
+        "itemId": "Q-R1",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The timing fits (rule activated 10:38, first failure 10:41), there is a clear mechanism (AUTO-LIB-17 matches the app\u0027s nettle-http user-agent on the password path; C2, E2), and block counts match the added failures (C1, C2). Rivals are ruled out: app version, OS (C1), auth service (C5) and other platforms (C12)."
+      },
+      {
+        "itemId": "Q-R2",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "C1 shows the drop on all versions at once within one minute and at equal size, while 6.14 accounted for only 5% of attempts; before 10:41, 6.14 password logins were normal."
+      },
+      {
+        "itemId": "Q-R3",
+        "answer": "association-only",
+        "confidence": 60,
+        "justification": "Calls rose in the same week, and some calls, reviews and complaints mention app access (E6, C8, C9, C14). But fee notices to 610,000 customers are a major confounder, and the C8 auditor says the rise cannot be split between causes."
+      },
+      {
+        "itemId": "Q-R4",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Bot traffic is excluded from the telemetry KPI (E5). The blocked traffic comes from genuine installs (C2), and mobile traffic was normal during the stuffing event (C7)."
+      },
+      {
+        "itemId": "Q-A1",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "This is a targeted, reversible fix aimed at the cause shown in C2/C1. It keeps rate limits and lockout (C7) in place and has a built-in telemetry check that also tests the causal claim."
+      },
+      {
+        "itemId": "Q-A2",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "Raising sensitivity would probably block even more legitimate app traffic, given C2 shows the edge already blocking real customers. Its premise (H3) is contradicted by E5, C2 and C7."
+      },
+      {
+        "itemId": "Q-A3",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "The edge-blocked attempts are real customers (C2: 92% with earlier successful logins). Excluding them would hide the outage from executives, and C11 already hides edge blocks from availability."
+      },
+      {
+        "itemId": "Q-A4",
+        "answer": "acceptable",
+        "confidence": 60,
+        "justification": "6.14 is not the cause (C1, C3, C4), so continuing the staged rollout with per-version tracking is reasonable, though it does nothing to fix the edge problem."
+      },
+      {
+        "itemId": "Q-A5",
+        "answer": "premature",
+        "confidence": 45,
+        "justification": "Reverting the screen does nothing for the real cause. H5 is contradicted by unchanged origin 401 rates (C2) and an identical drop on older versions (C1), so this action is unjustified; \u0027premature\u0027 is the nearest allowed label."
+      },
+      {
+        "itemId": "Q-SUFF",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "C1, C2, C5 and C12 together pin the cause on AUTO-LIB-17 strongly enough to commit to A1. A1 is targeted, reversible and self-verifying."
+      }
+    ],
+    "ambiguousItems": [
+      "Q-A5: none of the allowed labels fits an action that rests on a contradicted hypothesis but does no real damage. \u0027premature\u0027 assumes the hypothesis is still unconfirmed, and \u0027harmful\u0027 needs real damage; either could be argued.",
+      "Q-A4: \u0027acceptable\u0027 versus \u0027preferred\u0027. Continuing the rollout rightly rejects the requested rollback, but it is not the fix.",
+      "Q-R3: \u0027association-only\u0027 versus \u0027unknown\u0027. The fee-notice confounder and unreliable reason coding (E6, C8) weaken even the association."
+    ],
+    "caseProblems": [
+      "E1 reports post-period Android success as 88.7% for 3\u20139 March; C1 reports 88.4% for 4\u20139 March. The windows differ, so this is consistent, but the mismatch may confuse solvers.",
+      "C2 states the user-agent and rule match so precisely that a single item nearly settles H2. That is realistic for a vendor log, but the case becomes easy once C2 is read.",
+      "C2 gives a mean of 1.6 blocked requests per install over the week, which is low next to complaints that say \u0027every time\u0027 (C14) and the higher password retry volume (C1). It is plausible if users switch to quick-unlock or give up.",
+      "The A5 label set has no option for an action that is simply not indicated."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q-H5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "H5 claims the redesigned screen makes customers enter wrong credentials more often. It does not claim the screen caused the login drop. The blind solution\u0027s reasons answer a different question. That the added failures are 403s, and that the drop is the same on versions without the new screen, refute H1 and R2, not H5. Its remaining point, the unchanged 1.9% origin 401 rate in C2, is an aggregate across all Android versions. Since 10:41 about 92% of password submissions are blocked at the edge, so only about 900 a day reach the origin. 6.14 is 5\u201310% of attempts, which is roughly 45\u201390 forwarded requests a day. Even doubling 6.14\u0027s credential-error rate would move the aggregate by about 0.1 point, so it cannot be detected. Before the block, 6.14 had only 38 password attempts. C1 also says outright that \u0027credential-error rates cannot be compared.\u0027 A careful analyst concludes the claim is live but unestablished, so \u0027unknown\u0027 is the only defensible label.",
+        "fix": "Optional hardening, not required: add to C2 that the forwarded-request 401/5xx figures are \u0027not broken down by app version\u0027, so readers do not treat the aggregate 1.9% as a test of 6.14."
+      },
+      {
+        "itemId": "Q-A5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The flag assumes A5 rests on a contradicted hypothesis, but it does not. Reverting the password screen is the remedy for H5, and H5 is correctly \u0027unknown\u0027 (see Q-H5). That fits the \u0027premature\u0027 definition exactly: it could be right if a still-unconfirmed hypothesis were confirmed, but committing now is not justified. It is not \u0027harmful\u0027. A UX revert in a future release is reversible and does not suppress information, disable a control or punish anyone. C3\u0027s inline error messages and show-password toggle make a meaningful worsening of outcomes unlikely. \u0027Acceptable\u0027 and \u0027preferred\u0027 have no evidential basis. Even read as a response to H1, which is contradicted, the action does no real damage, so \u0027harmful\u0027 does not apply.",
+        "fix": "None required. Optionally, have the key rationale say explicitly that A5\u0027s premise is H5 (unknown), not H1 (contradicted), to head off the confusion behind the flag."
+      },
+      {
+        "itemId": "Q-A4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Rejecting the rollback is correct: C1 shows 6.14 is not implicated, and C4 shows crash data is normal. That makes A4 reasonable, not harmful. But A4 commits to expanding 6.14 \u0027on its planned schedule\u0027, and the one remaining 6.14-specific risk (H5) is unmeasurable while the edge block is in place. C1 says few password submissions reach a credential decision. So the \u0027tracking login outcomes by version\u0027 part of A4 cannot detect the risk it would need to catch until A1 is applied. Holding the rollout at its current share until the edge fix allows measurement would be at least as good. Continuing on schedule is therefore reasonable but not clearly among the best actions. A1 is the best action, and A4 neither fixes customer impact nor yields useful information before A1. \u0027Acceptable\u0027 is the better-supported label. The key\u0027s own rationale (\u0027not the fix\u0027) is thinner than the evidence allows, but the label holds.",
+        "fix": "Strengthen the Q-A4 rationale. Note that per-version tracking cannot measure credential-error rates (C1) until the edge rule is relaxed, so expanding the rollout on schedule before then is reasonable but not optimal. No change to the evidence is needed."
+      },
+      {
+        "itemId": "Q-R3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 needs evidence too weak to show even association, and that bar is not met. The 18% call rise is in the same week as the login drop (E6). Team leads report callers \u0027who can\u0027t get into the app\u0027 (E6). \u0027Digital access\u0027 calls are up 900, and 38 of 200 audited general enquiries are about app or online access (C8). A C9 reviewer says they could not log in and then called the bank. The fee-notice confounder and unreliable reason coding stop us apportioning the rise or establishing that the login drop caused it. That rules out \u0027causal\u0027. Those problems affect attribution, not co-occurrence, which the evidence shows directly. \u0027Association-only\u0027 is the only defensible label.",
+        "fix": "None required."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

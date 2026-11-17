@@ -1,0 +1,345 @@
+{
+  "caseId": "OD2-HO-NOCONC-2",
+  "groundTruthNarrative": "ratequote\u0027s 5xx rate rose from 0.31% to 0.41% in the week of 26 Oct. Three changes fall in that week: release v4.18, a move of the read replica to new hosts, and possibly partner-sync\u0027s month-end reconciliation. The default four-week dashboard view makes 0.41% look like an outlier. Over the preceding 26 weeks, though, the weekly rate ranged from 0.26% to 0.51%, and five of those weeks were higher than this one. The policy band edge is 0.482%, so the week is in band. Three earlier in-band upticks were investigated and no fault was found in any of them. The release engineer\u0027s comparison (new pods 0.52% vs old pods 0.30%) is the same new-pod excess seen in every recent rollout, including a config-only redeploy with no code change. It comes from cold caches on newly started pods and adds 10\u201320 errors per rollout. It says nothing about v4.18, and pods of the same age running different versions have never been compared. Nothing in the evidence separates the release, the replica move, partner traffic or ordinary variation; each stays live but unestablished. Users were not affected: client retries absorbed the errors and booking completion held. The team\u0027s own policy, the budget burn of 0.82x and the history together support recording the week and taking no corrective action. Rolling back or moving the replica back would be premature, and muting the alerting would be harmful.",
+  "answers": [
+    {
+      "itemId": "I-H1",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E3",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "C1",
+        "C2",
+        "C5",
+        "C6",
+        "C8",
+        "C10",
+        "C14"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal",
+        "confounded",
+        "central"
+      ],
+      "rationale": "The only direct evidence for the release is E3\u0027s new-vs-old pod comparison. C10 shows the same excess in every rollout, including a config-only redeploy of an unchanged image, and ties it to cache warm-up. So that comparison does not discriminate, and no same-age comparison exists. The fetchwell eviction change (C8) remains a plausible but untested mechanism, and C1/C14 neither confirm nor exclude it. An in-band week (C6) fits a small real effect as well as no effect at all, so it does not count against H1 either. The hypothesis is live but unestablished."
+    },
+    {
+      "itemId": "I-H2",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "tags": [
+        "confounded",
+        "alternative-cause"
+      ],
+      "rationale": "The replica moved in the same week (E4). Replica p99 rose slightly after the move but stayed inside the summer\u0027s range, with no errors or lag (C3). 504s cannot be attributed to the replica rather than tariff-rates (C2). Nothing confirms or excludes the move."
+    },
+    {
+      "itemId": "I-H3",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C6",
+        "C9",
+        "C13"
+      ],
+      "tags": [
+        "nonexistent-problem",
+        "base-rate",
+        "central"
+      ],
+      "rationale": "By the policy\u0027s own definition (E5), the normal band is the mean plus two standard deviations of the preceding 26 weeks: 0.354 \u002B 2\u00D70.064 = 0.482%. The week\u0027s 0.411% is inside it. Five of the prior 26 weeks were higher, and the three similar weeks that were investigated turned up no fault (C6). The four-week view in E2 hides this."
+    },
+    {
+      "itemId": "I-H4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C7"
+      ],
+      "tags": [
+        "artefact-check"
+      ],
+      "rationale": "A recount from the raw load balancer logs matches the dashboard for both weeks, apart from small late-shipping gaps, and the query has not been edited since March (E2). No dashboard changes are on the calendar (E4), and C7 confirms this. The rise is real in the counts."
+    },
+    {
+      "itemId": "I-H5",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C2",
+        "C4"
+      ],
+      "tags": [
+        "unverifiable",
+        "alternative-cause"
+      ],
+      "rationale": "It is not even established that the reconciliation ran during the week (E4; C4 says it may have slipped to 2 Nov, logs are gone and calls are untagged). Total volume was nearly flat. The claim is neither supported nor excluded."
+    },
+    {
+      "itemId": "I-R1",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "C1",
+        "C5",
+        "C6",
+        "C8",
+        "C10"
+      ],
+      "tags": [
+        "misleading-signal",
+        "confounded",
+        "leadership-narrative"
+      ],
+      "rationale": "The release and the higher weekly rate fall in the same week, so they co-occur. The only comparison that seemed to isolate the release is explained by new-pod warm-up common to all rollouts (C10). Two other changes, plus ordinary weekly variation (C6), are confounded with it. Nothing counts against the link itself, so it is not contradicted. It is not causal either."
+    },
+    {
+      "itemId": "I-R2",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C5",
+        "C10"
+      ],
+      "tags": [
+        "mechanism",
+        "natural-experiment"
+      ],
+      "rationale": "Across five rollouts, new pods show elevated 5xx while their cache hit ratio climbs from under 20% to about 90%. The excess errors are 504 timeouts on cache misses that go to the replica. The config-only redeploy of an unchanged image shows the same excess, which rules out code changes as the rival. Temporal order, mechanism, covariation and a natural experiment are all present."
+    },
+    {
+      "itemId": "I-R3",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C11"
+      ],
+      "tags": [
+        "impact-check"
+      ],
+      "rationale": "Booking completion did not fall (41.0% \u2192 41.2%) even though the 5xx rate rose. The SDK retry absorbs about 98.6% of 5xx, only 122 requests failed after retry, and there were no complaints (E6, C11). The evidence counts against this link."
+    },
+    {
+      "itemId": "I-R4",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C2",
+        "C3",
+        "C6"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "The replica move and the higher weekly rate co-occur in the same week (E2, E4). Replica metrics show no errors, and latency stays within the historical range (C3). The logs cannot attribute the 504s (C2). Co-occurrence is shown; causation is not, and nothing counts against the link."
+    },
+    {
+      "itemId": "I-R5",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C4"
+      ],
+      "tags": [
+        "unverifiable"
+      ],
+      "rationale": "Whether the reconciliation ran within the week is unconfirmed (E4) and cannot now be established (C4). So even co-occurrence with the higher rate is not shown."
+    },
+    {
+      "itemId": "I-A1",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E5",
+        "C1",
+        "C5",
+        "C6",
+        "C10"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "premature-fix"
+      ],
+      "rationale": "A rollback would be the right fix if H1 were confirmed. It is cheap and reversible: v4.18 contains nothing callers depend on (C1, C5), and a rollout adds only 10\u201320 warm-up errors (C10). But the evidence that seemed to implicate v4.18 is the warm-up effect (C10), and the week is in band (C6). Committing to the fix now is not justified."
+    },
+    {
+      "itemId": "I-A2",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6",
+        "C6",
+        "C9",
+        "C10",
+        "C13"
+      ],
+      "tags": [
+        "no-intervention",
+        "central"
+      ],
+      "rationale": "The week is inside the policy band (C6) and the burn of 0.82x is below the 2x page threshold (E2, E5). Users were not affected (E6), and earlier similar weeks resolved with no fault found (C6). Under the team\u0027s own rule this is a \u0027note and take no action\u0027 week, and keeping alerting as it is means a real shift would still be caught."
+    },
+    {
+      "itemId": "I-A3",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C13"
+      ],
+      "tags": [
+        "protective-control",
+        "suppresses-information"
+      ],
+      "rationale": "Muting all alerting, including the burn-rate page (E5), switches off the protection against an SLO breach for 30 days. That is damaging whether the rise is a fault (H1, H2, H5) or noise (H3), and the alerts are not causing a burden: the page has never fired and the warnings were closed as transient (C13)."
+    },
+    {
+      "itemId": "I-A4",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C3"
+      ],
+      "tags": [
+        "premature-fix"
+      ],
+      "rationale": "Moving the replica back would help if H2 were confirmed, and it is reversible because the old hosts are kept until 20 Nov (E4). But H2 is unestablished (C3 shows nothing abnormal) and the week is in band, so acting now is not justified."
+    },
+    {
+      "itemId": "I-A5",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C6",
+        "C10"
+      ],
+      "tags": [
+        "low-yield-investigation"
+      ],
+      "rationale": "Investigating does no damage and is a reasonable response to doubt, but it is not among the best actions. Policy reserves incident investigations for out-of-band weeks (E5). Three earlier investigations of similar weeks found nothing (C6). No same-age version comparison exists in last week\u0027s data (C10), so a look back is unlikely to settle anything."
+    },
+    {
+      "itemId": "I-SUFF",
+      "expected": "sufficient",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "E6",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E6",
+        "C6",
+        "C9",
+        "C10"
+      ],
+      "tags": [
+        "no-intervention",
+        "central"
+      ],
+      "rationale": "The top-ranked action is A2, the decision that no intervention is warranted. That decision is fully supported: the week is in band by the policy\u0027s own measure (E5, C6), burn is below 2x (E2), and users were not affected (E6). It does not depend on resolving which, if any, of the candidate causes was at work."
+    }
+  ],
+  "discriminatingReads": [
+    "C6",
+    "C10"
+  ],
+  "lowValueReads": [
+    "C7",
+    "C9",
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C6",
+    "C10"
+  ],
+  "authoringNotes": "Arithmetic check. The 26 weekly values in C6 sum to 9.21: mean 0.3542, sample SD 0.0638, upper edge 0.482. 6,410/2,086,000 = 0.307% and 8,690/2,112,000 = 0.411%. The C2 class counts sum to 6,410 and 8,690. Burn 0.411/0.5 = 0.82x. 30,880/9.21M = 0.335%, i.e. 67% of budget. v4.18 warm-up excess is (0.52\u22120.30)% \u00D7 5,960 \u2248 13 errors.\n\nTraps. (1) The four-week dashboard view (E2) and the Director\u0027s framing (E1) make 0.41% look abnormal; C6 counters this. (2) The concurrent pod comparison (E3, reinforced by the interested release engineer in C5) looks like a controlled test of v4.18; C10 shows it is new-pod cache warm-up seen in every rollout, including a no-code redeploy.\n\nRead paths. With only C6, an analyst can settle H3, A2 and SUFF but would likely still read the release as causal. With only C10, they neutralise the release claim but cannot apply the policy band. No other item supplies the 26-week band or the cross-rollout pod data. The distractors (C1, C2, C3, C4, C5, C8, C14) keep H1, H2 and H5 live without settling them. C7, C9, C11, C12 and C13 only confirm what the initial file already shows.\n\nR1 and R4 are keyed association-only because the evidence shows same-week co-occurrence, which the stated definition counts. R5 is unknown because the reconciliation\u0027s timing is itself unestablished."
+}

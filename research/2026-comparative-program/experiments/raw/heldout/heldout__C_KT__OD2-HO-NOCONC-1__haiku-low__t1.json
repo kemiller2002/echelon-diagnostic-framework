@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-NOCONC-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-NOCONC-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C15",
+    "X3": "C2",
+    "X4": "C5",
+    "X5": "C4",
+    "X6": "C1",
+    "X7": "C8",
+    "X8": "C13",
+    "X9": "C7",
+    "X10": "C9",
+    "X11": "C10",
+    "X12": "C6",
+    "X13": "C14",
+    "X14": "C12",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X11",
+    "X4"
+  ],
+  "reads": [
+    "C10",
+    "C5"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-NOCONC-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 29871,
+    "cacheCreationTokens": 8383,
+    "outputTokens": 2633,
+    "thinkingTokens": 1419,
+    "costUsd": 0.0032926099999999996,
+    "durationMs": 16865,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe Problem Analysis and Decision Analysis\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidence\u0022:[],\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X4\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The rise in store 14\u0027s shrink is probably not a real loss increase yet. Interim figures are estimates from partial cycle counts, with a margin of about \u00B10.6 points per quarter. Similar two-quarter rises at other stores were confirmed by the year-end count only about half the time. The self-checkout lanes were out of service from 2 April to 26 June, so they cannot explain the Q2 rise, and their Q3 intervention rate is in line with other stores. Store mix is stable, and the incident jump follows the new chain-wide reporting app, while chain shrink stayed flat. Staff theft and footfall remain unproven, and the earlier CCTV review did not show merchandise leaving. Next: keep store 14 in the 7 December full count, reject the proposal to drop it, and do not suspend anyone or add guards yet. Compare the full-count result with the interim figures before deciding on action. I am moderately confident in this. Decision needed by 20 November.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:27:17.4077681Z",
+    "finishedAt": "2026-11-17T16:27:35.2217757Z",
+    "output": {
+      "caseId": "OD2-HO-NOCONC-1",
+      "methodChoice": "Kepner-Tregoe Problem Analysis and Decision Analysis",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidence": [],
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "supported",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "X11",
+            "X4",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The rise in store 14\u0027s shrink is probably not a real loss increase yet. Interim figures are estimates from partial cycle counts, with a margin of about \u00B10.6 points per quarter. Similar two-quarter rises at other stores were confirmed by the year-end count only about half the time. The self-checkout lanes were out of service from 2 April to 26 June, so they cannot explain the Q2 rise, and their Q3 intervention rate is in line with other stores. Store mix is stable, and the incident jump follows the new chain-wide reporting app, while chain shrink stayed flat. Staff theft and footfall remain unproven, and the earlier CCTV review did not show merchandise leaving. Next: keep store 14 in the 7 December full count, reject the proposal to drop it, and do not suspend anyone or add guards yet. Compare the full-count result with the interim figures before deciding on action. I am moderately confident in this. Decision needed by 20 November."
+    }
+  }
+}

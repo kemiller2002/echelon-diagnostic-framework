@@ -1,0 +1,208 @@
+{
+  "runId": "heldout__E_NOCAUSAL__OD2-HO-CONFOUND-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "E_NOCAUSAL",
+  "caseId": "OD2-HO-CONFOUND-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C5",
+    "X3": "C6",
+    "X4": "C9",
+    "X5": "C10",
+    "X6": "C3",
+    "X7": "C12",
+    "X8": "C15",
+    "X9": "C8",
+    "X10": "C2",
+    "X11": "C1",
+    "X12": "C14",
+    "X13": "C7",
+    "X14": "C13",
+    "X15": "C4"
+  },
+  "readLabels": [
+    "X11",
+    "X10"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOCAUSAL__OD2-HO-CONFOUND-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19881,
+    "cacheCreationTokens": 9460,
+    "outputTokens": 1656,
+    "thinkingTokens": 0,
+    "costUsd": 0.056400099999999995,
+    "durationMs": 11641,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCAUSAL__OD2-HO-CONFOUND-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCAUSAL__OD2-HO-CONFOUND-2__sonnet-medium__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCAUSAL__OD2-HO-CONFOUND-2__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONFOUND-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The crash gap is mostly not caused by the Tiled Canvas flag. Build 7.4.0 already crashed at about 2% on 2\u20133 September, before the flag ramp, while 7.3.2 stayed at about 0.7%. Only 7.4.0 users can have the flag, so the flag group is simply the 7.4.0 group. Within 7.4.0, flag-on users crash 2.10% of sessions against 1.98% for the random holdout. That 0.12-point difference is within noise. Device memory mix and usage levels are the same across the groups, so neither explains the gap. The largest crash cluster, 41% of events, is a native crash in the upgraded Pixelda image library on HEIF decoding. It first appeared on 2 September and is absent from 7.3.2. The app store\u0027s own crash counts, which are separate from the crash-reporting SDK, show the same gap, so it isn\u0027t a reporting artifact. The 9 September sync-service deployment did not move 7.3.2\u0027s rate.\\n\\nDon\u0027t turn off the flag and ship 7.4.0 to 100%: that would spread the real Pixelda crash. Hold the rollout at 25% and fix the Pixelda crash first. Keep the flag holdout running, and widen it if you want an answer sooner, to settle whether the flag adds a small effect. I\u0027m fairly confident in this, and the flag\u0027s own effect remains open.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:09:58.9193068Z",
+    "finishedAt": "2026-11-17T16:10:11.5123528Z",
+    "output": {
+      "caseId": "OD2-HO-CONFOUND-2",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X10",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 78,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The crash gap is mostly not caused by the Tiled Canvas flag. Build 7.4.0 already crashed at about 2% on 2\u20133 September, before the flag ramp, while 7.3.2 stayed at about 0.7%. Only 7.4.0 users can have the flag, so the flag group is simply the 7.4.0 group. Within 7.4.0, flag-on users crash 2.10% of sessions against 1.98% for the random holdout. That 0.12-point difference is within noise. Device memory mix and usage levels are the same across the groups, so neither explains the gap. The largest crash cluster, 41% of events, is a native crash in the upgraded Pixelda image library on HEIF decoding. It first appeared on 2 September and is absent from 7.3.2. The app store\u0027s own crash counts, which are separate from the crash-reporting SDK, show the same gap, so it isn\u0027t a reporting artifact. The 9 September sync-service deployment did not move 7.3.2\u0027s rate.\n\nDon\u0027t turn off the flag and ship 7.4.0 to 100%: that would spread the real Pixelda crash. Hold the rollout at 25% and fix the Pixelda crash first. Keep the flag holdout running, and widen it if you want an answer sooner, to settle whether the flag adds a small effect. I\u0027m fairly confident in this, and the flag\u0027s own effect remains open."
+    }
+  }
+}

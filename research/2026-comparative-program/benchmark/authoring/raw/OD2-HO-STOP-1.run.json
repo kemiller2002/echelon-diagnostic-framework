@@ -1,0 +1,799 @@
+{
+  "label": "OD2-HO-STOP-1",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7717,
+  "cacheCreationTokens": 4501,
+  "outputTokens": 31666,
+  "thinkingTokens": 20348,
+  "costUsd": 0.6708874,
+  "durationMs": 297462,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-STOP-1/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-STOP-1\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022STOP\u0022,\u0022domain\u0022:\u0022organizational\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022The August dip at Calder Quay Hotel\u0022,\u0022setting\u0022:\u0022Calder Quay Hotel is a 212-room, eight-floor four-star hotel in the fictional harbour city of Merrowby. A regional management group runs it. An external survey vendor collects its monthly Guest Satisfaction Score (GSS), and the score counts toward the leadership team\u0027s bonus. Floors 1-5 hold 128 rooms and floors 6-8 hold 84. Two changes went in this summer: a new self-check-in kiosk system on 23 June, and a new housekeeping contractor from 1 July.\u0022,\u0022presentingRequest\u0022:\u0022The Regional VP of Operations wants to know why the August GSS fell from 8.6 to 8.1 and what the hotel should do. She also wants answers on two specific questions: should the hotel give notice to the new housekeeping contractor, and should it pull the self-check-in kiosks?\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Dana Okafor-Reyes, Regional VP Operations, to General Manager Tomasz Ellery, 2 September 2026\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Tomasz - August GSS came in at 8.1 against our 8.5 target, the first miss in fourteen months. We changed two things this summer: Orrin Facility Group took over housekeeping on 1 July, and the new self-check-in kiosks went live on 23 June. I\u0027ve read a handful of the August comments and one on a booking site called the room \u0027tired and dusty\u0027. Complaints logged at the desk are up roughly 40%. My view is that Orrin is the problem and we should serve notice before the 1 October renewal window closes. Please also tell me whether we need to pull the kiosks. I want a recommendation by Friday.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Pellmore Insights GSS dashboard, monthly export for Calder Quay Hotel\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Questionnaire version Q7 (in use since January 2025, unchanged). Invitations go to every checked-out stay with a valid email address, as before. July: 412 responses, overall 8.6. August: 398 responses, overall 8.1. By floor block, July to August. Floors 1-5 (128 rooms; 241 August responses): overall 8.6 to 8.5; room comfort 8.4 to 8.3; cleanliness 8.7 to 8.7; check-in 8.8 to 8.8; value for money 8.0 to 7.7. Floors 6-8 (84 rooms; 157 August responses): overall 8.6 to 7.4; room comfort 8.4 to 6.1; cleanliness 8.7 to 8.6; check-in 8.8 to 8.7; value for money 8.0 to 7.3. Vendor note: for this property, month-to-month movements under 0.2 on any score fall within normal variation (trailing 18 months).\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Engineering work-order log, WO-26-0814\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u002204 Aug 15:20 | Chiller CH-2 (east riser, serves floors 6-8) tripped on compressor fault. Reset failed. Guest calls about heat: 23 by 21:00. 05 Aug 09:40 | Contractor diagnosis: failed compressor contactor. Part not in stock; supplier lead time 11 working days. Portable units deployed to 12 rooms (all held). 07-18 Aug | Spot readings in occupied rooms on floors 6-8: 26.5-29.0 C (set point 22). 19 Aug 14:10 | Contactor fitted, CH-2 restored. Floors 6-8 below 23 C by 22:00. Notes: annual preventive maintenance on both CH-2 and CH-1 (west riser, floors 1-5) deferred in April 2026 under a budget hold; neither yet rescheduled. CH-1 has not faulted this year.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Pellmore Insights daily view and verbatim tagging report, August 2026\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Floors 6-8 overall score by checkout date: 1-4 Aug 8.5 (n=19); 5-20 Aug 6.8 (n=96); 21-31 Aug 8.4 (n=42); 1-14 Sep 8.6 (n=71). Floors 1-5 daily scores stayed between 8.4 and 8.6 throughout August and early September. Verbatim tagging, August (vendor auto-tags, spot-checked by guest relations): 74 negative comments, 61 of them from floors 6-8. Heat / air conditioning / \u0027stuffy\u0027: 56, all floors 6-8. Cleanliness: 4 (July: 5), 2 per block. Check-in or kiosk: 2 (July: 3). Price or value: 6 (July: 2), 4 of them from floors 1-5. Other: 6.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Rooms division monthly KPI pack, compiled by the Executive Housekeeper and Front Office Manager\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Room inspections are done by in-house supervisors, not by the contractor. Pass rate: June 95% (Linthwaite, prior contractor); July 96% (Orrin); August 95% (Orrin), with 95% on floors 1-5 and 95% on floors 6-8. About 640 inspections a month. Front-desk complaint log: July 50 entries, August 71. August by category (July in brackets): room temperature 24 (1); noise 11 (12); housekeeping 9 (10); billing 8 (9); kiosk/check-in 6 (7); other 13 (11). Share of guests checking in at kiosks: July 41%, August 43%. Average queue at peak: July 4.1 min, August 3.9 min.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Note from Priya Vantongeren, Revenue Manager, to the General Manager, 3 September 2026\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022\u0027Rack and BAR rates went up 6% hotel-wide from 1 August, as planned in the annual budget. We review rates weekly and can move them at any time. I can\u0027t tell you whether that hurt the value score. Value for money dips every August here: last year it went from 8.1 to 7.9 with no rate change, because of festival-season pricing across the city, and the overall score went from 8.5 to 8.4 last August as well. This year\u0027s value drop on floors 1-5 is slightly bigger, but nothing I have separates the rate rise from the usual seasonal dip.\u0027\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Orrin Facility Group monthly service reports, July-August 2026\u0022,\u0022source\u0022:\u0022Orrin Facility Group account manager\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Monthly service report to Calder Quay Hotel. July / August: rooms serviced 5,812 / 5,990; rooms released by 15:00 98% / 97%; self-audit quality score 97% / 97%; average attendants per shift 21 / 22; two attendant absences in August covered by agency staff. Report note: \u0027The client notified no service failures in either month. Several attendants reported very warm conditions on floors 6-8 during mid-August and were given extra breaks.\u0027\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Front-office staffing rotas and overtime, June-August 2026\u0022,\u0022source\u0022:\u0022Hotel workforce management system\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Front-office rota summary. Headcount: June 18.0 FTE, July 18.5, August 18.0. Overtime hours: June 112, July 96, August 104. In July, two new agents completed kiosk and desk training. No peak-hour shifts went unfilled in July or August. A duty manager was on the rota every night in August.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Self-check-in kiosk supplier support tickets, June-September 2026\u0022,\u0022source\u0022:\u0022Kiosk supplier service desk\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Support log for Calder Quay. 11 tickets since go-live on 23 June: 8 between 23 June and 6 July (key-card encoder calibration, receipt printer jams), 2 later in July (screen freeze, fixed by restart), 1 in August (receipt paper sensor). Kiosk availability: July 99.1%, August 99.6%. No tickets open at 31 August.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Public review-site ratings and comments, July-August 2026\u0022,\u0022source\u0022:\u0022Guest relations extract from public review sites\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022July: 58 reviews, average 4.4/5. August: 63 reviews, average 4.1/5. August reviews mentioning heat, air conditioning or stuffy rooms: 19 (July: 0). Mentioning cleanliness or dust: 2 (July: 3). One of these is the \u0027tired and dusty\u0027 review, which also says the room was \u0027like an oven\u0027. Mentioning check-in: 3 positive, 1 negative. Mentioning price: 3 (July: 2).\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Survey vendor methodology statement, 2026\u0022,\u0022source\u0022:\u0022Pellmore Insights client services\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Invitations go out 24 hours after checkout to every stay with a valid email address; there is no sampling. Questionnaire version Q7 has been in use since January 2025 with no changes to wording, scale or order. Response rates: June 31%, July 31%, August 30%. The invitation template, timing and reminder schedule have not changed in 2026.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Building management system corridor temperature trends, August 2026\u0022,\u0022source\u0022:\u0022Building management system export\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Hourly averages from floor 6-8 corridor sensors. 1-3 Aug: 21.8-22.6 C. 4 Aug: rising from 16:00. 6-18 Aug: daytime 27.4-30.2 C, overnight 25.9-27.1 C. 19 Aug: falls from 28.6 C at 14:00 to 22.9 C at 22:00. 20-31 Aug: 21.7-22.8 C. Floor 1-5 corridor sensors stayed at 21.5-23.0 C all through August.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Guest compensation and room-move ledger, August 2026\u0022,\u0022source\u0022:\u0022Finance and front office\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Guest recovery ledger, August. Room moves from floors 6-8 to floors 1-5: 14 (limited by 91% occupancy). Portable cooling units hired: 12, EUR 1,150. Goodwill credits to floor 6-8 stays between 4 and 19 August: 88 stays, EUR 7,920 in total, mostly one-night rate reductions. Credits for all other causes in August: EUR 640 (July: EUR 710).\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Competitive-set guest satisfaction benchmark, June-August 2026\u0022,\u0022source\u0022:\u0022Merrowby hotel association shared survey programme\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Benchmark across five comparable four-star hotels in Merrowby (anonymised). Average overall guest satisfaction: June 8.4, July 8.4, August 8.3. None of the participating hotels reported a building-systems outage in August. The association does not publish individual hotels\u0027 pricing or rate changes.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Municipal weather station daily records, August 2026\u0022,\u0022source\u0022:\u0022Merrowby municipal weather station\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Daily maximum temperatures: 1-5 Aug 24-27 C; 6-17 Aug 31-35 C (heat advisory 8-16 Aug); 18-31 Aug 23-28 C. The August mean maximum was 29.6 C, against a ten-year August average of 26.1 C.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Housekeeping staff pulse survey, August 2026\u0022,\u0022source\u0022:\u0022Anonymous pulse survey of Orrin attendants and in-house supervisors\u0022,\u0022sourceType\u0022:\u0022anonymous-staff-survey\u0022,\u0022text\u0022:\u002227 responses from 41 invited. \u0027I have the supplies I need\u0027: 85% agree. \u0027My room quota is manageable\u0027: 52% agree (May, under Linthwaite: 49%). \u0027I am proud of the standard of rooms I hand over\u0027: 81% agree. Free-text themes: heat on the upper floors in August (9 mentions), uniform sizing (4), timing of linen deliveries (3).\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Rate change record and occupancy report, July-August 2026\u0022,\u0022source\u0022:\u0022Revenue management system\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022BAR increase: \u002B6% on all room types from 1 August (budgeted in November 2025). Average daily rate: July EUR 171, August EUR 177 (August 2025: EUR 166). Occupancy: July 88%, August 91% (August 2025: 90%). August channel mix: direct 38%, online agencies 47%, corporate 15% (July: 37 / 48 / 15). The revenue system holds no guest-satisfaction data.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Finance memo on engineering maintenance deferrals, April 2026\u0022,\u0022source\u0022:\u0022Director of Finance to General Manager\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Memo, 14 April 2026: \u0027To meet the Q2 cost target we are moving the following engineering items to Q3: annual preventive service on chillers CH-1 and CH-2 (EUR 6,800 combined, including contactor and relay inspection and the recommended spares kit); cooling-tower descale (EUR 2,100); lobby carpet replacement (EUR 14,000). Engineering notes that the chiller service has been overdue since January. We will revisit this at the July forecast.\u0027\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Food and beverage outlet satisfaction scores, July-August 2026\u0022,\u0022source\u0022:\u0022Pellmore Insights F\u0026B module\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Breakfast restaurant: July 8.3, August 8.3. Lobby bar: July 8.1, August 8.2. Room service: July 7.9, August 7.6; August comments mention \u0027slow\u0027 (5) and \u0027ice delivery\u0027 (3). Each outlet gets 90-210 responses a month.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Loyalty-member complaint emails, August 2026\u0022,\u0022source\u0022:\u0022Loyalty desk inbox\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u002212 complaint emails in August. 9 came from guests on floors 6-8 about room heat between 5 and 18 August; three of them asked why they had not been moved. 1 was about the new rate (\u0027paid more for the same room\u0027). 1 was about late-night noise from a wedding party. 1 was about a duplicated card charge. July had 5 complaint emails, none about temperature.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with the Chief Engineer, 8 September 2026\u0022,\u0022source\u0022:\u0022Interview notes, Ruth Abernathy-Sole, Chief Engineer\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022\u0027The contactor is a wear part. The annual service checks it, and the kit we normally buy with the service includes a spare. Without the service we had no spare, so we waited eleven working days for one. CH-1 is the same model and age as CH-2, and its service is overdue too. I can\u0027t say CH-1 will fail, but if it does during a hot spell, floors 1-5 go the same way. Apart from that, the units are in reasonable shape.\u0027\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022A failure of in-room cooling during August caused the drop in the overall score.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Problems with check-in after the front-desk system change caused the drop in the overall score.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022A decline in housekeeping quality after the contractor change caused the drop in the overall score.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022A change in how the guest survey was administered produced the drop in the overall score.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022The 1 August room-rate increase contributed to the drop in the overall score.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022CH-2 chiller outage, 4-19 August\u0022,\u0022to\u0022:\u0022Lower August ratings from guests on floors 6-8\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Self-check-in kiosk go-live, 23 June\u0022,\u0022to\u0022:\u0022Lower August overall score\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u00226% room-rate increase, 1 August\u0022,\u0022to\u0022:\u0022Lower August value-for-money ratings\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Housekeeping contractor change, 1 July\u0022,\u0022to\u0022:\u0022Lower cleanliness ratings\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Reinstate the deferred preventive maintenance on both chillers, keep critical spare parts on site, and set a written guest-recovery protocol for cooling outages.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Serve notice on the Orrin Facility Group housekeeping contract before the 1 October renewal window.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Reverse the 1 August room-rate increase to restore value-for-money ratings.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Send an apology and a return-stay offer to guests who stayed on floors 6-8 during the cooling outage.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Exclude the August floor 6-8 survey responses from the reported GSS as an outlier month.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-STOP-1\u0022,\u0022groundTruthNarrative\u0022:\u0022The August GSS dip at Calder Quay came from a cooling failure, not from the two summer changes leadership suspects. On 4 August chiller CH-2, which serves only floors 6-8, failed when a compressor contactor wore out. The hotel had no spare because the annual preventive service, which normally comes with a spares kit, had been deferred in April under a budget hold. The replacement part took eleven working days, so rooms on floors 6-8 sat at 26.5-29 C until 19 August. Scores for floors 6-8 fell from 8.6 to 7.4, almost entirely in room comfort. Daily scores for those floors dropped only for checkouts during the outage and recovered once cooling was restored. Floors 1-5 share the same front desk, kiosks, housekeeping contractor and survey, and their overall score moved only within normal variation. Cleanliness, check-in, inspection pass rates, queue times and kiosk complaints were all flat. The 40% rise in desk complaints is explained by room-temperature complaints. The 6% rate rise coincides with a lower value-for-money score, but the same score falls every August in this festival city, and nothing in the evidence separates the two effects. CH-1, which serves floors 1-5, is still on deferred maintenance with no spare on site, so the same risk remains. The initial file establishes all of this, and every catalogue item only confirms it or is irrelevant.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C4\u0022,\u0022C6\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022Several findings point the same way. The drop is confined to floors 6-8: 8.6 to 7.4 there, against 8.6 to 8.5 on floors 1-5. Those are the floors served by CH-2. On those floors room comfort fell from 8.4 to 6.1 while the other subscores stayed flat. Daily scores for floors 6-8 fall exactly during the 4-19 August outage and recover afterwards. 56 negative comments are about heat, all from floors 6-8. Weighting the floor blocks by response count reproduces the 8.1 hotel-wide figure.\u0022},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022The kiosks went live on 23 June, and July still scored a normal 8.6. The check-in subscore held at 8.8 on floors 1-5 and 8.7 on floors 6-8. Kiosk complaints went from 7 to 6, and peak queue time improved from 4.1 to 3.9 minutes. Both floor blocks use the same front desk, yet only floors 6-8 dropped.\u0022},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022,\u0022punish-wrong-party\u0022],\u0022rationale\u0022:\u0022Cleanliness scores were flat: 8.7 to 8.7 on floors 1-5 and 8.7 to 8.6 on floors 6-8, both inside the 0.2 noise band. In-house inspections, not the contractor\u0027s own audits, show pass rates of 95-96% before and after the contractor change, and the same on both floor blocks. Cleanliness comments went from 5 to 4. The single \u0027dusty\u0027 review cited by the VP is an anecdote, and the rise in desk complaints is made up of room-temperature complaints (24 against 1), not housekeeping complaints (9 against 10).\u0022},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022measurement-artefact-ruled-out\u0022],\u0022rationale\u0022:\u0022The vendor, the questionnaire version and the invitation rule are all unchanged, and response counts are similar (412 and 398). A change to how the survey was administered would affect every floor, but the drop is confined to the floors that lost cooling and reverses after the repair.\u0022},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022C8\u0022,\u0022C11\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022seasonal\u0022,\u0022live-but-unestablished\u0022],\u0022rationale\u0022:\u0022On floors 1-5 the overall score fell by 0.1, which is within normal variation, and value for money fell by 0.3. Last August, with no rate change, value fell by 0.2 and the overall score by 0.1. The extra 0.1 this year is below the vendor\u0027s noise threshold. The evidence neither establishes a contribution from the rate rise nor rules one out, and no catalogue item separates rate from season.\u0022},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C6\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022natural-experiment\u0022,\u0022stop-early\u0022],\u0022rationale\u0022:\u0022All the elements of a causal case are present. The outage begins before the score falls. The mechanism is documented: rooms at 26.5-29 C and comments about heat. The drop appears only on the floors CH-2 serves, and floors 1-5 act as a comparison group. The other explanations (front desk, housekeeping, survey changes) are ruled out. The score recovers after the repair, which serves as an on/off natural experiment.\u0022},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022temporal-mismatch\u0022],\u0022rationale\u0022:\u0022The evidence counts against the link itself. After go-live, July scored a normal 8.6. Check-in scores were flat, kiosk complaints fell slightly, queues shortened, and the same kiosks serve floors 1-5, where scores did not drop.\u0022},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022C8\u0022,\u0022C11\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022seasonal\u0022],\u0022rationale\u0022:\u0022The rate rise and the lower value score occur together, and price comments rose from 2 to 6, so there is an association. But value for money falls every August, and a seasonal explanation is not ruled out. The revenue manager says nothing separates the two, so causation is not established. Nothing counts against the link, so \u0027contradicted\u0027 is not justified.\u0022},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022nonexistent-problem\u0022],\u0022rationale\u0022:\u0022Cleanliness scores did not fall after the contractor change: 8.7 to 8.7 and 8.7 to 8.6. Independent in-house inspection pass rates are unchanged (June 95%, July 96%, August 95%). The evidence counts directly against the claimed effect.\u0022},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C7\u0022,\u0022C12\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022recurrence\u0022],\u0022rationale\u0022:\u0022Cooling failure is the established cause. The outage lasted 15 days because no spare part was held after the maintenance deferral. CH-1, which serves floors 1-5, is on the same deferred status and has not been rescheduled. Reinstating maintenance, holding spares and setting a recovery protocol tackles the confirmed cause and the remaining exposure for all 212 rooms.\u0022},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Cleanliness scores and independent inspections show the contractor is performing. Terminating the contract punishes the wrong party and disrupts housekeeping. It would cause damage whether the cooling explanation or the still-live rate explanation is true, because neither involves housekeeping.\u0022},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022premature\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022If the rate rise were shown to depress value ratings, reversing it would help recover them. Rates are reviewed weekly and can be moved at any time, so a reversal could be undone. But whether the rate rise had any effect beyond the usual seasonal dip is unconfirmed, so committing to a reversal now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022service-recovery\u0022],\u0022rationale\u0022:\u0022Goodwill outreach to the guests who were affected is reasonable and low-risk. It deals only with past harm, though. Unlike A1, it does nothing about the deferred maintenance and missing spares that leave both risers exposed to a repeat.\u0022},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022],\u0022tags\u0022:[\u0022suppress-information\u0022,\u0022gamed-record\u0022],\u0022rationale\u0022:\u0022Removing real guest responses suppresses the signal of an operational failure and distorts a bonus-linked metric. It is harmful under every hypothesis, because no explanation makes those responses invalid.\u0022},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022E6\u0022],\u0022tags\u0022:[\u0022stop-early\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The initial file establishes the cooling cause, rules out the housekeeping, kiosk and survey explanations, documents the deferred maintenance on both chillers, and shows the rate question cannot be settled. That is enough to commit to A1. No catalogue item changes any answer.\u0022}],\u0022discriminatingReads\u0022:[],\u0022lowValueReads\u0022:[\u0022C2\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C13\u0022],\u0022optimalReadPath\u0022:[],\u0022authoringNotes\u0022:\u0022STOP class. The difficulty is resisting both the VP\u0027s two-change narrative and the urge to collect more evidence. Every trap is answered inside the initial file. (1) The 40% rise in desk complaints is answered by E5\u0027s category breakdown (temperature complaints 24 against 1). (2) The \u0027tired and dusty\u0027 review is answered by flat cleanliness scores and independent inspections; C4 adds that the same review also says the room was \u0027like an oven\u0027, which only confirms. (3) The kiosk suspicion is answered by July\u0027s normal score after the June go-live, flat check-in scores and shorter queues. The floor-block split in E2 acts as a built-in comparison group, and the daily on/off series in E4 serves as a natural experiment. The rate question (H5/R3) is deliberately left undecidable by the whole catalogue: C8 gives competitor overall scores but no competitor pricing, C11 says the revenue system holds no satisfaction data, and C14 has one anecdotal price complaint. Several catalogue items (C6, C7, C12, C15) are attractive confirmatory reads, but they repeat facts already in E3 and E4. Arithmetic check: (241 x 8.5 \u002B 157 x 7.4) / 398 = 8.07, which rounds to 8.1. Floor 6-8 daily series: (19 x 8.5 \u002B 96 x 6.8 \u002B 42 x 8.4) / 157 = 7.43. Complaint categories sum to 71 (August) and 50 (July). Verbatim tags sum to 74, with 61 from floors 6-8. Weights: H1, R1 and SUFF are central (3), A1 and the trap items are 2, and the peripheral items are 1. Only A1 is keyed preferred.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:15:33.0109526Z",
+  "finishedAt": "2026-11-17T15:20:31.3847614Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-STOP-1",
+      "split": "heldout",
+      "benchmarkClass": "STOP",
+      "domain": "organizational",
+      "readBudget": 2,
+      "title": "The August dip at Calder Quay Hotel",
+      "setting": "Calder Quay Hotel is a 212-room, eight-floor four-star hotel in the fictional harbour city of Merrowby. A regional management group runs it. An external survey vendor collects its monthly Guest Satisfaction Score (GSS), and the score counts toward the leadership team\u0027s bonus. Floors 1-5 hold 128 rooms and floors 6-8 hold 84. Two changes went in this summer: a new self-check-in kiosk system on 23 June, and a new housekeeping contractor from 1 July.",
+      "presentingRequest": "The Regional VP of Operations wants to know why the August GSS fell from 8.6 to 8.1 and what the hotel should do. She also wants answers on two specific questions: should the hotel give notice to the new housekeeping contractor, and should it pull the self-check-in kiosks?",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from Dana Okafor-Reyes, Regional VP Operations, to General Manager Tomasz Ellery, 2 September 2026",
+          "sourceType": "leadership-account",
+          "text": "Tomasz - August GSS came in at 8.1 against our 8.5 target, the first miss in fourteen months. We changed two things this summer: Orrin Facility Group took over housekeeping on 1 July, and the new self-check-in kiosks went live on 23 June. I\u0027ve read a handful of the August comments and one on a booking site called the room \u0027tired and dusty\u0027. Complaints logged at the desk are up roughly 40%. My view is that Orrin is the problem and we should serve notice before the 1 October renewal window closes. Please also tell me whether we need to pull the kiosks. I want a recommendation by Friday."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Pellmore Insights GSS dashboard, monthly export for Calder Quay Hotel",
+          "sourceType": "system-record",
+          "text": "Questionnaire version Q7 (in use since January 2025, unchanged). Invitations go to every checked-out stay with a valid email address, as before. July: 412 responses, overall 8.6. August: 398 responses, overall 8.1. By floor block, July to August. Floors 1-5 (128 rooms; 241 August responses): overall 8.6 to 8.5; room comfort 8.4 to 8.3; cleanliness 8.7 to 8.7; check-in 8.8 to 8.8; value for money 8.0 to 7.7. Floors 6-8 (84 rooms; 157 August responses): overall 8.6 to 7.4; room comfort 8.4 to 6.1; cleanliness 8.7 to 8.6; check-in 8.8 to 8.7; value for money 8.0 to 7.3. Vendor note: for this property, month-to-month movements under 0.2 on any score fall within normal variation (trailing 18 months)."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Engineering work-order log, WO-26-0814",
+          "sourceType": "log",
+          "text": "04 Aug 15:20 | Chiller CH-2 (east riser, serves floors 6-8) tripped on compressor fault. Reset failed. Guest calls about heat: 23 by 21:00. 05 Aug 09:40 | Contractor diagnosis: failed compressor contactor. Part not in stock; supplier lead time 11 working days. Portable units deployed to 12 rooms (all held). 07-18 Aug | Spot readings in occupied rooms on floors 6-8: 26.5-29.0 C (set point 22). 19 Aug 14:10 | Contactor fitted, CH-2 restored. Floors 6-8 below 23 C by 22:00. Notes: annual preventive maintenance on both CH-2 and CH-1 (west riser, floors 1-5) deferred in April 2026 under a budget hold; neither yet rescheduled. CH-1 has not faulted this year."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Pellmore Insights daily view and verbatim tagging report, August 2026",
+          "sourceType": "system-record",
+          "text": "Floors 6-8 overall score by checkout date: 1-4 Aug 8.5 (n=19); 5-20 Aug 6.8 (n=96); 21-31 Aug 8.4 (n=42); 1-14 Sep 8.6 (n=71). Floors 1-5 daily scores stayed between 8.4 and 8.6 throughout August and early September. Verbatim tagging, August (vendor auto-tags, spot-checked by guest relations): 74 negative comments, 61 of them from floors 6-8. Heat / air conditioning / \u0027stuffy\u0027: 56, all floors 6-8. Cleanliness: 4 (July: 5), 2 per block. Check-in or kiosk: 2 (July: 3). Price or value: 6 (July: 2), 4 of them from floors 1-5. Other: 6."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Rooms division monthly KPI pack, compiled by the Executive Housekeeper and Front Office Manager",
+          "sourceType": "system-record",
+          "text": "Room inspections are done by in-house supervisors, not by the contractor. Pass rate: June 95% (Linthwaite, prior contractor); July 96% (Orrin); August 95% (Orrin), with 95% on floors 1-5 and 95% on floors 6-8. About 640 inspections a month. Front-desk complaint log: July 50 entries, August 71. August by category (July in brackets): room temperature 24 (1); noise 11 (12); housekeeping 9 (10); billing 8 (9); kiosk/check-in 6 (7); other 13 (11). Share of guests checking in at kiosks: July 41%, August 43%. Average queue at peak: July 4.1 min, August 3.9 min."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Note from Priya Vantongeren, Revenue Manager, to the General Manager, 3 September 2026",
+          "sourceType": "manager-account",
+          "text": "\u0027Rack and BAR rates went up 6% hotel-wide from 1 August, as planned in the annual budget. We review rates weekly and can move them at any time. I can\u0027t tell you whether that hurt the value score. Value for money dips every August here: last year it went from 8.1 to 7.9 with no rate change, because of festival-season pricing across the city, and the overall score went from 8.5 to 8.4 last August as well. This year\u0027s value drop on floors 1-5 is slightly bigger, but nothing I have separates the rate rise from the usual seasonal dip.\u0027"
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Orrin Facility Group monthly service reports, July-August 2026",
+          "source": "Orrin Facility Group account manager",
+          "sourceType": "vendor-account",
+          "text": "Monthly service report to Calder Quay Hotel. July / August: rooms serviced 5,812 / 5,990; rooms released by 15:00 98% / 97%; self-audit quality score 97% / 97%; average attendants per shift 21 / 22; two attendant absences in August covered by agency staff. Report note: \u0027The client notified no service failures in either month. Several attendants reported very warm conditions on floors 6-8 during mid-August and were given extra breaks.\u0027"
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Front-office staffing rotas and overtime, June-August 2026",
+          "source": "Hotel workforce management system",
+          "sourceType": "system-record",
+          "text": "Front-office rota summary. Headcount: June 18.0 FTE, July 18.5, August 18.0. Overtime hours: June 112, July 96, August 104. In July, two new agents completed kiosk and desk training. No peak-hour shifts went unfilled in July or August. A duty manager was on the rota every night in August."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Self-check-in kiosk supplier support tickets, June-September 2026",
+          "source": "Kiosk supplier service desk",
+          "sourceType": "vendor-account",
+          "text": "Support log for Calder Quay. 11 tickets since go-live on 23 June: 8 between 23 June and 6 July (key-card encoder calibration, receipt printer jams), 2 later in July (screen freeze, fixed by restart), 1 in August (receipt paper sensor). Kiosk availability: July 99.1%, August 99.6%. No tickets open at 31 August."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Public review-site ratings and comments, July-August 2026",
+          "source": "Guest relations extract from public review sites",
+          "sourceType": "external-data",
+          "text": "July: 58 reviews, average 4.4/5. August: 63 reviews, average 4.1/5. August reviews mentioning heat, air conditioning or stuffy rooms: 19 (July: 0). Mentioning cleanliness or dust: 2 (July: 3). One of these is the \u0027tired and dusty\u0027 review, which also says the room was \u0027like an oven\u0027. Mentioning check-in: 3 positive, 1 negative. Mentioning price: 3 (July: 2)."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Survey vendor methodology statement, 2026",
+          "source": "Pellmore Insights client services",
+          "sourceType": "vendor-account",
+          "text": "Invitations go out 24 hours after checkout to every stay with a valid email address; there is no sampling. Questionnaire version Q7 has been in use since January 2025 with no changes to wording, scale or order. Response rates: June 31%, July 31%, August 30%. The invitation template, timing and reminder schedule have not changed in 2026."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Building management system corridor temperature trends, August 2026",
+          "source": "Building management system export",
+          "sourceType": "telemetry",
+          "text": "Hourly averages from floor 6-8 corridor sensors. 1-3 Aug: 21.8-22.6 C. 4 Aug: rising from 16:00. 6-18 Aug: daytime 27.4-30.2 C, overnight 25.9-27.1 C. 19 Aug: falls from 28.6 C at 14:00 to 22.9 C at 22:00. 20-31 Aug: 21.7-22.8 C. Floor 1-5 corridor sensors stayed at 21.5-23.0 C all through August."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Guest compensation and room-move ledger, August 2026",
+          "source": "Finance and front office",
+          "sourceType": "financial-record",
+          "text": "Guest recovery ledger, August. Room moves from floors 6-8 to floors 1-5: 14 (limited by 91% occupancy). Portable cooling units hired: 12, EUR 1,150. Goodwill credits to floor 6-8 stays between 4 and 19 August: 88 stays, EUR 7,920 in total, mostly one-night rate reductions. Credits for all other causes in August: EUR 640 (July: EUR 710)."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Competitive-set guest satisfaction benchmark, June-August 2026",
+          "source": "Merrowby hotel association shared survey programme",
+          "sourceType": "external-data",
+          "text": "Benchmark across five comparable four-star hotels in Merrowby (anonymised). Average overall guest satisfaction: June 8.4, July 8.4, August 8.3. None of the participating hotels reported a building-systems outage in August. The association does not publish individual hotels\u0027 pricing or rate changes."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Municipal weather station daily records, August 2026",
+          "source": "Merrowby municipal weather station",
+          "sourceType": "external-data",
+          "text": "Daily maximum temperatures: 1-5 Aug 24-27 C; 6-17 Aug 31-35 C (heat advisory 8-16 Aug); 18-31 Aug 23-28 C. The August mean maximum was 29.6 C, against a ten-year August average of 26.1 C."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Housekeeping staff pulse survey, August 2026",
+          "source": "Anonymous pulse survey of Orrin attendants and in-house supervisors",
+          "sourceType": "anonymous-staff-survey",
+          "text": "27 responses from 41 invited. \u0027I have the supplies I need\u0027: 85% agree. \u0027My room quota is manageable\u0027: 52% agree (May, under Linthwaite: 49%). \u0027I am proud of the standard of rooms I hand over\u0027: 81% agree. Free-text themes: heat on the upper floors in August (9 mentions), uniform sizing (4), timing of linen deliveries (3)."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Rate change record and occupancy report, July-August 2026",
+          "source": "Revenue management system",
+          "sourceType": "system-record",
+          "text": "BAR increase: \u002B6% on all room types from 1 August (budgeted in November 2025). Average daily rate: July EUR 171, August EUR 177 (August 2025: EUR 166). Occupancy: July 88%, August 91% (August 2025: 90%). August channel mix: direct 38%, online agencies 47%, corporate 15% (July: 37 / 48 / 15). The revenue system holds no guest-satisfaction data."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Finance memo on engineering maintenance deferrals, April 2026",
+          "source": "Director of Finance to General Manager",
+          "sourceType": "document",
+          "text": "Memo, 14 April 2026: \u0027To meet the Q2 cost target we are moving the following engineering items to Q3: annual preventive service on chillers CH-1 and CH-2 (EUR 6,800 combined, including contactor and relay inspection and the recommended spares kit); cooling-tower descale (EUR 2,100); lobby carpet replacement (EUR 14,000). Engineering notes that the chiller service has been overdue since January. We will revisit this at the July forecast.\u0027"
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Food and beverage outlet satisfaction scores, July-August 2026",
+          "source": "Pellmore Insights F\u0026B module",
+          "sourceType": "system-record",
+          "text": "Breakfast restaurant: July 8.3, August 8.3. Lobby bar: July 8.1, August 8.2. Room service: July 7.9, August 7.6; August comments mention \u0027slow\u0027 (5) and \u0027ice delivery\u0027 (3). Each outlet gets 90-210 responses a month."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Loyalty-member complaint emails, August 2026",
+          "source": "Loyalty desk inbox",
+          "sourceType": "customer-account",
+          "text": "12 complaint emails in August. 9 came from guests on floors 6-8 about room heat between 5 and 18 August; three of them asked why they had not been moved. 1 was about the new rate (\u0027paid more for the same room\u0027). 1 was about late-night noise from a wedding party. 1 was about a duplicated card charge. July had 5 complaint emails, none about temperature."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Interview with the Chief Engineer, 8 September 2026",
+          "source": "Interview notes, Ruth Abernathy-Sole, Chief Engineer",
+          "sourceType": "manager-account",
+          "text": "\u0027The contactor is a wear part. The annual service checks it, and the kit we normally buy with the service includes a spare. Without the service we had no spare, so we waited eleven working days for one. CH-1 is the same model and age as CH-2, and its service is overdue too. I can\u0027t say CH-1 will fail, but if it does during a hot spell, floors 1-5 go the same way. Apart from that, the units are in reasonable shape.\u0027"
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "A failure of in-room cooling during August caused the drop in the overall score."
+          },
+          {
+            "id": "H2",
+            "text": "Problems with check-in after the front-desk system change caused the drop in the overall score."
+          },
+          {
+            "id": "H3",
+            "text": "A decline in housekeeping quality after the contractor change caused the drop in the overall score."
+          },
+          {
+            "id": "H4",
+            "text": "A change in how the guest survey was administered produced the drop in the overall score."
+          },
+          {
+            "id": "H5",
+            "text": "The 1 August room-rate increase contributed to the drop in the overall score."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "CH-2 chiller outage, 4-19 August",
+            "to": "Lower August ratings from guests on floors 6-8",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Self-check-in kiosk go-live, 23 June",
+            "to": "Lower August overall score",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "6% room-rate increase, 1 August",
+            "to": "Lower August value-for-money ratings",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Housekeeping contractor change, 1 July",
+            "to": "Lower cleanliness ratings",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Reinstate the deferred preventive maintenance on both chillers, keep critical spare parts on site, and set a written guest-recovery protocol for cooling outages."
+          },
+          {
+            "id": "A2",
+            "text": "Serve notice on the Orrin Facility Group housekeeping contract before the 1 October renewal window."
+          },
+          {
+            "id": "A3",
+            "text": "Reverse the 1 August room-rate increase to restore value-for-money ratings."
+          },
+          {
+            "id": "A4",
+            "text": "Send an apology and a return-stay offer to guests who stayed on floors 6-8 during the cooling outage."
+          },
+          {
+            "id": "A5",
+            "text": "Exclude the August floor 6-8 survey responses from the reported GSS as an outlier month."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-STOP-1",
+      "groundTruthNarrative": "The August GSS dip at Calder Quay came from a cooling failure, not from the two summer changes leadership suspects. On 4 August chiller CH-2, which serves only floors 6-8, failed when a compressor contactor wore out. The hotel had no spare because the annual preventive service, which normally comes with a spares kit, had been deferred in April under a budget hold. The replacement part took eleven working days, so rooms on floors 6-8 sat at 26.5-29 C until 19 August. Scores for floors 6-8 fell from 8.6 to 7.4, almost entirely in room comfort. Daily scores for those floors dropped only for checkouts during the outage and recovered once cooling was restored. Floors 1-5 share the same front desk, kiosks, housekeeping contractor and survey, and their overall score moved only within normal variation. Cleanliness, check-in, inspection pass rates, queue times and kiosk complaints were all flat. The 40% rise in desk complaints is explained by room-temperature complaints. The 6% rate rise coincides with a lower value-for-money score, but the same score falls every August in this festival city, and nothing in the evidence separates the two effects. CH-1, which serves floors 1-5, is still on deferred maintenance with no spare on site, so the same risk remains. The initial file establishes all of this, and every catalogue item only confirms it or is irrelevant.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "C4",
+            "C6",
+            "C7",
+            "C9",
+            "C14",
+            "C15"
+          ],
+          "tags": [
+            "central",
+            "stop-early"
+          ],
+          "rationale": "Several findings point the same way. The drop is confined to floors 6-8: 8.6 to 7.4 there, against 8.6 to 8.5 on floors 1-5. Those are the floors served by CH-2. On those floors room comfort fell from 8.4 to 6.1 while the other subscores stayed flat. Daily scores for floors 6-8 fall exactly during the 4-19 August outage and recover afterwards. 56 negative comments are about heat, all from floors 6-8. Weighting the floor blocks by response count reproduces the 8.1 hotel-wide figure."
+        },
+        {
+          "itemId": "Q2",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "C2",
+            "C3"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "The kiosks went live on 23 June, and July still scored a normal 8.6. The check-in subscore held at 8.8 on floors 1-5 and 8.7 on floors 6-8. Kiosk complaints went from 7 to 6, and peak queue time improved from 4.1 to 3.9 minutes. Both floor blocks use the same front desk, yet only floors 6-8 dropped."
+        },
+        {
+          "itemId": "Q3",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "C1",
+            "C4",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal",
+            "punish-wrong-party"
+          ],
+          "rationale": "Cleanliness scores were flat: 8.7 to 8.7 on floors 1-5 and 8.7 to 8.6 on floors 6-8, both inside the 0.2 noise band. In-house inspections, not the contractor\u0027s own audits, show pass rates of 95-96% before and after the contractor change, and the same on both floor blocks. Cleanliness comments went from 5 to 4. The single \u0027dusty\u0027 review cited by the VP is an anecdote, and the rise in desk complaints is made up of room-temperature complaints (24 against 1), not housekeeping complaints (9 against 10)."
+        },
+        {
+          "itemId": "Q4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C5"
+          ],
+          "tags": [
+            "measurement-artefact-ruled-out"
+          ],
+          "rationale": "The vendor, the questionnaire version and the invitation rule are all unchanged, and response counts are similar (412 and 398). A change to how the survey was administered would affect every floor, but the drop is confined to the floors that lost cooling and reverses after the repair."
+        },
+        {
+          "itemId": "Q5",
+          "expected": "unknown",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "E6",
+            "C8",
+            "C11",
+            "C14"
+          ],
+          "tags": [
+            "confounded",
+            "seasonal",
+            "live-but-unestablished"
+          ],
+          "rationale": "On floors 1-5 the overall score fell by 0.1, which is within normal variation, and value for money fell by 0.3. Last August, with no rate change, value fell by 0.2 and the overall score by 0.1. The extra 0.1 this year is below the vendor\u0027s noise threshold. The evidence neither establishes a contribution from the rate rise nor rules one out, and no catalogue item separates rate from season."
+        },
+        {
+          "itemId": "Q6",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "C6",
+            "C7",
+            "C9",
+            "C14"
+          ],
+          "tags": [
+            "central",
+            "natural-experiment",
+            "stop-early"
+          ],
+          "rationale": "All the elements of a causal case are present. The outage begins before the score falls. The mechanism is documented: rooms at 26.5-29 C and comments about heat. The drop appears only on the floors CH-2 serves, and floors 1-5 act as a comparison group. The other explanations (front desk, housekeeping, survey changes) are ruled out. The score recovers after the repair, which serves as an on/off natural experiment."
+        },
+        {
+          "itemId": "Q7",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "C3"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "temporal-mismatch"
+          ],
+          "rationale": "The evidence counts against the link itself. After go-live, July scored a normal 8.6. Check-in scores were flat, kiosk complaints fell slightly, queues shortened, and the same kiosks serve floors 1-5, where scores did not drop."
+        },
+        {
+          "itemId": "Q8",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "E6",
+            "C8",
+            "C11",
+            "C14"
+          ],
+          "tags": [
+            "confounded",
+            "seasonal"
+          ],
+          "rationale": "The rate rise and the lower value score occur together, and price comments rose from 2 to 6, so there is an association. But value for money falls every August, and a seasonal explanation is not ruled out. The revenue manager says nothing separates the two, so causation is not established. Nothing counts against the link, so \u0027contradicted\u0027 is not justified."
+        },
+        {
+          "itemId": "Q9",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "E5",
+            "C1",
+            "C4"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "nonexistent-problem"
+          ],
+          "rationale": "Cleanliness scores did not fall after the contractor change: 8.7 to 8.7 and 8.7 to 8.6. Independent in-house inspection pass rates are unchanged (June 95%, July 96%, August 95%). The evidence counts directly against the claimed effect."
+        },
+        {
+          "itemId": "Q10",
+          "expected": "preferred",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C7",
+            "C12",
+            "C15"
+          ],
+          "tags": [
+            "protective-control",
+            "recurrence"
+          ],
+          "rationale": "Cooling failure is the established cause. The outage lasted 15 days because no spare part was held after the maintenance deferral. CH-1, which serves floors 1-5, is on the same deferred status and has not been rescheduled. Reinstating maintenance, holding spares and setting a recovery protocol tackles the confirmed cause and the remaining exposure for all 212 rooms."
+        },
+        {
+          "itemId": "Q11",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "C1"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "leadership-narrative"
+          ],
+          "rationale": "Cleanliness scores and independent inspections show the contractor is performing. Terminating the contract punishes the wrong party and disrupts housekeeping. It would cause damage whether the cooling explanation or the still-live rate explanation is true, because neither involves housekeeping."
+        },
+        {
+          "itemId": "Q12",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "E6",
+            "C11"
+          ],
+          "tags": [
+            "premature",
+            "confounded"
+          ],
+          "rationale": "If the rate rise were shown to depress value ratings, reversing it would help recover them. Rates are reviewed weekly and can be moved at any time, so a reversal could be undone. But whether the rate rise had any effect beyond the usual seasonal dip is unconfirmed, so committing to a reversal now is not justified."
+        },
+        {
+          "itemId": "Q13",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E3",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C7"
+          ],
+          "tags": [
+            "service-recovery"
+          ],
+          "rationale": "Goodwill outreach to the guests who were affected is reasonable and low-risk. It deals only with past harm, though. Unlike A1, it does nothing about the deferred maintenance and missing spares that leave both risers exposed to a repeat."
+        },
+        {
+          "itemId": "Q14",
+          "expected": "harmful",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "tags": [
+            "suppress-information",
+            "gamed-record"
+          ],
+          "rationale": "Removing real guest responses suppresses the signal of an operational failure and distorts a bonus-linked metric. It is harmful under every hypothesis, because no explanation makes those responses invalid."
+        },
+        {
+          "itemId": "Q15",
+          "expected": "sufficient",
+          "weight": 3,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "tags": [
+            "stop-early",
+            "central"
+          ],
+          "rationale": "The initial file establishes the cooling cause, rules out the housekeeping, kiosk and survey explanations, documents the deferred maintenance on both chillers, and shows the rate question cannot be settled. That is enough to commit to A1. No catalogue item changes any answer."
+        }
+      ],
+      "discriminatingReads": [],
+      "lowValueReads": [
+        "C2",
+        "C9",
+        "C10",
+        "C13"
+      ],
+      "optimalReadPath": [],
+      "authoringNotes": "STOP class. The difficulty is resisting both the VP\u0027s two-change narrative and the urge to collect more evidence. Every trap is answered inside the initial file. (1) The 40% rise in desk complaints is answered by E5\u0027s category breakdown (temperature complaints 24 against 1). (2) The \u0027tired and dusty\u0027 review is answered by flat cleanliness scores and independent inspections; C4 adds that the same review also says the room was \u0027like an oven\u0027, which only confirms. (3) The kiosk suspicion is answered by July\u0027s normal score after the June go-live, flat check-in scores and shorter queues. The floor-block split in E2 acts as a built-in comparison group, and the daily on/off series in E4 serves as a natural experiment. The rate question (H5/R3) is deliberately left undecidable by the whole catalogue: C8 gives competitor overall scores but no competitor pricing, C11 says the revenue system holds no satisfaction data, and C14 has one anecdotal price complaint. Several catalogue items (C6, C7, C12, C15) are attractive confirmatory reads, but they repeat facts already in E3 and E4. Arithmetic check: (241 x 8.5 \u002B 157 x 7.4) / 398 = 8.07, which rounds to 8.1. Floor 6-8 daily series: (19 x 8.5 \u002B 96 x 6.8 \u002B 42 x 8.4) / 157 = 7.43. Complaint categories sum to 71 (August) and 50 (July). Verbatim tags sum to 74, with 61 from floors 6-8. Weights: H1, R1 and SUFF are central (3), A1 and the trap items are 2, and the peripheral items are 1. Only A1 is keyed preferred."
+    }
+  }
+}

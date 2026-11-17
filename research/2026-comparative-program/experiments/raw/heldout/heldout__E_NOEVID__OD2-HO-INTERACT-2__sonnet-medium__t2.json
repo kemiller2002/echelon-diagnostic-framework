@@ -1,0 +1,213 @@
+{
+  "runId": "heldout__E_NOEVID__OD2-HO-INTERACT-2__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "E_NOEVID",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C15",
+    "X3": "C1",
+    "X4": "C12",
+    "X5": "C13",
+    "X6": "C11",
+    "X7": "C8",
+    "X8": "C4",
+    "X9": "C3",
+    "X10": "C7",
+    "X11": "C2",
+    "X12": "C10",
+    "X13": "C14",
+    "X14": "C9",
+    "X15": "C5"
+  },
+  "readLabels": [
+    "X11",
+    "X10"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOEVID__OD2-HO-INTERACT-2__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20238,
+    "cacheCreationTokens": 9645,
+    "outputTokens": 1666,
+    "thinkingTokens": 35,
+    "costUsd": 0.057275799999999995,
+    "durationMs": 11531,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOEVID__OD2-HO-INTERACT-2__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOEVID__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOEVID__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022Cancelling RotaWeave would probably not fix this. The drop is concentrated at Dock Street and Westgate, which have both the app and no coordinator since 1 May. Millbrook has the app but kept its coordinator, and it is stable (118 to 111). Quarry Lane lost its coordinator but has no app, and it is also stable (86 to 80). So neither change alone explains the fall. Together they do. The basic-tier app releases shifts to everyone on Thursdays and has no recurring bookings. Staff used to book regulars into their usual slots (74 a week). That fell to 3 a week after the coordinators left, and one admin seat sits unused. Of the regulars at those two sites, 129 lost their usual slot at least twice. 88% of them are now inactive, against 11% of those who kept their slot. Background checks do not explain it: 121 of the 123 lapsed volunteers held a current check. Commonplate shows little sign of involvement (2 of 61 callbacks). I am fairly confident, although the evidence is observational. Next steps: assign someone to book regulars into their usual slots at Dock Street and Westgate using the spare admin seat, and phone lapsed regulars to offer their slots back. Review the result after 60 days. Don\u0027t cancel the app, suspend the checks, or purge the roster. Check the Quarry Lane plan before its October go-live.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:14:34.6781157Z",
+    "finishedAt": "2026-11-17T16:14:47.1617649Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "E5",
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 82,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "Cancelling RotaWeave would probably not fix this. The drop is concentrated at Dock Street and Westgate, which have both the app and no coordinator since 1 May. Millbrook has the app but kept its coordinator, and it is stable (118 to 111). Quarry Lane lost its coordinator but has no app, and it is also stable (86 to 80). So neither change alone explains the fall. Together they do. The basic-tier app releases shifts to everyone on Thursdays and has no recurring bookings. Staff used to book regulars into their usual slots (74 a week). That fell to 3 a week after the coordinators left, and one admin seat sits unused. Of the regulars at those two sites, 129 lost their usual slot at least twice. 88% of them are now inactive, against 11% of those who kept their slot. Background checks do not explain it: 121 of the 123 lapsed volunteers held a current check. Commonplate shows little sign of involvement (2 of 61 callbacks). I am fairly confident, although the evidence is observational. Next steps: assign someone to book regulars into their usual slots at Dock Street and Westgate using the spare admin seat, and phone lapsed regulars to offer their slots back. Review the result after 60 days. Don\u0027t cancel the app, suspend the checks, or purge the roster. Check the Quarry Lane plan before its October go-live."
+    }
+  }
+}

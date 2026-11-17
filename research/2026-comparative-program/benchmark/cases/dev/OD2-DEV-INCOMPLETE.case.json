@@ -1,0 +1,414 @@
+{
+  "id": "OD2-DEV-INCOMPLETE",
+  "split": "dev",
+  "benchmarkClass": "INCOMPLETE",
+  "domain": "cross-domain",
+  "title": "Missed appointments after the scheduler change at Corrie Lane Outpatient Centre",
+  "setting": "Corrie Lane Outpatient Centre is one of two outpatient sites run by Hollins Vale Hospitals, a fictional regional hospital group. It runs orthopaedics, dermatology and endocrinology clinics, Monday to Friday, with about 2,900 appointments still booked on the day each month. On 3 March 2026 it moved from a legacy scheduler to Tidewell Scheduling, supplied by Osterline Systems. The sister site, Eastgate Outpatient Centre, is still on the legacy scheduler.",
+  "presentingRequest": "The operations director asks why the did-not-attend (DNA) rate at Corrie Lane has gone from about 8% to over 13% since the scheduler change, and what the hospital should do about it. The board wants a recommendation by November.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Email from Mairead Tolland, Director of Outpatient Operations, 9 Sept 2026",
+      "sourceType": "leadership-account",
+      "text": "Our did-not-attend (DNA) rate at Corrie Lane has gone from about 8% to over 13% since Tidewell went live on 3 March. The board wants an explanation and a fix by November. My view: the front desk stopped the day-before confirmation calls when the old system\u0027s printed call sheets went, and nobody told me. I\u0027d like you to confirm that so I can deal with it through the team leads. Owen thinks it\u0027s partly the March cuts to the route 14 bus and partly that Tidewell \u0027counts differently\u0027. Please tell us what is driving this and what we should do."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Outpatient performance dashboard, Corrie Lane, extract 8 Sept 2026",
+      "sourceType": "system-record",
+      "text": "Monthly DNA rate (DNAs divided by appointments still booked on the day). Sep 2025 7.9%; Oct 8.3%; Nov 8.0%; Dec 8.7%; Jan 2026 7.6%; Feb 8.1% (mean 8.1%). Mar 2026: withheld; Apr 2026: withheld. May 13.1%; Jun 13.5%; Jul 13.6%; Aug 13.4% (mean 13.4%). Appointments booked on the day: 2,860\u20132,990 per month throughout. Footnote 1: March\u2013April withheld until the outcomes of migrated appointments are reconciled. Footnote 2: according to the analytics team, month-to-month differences under 1 percentage point are normal variation at this volume."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Change record CR-2026-0117, Tidewell go-live, Corrie Lane",
+      "sourceType": "change-record",
+      "text": "Go-live 3 March 2026. All three specialties (orthopaedics, dermatology, endocrinology) switched over on the same day. Configuration: (1) Messaging. The legacy system sent one SMS 48 hours before each appointment. Tidewell sends a confirmation SMS at booking plus one reminder SMS at a fixed offset, set to 7 days (the vendor default). Tidewell allows one reminder offset per session template, and the vendor can change the offset for any template within two working days. (2) Booking. New and follow-up templates open 16 weeks ahead (legacy: 6 weeks). Follow-ups are booked at checkout instead of going on the recall list. (3) Outcome codes. The legacy code \u0027Arrived late \u2013 not seen\u0027 is mapped to Tidewell \u0027DNA\u0027. Rollback: legacy system decommissioned 30 April."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, Bisi Adeyemi-Clarke, front-desk team lead, 12 Sept 2026",
+      "sourceType": "staff-account",
+      "text": "BA-C: \u0027We never stopped the calls. The day-before calls were always for the minor-procedures list, meaning skin ops and joint injections, so people know to stop blood thinners or arrange a lift home. Now I run that list from a Tidewell report instead of the old printout. What has changed is patients telling us at the desk that they didn\u0027t get \u0022the text the day before\u0022 like they used to. And follow-ups now book their next appointment before they leave, sometimes four months out. Some of them look at the card and laugh.\u0027 Interviewer note: the director has asked BA-C to account for the call process, and she was visibly defensive."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Patient Advice desk log, Corrie Lane, scheduling-related entries May\u2013Aug 2026",
+      "sourceType": "customer-account",
+      "text": "Extracts (4 of 23 scheduling-related entries): (a) \u0027Used to get a text two days before. Now I get one a week before, and by the day I\u0027d forgotten.\u0027 (b) \u0027Got a text the day I booked and one a week before, nothing nearer the time. Missed my endocrine review.\u0027 (c) \u0027Why are you texting me a week early? I nearly came on the wrong day.\u0027 (d) \u0027Was given an August date back in April. My shifts changed in the meantime and I couldn\u0027t get through on the phone to move it.\u0027 The other 19 entries: phone waiting times (11), car parking (5), other (3)."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Note from Owen Faraday, Clinic Manager, Corrie Lane, 10 Sept 2026",
+      "sourceType": "manager-account",
+      "text": "Honestly, I think a good chunk of this is Tidewell counting differently. The old system had a separate \u0027arrived late \u2013 not seen\u0027 code, and the migration lumped all of that into DNA. Until the data people sort out March and April, I\u0027d suggest we stop sending the DNA figure to the board, because it makes us look worse than we are. The other thing is the bus. Vale Transit cut route 14 on 1 March, and a lot of our older patients rely on it."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Attended-visit billing reconciliation, Sep 2025\u2013Aug 2026",
+      "source": "Hollins Vale Hospitals income team",
+      "sourceType": "financial-record",
+      "text": "Billable attended outpatient visits matched to appointments still booked on the day. Sep\u2013Feb (legacy): attended 91.6%, DNA 8.1%, \u0027arrived late \u2013 not seen\u0027 0.3%. May\u2013Aug (Tidewell): attended 86.6%, DNA (including late-not-seen) 13.4%. Booked-on-day volumes were similar (2,917 vs 2,902 per month), but attended visits fell from an average of 2,672 to 2,513 per month. Income team note: bills are generated from clinicians\u0027 encounter entries, not from the scheduler\u0027s outcome code. The late-not-seen remapping can account for at most about 0.3 points of the change."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Clinical records audit of DNA-coded appointments, May\u2013June 2026",
+      "source": "Clinical audit team (lead: R. Gilchrist)",
+      "sourceType": "independent-observation",
+      "text": "Random sample of 200 Tidewell appointments coded DNA in May\u2013June, checked against clinician notes, kiosk check-in logs and same-day pathology or imaging requests. 193 (96.5%): no evidence of attendance. 4 (2.0%): arrived late and not seen (the legacy system would have coded these \u0027late \u2013 not seen\u0027). 3 (1.5%): attended and seen, outcome keyed wrongly. Audit conclusion: miscoded records make up about 3.5% of DNA codes, roughly 0.5 percentage points of the 13.4% rate. Miscoding does not explain a rise of the size reported."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Monthly DNA rates, Eastgate Outpatient Centre (Sep 2025\u2013Aug 2026) and Corrie Lane (May\u2013Aug 2025)",
+      "source": "Hollins Vale Hospitals analytics team",
+      "sourceType": "system-record",
+      "text": "Eastgate Outpatient Centre: same hospital group; runs orthopaedics, dermatology and general medicine; stays on the legacy scheduler until 2027 (48-hour SMS reminder, 6-week booking horizon). About 60% of its catchment postcodes overlap with Corrie Lane\u0027s, and Vale Transit route 14 serves both sites. Eastgate DNA rate: Sep\u2013Feb mean 7.9%; May\u2013Aug 2026 mean 8.2% (May 8.0, Jun 8.3, Jul 8.4, Aug 8.1). Corrie Lane in the same months a year earlier (May\u2013Aug 2025, legacy system): 7.8%, 8.0%, 8.3%, 8.1% (mean 8.1%)."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Outbound call records from front-desk telephone lines, January\u2013August 2026",
+      "source": "Telephony platform export, extensions 4410\u20134414",
+      "sourceType": "log",
+      "text": "Outbound calls to patient numbers, weekly mean: Jan\u2013Feb 91; May\u2013Aug 88. Calls fell to 64 a week in March (cutover weeks) and were back to normal by mid-April. Matched against the minor-procedures list, the share of listed patients with a logged call 1\u20132 working days before their appointment was 93% in Jan\u2013Feb and 91% in May\u2013Aug. In both periods the only other outbound calls were ad-hoc rebooking calls (about 10 a week). SOP OP-22 (2023) requires day-before calls for the minor-procedures list only."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Vale Transit service change notice, route 14, effective 1 March 2026",
+      "source": "Vale Transit public notice",
+      "sourceType": "external-data",
+      "text": "Route 14 (Hollins Cross \u2013 Corrie Lane \u2013 Eastgate). From 1 March 2026, evening buses after 19:00 run every 60 minutes instead of every 30, and the Sunday service is withdrawn. Monday\u2013Saturday service between 07:00 and 19:00 is unchanged at every 15 minutes. For reference, Corrie Lane outpatient sessions run 08:30\u201317:00, Monday to Friday, with the last appointments at 16:30."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Tidewell SMS delivery report and messaging configuration export, May\u2013August 2026",
+      "source": "Osterline Systems customer portal",
+      "sourceType": "system-record",
+      "text": "Batch summary: 10,940 reminder SMS submitted, 10,514 reported delivered (96.1%); confirmation SMS delivered 96.4%. Per-message delivery receipts are kept for 30 days and keyed to a message ID, not an appointment ID, so they cannot be joined to attendance outcomes. Configuration: all 41 session templates use a 7-day reminder offset; no template uses any other offset. SMS opt-out flags were not migrated from the legacy system, so every migrated patient defaulted to opted-in. Opt-outs recorded since go-live: 37."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Data team response to request for appointment-level booking lead times",
+      "source": "Hollins Vale Hospitals analytics team (T. Wren)",
+      "sourceType": "document",
+      "text": "Request: DNA rate by booking lead time, May\u2013Aug. Response: Tidewell\u0027s standard reports do not include the booking timestamp, and Osterline quotes 10 weeks for a custom appointment-level extract. What is available: median lead time from the Tidewell capacity dashboard (May 47 days, Jun 52, Jul 54, Aug 53) and, for the legacy system, a median of 19 days from a 2025 waiting-list audit (no appointments booked more than 42 days ahead). Neither source gives lead time by appointment type. No breakdown of outcome by lead time can be produced from current data."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Weekly appointment outcomes during cutover, 3 March\u201330 April 2026",
+      "source": "Hollins Vale Hospitals analytics reconciliation note",
+      "sourceType": "system-record",
+      "text": "1,140 appointments with dates in March\u2013April were migrated from the legacy system. For 39% of them the outcome field is blank, because clinicians kept recording in the legacy system after it was switched to read-only. Estimated completeness of outcome recording for the period: 61%. The team will not publish weekly DNA rates for March\u2013April: \u0027any weekly figure would mostly reflect which clinicians back-filled outcomes, not attendance.\u0027 The team considered rebuilding the figures from paper clinic lists, but those lists were shredded under the 8-week local retention rule."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Telephone callback survey of patients who missed appointments, July\u2013August 2026",
+      "source": "Patient experience team",
+      "sourceType": "customer-account",
+      "text": "412 patients with a DNA in July\u2013August were called up to twice. 64 (16%) were reached and willing to answer. Main reason given (one per patient): forgot or mixed up the date 24 (38%); work or caring clash 13 (20%); felt better or no longer needed 9 (14%); transport 6 (9%); unwell on the day 5 (8%); no reason given 7 (11%). Interviewers asked an open question and did not ask about reminders or how far ahead the appointment had been booked. No comparable survey exists for the legacy period."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "DNA rates by specialty and appointment type, Sep 2025\u2013Feb 2026 vs May\u2013Aug 2026",
+      "source": "Hollins Vale Hospitals analytics team",
+      "sourceType": "system-record",
+      "text": "Sep\u2013Feb compared with May\u2013Aug. By specialty: orthopaedics 7.8% to 13.0%; dermatology 8.0% to 13.2%; endocrinology 8.9% to 14.4%. By type: new appointments 9.0% to 14.6%; follow-ups 7.6% to 12.8%. On 3 March every template in all three specialties moved to Tidewell\u0027s 7-day reminder and 16-week horizon. Minor-procedure appointments sit within their specialty and are not flagged separately. Lead time by specialty or appointment type is not held."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Account manager statement from Osterline Systems, 15 September 2026",
+      "source": "K. Ingvaldsen, Osterline Systems",
+      "sourceType": "vendor-account",
+      "text": "K. Ingvaldsen: \u0027Seven days is our recommended default. Our customers see better utilisation with it because patients cancel early enough for the slot to be reused. I\u0027ve no reason to think the reminder is the issue; your delivery rates are excellent. Changing an offset is a free two-day ticket, done per template, and we\u0027ve had clients split their templates to compare. The current release can\u0027t send a second reminder per appointment. That\u0027s on the 2027 roadmap.\u0027 Analyst note: Osterline\u0027s contract with the hospital group is up for renewal in January 2027."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Outpatient operations paper on Tidewell configuration choices, January 2026, with August addendum",
+      "source": "Outpatient operations team paper to outpatient board",
+      "sourceType": "document",
+      "text": "Paper of 14 Jan 2026 (before go-live) recommends the 7-day reminder and booking follow-ups at checkout. Reasons: (i) the recall list reached 640 overdue follow-ups in 2025 during a five-month vacancy in the recall clerk post; the post was filled in October 2025 and the backlog cleared by January; (ii) a 7-day reminder leaves time to refill cancelled slots. August addendum: cancellations made 3 or more days ahead rose from 4.1% to 6.3% of bookings, and 68% of those slots were refilled, about 130 slots a month. A legacy refill figure was not recorded."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Front-desk and booking staff rota and vacancy figures, January\u2013August 2026",
+      "source": "Outpatient workforce team",
+      "sourceType": "system-record",
+      "text": "Funded front-desk and booking establishment: 6.6 FTE. Staff in post: Jan\u2013Feb average 6.4 FTE; May\u2013Aug average 6.2 FTE. Two weeks of agency cover during cutover in March. Sickness absence: 3.9% Jan\u2013Feb, 4.2% May\u2013Aug. No change to opening hours or desk staffing pattern since go-live. All front-desk staff completed Tidewell training before 3 March."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Referral volumes and patient mix, Corrie Lane, September 2025\u2013August 2026",
+      "source": "Hollins Vale Hospitals analytics team",
+      "sourceType": "system-record",
+      "text": "New referrals per month: Sep\u2013Feb 1,010\u20131,060; May\u2013Aug 1,020\u20131,055. Patients aged 75 and over: 18% vs 19% of appointments. Share of appointments for patients in the most deprived quintile: 22% vs 23%. Share needing an interpreter: 4% in both periods. Referral sources (GP, emergency department, other hospital) within 1 point of each other in both periods. No new referral pathways opened during the year."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Losing the near-date (48-hour) SMS reminder, so that patients now get their last reminder 7 days before, is the main driver of the rise in missed appointments."
+      },
+      {
+        "id": "H2",
+        "text": "Longer booking lead times under Tidewell (16-week templates and follow-ups booked at checkout) are the main driver of the rise in missed appointments."
+      },
+      {
+        "id": "H3",
+        "text": "The rise is mainly a recording artefact of Tidewell (for example, merging \u0027arrived late \u2013 not seen\u0027 into DNA); actual attendance has not materially fallen."
+      },
+      {
+        "id": "H4",
+        "text": "External factors, either the 1 March route 14 bus service change or seasonal variation, account for most of the rise, independent of the scheduling change."
+      },
+      {
+        "id": "H5",
+        "text": "Front-desk staff stopped or cut back the confirmation calls after go-live, and this explains the rise."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Near-date (48-hour) SMS reminder no longer sent",
+        "to": "Rise in Corrie Lane DNA rate from about 8% to about 13%",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Median booking lead time lengthened (about 19 to about 52 days)",
+        "to": "Rise in Corrie Lane DNA rate from about 8% to about 13%",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Route 14 bus service change on 1 March 2026",
+        "to": "Rise in Corrie Lane DNA rate from about 8% to about 13%",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Remapping of \u0027arrived late \u2013 not seen\u0027 to the DNA code",
+        "to": "Rise in the recorded Corrie Lane DNA rate",
+        "relation": "accounts for most of"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Before changing the configuration clinic-wide, run an 8-week test. Have the vendor set a 48-hour reminder offset on a randomly selected half of session templates, with booking practice unchanged. Commission the vendor\u0027s appointment-level extract with booking timestamps. Then compare DNA rates by test arm and by lead time."
+      },
+      {
+        "id": "A2",
+        "text": "Switch the reminder offset from 7 days to 48 hours on all session templates now."
+      },
+      {
+        "id": "A3",
+        "text": "Cut the booking horizon back to 6 weeks and return follow-ups to the recall list across all specialties."
+      },
+      {
+        "id": "A4",
+        "text": "Issue written warnings to front-desk staff for failing to make day-before confirmation calls."
+      },
+      {
+        "id": "A5",
+        "text": "Stop reporting the Corrie Lane DNA rate to the board until the migration data issues are resolved."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q01",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q02",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q03",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q04",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q05",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q06",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q07",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q08",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q09",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q14",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q15",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

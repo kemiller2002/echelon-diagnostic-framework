@@ -1,0 +1,235 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-INCOMPLETE",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C13",
+    "X3": "C8",
+    "X4": "C10",
+    "X5": "C4",
+    "X6": "C11",
+    "X7": "C9",
+    "X8": "C5",
+    "X9": "C3",
+    "X10": "C7",
+    "X11": "C12",
+    "X12": "C2",
+    "X13": "C6",
+    "X14": "C14"
+  },
+  "readLabels": [
+    "X12",
+    "X4",
+    "X9",
+    "X10",
+    "X5"
+  ],
+  "reads": [
+    "C2",
+    "C10",
+    "C3",
+    "C7",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21027,
+    "cacheCreationTokens": 11726,
+    "outputTokens": 2365,
+    "thinkingTokens": 321,
+    "costUsd": 0.0726687,
+    "durationMs": 20646,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-INCOMPLETE__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-INCOMPLETE\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X9\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X10\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X10\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X4\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The rise in missed appointments is real and tied to Tidewell, but the evidence doesn\u0027t yet show which setting caused it. Four other explanations are ruled out. Recoding of \\\u0022arrived late\\\u0022 accounts for only about 0.5 points of the rise (clinical audit). Eastgate, which shares the bus route and about 60% of its catchment, stayed flat at about 8%, so the bus cut and seasonal variation don\u0027t explain it. Front-desk calls continued at the same rate (91\u201393% of listed patients called), so the staff did not stop them and warnings would punish the wrong people. Two Tidewell changes happened on the same day: the reminder moved from 48 hours to 7 days, and booking lead time grew from about 19 to about 52 days. Both fit the patient comments, and nothing separates them. I\u0027m fairly sure of the exclusions and unsure about the split between these two. Next, run the randomised 48-hour reminder test (the vendor can change offsets within two working days). Start the appointment-level extract now, though it takes about 10 weeks. Keep reporting the DNA rate to the board, noting the data caveats. Don\u0027t discipline staff, and don\u0027t make clinic-wide changes before the test.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:38.3893824Z",
+    "finishedAt": "2026-11-17T14:27:00.0863814Z",
+    "output": {
+      "caseId": "OD2-DEV-INCOMPLETE",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X9",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X10",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X10",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X10",
+            "E3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "insufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "X4",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The rise in missed appointments is real and tied to Tidewell, but the evidence doesn\u0027t yet show which setting caused it. Four other explanations are ruled out. Recoding of \u0022arrived late\u0022 accounts for only about 0.5 points of the rise (clinical audit). Eastgate, which shares the bus route and about 60% of its catchment, stayed flat at about 8%, so the bus cut and seasonal variation don\u0027t explain it. Front-desk calls continued at the same rate (91\u201393% of listed patients called), so the staff did not stop them and warnings would punish the wrong people. Two Tidewell changes happened on the same day: the reminder moved from 48 hours to 7 days, and booking lead time grew from about 19 to about 52 days. Both fit the patient comments, and nothing separates them. I\u0027m fairly sure of the exclusions and unsure about the split between these two. Next, run the randomised 48-hour reminder test (the vendor can change offsets within two working days). Start the appointment-level extract now, though it takes about 10 weeks. Keep reporting the DNA rate to the board, noting the data caveats. Don\u0027t discipline staff, and don\u0027t make clinic-wide changes before the test."
+    }
+  }
+}

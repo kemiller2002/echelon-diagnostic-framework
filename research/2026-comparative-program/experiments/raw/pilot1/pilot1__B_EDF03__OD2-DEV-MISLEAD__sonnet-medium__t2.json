@@ -1,0 +1,218 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C4",
+    "X3": "C8",
+    "X4": "C1",
+    "X5": "C3",
+    "X6": "C11",
+    "X7": "C7",
+    "X8": "C5",
+    "X9": "C9",
+    "X10": "C2",
+    "X11": "C6",
+    "X12": "C12"
+  },
+  "readLabels": [
+    "X2",
+    "X4",
+    "X8",
+    "X11",
+    "X5"
+  ],
+  "reads": [
+    "C4",
+    "C1",
+    "C5",
+    "C6",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19866,
+    "cacheCreationTokens": 10521,
+    "outputTokens": 2118,
+    "thinkingTokens": 0,
+    "costUsd": 0.0652626,
+    "durationMs": 15861,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022,\u0022X8\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022X5\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The failures aren\u0027t caused by release v4.12. They come from a finance job, settle-recon, that was switched on 3 March to run every 15 minutes from 09:00 to 21:00. It shares the checkout payment credential. Its bursts of search calls go over Quillmark\u0027s 300-per-minute limit, so Quillmark returns 429 rate-limit errors, and checkout shows those as \\\u0022card declined\\\u0022. The evidence for this:\\n- Failures began at 09:00, before the 10:40 deploy.\\n- 93% of failures fall in the first minutes of each quarter hour.\\n- They stopped during the finance maintenance window on 6 March.\\n- Half the pods were rolled back to v4.11 in a test and failed at the same rate (3.7% against 3.6%), almost all of them 429s.\\nDon\u0027t do the full rollback. It wouldn\u0027t help, and it would undo the card-number masking fix needed for audit finding SEC-2291, due 13 March.\\nNext steps:\\n1. Pause settle-recon\u0027s daytime runs or revert it to nightly.\\n2. Watch the 429 rate and the failure rate to confirm recovery.\\n3. Give the job its own credential before any daytime schedule returns.\\n4. Fix the generic error mapping that hid the real cause.\\nDon\u0027t tell the board the failures caused the 9% revenue fall. The sale, the new ad traffic and the drop in conversion rate and order value all overlap with it. Wait until failures are fixed, then measure the lost revenue separately. I\u0027m fairly confident (about 90%) in this diagnosis.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:16.0336340Z",
+    "finishedAt": "2026-11-17T14:27:33.6514239Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X2",
+            "X5",
+            "X8",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X2",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X2",
+            "X5",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 80,
+          "evidenceIds": [
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 93,
+          "evidenceIds": [
+            "X2",
+            "X5",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "X5",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The failures aren\u0027t caused by release v4.12. They come from a finance job, settle-recon, that was switched on 3 March to run every 15 minutes from 09:00 to 21:00. It shares the checkout payment credential. Its bursts of search calls go over Quillmark\u0027s 300-per-minute limit, so Quillmark returns 429 rate-limit errors, and checkout shows those as \u0022card declined\u0022. The evidence for this:\n- Failures began at 09:00, before the 10:40 deploy.\n- 93% of failures fall in the first minutes of each quarter hour.\n- They stopped during the finance maintenance window on 6 March.\n- Half the pods were rolled back to v4.11 in a test and failed at the same rate (3.7% against 3.6%), almost all of them 429s.\nDon\u0027t do the full rollback. It wouldn\u0027t help, and it would undo the card-number masking fix needed for audit finding SEC-2291, due 13 March.\nNext steps:\n1. Pause settle-recon\u0027s daytime runs or revert it to nightly.\n2. Watch the 429 rate and the failure rate to confirm recovery.\n3. Give the job its own credential before any daytime schedule returns.\n4. Fix the generic error mapping that hid the real cause.\nDon\u0027t tell the board the failures caused the 9% revenue fall. The sale, the new ad traffic and the drop in conversion rate and order value all overlap with it. Wait until failures are fixed, then measure the lost revenue separately. I\u0027m fairly confident (about 90%) in this diagnosis."
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-MISLEAD-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-MISLEAD-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C14",
+    "X2": "C5",
+    "X3": "C11",
+    "X4": "C12",
+    "X5": "C1",
+    "X6": "C10",
+    "X7": "C4",
+    "X8": "C13",
+    "X9": "C3",
+    "X10": "C9",
+    "X11": "C8",
+    "X12": "C15",
+    "X13": "C6",
+    "X14": "C2",
+    "X15": "C7"
+  },
+  "readLabels": [
+    "X5",
+    "X14"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-MISLEAD-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22513,
+    "cacheCreationTokens": 11859,
+    "outputTokens": 2009,
+    "thinkingTokens": 330,
+    "costUsd": 0.06978930000000001,
+    "durationMs": 14391,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-MISLEAD-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-MISLEAD-1__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-MISLEAD-1__sonnet-medium__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X5\u0022]}],\u0022brief\u0022:\u0022The enrolment drop does not appear to be the Admissions Office\u0027s fault. Yield (the share of admitted students who enrolled) fell from 41.8% to 34.3%, while applications and admits rose, so the pool was not the problem. The drop is concentrated in the scholarship tiers where awards were cut: Dean\u0027s awards went from $14,000 to $9,000 and yield fell from 45.2% to 31.9%. Merit awards went from $9,000 to $5,000 and yield fell from 44.9% to 32.3%. Presidential awards and the no-award group, where nothing changed, were flat. Early-action students got decisions on time on the old system, and their yield fell by almost the same amount as regular-decision yield (7.4 vs 7.5 points). So late decisions do not explain the fall. The portal delays were real and probably cost some individual students, but the data show no measurable effect on the overall number. I\u0027m fairly confident, though the tier data don\u0027t split early action from regular decision. Next steps: don\u0027t replace the director on this basis. Take the scholarship schedule back to the finance committee with a costed proposal to restore awards in the affected tiers before award letters go out. Separately, set a turnaround target for regular decisions and restore reader capacity. Hold off on the vendor rebuild until the missing-transcript claims are checked.\u0022,\u0022methodChoice\u0022:\u0022Evidence-ledger provenance check (provost and director accounts are interested sources), then Kepner-Tregoe IS/IS-NOT distinctions by round and tier, then Analysis of Competing Hypotheses to weigh the scholarship, portal-delay and demand explanations.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:47:12.6739714Z",
+    "finishedAt": "2026-11-17T16:47:27.9441447Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 78,
+          "evidenceIds": [
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X5"
+          ]
+        }
+      ],
+      "brief": "The enrolment drop does not appear to be the Admissions Office\u0027s fault. Yield (the share of admitted students who enrolled) fell from 41.8% to 34.3%, while applications and admits rose, so the pool was not the problem. The drop is concentrated in the scholarship tiers where awards were cut: Dean\u0027s awards went from $14,000 to $9,000 and yield fell from 45.2% to 31.9%. Merit awards went from $9,000 to $5,000 and yield fell from 44.9% to 32.3%. Presidential awards and the no-award group, where nothing changed, were flat. Early-action students got decisions on time on the old system, and their yield fell by almost the same amount as regular-decision yield (7.4 vs 7.5 points). So late decisions do not explain the fall. The portal delays were real and probably cost some individual students, but the data show no measurable effect on the overall number. I\u0027m fairly confident, though the tier data don\u0027t split early action from regular decision. Next steps: don\u0027t replace the director on this basis. Take the scholarship schedule back to the finance committee with a costed proposal to restore awards in the affected tiers before award letters go out. Separately, set a turnaround target for regular decisions and restore reader capacity. Hold off on the vendor rebuild until the missing-transcript claims are checked.",
+      "methodChoice": "Evidence-ledger provenance check (provost and director accounts are interested sources), then Kepner-Tregoe IS/IS-NOT distinctions by round and tier, then Analysis of Competing Hypotheses to weigh the scholarship, portal-delay and demand explanations."
+    }
+  }
+}

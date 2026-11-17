@@ -1,0 +1,762 @@
+{
+  "label": "OD2-DEV2-NOCONC",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7726,
+  "cacheCreationTokens": 4333,
+  "outputTokens": 51762,
+  "thinkingTokens": 39750,
+  "costUsd": 1.0714652,
+  "durationMs": 502919,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-DEV2-NOCONC/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-DEV2-NOCONC\u0022,\u0022split\u0022:\u0022dev2\u0022,\u0022benchmarkClass\u0022:\u0022NOCONC\u0022,\u0022domain\u0022:\u0022cross-domain\u0022,\u0022readBudget\u0022:3,\u0022title\u0022:\u0022Calderbridge night-rota pilot: falls rise at two care homes\u0022,\u0022setting\u0022:\u0022Larchmere Care Group runs nine residential care homes. Two homes in the town of Calderbridge, Ashby Fold (52 beds, two floors) and Penmor Lodge (44 beds, two floors), have piloted a reduced night-staffing rota since 1 June 2026. Group rollout of the rota to the other seven homes is planned for March 2027. You are the group quality lead, writing in mid-October 2026.\u0022,\u0022presentingRequest\u0022:\u0022The Director of Operations wants a recommendation for the 12 November 2026 board. Should the group put Ashby Fold and Penmor Lodge back on four night staff and halt the March 2027 rollout of the pilot rota? What explains the rise in recorded falls at the two homes?\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Marian Telfer, Director of Operations, to the group quality lead, 6 October 2026\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: Calderbridge falls - board recommendation. Falls at our two night-rota pilot homes have nearly doubled: 16 in Q2, 31 in Q3 (Ashby Fold 9 to 17, Penmor Lodge 7 to 14). Since 1 June both homes have run nights with three staff (one carer per floor plus a floating senior) instead of four (two carers per floor). That is the obvious change. Night staff tell me they can\u0027t get to call bells as fast. We have no call-bell timings from before June, but I believe them. I want a recommendation for the 12 November board: put both homes back on four night staff now and pull the March rollout to the other seven homes. I am not prepared to wait another quarter.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Group quality dashboard extract, Q3 2026, falls section\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Recorded falls, Q2 to Q3 2026: Ashby Fold 9 to 17 (RED); Penmor Lodge 7 to 14 (RED); Brackenhill 11 to 9; Cresswell Court 8 to 9; Dunmore House 14 to 12; Elmstead 6 to 7; Fairholme 10 to 11; Greywater 12 to 9; Hatherley View 7 to 8. Ashby Fold and Penmor Lodge combined, by month: Apr 4, May 5, Jun 7, Jul 11, Aug 9, Sep 11. RAG rule: red where the quarter-on-quarter rise exceeds 25%. Notes: figures are raw counts, not adjusted for occupancy. From 1 July, Ashby Fold and Penmor Lodge incidents are imported directly from the Tallyline incident app. All other homes\u0027 figures are keyed in from paper incident forms by site administrators.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, night senior carers at Ashby Fold and Penmor Lodge, 2-3 October 2026 (taken by the deputy quality lead)\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Ashby Fold night senior (9 years in post): \u0027With one carer per floor, if two bells go at once on the same floor somebody waits. We\u0027re slower, I\u0027m sure of it, though I couldn\u0027t give you minutes.\u0027 Penmor Lodge night senior (in the floating role since June): \u0027It\u0027s different, not worse. Because I float, I\u0027m usually free for the second bell. A lot of what\u0027s on the system now is people found sitting on the floor at the two o\u0027clock check with no injury. We always had those. Whether they all got written up before, I honestly couldn\u0027t say.\u0027\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Incident system query: falls by time of day, Ashby Fold and Penmor Lodge combined, Q2 and Q3 2026\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Night (22:00-07:00): Q2 8, Q3 18. Day (07:00-22:00): Q2 8, Q3 13. Night share of falls: Q2 50%, Q3 58%. Day staffing at both homes did not change during either quarter. Source note: Q2 times come from paper forms. The time field was blank on 3 forms, and the administrator assigned those from the shift recorded. Q3 times are stamped automatically by Tallyline when the entry is made, which may be some time after the fall was discovered.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Replies from the two registered managers to the Director of Operations, 7 October 2026\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Penmor Lodge manager: \u0027I don\u0027t think it\u0027s the rota. Since Hollin Street Medical Practice took over our residents in May, the new GPs have been reviewing everyone\u0027s medication, and some residents have been started on night-time tablets. I\u0027d look there first.\u0027 Ashby Fold manager: \u0027We moved to Hollin Street in May as well. My worry is admissions. We\u0027ve taken more people from the hospital discharge-to-assess beds this summer, and they arrive frailer than our usual referrals. The rota is tight, but I\u0027m not convinced it\u0027s the whole story.\u0027\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Estates and maintenance log, Ashby Fold and Penmor Lodge, April-September 2026\u0022,\u0022source\u0022:\u0022Group estates helpdesk system\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Ashby Fold: 14 jobs logged, including a boiler service (April), replacement of two failed first-floor corridor ceiling lights (July, completed the same day), an adjusted door closer on bedroom 12 (August) and garden path resurfacing (September). No flooring changes. Penmor Lodge: 11 jobs logged, including a lift inspection (May), a lounge carpet deep-clean (June), a replacement nurse-call handset in room 7 (July) and a kitchen extractor repair (September). No flooring or lighting changes in resident areas. Night lighting levels at both homes were last surveyed in 2025 and met the group standard.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Monthly falls per 1,000 occupied bed days, all nine homes, January 2023-September 2026, with control limits\u0022,\u0022source\u0022:\u0022Group quality analyst, statistical chart pack\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Analyst\u0027s summary (D. Raman, group quality analyst). Rates use occupied bed days. Three-sigma limits were set on January 2023-May 2026 data. Ashby Fold: long-run mean 2.6 falls per 1,000 bed days; quarterly rates since 2023 ranged from 1.8 to 3.9; Q2 2026 was 2.0, its second-lowest quarter; Q3 2026 was 3.7. Penmor Lodge: mean 2.9; range 1.9-4.1; Q2 2026 1.9, Q3 2026 3.7. No monthly point at either home is above its upper limit, and no run rule is triggered. Since 2023, single homes in the group have had five other quarter-on-quarter rises of 70% or more, and each fell back the next quarter without specific action. Caution: at these volumes, a real, sustained increase of around 40% would usually take two to three quarters to show as a signal, so points inside the limits do not show that nothing changed.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Night agency and bank shift usage, Ashby Fold and Penmor Lodge, April-September 2026\u0022,\u0022source\u0022:\u0022Group workforce and finance system\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Share of night shifts filled by agency or bank staff: Ashby Fold 12% in Q2, 13% in Q3; Penmor Lodge 9% in Q2, 10% in Q3. The same three agencies were used throughout. All agency staff complete the group\u0027s falls and moving-and-handling induction before their first night shift. Night shifts that ran below rota: Ashby Fold 2 in Q2, 1 in Q3; Penmor Lodge 0 in Q2, 1 in Q3. The pilot cut the number of night shifts to fill by a quarter, so total night agency spend fell.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tallyline implementation briefing to the group, May 2026\u0022,\u0022source\u0022:\u0022Tallyline customer success manager, slide notes\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Slide notes: \u0027Most care providers see recorded incidents rise after go-live, often sharply and sometimes doubling, because staff can log an incident in under a minute at the point of care. This is a sign of a healthier reporting culture, not of more harm.\u0027 When asked for supporting data, the vendor referred to anonymised customer case studies. It did not provide figures, comparison groups or its definition of \u0027incident\u0027. The briefing formed part of the group\u0027s contract negotiation for the January 2027 rollout to the remaining seven homes.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Clinical governance monthly packs, Ashby Fold and Penmor Lodge, April-September 2026\u0022,\u0022source\u0022:\u0022Registered managers\u0027 monthly governance returns\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Occupancy: Ashby Fold 94% (Q2), 95% (Q3); Penmor Lodge 93%, 94%. Admissions Q2/Q3: Ashby Fold 4/3, of which from discharge-to-assess beds 3/2; Penmor Lodge 3/3. Mean dependency score (1-4 scale): Ashby Fold 2.61 to 2.58; Penmor Lodge 2.70 to 2.74. Hollin Street medication reviews, May-September: 23 residents reviewed; 14 medicines stopped, 4 doses reduced, 2 started (a night-time hypnotic for one Penmor resident, who has had no recorded fall, and a statin). Residents on any psychotropic or hypnotic: Ashby Fold 21 to 20; Penmor Lodge 18 to 18. Falls by resident: 27 of the 31 Q3 falls, and 13 of the 16 Q2 falls, were by residents who lived at the homes throughout both quarters. Highest individual count: one Penmor resident, 4 in Q2 and 5 in Q3. Nobody else had more than 3 in either quarter.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Nurse-call system export of night call response times, Ashby Fold, and nurse-call supplier note, Penmor Lodge\u0022,\u0022source\u0022:\u0022Nurse-call system export and supplier email\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Ashby Fold: the system keeps 45 days of call data, so the earliest available record is 16 August. Night calls from 16 August to 30 September: 1,212. Median time to answer 3 min 40 s; 9% took more than 10 minutes. No pre-pilot data survive, and the group has no standard for night response time. Penmor Lodge: the nurse-call panel (installed 2014) records calls but not answer times. The supplier confirms that no response-time data can be extracted. Neither home\u0027s figures can be compared with the period before 1 June.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Night staffing pilot protocol (approved April 2026) and status note, 3 October 2026\u0022,\u0022source\u0022:\u0022Executive team papers\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Purpose: test one carer per floor plus a floating senior at two homes before group rollout. Safeguards: each home\u0027s falls rate is reviewed monthly on the group control chart. The pilot pauses at a home if any month breaches the upper control limit, or if falls with harm (first aid or more) exceed 6 in a quarter at that home. Evaluation: the rollout decision is taken after at least two full quarters of data. Signed by the Director of Finance and the Director of Operations, with the Director of Operations\u0027 reservation about night cover recorded. Status note, 3 October: neither pause criterion has been met at either home.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Falls-prevention and moving-and-handling training records, Ashby Fold and Penmor Lodge, 2026\u0022,\u0022source\u0022:\u0022Group learning management system\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Mandatory falls-prevention e-learning compliance: Ashby Fold 88% (June), 90% (September); Penmor Lodge 91%, 92%. Practical moving-and-handling refresher in date: Ashby Fold 85%, 87%; Penmor Lodge 89%, 90%. The group target for both is 85%. At both homes, night-staff compliance is within two percentage points of day-staff compliance. The training content did not change in 2026.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tallyline go-live record, falls by harm level Q2-Q3 2026, and Q2 handover-note cross-check, Ashby Fold and Penmor Lodge\u0022,\u0022source\u0022:\u0022Deputy quality lead, compiled from Tallyline, paper forms and handover books\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Go-live: 1 July 2026 at both homes, which were chosen to give the rota pilot better night data. Other homes are scheduled for January 2027. Falls by harm level, both homes combined, Q2 to Q3: no harm 10 to 22; first-aid harm 4 to 6; GP or hospital attendance 2 to 3. Unwitnessed \u0027found on floor\u0027 falls: 5 to 14. Handover cross-check (September): night handover notes for 6 of the 13 Q2 weeks were compared with the paper incident forms. These were the weeks whose notes could still be found. Three entries clearly describe an unreported fall, and three more are ambiguous (\u0027sitting on floor, assisted up\u0027). No equivalent Q3 check is possible because handover notes are now written inside Tallyline. The cross-check therefore cannot say how many falls Tallyline itself misses.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Director of Operations\u0027 memo to the executive team on the proposed night staffing pilot, 18 March 2026\u0022,\u0022source\u0022:\u0022Executive team papers\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022\u0027I do not support reducing night staff to save \u00A3410,000 a year across the group. Four on nights is the safe minimum for two-floor homes, and I expect falls to rise if we cut it. If the executive proceeds, I want it on record that I warned against this.\u0027 Minute, 2 April 2026: the executive approved a two-home pilot, and the Director of Operations\u0027 reservation was recorded.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Family complaints and compliments log, Ashby Fold and Penmor Lodge, April-September 2026\u0022,\u0022source\u0022:\u0022Group customer relations log\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Complaints: Ashby Fold 3 (May: lost laundry; May: call bell \u0027took ages\u0027 at night; August: relative not told promptly about a no-harm fall); Penmor Lodge 2 (June: visiting hours; September: menu choice). Compliments: Ashby Fold 7, Penmor Lodge 9. No complaint mentions staffing levels. The August complaint was resolved after the home showed the family the Tallyline record and the time they were notified.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Post-fall observation completion audit, Ashby Fold and Penmor Lodge, Q2 and Q3 2026\u0022,\u0022source\u0022:\u0022Group clinical audit team\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Group policy requires a 24-hour observation schedule (pulse, blood pressure and consciousness checks) after any unwitnessed fall or head strike. Full schedule completed: Q2 (paper prompts) 4 of 6 eligible falls, 67%; Q3 (Tallyline sends timed reminders for each logged fall) 15 of 16 eligible falls, 94%. One Q3 head injury was identified at the 4-hour check, and the resident was sent to hospital the same evening. The other seven homes, still on paper, averaged 62% in Q3.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Anonymous night-staff pulse survey, Ashby Fold and Penmor Lodge, September 2026\u0022,\u0022source\u0022:\u0022Trade-union branch survey (14 of 22 night staff responded)\u0022,\u0022sourceType\u0022:\u0022anonymous-staff-survey\u0022,\u0022text\u0022:\u0022\u0027Compared with before June, is your night workload...\u0027 Heavier 9, about the same 4, lighter 1. \u0027Do you now log incidents you would not have written up on paper?\u0027 Yes 8, no 4, not sure 2. Free-text examples: \u0027paper forms took 20 minutes, so the little ones went in the handover book\u0027; \u0027the floating senior helps but she\u0027s always on the other floor when you need her\u0027; \u0027Tallyline nags you until you\u0027ve done the obs.\u0027 The union branch ran the survey, and the operations team helped draft the questions.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Most recent regulator inspection reports, Ashby Fold (March 2025) and Penmor Lodge (October 2024)\u0022,\u0022source\u0022:\u0022Care regulator public reports\u0022,\u0022sourceType\u0022:\u0022regulator-record\u0022,\u0022text\u0022:\u0022Ashby Fold: rated Good overall, with Good in the safe domain. Inspectors noted that \u0027falls risk assessments are in place and reviewed monthly; sensor equipment is used appropriately\u0027. One recommendation: update fire evacuation plans. Penmor Lodge: rated Good overall. The safe domain was rated Requires Improvement because of medicines storage temperatures, which has since been resolved. No enforcement action at either home. Neither inspection looked at night staffing in detail.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Infection-control and outbreak log, Ashby Fold and Penmor Lodge, April-September 2026\u0022,\u0022source\u0022:\u0022Group infection prevention lead\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022No outbreaks were declared at either home. Urinary tract infections treated: Ashby Fold 6 in Q2, 5 in Q3; Penmor Lodge 4 in Q2, 5 in Q3. Chest infections: Ashby Fold 2 and 1; Penmor Lodge 1 and 2. One Penmor Lodge resident tested positive for a respiratory virus in August and was isolated for five days, with no onward spread. Hydration charts were audited monthly at both homes, and no concerns were raised.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The night-staffing pilot that began in June raised residents\u0027 underlying risk of falling at the two homes.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022The rise mainly reflects more complete recording of falls after the two homes switched to the incident app, rather than more falls actually happening.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022A shift in the resident population at the two homes toward frailer, higher-risk residents drove the rise.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022Underlying fall risk at the two homes did not change, and the Q3 figures are ordinary quarter-to-quarter variation for homes of this size.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Prescribing changes made after the two homes moved to a new GP practice raised residents\u0027 fall risk.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Night-staffing pilot at the two homes (one carer per floor plus a floating senior)\u0022,\u0022to\u0022:\u0022Higher recorded fall counts at the two homes in Q3 2026\u0022,\u0022relation\u0022:\u0022increases\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Switch from paper incident forms to the incident app at the two homes\u0022,\u0022to\u0022:\u0022Higher recorded fall counts at the two homes in Q3 2026\u0022,\u0022relation\u0022:\u0022increases\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Change in resident mix toward frailer admissions at the two homes\u0022,\u0022to\u0022:\u0022Higher recorded fall counts at the two homes in Q3 2026\u0022,\u0022relation\u0022:\u0022increases\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Night-staffing pilot at the two homes\u0022,\u0022to\u0022:\u0022Slower answering of night call bells\u0022,\u0022relation\u0022:\u0022increases\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Return both homes to four night staff now and suspend the March rollout of the pilot rota to the other seven homes.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Keep the pilot running under its existing pause criteria. Re-present falls as rates on the control chart with the change in reporting method marked, start manual sampling of night call-bell response times at both homes, and take the rollout decision at a dated review in late January using Q4 data.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Issue formal capability warnings to the night senior carers at both homes over the rise in falls.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Withdraw the incident app at the two homes and return them to paper forms until all nine homes can switch together, so that the dashboard compares like with like.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-DEV2-NOCONC\u0022,\u0022groundTruthNarrative\u0022:\u0022Recorded falls at Ashby Fold and Penmor Lodge rose from 16 in Q2 to 31 in Q3 2026. The rise coincided with two changes at exactly those two homes: the night-staffing pilot (from June) and the switch from paper incident forms to the Tallyline app (from July). The Director of Operations, who argued against the pilot before it started, blames the rota. The whole evidence base cannot settle the cause. Converted to rates, both homes\u0027 Q3 figures sit inside their own historical ranges and control limits. Q2 was an unusually low quarter for both homes, and the group has seen five similar single-quarter jumps that fell back without action. However, the analyst warns that a real increase of around 40% could not yet be detected. Most of the increase is in no-harm and unwitnessed falls. A partial, non-random check of Q2 handover notes found 3-6 unreported falls in six weeks, which points to paper-era under-recording. But falls with harm also rose (6 to 9), and nobody knows how complete the app\u0027s own recording is. Call-bell timings have no pre-pilot baseline, and staff accounts conflict. Two alternatives are ruled out: resident mix and prescribing did not change, the rise is among long-stay residents, and the new GP practice mostly stopped medicines. The defensible course is to keep the pilot under its own pause rules, measure falls properly, and decide at the January review. Neither reversing the pilot nor declaring it safe is yet justified.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022confounded\u0022,\u0022misleading-signal\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022Several things fit H1: the timing, the night share of falls rising from 50% to 58%, the Ashby senior\u0027s account and the workload replies in the staff survey. But the incident app went live at the same two homes in the same quarter, and most of the rise is in no-harm and unwitnessed falls, the kind paper forms missed (C9). The rates are within each home\u0027s historical range and control limits (C2). No data separate a pilot effect from a recording change or from chance, and nothing counts against H1 either. The claim is live but unestablished.\u0022},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C9\u0022,\u0022C12\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022plausible-alternative\u0022,\u0022overreach-trap\u0022],\u0022rationale\u0022:\u0022The handover cross-check found 3 clear and 3 ambiguous unreported falls in 6 of 13 Q2 weeks, from a sample chosen by which notes survived. Scaled up, that implies roughly 6-13 missing Q2 falls against a rise of 15. So recording explains anywhere from under half to nearly all of the rise, and \u0027mainly\u0027 cannot be established. Falls with harm also rose (6 to 9), and the app\u0027s own completeness cannot be checked. The vendor\u0027s claim is unsupported and comes from an interested party (C4).\u0022},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022manager-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022Occupancy, admissions (including discharge-to-assess admissions, 3 in Q2 against 2 in Q3) and mean dependency were stable. 27 of the 31 Q3 falls, compared with 13 of 16 in Q2, were by residents who lived at the homes throughout both quarters. The rise is not coming from a changed population.\u0022},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C2\u0022,\u0022C7\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022normal-variation\u0022,\u0022base-rate\u0022,\u0022overreach-trap\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022C2 shows the Q3 rates are within the historical range and control limits, that Q2 was unusually low, and that comparable jumps have reverted before. That makes ordinary variation fully consistent with the data, against the impression from the red dashboard. But the analyst states explicitly that a real increase of around 40% would not yet show as a signal, and harmed falls rose too. The evidence does not show that underlying risk was unchanged, so this explanation fits the data no better than the others.\u0022},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022manager-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022The Hollin Street reviews mostly stopped or reduced medicines (14 stopped, 4 reduced, 2 started). Psychotropic and hypnotic use was flat. The only new night-time hypnotic went to a resident with no recorded fall. There was no prescribing change that would raise fall risk.\u0022},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C2\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The pilot and the higher recorded counts co-occur at the same two homes in the same period. A causal link would need the main rival ruled out, and the app change coincided almost exactly (June pilot, July app; June\u0027s count of 7 cannot separate them). The other homes give no comparison because they had neither change. Nothing counts against the link, so it is association only.\u0022},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C4\u0022,\u0022C9\u0022,\u0022C12\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022measurement-change\u0022],\u0022rationale\u0022:\u0022The app went live as recorded counts jumped, and most of the jump is in no-harm and unwitnessed falls, which fits a plausible recording mechanism. But the cross-check cannot show that the app captures more than paper did, because no Q3 check is possible. The pilot is an uncontrolled rival at the same homes. The two co-occur, but causation is not established.\u0022},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022manager-narrative\u0022],\u0022rationale\u0022:\u0022The evidence counts against the link itself: the claimed shift toward frailer admissions did not happen, and the extra falls came from residents who were present in both quarters. Admissions account for about 3-4 falls in each quarter.\u0022},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C6\u0022,\u0022C11\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022missing-data\u0022,\u0022mechanism-gap\u0022],\u0022rationale\u0022:\u0022There are no pre-pilot response-time data (E1, confirmed by C6), and Penmor\u0027s system cannot record answer times. The only accounts are unmeasured perceptions, and they conflict: the Ashby senior says slower, the Penmor senior says not worse. The evidence cannot establish even an association.\u0022},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C2\u0022,\u0022C7\u0022,\u0022C9\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022premature\u0022],\u0022rationale\u0022:\u0022If H1 were confirmed, restoring four night staff and suspending the rollout would clearly help. If H1 is wrong, the cost is money and a delayed evaluation, which is reversible. Right now the rise cannot be told apart from chance or a recording change (C2, C9), the pilot\u0027s own pause criteria have not been met (C7), and the request comes from a director who opposed the pilot in advance (C10). Committing now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C2\u0022,\u0022C6\u0022,\u0022C7\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022measurement\u0022,\u0022decision-deferral\u0022],\u0022rationale\u0022:\u0022This keeps the existing safety net (the pause rules), puts falls on a measure that separates the change in reporting method and chance from a real change, and fills the missing mechanism data (call bells). It also matches the protocol\u0027s planned two-quarter evaluation. Every live hypothesis gets tested before an irreversible rollout or a costly reversal.\u0022},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C2\u0022,\u0022C9\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022punish-wrong-party\u0022,\u0022suppresses-reporting\u0022],\u0022rationale\u0022:\u0022Under every live explanation, individual night seniors are the wrong target. If the pilot raised risk, the cause is the staffing design. If recording improved, the warnings punish better reporting. If the rise is chance, they punish noise. Under all three, the warnings would discourage staff from logging minor falls.\u0022},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C9\u0022,\u0022C12\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022suppresses-information\u0022,\u0022protective-control\u0022],\u0022rationale\u0022:\u0022Paper forms demonstrably missed falls (C9). Going back to paper would hide information whichever hypothesis is true. It would also switch off the app\u0027s timed post-fall observation reminders, which raised completion from 67% to 94% and caught a head injury (C12). Comparability can be handled by marking the method change instead.\u0022},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022expected\u0022:\u0022insufficient\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C2\u0022,\u0022C9\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C2\u0022,\u0022C5\u0022,\u0022C7\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022,\u0022no-reliable-conclusion\u0022],\u0022rationale\u0022:\u0022Neither substantive decision can be committed to. Reversing the pilot needs H1 to be established. Concluding that no intervention is needed, or rolling the rota out, needs a real rise to be excluded, and C2 explicitly says a real rise of around 40% cannot yet be excluded. The best action is evidence-gathering, so the evidence is insufficient.\u0022}],\u0022discriminatingReads\u0022:[\u0022C2\u0022,\u0022C9\u0022,\u0022C5\u0022],\u0022lowValueReads\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C8\u0022,\u0022C11\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C2\u0022,\u0022C9\u0022,\u0022C5\u0022],\u0022authoringNotes\u0022:\u0022Class NOCONC. Read alone, the initial file pushes toward H1 \u0027supported\u0027: a director\u0027s narrative, an apparent doubling, red RAG flags, a rising night share and a staff account. It also contains fair counter-signals: the dashboard footnote about the app, the Penmor senior\u0027s comment, day falls rising too, and the lack of call-bell baseline data. C2 (rates and control limits) and C9 (app go-live, harm levels and the handover cross-check) show that the leading question cannot be settled. They also keep H2 and H4 at \u0027unknown\u0027 rather than letting an analyst overcorrect to \u0027supported\u0027 (C2\u0027s power caveat; harmed falls up 6 to 9; the cross-check sample is non-random and Q3 completeness is unknown). C5 settles the two manager-led distractors (H3 and H5, and R3) as contradicted. Interested or weak sources: the director (C10 shows her prior opposition), the vendor (C4, no data), and the union survey drafted with the operations team (C13). C6 is a tempting mechanism read but has no baseline. C7 supports A1 being premature and A2 being preferred, but it does not change any key from the optimal path. A \u0027roll out now\u0027 action was deliberately left out because it fits neither the premature nor the harmful definition cleanly. Q2/Q3 arithmetic is consistent across E2, E4, C9 and C5 (16 and 31).\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:30:47.3110657Z",
+  "finishedAt": "2026-11-17T14:39:12.1793381Z",
+  "output": {
+    "case": {
+      "id": "OD2-DEV2-NOCONC",
+      "split": "dev2",
+      "benchmarkClass": "NOCONC",
+      "domain": "cross-domain",
+      "readBudget": 3,
+      "title": "Calderbridge night-rota pilot: falls rise at two care homes",
+      "setting": "Larchmere Care Group runs nine residential care homes. Two homes in the town of Calderbridge, Ashby Fold (52 beds, two floors) and Penmor Lodge (44 beds, two floors), have piloted a reduced night-staffing rota since 1 June 2026. Group rollout of the rota to the other seven homes is planned for March 2027. You are the group quality lead, writing in mid-October 2026.",
+      "presentingRequest": "The Director of Operations wants a recommendation for the 12 November 2026 board. Should the group put Ashby Fold and Penmor Lodge back on four night staff and halt the March 2027 rollout of the pilot rota? What explains the rise in recorded falls at the two homes?",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from Marian Telfer, Director of Operations, to the group quality lead, 6 October 2026",
+          "sourceType": "leadership-account",
+          "text": "Subject: Calderbridge falls - board recommendation. Falls at our two night-rota pilot homes have nearly doubled: 16 in Q2, 31 in Q3 (Ashby Fold 9 to 17, Penmor Lodge 7 to 14). Since 1 June both homes have run nights with three staff (one carer per floor plus a floating senior) instead of four (two carers per floor). That is the obvious change. Night staff tell me they can\u0027t get to call bells as fast. We have no call-bell timings from before June, but I believe them. I want a recommendation for the 12 November board: put both homes back on four night staff now and pull the March rollout to the other seven homes. I am not prepared to wait another quarter."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Group quality dashboard extract, Q3 2026, falls section",
+          "sourceType": "system-record",
+          "text": "Recorded falls, Q2 to Q3 2026: Ashby Fold 9 to 17 (RED); Penmor Lodge 7 to 14 (RED); Brackenhill 11 to 9; Cresswell Court 8 to 9; Dunmore House 14 to 12; Elmstead 6 to 7; Fairholme 10 to 11; Greywater 12 to 9; Hatherley View 7 to 8. Ashby Fold and Penmor Lodge combined, by month: Apr 4, May 5, Jun 7, Jul 11, Aug 9, Sep 11. RAG rule: red where the quarter-on-quarter rise exceeds 25%. Notes: figures are raw counts, not adjusted for occupancy. From 1 July, Ashby Fold and Penmor Lodge incidents are imported directly from the Tallyline incident app. All other homes\u0027 figures are keyed in from paper incident forms by site administrators."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Interview notes, night senior carers at Ashby Fold and Penmor Lodge, 2-3 October 2026 (taken by the deputy quality lead)",
+          "sourceType": "staff-account",
+          "text": "Ashby Fold night senior (9 years in post): \u0027With one carer per floor, if two bells go at once on the same floor somebody waits. We\u0027re slower, I\u0027m sure of it, though I couldn\u0027t give you minutes.\u0027 Penmor Lodge night senior (in the floating role since June): \u0027It\u0027s different, not worse. Because I float, I\u0027m usually free for the second bell. A lot of what\u0027s on the system now is people found sitting on the floor at the two o\u0027clock check with no injury. We always had those. Whether they all got written up before, I honestly couldn\u0027t say.\u0027"
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Incident system query: falls by time of day, Ashby Fold and Penmor Lodge combined, Q2 and Q3 2026",
+          "sourceType": "system-record",
+          "text": "Night (22:00-07:00): Q2 8, Q3 18. Day (07:00-22:00): Q2 8, Q3 13. Night share of falls: Q2 50%, Q3 58%. Day staffing at both homes did not change during either quarter. Source note: Q2 times come from paper forms. The time field was blank on 3 forms, and the administrator assigned those from the shift recorded. Q3 times are stamped automatically by Tallyline when the entry is made, which may be some time after the fall was discovered."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Replies from the two registered managers to the Director of Operations, 7 October 2026",
+          "sourceType": "manager-account",
+          "text": "Penmor Lodge manager: \u0027I don\u0027t think it\u0027s the rota. Since Hollin Street Medical Practice took over our residents in May, the new GPs have been reviewing everyone\u0027s medication, and some residents have been started on night-time tablets. I\u0027d look there first.\u0027 Ashby Fold manager: \u0027We moved to Hollin Street in May as well. My worry is admissions. We\u0027ve taken more people from the hospital discharge-to-assess beds this summer, and they arrive frailer than our usual referrals. The rota is tight, but I\u0027m not convinced it\u0027s the whole story.\u0027"
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Estates and maintenance log, Ashby Fold and Penmor Lodge, April-September 2026",
+          "source": "Group estates helpdesk system",
+          "sourceType": "system-record",
+          "text": "Ashby Fold: 14 jobs logged, including a boiler service (April), replacement of two failed first-floor corridor ceiling lights (July, completed the same day), an adjusted door closer on bedroom 12 (August) and garden path resurfacing (September). No flooring changes. Penmor Lodge: 11 jobs logged, including a lift inspection (May), a lounge carpet deep-clean (June), a replacement nurse-call handset in room 7 (July) and a kitchen extractor repair (September). No flooring or lighting changes in resident areas. Night lighting levels at both homes were last surveyed in 2025 and met the group standard."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Monthly falls per 1,000 occupied bed days, all nine homes, January 2023-September 2026, with control limits",
+          "source": "Group quality analyst, statistical chart pack",
+          "sourceType": "document",
+          "text": "Analyst\u0027s summary (D. Raman, group quality analyst). Rates use occupied bed days. Three-sigma limits were set on January 2023-May 2026 data. Ashby Fold: long-run mean 2.6 falls per 1,000 bed days; quarterly rates since 2023 ranged from 1.8 to 3.9; Q2 2026 was 2.0, its second-lowest quarter; Q3 2026 was 3.7. Penmor Lodge: mean 2.9; range 1.9-4.1; Q2 2026 1.9, Q3 2026 3.7. No monthly point at either home is above its upper limit, and no run rule is triggered. Since 2023, single homes in the group have had five other quarter-on-quarter rises of 70% or more, and each fell back the next quarter without specific action. Caution: at these volumes, a real, sustained increase of around 40% would usually take two to three quarters to show as a signal, so points inside the limits do not show that nothing changed."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Night agency and bank shift usage, Ashby Fold and Penmor Lodge, April-September 2026",
+          "source": "Group workforce and finance system",
+          "sourceType": "financial-record",
+          "text": "Share of night shifts filled by agency or bank staff: Ashby Fold 12% in Q2, 13% in Q3; Penmor Lodge 9% in Q2, 10% in Q3. The same three agencies were used throughout. All agency staff complete the group\u0027s falls and moving-and-handling induction before their first night shift. Night shifts that ran below rota: Ashby Fold 2 in Q2, 1 in Q3; Penmor Lodge 0 in Q2, 1 in Q3. The pilot cut the number of night shifts to fill by a quarter, so total night agency spend fell."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Tallyline implementation briefing to the group, May 2026",
+          "source": "Tallyline customer success manager, slide notes",
+          "sourceType": "vendor-account",
+          "text": "Slide notes: \u0027Most care providers see recorded incidents rise after go-live, often sharply and sometimes doubling, because staff can log an incident in under a minute at the point of care. This is a sign of a healthier reporting culture, not of more harm.\u0027 When asked for supporting data, the vendor referred to anonymised customer case studies. It did not provide figures, comparison groups or its definition of \u0027incident\u0027. The briefing formed part of the group\u0027s contract negotiation for the January 2027 rollout to the remaining seven homes."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Clinical governance monthly packs, Ashby Fold and Penmor Lodge, April-September 2026",
+          "source": "Registered managers\u0027 monthly governance returns",
+          "sourceType": "system-record",
+          "text": "Occupancy: Ashby Fold 94% (Q2), 95% (Q3); Penmor Lodge 93%, 94%. Admissions Q2/Q3: Ashby Fold 4/3, of which from discharge-to-assess beds 3/2; Penmor Lodge 3/3. Mean dependency score (1-4 scale): Ashby Fold 2.61 to 2.58; Penmor Lodge 2.70 to 2.74. Hollin Street medication reviews, May-September: 23 residents reviewed; 14 medicines stopped, 4 doses reduced, 2 started (a night-time hypnotic for one Penmor resident, who has had no recorded fall, and a statin). Residents on any psychotropic or hypnotic: Ashby Fold 21 to 20; Penmor Lodge 18 to 18. Falls by resident: 27 of the 31 Q3 falls, and 13 of the 16 Q2 falls, were by residents who lived at the homes throughout both quarters. Highest individual count: one Penmor resident, 4 in Q2 and 5 in Q3. Nobody else had more than 3 in either quarter."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Nurse-call system export of night call response times, Ashby Fold, and nurse-call supplier note, Penmor Lodge",
+          "source": "Nurse-call system export and supplier email",
+          "sourceType": "log",
+          "text": "Ashby Fold: the system keeps 45 days of call data, so the earliest available record is 16 August. Night calls from 16 August to 30 September: 1,212. Median time to answer 3 min 40 s; 9% took more than 10 minutes. No pre-pilot data survive, and the group has no standard for night response time. Penmor Lodge: the nurse-call panel (installed 2014) records calls but not answer times. The supplier confirms that no response-time data can be extracted. Neither home\u0027s figures can be compared with the period before 1 June."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Night staffing pilot protocol (approved April 2026) and status note, 3 October 2026",
+          "source": "Executive team papers",
+          "sourceType": "document",
+          "text": "Purpose: test one carer per floor plus a floating senior at two homes before group rollout. Safeguards: each home\u0027s falls rate is reviewed monthly on the group control chart. The pilot pauses at a home if any month breaches the upper control limit, or if falls with harm (first aid or more) exceed 6 in a quarter at that home. Evaluation: the rollout decision is taken after at least two full quarters of data. Signed by the Director of Finance and the Director of Operations, with the Director of Operations\u0027 reservation about night cover recorded. Status note, 3 October: neither pause criterion has been met at either home."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Falls-prevention and moving-and-handling training records, Ashby Fold and Penmor Lodge, 2026",
+          "source": "Group learning management system",
+          "sourceType": "system-record",
+          "text": "Mandatory falls-prevention e-learning compliance: Ashby Fold 88% (June), 90% (September); Penmor Lodge 91%, 92%. Practical moving-and-handling refresher in date: Ashby Fold 85%, 87%; Penmor Lodge 89%, 90%. The group target for both is 85%. At both homes, night-staff compliance is within two percentage points of day-staff compliance. The training content did not change in 2026."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Tallyline go-live record, falls by harm level Q2-Q3 2026, and Q2 handover-note cross-check, Ashby Fold and Penmor Lodge",
+          "source": "Deputy quality lead, compiled from Tallyline, paper forms and handover books",
+          "sourceType": "document",
+          "text": "Go-live: 1 July 2026 at both homes, which were chosen to give the rota pilot better night data. Other homes are scheduled for January 2027. Falls by harm level, both homes combined, Q2 to Q3: no harm 10 to 22; first-aid harm 4 to 6; GP or hospital attendance 2 to 3. Unwitnessed \u0027found on floor\u0027 falls: 5 to 14. Handover cross-check (September): night handover notes for 6 of the 13 Q2 weeks were compared with the paper incident forms. These were the weeks whose notes could still be found. Three entries clearly describe an unreported fall, and three more are ambiguous (\u0027sitting on floor, assisted up\u0027). No equivalent Q3 check is possible because handover notes are now written inside Tallyline. The cross-check therefore cannot say how many falls Tallyline itself misses."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Director of Operations\u0027 memo to the executive team on the proposed night staffing pilot, 18 March 2026",
+          "source": "Executive team papers",
+          "sourceType": "leadership-account",
+          "text": "\u0027I do not support reducing night staff to save \u00A3410,000 a year across the group. Four on nights is the safe minimum for two-floor homes, and I expect falls to rise if we cut it. If the executive proceeds, I want it on record that I warned against this.\u0027 Minute, 2 April 2026: the executive approved a two-home pilot, and the Director of Operations\u0027 reservation was recorded."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Family complaints and compliments log, Ashby Fold and Penmor Lodge, April-September 2026",
+          "source": "Group customer relations log",
+          "sourceType": "system-record",
+          "text": "Complaints: Ashby Fold 3 (May: lost laundry; May: call bell \u0027took ages\u0027 at night; August: relative not told promptly about a no-harm fall); Penmor Lodge 2 (June: visiting hours; September: menu choice). Compliments: Ashby Fold 7, Penmor Lodge 9. No complaint mentions staffing levels. The August complaint was resolved after the home showed the family the Tallyline record and the time they were notified."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Post-fall observation completion audit, Ashby Fold and Penmor Lodge, Q2 and Q3 2026",
+          "source": "Group clinical audit team",
+          "sourceType": "system-record",
+          "text": "Group policy requires a 24-hour observation schedule (pulse, blood pressure and consciousness checks) after any unwitnessed fall or head strike. Full schedule completed: Q2 (paper prompts) 4 of 6 eligible falls, 67%; Q3 (Tallyline sends timed reminders for each logged fall) 15 of 16 eligible falls, 94%. One Q3 head injury was identified at the 4-hour check, and the resident was sent to hospital the same evening. The other seven homes, still on paper, averaged 62% in Q3."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Anonymous night-staff pulse survey, Ashby Fold and Penmor Lodge, September 2026",
+          "source": "Trade-union branch survey (14 of 22 night staff responded)",
+          "sourceType": "anonymous-staff-survey",
+          "text": "\u0027Compared with before June, is your night workload...\u0027 Heavier 9, about the same 4, lighter 1. \u0027Do you now log incidents you would not have written up on paper?\u0027 Yes 8, no 4, not sure 2. Free-text examples: \u0027paper forms took 20 minutes, so the little ones went in the handover book\u0027; \u0027the floating senior helps but she\u0027s always on the other floor when you need her\u0027; \u0027Tallyline nags you until you\u0027ve done the obs.\u0027 The union branch ran the survey, and the operations team helped draft the questions."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Most recent regulator inspection reports, Ashby Fold (March 2025) and Penmor Lodge (October 2024)",
+          "source": "Care regulator public reports",
+          "sourceType": "regulator-record",
+          "text": "Ashby Fold: rated Good overall, with Good in the safe domain. Inspectors noted that \u0027falls risk assessments are in place and reviewed monthly; sensor equipment is used appropriately\u0027. One recommendation: update fire evacuation plans. Penmor Lodge: rated Good overall. The safe domain was rated Requires Improvement because of medicines storage temperatures, which has since been resolved. No enforcement action at either home. Neither inspection looked at night staffing in detail."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Infection-control and outbreak log, Ashby Fold and Penmor Lodge, April-September 2026",
+          "source": "Group infection prevention lead",
+          "sourceType": "system-record",
+          "text": "No outbreaks were declared at either home. Urinary tract infections treated: Ashby Fold 6 in Q2, 5 in Q3; Penmor Lodge 4 in Q2, 5 in Q3. Chest infections: Ashby Fold 2 and 1; Penmor Lodge 1 and 2. One Penmor Lodge resident tested positive for a respiratory virus in August and was isolated for five days, with no onward spread. Hydration charts were audited monthly at both homes, and no concerns were raised."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The night-staffing pilot that began in June raised residents\u0027 underlying risk of falling at the two homes."
+          },
+          {
+            "id": "H2",
+            "text": "The rise mainly reflects more complete recording of falls after the two homes switched to the incident app, rather than more falls actually happening."
+          },
+          {
+            "id": "H3",
+            "text": "A shift in the resident population at the two homes toward frailer, higher-risk residents drove the rise."
+          },
+          {
+            "id": "H4",
+            "text": "Underlying fall risk at the two homes did not change, and the Q3 figures are ordinary quarter-to-quarter variation for homes of this size."
+          },
+          {
+            "id": "H5",
+            "text": "Prescribing changes made after the two homes moved to a new GP practice raised residents\u0027 fall risk."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Night-staffing pilot at the two homes (one carer per floor plus a floating senior)",
+            "to": "Higher recorded fall counts at the two homes in Q3 2026",
+            "relation": "increases"
+          },
+          {
+            "id": "R2",
+            "from": "Switch from paper incident forms to the incident app at the two homes",
+            "to": "Higher recorded fall counts at the two homes in Q3 2026",
+            "relation": "increases"
+          },
+          {
+            "id": "R3",
+            "from": "Change in resident mix toward frailer admissions at the two homes",
+            "to": "Higher recorded fall counts at the two homes in Q3 2026",
+            "relation": "increases"
+          },
+          {
+            "id": "R4",
+            "from": "Night-staffing pilot at the two homes",
+            "to": "Slower answering of night call bells",
+            "relation": "increases"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Return both homes to four night staff now and suspend the March rollout of the pilot rota to the other seven homes."
+          },
+          {
+            "id": "A2",
+            "text": "Keep the pilot running under its existing pause criteria. Re-present falls as rates on the control chart with the change in reporting method marked, start manual sampling of night call-bell response times at both homes, and take the rollout decision at a dated review in late January using Q4 data."
+          },
+          {
+            "id": "A3",
+            "text": "Issue formal capability warnings to the night senior carers at both homes over the rise in falls."
+          },
+          {
+            "id": "A4",
+            "text": "Withdraw the incident app at the two homes and return them to paper forms until all nine homes can switch together, so that the dashboard compares like with like."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q01",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-DEV2-NOCONC",
+      "groundTruthNarrative": "Recorded falls at Ashby Fold and Penmor Lodge rose from 16 in Q2 to 31 in Q3 2026. The rise coincided with two changes at exactly those two homes: the night-staffing pilot (from June) and the switch from paper incident forms to the Tallyline app (from July). The Director of Operations, who argued against the pilot before it started, blames the rota. The whole evidence base cannot settle the cause. Converted to rates, both homes\u0027 Q3 figures sit inside their own historical ranges and control limits. Q2 was an unusually low quarter for both homes, and the group has seen five similar single-quarter jumps that fell back without action. However, the analyst warns that a real increase of around 40% could not yet be detected. Most of the increase is in no-harm and unwitnessed falls. A partial, non-random check of Q2 handover notes found 3-6 unreported falls in six weeks, which points to paper-era under-recording. But falls with harm also rose (6 to 9), and nobody knows how complete the app\u0027s own recording is. Call-bell timings have no pre-pilot baseline, and staff accounts conflict. Two alternatives are ruled out: resident mix and prescribing did not change, the rise is among long-stay residents, and the new GP practice mostly stopped medicines. The defensible course is to keep the pilot under its own pause rules, measure falls properly, and decide at the January review. Neither reversing the pilot nor declaring it safe is yet justified.",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "expected": "unknown",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "C2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "C2",
+            "C5",
+            "C6",
+            "C7",
+            "C9",
+            "C10",
+            "C13"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "confounded",
+            "misleading-signal",
+            "central"
+          ],
+          "rationale": "Several things fit H1: the timing, the night share of falls rising from 50% to 58%, the Ashby senior\u0027s account and the workload replies in the staff survey. But the incident app went live at the same two homes in the same quarter, and most of the rise is in no-harm and unwitnessed falls, the kind paper forms missed (C9). The rates are within each home\u0027s historical range and control limits (C2). No data separate a pilot effect from a recording change or from chance, and nothing counts against H1 either. The claim is live but unestablished."
+        },
+        {
+          "itemId": "Q02",
+          "expected": "unknown",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C2",
+            "C4",
+            "C9",
+            "C12",
+            "C13"
+          ],
+          "tags": [
+            "confounded",
+            "plausible-alternative",
+            "overreach-trap"
+          ],
+          "rationale": "The handover cross-check found 3 clear and 3 ambiguous unreported falls in 6 of 13 Q2 weeks, from a sample chosen by which notes survived. Scaled up, that implies roughly 6-13 missing Q2 falls against a rise of 15. So recording explains anywhere from under half to nearly all of the rise, and \u0027mainly\u0027 cannot be established. Falls with harm also rose (6 to 9), and the app\u0027s own completeness cannot be checked. The vendor\u0027s claim is unsupported and comes from an interested party (C4)."
+        },
+        {
+          "itemId": "Q03",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C5"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C5"
+          ],
+          "tags": [
+            "manager-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "Occupancy, admissions (including discharge-to-assess admissions, 3 in Q2 against 2 in Q3) and mean dependency were stable. 27 of the 31 Q3 falls, compared with 13 of 16 in Q2, were by residents who lived at the homes throughout both quarters. The rise is not coming from a changed population."
+        },
+        {
+          "itemId": "Q04",
+          "expected": "unknown",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C2",
+            "C7",
+            "C9"
+          ],
+          "tags": [
+            "normal-variation",
+            "base-rate",
+            "overreach-trap",
+            "central"
+          ],
+          "rationale": "C2 shows the Q3 rates are within the historical range and control limits, that Q2 was unusually low, and that comparable jumps have reverted before. That makes ordinary variation fully consistent with the data, against the impression from the red dashboard. But the analyst states explicitly that a real increase of around 40% would not yet show as a signal, and harmed falls rose too. The evidence does not show that underlying risk was unchanged, so this explanation fits the data no better than the others."
+        },
+        {
+          "itemId": "Q05",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C5"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C5"
+          ],
+          "tags": [
+            "manager-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "The Hollin Street reviews mostly stopped or reduced medicines (14 stopped, 4 reduced, 2 started). Psychotropic and hypnotic use was flat. The only new night-time hypnotic went to a resident with no recorded fall. There was no prescribing change that would raise fall risk."
+        },
+        {
+          "itemId": "Q06",
+          "expected": "association-only",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "E2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "C2",
+            "C7",
+            "C9",
+            "C13"
+          ],
+          "tags": [
+            "confounded",
+            "central"
+          ],
+          "rationale": "The pilot and the higher recorded counts co-occur at the same two homes in the same period. A causal link would need the main rival ruled out, and the app change coincided almost exactly (June pilot, July app; June\u0027s count of 7 cannot separate them). The other homes give no comparison because they had neither change. Nothing counts against the link, so it is association only."
+        },
+        {
+          "itemId": "Q07",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C4",
+            "C9",
+            "C12",
+            "C13"
+          ],
+          "tags": [
+            "confounded",
+            "measurement-change"
+          ],
+          "rationale": "The app went live as recorded counts jumped, and most of the jump is in no-harm and unwitnessed falls, which fits a plausible recording mechanism. But the cross-check cannot show that the app captures more than paper did, because no Q3 check is possible. The pilot is an uncontrolled rival at the same homes. The two co-occur, but causation is not established."
+        },
+        {
+          "itemId": "Q08",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C5"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C5"
+          ],
+          "tags": [
+            "manager-narrative"
+          ],
+          "rationale": "The evidence counts against the link itself: the claimed shift toward frailer admissions did not happen, and the extra falls came from residents who were present in both quarters. Admissions account for about 3-4 falls in each quarter."
+        },
+        {
+          "itemId": "Q09",
+          "expected": "unknown",
+          "weight": 2,
+          "requiredEvidence": [
+            "E1",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C6",
+            "C11",
+            "C13"
+          ],
+          "tags": [
+            "missing-data",
+            "mechanism-gap"
+          ],
+          "rationale": "There are no pre-pilot response-time data (E1, confirmed by C6), and Penmor\u0027s system cannot record answer times. The only accounts are unmeasured perceptions, and they conflict: the Ashby senior says slower, the Penmor senior says not worse. The evidence cannot establish even an association."
+        },
+        {
+          "itemId": "Q10",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C2",
+            "C7",
+            "C9",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "premature"
+          ],
+          "rationale": "If H1 were confirmed, restoring four night staff and suspending the rollout would clearly help. If H1 is wrong, the cost is money and a delayed evaluation, which is reversible. Right now the rise cannot be told apart from chance or a recording change (C2, C9), the pilot\u0027s own pause criteria have not been met (C7), and the request comes from a director who opposed the pilot in advance (C10). Committing now is not justified."
+        },
+        {
+          "itemId": "Q11",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C2",
+            "C6",
+            "C7",
+            "C9"
+          ],
+          "tags": [
+            "measurement",
+            "decision-deferral"
+          ],
+          "rationale": "This keeps the existing safety net (the pause rules), puts falls on a measure that separates the change in reporting method and chance from a real change, and fills the missing mechanism data (call bells). It also matches the protocol\u0027s planned two-quarter evaluation. Every live hypothesis gets tested before an irreversible rollout or a costly reversal."
+        },
+        {
+          "itemId": "Q12",
+          "expected": "harmful",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C2",
+            "C9",
+            "C13"
+          ],
+          "tags": [
+            "punish-wrong-party",
+            "suppresses-reporting"
+          ],
+          "rationale": "Under every live explanation, individual night seniors are the wrong target. If the pilot raised risk, the cause is the staffing design. If recording improved, the warnings punish better reporting. If the rise is chance, they punish noise. Under all three, the warnings would discourage staff from logging minor falls."
+        },
+        {
+          "itemId": "Q13",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C9",
+            "C12",
+            "C13"
+          ],
+          "tags": [
+            "suppresses-information",
+            "protective-control"
+          ],
+          "rationale": "Paper forms demonstrably missed falls (C9). Going back to paper would hide information whichever hypothesis is true. It would also switch off the app\u0027s timed post-fall observation reminders, which raised completion from 67% to 94% and caught a head injury (C12). Comparability can be handled by marking the method change instead."
+        },
+        {
+          "itemId": "Q14",
+          "expected": "insufficient",
+          "weight": 3,
+          "requiredEvidence": [
+            "C2",
+            "C9"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C2",
+            "C5",
+            "C7",
+            "C9"
+          ],
+          "tags": [
+            "sufficiency",
+            "no-reliable-conclusion"
+          ],
+          "rationale": "Neither substantive decision can be committed to. Reversing the pilot needs H1 to be established. Concluding that no intervention is needed, or rolling the rota out, needs a real rise to be excluded, and C2 explicitly says a real rise of around 40% cannot yet be excluded. The best action is evidence-gathering, so the evidence is insufficient."
+        }
+      ],
+      "discriminatingReads": [
+        "C2",
+        "C9",
+        "C5"
+      ],
+      "lowValueReads": [
+        "C1",
+        "C3",
+        "C8",
+        "C11",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C2",
+        "C9",
+        "C5"
+      ],
+      "authoringNotes": "Class NOCONC. Read alone, the initial file pushes toward H1 \u0027supported\u0027: a director\u0027s narrative, an apparent doubling, red RAG flags, a rising night share and a staff account. It also contains fair counter-signals: the dashboard footnote about the app, the Penmor senior\u0027s comment, day falls rising too, and the lack of call-bell baseline data. C2 (rates and control limits) and C9 (app go-live, harm levels and the handover cross-check) show that the leading question cannot be settled. They also keep H2 and H4 at \u0027unknown\u0027 rather than letting an analyst overcorrect to \u0027supported\u0027 (C2\u0027s power caveat; harmed falls up 6 to 9; the cross-check sample is non-random and Q3 completeness is unknown). C5 settles the two manager-led distractors (H3 and H5, and R3) as contradicted. Interested or weak sources: the director (C10 shows her prior opposition), the vendor (C4, no data), and the union survey drafted with the operations team (C13). C6 is a tempting mechanism read but has no baseline. C7 supports A1 being premature and A2 being preferred, but it does not change any key from the optimal path. A \u0027roll out now\u0027 action was deliberately left out because it fits neither the premature nor the harmful definition cleanly. Q2/Q3 arithmetic is consistent across E2, E4, C9 and C5 (16 and 31)."
+    }
+  }
+}

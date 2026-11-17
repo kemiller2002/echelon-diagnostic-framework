@@ -1,0 +1,225 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-CONTRA__haiku-low__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-CONTRA",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C6",
+    "X3": "C16",
+    "X4": "C8",
+    "X5": "C14",
+    "X6": "C1",
+    "X7": "C15",
+    "X8": "C5",
+    "X9": "C4",
+    "X10": "C13",
+    "X11": "C11",
+    "X12": "C10",
+    "X13": "C7",
+    "X14": "C2",
+    "X15": "C3",
+    "X16": "C9"
+  },
+  "readLabels": [
+    "X6",
+    "X15"
+  ],
+  "reads": [
+    "C1",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-CONTRA__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28923,
+    "cacheCreationTokens": 7684,
+    "outputTokens": 2409,
+    "thinkingTokens": 1039,
+    "costUsd": 0.00303133,
+    "durationMs": 16921,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022methodChoice\u0022:\u0022Collected 2 of 3 allowed items (X6 platform audit trail, X15 internal audit recalculation); stopped once the cause was clear.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidence\u0022:\u0022\u0022,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022,\u0022E1\u0022],\u0022answer_\u0022:\u0022\u0022},{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X6\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022The October night premium shortfalls were caused by Ardentra\u0027s own change, not by your data. On 22 October an Ardentra consultant applied a template to the night premium rule, which moved the premium\u0027s start time from 8pm to 10pm. The change log called it a label fix, and the audit trail shows otherwise. Internal audit recalculated all 158 night workers: 147 were underpaid by exactly the premium for hours between 8pm and 10pm. Re-running October with the 8pm start restored correct pay on the same platform release, so the release and the migrated records are not the cause. Hours agree with rosters, and the bank paid what the file said.\\n\\nConfidence is good on the cause. I have not confirmed the overtime drop; the rota trial started the same day and could explain it, so I would not act on it yet.\\n\\nDo not adopt Ardentra\u0027s account, cut off the HR team, or roll back release 7.4, which carries the November tax update. Next: have Ardentra restore the 8pm window and prove it in the test tenant before 24 November, pay affected staff off-cycle, and claim the cost from Ardentra. Ask internal audit to review the October change decision.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:42:11.3148079Z",
+    "finishedAt": "2026-11-17T14:42:29.1663766Z",
+    "output": {
+      "caseId": "OD2-DEV2-CONTRA",
+      "methodChoice": "Collected 2 of 3 allowed items (X6 platform audit trail, X15 internal audit recalculation); stopped once the cause was clear.",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidence": "",
+          "evidenceIds": [
+            "X15",
+            "E3",
+            "E1"
+          ],
+          "answer_": ""
+        },
+        {
+          "itemId": "S1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "X15",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "E1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X15",
+            "X6",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "The October night premium shortfalls were caused by Ardentra\u0027s own change, not by your data. On 22 October an Ardentra consultant applied a template to the night premium rule, which moved the premium\u0027s start time from 8pm to 10pm. The change log called it a label fix, and the audit trail shows otherwise. Internal audit recalculated all 158 night workers: 147 were underpaid by exactly the premium for hours between 8pm and 10pm. Re-running October with the 8pm start restored correct pay on the same platform release, so the release and the migrated records are not the cause. Hours agree with rosters, and the bank paid what the file said.\n\nConfidence is good on the cause. I have not confirmed the overtime drop; the rota trial started the same day and could explain it, so I would not act on it yet.\n\nDo not adopt Ardentra\u0027s account, cut off the HR team, or roll back release 7.4, which carries the November tax update. Next: have Ardentra restore the 8pm window and prove it in the test tenant before 24 November, pay affected staff off-cycle, and claim the cost from Ardentra. Ask internal audit to review the October change decision."
+    }
+  }
+}

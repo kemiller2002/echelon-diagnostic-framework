@@ -1,0 +1,120 @@
+{
+  "caseId": "OD2-DEV-STOP",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "supported",
+        "confidence": 95,
+        "justification": "E2, E3 and C1 show the merge sat in a lock wait of 2h13m40s behind pid 48812. Every other step ran at its median (E2, C1), so the wait accounts for the whole 1h02m overrun. Without it the run would have finished around 04:48."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "Volume was normal: 4.08M rows against a Thursday median of 4.01M (E5), no table was more than 3% above its Thursday median (C3), and extract time was normal (E2). Monday runs with about 5.6M rows still finish well inside the window (E5, C7)."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "customer_ltv took 19m, in line with its benchmark (E5, C1, C4). build_marts was within \u00B18% of its medians (C1). Runs since 15 Oct with customer_ltv included had a median of only 3h13m (E5)."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "During CV-8812 (02:52\u201303:37) the merge was waiting on a lock, not executing (E3, C1). CPU did not change (C5). The vendor\u0027s report says statements already running saw little impact (C2). Every step after the incident ran at its median (E2)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "The \u00271:00\u0027 note is ambiguous, and the change board chair cannot tell which time was meant (E4, C11). The earlier backfill was approved for overnight (E4), the at queue is not retained (C6), and the implementer has not been contacted (E4). So intent cannot be determined."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "causal",
+        "confidence": 93,
+        "justification": "The system lock record names pid 48812 as the holder of the ExclusiveLock and the merge (pid 48990) as its only waiter. The merge got the lock one second after the backfill committed, and there were no other lock waits (E3, E2, C1)."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "causal",
+        "confidence": 90,
+        "justification": "All other step times were at their medians (E2, C1), so subtracting the 2h13m40s wait puts the finish around 04:48. That is before the 06:00 deadline and consistent with the historical latest finish of 05:11\u201305:14 (E5, C7)."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "contradicted",
+        "confidence": 87,
+        "justification": "The incident overlapped only the lock wait, not any executing step. There was no CPU change (C5), running statements were largely unaffected (C2), and every step\u0027s duration was normal (E2, C1)."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "association-only",
+        "confidence": 70,
+        "justification": "The snapshot runs only on Mondays, which are also the high-volume days at about 1.4\u00D7 rows (E5, C3, C7, C12). The two factors are fully confounded, so the evidence shows co-occurrence but does not establish that the snapshot causes the longer runtimes."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "This addresses the confirmed process gap: the job owner was not a stakeholder and the checklist does not require one (E4, C11). It also fixes the missing lock-wait alert (E2, C10), and the 1:00/13:00 ambiguity matters less because the 01:00\u201306:00 window would be barred unless the owner signs off."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "premature",
+        "confidence": 65,
+        "justification": "The run was outside the approved window, but intent is unknown (C11, C6) and the implementer has not been contacted (E4). The change process also failed to catch the 1:00 note (C11), so a disciplinary finding now risks blaming the wrong party."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "customer_ltv is cleared as a cause (E5, C1, C4). Removing it would break the retention team\u0027s daily 08:00 call list, which already failed once when the model was missing (E7)."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "The banner is a protective control: it stopped Wednesday\u0027s margins going into the flash pack as Thursday\u0027s (E7). No dashboard was exported while it was showing (C8), and the CFO was reassured once it was explained (E7)."
+      },
+      {
+        "itemId": "Q14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The cause is established from system records (E2, E3, C1), and the rival explanations are ruled out (C2, C3, C5, E5). That is enough to commit to A1 and to reject the vendor-tier upgrade and actions A3 and A4."
+      }
+    ],
+    "ambiguousItems": [
+      "Q11: \u0027premature\u0027 and \u0027harmful\u0027 are both defensible. A disciplinary finding before hearing from Varga, while the change-board checklist gap is a documented contributing cause (C11), could reasonably count as punishing the wrong party.",
+      "Q9: \u0027association-only\u0027 and \u0027unknown\u0027 are both defensible, because the snapshot is completely confounded with Monday volume. Some reviewers might read the data as showing no meaningful link at all."
+    ],
+    "caseProblems": [
+      "E3 explicitly states \u0027No other blocked sessions or lock waits recorded\u0027, and C5 states that the build_marts profile \u0027matches the median Thursday profile\u0027. Both are unusually tidy, conclusion-like summaries for system records.",
+      "E4 includes \u0027Implementer availability: on annual leave\u2026; not yet contacted about this run\u0027. That is an odd field for a change record and appears planted to signal that H5 and A2 are premature.",
+      "C6\u0027s platform note that the at queue is not retained after a job runs is conveniently placed to keep H5 unresolvable."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q11",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The task defines \u0027premature\u0027 as an action that could be right if a still-unconfirmed hypothesis were confirmed. That fits A2 exactly. It is a fact that Varga ran the backfill outside the approved window (E3, E4). Whether a disciplinary finding is justified depends on H5, which is unknown. The 13:00 window and the \u00271:00\u0027 note fit a 12-hour slip. The earlier overnight backfill (CHG-3240) fits a deliberate choice. Varga has not been contacted (E4), and C11 explicitly leaves intent open. \u0027Harmful\u0027 would need the evidence to show that Varga is the wrong party, or that the finding would clearly make outcomes worse. It shows neither. Varga is the person who ran the change outside its window. The checklist gap (C11) is a contributing cause, not proof that Varga carries no responsibility. If the overnight run turned out to be deliberate, a finding could be appropriate. So the action depends on an unresolved hypothesis, which is what \u0027premature\u0027 means. It is not shown to be wrong on any reading. The key\u0027s answer is the only one consistent with the answer semantics.",
+        "fix": ""
+      },
+      {
+        "itemId": "Q9",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The task defines \u0027unknown\u0027 for an edge as evidence that is insufficient even to show association. Here the association is plainly documented. E5 shows that Monday runs average 3h34m against 3h06m for other runs, and that the weekly snapshot runs on Mondays from 02:00 to 02:40, inside the batch window. C7 and C12 repeat the pattern over a longer period. So the snapshot and the longer runtimes do co-occur. Causation is not established, because Monday runs also extract about 1.4\u00D7 the rows, and no evidence separates the snapshot from volume. There is no step-level breakdown and no period with the snapshot paused. Confounding is exactly what makes a link \u0027association-only\u0027 rather than \u0027causal\u0027. It does not reduce an observed co-occurrence to \u0027unknown\u0027. Nothing counts against the link either, so \u0027contradicted\u0027 is out. The reviewer\u0027s reading of \u0027no meaningful link\u0027 mixes up \u0027not shown to be causal\u0027 with \u0027no association shown\u0027.",
+        "fix": ""
+      }
+    ]
+  },
+  "needsRevision": false
+}

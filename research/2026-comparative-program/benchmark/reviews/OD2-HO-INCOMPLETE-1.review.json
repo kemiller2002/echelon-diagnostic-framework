@@ -1,0 +1,136 @@
+{
+  "caseId": "OD2-HO-INCOMPLETE-1",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S1",
+        "answer": "unknown",
+        "confidence": 65,
+        "justification": "The only evidence of an efficiency decline is the dashboard ratio (E2, C12), and its \u0027cooling delivered\u0027 input depends on FT-201, which was given an unverified default factor on 2 Apr 2026 (C6); against a decline, condenser-water temperature is flat and there are no high-pressure alarms (C9, C4), while the vendor\u0027s approach comparison has no matching load (E3)."
+      },
+      {
+        "itemId": "S2",
+        "answer": "unknown",
+        "confidence": 55,
+        "justification": "Interim HX-F1 (up to 400 kW) was tied into the header just as presses moved in Apr\u2013Jun (C11), and CH-3 run-hours doubled under an unchanged staging rule (C5, E6, C15), but there is no heat meter, the valve positions are unrecorded and a parallel cooler exists (C11), so the added load has not been measured."
+      },
+      {
+        "itemId": "S3",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "The independent revenue meter rose by the same ~218 MWh, and its accuracy test passed (C1, E1); non-chiller submeters were flat (C13); and more chiller run-hours confirm real consumption (C5)."
+      },
+      {
+        "itemId": "S4",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "2026 was slightly cooler and drier: lower dry-bulb and wet-bulb temperatures, fewer hours above 20 \u00B0C wet-bulb and 2% fewer CDD (C2, E1)."
+      },
+      {
+        "itemId": "S5",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "The setpoint was only lowered for 14\u201317 Mar and then restored, the parameter audit confirms 7.0 \u00B0C and the mean supply temperature was 7.1 \u00B0C (E5, C10)."
+      },
+      {
+        "itemId": "S6",
+        "answer": "unknown",
+        "confidence": 50,
+        "justification": "An efficiency decline itself has not been established, because the dashboard ratio rests on an unverified flowmeter (C6, E2), so not even a real association can be shown."
+      },
+      {
+        "itemId": "S7",
+        "answer": "association-only",
+        "confidence": 55,
+        "justification": "The HX-F1 tie-in and the staged press moves (C11) line up in time with the Apr\u2013Jun ramp (E1) and with heavier chiller staging (C5), but no heat or flow measurement on the branch confirms it caused the growth."
+      },
+      {
+        "itemId": "S8",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "The setpoint change lasted 3 days in March and was reversed, with supply temperature unchanged in Apr\u2013Oct (E5, C10), while the growth began in April and kept rising."
+      },
+      {
+        "itemId": "S9",
+        "answer": "unknown",
+        "confidence": 60,
+        "justification": "Only the vendor asserts the link (E3); the water-treatment records show acceptable control with a minor scaling index in Jul\u2013Aug (C3), nobody has inspected the tubes (C7), and the efficiency decline itself is unestablished (C6)."
+      },
+      {
+        "itemId": "S10",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "The decisive unknowns are the true header flow (C6) and the load on the HX-F1 branch (C11); a verified temporary meter, branch logging and per-chiller power measurements resolve both at low cost."
+      },
+      {
+        "itemId": "S11",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "Fouling is unconfirmed: there are no high-pressure alarms and condenser-water temperature is flat (C4, C9), the approach comparison has no matching load (E3), CH-2 was just brushed (C7) and the routine brushing is due Feb 2027."
+      },
+      {
+        "itemId": "S12",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "Production needs 7 \u00B0C supply; a past drift to 8.5 \u00B0C caused scrap and missed deliveries (E4), and line 3 already complains of warm water (C15)."
+      },
+      {
+        "itemId": "S13",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "It is cheap and fits the already-booked Dec CH-2 outage (C7), but CH-2\u0027s tubes were brushed in Oct 2026, so the inspection gives little information about fouling on CH-1 or CH-3."
+      },
+      {
+        "itemId": "S14",
+        "answer": "insufficient",
+        "confidence": 82,
+        "justification": "Neither the efficiency explanation nor the load explanation can be established without verified flow and branch-load data (C6, C11), so committing to substantive action is not yet justified."
+      }
+    ],
+    "ambiguousItems": [
+      "S2: unknown vs supported \u2014 C11 timing, the doubled CH-3 run-hours (C5) and flat condenser conditions (C9, C4) give a fairly strong circumstantial case for added load, but the load was never measured.",
+      "S6: unknown vs association-only \u2014 the dashboard efficiency ratio co-moves with electricity, but only by construction from a suspect flowmeter.",
+      "S13: acceptable vs preferred \u2014 it costs little and is already scheduled, but the next outage is CH-2, which was just brushed.",
+      "S7: association-only vs unknown, depending on whether timing alone counts as association."
+    ],
+    "caseProblems": [
+      "Internal tension: if the HX-F1 load ramped up from April to June, a header meter with a constant (default-factor) error would not show delivered cooling flat year on year month after month (E2). The case does not explain how FT-201 hides a ramping load, for example by saying where HX-F1 ties in relative to FT-201 and TT-202.",
+      "Monthly growth keeps rising through Sep\u2013Oct (E1, E2) even though hall-coil load from Building F should fall in autumn; this is only plausible as a percentage effect against a falling baseline and is not explained.",
+      "A4\u0027s \u0027next scheduled single-chiller outage\u0027 is the CH-2 outage, but CH-2 was brushed in Oct 2026 (C7). This undercuts A4\u0027s diagnostic value in a way that depends on reading the catalogue closely; it may be intended, but it is subtle.",
+      "C6\u0027s catalogue title (\u0027Calibration certificates and work-order history for chilled-water header flowmeter FT-201\u0027) makes clear that the flowmeter is the crux, which partly leaks the answer."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S2",
+        "ruling": "ambiguous",
+        "explanation": "The key\u0027s \u0027unknown\u0027 can be defended. C11 records manual HX-F1 isolation and selector valves whose positions have not been recorded since commissioning, the Building C cooler is piped in parallel, and there is no heat meter, so nothing shows heat entering the loop. But this task defines \u0027supported\u0027 comparatively: the evidence \u0027supports the claim more than its rivals.\u0027 On that reading, \u0027supported\u0027 is also defensible. H3, H4 and H5 are contradicted. H1\u0027s support is gone: C6 invalidates the dashboard, and E3 is one approach reading from an interested vendor that is not load-matched. H2, by contrast, has positive evidence. C11 documents a physical tie-in with flow observed on 8 Apr. The hall coils have no other cooling source in C11: the parallel Building C cooler serves only the mould units, and the hall in Building C had no cooling. The three dated press moves line up with the \u002B4/\u002B9/\u002B14% ramp. The ~220 kW needed fits within HX-F1\u0027s 400 kW. C5 and E6 show more chiller staging. With nothing comparable on the H1 side, a careful analyst can reasonably conclude H2 is better supported than every rival. The hall-coil load in particular has no alternative route in the current evidence, which keeps \u0027supported\u0027 alive despite Revision 2.",
+        "fix": "Edit C11 so the heat input is genuinely open on both routes. Add: \u0027Facilities email 18 Jun: hall AHUs running ventilation-only (coil valves closed) pending AC-F1; not BMS-monitored, no later record.\u0027 Also add: \u0027Building C cooler rated for all 18 presses.\u0027 Keep \u0027valve stroked, flow observed\u0027 and the press-move dates, so S7 stays association-only. After this edit, whether any heat reaches the central loop depends entirely on unrecorded valve positions, and S2 = unknown is uniquely defensible."
+      },
+      {
+        "itemId": "S6",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R1 needs a decline in chiller efficiency to be shown co-occurring with the electricity growth. The only series showing an efficiency decline is the dashboard kWe/kWr ratio. Its numerator is the MCC-4 electricity itself, and its denominator comes from FT-201, which C6 invalidates in both periods: open drift work order, verification last done in 2022, and a default calibration factor with no wet check since April 2026. Its co-movement with electricity is therefore partly by construction, and it is not independent evidence that efficiency fell. C12 only repeats the dashboard. E3 is one CH-1 approach reading, not load-matched, compared with a start-up value at unknown load; that is not a time series and cannot show covariation. E6 is a subjective impression. Because the \u0027from\u0027 condition is not shown to have occurred, co-occurrence cannot be shown. \u0027Unknown\u0027 fits the definition (\u0027insufficient even to show association\u0027), and \u0027association-only\u0027 would mean accepting an invalidated instrument.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "S13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A4 means opening a waterbox at \u0027the next scheduled single-chiller service outage\u0027. C7 identifies that as CH-2\u0027s outage on 8\u201310 Dec, and CH-2\u0027s tubes were brushed on 24\u201327 Oct with no record of their condition. A visual check would show about six weeks of deposit on a freshly cleaned unit. It would tell little about CH-1, the unit the vendor measured, or CH-3, neither opened since Feb 2025. It cannot address the competing explanation, HX-F1 load growth. It is cheap and harmless, so \u0027acceptable\u0027, but clearly weaker than A1, which separates the two explanations directly. \u0027Preferred\u0027 is therefore not defensible. One small risk: C7\u0027s planner note says only that \u0027a waterbox could be opened\u0027, which a reader might take to include CH-1\u0027s waterbox during the low-load December window.",
+        "fix": "Optional tightening: in C7, change \u0027a waterbox could be opened\u0027 to \u0027the CH-2 condenser waterbox could be opened\u0027, so no reader can assume CH-1 is inspectable in that window."
+      },
+      {
+        "itemId": "S7",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R2\u0027s \u0027from\u0027 condition is a heat load connected to the chilled-water loop, and C11 documents that connection. HX-F1 was tied into the central header for loads that were not on the central loop in Building C, with flow observed at commissioning on 8 Apr. The three dated relocation phases (8 Apr, 13 May, 10 Jun) track the E1 ramp of \u002B4%, \u002B9% and \u002B14%. This is co-occurrence plus covariation in stages, more than bare timing, so \u0027unknown\u0027 understates the evidence. \u0027Causal\u0027 is not justified: the heat transferred is unmeasured, the valve positions are unrecorded, a parallel cooler exists, and the efficiency rival is not ruled out. \u0027Contradicted\u0027 fails because C11 refutes the manager\u0027s denial in E4. \u0027Association-only\u0027 is the only defensible answer.",
+        "fix": "No change needed. If the S2 fix is adopted, keep the commissioning note \u0027valve stroked, flow observed\u0027 and the press-move dates so this ruling stays unchanged."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

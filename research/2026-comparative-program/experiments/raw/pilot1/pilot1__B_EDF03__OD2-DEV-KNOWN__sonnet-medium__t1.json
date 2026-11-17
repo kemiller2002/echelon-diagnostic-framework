@@ -1,0 +1,222 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-KNOWN",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C6",
+    "X3": "C10",
+    "X4": "C7",
+    "X5": "C5",
+    "X6": "C9",
+    "X7": "C4",
+    "X8": "C2",
+    "X9": "C11",
+    "X10": "C3",
+    "X11": "C12",
+    "X12": "C1"
+  },
+  "readLabels": [
+    "X8",
+    "X2",
+    "X5",
+    "X4",
+    "X1"
+  ],
+  "reads": [
+    "C2",
+    "C6",
+    "C5",
+    "C7",
+    "C8"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19985,
+    "cacheCreationTokens": 10863,
+    "outputTokens": 2352,
+    "thinkingTokens": 322,
+    "costUsd": 0.0689825,
+    "durationMs": 17854,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-KNOWN\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X2\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X2\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X2\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X2\u0022,\u0022X5\u0022]}],\u0022brief\u0022:\u0022Turnaround doubled mainly because of a control change on 1 April. Following an audit finding, adjuster settlement authority was cut from $10,000 to $2,500. Settlements of $2,500\u2013$10,000 (about half of all claims) now wait for three team leads. Those claims spent 0.7 days awaiting approval before and 16 days now. Their total went from 10.4 to 26 days. Other stages, such as indexing, investigation and payment, barely moved, and the other claim bands are unchanged. That counts against the imaging switch, the hail surge and the lost senior adjusters as main causes. The team leads\u0027 approval tray has grown steadily from 11 to 455 items. They approve about 199 items a week against roughly 212 arriving. The change was approved without a workload assessment. I\u0027m fairly confident, around 85\u201390%. The complaints rise is unreliable because logging changed in April. Whether the lower limit actually cuts overpayments is unproven. Don\u0027t sign the contractors or the imaging move. Don\u0027t discipline the team leads, and don\u0027t scrap the audit control. Add temporary approval capacity for this band with Internal Audit, for example by certifying senior adjusters as second approvers. Keep a second review on every claim in the band and track approval wait weekly. Leave permanent limits and a new post until the December re-test.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:13.4078359Z",
+    "finishedAt": "2026-11-17T14:27:32.7125441Z",
+    "output": {
+      "caseId": "OD2-DEV-KNOWN",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X8",
+            "X2",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S-H5",
+          "answer": "unknown",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X8",
+            "X2",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X8",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "X2",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X2",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "premature",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "X2",
+            "X5"
+          ]
+        }
+      ],
+      "brief": "Turnaround doubled mainly because of a control change on 1 April. Following an audit finding, adjuster settlement authority was cut from $10,000 to $2,500. Settlements of $2,500\u2013$10,000 (about half of all claims) now wait for three team leads. Those claims spent 0.7 days awaiting approval before and 16 days now. Their total went from 10.4 to 26 days. Other stages, such as indexing, investigation and payment, barely moved, and the other claim bands are unchanged. That counts against the imaging switch, the hail surge and the lost senior adjusters as main causes. The team leads\u0027 approval tray has grown steadily from 11 to 455 items. They approve about 199 items a week against roughly 212 arriving. The change was approved without a workload assessment. I\u0027m fairly confident, around 85\u201390%. The complaints rise is unreliable because logging changed in April. Whether the lower limit actually cuts overpayments is unproven. Don\u0027t sign the contractors or the imaging move. Don\u0027t discipline the team leads, and don\u0027t scrap the audit control. Add temporary approval capacity for this band with Internal Audit, for example by certifying senior adjusters as second approvers. Keep a second review on every claim in the band and track approval wait weekly. Leave permanent limits and a new post until the December re-test."
+    }
+  }
+}

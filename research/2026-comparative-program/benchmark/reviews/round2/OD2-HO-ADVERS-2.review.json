@@ -1,0 +1,134 @@
+{
+  "caseId": "OD2-HO-ADVERS-2",
+  "blindAgreement": "15/15",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I1",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Auto-closures happen before case creation (E3, C2), and cases reaching Incident\u2013Confirmed stayed at 37 in Sep and 36 in Oct (C4), close to the pre-migration level (E1). So triage did not reduce confirmations. The fall is exactly the 47 cases re-categorised later (C4)."
+      },
+      {
+        "itemId": "I2",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Confirmations per month are unchanged at 37 and 36 (C4) and alert volume is steady (E5, C8). Sep 37\u221223=14 and Oct 36\u221224=12 match the reported counts (E1), so lost detections are not needed to explain the fall."
+      },
+      {
+        "itemId": "I3",
+        "answer": "supported",
+        "confidence": 88,
+        "justification": "All 47 analyst-confirmed cases were moved to Suspicious Activity\u2013Monitoring 3h31m\u20133h42m after opening, while the SLA warning was active (C4). The changes came from a python script on Brackwater\u0027s jump host that polls specifically for confirmed cases with an SLA warning (C11). None was merged (C4), which contradicts C7. This points to deliberate reclassification."
+      },
+      {
+        "itemId": "I4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Analyst-confirmed malicious cases are steady at 37 and 36 a month (C4), and alert volume is unchanged (E5). The ISAC 8% phishing fall is a self-reported, unadjusted sector figure (C3) and cannot explain a two-thirds drop."
+      },
+      {
+        "itemId": "I5",
+        "answer": "contradicted",
+        "confidence": 87,
+        "justification": "The connector host made 0 category writes (C11). All 47 category PATCHes came from bss-jump-02 with a python-requests user-agent, which is the check that advisory C5 itself recommends for attributing changes to the connector."
+      },
+      {
+        "itemId": "I6",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Playbooks act before cases exist (E3, C2), and confirmed cases did not fall (C4: 37 and 36). The timing coincides, but the evidence counts against playbooks causing the fall in reported incidents."
+      },
+      {
+        "itemId": "I7",
+        "answer": "contradicted",
+        "confidence": 72,
+        "justification": "Confirmations stayed at the historical level (C4), and the whole fall is accounted for by post-confirmation category changes (C4, E1). That counts against rule deprecation driving the fall in reported confirmed incidents."
+      },
+      {
+        "itemId": "I8",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "There is temporal order (confirmation, then change at 3h31m\u20133h42m), a mechanism (re-categorised cases leave the counted category and the SLA metrics; E5, C4, C1 3.8), and exact arithmetic (37\u221223=14, 36\u221224=12 against E1). Ledgerline had no such changes (C4) and locked the field (C10)."
+      },
+      {
+        "itemId": "I9",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "Mean time to contain for cases contained within 3h30m is unchanged (1h51m vs 1h50m; C4). The lower reported mean comes from slow, uncontained cases leaving the metric (C4), not from faster analyst work."
+      },
+      {
+        "itemId": "I15",
+        "answer": "unknown",
+        "confidence": 60,
+        "justification": "The 28 replacement mappings were reviewed by Brackwater but never independently tested (C6), and per-rule historical incident data does not exist (C6). Steady confirmation counts (C4) do not rule out specific missed behaviours, so the evidence neither shows nor refutes undetected activity."
+      },
+      {
+        "itemId": "I10",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "There are 47 confirmed incidents with no containment timestamp (C4), including credential misuse, malware execution and data staging. Cutting IR capacity on the basis of a manipulated metric (E2, C14) would likely worsen outcomes."
+      },
+      {
+        "itemId": "I11",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "It restores the 47 confirmed cases (C4), checks the uncontained incidents with in-house staff and Halvard, and removes the cases:write category right (E3, C10) that the jump-host script used (C11). This addresses both the risk and the control gap."
+      },
+      {
+        "itemId": "I12",
+        "answer": "premature",
+        "confidence": 65,
+        "justification": "Credits apply only to confirmed incidents not contained within 4 hours (C1 3.4). Notes on 11 of the 47 describe containment steps (C4), so blanket invoicing should wait until containment is verified per case."
+      },
+      {
+        "itemId": "I13",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "Asking Brackwater to explain is reasonable before the renewal decision. However, their account (C7) is already contradicted by C4 and C11, so on its own this delays the needed containment verification and is not the best action."
+      },
+      {
+        "itemId": "I14",
+        "answer": "sufficient",
+        "confidence": 82,
+        "justification": "The audit trail (C4) and API gateway log (C11) together establish the post-confirmation re-categorisation and its source. That is enough to commit to A2, which is the highest-ranked substantive action."
+      }
+    ],
+    "ambiguousItems": [
+      "I13: A4 could be read as \u0027acceptable\u0027 (a reasonable governance step) or \u0027premature\u0027/\u0027harmful\u0027 (it gives the implicated party a chance to shape the narrative and delays verifying containment).",
+      "I15: R5 could be \u0027unknown\u0027 (no independent testing of the replacement rules) or \u0027contradicted\u0027 (confirmations steady at about 37 a month).",
+      "I12: A3 could be \u0027premature\u0027 (11 cases show containment steps and need per-case verification) or \u0027acceptable\u0027 (none of the 47 has a containment timestamp)."
+    ],
+    "caseProblems": [
+      "E1 labels August as the \u0027migration month\u0027, but CHG-2291 (E3) gives 2 September as the implementation date. This is a minor inconsistency.",
+      "H3\u0027s word \u0027deliberately\u0027 is supported by the script pattern (C11) but attributes intent without identifying an actor (C12 has no activity records). The case could note that intent is inferred.",
+      "C7\u0027s merge claim is directly refuted by C4 (\u0027None was linked or merged\u0027), and the connector claim by C11. The case is internally consistent, but the refutations are very tidy."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A4 asks Brackwater for a written explanation before the January renewal. Asking a vendor to account for anomalies is ordinary governance. The worry that this lets the implicated party \u0027shape the narrative\u0027 does not hold up: C4 and C11 were exported by Corvane IT on 12 Nov, so the key records are already secured and Brackwater cannot alter or hide them. The other worry, that A4 delays verifying containment, also fails. A4 does not replace or block A2; it only affects the timing of the renewal decision. A4 suppresses no information, punishes no wrong party and disables no protective control, so \u0027harmful\u0027 does not fit. \u0027Premature\u0027 does not fit either, because A4 does not depend on any unconfirmed hypothesis being true. It is not \u0027preferred\u0027, because C4 and C11 already establish what happened, and A4 does nothing about the 47 possibly uncontained compromises or the open cases:write grant, which A2 handles. \u0027Acceptable\u0027 is the only label that fits.",
+        "fix": "No evidence change is needed. Optionally, add to the I13 rationale: \u0027C4 and C11 are already in Corvane\u0027s custody, so asking for an explanation cannot compromise the evidence. A4 complements A2 rather than replacing it.\u0027"
+      },
+      {
+        "itemId": "I15",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R5 claims that deprecating the rules caused malicious activity to go undetected. Steady confirmation counts (37 and 36, within 33\u201346) and steady alert volumes (E5) only count detected activity. Attacks missed by the deprecated rules would never appear in either number, so these figures cannot count against R5. At most they show the gap is not large enough to move the totals, and even that inference is weak because the baseline range is wide. C6 says the replacement mapping was never independently tested and that per-rule incident history does not exist. C8 covers platform health only, not detection content. Nothing shows undetected activity, so \u0027association-only\u0027 or \u0027causal\u0027 cannot be supported. Nothing measures coverage, so \u0027contradicted\u0027 is not justified either. Under the stated semantics (\u0027evidence is insufficient even to show association\u0027), \u0027unknown\u0027 is the only defensible answer. The case was designed with this trap in mind: contradicting R2 does not prove R5 false.",
+        "fix": "None required."
+      },
+      {
+        "itemId": "I12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Credits are owed only for confirmed incidents not contained within 4 hours (C1 3.4). A3 invoices a credit for all 47 moved cases at once. The cases were moved at 3h31m\u20133h42m, so containment could still have happened before the 4-hour mark. A missing containment timestamp is a gap in the record, not proof of breach, and the notes on 11 cases describe containment steps (C4). So whether each case breached the SLA is still unverified. Once A2\u0027s per-case verification confirms which cases breached, the credits would be right. That is exactly what \u0027premature\u0027 means. The case for \u0027acceptable\u0027 rests on treating the missing timestamp as proof of breach, which C4 itself undercuts with the 11 cases. One weakness: the key\u0027s own rationale ends \u0027and an invoice can be corrected later\u0027. That clause suggests acting now carries little cost, which slightly undercuts \u0027premature\u0027 and could lead a reader towards \u0027acceptable\u0027.",
+        "fix": "Edit the I12 rationale. Remove \u0027and an invoice can be corrected later\u0027 and replace it with: \u0027a blanket claim covering cases that may have been contained in time (11 have containment notes) commits Corvane to a contractual position the evidence does not yet support.\u0027 Optionally, add a sentence to C4 to reinforce this: \u0027containment-step notes on the 11 cases are untimed, so it cannot be determined from the record whether they were contained within 4 hours.\u0027"
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

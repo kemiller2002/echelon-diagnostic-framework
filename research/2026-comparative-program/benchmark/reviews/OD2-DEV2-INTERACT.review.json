@@ -1,0 +1,139 @@
+{
+  "caseId": "OD2-DEV2-INTERACT",
+  "blindAgreement": "16/16",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S01",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "The 6.4 tote robots in Zone C, where no wrapped pallets are staged, stayed flat at 2.4 to 2.5 (C2). In the bench test, 6.4 with the old matte film stopped 0/20 times (C3), and other 6.4 sites show no rise (C7), so firmware alone does not explain the increase."
+      },
+      {
+        "itemId": "S02",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "The gloss film was in use from 4\u201311 August, yet stops stayed near 200 per week until week 36 (E1, E5, C9). The 6.3 robots in A/B stayed flat at 3.1 to 3.3 (C2), and 6.3 with gloss film stopped only 1/20 times on the bench (C3)."
+      },
+      {
+        "itemId": "S03",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "Stops with a badge tag nearby barely changed (41 to 44), while stops with no tag nearby rose from 164 to 607, and 99.2% of floor entries were tagged (C1). The temps were spread across all zones, yet only 6.4 robots in A/B rose (C1, C2), and the training records are clean (C4)."
+      },
+      {
+        "itemId": "S04",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "Only 6.4 robots working near gloss-wrapped pallets rose (3.2 to 15.6), while robots with one factor alone stayed flat (C2). The bench test showed 17/20 stops for 6.4 with gloss, against 1/20 and 0/20 for the other combinations, with no people present (C3), and the engineer described the mechanism (C3, C8)."
+      },
+      {
+        "itemId": "S05",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "The temps were also in Zone C, where the 6.4 robots stayed flat, and tagged stops did not rise (C1, C2). The bench test reproduced the stops with no people present (C3)."
+      },
+      {
+        "itemId": "S06",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "Release 6.4.2 is meant to reclassify the film reflections, but it has not been tested against this film (C3, E4), so the evidence neither confirms nor rules out that it would fix the problem on its own."
+      },
+      {
+        "itemId": "S07",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The eight robots left on 6.3 act as a natural control under the same dynamic mission assignment (C2). The bench intervention (C3) and the near-field filtering mechanism (E3, C3) show that firmware contributes, though only together with the film."
+      },
+      {
+        "itemId": "S08",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "In the bench test with 6.4, switching from matte to gloss film raised stops from 0/20 to 17/20 (C3). Gloss is 90 vs 55 GU (C8), and the rise appeared only in the pallet zones (C2), so the film contributes through its interaction with 6.4."
+      },
+      {
+        "itemId": "S09",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Tagged stops stayed flat at about 41\u201344 per week (C1). The temps were spread across zones while the rise was confined to 6.4 robots in A/B (C1, C2), and contact and near-miss reports were unchanged (C10)."
+      },
+      {
+        "itemId": "S10",
+        "answer": "association-only",
+        "confidence": 75,
+        "justification": "Missed waves had more stops (median 61 against 49), but they were also the largest waves, and the analyst has not separated volume from stops (C11). In 2025, cut-off misses rose from 2 to 7 per week with no rise in stops (E6), and wait time is not recorded per wave."
+      },
+      {
+        "itemId": "S11",
+        "answer": "preferred",
+        "confidence": 82,
+        "justification": "The matte film gave 0/20 stops with 6.4 (C3). The old film can be ordered within three working days (C9), and this option keeps 6.4\u0027s security patches and thin-obstacle detection (E3, C3) without touching the safety configuration."
+      },
+      {
+        "itemId": "S12",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "6.3 with gloss film produced few stops (C2, C3), so a rollback would likely work. However, 6.3 security support ends 31 October (E3), the rollback gives up 6.4\u0027s thin-obstacle detection (C3), and the film switch (C9) is a cheaper, cleaner remedy."
+      },
+      {
+        "itemId": "S13",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "Risk assessment RA-114 sets the current field as the minimum for mixed lanes at 1.2 m/s, and the safety committee did not endorse a cut (C14), so shortening the field would weaken a protective control."
+      },
+      {
+        "itemId": "S14",
+        "answer": "harmful",
+        "confidence": 93,
+        "justification": "The stops are caused by firmware and film, not by people (C1, C2, C3), and the temps\u0027 training records are clean (C4). Matching stops to rosters would punish the wrong people (C14), and E2\u0027s dismissal of the firmware is wrong."
+      },
+      {
+        "itemId": "S15",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "Release 6.4.2 has not been tested against this film (C3) and is not due until December (E4), so committing to it as the permanent fix depends on H6, which is unconfirmed, while the stops continue through peak."
+      },
+      {
+        "itemId": "S16",
+        "answer": "sufficient",
+        "confidence": 82,
+        "justification": "The natural experiment by firmware group and zone (C2), the bench intervention (C3), and the elimination of temps, network and maintenance causes (C1, C5, C6, C15) are enough to commit to the low-risk, reversible film switch (A1)."
+      }
+    ],
+    "ambiguousItems": [
+      "S12: rolling back to 6.3 could also be called premature or harmful, because 6.3 security support ends 31 Oct (E3) and 6.4\u0027s improved fork-tine detection would be lost (C3); \u0027acceptable\u0027 is also defensible because it would cut the stops (C2, C3).",
+      "S15: an indefinite wait for an untested fix during peak could also be called harmful, but \u0027premature\u0027 fits better.",
+      "S10: \u0027unknown\u0027 is also defensible, since robot wait time is not recorded per wave (C11)."
+    ],
+    "caseProblems": [
+      "C3\u0027s catalogue title (\u0027Bench test of protective stops against staged outbound pallets\u0027) and C2\u0027s grouping by firmware and zone point strongly toward the answer, but they do not state it outright.",
+      "C3 is a near-perfect 2x2 factorial in which the field engineer explains the mechanism directly, which makes the interaction case unusually clean.",
+      "E5\u0027s technician argument against the film is set up as a deliberate decoy that the interaction resolves. This is realistic, but it should be noted."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Premature\u0027 does not fit. That label is for an action that would only be right if a still-unconfirmed hypothesis were confirmed. Here the hypothesis A2 relies on is already established. The holdback robots stay flat on 6.3 in the same lanes with the same film (C2: 3.1 to 3.3, against 15.6), and the bench test shows 1/20 stops for 6.3 with gloss film (C3). So a rollback would remove the excess stops. \u0027Harmful\u0027 needs the action to be likely to worsen outcomes or disable a protective control. A2 brings stops back to the pre-September baseline. It returns robots to the configuration the site ran safely before September, with 1 contact in weeks 30 to 35 (E1). The protective field is left untouched. Running past the end of 6.3 security support under a waiver is a risk the site has already accepted for P31 to P38 (E3). Losing 6.4\u0027s low-profile detection gives up an improvement but does not take away an existing control. These costs make A2 worse than A1, which removes the trigger and keeps 6.4. That matches \u0027acceptable\u0027 rather than \u0027harmful\u0027. The objection that \u0027acceptable\u0027 is also defensible actually agrees with the key.",
+        "fix": "No change is required. Optionally, to close off a \u0027harmful\u0027 reading, add one sentence to E3 saying that the site\u0027s IT security team has confirmed the waiver can be extended to further units until a corrected release is available."
+      },
+      {
+        "itemId": "S15",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A5 is the textbook case of \u0027premature\u0027. It would be right if H6 were confirmed (6.4.2 fixes the gloss-film returns, so the cheaper film could stay). But C3 says outright that 6.4.2 \u0027has not been tested against this film\u0027, and Halvane has already been wrong about the firmware\u0027s role (E4). For \u0027harmful\u0027 the action would have to be likely to worsen outcomes. A5 keeps the current state until December. It gives up a better fix but does not make things worse than they are now. Protective stops are a safe failure mode: contacts were flat (E1), and the link to missed cut-offs is association only. The decision is also reversible, because the film can be reverted at any time within three days (C9). The objector agrees that \u0027premature\u0027 fits better.",
+        "fix": "No change required."
+      },
+      {
+        "itemId": "S10",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 means the evidence is not enough even to show association. The evidence here does show association. Missed cut-offs rose from 2 to 9 per week in the same weeks that stops tripled (E1, E6). C11 also finds more stops before missed waves than before on-time waves (median 61 against 49). What the evidence cannot do is separate this from peak volume. Last year\u0027s peak raised misses to 7 per week with stops flat (E6), missed waves were the largest waves (C11), and robot wait time is not recorded per wave. Those gaps stop the link from being called causal. They do not undo the co-occurrence. So \u0027association-only\u0027 is the only fitting label.",
+        "fix": "No change required."
+      }
+    ]
+  },
+  "needsRevision": false
+}

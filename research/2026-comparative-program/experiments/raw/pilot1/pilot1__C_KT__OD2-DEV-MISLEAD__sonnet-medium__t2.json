@@ -1,0 +1,219 @@
+{
+  "runId": "pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "C_KT",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C4",
+    "X3": "C6",
+    "X4": "C11",
+    "X5": "C1",
+    "X6": "C2",
+    "X7": "C10",
+    "X8": "C7",
+    "X9": "C3",
+    "X10": "C8",
+    "X11": "C5",
+    "X12": "C12"
+  },
+  "readLabels": [
+    "X2",
+    "X5",
+    "X11",
+    "X3",
+    "X9"
+  ],
+  "reads": [
+    "C4",
+    "C1",
+    "C5",
+    "C6",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18384,
+    "cacheCreationTokens": 9060,
+    "outputTokens": 2102,
+    "thinkingTokens": 75,
+    "costUsd": 0.0591104,
+    "durationMs": 14809,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X9\u0022,\u0022X11\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X11\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X11\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X5\u0022,\u0022X9\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The payment failures are not caused by release v4.12. Since 3 March, Finance\u0027s settle-recon job has run every 15 minutes from 09:00 to 21:00 on the same Quillmark credential that checkout uses. Each run sends 360\u2013430 search calls a minute, which pushes the credential over its 300 per minute limit. Quillmark then returns HTTP 429, and v4.12 shows every non-2xx response as a generic \\\u0022declined\\\u0022 error. The evidence for this is strong:\\n- Failures start at 09:00, before the 10:40 deploy.\\n- 93% of failures fall in the first minutes of each quarter hour.\\n- Failures stopped during the ERP maintenance window.\\n- Pods rolled back to v4.11 failed at the same rate (3.7%, mostly 429s).\\nA full rollback would not help. It would also remove the card-number masking that closes the audit finding due 13 March.\\nNext steps:\\n1. Pause settle-recon\u0027s daytime runs or put it back on its nightly schedule now.\\n2. Watch the 429 count and the failure rate to confirm recovery.\\n3. Give the job its own credential before any daytime schedule returns.\\n4. Make error handling log the raw upstream status.\\n5. Don\u0027t tell the board the failures caused the 9% revenue fall. Conversion and order value also fell, and the sale launched the same day. Estimate the failure impact separately from the failed-attempt data.\\nConfidence is high, about 90%.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:28:09.2309378Z",
+    "finishedAt": "2026-11-17T14:28:25.0927774Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X5",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X2",
+            "X9",
+            "X11",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X2",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "X11",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "X2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X2",
+            "X11",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "X5",
+            "X9",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The payment failures are not caused by release v4.12. Since 3 March, Finance\u0027s settle-recon job has run every 15 minutes from 09:00 to 21:00 on the same Quillmark credential that checkout uses. Each run sends 360\u2013430 search calls a minute, which pushes the credential over its 300 per minute limit. Quillmark then returns HTTP 429, and v4.12 shows every non-2xx response as a generic \u0022declined\u0022 error. The evidence for this is strong:\n- Failures start at 09:00, before the 10:40 deploy.\n- 93% of failures fall in the first minutes of each quarter hour.\n- Failures stopped during the ERP maintenance window.\n- Pods rolled back to v4.11 failed at the same rate (3.7%, mostly 429s).\nA full rollback would not help. It would also remove the card-number masking that closes the audit finding due 13 March.\nNext steps:\n1. Pause settle-recon\u0027s daytime runs or put it back on its nightly schedule now.\n2. Watch the 429 count and the failure rate to confirm recovery.\n3. Give the job its own credential before any daytime schedule returns.\n4. Make error handling log the raw upstream status.\n5. Don\u0027t tell the board the failures caused the 9% revenue fall. Conversion and order value also fell, and the sale launched the same day. Estimate the failure impact separately from the failed-attempt data.\nConfidence is high, about 90%."
+    }
+  }
+}

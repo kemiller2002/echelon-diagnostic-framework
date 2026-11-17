@@ -1,0 +1,767 @@
+{
+  "label": "OD2-HO-CONFOUND-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7723,
+  "cacheCreationTokens": 4517,
+  "outputTokens": 43834,
+  "thinkingTokens": 32375,
+  "costUsd": 0.9143766000000001,
+  "durationMs": 429247,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-CONFOUND-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-CONFOUND-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022CONFOUND\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022The crashing canvas flag\u0022,\u0022setting\u0022:\u0022Fernwick Software makes Quillmark, an Android note-taking and sketching app with about 2.04 million weekly active users. In September 2026 the mobile team started ramping a feature flag, tiled_canvas, which switches the sketch canvas to a new tiled renderer called Tiled Canvas. Over the same weeks, app build 7.4.0 was going out through the app store\u0027s staged rollout. Crash monitoring now shows that users with the flag crash far more often than everyone else.\u0022,\u0022presentingRequest\u0022:\u0022The Director of Engineering wants to turn the Tiled Canvas flag off for everyone, close the crash incident, and let build 7.4.0 go to 100% of users on Friday 18 September as planned. Before that happens, you have been asked to work out what is driving the crash gap and what the team should do next. You may collect at most two items from the catalogue.\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Crash dashboard export, Quillmark Android, panel \u0027Crash-affected sessions by flag cohort\u0027\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Period 10\u201316 Sep 2026. Tiled Canvas ON: 414,200 users, 2.10% of sessions ended in a crash. Tiled Canvas OFF: 1,627,900 users, 0.74%. Ratio 2.8x. Overall daily crash-affected sessions: 1 Sep 0.70%, 4 Sep 0.74%, 7 Sep 0.83%, 9 Sep 0.92%, 12 Sep 0.99%, 16 Sep 1.01%. Annotation added by the dashboard owner: \u0027Flag ramp 10% (4 Sep) \u2192 50% (7 Sep) \u2192 90% (10 Sep). Curve follows the ramp.\u0027 The panel has no filter or breakdown for app version or device.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Marisol Edevane, Director of Engineering, to mobile-leads, 16 Sep\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: Tiled Canvas. \u0027The numbers could not be clearer: people with Tiled Canvas crash nearly three times as often as everyone else, and the overall rate climbed step for step with the ramp. I don\u0027t need another week of analysis. The plan is to turn the flag off for everyone on Thursday, mark the crash incident resolved, and let 7.4.0 go to 100% on Friday as scheduled. The canvas team can bring the feature back when they can prove it is stable.\u0027\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Internal release notes, Quillmark Android 7.4.0\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Staged rollout through the app store: offered to 5% of users on 2 Sep and 25% on 6 Sep; 100% planned for 18 Sep. The store offers the update to a random share of users, who then install it at their own pace. Everyone else stays on 7.3.2. Changes in 7.4.0: (1) Tiled Canvas client code, which stays inactive unless the tiled_canvas flag is on; (2) image library Pixelda upgraded from 2.8 to 3.1 to support HEIF photo attachments; (3) Tracewell crash-reporting SDK upgraded from 4.9 to 5.0, which adds capture of native (C/C\u002B\u002B) crashes; (4) notification channel cleanup; (5) translation updates.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Flag service configuration export, tiled_canvas, 16 Sep\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022flag: tiled_canvas | owner: canvas-team | eligibility: client must report capability canvas.tiles.v1 (comment: \u0027capability first shipped in 7.4.0; not present in 7.3.x\u0027) | bucketing: random by hashed user id | rollout history: 4 Sep 10% of eligible users; 7 Sep 50%; 10 Sep 90% | holdout: the remaining 10% of eligible users stay off | kill switch: available, takes effect at next app start.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Incident channel #inc-crash-rate, excerpt, 15 Sep\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Dev (SRE): \u0027sync-service deployed on 9 Sep around 14:00 UTC, and the overall crash curve gets steeper around then. Might not be the client at all.\u0027 Priya (canvas engineer): \u0027Tiled Canvas holds more texture memory than the old canvas. If anything is ours, it will be on low-RAM phones.\u0027 Tom\u00E1s (PM): \u0027Also remember who ends up with the flag in practice. Our heaviest sketchers update first, and heavy users always crash more.\u0027 Nobody in the thread posted figures broken down by app version, device or usage.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Crash-affected session rates by app version, flag state and device memory tier, daily, 1\u201316 Sep\u0022,\u0022source\u0022:\u0022Product analytics query by data analyst Ines Waldmark\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Rates are crash-affected sessions as recorded by Tracewell. Build 7.3.2 (no user can receive the flag): 0.68\u20130.72% every day 1\u201316 Sep, with no change after 9 Sep. Build 7.4.0: 1.93\u20132.12% every day 2\u201316 Sep, including 2\u20133 Sep, before the flag was on for anyone (1.99%). 7.4.0, 10\u201316 Sep: flag on 2.10%; random flag-off holdout 1.98%. Difference 0.12 points, user-clustered 95% interval \u22120.08 to \u002B0.32. OS memory kills: flag on 0.58%, holdout 0.49% (interval \u22120.02 to \u002B0.20); 7.3.2 0.19%. Sessions on devices with 4 GB RAM or less: flag on 31%, holdout 30%, 7.3.2 33%. The gap between 7.4.0 and 7.3.2 holds in both memory tiers (4 GB or less: 2.5% vs 0.9%; over 4 GB: 1.8% vs 0.6%). Mean sessions per user per week: 12.3 / 12.2 / 12.3. Median session length: 6.1 / 6.0 / 5.8 min. Analyst\u0027s note: \u0027The holdout cannot rule out a flag effect of a few tenths of a point.\u0027\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Top crash clusters for builds 7.3.2 and 7.4.0, with app-store console crash statistics, 10\u201316 Sep\u0022,\u0022source\u0022:\u0022Tracewell console export and app-store developer console, pulled by release engineer\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Tracewell, 7.4.0, top clusters by event count. #1: SIGSEGV in libpixelda.so pd_decode_heif_tile on thread pixelda-worker-*, 41% of events. These stacks contain only library and thread-pool frames, so the screen that requested the decode is not recorded. This cluster does not occur in 7.3.2, which ships Pixelda 2.8. #2: OS memory kill with no stack, 29%. #3\u2013#25 are scattered, each under 3%, and none contains frames from the canvas.tiles package. Tracewell events do not carry flag state. 7.3.2 top cluster: a known search ANR, 12%. The app-store developer console collects crashes at OS level, separately from Tracewell. For the same days it shows crash-affected sessions of 2.04% for 7.4.0 and 0.69% for 7.3.2 (Tracewell: 2.09% and 0.70%). The console\u0027s top native crash for 7.4.0 is libpixelda.so, first seen 2 Sep.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Sync-service deployment record and server error rates, 8\u201310 Sep\u0022,\u0022source\u0022:\u0022Backend deployment system and service metrics\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Deploy sync-2026.09.2 at 14:02 UTC on 9 Sep. Changes: TLS library dependency patch; log retention raised from 7 to 14 days; sync payload compression switched from gzip to zstd for clients that advertise support (both 7.3.2 and 7.4.0 advertise it). Server 5xx rate 0.04% before and 0.05% after. p95 latency 212 ms before, 208 ms after. No rollback. Reviewer comment on the deploy ticket: \u0027Client-side impact not measured; we only see server metrics.\u0027\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tiled Canvas design document, memory budget section (v3, July)\u0022,\u0022source\u0022:\u0022Canvas team design repository\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Target: peak texture memory under 380 MB on 4 GB devices. Tiles are evicted least-recently-used first. Photo attachments placed on a canvas are decoded through the shared image pipeline (Pixelda) and cached as tiles; the classic note viewer uses the same pipeline. Open risk: \u0027On devices under 4 GB, the OS may kill the app in the background more often if the tile cache is not trimmed when memory runs low.\u0027 Status of that risk: \u0027mitigation planned for 7.5.\u0027\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Customer support contacts tagged \u0027crash\u0027 or \u0027app closes\u0027, weekly, 18 Aug\u201316 Sep\u0022,\u0022source\u0022:\u0022Support desk reporting\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Weekly counts: 204, 219, 198, 212, 231. Over the past year, week-to-week variation has been about \u00B115%. The ticket form does not record app version or feature flags. In a sample of 20 tickets from 10\u201316 Sep, 6 mention photos or attachments, 4 mention the sketch canvas and 10 give no context. Support lead: \u0027Nothing here looks unusual yet to us.\u0027\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022App store reviews mentioning crashes, 1\u201316 Sep\u0022,\u0022source\u0022:\u0022App store review export\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u002238 one-star reviews mention crashing, compared with 31 in the previous 16 days. Only 9 of them show an app version: 5 on 7.4.0 and 4 on 7.3.2. Common phrases: \u0027crashes when I open my notes\u0027, \u0027lost my drawing\u0027, \u0027keeps closing after the update\u0027. None of the reviews names the new canvas, and reviewers cannot see whether they have the flag.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tiled Canvas pre-launch QA report, 28 Aug\u0022,\u0022source\u0022:\u0022QA team\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Tested on 14 device models (3 of them with 3 GB RAM) using internal build 7.4.0-rc2 with the flag forced on. 212 scripted test cases, with no crashes in scripted runs. Two background kills were seen on a 3 GB device during a 40-minute soak test with 600 tiles, marked \u0027expected OS behaviour\u0027. The test content set contained JPEG and PNG attachments only. Sign-off: \u0027Ready for staged flag rollout.\u0027\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with the Tiled Canvas tech lead, 16 Sep\u0022,\u0022source\u0022:\u0022Interview notes\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027Our code didn\u0027t change between the 10% and 90% steps, and our own logging shows no exceptions in the tile renderer. People see a correlation and blame the newest thing. The canvas loads photo attachments through the same image pipeline as the note viewer, so if that pipeline is broken we\u0027d hit it too, like everyone else. I\u0027m confident it isn\u0027t us, but honestly I haven\u0027t opened the crash console since launch day.\u0027\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Device model and OS version distribution of all weekly active users, September\u0022,\u0022source\u0022:\u0022Product analytics standard report\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022The top 10 device models account for 34% of users. 32% of sessions run on devices with 4 GB RAM or less. 71% of users are on OS version 13 or newer. Median device age is 2.6 years. The report covers all users combined and is not split by app version, flag state or crash outcome.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Flag service audit log for tiled_canvas, 20 Aug\u201316 Sep\u0022,\u0022source\u0022:\u0022Flag service\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u002220 Aug: flag created by canvas-team with the eligibility rule and a 10% holdout. 4 Sep 09:12: rollout 0\u219210% (approved by J. Arkwright). 7 Sep 10:40: 10\u219250%. 10 Sep 09:05: 50\u219290%. 15 Sep 16:20: rollout frozen by M. Edevane. No changes to the eligibility rule, bucketing or holdout since the flag was created.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tracewell SDK 5.0 vendor release notes and migration guide\u0022,\u0022source\u0022:\u0022Tracewell (crash-reporting vendor)\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022\u0027Version 5.0 adds native crash capture for C/C\u002B\u002B libraries and improves de-duplication. Apps that include native code may see higher reported crash counts after upgrading, because crashes that previously went unrecorded are now captured. This is expected and does not indicate a regression in your app. During migration, we recommend comparing Tracewell figures with platform-level crash statistics.\u0027\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tiled Canvas engagement metrics for flagged users, 4\u201316 Sep\u0022,\u0022source\u0022:\u0022Canvas team analytics dashboard\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Canvas opens per flagged user per day: 1.4 (the same users with the old canvas in August: 1.3). Average strokes per canvas session: 212 (August: 198). Average tiles loaded per canvas session: 46. The dashboard covers flagged users only. It has no figures for unflagged users and no crash data.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Postmortem of the March 2025 \u0027Quick Share\u0027 crash spike\u0022,\u0022source\u0022:\u0022Engineering wiki\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022In March 2025, a flag-gated share sheet crashed on one OS version. Turning the flag off brought crash rates back to baseline within a day. Recorded lesson: \u0027When a flag cohort\u0027s crash rate jumps, turn the flag off first and investigate after.\u0027 Author: M. Edevane. Follow-up actions were all marked closed in May 2025.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u00227.4.0 beta channel crash statistics, 12\u201331 Aug\u0022,\u0022source\u0022:\u0022Beta programme report\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Beta users (n = 8,900) on 7.4.0-beta2 had 1.6% crash-affected sessions, compared with 1.1% for 7.3.2-beta in July. In the beta channel the tiled_canvas flag is forced on for every user, and beta builds include debug assertions. Top beta feedback themes: canvas lag on large drawings, and notification sounds. Report author: \u0027Beta crash rates usually run higher than production.\u0027\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Lab memory profile of Tiled Canvas and the old canvas on a 3 GB test device\u0022,\u0022source\u0022:\u0022Performance lab, QA team\u0022,\u0022sourceType\u0022:\u0022independent-observation\u0022,\u0022text\u0022:\u0022Scripted 20-minute sketch session with the same content, both conditions on 7.4.0. Peak app memory: old canvas 268 MB, Tiled Canvas 404 MB. In a 10-app switching loop, the app was killed in the background in 1 of 10 runs with the old canvas and 3 of 10 runs with Tiled Canvas. Engineer\u0027s note: \u0027Small sample. It suggests more background kills on low-RAM devices, but it doesn\u0027t tell us how often that happens in the field.\u0027\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Code that runs only when the Tiled Canvas flag is on is the source of the crash-rate gap between flagged and unflagged users.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Flagged users are all on the 7.4.0 build, and a change in that build other than the flag\u0027s code is the source of the crash-rate gap.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Flagged users are concentrated on lower-memory or older devices, and that device mix, not the flag\u0027s code, is the source of the crash-rate gap.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The crash-rate gap is a counting artifact of the updated crash-reporting SDK rather than a real difference in crashes.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Flagged users use the app more heavily than unflagged users, and that usage pattern, not the flag\u0027s code, is the source of the crash-rate gap.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Tiled Canvas flag enabled for a user\u0022,\u0022to\u0022:\u0022Higher crash-affected session rate for that user\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022User running build 7.4.0\u0022,\u0022to\u0022:\u0022Higher crash-affected session rate for that user\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022User running build 7.4.0\u0022,\u0022to\u0022:\u0022User eligible to receive the Tiled Canvas flag\u0022,\u0022relation\u0022:\u0022determines\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Sync-service backend deployment on 9 September\u0022,\u0022to\u0022:\u0022Higher crash-affected session rate\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Turn the Tiled Canvas flag off for all users, mark the crash incident resolved, and let 7.4.0 go to 100% on 18 September as scheduled.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Hold the 7.4.0 staged rollout at its current 25% and prioritise a fix build for 7.4.0\u0027s leading crash clusters before any further rollout.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Require the canvas team to rework Tiled Canvas\u0027s tile memory handling before the flag ramp is allowed to continue.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Widen the random flag-off holdout among 7.4.0 users from 10% to 30% for two weeks to measure whether the flag adds memory kills.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Roll the crash-reporting SDK back to Tracewell 4.9 in the next build so crash rates are comparable with 7.3.2.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-CONFOUND-2\u0022,\u0022groundTruthNarrative\u0022:\u0022The flag can only reach users on build 7.4.0, because eligibility requires a client capability that first shipped in that build (E4). So the comparison on the dashboard is really 7.4.0 users against mostly 7.3.2 users. Build 7.4.0 also upgraded the Pixelda image library to 3.1 for HEIF support, and that version crashes natively in its HEIF tile decoder. The crash affects every 7.4.0 user, flagged or not. C1 shows that 7.4.0 users crashed at about 2% from the build\u0027s first day, before anyone had the flag. The random flag-off holdout on 7.4.0 crashes at 1.98% against 2.10% for flagged users. The gap is present in both device memory tiers, usage is equal across groups, and 7.3.2 stayed flat across the 9 September backend deploy. C2 shows the leading 7.4.0 cluster is SIGSEGV in libpixelda.so, absent from 7.3.2. The OS-level store console reports the same rates as Tracewell, so the rise is not an artifact of the new SDK. The flag may still add a few tenths of a point through memory kills: the holdout difference has a positive point estimate, and a design risk and a lab profile make this plausible. That residual is neither established nor ruled out. Turning the flag off and shipping 7.4.0 to everyone would push a crashing build to the remaining roughly 77% of users. The right move is to hold 7.4.0 and fix its leading crash clusters.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C8\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022confounded\u0022,\u0022misleading-signal\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022C1 compares flagged users with a random flag-off holdout on the same build. The holdout crashes at 1.98% against 2.10%, so at most about 0.3 of the 1.36-point gap in E1 could come from the flag. 7.4.0 was already at 1.99% before any flag was on. C2 adds that no top cluster contains canvas.tiles frames. The flag\u0027s code cannot be the source of the gap.\u0022},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C8\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022hidden-confounder\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022E4 confines the flag to 7.4.0. C1 shows the elevated rate across all of 7.4.0 (holdout and pre-flag days included) and not in 7.3.2. C2 shows the rise is real, because the OS console agrees with Tracewell. C2 also places the leading cluster in the Pixelda 3.1 HEIF decoder, which ships only in 7.4.0. C1 alone cannot exclude a counting artifact, and C2 alone cannot exclude that the canvas triggers the decode (C4, C8). Together they support H2.\u0022},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C9\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022plausible-rival\u0022,\u0022staff-speculation\u0022],\u0022rationale\u0022:\u0022C1 shows the share of sessions on low-memory devices is almost the same for flagged users, the holdout and 7.3.2 (31/30/33%). The 7.4.0 versus 7.3.2 gap also holds within each memory tier. Device mix does not produce the gap. C9 is not split by cohort, so it cannot decide this.\u0022},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022measurement-artifact\u0022,\u0022vendor-account\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022The SDK upgrade is tied to the build, and the vendor warns of higher counts (C11), so the artifact story is plausible. But the app-store console counts crashes at OS level, independently of Tracewell. It shows 2.04% for 7.4.0 and 0.69% for 7.3.2, matching Tracewell\u0027s 2.09% and 0.70% (C2). The difference in crashes is real.\u0022},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C1\u0022,\u0022C12\u0022],\u0022tags\u0022:[\u0022plausible-rival\u0022,\u0022manager-speculation\u0022],\u0022rationale\u0022:\u0022The PM\u0027s claim in E5 is not borne out. C1 shows equal sessions per user per week (12.3/12.2/12.3) and similar session lengths across flagged users, the holdout and 7.3.2, and the crash measure is already per session. C12 covers flagged users only and cannot compare groups.\u0022},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C4\u0022,\u0022C7\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022tempting-edge\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The association is real (E1). Most of it comes from the build confounder, so causation is not established. Within 7.4.0 the flag effect is \u002B0.12 points with an interval of \u22120.08 to \u002B0.32, and the memory-kill difference has an interval of \u22120.02 to \u002B0.20. The analyst states a few-tenths effect cannot be ruled out, and C4 and C15 give a plausible memory mechanism. The evidence therefore neither establishes nor counts against the link, so it is not contradicted.\u0022},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022true-driver\u0022,\u0022mechanism\u0022],\u0022rationale\u0022:\u0022Several lines of evidence point the same way. Timing: 7.4.0 was elevated from its first day, while 7.3.2 stayed flat (C1). Covariation: the elevation holds in the holdout and in both device tiers, with equal usage across groups (C1). Mechanism: the leading cluster is in a library version that ships only in 7.4.0 (C2). The OS console confirms the crashes are real, which rules out the SDK-artifact rival (C2).\u0022},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022confounder-structure\u0022],\u0022rationale\u0022:\u0022The flag\u0027s eligibility rule requires a capability that first shipped in 7.4.0 (E4, E3). Running 7.4.0 is therefore by design a precondition for getting the flag. C1 (no flagged 7.3.2 users) and C10 (rule never changed) confirm this.\u0022},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022timing-coincidence\u0022],\u0022rationale\u0022:\u0022C1 shows 7.3.2 users, who get the same backend, stayed at 0.68\u20130.72% across 9 Sep. 7.4.0 users were already elevated from 2 Sep and did not change at the deploy. The steeper overall curve reflects 7.4.0 adoption. C3 shows only server metrics and does not settle this by itself.\u0022},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022harmful-action\u0022],\u0022rationale\u0022:\u0022Turning the flag off leaves the 7.4.0 crash in place, and closing the incident stops the investigation. Shipping 7.4.0 to 100% would expose the remaining roughly 77% of users to a crash rate about three times the 7.3.2 rate. This is damaging under H2 and also under the residual possibility that the flag adds a small effect.\u0022},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022best-action\u0022],\u0022rationale\u0022:\u0022The established driver is the 7.4.0 build, and its leading crash cluster is identified. Holding the rollout prevents further harm and is reversible. Fixing the leading clusters addresses the bulk of the excess crashes, whatever any small flag effect turns out to be.\u0022},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C4\u0022,\u0022C7\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022premature-action\u0022,\u0022unconfirmed-mechanism\u0022],\u0022rationale\u0022:\u0022Reworking tile memory handling would help if the flag really adds memory kills, which C4 and C15 make plausible but C1 cannot confirm. If that hypothesis is wrong, the cost is engineering time with no lasting damage. Committing to this mechanism now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022evidence-gathering\u0022],\u0022rationale\u0022:\u0022A larger random holdout would resolve the residual flag-effect question that C1 leaves open, and it is reversible. That makes it reasonable. It does nothing about the build-wide crash that drives most of the harm, so it is not among the best next actions.\u0022},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022suppress-information\u0022],\u0022rationale\u0022:\u0022C2 shows that SDK 5.0\u0027s counts match OS-level statistics, so the new SDK is accurate. Its native capture is what records the Pixelda crash. Rolling it back would remove visibility of native crashes under H2 and under the residual flag-effect rival alike.\u0022},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022With C1 and C2, the 7.4.0 build is established as the driver, through real crashes, a mechanism and a pre-flag onset. That is enough to commit to holding the rollout and fixing the leading clusters. The open question about a small flag effect does not change this decision.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022lowValueReads\u0022:[\u0022C6\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C13\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022Trap: E1 and E2 show a 2.8x flag cohort gap, and E4 quietly ties the flag to build 7.4.0. E3 lists three changes in that build: the flag\u0027s code, the image library upgrade and the SDK upgrade. Rivals are seeded in E5: backend deploy, device mix and heavy users. C1 is the only item that settles H3, H5 and R4, and it needs the SDK artifact excluded before H2 can be supported. C2 is the only item that settles H4, through its OS-level cross-check, and it supplies the mechanism for R2. C2 alone cannot clear the flag, because the decode stack has no caller frames and C4 and C8 say the canvas uses the same pipeline. Distractors pull toward both stories: C11 favours the artifact story, C14 (beta) is confounded because the flag is forced on, and C15 and C4 favour a memory effect without settling it. R1 is kept association-only on purpose. The point estimates are positive, the intervals include zero and modest positive effects, and the analyst says explicitly that the test lacks power. H1 is contradicted because it claims the flag is the source of the gap, which the holdout comparison excludes. Numbers are internally consistent: the weighted cohort rates reproduce E1\u0027s 0.74%, the overall daily curve follows 7.4.0 adoption up to about 22.5% of users (staged rollout offered to 25%), and the per-tier rates reproduce the build totals.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:22:25.8054911Z",
+  "finishedAt": "2026-11-17T15:29:35.9390489Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-CONFOUND-2",
+      "split": "heldout",
+      "benchmarkClass": "CONFOUND",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "The crashing canvas flag",
+      "setting": "Fernwick Software makes Quillmark, an Android note-taking and sketching app with about 2.04 million weekly active users. In September 2026 the mobile team started ramping a feature flag, tiled_canvas, which switches the sketch canvas to a new tiled renderer called Tiled Canvas. Over the same weeks, app build 7.4.0 was going out through the app store\u0027s staged rollout. Crash monitoring now shows that users with the flag crash far more often than everyone else.",
+      "presentingRequest": "The Director of Engineering wants to turn the Tiled Canvas flag off for everyone, close the crash incident, and let build 7.4.0 go to 100% of users on Friday 18 September as planned. Before that happens, you have been asked to work out what is driving the crash gap and what the team should do next. You may collect at most two items from the catalogue.",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Crash dashboard export, Quillmark Android, panel \u0027Crash-affected sessions by flag cohort\u0027",
+          "sourceType": "telemetry",
+          "text": "Period 10\u201316 Sep 2026. Tiled Canvas ON: 414,200 users, 2.10% of sessions ended in a crash. Tiled Canvas OFF: 1,627,900 users, 0.74%. Ratio 2.8x. Overall daily crash-affected sessions: 1 Sep 0.70%, 4 Sep 0.74%, 7 Sep 0.83%, 9 Sep 0.92%, 12 Sep 0.99%, 16 Sep 1.01%. Annotation added by the dashboard owner: \u0027Flag ramp 10% (4 Sep) \u2192 50% (7 Sep) \u2192 90% (10 Sep). Curve follows the ramp.\u0027 The panel has no filter or breakdown for app version or device."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email from Marisol Edevane, Director of Engineering, to mobile-leads, 16 Sep",
+          "sourceType": "leadership-account",
+          "text": "Subject: Tiled Canvas. \u0027The numbers could not be clearer: people with Tiled Canvas crash nearly three times as often as everyone else, and the overall rate climbed step for step with the ramp. I don\u0027t need another week of analysis. The plan is to turn the flag off for everyone on Thursday, mark the crash incident resolved, and let 7.4.0 go to 100% on Friday as scheduled. The canvas team can bring the feature back when they can prove it is stable.\u0027"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Internal release notes, Quillmark Android 7.4.0",
+          "sourceType": "change-record",
+          "text": "Staged rollout through the app store: offered to 5% of users on 2 Sep and 25% on 6 Sep; 100% planned for 18 Sep. The store offers the update to a random share of users, who then install it at their own pace. Everyone else stays on 7.3.2. Changes in 7.4.0: (1) Tiled Canvas client code, which stays inactive unless the tiled_canvas flag is on; (2) image library Pixelda upgraded from 2.8 to 3.1 to support HEIF photo attachments; (3) Tracewell crash-reporting SDK upgraded from 4.9 to 5.0, which adds capture of native (C/C\u002B\u002B) crashes; (4) notification channel cleanup; (5) translation updates."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Flag service configuration export, tiled_canvas, 16 Sep",
+          "sourceType": "system-record",
+          "text": "flag: tiled_canvas | owner: canvas-team | eligibility: client must report capability canvas.tiles.v1 (comment: \u0027capability first shipped in 7.4.0; not present in 7.3.x\u0027) | bucketing: random by hashed user id | rollout history: 4 Sep 10% of eligible users; 7 Sep 50%; 10 Sep 90% | holdout: the remaining 10% of eligible users stay off | kill switch: available, takes effect at next app start."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Incident channel #inc-crash-rate, excerpt, 15 Sep",
+          "sourceType": "staff-account",
+          "text": "Dev (SRE): \u0027sync-service deployed on 9 Sep around 14:00 UTC, and the overall crash curve gets steeper around then. Might not be the client at all.\u0027 Priya (canvas engineer): \u0027Tiled Canvas holds more texture memory than the old canvas. If anything is ours, it will be on low-RAM phones.\u0027 Tom\u00E1s (PM): \u0027Also remember who ends up with the flag in practice. Our heaviest sketchers update first, and heavy users always crash more.\u0027 Nobody in the thread posted figures broken down by app version, device or usage."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Crash-affected session rates by app version, flag state and device memory tier, daily, 1\u201316 Sep",
+          "source": "Product analytics query by data analyst Ines Waldmark",
+          "sourceType": "telemetry",
+          "text": "Rates are crash-affected sessions as recorded by Tracewell. Build 7.3.2 (no user can receive the flag): 0.68\u20130.72% every day 1\u201316 Sep, with no change after 9 Sep. Build 7.4.0: 1.93\u20132.12% every day 2\u201316 Sep, including 2\u20133 Sep, before the flag was on for anyone (1.99%). 7.4.0, 10\u201316 Sep: flag on 2.10%; random flag-off holdout 1.98%. Difference 0.12 points, user-clustered 95% interval \u22120.08 to \u002B0.32. OS memory kills: flag on 0.58%, holdout 0.49% (interval \u22120.02 to \u002B0.20); 7.3.2 0.19%. Sessions on devices with 4 GB RAM or less: flag on 31%, holdout 30%, 7.3.2 33%. The gap between 7.4.0 and 7.3.2 holds in both memory tiers (4 GB or less: 2.5% vs 0.9%; over 4 GB: 1.8% vs 0.6%). Mean sessions per user per week: 12.3 / 12.2 / 12.3. Median session length: 6.1 / 6.0 / 5.8 min. Analyst\u0027s note: \u0027The holdout cannot rule out a flag effect of a few tenths of a point.\u0027"
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Top crash clusters for builds 7.3.2 and 7.4.0, with app-store console crash statistics, 10\u201316 Sep",
+          "source": "Tracewell console export and app-store developer console, pulled by release engineer",
+          "sourceType": "log",
+          "text": "Tracewell, 7.4.0, top clusters by event count. #1: SIGSEGV in libpixelda.so pd_decode_heif_tile on thread pixelda-worker-*, 41% of events. These stacks contain only library and thread-pool frames, so the screen that requested the decode is not recorded. This cluster does not occur in 7.3.2, which ships Pixelda 2.8. #2: OS memory kill with no stack, 29%. #3\u2013#25 are scattered, each under 3%, and none contains frames from the canvas.tiles package. Tracewell events do not carry flag state. 7.3.2 top cluster: a known search ANR, 12%. The app-store developer console collects crashes at OS level, separately from Tracewell. For the same days it shows crash-affected sessions of 2.04% for 7.4.0 and 0.69% for 7.3.2 (Tracewell: 2.09% and 0.70%). The console\u0027s top native crash for 7.4.0 is libpixelda.so, first seen 2 Sep."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Sync-service deployment record and server error rates, 8\u201310 Sep",
+          "source": "Backend deployment system and service metrics",
+          "sourceType": "change-record",
+          "text": "Deploy sync-2026.09.2 at 14:02 UTC on 9 Sep. Changes: TLS library dependency patch; log retention raised from 7 to 14 days; sync payload compression switched from gzip to zstd for clients that advertise support (both 7.3.2 and 7.4.0 advertise it). Server 5xx rate 0.04% before and 0.05% after. p95 latency 212 ms before, 208 ms after. No rollback. Reviewer comment on the deploy ticket: \u0027Client-side impact not measured; we only see server metrics.\u0027"
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Tiled Canvas design document, memory budget section (v3, July)",
+          "source": "Canvas team design repository",
+          "sourceType": "document",
+          "text": "Target: peak texture memory under 380 MB on 4 GB devices. Tiles are evicted least-recently-used first. Photo attachments placed on a canvas are decoded through the shared image pipeline (Pixelda) and cached as tiles; the classic note viewer uses the same pipeline. Open risk: \u0027On devices under 4 GB, the OS may kill the app in the background more often if the tile cache is not trimmed when memory runs low.\u0027 Status of that risk: \u0027mitigation planned for 7.5.\u0027"
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Customer support contacts tagged \u0027crash\u0027 or \u0027app closes\u0027, weekly, 18 Aug\u201316 Sep",
+          "source": "Support desk reporting",
+          "sourceType": "customer-account",
+          "text": "Weekly counts: 204, 219, 198, 212, 231. Over the past year, week-to-week variation has been about \u00B115%. The ticket form does not record app version or feature flags. In a sample of 20 tickets from 10\u201316 Sep, 6 mention photos or attachments, 4 mention the sketch canvas and 10 give no context. Support lead: \u0027Nothing here looks unusual yet to us.\u0027"
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "App store reviews mentioning crashes, 1\u201316 Sep",
+          "source": "App store review export",
+          "sourceType": "customer-account",
+          "text": "38 one-star reviews mention crashing, compared with 31 in the previous 16 days. Only 9 of them show an app version: 5 on 7.4.0 and 4 on 7.3.2. Common phrases: \u0027crashes when I open my notes\u0027, \u0027lost my drawing\u0027, \u0027keeps closing after the update\u0027. None of the reviews names the new canvas, and reviewers cannot see whether they have the flag."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Tiled Canvas pre-launch QA report, 28 Aug",
+          "source": "QA team",
+          "sourceType": "document",
+          "text": "Tested on 14 device models (3 of them with 3 GB RAM) using internal build 7.4.0-rc2 with the flag forced on. 212 scripted test cases, with no crashes in scripted runs. Two background kills were seen on a 3 GB device during a 40-minute soak test with 600 tiles, marked \u0027expected OS behaviour\u0027. The test content set contained JPEG and PNG attachments only. Sign-off: \u0027Ready for staged flag rollout.\u0027"
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Interview with the Tiled Canvas tech lead, 16 Sep",
+          "source": "Interview notes",
+          "sourceType": "staff-account",
+          "text": "\u0027Our code didn\u0027t change between the 10% and 90% steps, and our own logging shows no exceptions in the tile renderer. People see a correlation and blame the newest thing. The canvas loads photo attachments through the same image pipeline as the note viewer, so if that pipeline is broken we\u0027d hit it too, like everyone else. I\u0027m confident it isn\u0027t us, but honestly I haven\u0027t opened the crash console since launch day.\u0027"
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Device model and OS version distribution of all weekly active users, September",
+          "source": "Product analytics standard report",
+          "sourceType": "telemetry",
+          "text": "The top 10 device models account for 34% of users. 32% of sessions run on devices with 4 GB RAM or less. 71% of users are on OS version 13 or newer. Median device age is 2.6 years. The report covers all users combined and is not split by app version, flag state or crash outcome."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Flag service audit log for tiled_canvas, 20 Aug\u201316 Sep",
+          "source": "Flag service",
+          "sourceType": "system-record",
+          "text": "20 Aug: flag created by canvas-team with the eligibility rule and a 10% holdout. 4 Sep 09:12: rollout 0\u219210% (approved by J. Arkwright). 7 Sep 10:40: 10\u219250%. 10 Sep 09:05: 50\u219290%. 15 Sep 16:20: rollout frozen by M. Edevane. No changes to the eligibility rule, bucketing or holdout since the flag was created."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Tracewell SDK 5.0 vendor release notes and migration guide",
+          "source": "Tracewell (crash-reporting vendor)",
+          "sourceType": "vendor-account",
+          "text": "\u0027Version 5.0 adds native crash capture for C/C\u002B\u002B libraries and improves de-duplication. Apps that include native code may see higher reported crash counts after upgrading, because crashes that previously went unrecorded are now captured. This is expected and does not indicate a regression in your app. During migration, we recommend comparing Tracewell figures with platform-level crash statistics.\u0027"
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Tiled Canvas engagement metrics for flagged users, 4\u201316 Sep",
+          "source": "Canvas team analytics dashboard",
+          "sourceType": "telemetry",
+          "text": "Canvas opens per flagged user per day: 1.4 (the same users with the old canvas in August: 1.3). Average strokes per canvas session: 212 (August: 198). Average tiles loaded per canvas session: 46. The dashboard covers flagged users only. It has no figures for unflagged users and no crash data."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Postmortem of the March 2025 \u0027Quick Share\u0027 crash spike",
+          "source": "Engineering wiki",
+          "sourceType": "prior-report",
+          "text": "In March 2025, a flag-gated share sheet crashed on one OS version. Turning the flag off brought crash rates back to baseline within a day. Recorded lesson: \u0027When a flag cohort\u0027s crash rate jumps, turn the flag off first and investigate after.\u0027 Author: M. Edevane. Follow-up actions were all marked closed in May 2025."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "7.4.0 beta channel crash statistics, 12\u201331 Aug",
+          "source": "Beta programme report",
+          "sourceType": "telemetry",
+          "text": "Beta users (n = 8,900) on 7.4.0-beta2 had 1.6% crash-affected sessions, compared with 1.1% for 7.3.2-beta in July. In the beta channel the tiled_canvas flag is forced on for every user, and beta builds include debug assertions. Top beta feedback themes: canvas lag on large drawings, and notification sounds. Report author: \u0027Beta crash rates usually run higher than production.\u0027"
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Lab memory profile of Tiled Canvas and the old canvas on a 3 GB test device",
+          "source": "Performance lab, QA team",
+          "sourceType": "independent-observation",
+          "text": "Scripted 20-minute sketch session with the same content, both conditions on 7.4.0. Peak app memory: old canvas 268 MB, Tiled Canvas 404 MB. In a 10-app switching loop, the app was killed in the background in 1 of 10 runs with the old canvas and 3 of 10 runs with Tiled Canvas. Engineer\u0027s note: \u0027Small sample. It suggests more background kills on low-RAM devices, but it doesn\u0027t tell us how often that happens in the field.\u0027"
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Code that runs only when the Tiled Canvas flag is on is the source of the crash-rate gap between flagged and unflagged users."
+          },
+          {
+            "id": "H2",
+            "text": "Flagged users are all on the 7.4.0 build, and a change in that build other than the flag\u0027s code is the source of the crash-rate gap."
+          },
+          {
+            "id": "H3",
+            "text": "Flagged users are concentrated on lower-memory or older devices, and that device mix, not the flag\u0027s code, is the source of the crash-rate gap."
+          },
+          {
+            "id": "H4",
+            "text": "The crash-rate gap is a counting artifact of the updated crash-reporting SDK rather than a real difference in crashes."
+          },
+          {
+            "id": "H5",
+            "text": "Flagged users use the app more heavily than unflagged users, and that usage pattern, not the flag\u0027s code, is the source of the crash-rate gap."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Tiled Canvas flag enabled for a user",
+            "to": "Higher crash-affected session rate for that user",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "User running build 7.4.0",
+            "to": "Higher crash-affected session rate for that user",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "User running build 7.4.0",
+            "to": "User eligible to receive the Tiled Canvas flag",
+            "relation": "determines"
+          },
+          {
+            "id": "R4",
+            "from": "Sync-service backend deployment on 9 September",
+            "to": "Higher crash-affected session rate",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Turn the Tiled Canvas flag off for all users, mark the crash incident resolved, and let 7.4.0 go to 100% on 18 September as scheduled."
+          },
+          {
+            "id": "A2",
+            "text": "Hold the 7.4.0 staged rollout at its current 25% and prioritise a fix build for 7.4.0\u0027s leading crash clusters before any further rollout."
+          },
+          {
+            "id": "A3",
+            "text": "Require the canvas team to rework Tiled Canvas\u0027s tile memory handling before the flag ramp is allowed to continue."
+          },
+          {
+            "id": "A4",
+            "text": "Widen the random flag-off holdout among 7.4.0 users from 10% to 30% for two weeks to measure whether the flag adds memory kills."
+          },
+          {
+            "id": "A5",
+            "text": "Roll the crash-reporting SDK back to Tracewell 4.9 in the next build so crash rates are comparable with 7.3.2."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-CONFOUND-2",
+      "groundTruthNarrative": "The flag can only reach users on build 7.4.0, because eligibility requires a client capability that first shipped in that build (E4). So the comparison on the dashboard is really 7.4.0 users against mostly 7.3.2 users. Build 7.4.0 also upgraded the Pixelda image library to 3.1 for HEIF support, and that version crashes natively in its HEIF tile decoder. The crash affects every 7.4.0 user, flagged or not. C1 shows that 7.4.0 users crashed at about 2% from the build\u0027s first day, before anyone had the flag. The random flag-off holdout on 7.4.0 crashes at 1.98% against 2.10% for flagged users. The gap is present in both device memory tiers, usage is equal across groups, and 7.3.2 stayed flat across the 9 September backend deploy. C2 shows the leading 7.4.0 cluster is SIGSEGV in libpixelda.so, absent from 7.3.2. The OS-level store console reports the same rates as Tracewell, so the rise is not an artifact of the new SDK. The flag may still add a few tenths of a point through memory kills: the holdout difference has a positive point estimate, and a design risk and a lab profile make this plausible. That residual is neither established nor ruled out. Turning the flag off and shipping 7.4.0 to everyone would push a crashing build to the remaining roughly 77% of users. The right move is to hold 7.4.0 and fix its leading crash clusters.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "E4",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C8"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "confounded",
+            "misleading-signal",
+            "central"
+          ],
+          "rationale": "C1 compares flagged users with a random flag-off holdout on the same build. The holdout crashes at 1.98% against 2.10%, so at most about 0.3 of the 1.36-point gap in E1 could come from the flag. 7.4.0 was already at 1.99% before any flag was on. C2 adds that no top cluster contains canvas.tiles frames. The flag\u0027s code cannot be the source of the gap."
+        },
+        {
+          "itemId": "Q2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C4",
+            "C8",
+            "C11"
+          ],
+          "tags": [
+            "confounded",
+            "hidden-confounder",
+            "central"
+          ],
+          "rationale": "E4 confines the flag to 7.4.0. C1 shows the elevated rate across all of 7.4.0 (holdout and pre-flag days included) and not in 7.3.2. C2 shows the rise is real, because the OS console agrees with Tracewell. C2 also places the leading cluster in the Pixelda 3.1 HEIF decoder, which ships only in 7.4.0. C1 alone cannot exclude a counting artifact, and C2 alone cannot exclude that the canvas triggers the decode (C4, C8). Together they support H2."
+        },
+        {
+          "itemId": "Q3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C1",
+            "C9",
+            "C15"
+          ],
+          "tags": [
+            "plausible-rival",
+            "staff-speculation"
+          ],
+          "rationale": "C1 shows the share of sessions on low-memory devices is almost the same for flagged users, the holdout and 7.3.2 (31/30/33%). The 7.4.0 versus 7.3.2 gap also holds within each memory tier. Device mix does not produce the gap. C9 is not split by cohort, so it cannot decide this."
+        },
+        {
+          "itemId": "Q4",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C1",
+            "C2",
+            "C11"
+          ],
+          "tags": [
+            "measurement-artifact",
+            "vendor-account",
+            "misleading-signal"
+          ],
+          "rationale": "The SDK upgrade is tied to the build, and the vendor warns of higher counts (C11), so the artifact story is plausible. But the app-store console counts crashes at OS level, independently of Tracewell. It shows 2.04% for 7.4.0 and 0.69% for 7.3.2, matching Tracewell\u0027s 2.09% and 0.70% (C2). The difference in crashes is real."
+        },
+        {
+          "itemId": "Q5",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C1",
+            "C12"
+          ],
+          "tags": [
+            "plausible-rival",
+            "manager-speculation"
+          ],
+          "rationale": "The PM\u0027s claim in E5 is not borne out. C1 shows equal sessions per user per week (12.3/12.2/12.3) and similar session lengths across flagged users, the holdout and 7.3.2, and the crash measure is already per session. C12 covers flagged users only and cannot compare groups."
+        },
+        {
+          "itemId": "Q6",
+          "expected": "association-only",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "C1",
+            "C2",
+            "C4",
+            "C7",
+            "C15"
+          ],
+          "tags": [
+            "confounded",
+            "tempting-edge",
+            "central"
+          ],
+          "rationale": "The association is real (E1). Most of it comes from the build confounder, so causation is not established. Within 7.4.0 the flag effect is \u002B0.12 points with an interval of \u22120.08 to \u002B0.32, and the memory-kill difference has an interval of \u22120.02 to \u002B0.20. The analyst states a few-tenths effect cannot be ruled out, and C4 and C15 give a plausible memory mechanism. The evidence therefore neither establishes nor counts against the link, so it is not contradicted."
+        },
+        {
+          "itemId": "Q7",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C1",
+            "C2",
+            "C11"
+          ],
+          "tags": [
+            "true-driver",
+            "mechanism"
+          ],
+          "rationale": "Several lines of evidence point the same way. Timing: 7.4.0 was elevated from its first day, while 7.3.2 stayed flat (C1). Covariation: the elevation holds in the holdout and in both device tiers, with equal usage across groups (C1). Mechanism: the leading cluster is in a library version that ships only in 7.4.0 (C2). The OS console confirms the crashes are real, which rules out the SDK-artifact rival (C2)."
+        },
+        {
+          "itemId": "Q8",
+          "expected": "causal",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C10"
+          ],
+          "tags": [
+            "confounder-structure"
+          ],
+          "rationale": "The flag\u0027s eligibility rule requires a capability that first shipped in 7.4.0 (E4, E3). Running 7.4.0 is therefore by design a precondition for getting the flag. C1 (no flagged 7.3.2 users) and C10 (rule never changed) confirm this."
+        },
+        {
+          "itemId": "Q9",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "C1",
+            "C3"
+          ],
+          "tags": [
+            "misleading-signal",
+            "timing-coincidence"
+          ],
+          "rationale": "C1 shows 7.3.2 users, who get the same backend, stayed at 0.68\u20130.72% across 9 Sep. 7.4.0 users were already elevated from 2 Sep and did not change at the deploy. The steeper overall curve reflects 7.4.0 adoption. C3 shows only server metrics and does not settle this by itself."
+        },
+        {
+          "itemId": "Q10",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C13"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "harmful-action"
+          ],
+          "rationale": "Turning the flag off leaves the 7.4.0 crash in place, and closing the incident stops the investigation. Shipping 7.4.0 to 100% would expose the remaining roughly 77% of users to a crash rate about three times the 7.3.2 rate. This is damaging under H2 and also under the residual possibility that the flag adds a small effect."
+        },
+        {
+          "itemId": "Q11",
+          "expected": "preferred",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "best-action"
+          ],
+          "rationale": "The established driver is the 7.4.0 build, and its leading crash cluster is identified. Holding the rollout prevents further harm and is reversible. Fixing the leading clusters addresses the bulk of the excess crashes, whatever any small flag effect turns out to be."
+        },
+        {
+          "itemId": "Q12",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C4",
+            "C7",
+            "C15"
+          ],
+          "tags": [
+            "premature-action",
+            "unconfirmed-mechanism"
+          ],
+          "rationale": "Reworking tile memory handling would help if the flag really adds memory kills, which C4 and C15 make plausible but C1 cannot confirm. If that hypothesis is wrong, the cost is engineering time with no lasting damage. Committing to this mechanism now is not justified."
+        },
+        {
+          "itemId": "Q13",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C15"
+          ],
+          "tags": [
+            "evidence-gathering"
+          ],
+          "rationale": "A larger random holdout would resolve the residual flag-effect question that C1 leaves open, and it is reversible. That makes it reasonable. It does nothing about the build-wide crash that drives most of the harm, so it is not among the best next actions."
+        },
+        {
+          "itemId": "Q14",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C2",
+            "C11"
+          ],
+          "tags": [
+            "protective-control",
+            "suppress-information"
+          ],
+          "rationale": "C2 shows that SDK 5.0\u0027s counts match OS-level statistics, so the new SDK is accurate. Its native capture is what records the Pixelda crash. Rolling it back would remove visibility of native crashes under H2 and under the residual flag-effect rival alike."
+        },
+        {
+          "itemId": "Q15",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "With C1 and C2, the 7.4.0 build is established as the driver, through real crashes, a mechanism and a pre-flag onset. That is enough to commit to holding the rollout and fixing the leading clusters. The open question about a small flag effect does not change this decision."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2"
+      ],
+      "lowValueReads": [
+        "C6",
+        "C9",
+        "C10",
+        "C13"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C2"
+      ],
+      "authoringNotes": "Trap: E1 and E2 show a 2.8x flag cohort gap, and E4 quietly ties the flag to build 7.4.0. E3 lists three changes in that build: the flag\u0027s code, the image library upgrade and the SDK upgrade. Rivals are seeded in E5: backend deploy, device mix and heavy users. C1 is the only item that settles H3, H5 and R4, and it needs the SDK artifact excluded before H2 can be supported. C2 is the only item that settles H4, through its OS-level cross-check, and it supplies the mechanism for R2. C2 alone cannot clear the flag, because the decode stack has no caller frames and C4 and C8 say the canvas uses the same pipeline. Distractors pull toward both stories: C11 favours the artifact story, C14 (beta) is confounded because the flag is forced on, and C15 and C4 favour a memory effect without settling it. R1 is kept association-only on purpose. The point estimates are positive, the intervals include zero and modest positive effects, and the analyst says explicitly that the test lacks power. H1 is contradicted because it claims the flag is the source of the gap, which the holdout comparison excludes. Numbers are internally consistent: the weighted cohort rates reproduce E1\u0027s 0.74%, the overall daily curve follows 7.4.0 adoption up to about 22.5% of users (staged rollout offered to 25%), and the per-tier rates reproduce the build totals."
+    }
+  }
+}

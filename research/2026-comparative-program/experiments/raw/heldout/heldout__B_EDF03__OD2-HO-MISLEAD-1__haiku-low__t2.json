@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-MISLEAD-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-MISLEAD-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C15",
+    "X3": "C8",
+    "X4": "C10",
+    "X5": "C6",
+    "X6": "C3",
+    "X7": "C11",
+    "X8": "C1",
+    "X9": "C12",
+    "X10": "C9",
+    "X11": "C2",
+    "X12": "C5",
+    "X13": "C14",
+    "X14": "C7",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X11",
+    "X8"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-MISLEAD-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20092,
+    "cacheCreationTokens": 9440,
+    "outputTokens": 2628,
+    "thinkingTokens": 1314,
+    "costUsd": 0.00340352,
+    "durationMs": 15434,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with two catalogue items (X11 tier yield, X8 yield by round)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X8\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The fall in enrolment is mostly a yield problem, and the largest share of it traces to the Fall 2026 merit scholarship cuts. Dean\u0027s-tier yield fell from 45% to 32% and Merit-tier yield from 45% to 32%, while the Presidential tier (unchanged award) held steady and the no-merit tier barely moved. Applications and admits rose, and admitted GPA was stable, so a weaker pool does not explain it. Early-action admits, decided on the old system and on time, lost about as much yield as regular decision (7.4 vs 7.5 points). That points away from the portal delay as the main driver. The Admissions Director is not the cause, so replacing her would be harmful. Confidence is moderate: the tier pattern is strong, but no one has separated the award effect from the reader-staffing and portal effects or checked the missing-transcript complaints. Next steps: take the award schedule back to the finance committee with a net-revenue model before next cycle\u0027s letters, set a regular-decision turnaround target, and audit the document-upload gap before deciding on any vendor action.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:44:51.9088398Z",
+    "finishedAt": "2026-11-17T16:45:08.5571808Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "methodChoice": "EDF-2 with two catalogue items (X11 tier yield, X8 yield by round)",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X11",
+            "X8",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The fall in enrolment is mostly a yield problem, and the largest share of it traces to the Fall 2026 merit scholarship cuts. Dean\u0027s-tier yield fell from 45% to 32% and Merit-tier yield from 45% to 32%, while the Presidential tier (unchanged award) held steady and the no-merit tier barely moved. Applications and admits rose, and admitted GPA was stable, so a weaker pool does not explain it. Early-action admits, decided on the old system and on time, lost about as much yield as regular decision (7.4 vs 7.5 points). That points away from the portal delay as the main driver. The Admissions Director is not the cause, so replacing her would be harmful. Confidence is moderate: the tier pattern is strong, but no one has separated the award effect from the reader-staffing and portal effects or checked the missing-transcript complaints. Next steps: take the award schedule back to the finance committee with a net-revenue model before next cycle\u0027s letters, set a regular-decision turnaround target, and audit the document-upload gap before deciding on any vendor action."
+    }
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-MISLEAD-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-MISLEAD-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C13",
+    "X3": "C11",
+    "X4": "C7",
+    "X5": "C14",
+    "X6": "C6",
+    "X7": "C10",
+    "X8": "C1",
+    "X9": "C15",
+    "X10": "C8",
+    "X11": "C2",
+    "X12": "C12",
+    "X13": "C3",
+    "X14": "C4",
+    "X15": "C5"
+  },
+  "readLabels": [
+    "X6",
+    "X3"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-MISLEAD-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28147,
+    "cacheCreationTokens": 7720,
+    "outputTokens": 2386,
+    "thinkingTokens": 1050,
+    "costUsd": 0.00301927,
+    "durationMs": 14940,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E4\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X6\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022The GET slowdown is not caused by gateway 5.8. The regression began in each cell when storage fleet configuration change FC-7710 (the 2 Nov compaction tuning) was applied, not when the gateway arrived. In cell aps-3, which received 5.8 but skipped the config change, latency stayed at about 94 ms. Rolling euw-1 back to 5.7 changed nothing. On the storage nodes, compaction threads tripled, disk utilisation jumped from 41% to 97%, and disk queue wait rose from 9 to 205 ms, which explains the slower reads. I am fairly confident in this, though the link from Orrin\u0027s migration to the compaction backlog is still unattributed (attribution report due 10 Nov). Next: revert FC-7710 in one cell, watch p99 and backlog, then extend the revert. Do not roll back the gateway, since that would not fix this and would delay the SEC-2291 security fix due 30 Nov. Do not pause compaction, which risks disk-full nodes. Log the config push on the change calendar.\u0022,\u0022methodChoice\u0022:\u0022Collected X6 (per-cell timing with config pushes and a 5.8 control cell) and X3 (storage disk and compaction metrics); stopped at the two-item limit.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:41:17.0199214Z",
+    "finishedAt": "2026-11-17T16:41:32.6038163Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-2",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E4",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E6",
+            "X6",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-A5",
+          "answer": "acceptable",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "The GET slowdown is not caused by gateway 5.8. The regression began in each cell when storage fleet configuration change FC-7710 (the 2 Nov compaction tuning) was applied, not when the gateway arrived. In cell aps-3, which received 5.8 but skipped the config change, latency stayed at about 94 ms. Rolling euw-1 back to 5.7 changed nothing. On the storage nodes, compaction threads tripled, disk utilisation jumped from 41% to 97%, and disk queue wait rose from 9 to 205 ms, which explains the slower reads. I am fairly confident in this, though the link from Orrin\u0027s migration to the compaction backlog is still unattributed (attribution report due 10 Nov). Next: revert FC-7710 in one cell, watch p99 and backlog, then extend the revert. Do not roll back the gateway, since that would not fix this and would delay the SEC-2291 security fix due 30 Nov. Do not pause compaction, which risks disk-full nodes. Log the config push on the change calendar.",
+      "methodChoice": "Collected X6 (per-cell timing with config pushes and a 5.8 control cell) and X3 (storage disk and compaction metrics); stopped at the two-item limit."
+    }
+  }
+}

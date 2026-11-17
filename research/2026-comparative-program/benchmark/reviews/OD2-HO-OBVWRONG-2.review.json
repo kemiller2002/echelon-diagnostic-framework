@@ -1,0 +1,128 @@
+{
+  "caseId": "OD2-HO-OBVWRONG-2",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I1",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Pelion bags are worked by the same Tessaly crew pool, and Pelion\u0027s rate stayed flat at 3.6\u20133.8. Corvane\u0027s auto-read-path rate also stayed flat at 3.7\u20133.9. The whole rise is in manual-encode bags that reached the lateral after it closed (C4). Training records were clean (C1)."
+      },
+      {
+        "itemId": "I2",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "No-read rates rose from 1.5% on Brackwater tags to 11.8% on Fennick tags, while transfer and Pelion tags stayed flat on every array. On 14\u201316 Oct the same counters reverted to Brackwater stock and failed at only 1.6% (C9). The extra encode bags miss their flights (C4)."
+      },
+      {
+        "itemId": "I3",
+        "answer": "contradicted",
+        "confidence": 70,
+        "justification": "Evening-bank passenger volume fell (C6). The auto-read-path rate was unchanged (C4). The rise is confined to tag-read failures, which are explained by the tag stock (C9), so evening compression is at most a minor contributor."
+      },
+      {
+        "itemId": "I4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Transfer and Pelion tags read at 1.3\u20131.4% on every array, including array 3 before and after its realignment (C9). Maintenance was done on schedule (C5)."
+      },
+      {
+        "itemId": "I5",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "The engineer says the no-read images cannot separate a media fault from printer heat settings (C9). Darkness adjustment for a new supplier\u0027s media is plausible (C8), and the only test certificate is Fennick\u0027s own (C7). So a manufacturing defect is live but not established."
+      },
+      {
+        "itemId": "I6",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "The changeover coincides in time with the rise (E1), but Pelion changed handler on the same day with the same crew pool and saw no rise. The auto-read-path rate under Tessaly is unchanged (C4)."
+      },
+      {
+        "itemId": "I7",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The 14\u201316 Oct counter reversion to Brackwater stock is a natural experiment: same counters and printers, failure rate 1.6%, while Fennick kiosk tags failed at 12.1% (C9). Reader faults are ruled out by the flat transfer and Pelion rates (C9)."
+      },
+      {
+        "itemId": "I8",
+        "answer": "causal",
+        "confidence": 82,
+        "justification": "The encode-path rate rose from 0.2 to about 4 while the auto-read path stayed flat. Encode volume rose about 6.5-fold and evening dwell rose from 7 to 33 minutes. 91% of failed bags reached the lateral after closing. Their check-in timing matches auto-read bags, which rules out late check-in (C4)."
+      },
+      {
+        "itemId": "I9",
+        "answer": "association-only",
+        "confidence": 70,
+        "justification": "Jam tickets rose with the stock change (E5). But kiosk preventive cleaning was cut to fortnightly at the same time, tickets are not split by counter versus kiosk, and stock type was not recorded (E5, C14)."
+      },
+      {
+        "itemId": "I10",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "The evidence points to the tag stock rather than handling (C4, C9). The SLA excludes causes outside the handler\u0027s control (C13). A breach notice would punish the wrong party and could trigger a retender."
+      },
+      {
+        "itemId": "I11",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "Brackwater stock is on hand (about 5 weeks) and its contract runs to 31 Dec (E5). It read at 1.6% in the October reversion (C9). Reverting removes the cause quickly and can be undone, while Fennick stock and printer settings are tested (C8)."
+      },
+      {
+        "itemId": "I12",
+        "answer": "premature",
+        "confidence": 80,
+        "justification": "Whether the fault lies in the media or the printer darkness settings is unresolved (C9, C8). A defect claim depends on H5, which is not yet confirmed (C7)."
+      },
+      {
+        "itemId": "I13",
+        "answer": "acceptable",
+        "confidence": 60,
+        "justification": "A third encode workstation is available on seven days\u0027 notice (C12) and would cut evening dwell (C4). But it treats the symptom, and reverting the stock (A2) fixes the cause sooner."
+      },
+      {
+        "itemId": "I14",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "The natural experiment and carrier controls (C9, C4) are enough to commit to the low-risk, reversible stock reversion (A2)."
+      }
+    ],
+    "ambiguousItems": [
+      "I13: A4 could be argued as preferred, since it is a quick temporary mitigation for the evening encode backlog (C12), as well as acceptable.",
+      "I3: H3 could be argued as unknown rather than contradicted, since crew leads report evening shortages (C10) and L6 is shared by three flights (C6), though passenger volume fell.",
+      "I6: R1 could be argued as association-only, given the temporal coincidence, rather than contradicted."
+    ],
+    "caseProblems": [
+      "C9 is a very clean natural experiment, with a counter-only reversion on exact dates, and it nearly settles the case on its own. It is realistic but strongly decisive.",
+      "C9 states no-read rates for transfer and Pelion tags but gives no Corvane tag volumes, so the 455/day encode figure in C4 cannot be cross-checked exactly. A rough check is roughly consistent.",
+      "Titles do not leak answers. However, the H2 and H5 wording separates \u0027tag production\u0027 from \u0027defective as manufactured\u0027 in a way that hints at the intended media-versus-printer ambiguity."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A4 is a reasonable mitigation: more encode capacity would shorten evening dwell (C4). But it only treats the symptom. The cause is the Fennick stock\u0027s roughly 12% no-read rate (C9). A2 removes that cause directly, using Brackwater stock already in stores under a valid contract (E5), and the 14\u201316 Oct reversion showed it works (1.6%). Once A2 is done, encode volume should fall back towards about 70 bags a day, so an extra workstation becomes unnecessary. A4 also depends on HBAA\u0027s cooperation, and C12 says the third workstation needs seven days\u0027 notice, by which time A2 will already have taken effect. So A4 is not among the best next actions. That makes it \u0027acceptable\u0027 rather than \u0027preferred\u0027. It is also not premature or harmful, so \u0027acceptable\u0027 is the only defensible answer.",
+        "fix": "None needed. Optionally, add to the A4 rationale that C12\u0027s seven-day notice means A2 takes effect sooner and removes the backlog at source."
+      },
+      {
+        "itemId": "I3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "H3 says the schedule compression is enough to cause the rise. C4 counts directly against that. Corvane\u0027s auto-read mishandling stayed flat (3.9 to 3.7), but evening compression would affect all evening bags, not just one routing path. The whole excess is in encode-path bags. Their volume rose about six-fold while evening passengers fell (C6: 2,310 to 2,050), and two extra departures cannot explain that. 91% of the missed encode bags reached the lateral after it closed, and check-in timing matches across the two paths. The crew leads\u0027 reports of shortages (C10) are unquantified staff accounts. They cannot outweigh the routing-path contrast. The L6 sharing in C6 also fails to explain why only encode-path bags went missing. The evidence is not neutral: it counts against H3, so \u0027contradicted\u0027 is correct and \u0027unknown\u0027 is not.",
+        "fix": "None needed."
+      },
+      {
+        "itemId": "I6",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The two changes happening on the same date is exactly what C4\u0027s contrast case tests, and the link fails that test. Pelion moved to Tessaly on the same date and is worked by the same single crew pool, yet its rate stayed flat (3.6\u20133.8). Corvane\u0027s auto-read bags, which the same crews load, also stayed flat. The excess bags missed their flights because they reached the lateral after closure, which is not a crew loading failure. The only evidence for the link is the timing, the leadership accounts and the pre-trace cause codes (C11). Those do not survive the contrast. Under the stated semantics, evidence that counts against the link means \u0027contradicted\u0027, not \u0027association-only\u0027.",
+        "fix": "None needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

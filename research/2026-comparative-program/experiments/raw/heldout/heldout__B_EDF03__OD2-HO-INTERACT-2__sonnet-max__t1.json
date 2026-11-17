@@ -1,0 +1,223 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-INTERACT-2__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C1",
+    "X3": "C7",
+    "X4": "C8",
+    "X5": "C4",
+    "X6": "C3",
+    "X7": "C2",
+    "X8": "C13",
+    "X9": "C6",
+    "X10": "C12",
+    "X11": "C15",
+    "X12": "C11",
+    "X13": "C14",
+    "X14": "C10",
+    "X15": "C5"
+  },
+  "readLabels": [
+    "X7",
+    "X3"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-INTERACT-2__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 40446,
+    "cacheCreationTokens": 32933,
+    "outputTokens": 61019,
+    "thinkingTokens": 58810,
+    "costUsd": 0.7459825999999999,
+    "durationMs": 406573,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-INTERACT-2__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-INTERACT-2__sonnet-max__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-INTERACT-2__sonnet-max__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022methodChoice\u0022:\u0022Collected 2 items: X7 (site-level counts with go-live and staffing status), then X3 (booking reconciliation from app audit logs and callbacks). Used the specified diagnostic sequence internally: compared sites with and without the app and with and without a coordinator, checked the mechanism and dose-response, and tested the renewal, satisfaction and competitor explanations against the same data.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:68,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022Mara, the evidence doesn\u0027t support cancelling RotaWeave. The fall comes from two changes together, not either alone.\\n\\nMillbrook (app, coordinator kept) went 118 to 111; Quarry Lane (coordinator lost, no app yet) 86 to 80; Dock Street and Westgate (both changes) roughly halved, 217 to 104. On the basic tier, a regular keeps a weekly slot only if staff book it before Thursday\u0027s release. At those two sites staff made about 74 such bookings a week until 30 April, then 3. Of 213 regulars there, 129 lost their usual slot; 88% of them are now inactive, versus 11% of those who kept it. Of 61 lapsed volunteers reached, 44 cited a lost shift and 2 joined another group; 121 of 123 lapsed had current background checks.\\n\\nI\u0027m fairly confident (about 85\u201390%). Unknown: how many lapsed volunteers will return.\\n\\nNext: at Dock Street and Westgate, use the idle admin seat to pre-book regulars weekly, phone lapsed ones offering their slot back, and review after 60 days. Arrange the same cover before Quarry Lane goes live on 6 October. Don\u0027t cancel the contract, suspend background checks, or hide inactive names.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:01:12.6469645Z",
+    "finishedAt": "2026-11-17T16:08:00.0665537Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "methodChoice": "Collected 2 items: X7 (site-level counts with go-live and staffing status), then X3 (booking reconciliation from app audit logs and callbacks). Used the specified diagnostic sequence internally: compared sites with and without the app and with and without a coordinator, checked the mechanism and dose-response, and tested the renewal, satisfaction and competitor explanations against the same data.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X7",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E1",
+            "E5",
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 68,
+          "evidenceIds": [
+            "E6",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 50,
+          "evidenceIds": [
+            "E6",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 94,
+          "evidenceIds": [
+            "E2",
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 50,
+          "evidenceIds": [
+            "X7",
+            "X3",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "Mara, the evidence doesn\u0027t support cancelling RotaWeave. The fall comes from two changes together, not either alone.\n\nMillbrook (app, coordinator kept) went 118 to 111; Quarry Lane (coordinator lost, no app yet) 86 to 80; Dock Street and Westgate (both changes) roughly halved, 217 to 104. On the basic tier, a regular keeps a weekly slot only if staff book it before Thursday\u0027s release. At those two sites staff made about 74 such bookings a week until 30 April, then 3. Of 213 regulars there, 129 lost their usual slot; 88% of them are now inactive, versus 11% of those who kept it. Of 61 lapsed volunteers reached, 44 cited a lost shift and 2 joined another group; 121 of 123 lapsed had current background checks.\n\nI\u0027m fairly confident (about 85\u201390%). Unknown: how many lapsed volunteers will return.\n\nNext: at Dock Street and Westgate, use the idle admin seat to pre-book regulars weekly, phone lapsed ones offering their slot back, and review after 60 days. Arrange the same cover before Quarry Lane goes live on 6 October. Don\u0027t cancel the contract, suspend background checks, or hide inactive names."
+    }
+  }
+}

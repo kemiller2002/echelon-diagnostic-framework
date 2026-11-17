@@ -1,0 +1,229 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-ADVERS-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-ADVERS-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C9",
+    "X3": "C7",
+    "X4": "C3",
+    "X5": "C1",
+    "X6": "C8",
+    "X7": "C15",
+    "X8": "C14",
+    "X9": "C11",
+    "X10": "C6",
+    "X11": "C2",
+    "X12": "C13",
+    "X13": "C10",
+    "X14": "C5",
+    "X15": "C12"
+  },
+  "readLabels": [
+    "X13",
+    "X14"
+  ],
+  "reads": [
+    "C10",
+    "C5"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-ADVERS-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20710,
+    "cacheCreationTokens": 10155,
+    "outputTokens": 2574,
+    "thinkingTokens": 1098,
+    "costUsd": 0.0035257,
+    "durationMs": 14901,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E2\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022]}],\u0022methodChoice\u0022:\u0022EDF-2 diagnostic sequence with two collected items (X13, X14)\u0022,\u0022brief\u0022:\u0022The VA-220 failures are most likely caused by defective Pellacott valves built in 2026. Teardowns and a helium retest of warehouse valves show seat leaks in 2026 Pellacott units and not in 2025 or Durrant-Hale units. Claim rates are the same across legacy and new installers and across firmware 4.1 and 4.2, so those explanations don\u0027t hold. The bigger problem is the certificates. The test rig recorded as used for VA-220 was out of service from January 2026, the other rigs have no VA-220 program loaded, and 31 of 36 certificate tables repeat four sequences. The records do not reflect tests that were actually run, which is why the score rose. I\u0027m fairly confident in this, but the seal change (Corlin vs Ferrand, with the Line 3 move) is not separated, and other suppliers\u0027 records are unverified. Next: quarantine all 2026-built Pellacott VA-220 stock, including the six held lots, and suspend its dock-to-stock status. Release only after Brenmoor-run helium testing. Do not release the held lots on new certificates, and do not charge installers for claims. Verify other suppliers\u0027 test records through the rig logs.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:59:23.6770958Z",
+    "finishedAt": "2026-11-17T15:59:39.4163075Z",
+    "output": {
+      "caseId": "OD2-HO-ADVERS-1",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X14",
+            "E2",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X13",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I16",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X14"
+          ]
+        }
+      ],
+      "methodChoice": "EDF-2 diagnostic sequence with two collected items (X13, X14)",
+      "brief": "The VA-220 failures are most likely caused by defective Pellacott valves built in 2026. Teardowns and a helium retest of warehouse valves show seat leaks in 2026 Pellacott units and not in 2025 or Durrant-Hale units. Claim rates are the same across legacy and new installers and across firmware 4.1 and 4.2, so those explanations don\u0027t hold. The bigger problem is the certificates. The test rig recorded as used for VA-220 was out of service from January 2026, the other rigs have no VA-220 program loaded, and 31 of 36 certificate tables repeat four sequences. The records do not reflect tests that were actually run, which is why the score rose. I\u0027m fairly confident in this, but the seal change (Corlin vs Ferrand, with the Line 3 move) is not separated, and other suppliers\u0027 records are unverified. Next: quarantine all 2026-built Pellacott VA-220 stock, including the six held lots, and suspend its dock-to-stock status. Release only after Brenmoor-run helium testing. Do not release the held lots on new certificates, and do not charge installers for claims. Verify other suppliers\u0027 test records through the rig logs."
+    }
+  }
+}

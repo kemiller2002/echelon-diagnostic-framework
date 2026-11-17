@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__E_NOSUFF__OD2-HO-OBVWRONG-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "E_NOSUFF",
+  "caseId": "OD2-HO-OBVWRONG-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C15",
+    "X3": "C1",
+    "X4": "C11",
+    "X5": "C8",
+    "X6": "C2",
+    "X7": "C7",
+    "X8": "C10",
+    "X9": "C9",
+    "X10": "C12",
+    "X11": "C4",
+    "X12": "C3",
+    "X13": "C6",
+    "X14": "C14",
+    "X15": "C5"
+  },
+  "readLabels": [
+    "X6",
+    "X13"
+  ],
+  "reads": [
+    "C2",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOSUFF__OD2-HO-OBVWRONG-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20051,
+    "cacheCreationTokens": 9351,
+    "outputTokens": 1615,
+    "thinkingTokens": 40,
+    "costUsd": 0.055571100000000005,
+    "durationMs": 10795,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSUFF__OD2-HO-OBVWRONG-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSUFF__OD2-HO-OBVWRONG-1__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSUFF__OD2-HO-OBVWRONG-1__sonnet-medium__t1/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The buffering problem is almost certainly the new smart-TV app version 5.2, not the CDN switch. Smart-TV 5.2 sessions stall about 5.9% of the time, on every ISP. Every other client on the same Tessaline CDN and the same ISPs stalls 0.6\u20130.7%, which matches the pre-migration level. The stalls began on 9 Oct, the day the CDN cutover finished and 5.2 shipped, so timing alone can\u0027t separate them. The client breakdown does. Handball demand doesn\u0027t fit: the rise came before the launch, and match nights are no worse than other days. ISP congestion doesn\u0027t fit either. So I advise against the breach notice, withheld fees and move back to Corvane, since that would not fix the problem and would punish the wrong party. Also don\u0027t mute the alert. Instead, revert 5.2\u0027s adaptive-streaming behaviour to the 5.1 settings and pause the wider rollout, and confirm with engineering. Add app version and device breakdowns to the dashboard. Don\u0027t offer win-back credits yet: the cancellation rise overlaps the 1 Oct price rise, and the exit survey has no quality option. Confidence is fairly high but not certain. Tessaline\u0027s slightly lower cache hit ratio may play a small part.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:27:05.3590024Z",
+    "finishedAt": "2026-11-17T16:27:17.0871753Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "E5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 78,
+          "evidenceIds": [
+            "X6",
+            "E5",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The buffering problem is almost certainly the new smart-TV app version 5.2, not the CDN switch. Smart-TV 5.2 sessions stall about 5.9% of the time, on every ISP. Every other client on the same Tessaline CDN and the same ISPs stalls 0.6\u20130.7%, which matches the pre-migration level. The stalls began on 9 Oct, the day the CDN cutover finished and 5.2 shipped, so timing alone can\u0027t separate them. The client breakdown does. Handball demand doesn\u0027t fit: the rise came before the launch, and match nights are no worse than other days. ISP congestion doesn\u0027t fit either. So I advise against the breach notice, withheld fees and move back to Corvane, since that would not fix the problem and would punish the wrong party. Also don\u0027t mute the alert. Instead, revert 5.2\u0027s adaptive-streaming behaviour to the 5.1 settings and pause the wider rollout, and confirm with engineering. Add app version and device breakdowns to the dashboard. Don\u0027t offer win-back credits yet: the cancellation rise overlaps the 1 Oct price rise, and the exit survey has no quality option. Confidence is fairly high but not certain. Tessaline\u0027s slightly lower cache hit ratio may play a small part."
+    }
+  }
+}

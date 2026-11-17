@@ -1,0 +1,212 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-CONTRA-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C3",
+    "X3": "C6",
+    "X4": "C4",
+    "X5": "C5",
+    "X6": "C10",
+    "X7": "C11",
+    "X8": "C9",
+    "X9": "C12",
+    "X10": "C15",
+    "X11": "C8",
+    "X12": "C14",
+    "X13": "C1",
+    "X14": "C7",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X8",
+    "X3"
+  ],
+  "reads": [
+    "C9",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-CONTRA-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21834,
+    "cacheCreationTokens": 11183,
+    "outputTokens": 2340,
+    "thinkingTokens": 690,
+    "costUsd": 0.0703274,
+    "durationMs": 17350,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-1__sonnet-medium__t1/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-1__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022methodChoice\u0022:\u0022Analysis of Competing Hypotheses (with careful reasoning): the case is a dispute between rival explanations, and the audit-trail evidence discriminates between them.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022E6\u0022]}],\u0022brief\u0022:\u0022The evidence points mainly at Callerby, not Halden. The tower crane left for Kestrel in October 2025, before the big structural change order (CO-09, 6 Nov), and stayed away until April. Your own report no. 14 and your superintendent confirm this. The platform\u0027s audit trail can\u0027t be edited. It shows the architect answered 62 of 64 RFIs within the contract period (median 4 working days). The 41 \\\u0022late\\\u0022 RFIs in the draft claim are mostly time the RFI sat in Callerby\u0027s own draft status, because the claim measured from the \u0027created\u0027 date rather than the \u0027submitted\u0027 date. The change orders were mostly small interior changes. CO-09 was real and structural, so a limited entitlement may exist, but it can\u0027t be separated from the crane absence yet. Do not submit the claim as drafted. It would likely be rebutted with documents and would damage credibility. Fenmore\u0027s 6% fee gives it a reason to claim the maximum. Have an independent analyst test whether any narrow CO-09 entitlement exists. Do not punish the superintendent, who told the truth. Review how the crane move was approved and what the incentive\u0027s role was before changing it. I\u0027m fairly confident, but I did not check the steel-delivery or crane ledger records.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:14:03.6683085Z",
+    "finishedAt": "2026-11-17T16:14:21.7869615Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "methodChoice": "Analysis of Competing Hypotheses (with careful reasoning): the case is a dispute between rival explanations, and the audit-trail evidence discriminates between them.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X3",
+            "E4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 50,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 50,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "preferred",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "X3",
+            "E4",
+            "E5",
+            "E6"
+          ]
+        }
+      ],
+      "brief": "The evidence points mainly at Callerby, not Halden. The tower crane left for Kestrel in October 2025, before the big structural change order (CO-09, 6 Nov), and stayed away until April. Your own report no. 14 and your superintendent confirm this. The platform\u0027s audit trail can\u0027t be edited. It shows the architect answered 62 of 64 RFIs within the contract period (median 4 working days). The 41 \u0022late\u0022 RFIs in the draft claim are mostly time the RFI sat in Callerby\u0027s own draft status, because the claim measured from the \u0027created\u0027 date rather than the \u0027submitted\u0027 date. The change orders were mostly small interior changes. CO-09 was real and structural, so a limited entitlement may exist, but it can\u0027t be separated from the crane absence yet. Do not submit the claim as drafted. It would likely be rebutted with documents and would damage credibility. Fenmore\u0027s 6% fee gives it a reason to claim the maximum. Have an independent analyst test whether any narrow CO-09 entitlement exists. Do not punish the superintendent, who told the truth. Review how the crane move was approved and what the incentive\u0027s role was before changing it. I\u0027m fairly confident, but I did not check the steel-delivery or crane ledger records."
+    }
+  }
+}

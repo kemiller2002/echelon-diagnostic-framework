@@ -1,0 +1,220 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-INCOMPLETE-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-INCOMPLETE-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C15",
+    "X3": "C10",
+    "X4": "C4",
+    "X5": "C2",
+    "X6": "C7",
+    "X7": "C3",
+    "X8": "C1",
+    "X9": "C13",
+    "X10": "C5",
+    "X11": "C14",
+    "X12": "C12",
+    "X13": "C8",
+    "X14": "C9",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X8",
+    "X7"
+  ],
+  "reads": [
+    "C1",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-INCOMPLETE-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 32293,
+    "cacheCreationTokens": 9376,
+    "outputTokens": 3168,
+    "thinkingTokens": 1714,
+    "costUsd": 0.0037829299999999995,
+    "durationMs": 18675,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INCOMPLETE-2\u0022,\u0022methodChoice\u0022:\u0022EDF-2 sequence, limited evidence (2 items collected: X8, X7)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X8\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022What is going on: the departures are concentrated in the Kestrel review team, not spread across the group or the market. Eight of the 11 associates on Kestrel left, against one of the 13 others. All 11 Kestrel associates were supervised by Dorian Faulk, and the staffing notes say they were picked from the least-utilised associates. Survey comments point to supervision (respect, corrections sent to the whole team) and to workload. I can\u0027t separate those two causes, because every Kestrel associate had the same supervisor and the same heavy workload. Pay and the firm-wide billable target don\u0027t explain the concentration, since everyone in the group and firm faces them. How sure I am: moderate on the concentration; low on which of supervision or workload drives it. What to do next: do not pay the \u00A312k group-wide retention payment or close the review. Commission the confidential interviews (A1, about \u00A39k, about three weeks), designed to separate supervision from workload. Meanwhile, consider reviewing supervision of Kestrel associates while that runs. Exit forms are not informative.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:44:49.4500401Z",
+    "finishedAt": "2026-11-17T16:45:09.0734787Z",
+    "output": {
+      "caseId": "OD2-HO-INCOMPLETE-2",
+      "methodChoice": "EDF-2 sequence, limited evidence (2 items collected: X8, X7)",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "E2",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "contradicted",
+          "confidence": 50,
+          "evidenceIds": [
+            "X8",
+            "E2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "E5",
+            "X8",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "insufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X7",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "What is going on: the departures are concentrated in the Kestrel review team, not spread across the group or the market. Eight of the 11 associates on Kestrel left, against one of the 13 others. All 11 Kestrel associates were supervised by Dorian Faulk, and the staffing notes say they were picked from the least-utilised associates. Survey comments point to supervision (respect, corrections sent to the whole team) and to workload. I can\u0027t separate those two causes, because every Kestrel associate had the same supervisor and the same heavy workload. Pay and the firm-wide billable target don\u0027t explain the concentration, since everyone in the group and firm faces them. How sure I am: moderate on the concentration; low on which of supervision or workload drives it. What to do next: do not pay the \u00A312k group-wide retention payment or close the review. Commission the confidential interviews (A1, about \u00A39k, about three weeks), designed to separate supervision from workload. Meanwhile, consider reviewing supervision of Kestrel associates while that runs. Exit forms are not informative."
+    }
+  }
+}

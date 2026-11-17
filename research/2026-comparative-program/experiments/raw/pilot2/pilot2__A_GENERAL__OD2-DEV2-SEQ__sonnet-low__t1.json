@@ -1,0 +1,224 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-SEQ",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C3",
+    "X3": "C10",
+    "X4": "C2",
+    "X5": "C13",
+    "X6": "C15",
+    "X7": "C8",
+    "X8": "C9",
+    "X9": "C1",
+    "X10": "C7",
+    "X11": "C14",
+    "X12": "C12",
+    "X13": "C11",
+    "X14": "C5",
+    "X15": "C4"
+  },
+  "readLabels": [
+    "X9",
+    "X4",
+    "X2"
+  ],
+  "reads": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17627,
+    "cacheCreationTokens": 7598,
+    "outputTokens": 2150,
+    "thinkingTokens": 288,
+    "costUsd": 0.053666700000000005,
+    "durationMs": 14338,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-SEQ__sonnet-low__t1/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-SEQ\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X4\u0022,\u0022X9\u0022]}],\u0022brief\u0022:\u0022The slowdown is not mainly Corvane or the new hires. It comes from the 1 May credit policy change (clause 6.3). That clause requires a full inspection appraisal for property collateral above $150k, where desktop valuation used to be allowed. Full appraisals take about 8.6 days at the valuation firm. Desktop valuations take about 1.2 days. Full appraisals rose from about 30 to about 80 a month. Property-secured loans went from about 8 to 15 days, almost all of it in the valuation stage. Unsecured loans are back to about 5.9 days, so Corvane is not the cause. Underwriting time is flat. Document collection at the new-hire branches matches the other branches. The valuation firm\u0027s turnaround per order type hasn\u0027t changed. The policy change was made for a reason: audit found desktop valuations overstated value by a median 12%. Nobody assessed its effect on processing time. I\u0027m fairly confident, about 85\u201390%. The link between delays and withdrawals is unproven, because Corvane now auto-closes files after 30 days without uploads, and that inflates the withdrawal count. Next steps: do not withhold the Corvane payment or put the new hires on improvement plans. Take the measured delay and the audit rationale to the credit risk committee to decide on the valuation clause, for example a middle band. Add a by-stage breakdown to the dashboard. Look at withdrawal reasons before you offer customers anything.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:42:11.0741030Z",
+    "finishedAt": "2026-11-17T14:42:26.3861793Z",
+    "output": {
+      "caseId": "OD2-DEV2-SEQ",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "acceptable",
+          "confidence": 70,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X2",
+            "X4",
+            "X9"
+          ]
+        }
+      ],
+      "brief": "The slowdown is not mainly Corvane or the new hires. It comes from the 1 May credit policy change (clause 6.3). That clause requires a full inspection appraisal for property collateral above $150k, where desktop valuation used to be allowed. Full appraisals take about 8.6 days at the valuation firm. Desktop valuations take about 1.2 days. Full appraisals rose from about 30 to about 80 a month. Property-secured loans went from about 8 to 15 days, almost all of it in the valuation stage. Unsecured loans are back to about 5.9 days, so Corvane is not the cause. Underwriting time is flat. Document collection at the new-hire branches matches the other branches. The valuation firm\u0027s turnaround per order type hasn\u0027t changed. The policy change was made for a reason: audit found desktop valuations overstated value by a median 12%. Nobody assessed its effect on processing time. I\u0027m fairly confident, about 85\u201390%. The link between delays and withdrawals is unproven, because Corvane now auto-closes files after 30 days without uploads, and that inflates the withdrawal count. Next steps: do not withhold the Corvane payment or put the new hires on improvement plans. Take the measured delay and the audit rationale to the credit risk committee to decide on the valuation clause, for example a middle band. Add a by-stage breakdown to the dashboard. Look at withdrawal reasons before you offer customers anything."
+    }
+  }
+}

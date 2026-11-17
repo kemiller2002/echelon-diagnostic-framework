@@ -1,0 +1,246 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-ADVERS__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-ADVERS",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C3",
+    "X3": "C10",
+    "X4": "C6",
+    "X5": "C7",
+    "X6": "C9",
+    "X7": "C4",
+    "X8": "C8",
+    "X9": "C11",
+    "X10": "C1",
+    "X11": "C12",
+    "X12": "C5"
+  },
+  "readLabels": [
+    "X10",
+    "X11",
+    "X12",
+    "X4",
+    "X2"
+  ],
+  "reads": [
+    "C1",
+    "C12",
+    "C5",
+    "C6",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-ADVERS__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 14,
+    "cacheReadTokens": 61596,
+    "cacheCreationTokens": 8798,
+    "outputTokens": 3396,
+    "thinkingTokens": 1883,
+    "costUsd": 0.00407496,
+    "durationMs": 24560,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-ADVERS\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X2\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X4\u0022,\u0022X12\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X10\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022X2\u0022]}],\u0022brief\u0022:\u0022What is going on: most of the Q3 pipeline growth is not real. On 29 Sept, 212 partner-tagged records ($6.2M) were bulk-loaded under Jun Okafor\u0027s account from a file that arrived in a team chat with the note \\\u0022load before snapshot.\\\u0022 None had any logged activity, and 171 of them duplicate 2024 closed-lost deals with dates moved into Q4. Rep-created deals convert at a steady 25%, the same as earlier this year, so the four reps are not failing to close. The webinar did not drive the surge.\\n\\nHow sure: high that the import is the main cause and that the reps\u0027 conversion is normal. Less sure who prepared and requested the file. Dana Wexley denies it, and the chat messages are gone.\\n\\nNext steps: Do not sign the performance plans or release the requisitions. Restate coverage using rep-created deals only (about 1.9x, below the 3.0x gate). Quarantine the 212 records. Preserve the source file and import job record, and interview Okafor and channel members about who posted the file.\u0022,\u0022methodChoice\u0022:\u0022Collected X10, X11, X12, X4, X2 (5 of 5 items).\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:25:58.2156028Z",
+    "finishedAt": "2026-11-17T14:26:23.6215428Z",
+    "output": {
+      "caseId": "OD2-DEV-ADVERS",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X10",
+            "X2",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "E5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "E5",
+            "E3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E2",
+            "X4",
+            "X12",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 82,
+          "evidenceIds": [
+            "X2",
+            "X10",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "X2"
+          ]
+        }
+      ],
+      "brief": "What is going on: most of the Q3 pipeline growth is not real. On 29 Sept, 212 partner-tagged records ($6.2M) were bulk-loaded under Jun Okafor\u0027s account from a file that arrived in a team chat with the note \u0022load before snapshot.\u0022 None had any logged activity, and 171 of them duplicate 2024 closed-lost deals with dates moved into Q4. Rep-created deals convert at a steady 25%, the same as earlier this year, so the four reps are not failing to close. The webinar did not drive the surge.\n\nHow sure: high that the import is the main cause and that the reps\u0027 conversion is normal. Less sure who prepared and requested the file. Dana Wexley denies it, and the chat messages are gone.\n\nNext steps: Do not sign the performance plans or release the requisitions. Restate coverage using rep-created deals only (about 1.9x, below the 3.0x gate). Quarantine the 212 records. Preserve the source file and import job record, and interview Okafor and channel members about who posted the file.",
+      "methodChoice": "Collected X10, X11, X12, X4, X2 (5 of 5 items)."
+    }
+  }
+}

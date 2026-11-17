@@ -1,0 +1,203 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-SEQ-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-SEQ-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C3",
+    "X2": "C5",
+    "X3": "C7",
+    "X4": "C14",
+    "X5": "C10",
+    "X6": "C2",
+    "X7": "C6",
+    "X8": "C9",
+    "X9": "C1",
+    "X10": "C4",
+    "X11": "C15",
+    "X12": "C8",
+    "X13": "C12",
+    "X14": "C11",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X8",
+    "X7"
+  ],
+  "reads": [
+    "C9",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-SEQ-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21958,
+    "cacheCreationTokens": 11501,
+    "outputTokens": 1907,
+    "thinkingTokens": 250,
+    "costUsd": 0.0672818,
+    "durationMs": 14072,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-SEQ-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-SEQ-1__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-SEQ-1__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-SEQ-1\u0022,\u0022methodChoice\u0022:\u0022D\u002BC: compare rival hypotheses and use IS/IS-NOT distinctions; one sentence: the competing explanations differ on which vans are affected, which the garage and assignment records can separate.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:87,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The evidence points to contaminated brake fluid, not driver technique, pads or the new routes. Northfield Motor Services refitted 13 Eastgate vans during the bay closure, mostly using an old bulk drum with a missing cap. Two vans serviced from a fresh drum on 11\u201312 September had no complaints. The other 11 Northfield vans are exactly the 11 vans behind all 27 complaints. Two of them (LK-217, LK-224) tested at about 150\u00B0C boiling point against 255\u00B0C for sealed stock, and the pedal went soft after a long descent. Northfield recommended rechecking the other vans on 25 September, and nobody replied. Calder Road vans received the same pads and have no complaints. The same drivers had no reports in other vans, including 141 days on Upper Wend. Do not issue warnings. They would punish drivers for reporting a real safety fault and suppress further reports. Retraining on descent braking is not justified either. This week, take the Northfield-serviced vans out of service, test and renew their fluid from sealed stock, and keep LK-209 parked until it is done. Also ask Northfield which other Larkspur vans used the bulk drum. Confidence is high, but I haven\u0027t seen fluid tests on the other 9 vans.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:56:42.8702556Z",
+    "finishedAt": "2026-11-17T15:56:57.8388607Z",
+    "output": {
+      "caseId": "OD2-HO-SEQ-1",
+      "methodChoice": "D\u002BC: compare rival hypotheses and use IS/IS-NOT distinctions; one sentence: the competing explanations differ on which vans are affected, which the garage and assignment records can separate.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X8",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X8",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E5",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 87,
+          "evidenceIds": [
+            "X8",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The evidence points to contaminated brake fluid, not driver technique, pads or the new routes. Northfield Motor Services refitted 13 Eastgate vans during the bay closure, mostly using an old bulk drum with a missing cap. Two vans serviced from a fresh drum on 11\u201312 September had no complaints. The other 11 Northfield vans are exactly the 11 vans behind all 27 complaints. Two of them (LK-217, LK-224) tested at about 150\u00B0C boiling point against 255\u00B0C for sealed stock, and the pedal went soft after a long descent. Northfield recommended rechecking the other vans on 25 September, and nobody replied. Calder Road vans received the same pads and have no complaints. The same drivers had no reports in other vans, including 141 days on Upper Wend. Do not issue warnings. They would punish drivers for reporting a real safety fault and suppress further reports. Retraining on descent braking is not justified either. This week, take the Northfield-serviced vans out of service, test and renew their fluid from sealed stock, and keep LK-209 parked until it is done. Also ask Northfield which other Larkspur vans used the bulk drum. Confidence is high, but I haven\u0027t seen fluid tests on the other 9 vans."
+    }
+  }
+}

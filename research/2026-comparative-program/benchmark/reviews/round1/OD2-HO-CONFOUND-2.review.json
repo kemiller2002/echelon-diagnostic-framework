@@ -1,0 +1,126 @@
+{
+  "caseId": "OD2-HO-CONFOUND-2",
+  "blindAgreement": "15/15",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Within 7.4.0 the random holdout crashes almost as often as flagged users (1.98% vs 2.10%, interval includes 0), and 7.4.0 was already at 1.99% on 2\u20133 Sep before the flag was on (C1). So flag-only code cannot account for the 2.10% vs 0.74% gap (E1), even if a small effect remains possible."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "supported",
+        "confidence": 88,
+        "justification": "Only 7.4.0 users can get the flag (E4, C10). 7.4.0 runs at about 2% whether the flag is on or off, while 7.3.2 stays flat at about 0.7% (C1). 7.4.0\u0027s top crash cluster is a Pixelda 3.1 HEIF decode SIGSEGV that never appears on 7.3.2, which ships Pixelda 2.8 (C2, E3)."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "The share of sessions on devices with 4 GB or less is about the same for flag on, holdout and 7.3.2 (31%/30%/33%), and the 7.4.0 vs 7.3.2 gap holds in both memory tiers (C1)."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "The app store\u0027s OS-level crash console, which is independent of Tracewell, shows the same 7.4.0 vs 7.3.2 gap (2.04% vs 0.69%) as Tracewell (2.09% vs 0.70%) (C2), which outweighs the vendor\u0027s general caveat (C11)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "Mean sessions per user per week (12.3/12.2/12.3) and median session length are almost the same for flag on, holdout and 7.3.2 users (C1), so the heavy-user claim in E5 is not borne out."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "association-only",
+        "confidence": 50,
+        "justification": "The raw flag-on vs flag-off association in E1 is confounded by build. The randomized holdout comparison (C1) is inconclusive: \u002B0.12 points, interval \u22120.08 to \u002B0.32. A memory mechanism is plausible (C15, C4), so causation is not established, and neither is a clear absence of any effect."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "causal",
+        "confidence": 78,
+        "justification": "7.4.0 users have a raised crash rate from day one, before the flag (C1). The store offers the update to a random share of users (E3), and device mix and usage match 7.3.2 users (C1). There is a build-specific mechanism (Pixelda cluster absent in 7.3.2, C2), and an independent platform console confirms the rates (C2)."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The flag\u0027s eligibility rule requires capability canvas.tiles.v1, which first shipped in 7.4.0 (E4), and the rule has not changed since the flag was created (C10)."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "7.3.2 users, who also receive zstd payloads, stayed flat at 0.68\u20130.72% with no change after the 9 Sep deploy (C1, C3). The rising overall curve is explained by more users moving onto 7.4.0 (C1, E3)."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "Turning the flag off would remove only about 0.12 points (C1). Closing the incident and shipping 7.4.0 to 100% would spread the build-driven crash rate of about 2% (Pixelda SIGSEGV, C2) to every user and close the investigation."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "Holding the rollout and fixing 7.4.0\u0027s leading crash clusters targets the build that drives the gap (C1) and its main cluster, libpixelda HEIF decode (C2)."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "premature",
+        "confidence": 70,
+        "justification": "A flag-driven increase in memory kills is plausible (C15, C4) but not established in the field (holdout interval \u22120.02 to \u002B0.20, C1), so blocking the ramp on a rework commits ahead of the evidence."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "A bigger randomized holdout is a cheap, reasonable way to resolve the remaining small memory-kill effect noted by the analyst (C1, C15). It is secondary to fixing the build-level crash cluster (C2)."
+      },
+      {
+        "itemId": "Q14",
+        "answer": "harmful",
+        "confidence": 82,
+        "justification": "The independent console shows the crashes are real (C2), so rolling back to Tracewell 4.9 would only stop capturing the native Pixelda crashes (C11, E3) and hide the main failure."
+      },
+      {
+        "itemId": "Q15",
+        "answer": "sufficient",
+        "confidence": 78,
+        "justification": "The randomized holdout, the build-level comparison, the cross-checked Pixelda crash cluster and the independent platform statistics (C1, C2) are enough to commit to holding 7.4.0 and fixing its leading crash."
+      }
+    ],
+    "ambiguousItems": [
+      "Q6: R1 could reasonably be \u0027association-only\u0027 (a raw association exists, causation is unestablished), \u0027contradicted\u0027 (the randomized holdout shows no significant effect) or \u0027unknown\u0027 (the interval includes a few tenths of a point).",
+      "Q13: A4 could be \u0027preferred\u0027 alongside A2, since it is the cheapest way to settle the remaining flag memory effect, or only \u0027acceptable\u0027."
+    ],
+    "caseProblems": [
+      "Minor: in E1, about 414k flagged users out of about 460k eligible implies roughly 90% of users offered 7.4.0 had installed it within 1\u20132 weeks, which is a fast uptake for \u0027install at their own pace\u0027. The other figures are internally consistent: the OFF-cohort mix gives 0.74% and the overall rate gives about 1.01%.",
+      "C1 alone nearly resolves the whole case, because it includes the randomized holdout, the build comparison, the memory tiers and the usage measures. Its title signals that it is the decisive item, but it does not state the answer."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q6",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R1 claims only that having the flag on goes with a higher crash-affected session rate. It does not claim the flag is the source of the whole gap; that is H1, which the key separately marks contradicted. Taking each alternative in turn: (1) \u0027unknown\u0027 does not fit. Under the stated semantics it means the evidence cannot even show an association, but E1 shows a large raw association (2.10% vs 0.74%), and within 7.4.0 the randomized comparison has a positive point estimate (\u002B0.12). (2) \u0027contradicted\u0027 does not fit. Evidence against the link would need, for example, an interval tightly centred on zero. Here the holdout interval (\u22120.08 to \u002B0.32) includes modest positive effects. The memory-kill difference (0.58% vs 0.49%, interval \u22120.02 to \u002B0.20) leans positive. The analyst says outright that a few-tenths effect cannot be ruled out. C4 (an open memory risk) and C15 (3 of 10 vs 1 of 10 background kills, higher peak memory) give a plausible mechanism. A non-significant result from an underpowered test is not evidence against a link. (3) \u0027causal\u0027 does not fit. The raw association is confounded by build (E4, C1), and the randomized estimate is not significant. That leaves \u0027association-only\u0027 as the one label consistent with the definitions: association is shown, causation is not.",
+        "fix": ""
+      },
+      {
+        "itemId": "Q13",
+        "ruling": "ambiguous",
+        "explanation": "The key says A4 is \u0027acceptable\u0027 because it does nothing about the build-wide Pixelda crash. That reasoning holds up, but \u0027preferred\u0027 means \u0027among the best next actions\u0027, and the evidence supports a reasonable case that A4 qualifies. It is cheap and reversible. It runs alongside A2 rather than competing with it. It targets the one question the evidence explicitly leaves open: the memory-kill difference has an interval of \u22120.02 to \u002B0.20, and the analyst says the test lacks power. That question is still decision-relevant for the flag, which is frozen at 90% (C10) while A3 is premature pending exactly this answer. A 30% holdout run for two weeks would roughly halve the width of the interval, so the test could plausibly settle the matter. Nothing in the evidence gives A4 a real cost or makes its answer irrelevant to any pending decision. So a careful analyst could defensibly rank it as among the best next actions alongside A2, and both \u0027preferred\u0027 and \u0027acceptable\u0027 are defensible.",
+        "fix": "Change C4 so the measurement cannot change any pending decision. Replace the risk status \u0027mitigation planned for 7.5\u0027 with \u0027mitigation (tile-cache trimming on low-memory signals) already implemented and merged for 7.5, shipping regardless of field measurements; flag ramp will stay frozen until 7.5.\u0027 A4\u0027s information would then have no decision value, making \u0027acceptable\u0027 the only defensible answer and keeping the key. Alternatively, keep the evidence and change the key for Q13 to \u0027preferred\u0027, with a rationale that A4 is the cheap, reversible complement to A2 that settles the residual R1 question."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

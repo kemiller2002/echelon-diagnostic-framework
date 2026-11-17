@@ -1,0 +1,219 @@
+{
+  "runId": "pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "C_KT",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C10",
+    "X3": "C5",
+    "X4": "C1",
+    "X5": "C11",
+    "X6": "C6",
+    "X7": "C3",
+    "X8": "C12",
+    "X9": "C7",
+    "X10": "C4",
+    "X11": "C9",
+    "X12": "C8"
+  },
+  "readLabels": [
+    "X10",
+    "X3",
+    "X4",
+    "X6",
+    "X7"
+  ],
+  "reads": [
+    "C4",
+    "C5",
+    "C1",
+    "C6",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18382,
+    "cacheCreationTokens": 9055,
+    "outputTokens": 2079,
+    "thinkingTokens": 71,
+    "costUsd": 0.0588602,
+    "durationMs": 13777,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-MISLEAD__sonnet-medium__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022,\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X10\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022,\u0022X4\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The failures are caused by rate limiting at the payment gateway, not by release v4.12. On 3 March at 09:00, before v4.12 deployed, Finance\u0027s settle-recon job began running every 15 minutes on the same gateway credential checkout uses. Each run sends 360\u2013430 search calls per minute, over the 300/min limit, so Quillmark returns HTTP 429 and checkout payments in those minutes fail. v4.12 hid the real status by mapping every error to \\\u0022declined\\\u0022. Evidence: 93% of failures fall in the first minutes of each quarter hour; no clusters occurred during the finance maintenance window; and rolling half the pods back to v4.11 gave the same failure rate (3.7% vs 3.6%), with 341 of 351 failures being 429s. Issuer declines are flat.\\nNext: pause settle-recon\u0027s daytime runs or revert it to nightly now, and watch the 429 and failure rates. Give it its own credential before any daytime schedule. Don\u0027t roll back v4.12; the rollback would lose the card-masking fix due by 13 March. Don\u0027t attribute the 9% revenue fall to the failures. Conversion, order value and the promotion changed too, so estimate the failure effect separately once fixed. A rate-limit increase is slow and chargeable, and wouldn\u0027t fix the cause. Confidence is high, and a recovery after the pause would confirm it.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:23.6240010Z",
+    "finishedAt": "2026-11-17T14:26:38.3877871Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X10",
+            "X3",
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "X10",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X10",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X10",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X3",
+            "X4",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The failures are caused by rate limiting at the payment gateway, not by release v4.12. On 3 March at 09:00, before v4.12 deployed, Finance\u0027s settle-recon job began running every 15 minutes on the same gateway credential checkout uses. Each run sends 360\u2013430 search calls per minute, over the 300/min limit, so Quillmark returns HTTP 429 and checkout payments in those minutes fail. v4.12 hid the real status by mapping every error to \u0022declined\u0022. Evidence: 93% of failures fall in the first minutes of each quarter hour; no clusters occurred during the finance maintenance window; and rolling half the pods back to v4.11 gave the same failure rate (3.7% vs 3.6%), with 341 of 351 failures being 429s. Issuer declines are flat.\nNext: pause settle-recon\u0027s daytime runs or revert it to nightly now, and watch the 429 and failure rates. Give it its own credential before any daytime schedule. Don\u0027t roll back v4.12; the rollback would lose the card-masking fix due by 13 March. Don\u0027t attribute the 9% revenue fall to the failures. Conversion, order value and the promotion changed too, so estimate the failure effect separately once fixed. A rate-limit increase is slow and chargeable, and wouldn\u0027t fix the cause. Confidence is high, and a recovery after the pause would confirm it."
+    }
+  }
+}

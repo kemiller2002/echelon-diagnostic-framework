@@ -1,0 +1,242 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-INCOMPLETE__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-INCOMPLETE",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C14",
+    "X3": "C2",
+    "X4": "C9",
+    "X5": "C4",
+    "X6": "C10",
+    "X7": "C7",
+    "X8": "C6",
+    "X9": "C1",
+    "X10": "C13",
+    "X11": "C3",
+    "X12": "C8",
+    "X13": "C11",
+    "X14": "C12"
+  },
+  "readLabels": [
+    "X3",
+    "X11",
+    "X8",
+    "X7",
+    "X5"
+  ],
+  "reads": [
+    "C2",
+    "C3",
+    "C6",
+    "C7",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-INCOMPLETE__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 31049,
+    "cacheCreationTokens": 14887,
+    "outputTokens": 2515,
+    "thinkingTokens": 992,
+    "costUsd": 0.00454619,
+    "durationMs": 16514,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-INCOMPLETE\u0022,\u0022methodChoice\u0022:\u0022EDF-2 style analysis with five evidence items collected (X3, X11, X8, X7, X5)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022X8\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022,\u0022E5\u0022,\u0022X8\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The rise in missed appointments at Corrie Lane is very likely caused by the Tidewell go-live rather than by the bus cut, staff behaviour, or the way DNAs are recorded. Four things point that way. Eastgate, on the old system and on the same bus route, stayed flat at about 8%. Last year\u0027s figures for the same months were also flat. The clinical audit shows miscoding accounts for only about half a point. Front-desk call logs show the day-before calls continued at the same rate. The most plausible driver is the change in reminders: patients now get a text at booking and one a week ahead, instead of two days ahead. Patients\u0027 complaints agree with this. Booking lead times also roughly tripled, and that may be contributing, but the data cannot separate it from the reminder change. I am moderately confident, not certain. Next, do not punish front-desk staff and do not stop reporting to the board. Instead, run the eight-week test: half of session templates on a 48-hour reminder, with booking unchanged. Ask Osterline for the appointment-level extract with booking dates so lead time can be checked. Revisit the decision once the test results are in.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:25:42.5754143Z",
+    "finishedAt": "2026-11-17T14:26:02.3934876Z",
+    "output": {
+      "caseId": "OD2-DEV-INCOMPLETE",
+      "methodChoice": "EDF-2 style analysis with five evidence items collected (X3, X11, X8, X7, X5)",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "supported",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E5",
+            "X8",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E2",
+            "E5",
+            "X8",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X8",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X8",
+            "E5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "E2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "insufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X8",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The rise in missed appointments at Corrie Lane is very likely caused by the Tidewell go-live rather than by the bus cut, staff behaviour, or the way DNAs are recorded. Four things point that way. Eastgate, on the old system and on the same bus route, stayed flat at about 8%. Last year\u0027s figures for the same months were also flat. The clinical audit shows miscoding accounts for only about half a point. Front-desk call logs show the day-before calls continued at the same rate. The most plausible driver is the change in reminders: patients now get a text at booking and one a week ahead, instead of two days ahead. Patients\u0027 complaints agree with this. Booking lead times also roughly tripled, and that may be contributing, but the data cannot separate it from the reminder change. I am moderately confident, not certain. Next, do not punish front-desk staff and do not stop reporting to the board. Instead, run the eight-week test: half of session templates on a 48-hour reminder, with booking unchanged. Ask Osterline for the appointment-level extract with booking dates so lead time can be checked. Revisit the decision once the test results are in."
+    }
+  }
+}

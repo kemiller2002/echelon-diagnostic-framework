@@ -1,0 +1,408 @@
+{
+  "id": "OD2-HO-OBVWRONG-1",
+  "split": "heldout",
+  "benchmarkClass": "OBVWRONG",
+  "domain": "technical",
+  "readBudget": 2,
+  "title": "Buffering complaints in Kestria after a CDN provider switch",
+  "setting": "Orvanta Play is a fictional subscription video service operating in eleven markets. In October its smaller market, Kestria (about 400,000 subscribers), moved video delivery from its long-standing CDN provider, Corvane Edge, to a new provider, Tessaline Networks. Since then, buffering complaints in Kestria have risen sharply while every other market is stable. The regional VP blames the new CDN and wants to penalise the vendor and switch back.",
+  "presentingRequest": "From the CTO, 16 November: \u0027Before Thursday\u0027s leadership meeting I need a clear view of what is behind the Kestria buffering and whether we should approve Mireille\u0027s plan: SLA breach notice to Tessaline, October fees withheld, traffic moved back to Corvane. Tell me what is going on and what we should do next.\u0027",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Customer support ticketing system export",
+      "sourceType": "system-record",
+      "text": "Ticketing system export, tag \u0027buffering/playback\u0027, market = Kestria. Weekly ticket counts: 22\u201328 Sep 118; 29 Sep\u20135 Oct 124; 6\u201312 Oct 433; 13\u201319 Oct 641; 20\u201326 Oct 628; 27 Oct\u20132 Nov 655; 3\u20139 Nov 637. Rate per 10,000 subscribers: 3.1 before 6 Oct, 16.0\u201316.4 from mid-October onward. All other markets combined: 2.8\u20133.2 per 10,000 every week, no trend. The device field on the ticket form is optional and is blank on 71% of Kestria tickets."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Change management system, CHG-4471",
+      "sourceType": "change-record",
+      "text": "CHG-4471 \u2014 Kestria CDN provider migration. Scope: all Orvanta Play video delivery for Kestria (all apps, all ISPs) moved from Corvane Edge to Tessaline Networks, served from Tessaline\u0027s Varsk point of presence. Cutover: DNS weights shifted gradually from 8 Oct 22:00 to 9 Oct 04:10 local time; 100% of Kestria traffic on Tessaline from 04:10 on 9 Oct. Rollback: revert DNS weights, estimated 2 hours; Corvane contract for Kestria ends 31 Dec. All other markets remain on Corvane; no further migrations planned before 2027. Status: closed \u2014 successful, no errors during cutover."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Playback quality dashboard (country view)",
+      "sourceType": "telemetry",
+      "text": "Playback quality dashboard, country level. Daily rebuffering ratio (share of viewing time spent stalled), Kestria: 5 Oct 0.6%; 6 Oct 0.6%; 7 Oct 0.5%; 8 Oct 0.6%; 9 Oct 1.7%; 10 Oct 2.7%; 11 Oct 2.7%; 12\u201331 Oct 2.6\u20132.9%; 1\u201315 Nov 2.7\u20132.9%. Handball match nights (11, 18, 25 Oct): 2.7%, 2.8%, 2.7%. All other markets: 0.5\u20130.7% every day. Annotation, 11 Oct: \u0027Kestrian Handball League streaming launch; Kestria viewing hours \u002B21% week on week.\u0027 The dashboard offers no breakdown below country level."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Email from Mireille Okonta-Haas, VP Kestria, to the CTO and Head of Partnerships, 3 November",
+      "sourceType": "leadership-account",
+      "text": "\u0027Since we moved Kestria to Tessaline on 8 October our buffering complaints have gone up fivefold, and nothing else in the region changed. Every other market is still on Corvane and is fine. October cancellations hit 3.4% of the base against 2.1% in September. Yes, the 1 October price rise was always going to cost us something, but this is the network. I want an SLA breach notice sent to Tessaline this week, their October fees withheld, and Kestria back on Corvane before that contract lapses. Also, please silence the Kestria rebuffering alert in the ops channel. We know the cause and it is paging people every night.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Product release digest, week 41, compiled by Product Operations",
+      "sourceType": "document",
+      "text": "Release digest, week 41. \u0027Orvanta Play for smart TVs 5.2 is live in all markets as of 9 October (store listings approved 8 October). Highlights: redesigned home rails, 12% fewer crashes in beta, faster video start. Beta feedback positive. No playback regressions reported from any market. Mobile and web apps: no releases this sprint; next mobile release planned for December.\u0027"
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Call notes, Tobiah Lenn, senior network engineer, 14 October",
+      "sourceType": "staff-account",
+      "text": "Notes from call with Tobiah Lenn. \u0027Tessaline\u0027s Varsk cache was cold after cutover. Their portal showed a hit ratio around 88% in the first week, against roughly 95% from Corvane. Our synthetic probes show p95 segment fetch time went from about 180 ms to about 215 ms. That is the kind of shift that tips players into stalls at peak time. I would put money on the CDN. The handball launch added load too, but the stalls started two days before that.\u0027"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Tessaline Networks monthly service report, Kestria, October",
+      "source": "Tessaline Networks account team",
+      "sourceType": "vendor-account",
+      "text": "Tessaline service report, Varsk point of presence, October. Availability 99.995% (SLA 99.95%). Peak delivered throughput 412 Gbps against 900 Gbps provisioned capacity. Cache hit ratio, month average 92.6%, \u0027consistent with normal warm-up after onboarding\u0027. Origin fetch error rate 0.002%; HTTP 5xx rate 0.004%. \u0027All SLA metrics were met for the period. We are aware of customer-reported rebuffering and are happy to support the investigation, but our edge metrics do not indicate a delivery fault.\u0027"
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Playback telemetry for Kestria, 12\u201325 October, broken down by client app, app version and ISP",
+      "source": "Player session beacon warehouse, query by data engineering",
+      "sourceType": "telemetry",
+      "text": "Session beacons, Kestria, 12\u201325 Oct. All sessions served by Tessaline (beacon CDN field). Rebuffering ratio by client (share of Kestria viewing hours in brackets): smart-TV app 5.2 \u2014 5.9% (40%); smart-TV app 5.1, devices with auto-update off \u2014 0.7% (8%); web player \u2014 0.6% (22%); iOS/Android apps, unchanged since September \u2014 0.7% (30%). By ISP, smart-TV 5.2: Kestnet 5.9%, Ostral Telecom 5.8%, Brevi Fibre 6.0%; all other clients on each of those ISPs 0.6\u20130.7%. Same breakdown for 24 Sep\u20137 Oct (Corvane): every client and every ISP 0.5\u20130.7%. Median video start time, 12\u201325 Oct: smart-TV 5.2 1.5 s; all other clients 2.4 s."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Release record and rollout configuration for smart-TV app 5.2",
+      "source": "Release management system, REL-TV-5.2",
+      "sourceType": "change-record",
+      "text": "REL-TV-5.2. Playback changes: adaptive-streaming startup buffer target lowered from 10 s to 4 s; switching up in quality allowed once 2 s is buffered (previously 6 s). Rationale: \u0027supports video start-time OKR\u0027. Both values sit in server-side remote-config profile abr_v2 and can be reverted per market without a new app build; changes take effect within about an hour. Rollout gate: Kestria 100% from 9 Oct 06:00 (selected as canary market; TVs auto-update within ~48 h); all other markets 0%; next stage: all markets on 20 Nov. Store listings approved in all markets 8 Oct. Pre-release dogfood: 380 employee TVs in Dravia, served by Corvane, 24 Sep\u20138 Oct: rebuffering 5.7% on 5.2 versus 0.6% on 5.1. Ticket QA-2291: \u0027deferred until after general availability\u0027."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Random sample of 40 Kestria buffering tickets, 13\u201319 October",
+      "source": "Customer support quality team",
+      "sourceType": "customer-account",
+      "text": "Random sample of 40 tickets tagged buffering/playback. Typical wording: \u0027spinning circle every few minutes\u0027, \u0027goes blurry then freezes\u0027, \u0027unwatchable during the match\u0027. Device: 27 tickets name no device, 9 mention a TV, 4 a phone or tablet. 31 of 40 describe problems in the evening. Two customers ask whether the problem is their own broadband. One customer says the problem started \u0027around the time of the price change\u0027. No ticket mentions a specific error code."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Kestnet interconnect utilisation summary, October",
+      "source": "Kestnet peering team, shared on request",
+      "sourceType": "external-data",
+      "text": "Kestnet (largest Kestrian ISP; roughly 45% of Orvanta\u0027s Kestria subscribers) peering summary, October. Link to Tessaline Varsk, 2\u00D7100G: evening peak utilisation 71\u201384%, no packet-loss alarms raised. Link to Corvane: utilisation fell from 68% to 6% after 9 Oct. Kestnet note: \u0027Provided for information only. We do not share per-customer flow data and we have no visibility of Ostral Telecom or Brevi Fibre networks.\u0027"
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Kestria cancellation exit survey results, October",
+      "source": "Subscriber lifecycle team",
+      "sourceType": "system-record",
+      "text": "Optional exit survey shown at cancellation, Kestria, October. Cancellations: 3.4% of base (September 2.1%). Survey response rate 8%. Answer options: \u0027Price\u0027, \u0027Not enough to watch\u0027, \u0027Other (free text)\u0027. October responses: Price 41%, Not enough to watch 24%, Other 35%. Free-text answers were not exported. Note from the lifecycle team: the answer options were set in 2024 and do not include streaming quality."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Kestria viewing hours and concurrency by day, 1 October\u201315 November",
+      "source": "Content analytics",
+      "sourceType": "telemetry",
+      "text": "Kestria viewing hours per day: 1\u201310 Oct average 1.92 million; 11 Oct\u201315 Nov average 2.31 million (\u002B20%). Handball League share of viewing on match nights: 38%. Peak concurrent streams: 214,000 before 11 Oct; 268,000 on match nights afterwards. Share of viewing by device class unchanged across the period: smart TV 48%, mobile 30%, web 22%."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "CDN cutover execution log, CHG-4471, 8\u20139 October",
+      "source": "Network operations runbook log",
+      "sourceType": "log",
+      "text": "8 Oct 22:00 DNS weight Tessaline 10%. 23:15 25%. 9 Oct 00:30 50%. 02:15 origin-shield HTTP 503 burst lasting 41 s, auto-recovered, 0.3% of requests in that minute affected. 03:20 75%. 04:10 100%. Health checks green throughout apart from 02:15. Post-cutover validation 04:30: test streams started successfully from Kestnet, Ostral and Brevi Fibre test lines. Change closed 05:05 by on-call network engineer."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Synthetic probe results, Kestria, 1\u201331 October",
+      "source": "Network monitoring platform",
+      "sourceType": "telemetry",
+      "text": "Twelve probes (four per major ISP) fetch a fixed 6-second video segment every 5 minutes. Before 9 Oct versus after: p50 fetch time 96 ms \u2192 104 ms; p95 182 ms \u2192 214 ms; p99 410 ms \u2192 395 ms; failed fetches 0.01% \u2192 0.01%. Evening (19:00\u201323:00) p95: 240 ms before, 262 ms after. Probes measure segment downloads only; they do not run a video player."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Social media mention monitoring, Kestria, September\u2013October",
+      "source": "Brand monitoring agency",
+      "sourceType": "external-data",
+      "text": "Mentions of Orvanta Play with negative playback terms: 380 in September, 2,940 in October. Daily peaks on handball match nights (11, 18 and 25 Oct). Most frequent phrases: \u0027buffering\u0027, \u0027freezing\u0027, \u0027blurry\u0027. After a Kestrian tech blog reported the CDN switch on 20 Oct, 14 posts tagged Tessaline directly. Sentiment on price-related posts: negative, volume stable since early October."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "On-call incident channel transcript, Kestria playback, 9\u201312 October",
+      "source": "Engineering chat export, incident INC-8812",
+      "sourceType": "log",
+      "text": "9 Oct 21:40 alert: Kestria rebuffering \u003E 1.5%. 21:52 \u0027probably cold cache on the new CDN, give it a day.\u0027 10 Oct 10:05 \u0027Tessaline says hit ratio is climbing.\u0027 10 Oct 22:30 \u0027still 2.7%, handball starts tomorrow, expect worse.\u0027 11 Oct 23:10 \u0027no worse tonight, oddly.\u0027 12 Oct 09:00 \u0027escalated to vendor management.\u0027 12 Oct 09:20 INC-8812 reassigned to Partnerships as a vendor issue; engineering on-call stood down."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "National regulator fixed-broadband speed statistics, Kestria, 2026",
+      "source": "Kestrian Communications Authority annual report",
+      "sourceType": "regulator-record",
+      "text": "Kestrian Communications Authority, fixed broadband performance 2026. Median download speed 64 Mbps (2025: 61 Mbps). Lines below 10 Mbps: 11% (2025: 12%). Evening slowdown (median, 20:00\u201322:00 versus daily average): 7%. Three largest providers: Kestnet, Ostral Telecom, Brevi Fibre. No provider-level outages above 4 hours were recorded in September or October 2026."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Kestria smart-TV app install base by manufacturer and model year",
+      "source": "App analytics",
+      "sourceType": "system-record",
+      "text": "Orvanta Play smart-TV installs in Kestria, 1 November: Halvik 34%, Sorenta 29%, Myra 18%, others 19%. Model years 2019\u20132025; median model year 2022. Manufacturer and model-year mix is within \u00B14 percentage points of Dravia and of the all-market average. Share of TVs with automatic app updates switched off: 14%."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Video encoding and packaging change log, September\u2013October",
+      "source": "Media pipeline change log",
+      "sourceType": "change-record",
+      "text": "Encoding ladder: 8 renditions from 0.4 to 12 Mbps, unchanged since 3 June. Segment duration: 6 seconds, unchanged. Packaging changes in the period: one, on 15 Sep \u2014 subtitle format update applied to all markets simultaneously. No encoding, DRM or manifest changes were made for Kestria specifically. No changes are scheduled before January."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Interview with Kestria customer care team lead, 3 November",
+      "source": "Operations review interview notes",
+      "sourceType": "manager-account",
+      "text": "Team lead, Kestria customer care: \u0027Agents follow the playback script: clear the cache, restart the router, reinstall the app. Reinstalling doesn\u0027t help; people ring back. We added two agents in late October and average handle time went from six to nine minutes. We don\u0027t record device type unless the customer volunteers it. Morale is low; agents feel they have nothing useful to tell people.\u0027"
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The migration of Kestria traffic to the new CDN provider is causing the rise in buffering in Kestria."
+      },
+      {
+        "id": "H2",
+        "text": "The October smart-TV app release is causing the rise in buffering in Kestria."
+      },
+      {
+        "id": "H3",
+        "text": "Congestion in Kestrian internet service providers\u0027 networks or interconnects is causing the rise in buffering in Kestria."
+      },
+      {
+        "id": "H4",
+        "text": "Extra viewing demand from the handball streaming launch is causing the rise in buffering in Kestria."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Migration of Kestria traffic to the new CDN provider",
+        "to": "Rise in rebuffering in Kestria",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Roll-out of smart-TV app 5.2 in Kestria",
+        "to": "Rise in rebuffering in Kestria",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Rise in rebuffering in Kestria",
+        "to": "Rise in Kestria subscription cancellations in October",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Kestrian Handball League streaming launch",
+        "to": "Rise in rebuffering in Kestria",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Send Tessaline an SLA breach notice, withhold its October fees and move Kestria traffic back to Corvane."
+      },
+      {
+        "id": "A2",
+        "text": "Revert the smart-TV app\u0027s adaptive-streaming behaviour in Kestria to the 5.1 settings and hold the wider 5.2 rollout until the playback regression is fixed."
+      },
+      {
+        "id": "A3",
+        "text": "Offer every Kestrian subscriber who cancelled in October a free month to return, funded from the playback-incident budget on the basis that buffering drove the cancellation rise."
+      },
+      {
+        "id": "A4",
+        "text": "Add app version and device type as standard breakdowns on the playback quality dashboard and its alerts."
+      },
+      {
+        "id": "A5",
+        "text": "Mute the Kestria rebuffering alert until the dispute with the CDN provider is resolved."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q5",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q6",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q7",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q8",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q9",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q14",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

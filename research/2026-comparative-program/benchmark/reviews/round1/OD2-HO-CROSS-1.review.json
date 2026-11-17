@@ -1,0 +1,129 @@
+{
+  "caseId": "OD2-HO-CROSS-1",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S01",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "C1 shows core and agency incident rates rose by the same amount after 12 Aug (0.8\u21923.9 vs 0.9\u21924.1). Pod D had a similar agency share (21% vs 23%) and stayed flat at 0.9. The weekly step in E2 also contradicts the gradual agency growth in E3, and C10 is an unrecorded selection of reports."
+      },
+      {
+        "itemId": "S02",
+        "answer": "supported",
+        "confidence": 92,
+        "justification": "C2 shows the 12 Aug import skipped 11 of 14 forwarding rules, including the SpO2 hold-off, repeat suppression and technical-alarm routing. C1 shows phone notifications per nurse doubled in Pods A-C only from 12 Aug while Pod D, still on the old server, stayed flat. E4 matches this."
+      },
+      {
+        "itemId": "S03",
+        "answer": "contradicted",
+        "confidence": 75,
+        "justification": "Acuity rose modestly (C3), but C1 shows bedside alarm events per patient-day flat at 94-97 from July to October. So acuity did not increase the number of alarms generated, and the rise is at the phone-forwarding level instead."
+      },
+      {
+        "itemId": "S04",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "C1 shows no step in alarm events around the 23-24 Sep update. The notification and incident step came on 12 Aug (C1, E2). Pod D got the same update (C5) yet stayed flat. C5 says limits and priorities were unchanged."
+      },
+      {
+        "itemId": "S05",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "The only evidence is one anecdote about Room 14 (E4). C12 records no signal data, and the C1 logs record dispatch rather than handset receipt, so coverage gaps are neither established nor ruled out."
+      },
+      {
+        "itemId": "S06",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The timing is clear (step on 12 Aug in C1) and the mechanism is documented (11 rules skipped, C2). Pod D, still on the old server, serves as a concurrent control and stayed flat. Upstream alarm events were flat (C1), which rules out rising alarm generation as the rival."
+      },
+      {
+        "itemId": "S07",
+        "answer": "causal",
+        "confidence": 72,
+        "justification": "Incidents and median acknowledgement times rose only in Pods A-C, where notifications doubled, and they rose equally across all staff groups. Pod D was unchanged on both measures (C1), and the incident step matches the week of 12 Aug (E2). E4 and C10 describe alarm fatigue as the mechanism. One caveat: the server change could also delay delivery, which C1\u0027s dispatch-only logs cannot exclude."
+      },
+      {
+        "itemId": "S08",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "In C1 the agency incident rate after 12 Aug matches the core rate, and Pod D had a comparable agency share without any rise. Incidents stepped in mid-August and then plateaued (E2) while the agency share kept climbing (E3), so the timing does not fit either."
+      },
+      {
+        "itemId": "S09",
+        "answer": "association-only",
+        "confidence": 55,
+        "justification": "Core sick leave rose after the notification increase, and more on 5 East (3.0\u21926.9) than hospital-wide (3.1\u21924.4) (E3). C6 includes a comment that \u0027the phone is relentless\u0027. But a respiratory virus season was under way (E3, C13), stress codes are similar to hospital-wide, and there is no breakdown by pod, so causation is not established."
+      },
+      {
+        "itemId": "S10",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "C2 identifies the missing rules and a quick fix (about 4 h plus validation) that restores the configuration the committee previously approved (C14). Pod D\u0027s flat figures in C1 show the old configuration performs well, and weekly tracking will confirm the effect."
+      },
+      {
+        "itemId": "S11",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "Agency status does not explain the rise (C1), and C10 is an unrepresentative selection. Reviews would punish nurses for a system fault (C2) in every staff group, and capping agency shifts would strain staffing while sick leave is rising (E3)."
+      },
+      {
+        "itemId": "S12",
+        "answer": "harmful",
+        "confidence": 80,
+        "justification": "The central station is unstaffed most nights (E4, C14), so the phone is how nurses hear alarms from rooms they are not in. Stopping SpO2 and technical alarm forwarding would disable a protective control when a targeted configuration restore is available (C2)."
+      },
+      {
+        "itemId": "S13",
+        "answer": "premature",
+        "confidence": 70,
+        "justification": "The only evidence is one anecdote about Room 14 (E4), and C12 has no signal data. A4 could be right if a coverage survey confirmed gaps, but committing to it now is not justified."
+      },
+      {
+        "itemId": "S14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "C1 and C2 together give a documented mechanism, a natural control (Pod D) and correct timing. That is enough to commit to A1, a low-risk restore of a previously approved configuration (C14)."
+      }
+    ],
+    "ambiguousItems": [
+      "S07: causal vs association-only. Pod D is a natural control, but because C1 logs dispatch only, delivery latency on the new server can\u0027t be fully separated from alarm fatigue caused by the notification load.",
+      "S09: association-only vs unknown. The excess 5 East sick leave is confounded by the virus season, and there is no breakdown by pod.",
+      "S03: contradicted vs unknown. Acuity did rise modestly, but bedside alarm events were flat, so the claim as stated fails."
+    ],
+    "caseProblems": [
+      "C1 is unusually clean and close to decisive by itself: a stratified, pod-controlled natural experiment with rates for each staff group. It may make the case too easy.",
+      "C2\u0027s addendum spells out the root cause (skipped rules file, warning logged but success reported) and the fix time, which comes close to giving the answer away, although its title is neutral.",
+      "E4\u0027s Room 14 anecdote (\u0027phone doesn\u0027t ring\u0027) exists only to support H5. Room 14 is in Pod C, on the new server, and no other evidence corroborates or explains it, so it is a loose thread.",
+      "Minor: C1\u0027s post-change median acknowledgement time of 71 s exceeds C14\u0027s 60 s re-route to the charge phone, but no evidence describes the charge phone\u0027s load. This is a small realism gap."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S07",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R2 (more notifications per nurse \u2192 more delayed responses) meets the case\u0027s own bar for \u0027causal\u0027. (1) Timing: in Pods A-C, notifications, acknowledgement time and incident rates all step up together on 12 August (C1, E2). (2) Natural experiment: Pod D stayed on the old server and all three measures stayed flat (C1, C2). (3) Main rival ruled out: incident rates rose equally for core and agency nurses, and Pod D had a similar agency share (C1). (4) Mechanism: C2 documents the dropped hold-off and repeat-suppression rules. E4 describes nurses getting the same desaturation alert three times and starting to glance at the phone instead of reading it. C10 has \u0027Thought it was another short desat\u0027 and \u0027several alerts queued\u0027. The other side\u0027s rival is delivery latency on the new server, since C1 logs dispatch only. That rival is speculative and the evidence counts against it. The E5 smoke test delivered alarms within 3 s. Nurses complain about too many alerts, not late ones, and \u0027queued\u0027 alerts were evidently received. C2\u0027s configuration comparison found the missing rules and no other change. Phones and firmware did not change (C12). The dispatch-only caveat is there to keep H5 (wireless gaps) unknown; it does not create a strong rival to R2. \u0027Association-only\u0027 would mean ignoring a natural control plus a documented mechanism.",
+        "fix": "Optional hardening, not required: add one sentence to the C2 addendum: \u0027Clinical Engineering bench test, 4 November: dispatch-to-handset delivery latency on the new server matches the old server (median 2 s, single alarms, Pod C test beds).\u0027 This closes the server-latency rival without saying anything about wireless coverage in room 14, so H5 stays unknown."
+      },
+      {
+        "itemId": "S09",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 means the evidence cannot even show an association, and that is not the case here. Core RN sick leave on 5 East rose from 3.2-3.4% to 6.1-6.9% after the 12 August rise in notifications (E3, C1). That is clearly more than the hospital-wide rise from 3.1% to 4.4%. So the two co-occur, and 5 East shows an excess over the shared baseline. C6 adds an anecdote linking sick leave to the phone load. The other side\u0027s points are the virus-season confounder (E3 bulletin, C13 respiratory codes) and the lack of a breakdown by pod (C13). Both are reasons the link cannot be called causal. Neither erases the observed co-occurrence. So \u0027association-only\u0027 is the one defensible answer: causal is blocked by the unexcluded respiratory season and optional reason codes, and unknown is blocked by the co-occurrence and the unit\u0027s excess sick leave.",
+        "fix": "No change needed. Optional hardening: in the rationale, say explicitly that the 5 East excess over the hospital-wide rise (6.9 vs 4.4) is what establishes the association, and the confounders are what block causation."
+      },
+      {
+        "itemId": "S03",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "H3 claims that rising acuity increased the number of alarms the bedside monitors generate. Acuity did rise modestly (C3: 3.1\u21923.4; more high-flow patient-days and more cardiac-surgery overflow). But C1 shows bedside alarm events per patient-day flat at 94-97 from July to October. Census was also flat (C3: 19.4-19.8), so total bedside alarms did not rise either. C15 shows alarm-limit changes and pauses were flat, so no offsetting nurse behaviour hid a rise. The claimed effect did not occur, which makes the hypothesis contradicted, not merely untested. \u0027Unknown\u0027 would require the evidence to fail to discriminate. Here it directly measures the outcome H3 predicts and finds no change. The flag\u0027s own justification (\u0027the claim as stated fails\u0027) supports contradicted.",
+        "fix": "No change needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

@@ -1,0 +1,220 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-CONTRA-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C8",
+    "X3": "C4",
+    "X4": "C2",
+    "X5": "C13",
+    "X6": "C12",
+    "X7": "C5",
+    "X8": "C3",
+    "X9": "C9",
+    "X10": "C7",
+    "X11": "C1",
+    "X12": "C14",
+    "X13": "C11",
+    "X14": "C6",
+    "X15": "C10"
+  },
+  "readLabels": [
+    "X9",
+    "X7"
+  ],
+  "reads": [
+    "C9",
+    "C5"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-CONTRA-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 34028,
+    "cacheCreationTokens": 10242,
+    "outputTokens": 3337,
+    "thinkingTokens": 2038,
+    "costUsd": 0.00405798,
+    "durationMs": 21447,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022X7\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022X7\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X9\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X9\u0022,\u0022X7\u0022,\u0022E2\u0022]}],\u0022brief\u0022:\u0022The crane was the main story. Callerby moved the Corran Valley tower crane to Kestrel in October 2025, and the site diaries show the frame \\\u0022on hold \u2013 design\\\u0022 from 22 October to April, with labour working on drainage and blockwork instead. The design-change explanation does not hold up well: the CO-09 connection queries were answered within days (14 November), yet the frame stayed on hold until April. The architect\u0027s answers were on time (62 of 64 RFIs inside the contract period). Most of the 41 \\\u0022late\\\u0022 RFIs sat in Callerby\u0027s own draft status for 9\u201347 days before submission. So the draft claim as written is not supportable, and submitting it on 1 December would be a serious mistake. My confidence is moderate, not high: I have not seen the full time impact analysis or the steel and connection records, and the 6% success fee gives the claims adviser an interest in the result. Next steps: do not submit the claim as drafted. Commission an independent forensic delay analysis now, before 1 December, and ask for a short extension from Halden if needed. Do not discipline the superintendent, who told the truth. Review the crane decision and its approval process inside the company, but do not suspend the incentive scheme on the current evidence.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:25:22.6566047Z",
+    "finishedAt": "2026-11-17T16:25:45.1540830Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "X7",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "E6",
+            "X7",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "preferred",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X9",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3",
+            "X9",
+            "X7",
+            "E2"
+          ]
+        }
+      ],
+      "brief": "The crane was the main story. Callerby moved the Corran Valley tower crane to Kestrel in October 2025, and the site diaries show the frame \u0022on hold \u2013 design\u0022 from 22 October to April, with labour working on drainage and blockwork instead. The design-change explanation does not hold up well: the CO-09 connection queries were answered within days (14 November), yet the frame stayed on hold until April. The architect\u0027s answers were on time (62 of 64 RFIs inside the contract period). Most of the 41 \u0022late\u0022 RFIs sat in Callerby\u0027s own draft status for 9\u201347 days before submission. So the draft claim as written is not supportable, and submitting it on 1 December would be a serious mistake. My confidence is moderate, not high: I have not seen the full time impact analysis or the steel and connection records, and the 6% success fee gives the claims adviser an interest in the result. Next steps: do not submit the claim as drafted. Commission an independent forensic delay analysis now, before 1 December, and ask for a short extension from Halden if needed. Do not discipline the superintendent, who told the truth. Review the crane decision and its approval process inside the company, but do not suspend the incentive scheme on the current evidence."
+    }
+  }
+}

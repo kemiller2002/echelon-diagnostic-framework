@@ -1,0 +1,216 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-INTERACT-2__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C14",
+    "X3": "C10",
+    "X4": "C13",
+    "X5": "C11",
+    "X6": "C4",
+    "X7": "C9",
+    "X8": "C8",
+    "X9": "C12",
+    "X10": "C2",
+    "X11": "C5",
+    "X12": "C3",
+    "X13": "C1",
+    "X14": "C6",
+    "X15": "C7"
+  },
+  "readLabels": [
+    "X10",
+    "X15"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-INTERACT-2__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22709,
+    "cacheCreationTokens": 12106,
+    "outputTokens": 1746,
+    "thinkingTokens": 0,
+    "costUsd": 0.06816689999999999,
+    "durationMs": 11813,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-INTERACT-2__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe specification (IS/IS NOT by site), then ACH across hypotheses, then evidence-ledger check on sources\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022Regular volunteers are leaving because of RotaWeave and the loss of coordinators together, not because of either one alone. The Basic tier has no recurring bookings. A regular keeps a weekly slot only if staff book it before the Thursday release. Coordinators used to do that booking. Since 1 May, bookings on behalf of volunteers at Dock Street and Westgate fell from 74 to 3 a week. Regulars lost their slots to new sign-ups, and 88% of those who lost a slot twice or more are now inactive. Millbrook has the app and a coordinator, and it is stable. Quarry Lane lost its coordinator but has no app, and it is nearly stable. The background-check renewal is not the main cause: 121 of the 123 who lapsed had a current check. Commonplate is also not the main cause: only 2 of 61 callbacks mentioned joining another group. Low satisfaction is a symptom. What to do: don\u0027t cancel RotaWeave, which would cost $14k and would not fix the real problem. Have a staff member or trained lead volunteer use the unused admin seat to book regulars into their usual slots before each release. Phone lapsed regulars to offer their slot back, and review after 60 days. Also plan this before Quarry Lane goes live on 6 Oct. Do not remove inactive volunteers from the figures. I am fairly confident in this, though the callback sample is small.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:32:10.2280944Z",
+    "finishedAt": "2026-11-17T16:32:23.1380678Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "methodChoice": "Kepner-Tregoe specification (IS/IS NOT by site), then ACH across hypotheses, then evidence-ledger check on sources",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "E5",
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X15",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 72,
+          "evidenceIds": [
+            "X10",
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X10",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "Regular volunteers are leaving because of RotaWeave and the loss of coordinators together, not because of either one alone. The Basic tier has no recurring bookings. A regular keeps a weekly slot only if staff book it before the Thursday release. Coordinators used to do that booking. Since 1 May, bookings on behalf of volunteers at Dock Street and Westgate fell from 74 to 3 a week. Regulars lost their slots to new sign-ups, and 88% of those who lost a slot twice or more are now inactive. Millbrook has the app and a coordinator, and it is stable. Quarry Lane lost its coordinator but has no app, and it is nearly stable. The background-check renewal is not the main cause: 121 of the 123 who lapsed had a current check. Commonplate is also not the main cause: only 2 of 61 callbacks mentioned joining another group. Low satisfaction is a symptom. What to do: don\u0027t cancel RotaWeave, which would cost $14k and would not fix the real problem. Have a staff member or trained lead volunteer use the unused admin seat to book regulars into their usual slots before each release. Phone lapsed regulars to offer their slot back, and review after 60 days. Also plan this before Quarry Lane goes live on 6 Oct. Do not remove inactive volunteers from the figures. I am fairly confident in this, though the callback sample is small."
+    }
+  }
+}

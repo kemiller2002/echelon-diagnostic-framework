@@ -1,0 +1,328 @@
+{
+  "caseId": "OD2-HO-ADVERS-2",
+  "groundTruthNarrative": "There was no real fall in incidents. Analysts confirmed 37 cases as malicious in September and 36 in October, within the Mar\u2013Jul range of 33\u201346. From 9 Sep a python script on a Brackwater analyst jump host, using the Brackwater integration token, polled every five minutes for confirmed cases carrying the 3h30m SLA-warning flag and moved each one to Suspicious Activity\u2013Monitoring: 47 cases, all with confirmation notes, none merged into another case. Brackwater compiles the monthly report and earns an SLA-linked bonus. The report counts only Incident\u2013Confirmed, and moved cases drop out of the SLA and containment-time metrics. So reported incidents fell to 14 and 12, SLA compliance showed 100%, and mean time to contain appeared to fall, although cases contained within 3h30m took as long as before (1h50m against 1h51m). The missing category lock, the cases:write grant and Brackwater compiling its own report made this possible. A real connector bug affecting the deployed version 4.1.7 makes an innocent explanation plausible, but the gateway log shows the connector host wrote no categories. Auto-triage, the deprecated rules and the sector phishing decline do not explain the fall, although whether the deprecated rules miss some attacks has never been tested. None of the 47 cases has a containment timestamp, so SLA breach on each case is unverified. The priority is to reinstate those cases, verify their containment and remove the edit right.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E5",
+        "C2",
+        "C4"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal"
+      ],
+      "rationale": "Auto-triage acts before a case is created (E3). C4 shows the number of cases reaching Incident\u2013Confirmed stayed at 37 and 36, within the Mar\u2013Jul baseline. The whole fall comes from 47 cases moved out of the category after confirmation, each with confirmation notes (37\u221223=14, 36\u221224=12, matching E1). So the triage did not filter out escalations that would have become incidents."
+    },
+    {
+      "itemId": "I2",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "E5",
+        "C4",
+        "C6",
+        "C8"
+      ],
+      "tags": [
+        "misleading-signal",
+        "confounded"
+      ],
+      "rationale": "Confirmed-stage volume (37 and 36) did not fall below the Mar\u2013Jul range of 33\u201346 (C4). Reported counts equal confirmed cases minus the cases moved out afterwards. There is no fall in detected incidents for lost rules to explain. C6 is neutral on this claim; whether the rules miss some attacks is a separate question (R5)."
+    },
+    {
+      "itemId": "I3",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C1",
+        "C4",
+        "C7",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "gamed-record",
+        "central"
+      ],
+      "rationale": "C4 shows 47 cases with confirmation notes moved to a category the report does not count, and none of them merged. The move happened just after the SLA warning, and the 47 exactly account for the reported fall. C11 shows the moves came from a script on a Brackwater analyst jump host. The script polled specifically for confirmed cases with SLA warnings and patched every case it found. Its targeting, together with the incentive in E2 and C1, supports a deliberate move over every rival."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C3",
+        "C4",
+        "C13"
+      ],
+      "tags": [
+        "external-cause",
+        "misleading-signal"
+      ],
+      "rationale": "Genuine confirmed incidents stayed at baseline levels (C4). The 8% sector-wide fall in phishing that E1 and C3 cite cannot account for a fall that does not exist at the confirmed stage."
+    },
+    {
+      "itemId": "I5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C4",
+        "C5",
+        "C7",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal",
+        "vendor-bug-decoy"
+      ],
+      "rationale": "The connector bug is real and the deployed version is affected (C5, C10). Its timing would also match C4. But C11 shows the connector host made zero category writes. All 47 category changes came from a python script on an analyst jump host that queried for SLA-warned cases, so the changes were not an unintended fault."
+    },
+    {
+      "itemId": "I6",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E5",
+        "C2",
+        "C4"
+      ],
+      "tags": [
+        "leadership-narrative"
+      ],
+      "rationale": "Playbooks act before a case exists (E3). The number of cases reaching Incident\u2013Confirmed did not fall (C4), so the evidence counts against the playbooks having reduced confirmed incidents."
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "misleading-signal"
+      ],
+      "rationale": "If deprecating rules reduced incidents, fewer cases would reach Incident\u2013Confirmed. C4 shows confirmed-stage counts at baseline, and the whole reported fall is the 47 recategorised cases, which counts against the link itself."
+    },
+    {
+      "itemId": "I8",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "mechanism"
+      ],
+      "rationale": "The report counts only Incident\u2013Confirmed at month end (E1, E5). C4 gives 37\u221223=14 and 36\u221224=12, exactly the reported figures, with the changes made before month end. That gives temporal order, a mechanism and an exact arithmetic match, which rules out the rival explanations."
+    },
+    {
+      "itemId": "I9",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E4",
+        "E5",
+        "C2",
+        "C4"
+      ],
+      "tags": [
+        "confounded",
+        "misleading-signal",
+        "revision"
+      ],
+      "rationale": "C4\u0027s like-for-like figure shows that cases contained within 3h30m took as long under Tessaline (1h50m) as under Ledgerline (1h51m), so containment did not get faster. The whole fall in reported mean time to contain comes from removing the 47 cases still uncontained at 3h30m from the metric (C4). E4, E5 and C4 also show analyst workload did not fall: the analysts are as busy as ever, alert volume is at baseline and confirmed-case counts are at baseline. The evidence counts against the link itself."
+    },
+    {
+      "itemId": "I15",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C4",
+        "C6",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "unknown-residual",
+        "overgeneralisation-trap"
+      ],
+      "rationale": "Nothing in the file or the catalogue shows any malicious activity going undetected, or measures what the 28 deprecated rules would have caught. C6 says the replacement mapping was never independently tested and per-rule history does not exist. C8 covers platform health only, not detection content. Confirmed counts at baseline (C4) show the reported fall is not caused by lost rules (R2), but they cannot show whether some attacks are now missed, because missed attacks never appear in any count. The evidence is not enough even to show an association, and nothing counts against the link."
+    },
+    {
+      "itemId": "I10",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "C4",
+        "C11",
+        "C14"
+      ],
+      "tags": [
+        "harmful",
+        "protective-control"
+      ],
+      "rationale": "Genuine incidents are at baseline, and 47 confirmed incidents have no containment record (C4). Cutting response capacity would weaken protection under the supported hypothesis, and no live rival remains under which the decline is real."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C4",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "preferred"
+      ],
+      "rationale": "This deals with the possibly uncontained compromises (credential misuse, malware, data staging) and stops further recategorisation. The connector writes no categories (C11), so removing the category-edit right does not break the sync."
+    },
+    {
+      "itemId": "I12",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "C1",
+        "C4"
+      ],
+      "tags": [
+        "premature"
+      ],
+      "rationale": "Credits apply only to incidents not contained within 4 hours (E2, C1). None of the 47 has a containment timestamp, and notes on 11 describe containment steps (C4), so breach is unconfirmed for each case. Recovering credits would be right once breaches are verified, and an invoice can be corrected later."
+    },
+    {
+      "itemId": "I13",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C4",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "acceptable"
+      ],
+      "rationale": "Asking for an explanation is reasonable, and the records are already exported and held by Corvane. However, it does not deal with the potentially uncontained incidents, so it is not among the best actions."
+    },
+    {
+      "itemId": "I14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "C4 and C11 together establish what changed, how much and who made the changes. That is enough to commit to A2."
+    }
+  ],
+  "discriminatingReads": [
+    "C4",
+    "C11"
+  ],
+  "lowValueReads": [
+    "C9",
+    "C13",
+    "C14",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C4",
+    "C11"
+  ],
+  "authoringNotes": "From the initial file alone, the leadership narrative (E1, E2), the deprecated rules and the hinted connector bug (E3, E4) all stay live. The hint at deliberate gaming (queue growth, cases:write, Brackwater compiling its own report) is only suggestive. C4 is the only item that reconciles the counts, exposes the SLA-metric exclusion and gives the like-for-like containment time, which settles H1, H2, H4, R1\u2013R4 and A3. C4 is neutral between deliberate gaming and the connector bug, because the bug would also fire on SLA warnings within about 10 minutes. C11 is the only item that settles H5 through provenance: source host, user-agent and the polling query. Traps: C5 is a real bug affecting the deployed version, C10 shows the field map left at the default, and C7 is an interested vendor\u0027s \u0027merge parking\u0027 story. C4 (no merges) and C11 (no connector category writes) counter all three. C6 and C8 are deliberately neutral on detection coverage so they do not duplicate C4. Revision after review: I9 (R4) rekeyed from association-only to contradicted. E4 already countered the workload reduction, and C4 now also gives the like-for-like containment time (1h51m against 1h50m for cases contained within 3h30m), so the evidence directly counts against the link. C4\u0027s ready-made sentence \u0027the remainder equal the reported 14 and 12\u0027 was removed, so the analyst now has to do the reconciliation. Because I9 had been the only association-only/unknown item, edge R5 (rule deprecation leading to undetected activity) was added with key \u0027unknown\u0027 to keep rule 4. It also guards against the overgeneralisation that contradicting H2/R2 proves the rule gap harmless. No other key changed."
+}

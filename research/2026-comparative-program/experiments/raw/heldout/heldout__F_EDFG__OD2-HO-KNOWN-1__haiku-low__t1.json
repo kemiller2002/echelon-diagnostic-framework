@@ -1,0 +1,229 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-KNOWN-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C9",
+    "X3": "C12",
+    "X4": "C11",
+    "X5": "C13",
+    "X6": "C6",
+    "X7": "C7",
+    "X8": "C3",
+    "X9": "C5",
+    "X10": "C10",
+    "X11": "C15",
+    "X12": "C1",
+    "X13": "C8",
+    "X14": "C14",
+    "X15": "C2"
+  },
+  "readLabels": [
+    "X12",
+    "X15"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-KNOWN-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 10,
+    "cacheReadTokens": 48404,
+    "cacheCreationTokens": 12888,
+    "outputTokens": 4047,
+    "thinkingTokens": 2145,
+    "costUsd": 0.005086139999999999,
+    "durationMs": 23977,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022__unparsedToolInput\u0022:{\u0022raw\u0022:\u0022{\\\u0022caseId\\\u0022: \\\u0022OD2-HO-KNOWN-1\\\u0022, \\\u0022methodChoice\\\u0022: \\\u0022Collected 2 items (X12, X15), the maximum; both were the most discriminating for the rivals.\\\u0022, \\\u0022answers\\\u0022: [{\\\u0022itemId\\\u0022:\\\u0022Q-H1\\\u0022,\\\u0022answer\\\u0022:\\\u0022contradicted\\\u0022,\\\u0022confidence\\\u0022:85,\\\u0022evidenceIds\\\u0022:[\\\u0022X12\\\u0022,\\\u0022E2\\\u0022],\\\u0022} ]}\u0022,\u0022len\u0022:242}}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022Collected 2 items (X12, X15), the maximum allowed; both were the most discriminating between the rivals.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:45,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:35,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022The Android password-login drop is not caused by release 6.14 or by an Android OS update. It starts at 10:41 UTC on 3 March, about three minutes after the edge-protection vendor\u0027s rule pack 2026.03.1 went live. A new vendor rule, AUTO-LIB-17, blocks password requests on the Android app that carry the nettle-http client library signature. It returns HTTP 403, and it blocks about 6,000 to 9,800 requests a day from roughly 41,300 installs, 92% of which logged in successfully in the prior 90 days. These are mostly real customers, not bots. Quick-unlock and iOS are unaffected. Confidence is high for the edge rule as the main cause; the exact reason 6.12 and 6.13 are also hit is not yet explained. Credential stuffing (Security\u0027s theory) and the 14:00 session-timeout change are contradicted by the timing and the 403 pattern. The contact-centre rise is probably linked, but the fee mailing confounds it, so treat it as association only. Next steps: ask Corvane to set AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits and lockout, and confirm recovery in telemetry. Do not raise bot sensitivity, do not exclude blocked attempts from the KPI, and do not revert the password screen.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:08:20.0267537Z",
+    "finishedAt": "2026-11-17T16:08:44.8383147Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "Collected 2 items (X12, X15), the maximum allowed; both were the most discriminating between the rivals.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 45,
+          "evidenceIds": [
+            "X15",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "acceptable",
+          "confidence": 35,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X15",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "The Android password-login drop is not caused by release 6.14 or by an Android OS update. It starts at 10:41 UTC on 3 March, about three minutes after the edge-protection vendor\u0027s rule pack 2026.03.1 went live. A new vendor rule, AUTO-LIB-17, blocks password requests on the Android app that carry the nettle-http client library signature. It returns HTTP 403, and it blocks about 6,000 to 9,800 requests a day from roughly 41,300 installs, 92% of which logged in successfully in the prior 90 days. These are mostly real customers, not bots. Quick-unlock and iOS are unaffected. Confidence is high for the edge rule as the main cause; the exact reason 6.12 and 6.13 are also hit is not yet explained. Credential stuffing (Security\u0027s theory) and the 14:00 session-timeout change are contradicted by the timing and the 403 pattern. The contact-centre rise is probably linked, but the fee mailing confounds it, so treat it as association only. Next steps: ask Corvane to set AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits and lockout, and confirm recovery in telemetry. Do not raise bot sensitivity, do not exclude blocked attempts from the KPI, and do not revert the password screen."
+    }
+  }
+}

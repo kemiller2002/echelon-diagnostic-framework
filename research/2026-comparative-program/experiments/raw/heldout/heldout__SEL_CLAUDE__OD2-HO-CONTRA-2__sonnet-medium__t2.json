@@ -1,0 +1,219 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-CONTRA-2__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-CONTRA-2",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C14",
+    "X3": "C7",
+    "X4": "C12",
+    "X5": "C13",
+    "X6": "C6",
+    "X7": "C9",
+    "X8": "C4",
+    "X9": "C10",
+    "X10": "C8",
+    "X11": "C3",
+    "X12": "C15",
+    "X13": "C1",
+    "X14": "C2",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X15",
+    "X6"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-CONTRA-2__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22450,
+    "cacheCreationTokens": 11966,
+    "outputTokens": 1996,
+    "thinkingTokens": 321,
+    "costUsd": 0.070081,
+    "durationMs": 14203,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-2__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-2__sonnet-medium__t2/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONTRA-2__sonnet-medium__t2/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022methodChoice\u0022:\u0022D with C elements: competing hypotheses on temperature source, and IS/IS-NOT splits by shift and supplier.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X6\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X6\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The jump in write-offs is mostly self-inflicted, not Haverlow\u0027s fault. Since the night receiving team was cut from six to four in week 31, chilled pallets wait about 3 hours 52 minutes (up from 44 minutes) on an unrefrigerated dock averaging 15\u201317\u00B0C. Night write-off rates rose from 0.6% to 2.9% for every supplier; day shifts stayed flat. Haverlow\u0027s trailer telematics, which can\u0027t be edited, show product at 2.4\u20133.5\u00B0C when the doors open. The \\\u0022warm\\\u0022 receiving probe readings were keyed hours after unloading, so they measure dock warming. The chambers held temperature. I\u0027m fairly confident (about 85%). Do not raise the chargeback or shift volume: it would penalise the wrong party and leave the cause in place. Do not drop night probing. Restore night staffing, or otherwise cap dock-to-chamber time, and monitor it weekly from scan data. Separately, reconcile a sample of Corriebank claims, since their self-certified credits rose from 3 August. Whether over-claiming is happening is still unknown, so don\u0027t ask for photo evidence yet. Fix the receiving process first.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:24:52.1725487Z",
+    "finishedAt": "2026-11-17T16:25:07.3275970Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-2",
+      "methodChoice": "D with C elements: competing hypotheses on temperature source, and IS/IS-NOT splits by shift and supplier.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6",
+            "E4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X15",
+            "X6",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 75,
+          "evidenceIds": [
+            "E7",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X15",
+            "X6",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The jump in write-offs is mostly self-inflicted, not Haverlow\u0027s fault. Since the night receiving team was cut from six to four in week 31, chilled pallets wait about 3 hours 52 minutes (up from 44 minutes) on an unrefrigerated dock averaging 15\u201317\u00B0C. Night write-off rates rose from 0.6% to 2.9% for every supplier; day shifts stayed flat. Haverlow\u0027s trailer telematics, which can\u0027t be edited, show product at 2.4\u20133.5\u00B0C when the doors open. The \u0022warm\u0022 receiving probe readings were keyed hours after unloading, so they measure dock warming. The chambers held temperature. I\u0027m fairly confident (about 85%). Do not raise the chargeback or shift volume: it would penalise the wrong party and leave the cause in place. Do not drop night probing. Restore night staffing, or otherwise cap dock-to-chamber time, and monitor it weekly from scan data. Separately, reconcile a sample of Corriebank claims, since their self-certified credits rose from 3 August. Whether over-claiming is happening is still unknown, so don\u0027t ask for photo evidence yet. Fix the receiving process first."
+    }
+  }
+}

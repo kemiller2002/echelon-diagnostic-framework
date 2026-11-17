@@ -1,0 +1,214 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-NOCONC",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C11",
+    "X3": "C2",
+    "X4": "C7",
+    "X5": "C13",
+    "X6": "C14",
+    "X7": "C1",
+    "X8": "C4",
+    "X9": "C9",
+    "X10": "C10",
+    "X11": "C5",
+    "X12": "C12",
+    "X13": "C6",
+    "X14": "C15",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X9",
+    "X13",
+    "X3"
+  ],
+  "reads": [
+    "C9",
+    "C6",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18018,
+    "cacheCreationTokens": 7960,
+    "outputTokens": 1837,
+    "thinkingTokens": 100,
+    "costUsd": 0.052023799999999995,
+    "durationMs": 15454,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__A_GENERAL__OD2-DEV2-NOCONC__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-NOCONC\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X9\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X9\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X9\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022I can\u0027t yet tell you whether the rota caused the rise in falls, so I wouldn\u0027t reverse it now. The rise has at least two plausible explanations, and the evidence doesn\u0027t separate them.\\n\\nFirst, recording changed on 1 July. The two homes moved to the app, and the other seven homes still use paper. Staff say unharmed \\\u0022found on floor\\\u0022 cases were under-written before. A check of Q2 handover notes found three clear unreported falls and three ambiguous ones. The increase is mostly no-harm and unwitnessed falls. Harm falls rose only from 6 to 9.\\n\\nSecond, the rota may be a real factor. Night falls rose, and Ashby Fold\u0027s median night call answer time is 3 min 40 s. There is no pre-June baseline, so I can\u0027t say calls are slower. Penmor Lodge has no answer-time data at all.\\n\\nFalls per 1,000 bed days are inside the control limits. Other homes have had similar one-quarter jumps that reversed. But a real 40% increase would take two to three quarters to show.\\n\\nMedication changes and frailer admissions are untested.\\n\\nNext steps: keep the pilot running under its existing pause criteria. Show falls as rates, with the recording change marked. Start manual sampling of night call-bell answer times. Review in late January with Q4 data. Don\u0027t discipline night staff, and don\u0027t withdraw the app.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:42:26.3874215Z",
+    "finishedAt": "2026-11-17T14:42:42.6529098Z",
+    "output": {
+      "caseId": "OD2-DEV2-NOCONC",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "supported",
+          "confidence": 50,
+          "evidenceIds": [
+            "X9",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "unknown",
+          "confidence": 50,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "X9",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X13",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "X9",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 78,
+          "evidenceIds": [
+            "X3",
+            "X9",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E3",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X3",
+            "X9",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "I can\u0027t yet tell you whether the rota caused the rise in falls, so I wouldn\u0027t reverse it now. The rise has at least two plausible explanations, and the evidence doesn\u0027t separate them.\n\nFirst, recording changed on 1 July. The two homes moved to the app, and the other seven homes still use paper. Staff say unharmed \u0022found on floor\u0022 cases were under-written before. A check of Q2 handover notes found three clear unreported falls and three ambiguous ones. The increase is mostly no-harm and unwitnessed falls. Harm falls rose only from 6 to 9.\n\nSecond, the rota may be a real factor. Night falls rose, and Ashby Fold\u0027s median night call answer time is 3 min 40 s. There is no pre-June baseline, so I can\u0027t say calls are slower. Penmor Lodge has no answer-time data at all.\n\nFalls per 1,000 bed days are inside the control limits. Other homes have had similar one-quarter jumps that reversed. But a real 40% increase would take two to three quarters to show.\n\nMedication changes and frailer admissions are untested.\n\nNext steps: keep the pilot running under its existing pause criteria. Show falls as rates, with the recording change marked. Start manual sampling of night call-bell answer times. Review in late January with Q4 data. Don\u0027t discipline night staff, and don\u0027t withdraw the app."
+    }
+  }
+}

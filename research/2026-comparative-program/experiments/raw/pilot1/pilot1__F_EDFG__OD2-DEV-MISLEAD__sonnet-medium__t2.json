@@ -1,0 +1,209 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C3",
+    "X3": "C9",
+    "X4": "C2",
+    "X5": "C8",
+    "X6": "C10",
+    "X7": "C12",
+    "X8": "C7",
+    "X9": "C5",
+    "X10": "C1",
+    "X11": "C11",
+    "X12": "C6"
+  },
+  "readLabels": [
+    "X1",
+    "X9",
+    "X10",
+    "X12"
+  ],
+  "reads": [
+    "C4",
+    "C5",
+    "C1",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20312,
+    "cacheCreationTokens": 10495,
+    "outputTokens": 2032,
+    "thinkingTokens": 165,
+    "costUsd": 0.0643432,
+    "durationMs": 18288,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-MISLEAD__sonnet-medium__t2/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The failures are most likely caused by Finance\u0027s settlement-reconciliation job, not release v4.12. On 3 March it moved from a nightly run to every 15 minutes during the day. It shares one Quillmark credential with checkout. Each run sends bursts of 360\u2013430 requests a minute against a 300-per-minute limit. Quillmark answers with HTTP 429 (too many requests), and checkout shows that as \\\u0022card declined\\\u0022. The canary test settles the v4.12 question. Pods on the old v4.11 failed at 3.7% and pods on v4.12 at 3.6%. Almost all of the old-version failures were 429s. Issuer declines stayed flat, and Quillmark has no platform incident. A full rollback would not fix this. It would also undo the card-number masking required by SEC-2291, which is due 13 March. Next steps: (1) pause or revert the daytime settle-recon schedule now, then watch the 429 rate and the payment failure rate; (2) give that job its own credential before any daytime schedule returns; (3) change checkout to log the real gateway status and to retry or handle 429s; (4) don\u0027t attribute the 9% revenue drop to the incident yet. Traffic, conversion and order value changed with the sale, and the failed customers often succeeded on retry. A rate-limit increase is slow and chargeable, so keep it as a backup. I\u0027m fairly confident, around 85\u201390%.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:56.8395076Z",
+    "finishedAt": "2026-11-17T14:28:16.2273491Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X1",
+            "X9",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5",
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X1",
+            "X9",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X9",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The failures are most likely caused by Finance\u0027s settlement-reconciliation job, not release v4.12. On 3 March it moved from a nightly run to every 15 minutes during the day. It shares one Quillmark credential with checkout. Each run sends bursts of 360\u2013430 requests a minute against a 300-per-minute limit. Quillmark answers with HTTP 429 (too many requests), and checkout shows that as \u0022card declined\u0022. The canary test settles the v4.12 question. Pods on the old v4.11 failed at 3.7% and pods on v4.12 at 3.6%. Almost all of the old-version failures were 429s. Issuer declines stayed flat, and Quillmark has no platform incident. A full rollback would not fix this. It would also undo the card-number masking required by SEC-2291, which is due 13 March. Next steps: (1) pause or revert the daytime settle-recon schedule now, then watch the 429 rate and the payment failure rate; (2) give that job its own credential before any daytime schedule returns; (3) change checkout to log the real gateway status and to retry or handle 429s; (4) don\u0027t attribute the 9% revenue drop to the incident yet. Traffic, conversion and order value changed with the sale, and the failed customers often succeeded on retry. A rate-limit increase is slow and chargeable, so keep it as a backup. I\u0027m fairly confident, around 85\u201390%."
+    }
+  }
+}

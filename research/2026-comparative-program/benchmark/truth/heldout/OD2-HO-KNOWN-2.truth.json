@@ -1,0 +1,305 @@
+{
+  "caseId": "OD2-HO-KNOWN-2",
+  "groundTruthNarrative": "On 14 April Finance Systems implemented change FC-0417 after an internal audit finding on unsupported credits. It cut the credit adjustment an agent may apply in-call from \u00A3100 to \u00A325, and the billing platform now blocks larger adjustments and opens a referral to the Billing Resolution team automatically. Finance judged the impact on Customer Operations \u0027minimal\u0027 and did not consult it. In the same week the share of billing calls referred to BRT jumped from 7% to 54%, at the same rate in every tenure band. Referred calls have always had about 34% FCR against 82% for non-referred calls, so the larger referral share takes billing FCR from 79% to 56%. That accounts for the whole site fall from 75.0% to 67.1%. FCR for every other contact reason is flat, and tariff enquiries have above-average FCR, so the tariff mix shift slightly raises overall FCR. The April intake went live the same day, which is why leadership blamed them. But tenured agents fell by about 7.8 points and the intake\u0027s FCR is within one point of theirs. The IVR redesign came two weeks after the step. Higher occupancy cannot explain a fall confined to referred billing calls. Complaints rose over the same months, but the tariff increase is an unexcluded rival. The right move is a staged, Finance-agreed revision of in-call authority with a sampling control, not performance plans for new starters.",
+  "answers": [
+    {
+      "itemId": "S01",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "C1",
+        "C3",
+        "C6",
+        "C8",
+        "C12"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal",
+        "confounded-timing"
+      ],
+      "rationale": "The intake went live in the same week as the step (E2, E3), and QA gaps (C3) and team leader notes (C12) look damaging. But C6 shows tenured bands fell from 75.1/75.0% to 67.3/67.2%, the intake runs at 66.4%, and billing referral rates are near-identical across tenure (53\u201356%). Inexperience cannot produce a fall of the same size among tenured agents."
+    },
+    {
+      "itemId": "S02",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C6",
+        "C8",
+        "C11",
+        "C13"
+      ],
+      "tags": [
+        "central",
+        "decisive-pair"
+      ],
+      "rationale": "C11: from 14 April the platform blocks in-call adjustments over \u00A325 and auto-refers them to BRT. C6: the billing referral share stepped from 7% to 54% in w/c 14 Apr in every tenure band. FCR within referred and non-referred calls is unchanged, and the shift arithmetically accounts for the 79%\u219256% billing fall and the whole site fall, while other reasons are flat. From the initial file alone this is only one of several April changes."
+    },
+    {
+      "itemId": "S03",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "C2",
+        "C6"
+      ],
+      "tags": [
+        "misleading-signal",
+        "temporal-order"
+      ],
+      "rationale": "The IVR went live on 28 April (E3). FCR had already dropped to 67.5% by w/c 21 Apr and did not move after 28 Apr (E2). C2\u0027s transfer proxy is also flat (4.0%\u21923.8%), but it is a supplier source and is not needed."
+    },
+    {
+      "itemId": "S04",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C4",
+        "C6",
+        "C13",
+        "C15"
+      ],
+      "tags": [
+        "plausible-rival",
+        "misleading-signal"
+      ],
+      "rationale": "Occupancy did rise modestly (C4), but C6 shows FCR flat for payments, moving home, meter and other calls. Within billing, referred and non-referred FCR are both unchanged, so no fall is left that general time pressure could explain. A centre-wide workload effect would not be confined to the referral share of billing calls."
+    },
+    {
+      "itemId": "S05",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C6",
+        "C9",
+        "C14"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "mix-shift"
+      ],
+      "rationale": "C6: tariff enquiries doubled their share (6%\u219212%), but their FCR is 85\u201386%, above the site average, so the mix shift slightly raises overall FCR. E2 also shows FCR stable in the first two weeks after the 1 April tariff change."
+    },
+    {
+      "itemId": "S06",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C11",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "mechanism",
+        "decisive-pair"
+      ],
+      "rationale": "C11 gives the mechanism: the platform blocks adjustments over \u00A325 and auto-opens a referral. C6 gives the step change in referral share in the week of implementation, uniform across tenure bands, which rules out the intake rival. Without C11, a reader has only timing and an anecdote (E4), and C8\u0027s manager guesses new starters."
+    },
+    {
+      "itemId": "S07",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "C6",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "mechanism"
+      ],
+      "rationale": "C6: referred calls had about 34% FCR before and after, and non-referred 82% before and after. The referral-share step was forced by an outside rule change (C11) on a stable billing population, and adding the newly referred small cases (C8) did not raise referred FCR, so the referral itself produces repeat contact. The step reproduces the billing and site falls; other reasons are flat; the intake rival is ruled out by tenure data. 58% of post-referral repeats are customers chasing status or callbacks, which gives the mechanism."
+    },
+    {
+      "itemId": "S08",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E6",
+        "C1",
+        "C3",
+        "C6"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded-timing"
+      ],
+      "rationale": "The link itself is countered: agents unaffected by the intake (tenured bands) dropped by the same amount, and the intake\u0027s own FCR is within a point of theirs. The timing coincidence in E2/E3 is explained by FC-0417 sharing the date."
+    },
+    {
+      "itemId": "S09",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E2",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "C10"
+      ],
+      "tags": [
+        "association-only",
+        "unresolved-rival"
+      ],
+      "rationale": "Complaints rose from April as FCR fell (E2, E5). But the 1 April tariff increase is an equally timed rival, 64% of complaints are uncategorised, and complaints are not linked to calls. No catalogue item separates the two."
+    },
+    {
+      "itemId": "S10",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "C8",
+        "E3"
+      ],
+      "tags": [
+        "targets-mechanism",
+        "respects-control"
+      ],
+      "rationale": "This acts on the established mechanism and meets the controller\u0027s stated condition in C11 (compensating control shown on a limited population first). It is a substantive operational change, staged and reversible within a day, and C6 confirms MI can track FCR for the trial teams within a day."
+    },
+    {
+      "itemId": "S11",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E6",
+        "C3",
+        "C6"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "The intake\u0027s FCR is depressed by the system-forced referrals that hit every tenure band equally (C6). Performance plans would punish agents for a Finance configuration and would not raise FCR. No live hypothesis makes this beneficial."
+    },
+    {
+      "itemId": "S12",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11"
+      ],
+      "tags": [
+        "premature",
+        "protective-control"
+      ],
+      "rationale": "It would be right if post-call sampling is confirmed to keep unsupported credits below 1%, but that is untested, and Finance requires a limited-population demonstration first (C11). It is not harmful: a sampling control is kept and the parameter can be reversed within a day, so a wrong guess causes bounded, non-lasting loss."
+    },
+    {
+      "itemId": "S13",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E6",
+        "C6"
+      ],
+      "tags": [
+        "monitoring"
+      ],
+      "rationale": "Reasonable: the site dashboard hid the reason-level and referral pattern that C6 exposed. But the action text states a real cost (about three months of an analyst\u0027s time, deferring other MI reports), and C6 shows MI can already rerun the same breakdown for any set of teams within a day, which covers tracking the A1 trial. A costly rebuild that adds nothing the next decision needs is reasonable but not among the best next actions."
+    },
+    {
+      "itemId": "S14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E2",
+        "E3"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "After C6 and C11 the mechanism is established and the rivals are excluded. The evidence is enough to commit to the staged authority revision (A1), which is a substantive intervention."
+    }
+  ],
+  "discriminatingReads": [
+    "C6",
+    "C11"
+  ],
+  "lowValueReads": [
+    "C5",
+    "C7",
+    "C10",
+    "C14",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C6",
+    "C11"
+  ],
+  "authoringNotes": "Revision: to remove the preferred/acceptable ambiguity on A4 (S13), A4 now states its cost (about three months of an analyst\u0027s time, deferring other MI reports), and C6 ends with a note that MI can rerun the reason/referral/tenure breakdown for any set of teams within a day. The rebuild is therefore not needed to track the A1 trial, and \u0027acceptable\u0027 is the only defensible key. C6 was lightly reworded to keep within the length limit, with no data changed. E2 now states that weeks are listed fortnightly after 19 May. Arithmetic check. Site Q1 = .38*79\u002B.06*86\u002B.22*77\u002B.14*70\u002B.12*66\u002B.08*64 = 75.0. May\u2013Jul = .36*56\u002B.12*85\u002B.20*77\u002B.13*70\u002B.11*65\u002B.08*64 = 67.1, matching E2. Billing Q1 = .07*33\u002B.93*82 \u2248 79; May\u2013Jul = .54*34\u002B.46*82 \u2248 56. The intake handles about 15% of calls, so .15*66.4\u002B.85*67.25 \u2248 67.1. Non-redundancy. C6 alone settles H1, H4, H5, R2, R3 and A4, and is the only item with tenure-level or reason-level FCR. C11 alone supplies the mechanism (block plus auto-referral), Finance\u0027s unconsulted \u0027minimal impact\u0027 assessment and the controller\u0027s condition. That condition separates A1 (preferred) from A3 (premature), and the mechanism is needed for R1 to be causal. C8 and C13 hint at the mechanism without establishing it; C8\u0027s manager misattributes it to new starters. C3 and C12 are fair traps for H1, countered by C6. C2 is a vendor-interested source whose data happens to be accurate; H3 is already countered by timing in E2/E3. Initial-file-only answers would be: H1 unknown or supported (leadership narrative and coincident timing), H2 unknown, R1 and R2 unknown, R3 association-only, and A4 plausibly preferred (no reason-level view exists). No item resolves R4, by design. Sources are deliberately mixed in reliability: leadership (E1) is wrong, Finance\u0027s impact assessment (C11) is wrong, the BRT manager (C8) is partly right, and an anonymous agent (E4, comment 4) is right but is one of six competing comments."
+}

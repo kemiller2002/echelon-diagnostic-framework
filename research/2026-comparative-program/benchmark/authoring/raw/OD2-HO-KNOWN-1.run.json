@@ -1,0 +1,821 @@
+{
+  "label": "OD2-HO-KNOWN-1",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7726,
+  "cacheCreationTokens": 4501,
+  "outputTokens": 57077,
+  "thinkingTokens": 45016,
+  "costUsd": 1.1791092,
+  "durationMs": 571046,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-KNOWN-1/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022KNOWN\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Android login success drop at Oxleigh Mutual\u0022,\u0022setting\u0022:\u0022Oxleigh Mutual is a fictional mid-sized retail bank with about 1.2 million mobile-app customers. Its Android and iOS apps call a mobile API that sits behind a vendor-managed edge protection service supplied by Corvane. Customers log in either by typing a password or by biometric/PIN quick-unlock on a device they have already enrolled. A product analytics team reports login success rates from in-app telemetry.\u0022,\u0022presentingRequest\u0022:\u0022The Head of Digital Channels asks why Android login success has dropped since 3 March and what the bank should do now. She expects a rollback plan for Android release 6.14 by Thursday.\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Priya Lindqvist, Head of Digital Channels, 10 March\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Team \u2014 Android login success has fallen off a cliff. Seven-day average was 97.1% for 24 Feb\u20132 Mar and 88.7% for 3\u20139 Mar. iOS is flat (97.4% to 97.3%) and web is flat (96.8% to 96.9%). The Android store rating for this week is 3.1, down from 4.4. Android 6.14 started rolling out on 3 March with the new password screen, and the timing speaks for itself. I want a rollback plan on my desk by Thursday and a clear explanation for the executive committee. Please don\u0027t spend a week on analysis; customers are locked out now.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Notes from Tom\u00E1s Reyes, Android engineering lead, 9 March\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u00226.14 staged rollout began 3 Mar 09:00 UTC via the store console. Changes: redesigned password-login screen; our networking library nettle-http bumped from 4.11 to 4.12 (the Android app uses nettle-http for every API call); new analytics events. Crash-free sessions unchanged. The extra failures seem to be in password logins; biometric/PIN quick-unlock looks normal. We could not reproduce on our test devices against staging. Worth noting the March Android security patch started reaching phones around 2 March, and in 2024 an OS update broke keystore-backed login for us for two weeks. Can\u0027t rule either out yet.\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Change calendar extract, production, 2\u20134 March\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CHG-5521 | 2 Mar 22:00 UTC | Core banking database index maintenance. Closed, no incidents.\\nCHG-5530 | 3 Mar 09:00 UTC | Android app 6.14 staged rollout start (store console). Owner: Mobile.\\nCHG-5534 | 3 Mar, vendor window | Edge protection (Corvane): vendor-managed rule pack auto-update to 2026.03.1. Standard change, pre-approved, applied by vendor; no bank testing required.\\nCHG-5536 | 3 Mar 14:00 UTC | Auth service: session-token lifetime for all mobile client IDs (iOS and Android) reduced from 30 to 20 minutes. Affects session expiry only.\\nCHG-5540 | 4 Mar 08:00 UTC | Marketing website TLS certificate renewal.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Message from Dana Okafor, Security Operations manager, 9 March\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022On 28 Feb we stopped a credential-stuffing run against web login. My read is that the Android drop is the same crowd moving onto the mobile API: bots fail logins, the success rate goes down. Two asks: (1) exclude edge-blocked attempts from the login KPI, because those are not real customers and they are distorting the number executives see; (2) raise Corvane bot-protection sensitivity on all login endpoints from \u0027standard\u0027 to \u0027high\u0027 until this blows over. Happy to brief the executive committee.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Digital analytics KPI definition: mobile login success rate (v3, January)\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Login success rate = login-success events \u00F7 login-attempt events, both emitted by the in-app telemetry SDK. An attempt event is emitted when a user submits a password or triggers biometric/PIN quick-unlock in an installed copy of the app. Each event carries an app-install ID, app version, OS version and an outcome category: success, credentials rejected, request rejected by server, or network/timeout. Requests sent to the API by scripts or tools other than the installed app do not emit telemetry events and are not counted. Dashboard tiles show the platform-level rate only.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Contact-centre weekly operations summary, week of 2 March\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Inbound calls 2\u20138 March: 41,200 against a four-week average of 34,900 (\u002B18%). Average wait 6m40s (target 3m). Scheduled events this week: annual account-fee notices mailed 2 March to 610,000 customers; savings-rate change emailed 4 March. Reason coding: 57% of calls logged as \u0027General enquiry\u0027, the default code; a January coding audit found reason codes unreliable for trend analysis. Team leads report \u0027a mix of fee questions and people who can\u0027t get into the app\u0027.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Android login outcomes by app version, OS version and outcome category, 24 Feb\u20139 Mar\u0022,\u0022source\u0022:\u0022Product analytics, in-app telemetry extract\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Daily averages; pre = 24 Feb\u20132 Mar, post = 4\u20139 Mar. Quick-unlock: 96,700 \u2192 96,900 attempts/day, success 97.2% \u2192 97.2%. Password: 7,500 \u2192 10,600 attempts/day, success 96.0% \u2192 8.2%. Overall 97.1% \u2192 88.4%. Post success by app version (share of attempts): 6.11 and older 88.3% (6%); 6.12 88.6% (18%); 6.13 88.4% (71%); 6.14 88.5% (5%; staged rollout at 5%, 10% from 6 Mar). Pre: 6.12 97.0%, 6.13 97.1%. Post by OS: Android 11 to 15 all between 88.2% and 88.6%; March security patch installed 88.4%, not installed 88.4%. Added failures are all \u0027request rejected by server\u0027 (HTTP 403) on password submissions, first logged 3 Mar 10:41 UTC on every version within one minute. Before 10:41, 6.14 logged 38 password attempts (1 credentials rejected); afterwards few password submissions reach a credential decision, so credential-error rates cannot be compared.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Corvane edge event log export, mobile API authentication paths, 1\u20139 March\u0022,\u0022source\u0022:\u0022Corvane tenant console export pulled by bank platform team\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Tenant: Oxleigh mobile API. Rule pack 2026.03.1 activated 3 Mar 10:38 UTC. New rule AUTO-LIB-17 \u0027automation HTTP library user-agent on authentication path\u0027: matches user-agent \u0027nettle-http\u0027 AND path /auth/password/* AND no edge session cookie; action block (HTTP 403, vendor HTML page). AUTO-LIB-17 blocks: 1\u20132 Mar none (rule absent); 3 Mar 6,050, first at 10:41; 4\u20139 Mar 9,580\u20139,840 per day. Blocked requests carried header X-Client: oxleigh-android and an app-install ID: 41,300 distinct install IDs, 92% with a successful login from the same install ID in the prior 90 days; mean 1.6 blocked requests per install ID over the week, maximum 14. AUTO-LIB-17 hits on iOS (user-agent \u0027OxleighGo-iOS/5.21\u0027), web, or quick-unlock path /auth/device-token: 0. Forwarded Android password requests: origin returned 401 for 1.9% and 5xx for 0.1%, unchanged from before 3 Mar.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Android 6.14 release notes and merged change list\u0022,\u0022source\u0022:\u0022Mobile engineering release record\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Release 6.14 (build 61400), approved 27 Feb. User-facing: redesigned password-login screen (larger fields, show-password toggle, inline error messages); updated card-freeze flow wording. Technical: nettle-http 4.11.3 \u2192 4.12.0 (connection-pool fixes); analytics SDK events for screen timings; minimum Android version unchanged at 11. 214 merged changes, 9 touching login code, all in the password-screen UI layer. Regression suite: 1,140 automated tests passed on staging. Sign-off: Mobile engineering lead, QA lead, Product owner.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Android crash and ANR reports by app version, 24 Feb\u20139 Mar\u0022,\u0022source\u0022:\u0022Crash reporting service export\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Crash-free sessions, Android: 99.62% (24 Feb\u20132 Mar) and 99.60% (3\u20139 Mar). By version, 3\u20139 Mar: 6.12 99.61%, 6.13 99.60%, 6.14 99.57%. Application-not-responding rate 0.21% \u2192 0.22%. Top crash clusters unchanged: image-cache out-of-memory on low-memory devices, push-token refresh race. No crash cluster references login, the password screen or nettle-http. iOS crash-free sessions 99.71% \u2192 99.70% over the same periods.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Authentication service outcome summary, 1\u20139 March\u0022,\u0022source\u0022:\u0022Backend platform team, auth-service log summary\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022All channels combined; this summary is not broken down by platform or client. Of password-login requests that reached the service, 1\u20132 Mar vs 3\u20139 Mar: credentials accepted 97.9% vs 97.9%; credentials rejected 1.9% vs 1.9%; account locked 0.1% vs 0.1%; server errors 0.1% vs 0.1%. No new error codes appeared. The session-token lifetime change (3 Mar 14:00) produced the expected rise in token-refresh calls, all successful. p95 response time 180 ms vs 185 ms.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Corvane support ticket response, 9 March\u0022,\u0022source\u0022:\u0022Corvane customer support, ticket CS-77812\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Thank you for your enquiry. Rule pack 2026.03.1 added 14 detections for newly catalogued automation tooling and was deployed to all tenants on 3 March following our standard validation process. Your tenant\u0027s overall block rate moved from 0.31% to 0.35% of requests, which is within normal variation. We have no indication that the update affects legitimate mobile application traffic, and we recommend investigating recent client releases. Please reopen this ticket with request samples if the issue persists.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Security Operations incident report SEC-0228, 28 February credential-stuffing event\u0022,\u0022source\u0022:\u0022Security Operations\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u002228 Feb 01:10\u201304:05 UTC: about 380,000 login attempts against web login from about 1,240 IP addresses, using leaked credential lists. Contained by existing per-IP rate limits and account lockout; 23 accounts locked, no confirmed takeovers, affected customers notified. Mobile API traffic during the window was normal. Recommendations: keep rate limits as configured; review bot-protection posture in Q2. The same actor could retarget other channels in future, and this cannot be excluded.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Contact-centre reason-code report and coding audit, 2\u20139 March\u0022,\u0022source\u0022:\u0022Contact-centre quality team\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Calls by reason code against four-week average: General enquiry \u002B3,700; Fees and charges \u002B1,400; Digital access \u002B900; Cards \u002B300. Audit of 200 sampled \u0027General enquiry\u0027 recordings from 4\u20136 March: 61 about fee notices, 38 about app or online-banking access (platform recorded in only 9 of these), 101 other or unclassifiable. Auditor\u0027s note: the sample is too small and platform capture too inconsistent to apportion the weekly rise between causes.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022App store ratings and review sample, Android and iOS, 1\u20139 March\u0022,\u0022source\u0022:\u0022Store console exports\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Android: 1,860 new ratings, weekly average 3.1 (prior week 4.4). Sample of 40 one- and two-star reviews: 31 mention password login failing with \u0027Something went wrong, please try again\u0027; 6 say fingerprint login still works; 3 unrelated. iOS: 1,240 new ratings, average 4.5 (prior week 4.5). Representative Android review: \u0027Changed my phone so I have to use my password now and it just won\u0027t let me in. Called the bank, waited 40 minutes.\u0027\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with Mei S\u00F8rensen, QA lead, on 6.14 test coverage, 10 March\u0022,\u0022source\u0022:\u0022Interview notes\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u00276.14 went through the full login regression suite on 20 physical devices, Android 11 through 15. Everything passed. Our test devices point at the staging API, and staging doesn\u0027t have the Corvane layer in front of it; it goes straight to the load balancer. When the drop started I re-ran password login on 6.13 and 6.14 against staging and both were fine. I can\u0027t test against production without real customer credentials, which we\u0027re not allowed to use.\u0027\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Mobile API availability and latency dashboard, 1\u20139 March\u0022,\u0022source\u0022:\u0022Platform operations monitoring\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Availability (non-5xx responses \u00F7 all responses at origin): 99.97% in both weeks. p95 latency 210 ms \u2192 214 ms. Edge-handled responses (bot challenges and blocks) are excluded from availability by design; they are counted as \u0027protected\u0027 rather than failed. No availability or latency alerts fired 1\u20139 March. The per-endpoint panel for the password-login path shows origin latency only.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022iOS login outcomes by app version, 24 Feb\u20139 Mar\u0022,\u0022source\u0022:\u0022Product analytics, in-app telemetry extract\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Overall iOS login success 97.4% pre (24 Feb\u20132 Mar) and 97.3% post (4\u20139 Mar). Password: 5,900 \u2192 6,000 attempts/day, success 96.3% \u2192 96.2%. Quick-unlock: 88,400 \u2192 88,700 attempts/day, success 97.5% \u2192 97.4%. Post success by version: 5.20 97.3%, 5.21 97.3%. No iOS release since 18 February. Outcome categories unchanged; \u0027request rejected by server\u0027 0.1% in both periods.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022On-call engineering chat transcript, 3\u20134 March\u0022,\u0022source\u0022:\u0022Engineering on-call channel export\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u00223 Mar 13:52 [Ivo, backend on-call]: seeing a bump in Android login failures on the dashboard, auth service looks healthy.\\n3 Mar 14:20 [Ivo]: token lifetime change just went out, could that be related?\\n3 Mar 15:05 [Rhea, mobile]: will look at 6.14 crash data.\\n4 Mar 09:12 [Ivo]: still elevated, nothing odd in auth logs. Parking until Mobile confirms.\\n4 Mar 09:30 [Rhea]: can\u0027t reproduce on staging. Escalating to Tom\u00E1s.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Sample of customer complaint emails tagged \u0027login\u0027, 4\u20138 March\u0022,\u0022source\u0022:\u0022Customer complaints team\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Sample of 25 emails tagged \u0027login\u0027: 19 from Android users, 4 iOS, 2 web. Typical Android text: \u0027Every time I put my password in I get Something went wrong (ref S-403). Fingerprint works on my tablet but my new phone needs the password.\u0027 Five Android complainants say they reinstalled the app; none say it helped. The iOS emails concern forgotten passwords; both web emails are about the fee notice.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Third-party service status pages (analytics SDK, push notifications, SMS passcodes, maps), 1\u20139 March\u0022,\u0022source\u0022:\u0022Vendor public status page archives\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Analytics SDK provider: operational, no incidents. Push provider: \u0027degraded delivery in EU region\u0027 5 Mar 02:00\u201303:10 UTC, resolved. SMS passcode provider: operational; one incident \u0027delayed delivery to one carrier\u0027 7 Mar 18:00\u201318:40 UTC. Maps SDK: operational. None of the listed incidents spans 3 March. Oxleigh uses SMS passcodes only for new-device enrolment, on both iOS and Android.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022A defect introduced in Android app release 6.14 is causing the drop in Android login success.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022A change in the edge protection layer in front of the mobile API is rejecting legitimate Android login requests, causing the drop in Android login success.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Automated credential-stuffing traffic is pulling down the measured Android login success rate.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022A recent Android operating-system security update on customers\u0027 phones is causing Android login attempts to fail.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022The redesigned password screen in release 6.14 makes customers enter wrong credentials more often.\u0022},{\u0022id\u0022:\u0022H6\u0022,\u0022text\u0022:\u0022The 3 March change to the authentication service is rejecting valid Android login requests.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u00223 March vendor rule-pack update to the edge protection layer\u0022,\u0022to\u0022:\u0022Drop in Android login success from 3 March\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Rollout of Android release 6.14\u0022,\u0022to\u0022:\u0022Drop in Android login success from 3 March\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Drop in Android login success from 3 March\u0022,\u0022to\u0022:\u002218% rise in contact-centre call volume, week of 2 March\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Credential-stuffing activity against Oxleigh\u0027s login services\u0022,\u0022to\u0022:\u0022Drop in Android login success from 3 March\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Have the edge vendor set the rules added in the 3 March rule-pack update to log-only on the mobile password-login path, keeping rate limits, account lockout and all other edge rules active, then confirm in telemetry that Android password-login success returns to its pre-3 March level.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Raise edge bot-protection sensitivity on all login endpoints from \u0027standard\u0027 to \u0027high\u0027 until the suspected credential-stuffing subsides.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Exclude edge-blocked login attempts from the login success KPI reported to executives, treating them as non-customer traffic.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Continue the Android 6.14 staged rollout on its planned schedule while tracking login outcomes by app version.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Revert the redesigned password screen in the next Android release.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022refId\u0022:\u0022H6\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022groundTruthNarrative\u0022:\u0022At 10:38 UTC on 3 March the edge protection vendor, Corvane, automatically applied rule pack 2026.03.1 to Oxleigh\u0027s mobile API. A new rule, AUTO-LIB-17, blocks requests to the password-login path when the user-agent is the default \u0027nettle-http\u0027 library string and no edge session cookie is present. Oxleigh\u0027s Android app sends every API call through nettle-http with that default user-agent. The iOS app uses a custom user-agent, and quick-unlock uses a different path. From 10:41, about 9,700 Android password submissions a day got a vendor 403 and never reached the auth service. Android login success fell from 97.1% to about 88.4%. Android 6.14 happened to start a staged rollout at 09:00 the same day, with a redesigned password screen, so leadership blamed the release. But 6.14 made up only 5% of attempts, and every older version failed the same way at the same minute. Devices with and without the March OS patch also failed at identical rates. The blocked traffic came from established customer installs, not credential stuffing. The auth service\u0027s token change affected both platforms and changed nothing. The vendor\u0027s tenant-wide figures hid a problem confined to one path. Whether the redesign raises typing errors cannot be determined, because few password submissions have reached a credential check since 10:41. The fix is to set the new rules to log-only on that path and confirm recovery.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022,\u0022coincident-change\u0022],\u0022rationale\u0022:\u0022C1 shows versions 6.11, 6.12 and 6.13 dropped to the same ~88.4% as 6.14. All versions began failing in the same minute (10:41 on 3 March), and 6.14 was only 5% of attempts. A 5% share cannot produce an 8.7-point drop. The timing and the password-screen redesign in E1/E2 are coincidental.\u0022},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C6\u0022,\u0022C10\u0022,\u0022C12\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022central-mechanism\u0022,\u0022vendor-managed-change\u0022],\u0022rationale\u0022:\u0022C2 shows a new rule, activated at 10:38, blocking requests that carry the nettle-http user-agent on the password path from 10:41. That is about 9,700 blocks a day, from established Android installs. E2 says the Android app uses nettle-http for every call. C1 shows the added failures are all server-rejected 403s on password submissions from 10:41, while quick-unlock (not covered by the rule) is unchanged. C6\u0027s tenant-wide reassurance is outweighed by these path-level counts.\u0022},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022interested-party\u0022,\u0022measurement\u0022],\u0022rationale\u0022:\u0022E5: the KPI counts only attempts from installed apps, not scripted traffic. C2: the blocked requests came from 41,300 app installs, 92% of which had logged in successfully before, averaging 1.6 blocked requests each over the week. That is a customer pattern, not a credential-stuffing pattern. E4\u0027s claim is an inference from the 28 Feb web event.\u0022},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C15\u0022],\u0022tags\u0022:[\u0022plausible-rival\u0022,\u0022confounded-timing\u0022],\u0022rationale\u0022:\u0022C1: success is 88.2\u201388.6% on every Android OS version and 88.4% on devices both with and without the March security patch. The failures do not track the OS update.\u0022},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022unresolvable\u0022,\u0022side-claim\u0022],\u0022rationale\u0022:\u0022C1: 6.14 had only 38 password attempts before the blocking began. Since then few password submissions reach a credential check, so credential-error rates for the redesign cannot be measured. The claim is still possible but unestablished.\u0022},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C2\u0022,\u0022C5\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022coincident-change\u0022],\u0022rationale\u0022:\u0022E3: the token-lifetime change applied equally to iOS and Android and affects only session expiry, yet E1 shows iOS flat. C2 adds that the auth service\u0027s 401/5xx rates on forwarded Android requests did not change.\u0022},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C12\u0022],\u0022tags\u0022:[\u0022central-mechanism\u0022,\u0022joint-evidence\u0022],\u0022rationale\u0022:\u0022Timing: the rule was activated at 10:38 and the first block came at 10:41, the same minute the client 403s began (C1). Mechanism: the rule matches nettle-http on the password path, which only the Android app sends (C2, E2). Covariation: about 9,700 blocks a day against about 9,400 added failures. Main rivals ruled out: all app and OS versions are affected equally (C1), and iOS, web and quick-unlock have zero hits.\u0022},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C1\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022coincident-change\u0022],\u0022rationale\u0022:\u0022C1 counts directly against the link. Versions that never received 6.14 fell by the same amount at the same minute, and 6.14 carried only 5% of attempts.\u0022},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E6\u0022,\u0022C8\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022association-only\u0022],\u0022rationale\u0022:\u0022The rise in calls coincides with the login drop. But annual fee notices went out on 2 March, reason codes are unreliable, and 57% of calls were default-coded (E6). C8 confirms the rise cannot be split between causes. The two co-occur, but causation of the 18% rise is not established.\u0022},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022interested-party\u0022],\u0022rationale\u0022:\u0022The metric excludes scripted traffic (E5). The requests that make up the drop came from established customer installs at low per-device volume (C2). Evidence counts against the link itself.\u0022},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022reversible-fix\u0022],\u0022rationale\u0022:\u0022This targets the established mechanism and is reversible. Log-only keeps visibility, and the step includes checking that success recovers. It restores the pre-3 March posture on one path only. That posture, with rate limits and lockout, contained the 28 Feb attack (E4, C7). The new rule is blocking customers, not attackers (C2).\u0022},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022harmful\u0022,\u0022worsens-outcome\u0022,\u0022interested-party\u0022],\u0022rationale\u0022:\u0022C2 shows the edge is already blocking legitimate customers. Raising sensitivity would block more of them, and no live rival is helped by it. The credential-stuffing explanation is contradicted.\u0022},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022harmful\u0022,\u0022suppresses-information\u0022,\u0022gamed-record\u0022],\u0022rationale\u0022:\u0022The edge-blocked attempts are real customers using installed apps (E5, C2). Excluding them would hide the failure from executives under any hypothesis. C11 already shows how dashboards that count blocks as \u0027protected\u0027 made the problem invisible.\u0022},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u00226.14 is not implicated (C1), and crash data is normal (C4). Continuing the rollout while tracking login outcomes by version is reasonable. It does nothing to fix the customer impact, so it is not among the best actions.\u0022},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022premature\u0022,\u0022unresolved-side-claim\u0022],\u0022rationale\u0022:\u0022This would help if the redesign raises credential errors (H5). That is currently unmeasurable (C1). A future release could reverse the change, so it does no lasting damage, but committing to it now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022The top action, A1, is substantive. Timing, mechanism, covariation and rival exclusion (C1 \u002B C2) justify committing to it, and it is scoped, reversible and self-verifying.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022lowValueReads\u0022:[\u0022C4\u0022,\u0022C8\u0022,\u0022C9\u0022,\u0022C11\u0022,\u0022C12\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C2\u0022],\u0022authoringNotes\u0022:\u0022Trap structure: Android 6.14 started rolling out at 09:00 on 3 March and redesigned the password screen, which is exactly where the failures sit (E1, E2). The edge rule-pack update is one \u0027standard, pre-approved\u0027 line among five changes, with no time given (E3). Security Operations pushes a bot explanation (E4), and the vendor says nothing changed for legitimate traffic (C6). C1 is the only item with failure rates by app version, rollout share and OS patch status. It alone settles H1, R2 and H4. C2 has no version data, and the X-Client header and user-agent carry no app version. C3 shows 6.14 upgraded nettle-http, so with C2 alone a reader cannot rule out that 6.14 introduced the matching user-agent. C2 is the only item giving the rule-activation time, the rule logic, block counts and the device-history pattern. It alone settles R1 (causal), H2, H3/R4 and the A1/SUFF commitment. C1 alone shows a server-side 403 onset at 10:41 but cannot tie it to the vendor change, whose time is missing from E3. The rollout percentage appears only in C1; C13 was written so it does not leak it. C5 has no platform breakdown, so it cannot localise the loss. C10, C11 and C14 hint at the edge without settling anything. H6 is already contradicted from the initial file (it affects both platforms, and iOS is flat). R3 stays association-only under every item because of the fee-notice confound and unreliable coding. Numbers reconcile: pre-period overall success is (96,700\u00D70.972 \u002B 7,500\u00D70.96)/104,200 = 97.1%. Post-period is (96,900\u00D70.972 \u002B 10,600\u00D70.082)/107,500 = 88.4%. E1\u0027s 88.7% includes the partial 3 March. iOS figures in C12 also reconcile. All names (Oxleigh Mutual, Corvane, nettle-http, people) are fictional.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:53:14.2262679Z",
+  "finishedAt": "2026-11-17T15:02:46.5688246Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-KNOWN-1",
+      "split": "heldout",
+      "benchmarkClass": "KNOWN",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "Android login success drop at Oxleigh Mutual",
+      "setting": "Oxleigh Mutual is a fictional mid-sized retail bank with about 1.2 million mobile-app customers. Its Android and iOS apps call a mobile API that sits behind a vendor-managed edge protection service supplied by Corvane. Customers log in either by typing a password or by biometric/PIN quick-unlock on a device they have already enrolled. A product analytics team reports login success rates from in-app telemetry.",
+      "presentingRequest": "The Head of Digital Channels asks why Android login success has dropped since 3 March and what the bank should do now. She expects a rollback plan for Android release 6.14 by Thursday.",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from Priya Lindqvist, Head of Digital Channels, 10 March",
+          "sourceType": "leadership-account",
+          "text": "Team \u2014 Android login success has fallen off a cliff. Seven-day average was 97.1% for 24 Feb\u20132 Mar and 88.7% for 3\u20139 Mar. iOS is flat (97.4% to 97.3%) and web is flat (96.8% to 96.9%). The Android store rating for this week is 3.1, down from 4.4. Android 6.14 started rolling out on 3 March with the new password screen, and the timing speaks for itself. I want a rollback plan on my desk by Thursday and a clear explanation for the executive committee. Please don\u0027t spend a week on analysis; customers are locked out now."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Notes from Tom\u00E1s Reyes, Android engineering lead, 9 March",
+          "sourceType": "manager-account",
+          "text": "6.14 staged rollout began 3 Mar 09:00 UTC via the store console. Changes: redesigned password-login screen; our networking library nettle-http bumped from 4.11 to 4.12 (the Android app uses nettle-http for every API call); new analytics events. Crash-free sessions unchanged. The extra failures seem to be in password logins; biometric/PIN quick-unlock looks normal. We could not reproduce on our test devices against staging. Worth noting the March Android security patch started reaching phones around 2 March, and in 2024 an OS update broke keystore-backed login for us for two weeks. Can\u0027t rule either out yet."
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Change calendar extract, production, 2\u20134 March",
+          "sourceType": "change-record",
+          "text": "CHG-5521 | 2 Mar 22:00 UTC | Core banking database index maintenance. Closed, no incidents.\nCHG-5530 | 3 Mar 09:00 UTC | Android app 6.14 staged rollout start (store console). Owner: Mobile.\nCHG-5534 | 3 Mar, vendor window | Edge protection (Corvane): vendor-managed rule pack auto-update to 2026.03.1. Standard change, pre-approved, applied by vendor; no bank testing required.\nCHG-5536 | 3 Mar 14:00 UTC | Auth service: session-token lifetime for all mobile client IDs (iOS and Android) reduced from 30 to 20 minutes. Affects session expiry only.\nCHG-5540 | 4 Mar 08:00 UTC | Marketing website TLS certificate renewal."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Message from Dana Okafor, Security Operations manager, 9 March",
+          "sourceType": "manager-account",
+          "text": "On 28 Feb we stopped a credential-stuffing run against web login. My read is that the Android drop is the same crowd moving onto the mobile API: bots fail logins, the success rate goes down. Two asks: (1) exclude edge-blocked attempts from the login KPI, because those are not real customers and they are distorting the number executives see; (2) raise Corvane bot-protection sensitivity on all login endpoints from \u0027standard\u0027 to \u0027high\u0027 until this blows over. Happy to brief the executive committee."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Digital analytics KPI definition: mobile login success rate (v3, January)",
+          "sourceType": "document",
+          "text": "Login success rate = login-success events \u00F7 login-attempt events, both emitted by the in-app telemetry SDK. An attempt event is emitted when a user submits a password or triggers biometric/PIN quick-unlock in an installed copy of the app. Each event carries an app-install ID, app version, OS version and an outcome category: success, credentials rejected, request rejected by server, or network/timeout. Requests sent to the API by scripts or tools other than the installed app do not emit telemetry events and are not counted. Dashboard tiles show the platform-level rate only."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Contact-centre weekly operations summary, week of 2 March",
+          "sourceType": "system-record",
+          "text": "Inbound calls 2\u20138 March: 41,200 against a four-week average of 34,900 (\u002B18%). Average wait 6m40s (target 3m). Scheduled events this week: annual account-fee notices mailed 2 March to 610,000 customers; savings-rate change emailed 4 March. Reason coding: 57% of calls logged as \u0027General enquiry\u0027, the default code; a January coding audit found reason codes unreliable for trend analysis. Team leads report \u0027a mix of fee questions and people who can\u0027t get into the app\u0027."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Android login outcomes by app version, OS version and outcome category, 24 Feb\u20139 Mar",
+          "source": "Product analytics, in-app telemetry extract",
+          "sourceType": "telemetry",
+          "text": "Daily averages; pre = 24 Feb\u20132 Mar, post = 4\u20139 Mar. Quick-unlock: 96,700 \u2192 96,900 attempts/day, success 97.2% \u2192 97.2%. Password: 7,500 \u2192 10,600 attempts/day, success 96.0% \u2192 8.2%. Overall 97.1% \u2192 88.4%. Post success by app version (share of attempts): 6.11 and older 88.3% (6%); 6.12 88.6% (18%); 6.13 88.4% (71%); 6.14 88.5% (5%; staged rollout at 5%, 10% from 6 Mar). Pre: 6.12 97.0%, 6.13 97.1%. Post by OS: Android 11 to 15 all between 88.2% and 88.6%; March security patch installed 88.4%, not installed 88.4%. Added failures are all \u0027request rejected by server\u0027 (HTTP 403) on password submissions, first logged 3 Mar 10:41 UTC on every version within one minute. Before 10:41, 6.14 logged 38 password attempts (1 credentials rejected); afterwards few password submissions reach a credential decision, so credential-error rates cannot be compared."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Corvane edge event log export, mobile API authentication paths, 1\u20139 March",
+          "source": "Corvane tenant console export pulled by bank platform team",
+          "sourceType": "log",
+          "text": "Tenant: Oxleigh mobile API. Rule pack 2026.03.1 activated 3 Mar 10:38 UTC. New rule AUTO-LIB-17 \u0027automation HTTP library user-agent on authentication path\u0027: matches user-agent \u0027nettle-http\u0027 AND path /auth/password/* AND no edge session cookie; action block (HTTP 403, vendor HTML page). AUTO-LIB-17 blocks: 1\u20132 Mar none (rule absent); 3 Mar 6,050, first at 10:41; 4\u20139 Mar 9,580\u20139,840 per day. Blocked requests carried header X-Client: oxleigh-android and an app-install ID: 41,300 distinct install IDs, 92% with a successful login from the same install ID in the prior 90 days; mean 1.6 blocked requests per install ID over the week, maximum 14. AUTO-LIB-17 hits on iOS (user-agent \u0027OxleighGo-iOS/5.21\u0027), web, or quick-unlock path /auth/device-token: 0. Forwarded Android password requests: origin returned 401 for 1.9% and 5xx for 0.1%, unchanged from before 3 Mar."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Android 6.14 release notes and merged change list",
+          "source": "Mobile engineering release record",
+          "sourceType": "document",
+          "text": "Release 6.14 (build 61400), approved 27 Feb. User-facing: redesigned password-login screen (larger fields, show-password toggle, inline error messages); updated card-freeze flow wording. Technical: nettle-http 4.11.3 \u2192 4.12.0 (connection-pool fixes); analytics SDK events for screen timings; minimum Android version unchanged at 11. 214 merged changes, 9 touching login code, all in the password-screen UI layer. Regression suite: 1,140 automated tests passed on staging. Sign-off: Mobile engineering lead, QA lead, Product owner."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Android crash and ANR reports by app version, 24 Feb\u20139 Mar",
+          "source": "Crash reporting service export",
+          "sourceType": "telemetry",
+          "text": "Crash-free sessions, Android: 99.62% (24 Feb\u20132 Mar) and 99.60% (3\u20139 Mar). By version, 3\u20139 Mar: 6.12 99.61%, 6.13 99.60%, 6.14 99.57%. Application-not-responding rate 0.21% \u2192 0.22%. Top crash clusters unchanged: image-cache out-of-memory on low-memory devices, push-token refresh race. No crash cluster references login, the password screen or nettle-http. iOS crash-free sessions 99.71% \u2192 99.70% over the same periods."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Authentication service outcome summary, 1\u20139 March",
+          "source": "Backend platform team, auth-service log summary",
+          "sourceType": "log",
+          "text": "All channels combined; this summary is not broken down by platform or client. Of password-login requests that reached the service, 1\u20132 Mar vs 3\u20139 Mar: credentials accepted 97.9% vs 97.9%; credentials rejected 1.9% vs 1.9%; account locked 0.1% vs 0.1%; server errors 0.1% vs 0.1%. No new error codes appeared. The session-token lifetime change (3 Mar 14:00) produced the expected rise in token-refresh calls, all successful. p95 response time 180 ms vs 185 ms."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Corvane support ticket response, 9 March",
+          "source": "Corvane customer support, ticket CS-77812",
+          "sourceType": "vendor-account",
+          "text": "Thank you for your enquiry. Rule pack 2026.03.1 added 14 detections for newly catalogued automation tooling and was deployed to all tenants on 3 March following our standard validation process. Your tenant\u0027s overall block rate moved from 0.31% to 0.35% of requests, which is within normal variation. We have no indication that the update affects legitimate mobile application traffic, and we recommend investigating recent client releases. Please reopen this ticket with request samples if the issue persists."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Security Operations incident report SEC-0228, 28 February credential-stuffing event",
+          "source": "Security Operations",
+          "sourceType": "prior-report",
+          "text": "28 Feb 01:10\u201304:05 UTC: about 380,000 login attempts against web login from about 1,240 IP addresses, using leaked credential lists. Contained by existing per-IP rate limits and account lockout; 23 accounts locked, no confirmed takeovers, affected customers notified. Mobile API traffic during the window was normal. Recommendations: keep rate limits as configured; review bot-protection posture in Q2. The same actor could retarget other channels in future, and this cannot be excluded."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Contact-centre reason-code report and coding audit, 2\u20139 March",
+          "source": "Contact-centre quality team",
+          "sourceType": "system-record",
+          "text": "Calls by reason code against four-week average: General enquiry \u002B3,700; Fees and charges \u002B1,400; Digital access \u002B900; Cards \u002B300. Audit of 200 sampled \u0027General enquiry\u0027 recordings from 4\u20136 March: 61 about fee notices, 38 about app or online-banking access (platform recorded in only 9 of these), 101 other or unclassifiable. Auditor\u0027s note: the sample is too small and platform capture too inconsistent to apportion the weekly rise between causes."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "App store ratings and review sample, Android and iOS, 1\u20139 March",
+          "source": "Store console exports",
+          "sourceType": "customer-account",
+          "text": "Android: 1,860 new ratings, weekly average 3.1 (prior week 4.4). Sample of 40 one- and two-star reviews: 31 mention password login failing with \u0027Something went wrong, please try again\u0027; 6 say fingerprint login still works; 3 unrelated. iOS: 1,240 new ratings, average 4.5 (prior week 4.5). Representative Android review: \u0027Changed my phone so I have to use my password now and it just won\u0027t let me in. Called the bank, waited 40 minutes.\u0027"
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Interview with Mei S\u00F8rensen, QA lead, on 6.14 test coverage, 10 March",
+          "source": "Interview notes",
+          "sourceType": "staff-account",
+          "text": "\u00276.14 went through the full login regression suite on 20 physical devices, Android 11 through 15. Everything passed. Our test devices point at the staging API, and staging doesn\u0027t have the Corvane layer in front of it; it goes straight to the load balancer. When the drop started I re-ran password login on 6.13 and 6.14 against staging and both were fine. I can\u0027t test against production without real customer credentials, which we\u0027re not allowed to use.\u0027"
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Mobile API availability and latency dashboard, 1\u20139 March",
+          "source": "Platform operations monitoring",
+          "sourceType": "telemetry",
+          "text": "Availability (non-5xx responses \u00F7 all responses at origin): 99.97% in both weeks. p95 latency 210 ms \u2192 214 ms. Edge-handled responses (bot challenges and blocks) are excluded from availability by design; they are counted as \u0027protected\u0027 rather than failed. No availability or latency alerts fired 1\u20139 March. The per-endpoint panel for the password-login path shows origin latency only."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "iOS login outcomes by app version, 24 Feb\u20139 Mar",
+          "source": "Product analytics, in-app telemetry extract",
+          "sourceType": "telemetry",
+          "text": "Overall iOS login success 97.4% pre (24 Feb\u20132 Mar) and 97.3% post (4\u20139 Mar). Password: 5,900 \u2192 6,000 attempts/day, success 96.3% \u2192 96.2%. Quick-unlock: 88,400 \u2192 88,700 attempts/day, success 97.5% \u2192 97.4%. Post success by version: 5.20 97.3%, 5.21 97.3%. No iOS release since 18 February. Outcome categories unchanged; \u0027request rejected by server\u0027 0.1% in both periods."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "On-call engineering chat transcript, 3\u20134 March",
+          "source": "Engineering on-call channel export",
+          "sourceType": "staff-account",
+          "text": "3 Mar 13:52 [Ivo, backend on-call]: seeing a bump in Android login failures on the dashboard, auth service looks healthy.\n3 Mar 14:20 [Ivo]: token lifetime change just went out, could that be related?\n3 Mar 15:05 [Rhea, mobile]: will look at 6.14 crash data.\n4 Mar 09:12 [Ivo]: still elevated, nothing odd in auth logs. Parking until Mobile confirms.\n4 Mar 09:30 [Rhea]: can\u0027t reproduce on staging. Escalating to Tom\u00E1s."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Sample of customer complaint emails tagged \u0027login\u0027, 4\u20138 March",
+          "source": "Customer complaints team",
+          "sourceType": "customer-account",
+          "text": "Sample of 25 emails tagged \u0027login\u0027: 19 from Android users, 4 iOS, 2 web. Typical Android text: \u0027Every time I put my password in I get Something went wrong (ref S-403). Fingerprint works on my tablet but my new phone needs the password.\u0027 Five Android complainants say they reinstalled the app; none say it helped. The iOS emails concern forgotten passwords; both web emails are about the fee notice."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Third-party service status pages (analytics SDK, push notifications, SMS passcodes, maps), 1\u20139 March",
+          "source": "Vendor public status page archives",
+          "sourceType": "external-data",
+          "text": "Analytics SDK provider: operational, no incidents. Push provider: \u0027degraded delivery in EU region\u0027 5 Mar 02:00\u201303:10 UTC, resolved. SMS passcode provider: operational; one incident \u0027delayed delivery to one carrier\u0027 7 Mar 18:00\u201318:40 UTC. Maps SDK: operational. None of the listed incidents spans 3 March. Oxleigh uses SMS passcodes only for new-device enrolment, on both iOS and Android."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "A defect introduced in Android app release 6.14 is causing the drop in Android login success."
+          },
+          {
+            "id": "H2",
+            "text": "A change in the edge protection layer in front of the mobile API is rejecting legitimate Android login requests, causing the drop in Android login success."
+          },
+          {
+            "id": "H3",
+            "text": "Automated credential-stuffing traffic is pulling down the measured Android login success rate."
+          },
+          {
+            "id": "H4",
+            "text": "A recent Android operating-system security update on customers\u0027 phones is causing Android login attempts to fail."
+          },
+          {
+            "id": "H5",
+            "text": "The redesigned password screen in release 6.14 makes customers enter wrong credentials more often."
+          },
+          {
+            "id": "H6",
+            "text": "The 3 March change to the authentication service is rejecting valid Android login requests."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "3 March vendor rule-pack update to the edge protection layer",
+            "to": "Drop in Android login success from 3 March",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Rollout of Android release 6.14",
+            "to": "Drop in Android login success from 3 March",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Drop in Android login success from 3 March",
+            "to": "18% rise in contact-centre call volume, week of 2 March",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Credential-stuffing activity against Oxleigh\u0027s login services",
+            "to": "Drop in Android login success from 3 March",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Have the edge vendor set the rules added in the 3 March rule-pack update to log-only on the mobile password-login path, keeping rate limits, account lockout and all other edge rules active, then confirm in telemetry that Android password-login success returns to its pre-3 March level."
+          },
+          {
+            "id": "A2",
+            "text": "Raise edge bot-protection sensitivity on all login endpoints from \u0027standard\u0027 to \u0027high\u0027 until the suspected credential-stuffing subsides."
+          },
+          {
+            "id": "A3",
+            "text": "Exclude edge-blocked login attempts from the login success KPI reported to executives, treating them as non-customer traffic."
+          },
+          {
+            "id": "A4",
+            "text": "Continue the Android 6.14 staged rollout on its planned schedule while tracking login outcomes by app version."
+          },
+          {
+            "id": "A5",
+            "text": "Revert the redesigned password screen in the next Android release."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q-H1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "refId": "H6",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "groundTruthNarrative": "At 10:38 UTC on 3 March the edge protection vendor, Corvane, automatically applied rule pack 2026.03.1 to Oxleigh\u0027s mobile API. A new rule, AUTO-LIB-17, blocks requests to the password-login path when the user-agent is the default \u0027nettle-http\u0027 library string and no edge session cookie is present. Oxleigh\u0027s Android app sends every API call through nettle-http with that default user-agent. The iOS app uses a custom user-agent, and quick-unlock uses a different path. From 10:41, about 9,700 Android password submissions a day got a vendor 403 and never reached the auth service. Android login success fell from 97.1% to about 88.4%. Android 6.14 happened to start a staged rollout at 09:00 the same day, with a redesigned password screen, so leadership blamed the release. But 6.14 made up only 5% of attempts, and every older version failed the same way at the same minute. Devices with and without the March OS patch also failed at identical rates. The blocked traffic came from established customer installs, not credential stuffing. The auth service\u0027s token change affected both platforms and changed nothing. The vendor\u0027s tenant-wide figures hid a problem confined to one path. Whether the redesign raises typing errors cannot be determined, because few password submissions have reached a credential check since 10:41. The fix is to set the new rules to log-only on that path and confirm recovery.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal",
+            "coincident-change"
+          ],
+          "rationale": "C1 shows versions 6.11, 6.12 and 6.13 dropped to the same ~88.4% as 6.14. All versions began failing in the same minute (10:41 on 3 March), and 6.14 was only 5% of attempts. A 5% share cannot produce an 8.7-point drop. The timing and the password-screen redesign in E1/E2 are coincidental."
+        },
+        {
+          "itemId": "Q-H2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E5",
+            "C1",
+            "C2",
+            "C6",
+            "C10",
+            "C12",
+            "C14"
+          ],
+          "tags": [
+            "central-mechanism",
+            "vendor-managed-change"
+          ],
+          "rationale": "C2 shows a new rule, activated at 10:38, blocking requests that carry the nettle-http user-agent on the password path from 10:41. That is about 9,700 blocks a day, from established Android installs. E2 says the Android app uses nettle-http for every call. C1 shows the added failures are all server-rejected 403s on password submissions from 10:41, while quick-unlock (not covered by the rule) is unchanged. C6\u0027s tenant-wide reassurance is outweighed by these path-level counts."
+        },
+        {
+          "itemId": "Q-H3",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "misleading-signal",
+            "interested-party",
+            "measurement"
+          ],
+          "rationale": "E5: the KPI counts only attempts from installed apps, not scripted traffic. C2: the blocked requests came from 41,300 app installs, 92% of which had logged in successfully before, averaging 1.6 blocked requests each over the week. That is a customer pattern, not a credential-stuffing pattern. E4\u0027s claim is an inference from the 28 Feb web event."
+        },
+        {
+          "itemId": "Q-H4",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C15"
+          ],
+          "tags": [
+            "plausible-rival",
+            "confounded-timing"
+          ],
+          "rationale": "C1: success is 88.2\u201388.6% on every Android OS version and 88.4% on devices both with and without the March security patch. The failures do not track the OS update."
+        },
+        {
+          "itemId": "Q-H5",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C3"
+          ],
+          "tags": [
+            "unresolvable",
+            "side-claim"
+          ],
+          "rationale": "C1: 6.14 had only 38 password attempts before the blocking began. Since then few password submissions reach a credential check, so credential-error rates for the redesign cannot be measured. The claim is still possible but unestablished."
+        },
+        {
+          "itemId": "Q-H6",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E1",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C2",
+            "C5",
+            "C13"
+          ],
+          "tags": [
+            "coincident-change"
+          ],
+          "rationale": "E3: the token-lifetime change applied equally to iOS and Android and affects only session expiry, yet E1 shows iOS flat. C2 adds that the auth service\u0027s 401/5xx rates on forwarded Android requests did not change."
+        },
+        {
+          "itemId": "Q-R1",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C12"
+          ],
+          "tags": [
+            "central-mechanism",
+            "joint-evidence"
+          ],
+          "rationale": "Timing: the rule was activated at 10:38 and the first block came at 10:41, the same minute the client 403s began (C1). Mechanism: the rule matches nettle-http on the password path, which only the Android app sends (C2, E2). Covariation: about 9,700 blocks a day against about 9,400 added failures. Main rivals ruled out: all app and OS versions are affected equally (C1), and iOS, web and quick-unlock have zero hits."
+        },
+        {
+          "itemId": "Q-R2",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C1",
+            "C3"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "coincident-change"
+          ],
+          "rationale": "C1 counts directly against the link. Versions that never received 6.14 fell by the same amount at the same minute, and 6.14 carried only 5% of attempts."
+        },
+        {
+          "itemId": "Q-R3",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E6",
+            "C8",
+            "C9"
+          ],
+          "tags": [
+            "confounded",
+            "association-only"
+          ],
+          "rationale": "The rise in calls coincides with the login drop. But annual fee notices went out on 2 March, reason codes are unreliable, and 57% of calls were default-coded (E6). C8 confirms the rise cannot be split between causes. The two co-occur, but causation of the 18% rise is not established."
+        },
+        {
+          "itemId": "Q-R4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E5",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "misleading-signal",
+            "interested-party"
+          ],
+          "rationale": "The metric excludes scripted traffic (E5). The requests that make up the drop came from established customer installs at low per-device volume (C2). Evidence counts against the link itself."
+        },
+        {
+          "itemId": "Q-A1",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C7"
+          ],
+          "tags": [
+            "protective-control",
+            "reversible-fix"
+          ],
+          "rationale": "This targets the established mechanism and is reversible. Log-only keeps visibility, and the step includes checking that success recovers. It restores the pre-3 March posture on one path only. That posture, with rate limits and lockout, contained the 28 Feb attack (E4, C7). The new rule is blocking customers, not attackers (C2)."
+        },
+        {
+          "itemId": "Q-A2",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "harmful",
+            "worsens-outcome",
+            "interested-party"
+          ],
+          "rationale": "C2 shows the edge is already blocking legitimate customers. Raising sensitivity would block more of them, and no live rival is helped by it. The credential-stuffing explanation is contradicted."
+        },
+        {
+          "itemId": "Q-A3",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "E5",
+            "C1",
+            "C2",
+            "C11"
+          ],
+          "tags": [
+            "harmful",
+            "suppresses-information",
+            "gamed-record"
+          ],
+          "rationale": "The edge-blocked attempts are real customers using installed apps (E5, C2). Excluding them would hide the failure from executives under any hypothesis. C11 already shows how dashboards that count blocks as \u0027protected\u0027 made the problem invisible."
+        },
+        {
+          "itemId": "Q-A4",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "C1",
+            "C3",
+            "C4"
+          ],
+          "tags": [
+            "leadership-narrative"
+          ],
+          "rationale": "6.14 is not implicated (C1), and crash data is normal (C4). Continuing the rollout while tracking login outcomes by version is reasonable. It does nothing to fix the customer impact, so it is not among the best actions."
+        },
+        {
+          "itemId": "Q-A5",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C3"
+          ],
+          "tags": [
+            "premature",
+            "unresolved-side-claim"
+          ],
+          "rationale": "This would help if the redesign raises credential errors (H5). That is currently unmeasurable (C1). A future release could reverse the change, so it does no lasting damage, but committing to it now is not justified."
+        },
+        {
+          "itemId": "Q-SUFF",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C2"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "The top action, A1, is substantive. Timing, mechanism, covariation and rival exclusion (C1 \u002B C2) justify committing to it, and it is scoped, reversible and self-verifying."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C2"
+      ],
+      "lowValueReads": [
+        "C4",
+        "C8",
+        "C9",
+        "C11",
+        "C12",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C2"
+      ],
+      "authoringNotes": "Trap structure: Android 6.14 started rolling out at 09:00 on 3 March and redesigned the password screen, which is exactly where the failures sit (E1, E2). The edge rule-pack update is one \u0027standard, pre-approved\u0027 line among five changes, with no time given (E3). Security Operations pushes a bot explanation (E4), and the vendor says nothing changed for legitimate traffic (C6). C1 is the only item with failure rates by app version, rollout share and OS patch status. It alone settles H1, R2 and H4. C2 has no version data, and the X-Client header and user-agent carry no app version. C3 shows 6.14 upgraded nettle-http, so with C2 alone a reader cannot rule out that 6.14 introduced the matching user-agent. C2 is the only item giving the rule-activation time, the rule logic, block counts and the device-history pattern. It alone settles R1 (causal), H2, H3/R4 and the A1/SUFF commitment. C1 alone shows a server-side 403 onset at 10:41 but cannot tie it to the vendor change, whose time is missing from E3. The rollout percentage appears only in C1; C13 was written so it does not leak it. C5 has no platform breakdown, so it cannot localise the loss. C10, C11 and C14 hint at the edge without settling anything. H6 is already contradicted from the initial file (it affects both platforms, and iOS is flat). R3 stays association-only under every item because of the fee-notice confound and unreliable coding. Numbers reconcile: pre-period overall success is (96,700\u00D70.972 \u002B 7,500\u00D70.96)/104,200 = 97.1%. Post-period is (96,900\u00D70.972 \u002B 10,600\u00D70.082)/107,500 = 88.4%. E1\u0027s 88.7% includes the partial 3 March. iOS figures in C12 also reconcile. All names (Oxleigh Mutual, Corvane, nettle-http, people) are fictional."
+    }
+  }
+}

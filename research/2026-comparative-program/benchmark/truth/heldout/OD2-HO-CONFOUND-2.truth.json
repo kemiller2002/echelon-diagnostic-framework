@@ -1,0 +1,319 @@
+{
+  "caseId": "OD2-HO-CONFOUND-2",
+  "groundTruthNarrative": "The flag can only reach users on build 7.4.0, because eligibility requires a client capability that first shipped in that build (E4). So the comparison on the dashboard is really 7.4.0 users against mostly 7.3.2 users. Build 7.4.0 also upgraded the Pixelda image library to 3.1 for HEIF support, and that version crashes natively in its HEIF tile decoder. The crash affects every 7.4.0 user, flagged or not. C1 shows that 7.4.0 users crashed at about 2% from the build\u0027s first day, before anyone had the flag. The random flag-off holdout on 7.4.0 crashes at 1.98% against 2.10% for flagged users. The gap is present in both device memory tiers, usage is equal across groups, and 7.3.2 stayed flat across the 9 September backend deploy. C2 shows the leading 7.4.0 cluster is SIGSEGV in libpixelda.so, absent from 7.3.2. The OS-level store console reports the same rates as Tracewell, so the rise is not an artifact of the new SDK. The flag may still add a few tenths of a point through memory kills: the holdout difference has a positive point estimate, and a design risk and a lab profile make this plausible. That residual is neither established nor ruled out, and the existing holdout will resolve it within weeks anyway. Turning the flag off and shipping 7.4.0 to everyone would push a crashing build to the remaining roughly 77% of users. The right move is to hold 7.4.0 and fix its leading crash clusters.",
+  "answers": [
+    {
+      "itemId": "Q1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "E4",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E4",
+        "C1",
+        "C2",
+        "C8"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded",
+        "misleading-signal",
+        "central"
+      ],
+      "rationale": "C1 compares flagged users with a random flag-off holdout on the same build. The holdout crashes at 1.98% against 2.10%, so at most about 0.3 of the 1.36-point gap in E1 could come from the flag. 7.4.0 was already at 1.99% before any flag was on. C2 adds that no top cluster contains canvas.tiles frames. The flag\u0027s code cannot be the source of the gap."
+    },
+    {
+      "itemId": "Q2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C1",
+        "C2",
+        "C4",
+        "C8",
+        "C11"
+      ],
+      "tags": [
+        "confounded",
+        "hidden-confounder",
+        "central"
+      ],
+      "rationale": "E4 confines the flag to 7.4.0. C1 shows the elevated rate across all of 7.4.0 (holdout and pre-flag days included) and not in 7.3.2. C2 shows the rise is real, because the OS console agrees with Tracewell. C2 also places the leading cluster in the Pixelda 3.1 HEIF decoder, which ships only in 7.4.0. C1 alone cannot exclude a counting artifact, and C2 alone cannot exclude that the canvas triggers the decode (C4, C8). Together they support H2."
+    },
+    {
+      "itemId": "Q3",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C1",
+        "C9",
+        "C15"
+      ],
+      "tags": [
+        "plausible-rival",
+        "staff-speculation"
+      ],
+      "rationale": "C1 shows the share of sessions on low-memory devices is almost the same for flagged users, the holdout and 7.3.2 (31/30/33%). The 7.4.0 versus 7.3.2 gap also holds within each memory tier. Device mix does not produce the gap. C9 is not split by cohort, so it cannot decide this."
+    },
+    {
+      "itemId": "Q4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C1",
+        "C2",
+        "C11"
+      ],
+      "tags": [
+        "measurement-artifact",
+        "vendor-account",
+        "misleading-signal"
+      ],
+      "rationale": "The SDK upgrade is tied to the build, and the vendor warns of higher counts (C11), so the artifact story is plausible. But the app-store console counts crashes at OS level, independently of Tracewell. It shows 2.04% for 7.4.0 and 0.69% for 7.3.2, matching Tracewell\u0027s 2.09% and 0.70% (C2). The difference in crashes is real."
+    },
+    {
+      "itemId": "Q5",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C1",
+        "C12"
+      ],
+      "tags": [
+        "plausible-rival",
+        "manager-speculation"
+      ],
+      "rationale": "The PM\u0027s claim in E5 is not borne out. C1 shows equal sessions per user per week (12.3/12.2/12.3) and similar session lengths across flagged users, the holdout and 7.3.2, and the crash measure is already per session. C12 covers flagged users only and cannot compare groups."
+    },
+    {
+      "itemId": "Q6",
+      "expected": "association-only",
+      "weight": 3,
+      "requiredEvidence": [
+        "E1",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C1",
+        "C2",
+        "C4",
+        "C7",
+        "C15"
+      ],
+      "tags": [
+        "confounded",
+        "tempting-edge",
+        "central"
+      ],
+      "rationale": "The association is real (E1). Most of it comes from the build confounder, so causation is not established. Within 7.4.0 the flag effect is \u002B0.12 points with an interval of \u22120.08 to \u002B0.32, and the memory-kill difference has an interval of \u22120.02 to \u002B0.20. The analyst states a few-tenths effect cannot yet be ruled out, and C4 and C15 give a plausible memory mechanism. The evidence therefore neither establishes nor counts against the link, so it is not contradicted."
+    },
+    {
+      "itemId": "Q7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C1",
+        "C2",
+        "C11"
+      ],
+      "tags": [
+        "true-driver",
+        "mechanism"
+      ],
+      "rationale": "Several lines of evidence point the same way. Timing: 7.4.0 was elevated from its first day, while 7.3.2 stayed flat (C1). Covariation: the elevation holds in the holdout and in both device tiers, with equal usage across groups (C1). Mechanism: the leading cluster is in a library version that ships only in 7.4.0 (C2). The OS console confirms the crashes are real, which rules out the SDK-artifact rival (C2)."
+    },
+    {
+      "itemId": "Q8",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C1",
+        "C10"
+      ],
+      "tags": [
+        "confounder-structure"
+      ],
+      "rationale": "The flag\u0027s eligibility rule requires a capability that first shipped in 7.4.0 (E4, E3). Running 7.4.0 is therefore by design a precondition for getting the flag. C1 (no flag possible on 7.3.2) and C10 (rule never changed) confirm this."
+    },
+    {
+      "itemId": "Q9",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C1",
+        "C3"
+      ],
+      "tags": [
+        "misleading-signal",
+        "timing-coincidence"
+      ],
+      "rationale": "C1 shows 7.3.2 users, who get the same backend, stayed at 0.68\u20130.72% across 9 Sep. 7.4.0 users were already elevated from 2 Sep and did not change at the deploy. The steeper overall curve reflects 7.4.0 adoption. C3 shows only server metrics and does not settle this by itself."
+    },
+    {
+      "itemId": "Q10",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C13"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "harmful-action"
+      ],
+      "rationale": "Turning the flag off leaves the 7.4.0 crash in place, and closing the incident stops the investigation. Shipping 7.4.0 to 100% would expose the remaining roughly 77% of users to a crash rate about three times the 7.3.2 rate. This is damaging under H2 and also under the residual possibility that the flag adds a small effect."
+    },
+    {
+      "itemId": "Q11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "best-action"
+      ],
+      "rationale": "The established driver is the 7.4.0 build, and its leading crash cluster is identified. Holding the rollout prevents further harm and is reversible. Fixing the leading clusters addresses the bulk of the excess crashes, whatever any small flag effect turns out to be."
+    },
+    {
+      "itemId": "Q12",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C4",
+        "C7",
+        "C15"
+      ],
+      "tags": [
+        "premature-action",
+        "unconfirmed-mechanism"
+      ],
+      "rationale": "Reworking tile memory handling would help if the flag really adds memory kills, which C4 and C15 make plausible but C1 cannot confirm. If that hypothesis is wrong, the cost is engineering time with no lasting damage. Committing to this mechanism now is not justified."
+    },
+    {
+      "itemId": "Q13",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C15"
+      ],
+      "tags": [
+        "evidence-gathering"
+      ],
+      "rationale": "Measuring the residual flag effect is reasonable and reversible, so the action is not harmful or premature. But C1\u0027s analyst states that the existing 10% holdout will resolve a 0.2-point effect in about three more weeks and that widening it would save only about one week. A4 therefore adds little information the team will not get anyway, it removes the feature from a further 20% of eligible users, and it does nothing about the build-wide crash that drives the harm. It is reasonable but not among the best next actions."
+    },
+    {
+      "itemId": "Q14",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C2",
+        "C11"
+      ],
+      "tags": [
+        "protective-control",
+        "suppress-information"
+      ],
+      "rationale": "C2 shows that SDK 5.0\u0027s counts match OS-level statistics, so the new SDK is accurate. Its native capture is what records the Pixelda crash. Rolling it back would remove visibility of native crashes under H2 and under the residual flag-effect rival alike."
+    },
+    {
+      "itemId": "Q15",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "With C1 and C2, the 7.4.0 build is established as the driver, through real crashes, a mechanism and a pre-flag onset. That is enough to commit to holding the rollout and fixing the leading clusters. The open question about a small flag effect does not change this decision."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2"
+  ],
+  "lowValueReads": [
+    "C6",
+    "C9",
+    "C10",
+    "C13"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C2"
+  ],
+  "authoringNotes": "Trap: E1 and E2 show a 2.8x flag cohort gap, and E4 quietly ties the flag to build 7.4.0. E3 lists three changes in that build: the flag\u0027s code, the image library upgrade and the SDK upgrade. Rivals are seeded in E5: backend deploy, device mix and heavy users. C1 is the only item that settles H3, H5 and R4, and it needs the SDK artifact excluded before H2 can be supported. C2 is the only item that settles H4, through its OS-level cross-check, and it supplies the mechanism for R2. C2 alone cannot clear the flag, because the decode stack has no caller frames and C4 and C8 say the canvas uses the same pipeline. Distractors pull toward both stories: C11 favours the artifact story, C14 (beta) is confounded because the flag is forced on, and C15 and C4 favour a memory effect without settling it. R1 is kept association-only on purpose. The point estimates are positive, the intervals include zero and modest positive effects, and the analyst says explicitly that the test lacks power so far. H1 is contradicted because it claims the flag is the source of the gap, which the holdout comparison excludes. Revision after review: C1\u0027s analyst note now states that the existing holdout will resolve a 0.2-point effect in about three more weeks and that widening it would save only about one week. This puts the information on the optimal read path and removes A4\u0027s case for \u0027preferred\u0027: its marginal information value is small, and it takes the feature away from more users. That leaves \u0027acceptable\u0027 as the only defensible key. C1 was also tightened to stay within the word limit, with every figure unchanged. Power check: with about 46k holdout users against about 414k flagged users and a \u00B10.20 interval after one week, the interval narrows to roughly \u00B10.10 after about four weeks in total. Widening the holdout to 30% narrows it about 1.5 times faster, which fits the \u0027save about one week\u0027 claim. Numbers are internally consistent: the weighted cohort rates reproduce E1\u0027s 0.74%, the overall daily curve follows 7.4.0 adoption up to about 22.5% of users (staged rollout offered to 25%), and the per-tier rates reproduce the build totals."
+}

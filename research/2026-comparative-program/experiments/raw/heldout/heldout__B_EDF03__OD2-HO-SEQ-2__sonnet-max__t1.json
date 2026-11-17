@@ -1,0 +1,217 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-SEQ-2__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-SEQ-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C7",
+    "X3": "C13",
+    "X4": "C9",
+    "X5": "C12",
+    "X6": "C1",
+    "X7": "C3",
+    "X8": "C11",
+    "X9": "C5",
+    "X10": "C14",
+    "X11": "C8",
+    "X12": "C15",
+    "X13": "C4",
+    "X14": "C2",
+    "X15": "C6"
+  },
+  "readLabels": [
+    "X6",
+    "X14"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-SEQ-2__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 36418,
+    "cacheCreationTokens": 22700,
+    "outputTokens": 46966,
+    "thinkingTokens": 44889,
+    "costUsd": 0.5641178,
+    "durationMs": 303025,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-SEQ-2__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-SEQ-2__sonnet-max__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-SEQ-2__sonnet-max__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-SEQ-2\u0022,\u0022methodChoice\u0022:\u0022Applied the supplied diagnostic sequence internally. Collected X6 (printer job log) first, then X14 (ERP shelf-life audit trail); stopped at 2 items.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:87,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022,\u0022E1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:62,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:66,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]}],\u0022brief\u0022:\u0022Cause: the wrong dates came from the data feeding the printers, not from operators or firmware. On 3 Oct Regulatory Affairs entered a 36-month shelf life for Veltranol, valid only from 1 Mar 2027; the approved 24-month value stayed in force. From 4 Oct PackBridge sent 36 months anyway. Printer logs show 30 earlier jobs correct, including agency operators\u0027 jobs after the firmware change, and 17 since, all 12 months late, none overridden, including Line 1 day shift with permanent staff. Operator and camera checks use the same feed, so they couldn\u0027t catch it.\\n\\nIs the director\u0027s plan right? No: it punishes people who did nothing wrong and leaves the fault running.\\n\\nConfidence: about 85% on the cause. Unknown: why PackBridge sent a future-dated value (the vendor says it cannot), and whether other products are affected.\\n\\nNow: hold every Veltranol lot packed since 4 Oct (only three are held); reset the Veltranol record so only 24 months can be read; add a second-person check of printed expiry against the batch record at every setup; inspect retained cartons of other products edited in October, starting with HX-15-30 and MR-05-14.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:25:40.0039204Z",
+    "finishedAt": "2026-11-17T16:30:43.8033041Z",
+    "output": {
+      "caseId": "OD2-HO-SEQ-2",
+      "methodChoice": "Applied the supplied diagnostic sequence internally. Collected X6 (printer job log) first, then X14 (ERP shelf-life audit trail); stopped at 2 items.",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 95,
+          "evidenceIds": [
+            "X6",
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 95,
+          "evidenceIds": [
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X6",
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 87,
+          "evidenceIds": [
+            "X6",
+            "X14",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X14",
+            "X6",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X14",
+            "E1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "premature",
+          "confidence": 62,
+          "evidenceIds": [
+            "X6",
+            "X14",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 66,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E4",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        }
+      ],
+      "brief": "Cause: the wrong dates came from the data feeding the printers, not from operators or firmware. On 3 Oct Regulatory Affairs entered a 36-month shelf life for Veltranol, valid only from 1 Mar 2027; the approved 24-month value stayed in force. From 4 Oct PackBridge sent 36 months anyway. Printer logs show 30 earlier jobs correct, including agency operators\u0027 jobs after the firmware change, and 17 since, all 12 months late, none overridden, including Line 1 day shift with permanent staff. Operator and camera checks use the same feed, so they couldn\u0027t catch it.\n\nIs the director\u0027s plan right? No: it punishes people who did nothing wrong and leaves the fault running.\n\nConfidence: about 85% on the cause. Unknown: why PackBridge sent a future-dated value (the vendor says it cannot), and whether other products are affected.\n\nNow: hold every Veltranol lot packed since 4 Oct (only three are held); reset the Veltranol record so only 24 months can be read; add a second-person check of printed expiry against the batch record at every setup; inspect retained cartons of other products edited in October, starting with HX-15-30 and MR-05-14."
+    }
+  }
+}

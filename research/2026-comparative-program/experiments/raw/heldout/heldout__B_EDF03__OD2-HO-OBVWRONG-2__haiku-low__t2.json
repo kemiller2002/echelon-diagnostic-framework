@@ -1,0 +1,213 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-OBVWRONG-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-OBVWRONG-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C14",
+    "X3": "C8",
+    "X4": "C1",
+    "X5": "C11",
+    "X6": "C10",
+    "X7": "C16",
+    "X8": "C6",
+    "X9": "C3",
+    "X10": "C12",
+    "X11": "C5",
+    "X12": "C2",
+    "X13": "C9",
+    "X14": "C7",
+    "X15": "C13",
+    "X16": "C4"
+  },
+  "readLabels": [
+    "X13",
+    "X14"
+  ],
+  "reads": [
+    "C9",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-OBVWRONG-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 34071,
+    "cacheCreationTokens": 10386,
+    "outputTokens": 3575,
+    "thinkingTokens": 2299,
+    "costUsd": 0.00420621,
+    "durationMs": 21243,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E1\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E5\u0022,\u0022X14\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E5\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The rise is mostly a tag-readability problem that began on 1 September, not a handling-crew problem. Since the switch to Fennick Labels tag stock, about 12% of Corvane bags tagged at Harlow Bay counters and kiosks fail to scan, versus about 1.5% for the old Brackwater stock and for transfer and Pelion tags on the same arrays. On 14\u201316 October, counters that briefly used Brackwater stock read normally, while kiosks using Fennick stock kept failing. Those failed bags go to manual encode and miss their flights. Printer tag-jam tickets also rose from that date. The open question is whether the Fennick media is defective or just needs different printer heat settings; the supplier\u0027s own test is in-house only. I am fairly confident about the tag cause but not about the cause of the media fault. Do not issue the breach notice: it would penalise Tessaly for a problem that mostly sits in tag supply and printing. Next, switch counters and kiosks back to Brackwater stock now, which is cheap and reversible, and run a joint, third-party-observed print trial of Fennick stock against printer settings before any defect claim. Ask Tessaly for the crew-training plan as a separate, lower-priority matter.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:05:18.5387329Z",
+    "finishedAt": "2026-11-17T16:05:40.4779466Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-2",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X13",
+            "E1",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13",
+            "E5",
+            "X14",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X14",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "E1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "E5",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X14",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "X13",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The rise is mostly a tag-readability problem that began on 1 September, not a handling-crew problem. Since the switch to Fennick Labels tag stock, about 12% of Corvane bags tagged at Harlow Bay counters and kiosks fail to scan, versus about 1.5% for the old Brackwater stock and for transfer and Pelion tags on the same arrays. On 14\u201316 October, counters that briefly used Brackwater stock read normally, while kiosks using Fennick stock kept failing. Those failed bags go to manual encode and miss their flights. Printer tag-jam tickets also rose from that date. The open question is whether the Fennick media is defective or just needs different printer heat settings; the supplier\u0027s own test is in-house only. I am fairly confident about the tag cause but not about the cause of the media fault. Do not issue the breach notice: it would penalise Tessaly for a problem that mostly sits in tag supply and printing. Next, switch counters and kiosks back to Brackwater stock now, which is cheap and reversible, and run a joint, third-party-observed print trial of Fennick stock against printer settings before any defect claim. Ask Tessaly for the crew-training plan as a separate, lower-priority matter."
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-OBVWRONG-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-OBVWRONG-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C5",
+    "X3": "C2",
+    "X4": "C11",
+    "X5": "C16",
+    "X6": "C6",
+    "X7": "C4",
+    "X8": "C3",
+    "X9": "C7",
+    "X10": "C8",
+    "X11": "C10",
+    "X12": "C1",
+    "X13": "C15",
+    "X14": "C9",
+    "X15": "C12",
+    "X16": "C14"
+  },
+  "readLabels": [
+    "X14",
+    "X10"
+  ],
+  "reads": [
+    "C9",
+    "C8"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-OBVWRONG-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 23183,
+    "cacheCreationTokens": 12556,
+    "outputTokens": 2423,
+    "thinkingTokens": 737,
+    "costUsd": 0.0767843,
+    "durationMs": 17836,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-OBVWRONG-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-OBVWRONG-2__sonnet-medium__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-OBVWRONG-2__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-2\u0022,\u0022methodChoice\u0022:\u0022Evidence-ledger provenance check on interested sources (E2, E6, E3), then ACH across the five hypotheses; Kepner-Tregoe IS/IS NOT distinctions on X14 (Fennick vs Brackwater tags, counters/kiosks, Pelion and transfer tags)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]}],\u0022brief\u0022:\u0022The evidence points away from Tessaly and toward the tag stock. On 1 September check-in switched from Brackwater to Fennick tag stock, the same day the handler changed. Bags with Fennick tags fail automatic reading about 12% of the time, against about 1.5% for August\u0027s Brackwater tags. Pelion\u0027s tags and Corvane\u0027s transfer tags stay near 1.3\u20131.4%. When counters briefly used Brackwater stock on 14\u201316 October, their failure rate fell to 1.6%, while kiosks on Fennick stock stayed at 12%. That points to the tag stock, or how the printers are set for it, and not to the airport\u0027s readers or to Tessaly\u0027s crews. Those unreadable bags go to manual encoding and then miss the lateral cutoff.\\n\\nI am fairly confident in the stock link. I can\u0027t yet say whether Fennick\u0027s stock is faulty or the printers just need different heat settings. I did not check mishandling cause codes or reconciliation data, so Tessaly\u0027s crews may still contribute somewhat.\\n\\nNext: do not send the breach notice or withhold the fee. Switch counters and kiosks back to Brackwater now, since about five weeks of stock is on hand. Then test Fennick stock and printer settings before making any claim against Fennick.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:52:52.8390766Z",
+    "finishedAt": "2026-11-17T16:53:11.3743058Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-2",
+      "methodChoice": "Evidence-ledger provenance check on interested sources (E2, E6, E3), then ACH across the five hypotheses; Kepner-Tregoe IS/IS NOT distinctions on X14 (Fennick vs Brackwater tags, counters/kiosks, Pelion and transfer tags)",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E4",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        }
+      ],
+      "brief": "The evidence points away from Tessaly and toward the tag stock. On 1 September check-in switched from Brackwater to Fennick tag stock, the same day the handler changed. Bags with Fennick tags fail automatic reading about 12% of the time, against about 1.5% for August\u0027s Brackwater tags. Pelion\u0027s tags and Corvane\u0027s transfer tags stay near 1.3\u20131.4%. When counters briefly used Brackwater stock on 14\u201316 October, their failure rate fell to 1.6%, while kiosks on Fennick stock stayed at 12%. That points to the tag stock, or how the printers are set for it, and not to the airport\u0027s readers or to Tessaly\u0027s crews. Those unreadable bags go to manual encoding and then miss the lateral cutoff.\n\nI am fairly confident in the stock link. I can\u0027t yet say whether Fennick\u0027s stock is faulty or the printers just need different heat settings. I did not check mishandling cause codes or reconciliation data, so Tessaly\u0027s crews may still contribute somewhat.\n\nNext: do not send the breach notice or withhold the fee. Switch counters and kiosks back to Brackwater now, since about five weeks of stock is on hand. Then test Fennick stock and printer settings before making any claim against Fennick."
+    }
+  }
+}

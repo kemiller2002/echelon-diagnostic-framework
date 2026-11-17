@@ -1,0 +1,351 @@
+{
+  "caseId": "OD2-HO-CROSS-2",
+  "groundTruthNarrative": "On 4 Aug Serra Vale began booking Meridane containers through the new Tallis documentation suite. On 1 Aug the contractor\u0027s implementation user had created the mandarin product record by copying the avocado record. The description and tariff code were edited, but the carriage temperature stayed at 7.0\u00B0C. Reefer fields were outside go-live testing, and the cooperative\u0027s logistics lead signed off the product master. As a result, every Meridane container booked through Tallis (K3, K4, K6, K8, K9) was instructed at 7.0\u00B0C, and carried at that temperature, instead of the 4.0\u00B0C specification. Meridane\u0027s units held the setpoint within 0.4\u00B0C, and the cooperative\u0027s own loggers confirm this. The Meridane container booked by email before the switch (K1: same transshipment route, 26 days, old fungicide) and all Coastway containers (email template, 4.0\u00B0C) arrived within tolerance. Fungicide stock, transit time and Lower Serra share did not separate accepted from rejected containers. Carriage temperature separated them perfectly. The symptom shows up as fruit decay and seems to point at the carrier, the growers or the fungicide. The cause sits in the cooperative\u0027s own IT data migration. Within warm containers, Lower Serra pallets decayed more than other pallets. That pattern is confounded with night-shift packing and unrecorded stowage, and it does not explain why containers failed. Contractual liability for the faulty record is not established. Two mandarin containers on the same record are still at sea or queued. The fix is to correct the record, reset those containers and add a pre-submission check.",
+  "answers": [
+    {
+      "itemId": "I-H1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C6",
+        "C1",
+        "C4",
+        "C9",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal",
+        "confounded",
+        "manager-narrative"
+      ],
+      "rationale": "C6 shows that fungicide stock does not track the outcome. K3 was packed with the old supplier\u0027s product and was rejected (11.2%). K5 and K7 were packed with Pellacor and accepted (1.9%, 0.8%), and K5 spent 26 days in transit. K1 and K2 used old stock at 4.0\u00B0C and passed. The quality manager\u0027s timing argument (E3) rests on K1 and K2 having been packed before Pellacor arrived, but temperature, not fungicide, separates the groups."
+    },
+    {
+      "itemId": "I-H2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E4",
+        "C6",
+        "C2",
+        "C8",
+        "C10",
+        "C14"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal",
+        "punish-wrong-party"
+      ],
+      "rationale": "Lower Serra fruit made up 28\u201340% of every container, including the four that passed at 0.8\u20131.9% (C6). In rejected containers, the non-Lower Serra pallets alone averaged 10.3% (E1), far above the 3% tolerance. Lower Serra fruit was therefore neither necessary nor sufficient for rejection."
+    },
+    {
+      "itemId": "I-H3",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E1",
+        "E5",
+        "E6",
+        "C5"
+      ],
+      "tags": [
+        "external-cause",
+        "misleading-signal",
+        "vendor-correct",
+        "central"
+      ],
+      "rationale": "C6 shows every unit held its controller setpoint within 0.4\u00B0C with no significant power-off, and the cooperative\u0027s own loggers in K4, K5 and K6 confirm the readings. C11 shows that the 7.0\u00B0C setpoint is exactly what the cooperative transmitted. Meridane kept the instructed temperature, so its self-interested letter (E6) turns out to be accurate. C6 alone cannot rule out a carrier keying error, so both reads are needed."
+    },
+    {
+      "itemId": "I-H4",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E1",
+        "E2",
+        "E5",
+        "E6",
+        "C3"
+      ],
+      "tags": [
+        "cross-domain",
+        "central",
+        "it-data-error"
+      ],
+      "rationale": "C11 shows that every Tallis-booked Meridane container was instructed at 7.0\u00B0C, copied from the avocado record, against a 4.0\u00B0C mandarin specification. Email bookings, including Meridane\u0027s K1 before the switch, were at 4.0\u00B0C. C6 shows that the containers actually ran at those setpoints and that the 7.0\u00B0C containers, and only those, failed. Fungicide, transit time and grower share were similar across the two groups."
+    },
+    {
+      "itemId": "I-H5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "E1"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "E1",
+        "E3",
+        "E5",
+        "C5",
+        "C11"
+      ],
+      "tags": [
+        "confounded",
+        "misleading-signal"
+      ],
+      "rationale": "Transit times overlap completely (C6). K1 sailed on the same Meridane transshipment route for 26 days and was accepted. K5 (Coastway) took 26 days and was accepted. K4 took only 23 days and was rejected. Transit length does not separate the outcomes."
+    },
+    {
+      "itemId": "I-R1",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C11",
+        "C6",
+        "E5",
+        "C3"
+      ],
+      "tags": [
+        "cross-domain",
+        "mechanism"
+      ],
+      "rationale": "C11 provides the mechanism, the temporal order and the covariation. The setpoint field was filled automatically from a product record copied from avocado on 1 Aug. Every Meridane booking after go-live carries 7.0\u00B0C, while the Meridane booking made by email before go-live (K1) and all Coastway email bookings carry 4.0\u00B0C. C6 confirms that the controllers ran at the transmitted values."
+    },
+    {
+      "itemId": "I-R2",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6",
+        "E2"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "E2",
+        "E1",
+        "C11",
+        "C7",
+        "C13"
+      ],
+      "tags": [
+        "central",
+        "natural-experiment"
+      ],
+      "rationale": "All containers left the packhouse at about 4\u00B0C with 0.2\u20130.5% decay (E2), so the difference arose in transit. In C6, every container carried at about 7\u00B0C failed (9.4\u201313.8%) and every container at about 4\u00B0C passed (0.8\u20131.9%). The main rivals (fungicide stock, transit days, carrier route via K1, Lower Serra share) are held across both groups, independent loggers confirm the temperatures, and faster mould growth in warmer storage is a generalist mechanism."
+    },
+    {
+      "itemId": "I-R3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "E2",
+        "E3",
+        "E1",
+        "C1",
+        "C4",
+        "C9"
+      ],
+      "tags": [
+        "misleading-signal",
+        "temporal-coincidence"
+      ],
+      "rationale": "The evidence counts against this link itself. Pellacor-treated fruit carried at 4\u00B0C arrived within tolerance even after 26 days (K5, K7). Fruit treated with the old product exceeded tolerance when carried at 7\u00B0C (K3). The switch to Pellacor did not produce above-tolerance decay."
+    },
+    {
+      "itemId": "I-R4",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E1",
+        "E2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "C6",
+        "C8",
+        "C10",
+        "C14",
+        "C2"
+      ],
+      "tags": [
+        "association-only",
+        "confounded",
+        "leadership-narrative"
+      ],
+      "rationale": "In rejected containers, Lower Serra pallets averaged 15.1% decay against 10.3% for other pallets (E1), so the association exists. However, Lower Serra lots were also the night-shift lots under a new supervisor (E2), stowage positions were not recorded (E1), and no pallet-level data exist for accepted containers (C6). The confounds are not ruled out, so causation is unestablished. Nothing counts against the link itself."
+    },
+    {
+      "itemId": "I-A1",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E4",
+        "E6",
+        "C5"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "harmful"
+      ],
+      "rationale": "Meridane carried the containers at the temperature the cooperative itself instructed. The claim blames the wrong party, would be defeated by the controller data, damages the carrier relationship, and diverts attention from the record that is still sending 7.0\u00B0C. No live rival under which Meridane failed remains."
+    },
+    {
+      "itemId": "I-A2",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C6",
+        "E4",
+        "C8",
+        "E2"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "harmful",
+        "leadership-narrative"
+      ],
+      "rationale": "Lower Serra fruit passed when carried at 4\u00B0C, and the other pallets in warm containers failed on their own. Suspending deliveries and withholding payment punishes growers for a failure they did not cause, and it would not prevent further rejections."
+    },
+    {
+      "itemId": "I-A3",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C11",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "C11",
+        "C6",
+        "E5",
+        "C3"
+      ],
+      "tags": [
+        "fix",
+        "urgent"
+      ],
+      "rationale": "This removes the confirmed mechanism. It also protects the container now at sea and the one queued on the same faulty record (C11), and the added check closes the gap left when reefer fields were excluded from testing (C3). It is the only action keyed preferred."
+    },
+    {
+      "itemId": "I-A4",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C11",
+        "C3",
+        "E5"
+      ],
+      "tags": [
+        "premature",
+        "liability-unestablished"
+      ],
+      "rationale": "The contractor\u0027s user created the record (C11). However, the cooperative\u0027s logistics lead signed off the product master, and the cooperative\u0027s steering group agreed to exclude reefer fields from testing (C3). The contract terms are not in evidence. If Brindle proves liable, recovering costs is appropriate. Until then, a reversible commercial step is not justified, and it is not harmful under the live rival that Brindle is liable."
+    },
+    {
+      "itemId": "I-A5",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E6"
+      ],
+      "tags": [
+        "monitoring",
+        "acceptable"
+      ],
+      "rationale": "Independent loggers would give early warning and independent records, which is reasonable given that the carrier data were initially distrusted. But they only detect a wrong setpoint and do not correct it, so the action is not among the best."
+    },
+    {
+      "itemId": "I-SUFF",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E1",
+        "E2"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "The two reads together establish what caused the rejections, provide a natural comparison (K1) and rule out the rivals. That is enough to commit to A3, which is substantive, low-regret and urgent because two containers are on the same faulty record."
+    }
+  ],
+  "discriminatingReads": [
+    "C6",
+    "C11"
+  ],
+  "lowValueReads": [
+    "C1",
+    "C2",
+    "C7",
+    "C9",
+    "C12",
+    "C13",
+    "C14",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C6",
+    "C11"
+  ],
+  "authoringNotes": "The symptom domain is fruit decay and export compliance. The cause domain is the IT and master-data migration. Rejection is perfectly confounded with the carrier in the initial file, apart from K1, and the fungicide timing story also explains K1, so an analyst reading only the initial file is pulled toward the carrier, the growers or the fungicide. Meridane\u0027s self-interested letter is accurate (vendor-correct trap). C6 uniquely settles R2, H1 and H5 because it gives actual temperatures, fungicide stock and transit days per container. On its own, C6 cannot separate a carrier keying error from a cooperative instruction error. C11 uniquely settles R1 and H4 because it shows the transmitted values and the record\u0027s history. On its own, C11 does not give actual voyage temperatures or rule out the fungicide and transit confounds. Both reads are needed for H3, H4 and SUFF. Near-miss distractors that bear on items without settling them: C3 hints at untested reefer fields but shows no values; C5 records plug status only; C4 has ambiguous low readings with no lot traceability; C8 and C10 support the Lower Serra association without isolating it. No catalogue item contains the Brindle contract, so A4 stays premature. R4 is deliberately left at association-only through stated confounds (night shift, stowage) and missing pallet data for accepted containers. Hypotheses each refer only to changes named in the initial file (new supplier, Lower Serra, Meridane, documentation suite, transshipment) and contain no catalogue-only number or component."
+}

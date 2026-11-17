@@ -1,0 +1,234 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-KNOWN-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C6",
+    "X3": "C13",
+    "X4": "C5",
+    "X5": "C8",
+    "X6": "C4",
+    "X7": "C14",
+    "X8": "C11",
+    "X9": "C12",
+    "X10": "C10",
+    "X11": "C3",
+    "X12": "C7",
+    "X13": "C1",
+    "X14": "C2",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X14",
+    "X13"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-KNOWN-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17955,
+    "cacheCreationTokens": 7409,
+    "outputTokens": 2637,
+    "thinkingTokens": 1164,
+    "costUsd": 0.00298045,
+    "durationMs": 15212,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022Collected 2 items: X14 (Corvane edge event log) and X13 (Android outcomes by version, OS, outcome category). Stopped there.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022E1\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X14\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022The Android login drop is almost certainly caused by the vendor\u0027s 3 March edge rule update, not by the app release, the security patch, or bots. The new Corvane rule AUTO-LIB-17 began blocking password logins from the Android app at 10:41 UTC on 3 March, the minute after the rule went live. It matches the networking library\u0027s user-agent (nettle-http) on password paths. About 41,300 real, previously active Android installs were blocked, while the rate of failures is identical across all app versions, OS versions and the patch status. iOS and quick-unlock were untouched. The 6.14 rollout and the 14:00 session change do not explain the timing. Credential-stuffing does not fit the data.\\n\\nConfidence is high on the mechanism, moderate on the contact-centre link (fee notices mailed 2 March confound it).\\n\\nNext steps: ask Corvane to set AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits and lockout, and confirm recovery in telemetry. Do not raise bot sensitivity or exclude blocked attempts from the KPI; both would worsen the lockout or hide it from executives. Do not revert the password screen yet.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:44:20.4073510Z",
+    "finishedAt": "2026-11-17T16:44:36.3606673Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "Collected 2 items: X14 (Corvane edge event log) and X13 (Android outcomes by version, OS, outcome category). Stopped there.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X13",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X13",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "X13",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6",
+            "E1",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E5",
+            "X14",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X13",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "The Android login drop is almost certainly caused by the vendor\u0027s 3 March edge rule update, not by the app release, the security patch, or bots. The new Corvane rule AUTO-LIB-17 began blocking password logins from the Android app at 10:41 UTC on 3 March, the minute after the rule went live. It matches the networking library\u0027s user-agent (nettle-http) on password paths. About 41,300 real, previously active Android installs were blocked, while the rate of failures is identical across all app versions, OS versions and the patch status. iOS and quick-unlock were untouched. The 6.14 rollout and the 14:00 session change do not explain the timing. Credential-stuffing does not fit the data.\n\nConfidence is high on the mechanism, moderate on the contact-centre link (fee notices mailed 2 March confound it).\n\nNext steps: ask Corvane to set AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits and lockout, and confirm recovery in telemetry. Do not raise bot sensitivity or exclude blocked attempts from the KPI; both would worsen the lockout or hide it from executives. Do not revert the password screen yet."
+    }
+  }
+}

@@ -1,0 +1,430 @@
+{
+  "id": "OD2-HO-CONTRA-2",
+  "split": "heldout",
+  "benchmarkClass": "CONTRA",
+  "domain": "cross-domain",
+  "readBudget": 2,
+  "title": "Chilled spoilage write-offs at Brackenford DC",
+  "setting": "Tallowmere Foods is a regional food distributor. Its Brackenford distribution centre (DC) receives chilled, frozen and ambient lines from suppliers and delivers to supermarket and wholesale customers. Chilled product is received at the dock, probed, and put away into three chilled chambers (CH1\u2013CH3) before being picked for store deliveries. Haverlow Dairy is the largest chilled supplier and delivers overnight. Pellridge Foods supplies dairy and ready meals. Corriebank Stores is the largest chilled customer. A cost programme (\u0027Phase 2\u0027) went live at the DC in late July.",
+  "presentingRequest": "The Operations Director asks: what is behind the jump in chilled spoiled-product write-offs since early August? The site General Manager wants a temperature-abuse chargeback raised against Haverlow Dairy and a third of Haverlow\u0027s volume moved to Pellridge. Which single next action should lead, and is the evidence good enough to commit to it?",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Finance: weekly shrink report, Brackenford DC",
+      "sourceType": "financial-record",
+      "text": "Chilled spoiled-product write-offs, Brackenford DC. Weeks 26\u201331 average: \u00A38,600/week (DC-stage write-offs \u00A36,200; customer spoilage credits \u00A32,400). Weeks 32\u201338 average: \u00A327,000/week (DC-stage \u00A321,900; customer credits \u00A35,100). DC-stage write-offs are product found out of condition or below minimum remaining life at pick, QA hold or cycle count. Frozen and ambient write-offs flat across the period (\u00B16%). By supplier, weeks 32\u201338 DC-stage chilled write-off value: Haverlow Dairy 58%, Pellridge Foods 21%, own-label salads 14%, other 7%. All three named lines are up on weeks 26\u201331; Haverlow is up most in absolute terms."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Email, Gareth Oyelaran, General Manager, Brackenford DC, to Procurement Director, 22 Sep",
+      "sourceType": "manager-account",
+      "text": "Subject: Haverlow temperature failures. \u0027Our receiving probes show Haverlow loads coming in at 6.5\u20138\u00B0C most nights since early August. Extract attached; spec is 5\u00B0C. The chambers have held 2\u20134\u00B0C throughout (dashboard attached), so this is not a storage problem. Haverlow is 58% of our chilled write-off value. Phase 2 went in cleanly in late July and is delivering its labour saving with no service impact. I want a temperature-abuse chargeback raised for August and September, and I recommend we move a third of Haverlow\u0027s volume to Pellridge from October.\u0027"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "WMS receipt-confirmation export attached to E2 (filter: supplier = Haverlow Dairy, week 35)",
+      "sourceType": "system-record",
+      "text": "Header note: \u0027Core probe at unload per SOP REC-04. Spec \u22645.0\u00B0C.\u0027 Rows: night of 24 Aug, load HVD-4471, receipt confirmed 02:52, probe 7.4\u00B0C, accepted on concession (QA on-call). Night of 25 Aug, HVD-4486, confirmed 03:18, 6.9\u00B0C, concession. Night of 26 Aug, HVD-4502, confirmed 02:31, 7.9\u00B0C, concession. Night of 27 Aug, HVD-4519, confirmed 03:05, 6.6\u00B0C, concession. Footer: Haverlow mean receipt probe weeks 26\u201330 3.4\u00B0C (n=27); weeks 32\u201338 7.1\u00B0C (n=38). Probe values are keyed by the receiving operative on the handheld at the receipt-confirmation step."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Letter, Ines Marchetti, Quality Manager, Haverlow Dairy, 24 Sep",
+      "sourceType": "vendor-account",
+      "text": "Reply to Tallowmere\u0027s chargeback notice. \u0027Every load is core-probed at dispatch; August\u2013September readings were 2.6\u20133.4\u00B0C, the same as in spring. Our loads travel on Vantline trailers set to 2\u00B0C, with the same haulier and routes since March. Nothing in our process has changed. Your own receipt records showed our product at 3\u20134\u00B0C until late July. We do not accept the chargeback, and we ask you to share whatever evidence shows our product arriving warm.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Change record CR-2231, \u0027Phase 2 labour optimisation\u0027",
+      "sourceType": "change-record",
+      "text": "Sponsor: G. Oyelaran. Effective Monday 27 July (week 31). Change: night receiving team (22:00\u201306:00) reduced from six to four operatives; two operatives redeployed to day-shift picking. Inbound delivery slot schedule unchanged. Day receiving team unchanged at five. Projected saving \u00A32,300/week. Risk assessment: \u0027Low. Night inbound volume (~120 pallets/shift) is within the capacity of four operatives at standard handling rates.\u0027 Status: implemented; benefits confirmed by Finance in week 34."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Chamber temperature dashboard attached to E2",
+      "sourceType": "telemetry",
+      "text": "Chilled chambers CH1\u2013CH3 (setpoint 2\u00B0C), weeks 26\u201338. Hourly mean air temperature range: CH1 1.7\u20133.6\u00B0C, CH2 1.9\u20133.9\u00B0C, CH3 1.8\u20133.5\u00B0C. High-temperature alarms (\u003E5\u00B0C for 15 min): two in the period, both in CH2 during defrost cycles in week 29, each cleared within 20 minutes. Same alarm count as weeks 13\u201325. Probes calibrated in June per the maintenance schedule. The dashboard covers chamber air only; dock and marshalling areas are not instrumented on this system."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "Email, Tom Hesketh, Key Account Manager (Corriebank Stores), 18 Sep",
+      "sourceType": "manager-account",
+      "text": "\u0027FYI: from 3 August Corriebank moved its stores to self-certified spoilage credits. Claims under \u00A350 no longer need a photo or the product returned. Their spoilage credits with us were about \u00A31,250 a week in July and have averaged \u00A33,100 a week since. Corriebank is our biggest chilled customer, roughly 55% of chilled sales. I\u0027d guess some stores are being generous with claims now it\u0027s easy, but I\u0027ve no hard evidence either way.\u0027"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Haverlow Dairy dispatch QA temperature records, weeks 28\u201338",
+      "source": "Haverlow Dairy quality department",
+      "sourceType": "vendor-account",
+      "text": "Haverlow\u0027s dispatch log for Brackenford loads, supplied at Tallowmere\u0027s request. Each load is core-probed on two pallets at the loading bay before the trailer doors close. Weeks 28\u201338: 61 loads, readings 2.6\u20133.4\u00B0C, mean 3.0\u00B0C, no weekly mean above 3.2\u00B0C. Probe IDs and calibration certificates attached (last calibrated May). Dispatch times 19:40\u201320:30 for the Brackenford run. The log is kept by Haverlow\u0027s own QA technicians."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Refrigeration contractor service reports, chilled and frozen chambers, weeks 26\u201338",
+      "source": "Kelmore Refrigeration Services",
+      "sourceType": "vendor-account",
+      "text": "Planned maintenance visits in weeks 28, 32 and 36 to chilled chambers CH1\u2013CH3 and frozen chamber F1. Week 30 reactive visit: defrost timer replaced on the CH2 evaporator after a fault code; post-repair pull-down test normal. All visits: refrigerant pressures, superheat and compressor amps within limits; evaporator coils clean. Door strip curtains on CH1 and CH3 noted as worn; replacement quoted. No faults outstanding at the week 36 visit. The dock area is outside the contract scope."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Laboratory results on retained samples from written-off chilled lots, September",
+      "source": "Mossgate Laboratories (contract food-testing lab)",
+      "sourceType": "expert-account",
+      "text": "Twelve retained samples from lots written off in weeks 35\u201337 (Haverlow yoghurt \u00D75, Pellridge ready meals \u00D74, own-label salad \u00D73). Total viable counts and lactic acid bacteria were elevated against the products\u0027 expected profile at that age in 10 of 12 samples; no pathogens detected. Lab comment: \u0027Profiles are consistent with a period of temperature abuse at some point after manufacture. Testing cannot identify where in the chain the abuse occurred or how long it lasted.\u0027"
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Formal customer complaint log, chilled lines, weeks 26\u201338",
+      "source": "Tallowmere Customer Service",
+      "sourceType": "customer-account",
+      "text": "Formal complaints, logged separately from routine spoilage credits. Weeks 26\u201331: 9 complaints; weeks 32\u201338: 14. Themes: short remaining shelf life on arrival at store (8), blown or swollen packs (4), off odour (2). Complaints came from Corriebank (6), Hollin Co-operative (5) and independent wholesalers (3). Products named: Haverlow yoghurts and milk, Pellridge ready meals, own-label salads. No complaint mentioned delivery vehicle temperature."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Outbound delivery fleet telematics, Brackenford chilled store routes, weeks 26\u201338",
+      "source": "Reefwatch portal export, Vantline trailers on Tallowmere outbound contract",
+      "sourceType": "telemetry",
+      "text": "Data for the 14 Vantline trailers on Tallowmere\u0027s chilled store-delivery routes. Return-air temperatures during delivery legs 1.8\u20134.4\u00B0C. Three excursions above 5\u00B0C in the period, each under 25 minutes and during multi-drop door openings, against four in weeks 13\u201325. Average route length and drops per route unchanged. No refrigeration unit faults logged."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Vantline trailer refrigeration telematics, Haverlow inbound loads to Brackenford, weeks 28\u201338",
+      "source": "Reefwatch portal export pulled by Brackenford transport planner (Vantline also runs Tallowmere\u0027s outbound fleet)",
+      "sourceType": "telemetry",
+      "text": "Data written by the trailer refrigeration units at 5-minute intervals, with door-sensor events; records cannot be edited in the portal. 61 Haverlow loads, weeks 28\u201338. Return-air temperature in the hour before door-open: 1.9\u20133.6\u00B0C on every load, with no trend from July to September. Product probe channel (front pallet) at door-open: 2.4\u20133.5\u00B0C. Week 35 loads: HVD-4471 door-open 22:41, doors closed with trailer empty 23:19; HVD-4486 open 23:06, closed 23:47; HVD-4502 open 22:18, closed 22:55; HVD-4519 open 22:52, closed 23:30. No reefer alarms or power interruptions logged on any load."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Regional weather station daily records, July\u2013September",
+      "source": "Public met-station 9 km from the DC",
+      "sourceType": "external-data",
+      "text": "Daily maximums: July average 22.4\u00B0C; August average 25.1\u00B0C, including a five-day spell of 29\u201331\u00B0C (17\u201321 August, week 34); 1\u201320 September average 20.3\u00B0C. Overnight minimums 11\u201317\u00B0C through August and 8\u201313\u00B0C in September. Rainfall near the seasonal normal throughout."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Haverlow Dairy supply agreement, quality and chargeback schedule",
+      "source": "Tallowmere Procurement contract file",
+      "sourceType": "document",
+      "text": "Schedule 4 of the current supply agreement. Product must be \u22645.0\u00B0C core on arrival. Chargebacks for temperature non-conformance require the buyer to notify the supplier within 24 hours of receipt and to keep the non-conforming product for joint inspection. Volume commitment: Tallowmere takes at least 80% of forecast volume through next March; any shortfall attracts a capacity fee. Either party may request a joint cold-chain audit at shared cost."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Annual staff engagement survey results, Brackenford DC, June",
+      "source": "Tallowmere HR",
+      "sourceType": "anonymous-staff-survey",
+      "text": "Run 2\u201313 June; response rate 64% (n=141). Engagement index 61 site-wide, 58 night shift, 63 day shift. Top comment themes: canteen opening hours, fairness of overtime allocation, car park lighting. \u0027I have the resources to do my job well\u0027: 66% agree site-wide, 62% on night shift. The survey predates the Phase 2 changes."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Internal audit report: stock-count accuracy, Brackenford DC, issued last November",
+      "source": "Tallowmere Internal Audit",
+      "sourceType": "prior-report",
+      "text": "Scope: cycle-count accuracy and stock adjustment controls. Findings: count accuracy 98.7% against a 99.0% target; two medium findings on late posting of adjustments in frozen; no findings in chilled. The recommendation on adjustment approval thresholds was implemented in February. Receiving and temperature controls were out of scope."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "WMS scan-event analysis: dock-to-chamber times and DC-stage write-off rates by receiving shift, weeks 26\u201338",
+      "source": "Inventory Control analyst, Finance (from WMS scan timestamps)",
+      "sourceType": "system-record",
+      "text": "Prepared by Inventory Control from WMS scan timestamps (first unload label scan to chamber location scan). Median dock-to-chamber time, chilled pallets: day receiving (06:00\u201322:00) 38 min in weeks 26\u201330, 41 min in weeks 31\u201338; night receiving (22:00\u201306:00) 44 min in weeks 26\u201330, 3 h 05 min in week 31, 3 h 52 min in weeks 32\u201338. Night pallets received per shift: 118 before, 121 after. DC-stage write-off rate, lots traced to receiving shift (customer credits cannot be traced and are excluded), weeks 26\u201330 vs 32\u201338: day 0.5% \u2192 0.6%; night 0.6% \u2192 2.9%. Night, weeks 32\u201338: Haverlow 3.0%, Pellridge 2.8%, own-label 2.9%. Day: Pellridge 0.6%, own-label 0.5%; Haverlow delivers nights only. Both shifts put away into CH1\u2013CH3. Dock staging lanes are unrefrigerated; facilities BMS dock sensor averaged 15\u201317\u00B0C overnight, August\u2013September."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Write-off approval audit trail, chilled lines, weeks 26\u201338",
+      "source": "WMS approval log",
+      "sourceType": "system-record",
+      "text": "Every chilled write-off line needs QA approval in the WMS. Weeks 26\u201338: 2,214 lines, all approved by one of four QA technicians; 97% approved within 24 hours of the hold. Reason codes: \u0027out of condition\u0027 61%, \u0027below minimum life\u0027 34%, \u0027damaged\u0027 5%; the mix is similar before and after week 31. No lines approved by users outside QA; no bulk or back-dated approvals found."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Corriebank Stores supplier notice on spoilage credit procedure, 20 July",
+      "source": "Corriebank Stores category team",
+      "sourceType": "document",
+      "text": "Notice to all chilled suppliers. From 3 August, store managers may self-certify spoilage credit claims below \u00A350 per line without photographs or product return; claims above \u00A350 still need a photograph. Corriebank\u0027s category team will \u0027monitor claim rates and review the process at the end of Q4\u0027. Suppliers may request a claim-level extract on 10 working days\u0027 notice."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Supplier quality scorecards, Pellridge Foods and Haverlow Dairy, Q2",
+      "source": "Tallowmere Procurement",
+      "sourceType": "document",
+      "text": "Scorecard for April\u2013June. Pellridge: on-time in full 96.8%; arrival temperature conformance 99.1% (2 of 223 loads above 5\u00B0C, both day deliveries during June heat); label accuracy 99.6%; overall rating Green. Haverlow: on-time in full 97.9%; arrival temperature conformance 100%; label accuracy 99.8%; overall rating Green."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Procurement supplier market review, chilled dairy, May",
+      "source": "Tallowmere Procurement",
+      "sourceType": "document",
+      "text": "Prepared in May for the annual tender. Alternative chilled dairy capacity for Brackenford: Pellridge could absorb up to 30% of Haverlow\u0027s current volume from October at an estimated 4\u20136% higher unit cost; one further regional dairy could supply from January. Switching would need new delivery slots and pallet configurations. Recommendation (May): keep Haverlow as primary supplier through the next tender."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Haverlow Dairy\u0027s product is reaching the DC above the chilled temperature specification."
+      },
+      {
+        "id": "H2",
+        "text": "Chilled product is warming inside the DC before it is placed in the storage chambers."
+      },
+      {
+        "id": "H3",
+        "text": "The DC\u0027s chilled storage chambers are not holding their set temperature."
+      },
+      {
+        "id": "H4",
+        "text": "The DC\u0027s recorded receiving temperatures reflect the condition of product as it came off the trailer."
+      },
+      {
+        "id": "H5",
+        "text": "Some of the increase in customer spoilage credits reflects claims for product that was not actually spoiled."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Night receiving team cut from six to four operatives (CR-2231, week 31)",
+        "to": "Longer dock-to-chamber time for night-received chilled pallets",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Longer dock-to-chamber time for chilled pallets",
+        "to": "Increase in DC-stage spoiled-product write-offs",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Temperature of Haverlow loads on arrival at the DC",
+        "to": "Increase in DC-stage spoiled-product write-offs",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Corriebank\u0027s move to self-certified spoilage credits (from 3 August)",
+        "to": "Increase in customer spoilage credits",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Raise a temperature-abuse chargeback against Haverlow Dairy for August\u2013September and move a third of its volume to Pellridge from October."
+      },
+      {
+        "id": "A2",
+        "text": "Restore the night receiving team to six operatives and set a maximum dock-to-chamber time for chilled pallets, monitored weekly from WMS scan data."
+      },
+      {
+        "id": "A3",
+        "text": "Ask Corriebank to reinstate photo evidence on all spoilage credit claims, on the basis that over-claiming is behind the rise in credits."
+      },
+      {
+        "id": "A4",
+        "text": "Request Corriebank\u0027s claim-level extract and reconcile a sample of claims against delivery lots and receiving shift before reviewing credit terms."
+      },
+      {
+        "id": "A5",
+        "text": "Drop the receiving temperature probe for night loads so that operatives can put pallets away faster."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q14",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q15",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

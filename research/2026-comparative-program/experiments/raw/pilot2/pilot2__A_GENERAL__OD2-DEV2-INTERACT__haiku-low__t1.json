@@ -1,0 +1,229 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-INTERACT__haiku-low__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-INTERACT",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C8",
+    "X3": "C3",
+    "X4": "C12",
+    "X5": "C5",
+    "X6": "C2",
+    "X7": "C6",
+    "X8": "C4",
+    "X9": "C9",
+    "X10": "C7",
+    "X11": "C14",
+    "X12": "C11",
+    "X13": "C1",
+    "X14": "C13",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X6",
+    "X3"
+  ],
+  "reads": [
+    "C2",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-INTERACT__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28040,
+    "cacheCreationTokens": 7551,
+    "outputTokens": 3162,
+    "thinkingTokens": 1844,
+    "costUsd": 0.0033724000000000002,
+    "durationMs": 19702,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-INTERACT\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E1\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S15\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]}],\u0022brief\u0022:\u0022The stops are not caused by the temps, and neither the firmware nor the film alone explains the tripling. The rise comes from the combination: the 30 pallet robots upgraded to firmware 6.4 in Zones A/B went from about 3 to about 16 stops per 100 robot-hours, while the 8 pallet robots still on 6.3 in the same zones stayed flat, and the 6.4 tote robots in Zone C stayed flat. A bench test showed 6.4 treats short specular reflections from the new gloss stretch film as obstacles (17 of 20 stops), while 6.4 with the old matte film gave 0 of 20. Temps arrived in the same lanes and the flat 6.3 robots show they did not drive the rise. Confidence is moderate-to-high, and the bench test is small. Next: switch outbound pallets back to the matte film, keep the current firmware, and track stops by zone and firmware group weekly. Do not adopt the three-strike policy or shorten the protective fields, and do not wait for the December release, which has not been tested against this film. Check the 6.3 security deadline on 31 October.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:40:31.9439551Z",
+    "finishedAt": "2026-11-17T14:40:54.6435301Z",
+    "output": {
+      "caseId": "OD2-DEV2-INTERACT",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "E1",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S15",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S16",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        }
+      ],
+      "brief": "The stops are not caused by the temps, and neither the firmware nor the film alone explains the tripling. The rise comes from the combination: the 30 pallet robots upgraded to firmware 6.4 in Zones A/B went from about 3 to about 16 stops per 100 robot-hours, while the 8 pallet robots still on 6.3 in the same zones stayed flat, and the 6.4 tote robots in Zone C stayed flat. A bench test showed 6.4 treats short specular reflections from the new gloss stretch film as obstacles (17 of 20 stops), while 6.4 with the old matte film gave 0 of 20. Temps arrived in the same lanes and the flat 6.3 robots show they did not drive the rise. Confidence is moderate-to-high, and the bench test is small. Next: switch outbound pallets back to the matte film, keep the current firmware, and track stops by zone and firmware group weekly. Do not adopt the three-strike policy or shorten the protective fields, and do not wait for the December release, which has not been tested against this film. Check the 6.3 security deadline on 31 October."
+    }
+  }
+}

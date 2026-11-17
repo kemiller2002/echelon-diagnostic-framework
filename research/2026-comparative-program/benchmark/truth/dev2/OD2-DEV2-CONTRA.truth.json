@@ -1,0 +1,314 @@
+{
+  "caseId": "OD2-DEV2-CONTRA",
+  "groundTruthNarrative": "On 22 Oct, after parallel-run sign-off and inside the configuration freeze, an Ardentra consultant applied the vendor\u0027s standard night template to rule NSP-02 under CR-118. The template changed the label, and it also moved the premium window start from 20:00 to 22:00. Ardentra wrote the change log entry, which recorded the change as a label correction with no calculation impact, and the CAB approved it without a test. The October run therefore left out the time-and-a-third premium for hours worked between 20:00 and 22:00. 147 of 158 night workers were underpaid by exactly that amount. The 11 Kelsey Road staff rostered 22:00\u201306:00 were unaffected. Ardentra\u0027s incident report blamed malformed legacy shift-pattern codes and a fresh extract, MD-1023. The append-only platform audit trail, the production job log and internal audit\u0027s recalculation contradict both claims. Production used the same MD-0915 snapshot that reconciled perfectly in the parallel run. Flagged records were underpaid no more often than clean ones. Restoring the 20:00 start in the test tenant on release 7.4 produced correct pay for all 158. Release 7.4, the timesheet portal and the bank interface played no part. Whether the consultant knew the template changed the window is not established. The fall in night overtime cover coincides with both the pay error and a new rota trial on the same teams, so it cannot be attributed to either.",
+  "answers": [
+    {
+      "itemId": "S1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C8",
+        "C15"
+      ],
+      "tags": [
+        "vendor-narrative",
+        "leadership-narrative",
+        "interested-party",
+        "misleading-signal"
+      ],
+      "rationale": "Ardentra (E1) says production used a fresh extract MD-1023. The platform job log shows production loaded MD-0915, the snapshot that reconciled to the penny for every night worker in the parallel run, flagged records included (C2). No MD-1023 exists. Flagged night workers were underpaid no more often than unflagged ones (86% vs 94%). Every shortfall equals exactly the 20:00\u201322:00 premium, a pattern an eligibility failure would not produce. The same production data gives correct pay once the window is restored (C3)."
+    },
+    {
+      "itemId": "S2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "C1",
+        "C3",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "contradicted-by-independent-record",
+        "gamed-record",
+        "central"
+      ],
+      "rationale": "The append-only audit trail, exported by Fenmarch under a read-only role, shows that CR-118 moved NSP-02 window_start from 20:00 to 22:00 (C1). Ardentra\u0027s own change log (E2) called the change label-only. The shortfalls match that change exactly, staff working only 22:00\u201306:00 were unaffected, and restoring 20:00 in the test tenant fixes all 158 cases (C3)."
+    },
+    {
+      "itemId": "S3",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C3",
+        "C6",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal"
+      ],
+      "rationale": "Timesheet hours agreed to the rostering system for all 158 night workers (C3). The payroll officer says hours on payslips were right (E5). Late approvals (C6) did not change hours, and no timesheet defaulted to contracted hours."
+    },
+    {
+      "itemId": "S4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C3",
+        "C5"
+      ],
+      "tags": [
+        "easy-exclusion"
+      ],
+      "rationale": "The bank credited exactly the payroll output for all 2,140 payees (E3, C5). The error is in the calculated premium line, upstream of the bank file."
+    },
+    {
+      "itemId": "S5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "E2",
+        "C11"
+      ],
+      "tags": [
+        "misleading-signal",
+        "temporal-coincidence"
+      ],
+      "rationale": "Release 7.4 went live at cutover, which makes it a plausible suspect from E2. But the test tenant on the same release 7.4 calculated correct pay for all 158 once only the window setting was restored (C3). The template applied its stored 22:00 value as designed (C1), so the platform code worked as intended."
+    },
+    {
+      "itemId": "S6",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C3",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "central",
+        "intervention",
+        "contradicted-by-independent-record"
+      ],
+      "rationale": "The edit (22 Oct) came before the calculation (27 Oct). The mechanism is clear: the window start moved by two hours (C1). Shortfalls match the 20:00\u201322:00 premium exactly, and the 22:00\u201306:00 staff were unaffected. Reversing the setting restores correct pay (C3), which rules out the data and release rivals."
+    },
+    {
+      "itemId": "S7",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C2",
+        "C3",
+        "C4",
+        "C15"
+      ],
+      "tags": [
+        "vendor-narrative",
+        "interested-party"
+      ],
+      "rationale": "Flagged night workers were underpaid at no higher a rate than unflagged ones (C3). The same flagged records reconciled perfectly in the parallel run (C2). Correct pay results from the unchanged flagged data once the window is restored (C3). This is evidence against the link itself. C4 shows only that anomalies exist; it does not link them to pay outcomes."
+    },
+    {
+      "itemId": "S8",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "E2",
+        "C11"
+      ],
+      "tags": [
+        "temporal-coincidence"
+      ],
+      "rationale": "Restoring only the window, with release 7.4 unchanged, produces correct pay for all 158 (C3). The release made no tenant rule changes (C1)."
+    },
+    {
+      "itemId": "S9",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C12",
+        "C14"
+      ],
+      "tags": [
+        "confounded",
+        "unknown-driver"
+      ],
+      "rationale": "Night overtime cover fell after the pay error (E6). But the rota trial started on 1 Nov for the same teams, and staff reps complain about both. Co-occurrence is shown, but the rival has not been separated out, and nothing in the catalogue gives reasons for declines."
+    },
+    {
+      "itemId": "S10",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C1",
+        "C2",
+        "C3",
+        "C13"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative",
+        "vendor-narrative"
+      ],
+      "rationale": "The data did not cause the errors (C2, C3). Suspending and investigating the HR data team punishes the wrong party. A full reload days before payroll adds risk and leaves the window setting uncorrected. Absorbing costs that the evidence places with the vendor\u0027s change is a financial loss. No live rival makes this action beneficial."
+    },
+    {
+      "itemId": "S11",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C3",
+        "C8",
+        "C16"
+      ],
+      "tags": [
+        "central",
+        "remedy"
+      ],
+      "rationale": "Restoring the window is directly supported by the intervention result (C3). It must happen before 24 Nov, or November will repeat the error. Recalculation identifies all 147 underpaid staff, including 8 who raised no ticket."
+    },
+    {
+      "itemId": "S12",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C14"
+      ],
+      "tags": [
+        "premature",
+        "confounded"
+      ],
+      "rationale": "Pausing the rota would help if the rota is what drives the declines, but that is unconfirmed: the pay error is a co-occurring rival (E6). The trial can be paused at one week\u0027s notice and resumed, so being wrong causes no lasting damage. Committing now is not justified. Asking staff why they decline would discriminate cheaply."
+    },
+    {
+      "itemId": "S13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "C1",
+        "C3",
+        "C11"
+      ],
+      "tags": [
+        "protective-control",
+        "temporal-coincidence"
+      ],
+      "rationale": "Release 7.4 is excluded as a cause (C3), so rolling it back leaves the error in place. It would also remove the statutory tax table update required from the November pay period (E2), putting tax wrong for all staff. With no live rival under which the rollback helps, it is harmful."
+    },
+    {
+      "itemId": "S14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C2",
+        "C3",
+        "E3"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "The independent audit trail identifies the change, the recalculation quantifies its effect, and the test-tenant intervention confirms the fix. That is enough to commit to A2 before 24 Nov."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "lowValueReads": [
+    "C5",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C16"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C3",
+    "C2"
+  ],
+  "authoringNotes": "CONTRA structure: the interested party is Ardentra, which faces clause 14.3 cost exposure. Its incident report (E1) and its self-written change log (E2) are contradicted by three independent records: the append-only platform audit trail exported by Fenmarch\u0027s administrator (C1), the production job log in internal audit\u0027s workpapers (C2), and internal audit\u0027s full-population recalculation and test-tenant intervention (C3). The Programme Director (E4) endorses the vendor narrative. He has his own interest: he signed off the compressed go-live and the freeze exception. From the initial file alone, E5 hints that the parallel run was fine, but E1\u0027s fresh-extract claim neutralises that hint, and E2 says CR-118 was cosmetic. Data, configuration and release therefore all remain live, and the leadership narrative pulls toward H1. Fairness: every trap is countered. C4\u0027s anomaly list is answered by C3\u0027s stratified rates. C6\u0027s late-approval association is answered within C6 itself (no defaults) and by C3 (hours agree to rosters). C7\u0027s good-faith claim leaves the consultant\u0027s knowledge unresolved; this is deliberately unscored. The release 7.4 timing is answered by the C3 re-run on 7.4. Skeptical review: (a) Could the template behaviour count as a software defect? C1 shows the template stores 22:00 and applied it as designed, so H5 is contradicted. (b) Could R4 be \u0027unknown\u0027? E6 documents co-occurrence on the same teams, so association is shown; causation is confounded by the rota trial. (c) A3 versus acceptable: the manager states that the driver is unknown, and pausing commits to one hypothesis, so it is premature. It is not harmful because the pause is reversible at one week\u0027s notice. (d) A4 is harmful only because E2 records the statutory November tax update inside 7.4. (e) Numbers reconcile: 158 = 147 \u002B 11; flagged night workers 22 = 19 \u002B 3; unflagged 136 = 128 \u002B 8; flagged total 212 = 22 \u002B 190; tickets 139 \u002B 8 silent = 147; 18 flagged complainants (E1) out of 19 flagged underpaid."
+}

@@ -1,0 +1,201 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-CROSS-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C12",
+    "X3": "C8",
+    "X4": "C14",
+    "X5": "C9",
+    "X6": "C5",
+    "X7": "C3",
+    "X8": "C10",
+    "X9": "C2",
+    "X10": "C7",
+    "X11": "C15",
+    "X12": "C4",
+    "X13": "C1",
+    "X14": "C13",
+    "X15": "C6"
+  },
+  "readLabels": [
+    "X9",
+    "X13"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-CROSS-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18632,
+    "cacheCreationTokens": 8101,
+    "outputTokens": 1542,
+    "thinkingTokens": 46,
+    "costUsd": 0.0496992,
+    "durationMs": 10681,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-CROSS-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-CROSS-1__sonnet-medium__t2/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-CROSS-1__sonnet-medium__t2/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X13\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022The rise in delayed alarm responses is most likely caused by the 12 August relay server move, not by agency nurses. The import tool skipped 11 of 14 forwarding rules and still reported success. Those rules included a 15-second hold-off on brief SpO2 alarms, suppression of repeat notifications, and routing of technical alarms to the charge phone only. Since then, phones in Pods A-C get about 80 notifications per nurse per shift, up from about 38. Median acknowledgement time doubled, from 34 to 71 seconds. Pod D was still on the old server and shows no change. Core, agency and Pod A-C staff all rose similarly, and agency share was similar across pods. Bedside alarm rates stayed flat, so acuity and the monitor v7.2 update don\u0027t explain it. The sick-leave link is plausible but unproven, because an early respiratory virus season was also under way. Recommendation: don\u0027t cap agency use or open performance reviews, since that would punish the wrong people. Don\u0027t turn off phone forwarding either. Restore the relay rules after clinical validation. Then track notifications per nurse and acknowledgement times weekly. Confidence is high, though a re-import would confirm it.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:47:53.5664175Z",
+    "finishedAt": "2026-11-17T16:48:05.3695634Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X9",
+            "X13",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X9",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X13",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X13",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X9",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "The rise in delayed alarm responses is most likely caused by the 12 August relay server move, not by agency nurses. The import tool skipped 11 of 14 forwarding rules and still reported success. Those rules included a 15-second hold-off on brief SpO2 alarms, suppression of repeat notifications, and routing of technical alarms to the charge phone only. Since then, phones in Pods A-C get about 80 notifications per nurse per shift, up from about 38. Median acknowledgement time doubled, from 34 to 71 seconds. Pod D was still on the old server and shows no change. Core, agency and Pod A-C staff all rose similarly, and agency share was similar across pods. Bedside alarm rates stayed flat, so acuity and the monitor v7.2 update don\u0027t explain it. The sick-leave link is plausible but unproven, because an early respiratory virus season was also under way. Recommendation: don\u0027t cap agency use or open performance reviews, since that would punish the wrong people. Don\u0027t turn off phone forwarding either. Restore the relay rules after clinical validation. Then track notifications per nurse and acknowledgement times weekly. Confidence is high, though a re-import would confirm it."
+    }
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-MISLEAD__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C3",
+    "X3": "C12",
+    "X4": "C2",
+    "X5": "C7",
+    "X6": "C8",
+    "X7": "C10",
+    "X8": "C6",
+    "X9": "C9",
+    "X10": "C4",
+    "X11": "C5",
+    "X12": "C11"
+  },
+  "readLabels": [
+    "X10",
+    "X2",
+    "X1"
+  ],
+  "reads": [
+    "C4",
+    "C3",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-MISLEAD__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17499,
+    "cacheCreationTokens": 7094,
+    "outputTokens": 2269,
+    "thinkingTokens": 932,
+    "costUsd": 0.0027288900000000003,
+    "durationMs": 13159,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022methodChoice\u0022:\u0022Collected 3 of 5 catalogue items (X10, X2, X1), then stopped because they settled the main questions.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X2\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X8\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X8\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X2\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022The payment failures are not caused by the v4.12 code. Since 3 March, a new reporting job (settle-recon, moved to a 15-minute daytime schedule on the shared Quillmark credential) fires bursts of search calls that push the credential over its 300-per-minute limit. Quillmark then returns HTTP 429 responses, and checkout shows them to customers as \\\u0022card declined.\\\u0022 Failures cluster in the first few minutes of each quarter hour. The canary (CHG-2231) is decisive: v4.11 pods failed at the same rate as v4.12 pods, so rolling back would not fix anything and would also undo the card-number masking required by SEC-2291 (deadline 13 March). I am fairly confident in this, though not certain; the bank-side evidence and the revenue link are not fully checked. Next steps: pause or revert settle-recon\u0027s daytime runs now and watch the 429 and failure rates; give that job its own credential; do not roll back v4.12. Do not tell the board that the failures caused the 9% revenue fall. Part of that drop coincides with the end of Winter Clearance, so the revenue figure needs separate analysis before any forecast restatement.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:20.5973415Z",
+    "finishedAt": "2026-11-17T14:27:34.7493219Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "methodChoice": "Collected 3 of 5 catalogue items (X10, X2, X1), then stopped because they settled the main questions.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "E3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X2",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "X10",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5",
+            "X8",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X8",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "X2",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "The payment failures are not caused by the v4.12 code. Since 3 March, a new reporting job (settle-recon, moved to a 15-minute daytime schedule on the shared Quillmark credential) fires bursts of search calls that push the credential over its 300-per-minute limit. Quillmark then returns HTTP 429 responses, and checkout shows them to customers as \u0022card declined.\u0022 Failures cluster in the first few minutes of each quarter hour. The canary (CHG-2231) is decisive: v4.11 pods failed at the same rate as v4.12 pods, so rolling back would not fix anything and would also undo the card-number masking required by SEC-2291 (deadline 13 March). I am fairly confident in this, though not certain; the bank-side evidence and the revenue link are not fully checked. Next steps: pause or revert settle-recon\u0027s daytime runs now and watch the 429 and failure rates; give that job its own credential; do not roll back v4.12. Do not tell the board that the failures caused the 9% revenue fall. Part of that drop coincides with the end of Winter Clearance, so the revenue figure needs separate analysis before any forecast restatement."
+    }
+  }
+}

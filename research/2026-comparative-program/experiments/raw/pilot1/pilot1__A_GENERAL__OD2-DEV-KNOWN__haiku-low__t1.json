@@ -1,0 +1,231 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-KNOWN__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-KNOWN",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C9",
+    "X3": "C8",
+    "X4": "C4",
+    "X5": "C7",
+    "X6": "C11",
+    "X7": "C2",
+    "X8": "C1",
+    "X9": "C3",
+    "X10": "C6",
+    "X11": "C10",
+    "X12": "C12"
+  },
+  "readLabels": [
+    "X7",
+    "X10",
+    "X4",
+    "X8",
+    "X3"
+  ],
+  "reads": [
+    "C2",
+    "C6",
+    "C4",
+    "C1",
+    "C8"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-KNOWN__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17627,
+    "cacheCreationTokens": 7978,
+    "outputTokens": 2939,
+    "thinkingTokens": 1443,
+    "costUsd": 0.0032419700000000003,
+    "durationMs": 15735,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-KNOWN\u0022,\u0022methodChoice\u0022:\u0022Evidence-limited review: initial evidence plus 5 catalogue items (X7, X10, X4, X8, X3).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X10\u0022,\u0022E6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X10\u0022,\u0022E6\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X7\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X10\u0022,\u0022X4\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022What is going on: the slowdown is concentrated in one step. Claims worth $2,500\u2013$10,000 now wait about 16 days for approval, up from under 1 day before April. Since the April change to the authority matrix, these approvals route to three team leads. Their tray grew from about 38 items a week to about 212, and the tray depth is now about 455. Investigation, imaging and the other stages barely moved. The hail surge has ended, the two departures did not slow investigation, and Quillfast processes documents faster than the old provider. The complaint rise is partly a logging change, not just slower claims.\\n\\nHow sure: moderately. The bottleneck pattern is strong. The complaint trend is not measurable like-for-like, and I did not check the $2,500 overpayment question.\\n\\nWhat to do next: add interim approval capacity for the $2,500\u2013$10,000 band, using experienced staff as second approvers with Internal Audit involved, and track approval wait weekly. Do not restore the $10,000 limit without audit sign-off, and do not penalise team leads. Defer any permanent authority decision and any return to the old imaging provider until the approval data supports them.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:34.6939736Z",
+    "finishedAt": "2026-11-17T14:27:51.4556708Z",
+    "output": {
+      "caseId": "OD2-DEV-KNOWN",
+      "methodChoice": "Evidence-limited review: initial evidence plus 5 catalogue items (X7, X10, X4, X8, X3).",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "supported",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "X10",
+            "E6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X8",
+            "X7",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-H5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X10",
+            "E6",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X8",
+            "X7",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "preferred",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "X10",
+            "X4",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "What is going on: the slowdown is concentrated in one step. Claims worth $2,500\u2013$10,000 now wait about 16 days for approval, up from under 1 day before April. Since the April change to the authority matrix, these approvals route to three team leads. Their tray grew from about 38 items a week to about 212, and the tray depth is now about 455. Investigation, imaging and the other stages barely moved. The hail surge has ended, the two departures did not slow investigation, and Quillfast processes documents faster than the old provider. The complaint rise is partly a logging change, not just slower claims.\n\nHow sure: moderately. The bottleneck pattern is strong. The complaint trend is not measurable like-for-like, and I did not check the $2,500 overpayment question.\n\nWhat to do next: add interim approval capacity for the $2,500\u2013$10,000 band, using experienced staff as second approvers with Internal Audit involved, and track approval wait weekly. Do not restore the $10,000 limit without audit sign-off, and do not penalise team leads. Defer any permanent authority decision and any return to the old imaging provider until the approval data supports them."
+    }
+  }
+}

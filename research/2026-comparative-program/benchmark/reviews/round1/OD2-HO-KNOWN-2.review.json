@@ -1,0 +1,136 @@
+{
+  "caseId": "OD2-HO-KNOWN-2",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S01",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "C6 shows April-intake FCR of 66.4%, almost the same as tenured agents (67.3% and 67.2%), who fell from about 75% by the same amount, and billing referral rates are similar across tenure bands (56/54/53%); C1 and C3 show a normal, improving cohort."
+      },
+      {
+        "itemId": "S02",
+        "answer": "supported",
+        "confidence": 88,
+        "justification": "C11 cut the in-call credit limit from \u00A3100 to \u00A325 with automatic BRT referral on 14 Apr; C6 shows billing referrals jumping from 7% to 54% that same week, with billing FCR falling from 79% to 56% while other contact reasons held steady; this fully accounts for the 75%\u219267% fall shown in E2."
+      },
+      {
+        "itemId": "S03",
+        "answer": "contradicted",
+        "confidence": 87,
+        "justification": "E2 shows FCR falling in w/c 14 Apr, two weeks before the IVR went live on 28 Apr (E3); C2 shows misrouting slightly down (3.8% vs 4.0%); C6 shows FCR flat for all non-billing contact reasons."
+      },
+      {
+        "itemId": "S04",
+        "answer": "contradicted",
+        "confidence": 75,
+        "justification": "Occupancy and handle time rose (C4), but C6 shows unchanged FCR for non-billing reasons and for non-referred billing calls (82%\u219282%), so the fall is confined to referrals; extra workload looks like a result of repeat calls, not the cause."
+      },
+      {
+        "itemId": "S05",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "C6 shows tariff enquiries doubling as a share of calls (6%\u219212%) but with high FCR (86%\u219285%), so this mix shift would have raised site FCR, not lowered it; the whole drop sits in billing referrals."
+      },
+      {
+        "itemId": "S06",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "C11 describes the mechanism (the platform blocks credits over \u00A325 and opens a referral automatically); C6 shows a step change in referrals in w/c 14 Apr, the week FC-0417 went in; C6 also rules out the rival explanation, the new intake, because referral rates are similar across tenure bands; C8 confirms BRT is now receiving small adjustments."
+      },
+      {
+        "itemId": "S07",
+        "answer": "causal",
+        "confidence": 72,
+        "justification": "C6 shows FCR stable within each group (referred 33\u219234%, non-referred 82\u219282%), so the fall comes entirely from the shift in referral share; 58% of sampled repeat contacts after a referral were chasing referral status or a promised callback; C8 shows BRT turnaround doubled; E2 shows the drop starting in the same week."
+      },
+      {
+        "itemId": "S08",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "C6 shows the intake\u0027s FCR is no worse than tenured agents\u0027, and tenured FCR fell by the same amount, so the intake\u0027s arrival on 14 Apr is coincidental timing."
+      },
+      {
+        "itemId": "S09",
+        "answer": "association-only",
+        "confidence": 65,
+        "justification": "E5 shows complaints rising from April alongside the FCR fall, but complaints are not linked to the originating call, 64% are uncategorised, and the largest categorised share is price/tariff, so causation is not established."
+      },
+      {
+        "itemId": "S10",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "A1 targets the cause identified from C6 and C11, and the limited trial with post-call sampling is exactly the condition the financial controller set in C11; the limit is a configuration change that takes one working day."
+      },
+      {
+        "itemId": "S11",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "C6 shows intake FCR matches tenured agents\u0027 and the drop comes from a system-enforced referral rule, so performance plans would punish agents for a cause they do not control (see also E6 and C13)."
+      },
+      {
+        "itemId": "S12",
+        "answer": "premature",
+        "confidence": 65,
+        "justification": "C11 says Finance would accept a higher limit only after a limited-population test shows unsupported credits kept below 1% of value, so a site-wide rollout before that is shown risks reopening the IA-11 audit finding."
+      },
+      {
+        "itemId": "S13",
+        "answer": "acceptable",
+        "confidence": 65,
+        "justification": "E2 lacks contact-reason and referral views and C6 had to be produced as a one-off, so adding them would help trace future changes, but this is monitoring and does not fix the current drop."
+      },
+      {
+        "itemId": "S14",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "C6, C11 and E2 together establish the referral mechanism well enough to commit to the limited trial in A1, which also builds in the safeguard Finance asked for."
+      }
+    ],
+    "ambiguousItems": [
+      "S07: \u0027causal\u0027 vs \u0027association-only\u0027. The within-stratum stability and repeat-contact content in C6 support causal, but there is no intervention yet, and referred calls may be harder cases by selection.",
+      "S12: \u0027premature\u0027 vs \u0027harmful\u0027. A site-wide rollout without the controller\u0027s trial could be read as weakening an audit control (harmful), or as right but not yet justified (premature).",
+      "S13: \u0027acceptable\u0027 vs \u0027preferred\u0027. Cheap, complementary instrumentation could reasonably be ranked among the best next steps.",
+      "S04: \u0027contradicted\u0027 vs \u0027unknown\u0027. Workload did rise; it is mainly the C6 stratum evidence that rules it out as a cause."
+    ],
+    "caseProblems": [
+      "C6 is close to decisive on its own: it decomposes by reason, referral and tenure, and it reconciles exactly with E2 (mix-weighted 74.96% and 67.13%). That is realistic for a MI analysis but makes the case easy once C6 is read.",
+      "The C6 catalogue title (\u0027...by contact reason, referral status and agent tenure\u0027) signals which analysis is relevant, though it does not leak the answer.",
+      "E2 lists weeks irregularly after mid-May (26 May, 9 Jun and 23 Jun are missing); this is minor but could look like an omission.",
+      "C11 hands over the trial condition for A1 almost verbatim (\u0027limited population\u0027, \u0027below 1%\u0027), which partly leaks the preferred action."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S07",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The selection worry does not hold up here. The rise in referrals came from an outside rule change: C11 shows the platform has forced a referral on every adjustment over \u00A325 since 14 April. That rule applied to a stable billing population (38% of calls before, 36% after). The calls newly referred are the small cases that agents used to settle in-call (C8, \u0027small stuff\u0027). Before the change, referrals were mostly hard cases over \u00A3100, and they had 33% FCR. After it, the referred group is mostly these easy cases, yet referred FCR is still 34%, and non-referred FCR is still 82%. If case difficulty drove the low FCR, adding easy cases should have raised referred FCR. It did not, so the referral itself produces the repeat contact. The mechanism fits: 58% of repeats after a referral are customers chasing status or a callback. The step happened in the week of the rule change, and it is the same in every tenure band, which rules out the intake rival. The arithmetic accounts for the whole fall, and FCR for every other contact reason is flat. That amounts to a natural experiment plus a mechanism plus the main rival excluded, which meets the definition of \u0027causal\u0027. \u0027Association-only\u0027 would ignore the forced, outside nature of the change in referral share.",
+        "fix": ""
+      },
+      {
+        "itemId": "S12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A3 does not remove the protective control. It replaces the hard \u00A325 block with a higher limit backed by post-call sampling, and the parameter can be reversed within one working day (C11). Whether sampling keeps unsupported credits below 1% is exactly the unconfirmed point. The controller\u0027s own condition (C11) is that this be shown on a limited population first. So the action could be right if that point were confirmed, but committing to it now is not justified. That is the definition of \u0027premature\u0027. \u0027Harmful\u0027 requires that the action be likely to worsen outcomes or disable a control. Here the possible loss is bounded and reversible, and a compensating control stays in place, so \u0027harmful\u0027 does not fit as well.",
+        "fix": ""
+      },
+      {
+        "itemId": "S13",
+        "ruling": "ambiguous",
+        "explanation": "\u0027Preferred\u0027 means among the best next actions, so more than one action can be preferred. A4 is cheap and causes no conflict with A1. It directly addresses the blind spot that led leadership to the wrong diagnosis: E2\u0027s dashboard has no contact-reason view, and E6 shows only the site-level figure is available. It would also help track the A1 trial and any wider rollout of revised authority. Nothing in the evidence gives A4 a cost, a delay or a trade-off that would push it below \u0027preferred\u0027. The key\u0027s reason, \u0027monitoring, not a fix\u0027, does not appear in the answer definitions. A careful analyst could therefore defensibly answer either \u0027preferred\u0027 or \u0027acceptable\u0027.",
+        "fix": "Give A4 a stated cost that makes it clearly secondary. For example, reword A4 to: \u0027Ask MI to rebuild the weekly FCR dashboard to add contact reason and referral status (MI estimate: about three months of the team\u0027s capacity, delaying other requests) so future movements can be traced.\u0027 Also add a note to C6 that MI can produce the reason-and-referral breakdown on request for the A1 trial teams. This leaves \u0027acceptable\u0027 as the only defensible answer."
+      },
+      {
+        "itemId": "S04",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The hypothesis claims that rising workload caused the fall in FCR, not merely that workload rose. C6 shows that a centre-wide time-pressure effect does not appear anywhere it should. FCR is flat for payments, moving home, meter and other calls, and within billing, FCR for both referred and non-referred calls is unchanged. The change in referral share accounts for the whole fall, so there is no unexplained remainder for workload to explain. The modest rise in occupancy (C4) is real, but the evidence counts against it being a cause. The rise is also plausibly a result of the extra repeat calls rather than their source. \u0027Contradicted\u0027 is the only answer that fits.",
+        "fix": ""
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

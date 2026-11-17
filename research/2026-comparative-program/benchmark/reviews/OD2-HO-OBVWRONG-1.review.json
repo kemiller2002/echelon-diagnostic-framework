@@ -1,0 +1,121 @@
+{
+  "caseId": "OD2-HO-OBVWRONG-1",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "From 12 to 25 Oct, every client except smart-TV 5.2 rebuffered at 0.6\u20130.7% on Tessaline, the same as before the switch (C2). The 5.2 regression also showed up on Corvane in the Dravia dogfood test (5.7% vs 0.6%, C3), and Tessaline met all its SLA metrics with plenty of spare capacity (C1)."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "supported",
+        "confidence": 92,
+        "justification": "Rebuffering is 5.9% on smart-TV 5.2 against 0.6\u20130.7% everywhere else, on every ISP (C2). The rise began on 9 Oct, when 5.2 rolled out to 100% of Kestria as the only canary market (C3, E3). 5.2 lowered its buffer targets (C3), and the same regression appeared on Corvane in Dravia (C3)."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "On Kestnet, Ostral and Brevi Fibre alike, only 5.2 sessions are elevated and all other clients stay at 0.6\u20130.7% (C2). Kestnet\u0027s interconnect raised no loss alarms (C5), and national broadband statistics are stable (C12)."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Rebuffering rose on 9\u201310 Oct, before the 11 Oct handball launch (E3, E6). Match nights were no worse than other days (E3, C11), and other clients stayed flat despite the extra demand (C2, C7)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Non-5.2 clients served by Tessaline show unchanged rebuffering (C2), the regression reproduces on Corvane (C3), and the probe shifts are small (C9). That counts against the CDN link even though the timing coincides (E2)."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The evidence has timing (C3, E3), a mechanism (lower buffer thresholds, C3), and covariation isolated to 5.2 within the same CDN and ISPs (C2). The Corvane dogfood replication (C3) rules out the CDN as the rival explanation."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "association-only",
+        "confidence": 70,
+        "justification": "Cancellations rose in the same month as buffering (E4, C6), but the 1 Oct price rise is a confounder (E4, C6, C4). The exit survey doesn\u0027t offer streaming quality as an answer and free-text replies weren\u0027t exported (C6)."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The rise came before the 11 Oct launch, and match nights were no worse (E3, C11), so the extra demand (C7) didn\u0027t drive rebuffering."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "It punishes a vendor that met its SLA (C1) for a fault in our own app (C2, C3), and moving back to Corvane wouldn\u0027t fix 5.2 buffering (C3 Dravia dogfood)."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "It targets the established cause (C2, C3), can be reverted server-side per market within about an hour (C3), and stops the regression spreading to all markets on 20 Nov (C3)."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "Its stated basis, that buffering drove the cancellation rise, isn\u0027t established given the price-rise confounder and an exit survey with no quality option (C6, E4)."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "acceptable",
+        "confidence": 60,
+        "justification": "The country-only dashboard (E3) hid a client-specific regression that only an ad hoc query found (C2), so this is a sound monitoring fix. It needs a pipeline rebuild of about six weeks (C2), though, so it comes second to the immediate fix (A2)."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "It would switch off a protective alert that correctly detected a real regression (C11, E3), on the basis of a misattributed cause (E4 vs C2, C3)."
+      },
+      {
+        "itemId": "Q14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The client-level split (C2), release config (C3) and Corvane dogfood replication (C3) are enough to commit to reverting the abr_v2 settings, which is cheap and reversible (C3)."
+      }
+    ],
+    "ambiguousItems": [
+      "Q12: A4 could be \u0027preferred\u0027, since the monitoring gap is a root contributor to the misdiagnosis, or \u0027acceptable\u0027, since the six-week rebuild makes it secondary to the immediate A2 revert.",
+      "Q7: R3 could be \u0027unknown\u0027 rather than \u0027association-only\u0027, because the only temporal co-occurrence is confounded by the price rise and there is no individual-level link."
+    ],
+    "caseProblems": [
+      "E5 says 5.2 is \u0027live in all markets\u0027, but C3\u0027s rollout gate shows 0% outside Kestria. This looks intentional (store approval vs rollout gate) and is plausible, not an error.",
+      "C3 bundles the decisive Dravia/Corvane dogfood result with the rollout configuration in one item, which makes the case very easy once C3 is read. It doesn\u0027t leak through its title, though.",
+      "The internal numbers are consistent: the C2 weighted mix (~2.75%) matches E3\u0027s 2.6\u20132.9%, and the C2 smart-TV share (48%) matches C7."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A2 clearly stands alone as the best next action. It targets the established cause (C2, C3), it can be reverted per market within about an hour, and it stops the 20 Nov global stage. A4 is worthwhile, because the lack of per-client breakdowns helped hide the cause (E3 offers no breakdown below country level, E1 has the device field blank on 71% of tickets, C11 shows the misattribution). But the sentence added to C2 decides the ranking: the breakdowns depend on a pipeline rebuild scheduled for Q1 2027, about six weeks of work. So A4 cannot affect the current incident or the leadership decision before 20 November. The ad hoc warehouse query in C2 already gives the needed breakdown, and the country-level alert still works as a protective control. \u0027Among the best next actions\u0027 therefore does not fit A4. \u0027Root contributor\u0027 is a reason to call it worthwhile, which \u0027acceptable\u0027 already covers. It is not premature, because it does not depend on an unconfirmed hypothesis. It is not harmful. \u0027Acceptable\u0027 is the only answer that fits.",
+        "fix": "No change required. Optional hardening: add a clause to the C2 note such as \u0027the rebuild cannot be brought forward; until then the ad hoc query can be rerun on request\u0027. That closes off the argument that A4 could be pulled forward and become an immediate action."
+      },
+      {
+        "itemId": "Q7",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The task defines \u0027association-only\u0027 as the two conditions co-occurring or correlating in the evidence without causation being established. It reserves \u0027unknown\u0027 for evidence that is \u0027insufficient even to show association\u0027. The evidence does show co-occurrence. Kestria rebuffering rose from 9 Oct and stayed at 2.6\u20132.9% for the rest of October (E3). Kestria cancellations rose to 3.4% in October from 2.1% in September (E4, C6). The objection is that a confounder (the 1 Oct price rise) means association isn\u0027t shown. That mixes up association with causal identification. A confounder is exactly why the right label is association-only rather than causal. It does not erase the observed co-occurrence. No evidence counts against the link, so \u0027contradicted\u0027 does not apply. The exit survey has no quality option (C6) and does not separate the two causes, so \u0027causal\u0027 is also out. Read with the stated semantics, association-only is the single defensible answer.",
+        "fix": "No change required. Optional hardening: state in E4 or C6 that the cancellation rise was concentrated after 9 Oct, or give weekly cancellation counts. That would make the temporal co-occurrence explicit beyond a single monthly figure."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

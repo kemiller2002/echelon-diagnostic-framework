@@ -1,0 +1,405 @@
+{
+  "id": "OD2-HO-SEQ-2",
+  "split": "heldout",
+  "benchmarkClass": "SEQ",
+  "domain": "cross-domain",
+  "readBudget": 2,
+  "title": "Expiry dates a year too late on Veltranol cartons at Ashcombe Packaging, Wrexley",
+  "setting": "Ashcombe Packaging Services\u0027 Wrexley site is a contract packager running four blister-and-carton lines (Lines 1-4). Each line has an Inkora TJ-5 inkjet printer that prints lot and expiry on cartons, and a camera that inspects every carton. A line integration service, PackBridge (supplied by Corvane Systems), takes product data from the site ERP and pre-fills each print job. Several changes were made at the site between late September and October 2026.",
+  "presentingRequest": "The client\u0027s quality lead asks for an independent view. What caused the wrong expiry dates on Veltranol cartons? Is the site director\u0027s plan right? What should the site do now? You may collect at most two further items of evidence.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Deviation DV-26-114 opening record, QA, 12 Nov 2026",
+      "sourceType": "system-record",
+      "text": "Deviation DV-26-114, opened 12 Nov 2026 (QA). Kestrel Distribution\u0027s goods-in system rejected three lots of Veltranol 20 mg tablets, 28s (VT-2641, VT-2644, VT-2652), because the printed expiry was later than the maximum shelf life in Kestrel\u0027s product file. Cartons and 2D codes read EXP 10/2029. The approved batch records, generated from the ERP batch master, state EXP 10/2028 (24 months from bulk manufacture). All three lots were packed on Line 3, night shift, 9-23 Oct. Veltranol is the only product Kestrel buys from the site. Immediate action: the three lots are on hold and Kestrel is quarantining the stock it received. Status of other Veltranol lots: not yet reviewed."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Email from Gareth Lindqvist, Site Director, to the client quality lead, 13 Nov 2026",
+      "sourceType": "leadership-account",
+      "text": "\u0027I want to be straight with you. All three lots came off Line 3 nights, which is where our new agency cohort started on 30 September. Setup on these lines lets the operator overwrite the pre-filled expiry, and our night supervisor tells me the new starters weren\u0027t always confident with that screen. I\u0027m satisfied this is a people issue. This week I\u0027m removing the agency operators from labelling duties and issuing formal warnings, and we\u0027ll retrain everyone. I don\u0027t expect you\u0027ll see this again.\u0027"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Site change-control log summary, 15 Sep - 31 Oct 2026",
+      "sourceType": "change-record",
+      "text": "CC-301 (28 Sep): Inkora TJ-5 printer firmware 4.2 to 4.3 on all four line printers, to fix intermittent dropping of the final lot-code character. CC-305 (30 Sep): six agency operators added to the night shift on Lines 3 and 4. CC-309 (1-24 Oct): Regulatory Affairs material-master update, 12 edits across 9 products, arising from the annual product review and approved variations. CC-311 (1 Oct): camera font re-teach, Line 3. No changes to PackBridge (line integration service) were recorded in the period."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, Dana Whitcombe, night-shift supervisor, 13 Nov 2026",
+      "sourceType": "manager-account",
+      "text": "\u0027At job setup PackBridge fills in the lot number and expiry. The operator checks the printer screen against the work-order printout, which also comes out of PackBridge, then presses Confirm or overrides with a reason code. Operators can\u0027t touch PackBridge or the ERP, only the printer screen. Some of the agency lads were slow on that screen in their first fortnight. I had to talk two of them through it. The camera reads every carton and kicks out anything smudged or cut short, about three in a thousand. It checks the print matches the job. It doesn\u0027t know the batch record. The printers log every job\u0027s setup values if QA want them.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Email from Corvane Systems support (PackBridge vendor) to site QA, 14 Nov 2026",
+      "sourceType": "vendor-account",
+      "text": "\u0027PackBridge reads product master data from your ERP when a job is created and works out expiry as manufacture date plus shelf life. Master-data records carry a valid-from date, and PackBridge only ever uses the value in effect on the job date. It cannot send a future value to the line. No other site has reported date errors on this version. We suggest you look at manual overrides at the printer.\u0027"
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "QA manager note to file, 14 Nov 2026",
+      "sourceType": "manager-account",
+      "text": "\u0027I wouldn\u0027t assume this started in October. Kestrel only switched on its shelf-life check at goods-in on 1 October, so before that nobody outside would have caught a late expiry. Our in-process checks compare the carton to the work order, so they wouldn\u0027t have caught it either. I\u0027d treat everything since the last audit as suspect until shown otherwise.\u0027"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Inkora printer job records, Veltranol 20 mg, all lines, 1 Jun - 10 Nov 2026",
+      "source": "Inkora TJ-5 job database export, pulled by Engineering, 15 Nov 2026",
+      "sourceType": "log",
+      "text": "Export of 47 Veltranol jobs (28s and 56s) on Lines 1-4. Each job record has: date and shift, line, operator ID, expiry received in the PackBridge payload, shelf-life basis in the payload (SHELF_LIFE_M), operator override (Y/N), expiry printed, camera result.\n- 2 Jun to 3 Oct (30 jobs): SHELF_LIFE_M = 24, and expiry matches the batch record. This includes 4 jobs after the 28 Sep firmware change, 3 of them on Line 3 nights, 30 Sep to 3 Oct, set up by agency operators.\n- 4 Oct 22:10 to 10 Nov (17 jobs): SHELF_LIFE_M = 36, and expiry is 12 months later than the batch record. 15 of these jobs ran on Line 3 nights. 2 ran on Line 1 day shift (21 Oct, 29 Oct; operators D-102 and D-114, permanent staff). Those 2 lots are in the finished-goods warehouse.\n- All 47 jobs: override = N, printed string identical to payload string, camera result PASS (matched to job data)."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "ERP material-master change history, shelf-life fields, 1 Sep - 10 Nov 2026",
+      "source": "ERP audit-trail report run by IT, 15 Nov 2026",
+      "sourceType": "system-record",
+      "text": "Audit trail for field SHELF_LIFE_M. Each value is stored with a valid-from date.\n- VT-20-28 and VT-20-56 (Veltranol): new value 36 entered 3 Oct 16:42 by user RA-OKONJO under CC-309, valid-from 01 Mar 2027, with the note \u0027per approved variation - lots manufactured from 01-03-2027 only\u0027. The existing value of 24 (valid since 2023) was kept and is still the value in effect today.\n- The other 10 CC-309 edits cover 7 products. Eight of them have a valid-from date equal to the entry date. Two have later dates, both entered 20 Oct with valid-from 01 Jan 2027: HX-15-30 (36 to 24) and MR-05-14 (24 to 30).\n- No other changes to SHELF_LIFE_M in the period.\nThis report does not include packing history for the products listed."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Agency operator induction and competency records, night shift, Sep - Oct 2026",
+      "source": "Training department files",
+      "sourceType": "document",
+      "text": "Six agency operators (A-201 to A-206) finished induction 26-29 Sep. Four were signed off as competent in labelling setup (SOP PK-044) on 2 Oct and two on 9 Oct. The night supervisor countersigned the two later sign-offs after those operators had already run three jobs each. Assessment notes include \u0027hesitant at override screen\u0027 (A-203) and \u0027needs reminder to check work-order printout\u0027 (A-205). No assessment records an override error."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Shift rosters and line assignments, 1 Sep - 10 Nov 2026",
+      "source": "Workforce management system export",
+      "sourceType": "system-record",
+      "text": "The rosters list names, shift and line only. The product schedule is held in the planning system and is not included. From 30 Sep, each Line 3 night shift had two agency operators and one permanent operator, and each Line 4 night shift had the same mix. Day shifts on all lines had only permanent operators. D. Whitcombe was night supervisor throughout. Night-shift overtime rose from 6% of hours in September to 11% in October."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Inkora TJ-5 firmware 4.3 release notes and CC-301 validation summary",
+      "source": "Inkora release notes; site engineering validation file",
+      "sourceType": "vendor-account",
+      "text": "Release notes, 4.3: \u0027Fix: final character of variable text fields could be dropped at high line speed. Change: date/time formatting library updated for improved locale support. Known issues: none.\u0027 CC-301 validation summary (site engineering, 27 Sep): test prints of lot and expiry fields on each printer, 20 cartons per line, all matched the input. Truncation test passed at 220 cartons/min. The engineers typed the test inputs by hand. They were not received from PackBridge."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Camera reject statistics, Lines 1 and 3, 1 Sep - 10 Nov 2026",
+      "source": "Camera inspection system reports",
+      "sourceType": "telemetry",
+      "text": "Line 3 reject rate: 0.31% (Sep), 0.29% (Oct), 0.33% (Nov to date). Line 1: 0.27%, 0.30%, 0.28%. Reject reasons: smudge or low contrast 61%, missing or truncated character 33%, no read 6%. After the CC-311 font re-teach (1 Oct), Line 3 no-read rejects fell from 0.04% to 0.01%. Across both lines, 412 cartons with truncated lot or expiry codes were rejected in the period."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Kestrel Distribution complaint correspondence, 11 - 14 Nov 2026",
+      "source": "Customer complaint file",
+      "sourceType": "customer-account",
+      "text": "Kestrel\u0027s goods-in check has been live since 1 Oct. It compares the scanned expiry with the maximum shelf life held for each SKU. It flagged three Veltranol lots, and Kestrel quarantined 1,140 packs. Kestrel received four other Veltranol lots from the site in October that its system did not flag, because they were booked in by hand during a scanner outage on 17-18 Oct. Kestrel asks whether those lots are also affected and wants a written explanation by 28 Nov."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "PackBridge interface configuration export, Lines 1-4",
+      "source": "PackBridge admin console export by IT, 15 Nov 2026",
+      "sourceType": "system-record",
+      "text": "Mapping: EXPIRY = MFG_DATE \u002B SHELF_LIFE_M, end-of-month format MM/YYYY. SHELF_LIFE_M source: ERP material master, read when the job is created. Parameter USE_VALID_FROM = Y. Software version 7.2.1, installed 14 Mar 2025. Last configuration change: 14 Mar 2025 (CC-188, initial go-live). Interface error log: no errors for 1 Sep - 10 Nov."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Interview notes, four agency operators, 14 Nov 2026",
+      "source": "HR and QA joint interviews",
+      "sourceType": "staff-account",
+      "text": "All four say they never overrode an expiry on Veltranol and \u0027just checked it matched the work order and pressed Confirm\u0027. A-203: \u0027The first week I didn\u0027t really know what the override button did, so I never touched it.\u0027 A-205: \u0027We were told the system does the dates.\u0027 None of the four were told why they were being interviewed, and two asked whether they would lose their placement."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Batch packaging records, lots VT-2641, VT-2644, VT-2652",
+      "source": "QA batch record archive",
+      "sourceType": "document",
+      "text": "In each record, the header shows the approved expiry 10/2028, taken from the ERP batch master. Line clearance is signed. Operators signed in-process checks hourly and a QA technician every four hours, each reading \u0027carton print checked against work order - conforms\u0027. Under SOP PK-044, work-order printouts are thrown away at the end of each job and are not in the records. QA release reviews on 27 Oct, 30 Oct and 4 Nov say \u0027record complete\u0027. No carton specimen is kept with the record."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "CC-309 change-control form and impact assessment",
+      "source": "Change-control system",
+      "sourceType": "document",
+      "text": "Raised by Regulatory Affairs on 22 Sep. Scope: 12 material-master edits across 9 products, arising from the annual product review and approved variations. The edit list is held in the ERP. Impact assessment, section 4, \u0027Downstream systems\u0027: \u0027Master-data values only. PackBridge applies valid-from dates; no impact on packaging line systems. No line testing required.\u0027 Approved by QA and Engineering on 30 Sep. Closed 25 Oct."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Line 3 shift handover log, October 2026",
+      "source": "Line 3 handover book",
+      "sourceType": "document",
+      "text": "October entries mention: printhead cleans (5 Oct, 19 Oct), carton magazine jam (11 Oct), camera re-teach checked OK (2 Oct), agency operator A-205 sent home sick (16 Oct), and \u0027Veltranol run long, bulk arrived late\u0027 (22 Oct). No entry mentions expiry dates, overrides or label queries. Several night entries are initialled but not dated."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Line 3 packing-room temperature and humidity records, 1 Sep - 10 Nov 2026",
+      "source": "Building monitoring system",
+      "sourceType": "telemetry",
+      "text": "Logged every 15 minutes. Temperature 19.2-22.8 C (limits 15-25 C). Relative humidity 38-54% (limits 30-60%). No excursions. There were two sensor dropouts (7 Oct 03:10-03:40; 26 Oct 01:00-01:15), and those gaps were filled from the room\u0027s second probe. No operator complaints about ink drying were recorded."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Brightwell Staffing contract and Q3 2026 supplier review",
+      "source": "Procurement file",
+      "sourceType": "document",
+      "text": "The contract runs Apr 2026 - Mar 2027 for up to ten packaging operators. The agency handles basic GMP induction, and the site handles SOP training and competency. Q3 review: fill rate 94%, two late starts, rated \u0027meets expectations\u0027. No quality incidents were attributed to agency staff before October. The renewal discussion is set for January 2027."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Internal data-integrity audit report, June 2025",
+      "source": "Corporate internal audit",
+      "sourceType": "prior-report",
+      "text": "Observation 3 (minor): \u0027Master-data changes are assessed for regulatory impact but not routinely for effect on downstream line systems.\u0027 CAPA-25-071 was assigned to IT, due Mar 2026. Status: open, extension requested. Observation 5: printer audit trails are enabled, protected from editing and reviewed quarterly, rated satisfactory. Observation 7: training records were sometimes signed after the activity, rated minor."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "Operators entered or overrode the wrong expiry dates during line setup."
+      },
+      {
+        "id": "H2",
+        "text": "The printer firmware upgrade changed the expiry dates as they were printed."
+      },
+      {
+        "id": "H3",
+        "text": "The wrong expiry dates were already in the data sent to the printers, before any operator action."
+      },
+      {
+        "id": "H4",
+        "text": "Wrong expiry dates on Veltranol cartons began before the late-September changes and went undetected."
+      },
+      {
+        "id": "H5",
+        "text": "Products other than Veltranol have also been packed with wrong expiry dates."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Agency operators joining the night shift (CC-305, 30 Sep)",
+        "to": "Wrong expiry dates printed on Veltranol cartons",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Printer firmware upgrade 4.2 to 4.3 (CC-301, 28 Sep)",
+        "to": "Wrong expiry dates printed on Veltranol cartons",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Regulatory Affairs\u0027 October material-master edits (CC-309)",
+        "to": "Wrong expiry dates printed on Veltranol cartons",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Remove the agency operators from labelling duties and issue them formal warnings, as the site director proposes."
+      },
+      {
+        "id": "A2",
+        "text": "Reset the Veltranol shelf-life records in the ERP so that only the value approved for current lots can be read. Extend the hold to every Veltranol lot packed since those records last changed. Require a second-person QA check of printed expiry against the approved batch record at each setup until the cause is fully resolved. Inspect retained cartons of any other product whose shelf-life record changed in October."
+      },
+      {
+        "id": "A3",
+        "text": "Commission a site-wide reconciliation of printed expiry against batch records for every lot packed in the past 12 months."
+      },
+      {
+        "id": "A4",
+        "text": "Begin over-labelling held and warehouse stock of other products with corrected expiry dates, on the assumption that they carry the same fault."
+      },
+      {
+        "id": "A5",
+        "text": "Switch off the camera\u0027s expiry-field verification on Lines 1 and 3, since it passed every faulty carton and gives false assurance."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I-H1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-H2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-H3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-H4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-H5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-R1",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-R2",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-R3",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I-A1",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I-A2",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I-A3",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I-A4",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I-A5",
+      "refId": "A5",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I-SUFF",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

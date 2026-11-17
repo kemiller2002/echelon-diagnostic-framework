@@ -1,0 +1,341 @@
+{
+  "caseId": "OD2-HO-ADVERS-1",
+  "groundTruthNarrative": "From 12 January 2026 Pellacott built VA-220 valves with a new Corlin seal on a new Line 3. Its only VA-220 leak rig, LT-04, had failed on 9 January and logged no test after 18 December 2025. Rather than stop shipments, Pellacott issued 2026 certificates citing LT-04 with per-piece values copied from November 2025 tables. Because these fabricated records were complete and showed 100% pass, Pellacott\u0027s SupplierPath test-record component rose from 58 to 100. That rise lifted its score from 70 to 89 and triggered automatic dock-to-stock, which removed Brenmoor\u0027s last receiving check. Brenmoor\u0027s own helium retest found 11% of never-installed 2026-built Pellacott valves leaking at the seat, against about 1% of 2025-built and none of Durrant-Hale\u0027s. Teardowns of returned valves show the same seat defect with braze joints intact. Claim rates, matched by unit serial, are the same for legacy and new installers and for firmware 4.1 and 4.2, and they stay at baseline whenever Durrant-Hale valves are fitted. The new-installer pattern seen by field service is confounded by build year. Whether the seal compound or Line 3 assembly creates the defect cannot be separated. Whether other suppliers\u0027 records are also unreal is open. The right step is containment, with Brenmoor running its own tests.",
+  "answers": [
+    {
+      "itemId": "I1",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C1",
+        "C4",
+        "C6",
+        "C5"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded",
+        "misleading-signal"
+      ],
+      "rationale": "C5 shows nearly identical claim rates for legacy (41) and new (42) installers on Pellacott 2026 valves. It shows baseline rates (5\u20137) in every installer group with Durrant-Hale valves, braze joints intact on all returns, and seat leaks in never-installed stock. The pattern field service sees in E5 comes from new firms installing 2026-built units."
+    },
+    {
+      "itemId": "I2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C5",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E6",
+        "C3",
+        "C5",
+        "C10",
+        "C13",
+        "C15"
+      ],
+      "tags": [
+        "gamed-record",
+        "central",
+        "provenance"
+      ],
+      "rationale": "C5 establishes that 2026-built Pellacott valves are defective before installation (11% seat leaks in unpowered stock against about 1% for 2025-built). C10 shows the cited rig LT-04 was out of service all of 2026, no other rig ran VA-220, and every checked 2026 per-piece table is a copy of a 2025 sequence. So the certificates do not reflect real tests."
+    },
+    {
+      "itemId": "I3",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E6",
+        "C3",
+        "C4",
+        "C5",
+        "C10",
+        "C13"
+      ],
+      "tags": [
+        "plausible-rival",
+        "gamed-record",
+        "central"
+      ],
+      "rationale": "H3 needs the recorded tests to have been performed. C10 shows LT-04 logged no cycle after 18 Dec 2025, no other equipment could test VA-220, and the values were recycled. The tests were not done as recorded. C5 alone leaves H3 open because it did not replicate the pressure-decay method."
+    },
+    {
+      "itemId": "I4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C2",
+        "C6",
+        "C5"
+      ],
+      "tags": [
+        "misleading-signal",
+        "natural-experiment"
+      ],
+      "rationale": "In C5, units on firmware 4.1 (40) and 4.2 (42) fail at the same rate with Pellacott 2026 valves. Durrant-Hale valves stay at baseline under 4.2, and never-powered warehouse valves already leak. The firmware timing is coincidental."
+    },
+    {
+      "itemId": "I5",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C8",
+        "C13",
+        "C10"
+      ],
+      "tags": [
+        "open-question",
+        "scope"
+      ],
+      "rationale": "E3 and C8 show test-record scores rising across the programme under the same unverified scoring incentive, so the claim is live. But the rise fits legitimate paperwork completion equally well, no evidence checks any other supplier\u0027s rig logs or raw data, and no catalogue item settles it either way."
+    },
+    {
+      "itemId": "I6",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C5"
+      ],
+      "tags": [
+        "mechanism",
+        "covariation"
+      ],
+      "rationale": "C5 gives the mechanism: the returned valves\u0027 seat leak matches the dominant claim code in E2. It shows the defect is present before installation and covaries with valve source and build year. It also rules out the main rivals (installers and firmware) by serial-matched stratification."
+    },
+    {
+      "itemId": "I7",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C1",
+        "C4",
+        "C6",
+        "C5"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "confounded"
+      ],
+      "rationale": "C5 shows that installer cohort makes no difference to failure rates for a given valve source, and that installation damage (braze joints) is absent. This is evidence against the link itself."
+    },
+    {
+      "itemId": "I8",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C2",
+        "C5"
+      ],
+      "tags": [
+        "natural-experiment"
+      ],
+      "rationale": "Units left on 4.1 because they lack a connectivity module fail at the same rate as 4.2 units, and 4.2 units with Durrant-Hale valves stay at baseline. This counts directly against the firmware link."
+    },
+    {
+      "itemId": "I9",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C5",
+        "C11"
+      ],
+      "tags": [
+        "confounded",
+        "association-only"
+      ],
+      "rationale": "The seal change coincides with the defect onset (E4), and the defect sits in the slide seal (C5). But C5 states that the seal compound was not analysed and that the Corlin seal and the Line 3 assembly change are fully confounded. Causation by the seal source is therefore not established. The co-occurrence itself is clearly shown, so the answer is association-only rather than unknown."
+    },
+    {
+      "itemId": "I10",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "C3",
+        "C8",
+        "C13"
+      ],
+      "tags": [
+        "score-construction"
+      ],
+      "rationale": "E3 defines test-record conformance as the percentage of lot certificates that have complete per-piece values with every piece within the leak limit, so completeness and all-pass together are what the component scores. Pellacott\u0027s component, weighted 0.40, rose from 58 to 100 as its records became complete and all-pass (E3, E6, C3). That adds about 17 of the 19-point rise, while the audit and delivery components moved only a few points. The link is mechanical, fixed by the formula."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C15",
+        "C5",
+        "C10"
+      ],
+      "tags": [
+        "containment",
+        "protective-control"
+      ],
+      "rationale": "With 11% of 2026-built Pellacott stock leaking and Pellacott\u0027s records shown not to be genuine, the best next action is to contain the stock and test it independently. This does not depend on whether the seal or Line 3 is to blame."
+    },
+    {
+      "itemId": "I12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "C1",
+        "C6",
+        "C5"
+      ],
+      "tags": [
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "Installers are shown not to drive failures. Suspending them and charging claims back punishes the wrong party, cuts installation capacity and leaves the defective parts in place. No live rival hypothesis would make this action beneficial."
+    },
+    {
+      "itemId": "I13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C4",
+        "C15",
+        "C5",
+        "C10"
+      ],
+      "tags": [
+        "gamed-record",
+        "disable-protective-control"
+      ],
+      "rationale": "C10 shows Pellacott\u0027s certificates are fabricated, and Pellacott has no working VA-220 rig to produce fresh ones. Releasing the lots on that paper would undo the only protective hold and ship stock that C5 shows is about 11% defective."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C5",
+        "C11"
+      ],
+      "tags": [
+        "premature",
+        "confounded"
+      ],
+      "rationale": "If the Corlin seal were confirmed as the cause, reverting to Ferrand (still an approved source, E4) would clearly help, and reverting costs little if it is wrong. But C5 cannot separate the seal from the Line 3 change, so committing now is not justified."
+    },
+    {
+      "itemId": "I15",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C3",
+        "C8",
+        "C13",
+        "C10"
+      ],
+      "tags": [
+        "systemic-fix"
+      ],
+      "rationale": "The scoring flaw is confirmed: E3 shows unverified self-reported records drove the score, and C10 shows those records were fabricated. Requiring verification is a reasonable systemic fix, so A5 is not harmful or premature. But as worded, A5 explicitly leaves every other supplier\u0027s existing dock-to-stock grant in place, unverified, until the next scoring cycle closes (18 Dec 2026 per C8), while those grants rest on the same self-reported records that C10 shows can be fabricated. It also does nothing about the defective stock now. So it is reasonable but not among the best next actions."
+    },
+    {
+      "itemId": "I16",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5",
+        "C10"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C5",
+        "C10",
+        "C15"
+      ],
+      "tags": [
+        "sufficiency"
+      ],
+      "rationale": "The highest-ranked substantive action (A1) needs only two things: that 2026-built Pellacott stock is defective before installation (C5) and that Pellacott\u0027s certificates cannot be trusted (C10). Both are established. The open questions about the seal and other suppliers do not affect it."
+    }
+  ],
+  "discriminatingReads": [
+    "C5",
+    "C10"
+  ],
+  "lowValueReads": [
+    "C7",
+    "C12",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C5",
+    "C10"
+  ],
+  "authoringNotes": "The initial file points three ways: installers (VP, field service), firmware (field service) and the supplier (change notice, claim code). Pellacott\u0027s high audit score acts as a credibility trap. E6 quietly names rig LT-04, and E3 shows suspiciously perfect records after poor 2025 paperwork. C5 alone settles the defect, installer and firmware items, but leaves fabrication against honest test escape open because it did not replicate Pellacott\u0027s method. C10 alone settles fabrication (H3 contradicted) but not whether the defect predates installation or the installer and firmware rivals. C3, C13 and C9 hint at gaming (unwitnessed tests, a rebate incentive) but settle nothing. C2 and C6 keep the firmware and installer rivals alive without settling them. H5 stays unknown because no item examines other suppliers\u0027 raw data. A4 is premature because seal source and Line 3 are confounded in every 2026 sample. Revision 1: E3 defines test-record conformance as complete per-piece values with every piece within the limit, and R5\u0027s cause node names the complete, all-pass records, so \u0027causal\u0027 is the only defensible answer for I10. Revision 2 (I15 ambiguity): A5\u0027s text now states that other suppliers\u0027 existing dock-to-stock grants remain in place, unverified, until the next scoring cycle closes, and C8 now gives that close date (18 Dec 2026). The gap is now part of the action, not just the rationale, so \u0027acceptable\u0027 is the only defensible key; A5 is still not harmful because it improves on the status quo and removes no existing control. A5 says \u0027other suppliers\u0027 so it does not conflict with A1\u0027s suspension of Pellacott. Minor clarity fixes: C5 item 3 now states that claims were matched to valve lot, installer and firmware by unit serial, which explains a split the E2 dashboard cannot make. C3 now notes that only paper calibration records were reviewed and the rigs were not inspected, so the \u0027in date\u0027 finding for LT-04 is consistent with C10."
+}

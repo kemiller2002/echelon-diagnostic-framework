@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-MISLEAD-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-MISLEAD-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C13",
+    "X3": "C6",
+    "X4": "C12",
+    "X5": "C4",
+    "X6": "C5",
+    "X7": "C1",
+    "X8": "C3",
+    "X9": "C2",
+    "X10": "C7",
+    "X11": "C9",
+    "X12": "C14",
+    "X13": "C8",
+    "X14": "C10",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X3",
+    "X1"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-MISLEAD-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21643,
+    "cacheCreationTokens": 11333,
+    "outputTokens": 2014,
+    "thinkingTokens": 318,
+    "costUsd": 0.06764830000000001,
+    "durationMs": 14256,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-2__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-2__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022methodChoice\u0022:\u0022Combination of C and D: the case has competing causes and a natural experiment, so I compared hypotheses against per-cell timing (D) and checked the actions for risk (C).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E6\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022Don\u0027t roll back the gateway. The regression comes from the 2 Nov storage compaction tuning change, not from gateway 5.8. That push raised compaction threads from 2 to 6 and compaction\u0027s share of disk bytes from 38% to 71%. Disk utilisation went from 41% to 97% within five minutes in each cell. Node-side read time rose from 61 ms to 262 ms. Latency rose in each cell within minutes of its push, even in cells that still had 5.7 or only a few gateways on 5.8. The one cell that skipped the push (aps-3) already had 5.8 and stayed at about 94 ms. A test rollback to 5.7 in euw-1 changed nothing. Rolling back would also reopen the security hole and would not help latency. Network and traffic growth don\u0027t fit the timing.\\n\\nNext: revert the compaction tuning in one cell first, watch p99 and compaction backlog, then extend it to the other cells. Don\u0027t pause compaction. Backlog was 11% against a 15% danger point, and a pause risks disk-full. Hold the Orrin rate limit until the 10 Nov attribution report shows where backlog growth comes from. The lifecycle sweep is a competing source. I\u0027m fairly confident in the cause. The Orrin link is the least certain part.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:16:47.9297419Z",
+    "finishedAt": "2026-11-17T16:17:03.1040802Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-2",
+      "methodChoice": "Combination of C and D: the case has competing causes and a natural experiment, so I compared hypotheses against per-cell timing (D) and checked the actions for risk (C).",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "E6",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "association-only",
+          "confidence": 72,
+          "evidenceIds": [
+            "X1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X3",
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S-A5",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X3",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "Don\u0027t roll back the gateway. The regression comes from the 2 Nov storage compaction tuning change, not from gateway 5.8. That push raised compaction threads from 2 to 6 and compaction\u0027s share of disk bytes from 38% to 71%. Disk utilisation went from 41% to 97% within five minutes in each cell. Node-side read time rose from 61 ms to 262 ms. Latency rose in each cell within minutes of its push, even in cells that still had 5.7 or only a few gateways on 5.8. The one cell that skipped the push (aps-3) already had 5.8 and stayed at about 94 ms. A test rollback to 5.7 in euw-1 changed nothing. Rolling back would also reopen the security hole and would not help latency. Network and traffic growth don\u0027t fit the timing.\n\nNext: revert the compaction tuning in one cell first, watch p99 and compaction backlog, then extend it to the other cells. Don\u0027t pause compaction. Backlog was 11% against a 15% danger point, and a pause risks disk-full. Hold the Orrin rate limit until the 10 Nov attribution report shows where backlog growth comes from. The lifecycle sweep is a competing source. I\u0027m fairly confident in the cause. The Orrin link is the least certain part."
+    }
+  }
+}

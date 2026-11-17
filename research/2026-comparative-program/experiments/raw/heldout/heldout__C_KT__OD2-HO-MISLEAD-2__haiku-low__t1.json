@@ -1,0 +1,212 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-MISLEAD-2__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-MISLEAD-2",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C13",
+    "X3": "C14",
+    "X4": "C3",
+    "X5": "C10",
+    "X6": "C12",
+    "X7": "C6",
+    "X8": "C5",
+    "X9": "C7",
+    "X10": "C2",
+    "X11": "C1",
+    "X12": "C15",
+    "X13": "C11",
+    "X14": "C4",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X7",
+    "X13"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-MISLEAD-2__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 29913,
+    "cacheCreationTokens": 8607,
+    "outputTokens": 2492,
+    "thinkingTokens": 1126,
+    "costUsd": 0.00326733,
+    "durationMs": 15062,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-2\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe Problem Analysis and Decision Analysis, with Potential Problem Analysis for the chosen path\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X7\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E6\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022S-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022The GET latency regression is most likely caused by the 2 Nov storage-node compaction tuning change (FC-7710), not by gateway 5.8. In every cell, p99 jumped within minutes of the config push, and disk utilisation went from 41% to 97% with read queue waits rising sharply. Gateway 5.8 arrived in cells that showed no regression: aps-3 got 5.8 at 01:05 without the config push and stayed at about 94 ms. Rolling euw-1 back to 5.7 on 6 Nov also left p99 near 295 ms. Traffic growth (\u002B6%) and the network problem were both ruled out. Confidence is moderate-to-high, but the cause of the compaction backlog (Orrin migration vs. the cold-tier deletion sweep) is not yet attributed; that report is due 10 Nov. Next steps: revert FC-7710 in one cell first and watch p99 and disk utilisation, then extend if it recovers. Do not roll back to 5.7 today: it does not address the cause and would reopen the SEC-2291 audit exposure. Do not pause compaction, since that risks disk-full. Hold Orrin rate-limiting until attribution is confirmed.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:12:31.8412693Z",
+    "finishedAt": "2026-11-17T16:12:47.7491901Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-2",
+      "methodChoice": "Kepner-Tregoe Problem Analysis and Decision Analysis, with Potential Problem Analysis for the chosen path",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X7",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X13",
+            "X7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X13",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "E6",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "S-A5",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "The GET latency regression is most likely caused by the 2 Nov storage-node compaction tuning change (FC-7710), not by gateway 5.8. In every cell, p99 jumped within minutes of the config push, and disk utilisation went from 41% to 97% with read queue waits rising sharply. Gateway 5.8 arrived in cells that showed no regression: aps-3 got 5.8 at 01:05 without the config push and stayed at about 94 ms. Rolling euw-1 back to 5.7 on 6 Nov also left p99 near 295 ms. Traffic growth (\u002B6%) and the network problem were both ruled out. Confidence is moderate-to-high, but the cause of the compaction backlog (Orrin migration vs. the cold-tier deletion sweep) is not yet attributed; that report is due 10 Nov. Next steps: revert FC-7710 in one cell first and watch p99 and disk utilisation, then extend if it recovers. Do not roll back to 5.7 today: it does not address the cause and would reopen the SEC-2291 audit exposure. Do not pause compaction, since that risks disk-full. Hold Orrin rate-limiting until attribution is confirmed."
+    }
+  }
+}

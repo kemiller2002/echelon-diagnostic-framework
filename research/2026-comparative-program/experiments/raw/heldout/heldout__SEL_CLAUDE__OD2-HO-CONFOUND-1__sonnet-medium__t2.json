@@ -1,0 +1,198 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-CONFOUND-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-CONFOUND-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C3",
+    "X2": "C14",
+    "X3": "C9",
+    "X4": "C13",
+    "X5": "C8",
+    "X6": "C4",
+    "X7": "C11",
+    "X8": "C5",
+    "X9": "C2",
+    "X10": "C15",
+    "X11": "C6",
+    "X12": "C12",
+    "X13": "C1",
+    "X14": "C7",
+    "X15": "C10"
+  },
+  "readLabels": [
+    "X13",
+    "X4"
+  ],
+  "reads": [
+    "C1",
+    "C13"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-CONFOUND-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21380,
+    "cacheCreationTokens": 10590,
+    "outputTokens": 1625,
+    "thinkingTokens": 0,
+    "costUsd": 0.060759999999999995,
+    "durationMs": 11407,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONFOUND-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONFOUND-1__sonnet-medium__t2/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CONFOUND-1__sonnet-medium__t2/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONFOUND-1\u0022,\u0022methodChoice\u0022:\u0022D (competing hypotheses) with K-T style IS/IS NOT comparison: the question is which rival explains the gap, and a confounder (time in level) is the key.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:62,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022,\u0022E1\u0022]}],\u0022brief\u0022:\u0022The gap is mostly a difference in who is eligible, not where people work. Only 32% of remote staff have the 18 months in level that policy requires, versus 74% of office staff. Among eligible people, nomination rates (28% vs 29%), approval rates (71% vs 74%) and promotion rates (20% vs 21%) are nearly the same. Applying office rates to the remote eligibility mix predicts 8.2%, and the observed rate is 7.6%. The by-job-family breakdown doesn\u0027t change this, because tenure differs within every family. I can\u0027t confirm proximity bias. The eligible remote group is only 110 people, so a real gap of a few points can\u0027t be ruled out. Staffing data can\u0027t show who gets stretch work, and I haven\u0027t tested attrition. Don\u0027t announce the three-day office rule. It rests on an unsupported diagnosis, and it would hit about 180 people hired on home-based contracts. Instead, change promotion reporting to compare eligible employees only, and re-check it at FY2027. Meanwhile, begin tracking stretch assignments, and explain eligibility rules to remote staff. Confidence is moderate to high.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:44:21.1699170Z",
+    "finishedAt": "2026-11-17T16:44:33.6625091Z",
+    "output": {
+      "caseId": "OD2-HO-CONFOUND-1",
+      "methodChoice": "D (competing hypotheses) with K-T style IS/IS NOT comparison: the question is which rival explains the gap, and a confounder (time in level) is the key.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 62,
+          "evidenceIds": [
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13",
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "E4",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 72,
+          "evidenceIds": [
+            "X13",
+            "E4",
+            "E1"
+          ]
+        }
+      ],
+      "brief": "The gap is mostly a difference in who is eligible, not where people work. Only 32% of remote staff have the 18 months in level that policy requires, versus 74% of office staff. Among eligible people, nomination rates (28% vs 29%), approval rates (71% vs 74%) and promotion rates (20% vs 21%) are nearly the same. Applying office rates to the remote eligibility mix predicts 8.2%, and the observed rate is 7.6%. The by-job-family breakdown doesn\u0027t change this, because tenure differs within every family. I can\u0027t confirm proximity bias. The eligible remote group is only 110 people, so a real gap of a few points can\u0027t be ruled out. Staffing data can\u0027t show who gets stretch work, and I haven\u0027t tested attrition. Don\u0027t announce the three-day office rule. It rests on an unsupported diagnosis, and it would hit about 180 people hired on home-based contracts. Instead, change promotion reporting to compare eligible employees only, and re-check it at FY2027. Meanwhile, begin tracking stretch assignments, and explain eligibility rules to remote staff. Confidence is moderate to high."
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-INTERACT-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C3",
+    "X3": "C15",
+    "X4": "C4",
+    "X5": "C6",
+    "X6": "C14",
+    "X7": "C5",
+    "X8": "C10",
+    "X9": "C1",
+    "X10": "C13",
+    "X11": "C7",
+    "X12": "C9",
+    "X13": "C8",
+    "X14": "C12",
+    "X15": "C2"
+  },
+  "readLabels": [
+    "X15",
+    "X11"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-INTERACT-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28300,
+    "cacheCreationTokens": 7583,
+    "outputTokens": 2853,
+    "thinkingTokens": 1443,
+    "costUsd": 0.0032269000000000004,
+    "durationMs": 16859,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022methodChoice\u0022:\u0022Collected X15 (site-level counts) and X11 (booking reconciliation), the two most discriminating items.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X11\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X15\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X11\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022What is going on: the drop is not mainly the app or the background check. It is concentrated where two things happened together: RotaWeave went live and the site coordinator was removed (Dock Street, Westgate). Millbrook kept its coordinator and stayed roughly flat (118 to 111) on the app. Quarry Lane lost its coordinator but never got the app and declined only modestly (86 to 80). Background-check renewal applied at all four sites, yet 121 of 123 lapsed regulars held a current check, so it does not explain the pattern. At Dock Street and Westgate, regulars were lost mainly because nobody booked their usual slot before the Thursday release. Callbacks say the same.\\n\\nHow sure: moderately confident on the combined-cause pattern. It rests on four site counts and one booking reconciliation compiled by a manager, not a controlled test. Commonplate and satisfaction were not tested directly.\\n\\nWhat to do next: do not cancel RotaWeave on 30 September, and do not suspend background checks (they protect minors). Put a named person on booking regulars into their usual slots at Dock Street and Westgate now, phone lapsed regulars, and review in 60 days. Restore coordinator-level oversight there. Re-check the Quarry Lane and Millbrook comparison before the board meets.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:17:56.1130433Z",
+    "finishedAt": "2026-11-17T16:18:13.6799401Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "methodChoice": "Collected X15 (site-level counts) and X11 (booking reconciliation), the two most discriminating items.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "X11",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "X11",
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "X15",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X11",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X11",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "What is going on: the drop is not mainly the app or the background check. It is concentrated where two things happened together: RotaWeave went live and the site coordinator was removed (Dock Street, Westgate). Millbrook kept its coordinator and stayed roughly flat (118 to 111) on the app. Quarry Lane lost its coordinator but never got the app and declined only modestly (86 to 80). Background-check renewal applied at all four sites, yet 121 of 123 lapsed regulars held a current check, so it does not explain the pattern. At Dock Street and Westgate, regulars were lost mainly because nobody booked their usual slot before the Thursday release. Callbacks say the same.\n\nHow sure: moderately confident on the combined-cause pattern. It rests on four site counts and one booking reconciliation compiled by a manager, not a controlled test. Commonplate and satisfaction were not tested directly.\n\nWhat to do next: do not cancel RotaWeave on 30 September, and do not suspend background checks (they protect minors). Put a named person on booking regulars into their usual slots at Dock Street and Westgate now, phone lapsed regulars, and review in 60 days. Restore coordinator-level oversight there. Re-check the Quarry Lane and Millbrook comparison before the board meets."
+    }
+  }
+}

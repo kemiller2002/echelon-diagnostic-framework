@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-INTERACT-2__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C5",
+    "X3": "C13",
+    "X4": "C6",
+    "X5": "C4",
+    "X6": "C11",
+    "X7": "C9",
+    "X8": "C12",
+    "X9": "C3",
+    "X10": "C2",
+    "X11": "C7",
+    "X12": "C1",
+    "X13": "C14",
+    "X14": "C15",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X10",
+    "X11"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-INTERACT-2__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18841,
+    "cacheCreationTokens": 8242,
+    "outputTokens": 1645,
+    "thinkingTokens": 0,
+    "costUsd": 0.0513141,
+    "durationMs": 11164,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-2__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-2__sonnet-medium__t2/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The drop is not mainly the app itself, the background checks, or Commonplate. It comes from the app and the loss of site coordinators together. The app\u0027s basic tier has no recurring bookings. A regular keeps a weekly slot only if staff book it before the Thursday release. Coordinators used to do that. After 1 May they stopped at Dock Street and Westgate: bookings on behalf of volunteers fell from 74 a week to 3. Regulars then lost their usual slots to new sign-ups, and 88% of those who lost a slot twice or more are now inactive, against 11% of those who kept theirs. Millbrook has the app and a coordinator and is stable. Quarry Lane lost its coordinator but has no app, and is also stable. Only 2 of the 23 people deactivated for background checks were lost. 121 of the 123 who lapsed had a current check. I\u0027m fairly confident, since the site pattern, the booking records and the callbacks all agree. Evidence on Commonplate is thin: only 2 of 61 callbacks mention another group. Don\u0027t cancel the app or suspend the checks. Assign someone to book regulars into their usual slots at Dock Street and Westgate before each Thursday, and phone lapsed regulars to offer their slots back. Don\u0027t remove inactive volunteers from the roster to improve the figures. Give the board the site-level numbers.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:11:58.8899225Z",
+    "finishedAt": "2026-11-17T16:12:10.9882354Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "E6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The drop is not mainly the app itself, the background checks, or Commonplate. It comes from the app and the loss of site coordinators together. The app\u0027s basic tier has no recurring bookings. A regular keeps a weekly slot only if staff book it before the Thursday release. Coordinators used to do that. After 1 May they stopped at Dock Street and Westgate: bookings on behalf of volunteers fell from 74 a week to 3. Regulars then lost their usual slots to new sign-ups, and 88% of those who lost a slot twice or more are now inactive, against 11% of those who kept theirs. Millbrook has the app and a coordinator and is stable. Quarry Lane lost its coordinator but has no app, and is also stable. Only 2 of the 23 people deactivated for background checks were lost. 121 of the 123 who lapsed had a current check. I\u0027m fairly confident, since the site pattern, the booking records and the callbacks all agree. Evidence on Commonplate is thin: only 2 of 61 callbacks mention another group. Don\u0027t cancel the app or suspend the checks. Assign someone to book regulars into their usual slots at Dock Street and Westgate before each Thursday, and phone lapsed regulars to offer their slots back. Don\u0027t remove inactive volunteers from the roster to improve the figures. Give the board the site-level numbers."
+    }
+  }
+}

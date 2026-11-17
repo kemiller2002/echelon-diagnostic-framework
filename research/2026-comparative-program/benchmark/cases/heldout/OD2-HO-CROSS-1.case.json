@@ -1,0 +1,407 @@
+{
+  "id": "OD2-HO-CROSS-1",
+  "split": "heldout",
+  "benchmarkClass": "CROSS",
+  "domain": "cross-domain",
+  "readBudget": 2,
+  "title": "Delayed alarm responses in an adult ICU",
+  "setting": "Kestrel Bay Regional Hospital (fictional). Unit 5 East is a 20-bed adult ICU with four pods of five beds (Pod A beds 1-5, Pod B 6-10, Pod C 11-15, Pod D 16-20). Bedside monitors sound locally, report to a central station, and send alarms through a clinical alert relay server to nurses\u0027 handheld phones. Analysis date: 17 November 2026.",
+  "presentingRequest": "The Chief Nursing Officer asks: why have delayed alarm response incidents on 5 East risen since August, and should she approve the Director of Critical Care Nursing\u0027s proposal to cap agency nurse use and open performance reviews for the nurses involved?",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Email from the Director of Critical Care Nursing to the CNO, 3 November",
+      "sourceType": "leadership-account",
+      "text": "Subject: 5 East alarm incidents, proposal. Delayed alarm response incidents have roughly quadrupled since the summer. The obvious change is staffing. The Larkfield agency contract went live on 5 August, and since then we have had a steady flow of nurses who don\u0027t know our pods, plus four new graduates from 1 September. Two of the September incidents involved agency nurses who went to the wrong room. I\u0027m asking for approval to cap agency use at 10% of RN shifts from December and to open performance reviews for every nurse named in a delayed-response report. Our nurses need to know this is being taken seriously."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Incident reporting system extract, category \u0027alarm response delayed \u003E2 min or not acknowledged\u0027, 5 East",
+      "sourceType": "system-record",
+      "text": "Monthly counts: May 5, Jun 6, Jul 6, Aug 16, Sep 24, Oct 26. Weekly view: 1-2 per week up to and including the week beginning 3 August; 4 in the week beginning 10 August; 5-7 every week from then to 31 October, with no further step change. Harm grading: three moderate-harm events (9 Sep, 3 Oct, 22 Oct); the rest no or low harm. Patient-days per month ranged 588-614 across May-October. The charge nurse usually files the report, and each report names the nurse assigned to the patient."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Nursing workforce report, 5 East, prepared by the finance business partner",
+      "sourceType": "financial-record",
+      "text": "RN shifts filled by agency: Jun 7%, Jul 8%, Aug 14%, Sep 21%, Oct 24%. Core RN sick leave (% of rostered hours): Jun 3.0, Jul 3.2, Aug 3.4, Sep 6.1, Oct 6.9. Hospital-wide nursing sick leave over the same months rose from 3.1 to 4.4. Resignations: one in September, one in October. Note: the Larkfield contract started 5 August to cover summer annual leave; from September, agency shifts also backfilled sick leave and the two vacancies. Occupational Health bulletin, 28 August: an early respiratory virus season is under way and staff absence is rising across the hospital."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Night charge nurse\u0027s huddle notes, 5 East, 2 October",
+      "sourceType": "staff-account",
+      "text": "Raised at huddle: \u0027The phones haven\u0027t stopped since the summer. I get the same desat three times and by the time I look the sats are back to 96.\u0027 \u0027I\u0027ve started glancing at the phone instead of reading it.\u0027 Agency RN: \u0027At my other ICU the phones are much quieter for the same kind of patients.\u0027 \u0027Room 14: sometimes my phone doesn\u0027t ring at all and I hear the bedside alarm first.\u0027 Pod D nurses said they hadn\u0027t really noticed a difference. Reminder given: the central station is unstaffed most nights; for rooms you are not in, the phone is how you hear an alarm."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "IT service notice and closure note, clinical alert relay",
+      "sourceType": "change-record",
+      "text": "Notice, 9 August: \u0027The clinical alert relay server, which forwards bedside monitor alarms to nurse phones, will move to new hardware on 12 August, 01:00-03:00. This is a like-for-like refresh. No user-facing changes are expected. Bedside monitors and the central station are not affected.\u0027 Closure note, 12 August 03:40: \u0027Completed successfully. Configuration imported. Smoke test passed: test alarms from beds 1 and 6 delivered to phones within 3 seconds. No incidents logged.\u0027"
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Email from the ICU medical director to the CNO, 7 October",
+      "sourceType": "expert-account",
+      "text": "Before we pin this on the nurses: our case mix has been heavier this autumn, with more cardiac surgery overflow and more patients on high-flow oxygen, so I\u0027m not surprised alarms are up. Also, Biomedical Engineering installed the monitor vendor\u0027s software update (v7.2) on all 20 bedside monitors on 23-24 September, and the vendor says it changes how SpO2 problems are alarmed. I\u0027d want both looked at before anyone is disciplined."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Clinical alert relay message-log extract, 1 July-31 October, by pod and nurse group",
+      "source": "Clinical informatics team, extract dated 4 November",
+      "sourceType": "telemetry",
+      "text": "Bedside alarm events received from monitors (all priorities) per patient-day: July 96; 1-11 Aug 95; 12-31 Aug 97; Sept 96; Oct 94; no step around 23-24 Sept. Phone notifications dispatched per nurse per 12-hour shift: Pods A-C 37-39 until 11 Aug, 79-86 from 12 Aug onward; Pod D 35-39 throughout. Median phone acknowledgement time: Pods A-C 34 s before 12 Aug, 71 s after; Pod D 33-36 s throughout. Delayed-response incidents per 100 nurse-shifts, Pods A-C, before -\u003E after 12 Aug: core RNs (2\u002B years on unit) 0.8 -\u003E 3.9; agency 0.9 -\u003E 4.1; new graduates (4 nurses, from 1 Sept) 4.0. Pod D, all staff: 0.9 -\u003E 0.9. Agency share of shifts, Sep-Oct: Pods A-C 23%, Pod D 21%. Logs record dispatch to the phone system, not receipt by a handset."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Change record CHG-20417 and configuration comparison, clinical alert relay server",
+      "source": "IT change management record with Clinical Engineering addendum dated 4 November",
+      "sourceType": "change-record",
+      "text": "CHG-20417: relay server hardware refresh, implemented 12 August; risk rated low; test plan \u0027confirm delivery from two beds\u0027. Addendum, configuration comparison by Clinical Engineering, 4 November: the old server ran 14 forwarding rules, including a 15-second hold-off so that SpO2-low alarms resolving within 15 s are not sent to phones, suppression of repeat notifications for the same alarm within 60 s, and routing of probe-off and leads-off technical alarms to the pod charge phone only. The new server has 3 active rules (priority mapping). The other 11 sat in a rules file the import tool skipped because of a version-format mismatch; it logged a warning but reported success. Beds 16-20 (Pod D) were deferred to phase 2 and still forward through the old server. Re-import after format conversion: vendor estimate 4 hours plus clinical validation."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Unit census and acuity scores, 5 East, June-October",
+      "source": "Nursing acuity system report",
+      "sourceType": "system-record",
+      "text": "Average daily census: 19.4-19.8 patients in each month June-October. Mean nursing acuity score (1-5 scale): Jun 3.1, Jul 3.2, Aug 3.3, Sep 3.4, Oct 3.4. Patient-days on high-flow oxygen: Jul 112, Aug 118, Sep 124, Oct 131. Post-cardiac-surgery overflow admissions: Jul 4, Aug 5, Sep 9, Oct 8. Ventilated patient-days broadly flat at 210-226 per month. Acuity is scored by the charge nurse at 06:00 each day and is used for staffing allocation."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Agency nurse orientation and competency sign-off records, 5 August-31 October",
+      "source": "Unit education coordinator",
+      "sourceType": "document",
+      "text": "Larkfield agency nurses deployed to 5 East, 5 Aug-31 Oct: 41. Completed the 5 East unit orientation (pod layout, phone sign-on, alarm escalation module): 38. Outstanding: 3, all first deployed in October. Mean prior ICU experience 6.2 years (range 1-19). Orientation consists of one supervised 3-hour period on shift plus a 20-minute e-learning module; competency sign-off is by the charge nurse on duty, and no practical alarm-response assessment is included."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Bedside monitor software v7.2 release notes and installation record",
+      "source": "Monitor vendor release notes with Biomedical Engineering installation log",
+      "sourceType": "vendor-account",
+      "text": "Summary of changes in v7.2: security patches to the network stack; SpO2 probe-off technical alarm now annunciated after 10 s of signal loss (previously 20 s) \u0027to speed detection of disconnected sensors\u0027; improved ECG lead-label display; printer driver update. \u0027Default physiological alarm limits and alarm priority assignments are unchanged.\u0027 Installation log: all 20 5 East monitors updated 23-24 September by Biomedical Engineering. No post-installation measurement of alarm volume was performed."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Exit interview notes, two core nurses who resigned September-October",
+      "source": "Human Resources",
+      "sourceType": "staff-account",
+      "text": "RN A (resigned September, 7 years on unit): moving to a day-surgery unit nearer home; said \u0027nights have got harder since the summer, the phone is relentless\u0027; also said the 9 September event had shaken her. RN B (resigned October, 3 years on unit): leaving to start a nurse practitioner course; no complaints about the unit beyond \u0027the usual workload\u0027. Both rated team support as \u0027good\u0027 and said they would consider returning."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Nurse-to-patient assignment ratios by shift, 5 East, July-October",
+      "source": "Rostering system report",
+      "sourceType": "system-record",
+      "text": "Mean patients per RN, day/night: July 1.6/1.7; August 1.6/1.7; September 1.6/1.8; October 1.6/1.7. One-to-one assignments for ventilated or unstable patients were maintained on 97-99% of shifts in every month. The charge nurse held no patient assignment on 92-95% of shifts throughout the period. No shift fell below the hospital\u0027s minimum staffing standard."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Interview with the Director of Critical Care Nursing, 6 November",
+      "source": "Interview notes, review team",
+      "sourceType": "leadership-account",
+      "text": "\u0027I read every one of those reports, and most of them name nurses I didn\u0027t recognise, agency or new.\u0027 Asked whether she had compared incident rates with the number of shifts each group worked: \u0027No, but I don\u0027t need a spreadsheet to know my unit.\u0027 She described the phone system as \u0027IT\u0027s business\u0027 and said IT had confirmed nothing changed. She has drafted performance-review letters and wants them sent before the December roster is published."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Interview with the IT clinical applications manager, 6 November",
+      "source": "Interview notes, review team",
+      "sourceType": "manager-account",
+      "text": "\u0027It was a like-for-like move. We exported the whole configuration from the old box and the import completed with a green tick. Smoke test passed. If the alarm rules had broken, the phones would have stopped getting alarms, and they clearly haven\u0027t.\u0027 No service desk tickets were logged about the relay between 12 August and 31 October. He confirmed he had not reviewed the import log beyond its completion status."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Ten delayed-response incident reports forwarded by the Director of Critical Care Nursing",
+      "source": "Incident reporting system, reports selected by the Director",
+      "sourceType": "system-record",
+      "text": "Ten reports dated 14 August-20 October. Assigned nurse: agency 6, core 3, new graduate 1. Free-text excerpts: \u0027Phone showed several alerts queued for bed 8; attended after 3 min.\u0027 \u0027Thought it was another short desat.\u0027 \u0027Agency RN unfamiliar with Pod C layout, went to wrong room first.\u0027 \u0027Two phones in Pod B alarming at once for the same patient.\u0027 Times to attend ranged from 2.5 to 7 minutes. Selection criteria for the ten reports were not recorded."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Patient safety committee minutes, 19 September and 17 October",
+      "source": "Hospital patient safety committee",
+      "sourceType": "document",
+      "text": "19 September: committee noted rising delayed-response incidents on 5 East; the Director attributed them to agency onboarding; agreed action: orientation refresher for agency nurses. 17 October: incidents still elevated; action: Director to bring staffing proposals; the medical director asked for the monitor update to be reviewed, but no owner was assigned. No data on alarm or notification volumes were presented at either meeting."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Nurse phone fleet inventory and maintenance log, 5 East, 2026",
+      "source": "Telecoms asset register",
+      "sourceType": "system-record",
+      "text": "30 handsets in service, single model, firmware 4.8 installed March 2026 and unchanged since. Battery replacements July-October: 5. Two handsets returned for cracked screens in September and replaced from the spare pool (4 spares). Handsets are assigned to a nurse at shift start through a sign-on screen; the register does not record signal or call-quality data."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Occupational Health absence reason codes, 5 East and hospital-wide, September-October",
+      "source": "Occupational Health",
+      "sourceType": "system-record",
+      "text": "Reason codes are self-declared and optional for absences of three days or fewer. 5 East core RN sick-leave days, Sep-Oct: respiratory 38%, other/personal or not stated 47%, musculoskeletal 9%, stress/anxiety 6%. Hospital-wide nursing, same period: respiratory 41%, other/not stated 44%, musculoskeletal 10%, stress/anxiety 5%. No breakdown by shift pattern or by pod is available."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "5 East alarm management policy, March 2024 revision",
+      "source": "Unit policy library",
+      "sourceType": "document",
+      "text": "Bedside default limits follow the adult ICU profile; nurses may individualise limits with a documented rationale. Phone forwarding \u0027follows the forwarding configuration approved by the Unit Alarm Committee and maintained by Clinical Engineering; changes require committee sign-off\u0027. The central station is to be staffed \u0027when staffing allows\u0027. Unacknowledged high-priority alarms re-route to the charge nurse\u0027s phone after 60 seconds."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Bedside monitor alarm-limit and alarm-pause audit trail, July-October",
+      "source": "Monitor network audit log, Biomedical Engineering",
+      "sourceType": "log",
+      "text": "Nurse-initiated alarm-limit changes per patient-day: July 0.9, August 1.0, September 0.9, October 1.0. Audio-pause events longer than 2 minutes per patient-day: 0.3-0.4 in every month. No monitor had alarms disabled for more than 10 minutes at any point in the period. Limit changes were documented with a rationale in 88-91% of cases each month."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The growing share of agency and newly graduated nurses on the unit has worsened alarm response."
+      },
+      {
+        "id": "H2",
+        "text": "A change to the system that forwards bedside alarms to nurses\u0027 phones has increased the alarm notification load on nurses."
+      },
+      {
+        "id": "H3",
+        "text": "Rising patient acuity has increased the number of alarms generated by the bedside monitors."
+      },
+      {
+        "id": "H4",
+        "text": "The bedside monitor software update has changed alarm behaviour and increased the alarm load on nurses."
+      },
+      {
+        "id": "H5",
+        "text": "Gaps in wireless coverage in parts of the unit stop some phone alarm notifications from reaching nurses."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Move of the clinical alert relay server to new hardware (12 August)",
+        "to": "Increase in phone alarm notifications per nurse",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Increase in phone alarm notifications per nurse",
+        "to": "Rise in delayed alarm response incidents",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Rise in the agency nurse share of RN shifts",
+        "to": "Rise in delayed alarm response incidents",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Increase in phone alarm notifications per nurse",
+        "to": "Rise in core nurse sick leave",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Restore the relay server\u0027s alarm-forwarding configuration to its pre-August state, with Clinical Engineering validation and Unit Alarm Committee sign-off, then track phone notifications per nurse and acknowledgement times weekly."
+      },
+      {
+        "id": "A2",
+        "text": "Cap agency nurses at 10% of RN shifts and open performance reviews for every nurse named in a delayed-response incident report."
+      },
+      {
+        "id": "A3",
+        "text": "Stop forwarding SpO2 and technical alarms to nurses\u0027 phones until the review is complete, relying on bedside and central-station alarms in the meantime."
+      },
+      {
+        "id": "A4",
+        "text": "Install additional wireless access points around the rooms where nurses report phones failing to ring."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "S01",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S02",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S03",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S04",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S05",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S06",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S07",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S08",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S09",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "S10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "S14",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CROSS-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C4",
+    "X3": "C2",
+    "X4": "C9",
+    "X5": "C12",
+    "X6": "C10",
+    "X7": "C11",
+    "X8": "C5",
+    "X9": "C3",
+    "X10": "C7",
+    "X11": "C15",
+    "X12": "C1",
+    "X13": "C13",
+    "X14": "C14",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X3",
+    "X12"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CROSS-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20079,
+    "cacheCreationTokens": 9568,
+    "outputTokens": 2099,
+    "thinkingTokens": 860,
+    "costUsd": 0.00316449,
+    "durationMs": 12550,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with evidence limited to 2 collected items (X3, X12)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X12\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E1\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022What is going on: the main driver appears to be the 12 August relay server change. The rebuild imported only 3 of 14 forwarding rules; the old 15-second SpO2 hold-off, 60-second repeat suppression and routing of technical alarms to the charge phone were lost. Phone notifications per nurse roughly doubled in Pods A-C only, and delayed responses rose there for core, agency and new nurses alike. Pod D still uses the old server and did not change. Staffing, acuity and the monitor update do not explain the pattern: alarm volume per patient-day was flat, and Pod D\u0027s agency share was similar. Confidence is moderate to high on the relay cause, lower on the exact mechanism and on sick leave. Next: restore the full rule set on the relay server with clinical engineering validation and alarm committee sign-off, then track notifications and acknowledgement times. Do not discipline nurses or cap agency use on this evidence. Do not switch off SpO2 or technical alarm forwarding.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:20:03.3366034Z",
+    "finishedAt": "2026-11-17T16:20:16.7249714Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "EDF-2 with evidence limited to 2 collected items (X3, X12)",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X12",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X12",
+            "E1",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "What is going on: the main driver appears to be the 12 August relay server change. The rebuild imported only 3 of 14 forwarding rules; the old 15-second SpO2 hold-off, 60-second repeat suppression and routing of technical alarms to the charge phone were lost. Phone notifications per nurse roughly doubled in Pods A-C only, and delayed responses rose there for core, agency and new nurses alike. Pod D still uses the old server and did not change. Staffing, acuity and the monitor update do not explain the pattern: alarm volume per patient-day was flat, and Pod D\u0027s agency share was similar. Confidence is moderate to high on the relay cause, lower on the exact mechanism and on sick leave. Next: restore the full rule set on the relay server with clinical engineering validation and alarm committee sign-off, then track notifications and acknowledgement times. Do not discipline nurses or cap agency use on this evidence. Do not switch off SpO2 or technical alarm forwarding."
+    }
+  }
+}

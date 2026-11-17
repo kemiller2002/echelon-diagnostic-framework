@@ -1,0 +1,204 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-INTERACT-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-INTERACT-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C14",
+    "X2": "C7",
+    "X3": "C4",
+    "X4": "C10",
+    "X5": "C12",
+    "X6": "C9",
+    "X7": "C11",
+    "X8": "C2",
+    "X9": "C5",
+    "X10": "C8",
+    "X11": "C13",
+    "X12": "C1",
+    "X13": "C3",
+    "X14": "C6",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X12",
+    "X8"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-INTERACT-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20119,
+    "cacheCreationTokens": 9710,
+    "outputTokens": 2443,
+    "thinkingTokens": 1176,
+    "costUsd": 0.00336529,
+    "durationMs": 14290,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X12\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022The rejects come from the combination of Arnholt resin and the degraded D5 dryer. Arnholt run through D5 rejects at about 10%, Quillan through D5 at 0.9%, and Arnholt through the healthy D7 or a portable dryer at 0.8%. The same Arnholt lot went from 10.4% rejects through D5 to 0.8% through the portable dryer. The six new operators show the same reject rate as experienced staff on the same material, so the operator explanation does not hold, and putting them on improvement plans would punish the wrong group. I am fairly confident in this. The main gap is the north annex storage: Arnholt was only ever stored there, so its contribution to moisture is not separated out.\\nThis week: repair D5\u0027s heater and desiccant and confirm dew point reaches -40 C; restore the original alarm limit. Until then, keep Arnholt off D5 by routing it to Press 7 or a verified dryer. Add a moisture check on every VX resin lot. Do not drop Arnholt, and do not act on the operators. Moving the octabins out of the annex is worth testing later, not now.\u0022,\u0022methodChoice\u0022:\u0022EDF-2 analysis using X8 and X12 as the two collected items.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:50:38.1252844Z",
+    "finishedAt": "2026-11-17T16:50:53.3191262Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-1",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X8",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E4",
+            "X12",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X8",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "The rejects come from the combination of Arnholt resin and the degraded D5 dryer. Arnholt run through D5 rejects at about 10%, Quillan through D5 at 0.9%, and Arnholt through the healthy D7 or a portable dryer at 0.8%. The same Arnholt lot went from 10.4% rejects through D5 to 0.8% through the portable dryer. The six new operators show the same reject rate as experienced staff on the same material, so the operator explanation does not hold, and putting them on improvement plans would punish the wrong group. I am fairly confident in this. The main gap is the north annex storage: Arnholt was only ever stored there, so its contribution to moisture is not separated out.\nThis week: repair D5\u0027s heater and desiccant and confirm dew point reaches -40 C; restore the original alarm limit. Until then, keep Arnholt off D5 by routing it to Press 7 or a verified dryer. Add a moisture check on every VX resin lot. Do not drop Arnholt, and do not act on the operators. Moving the octabins out of the annex is worth testing later, not now.",
+      "methodChoice": "EDF-2 analysis using X8 and X12 as the two collected items."
+    }
+  }
+}

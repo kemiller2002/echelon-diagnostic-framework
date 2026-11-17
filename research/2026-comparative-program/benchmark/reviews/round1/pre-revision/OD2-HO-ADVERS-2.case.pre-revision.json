@@ -1,0 +1,400 @@
+{
+  "id": "OD2-HO-ADVERS-2",
+  "split": "heldout",
+  "benchmarkClass": "ADVERS",
+  "domain": "technical",
+  "readBudget": 2,
+  "title": "Confirmed incidents fall by two-thirds after a case-platform migration",
+  "setting": "Corvane Health Supplies is a fictional regional distributor of medical consumables with about 1,900 staff. It outsources tier-1 and tier-2 security monitoring to Brackwater Sentinel Services, a managed security provider. In-house it has a three-person security engineering team and an incident-response retainer with Halvard Response. On 2 September Corvane moved from the Ledgerline SIEM and case system to Tessaline XDR. Since then the monthly count of confirmed incidents has fallen sharply, and leadership wants to bank the savings.",
+  "presentingRequest": "From Owen Brekke, CFO: \u0027Before Thursday\u0027s budget meeting, tell me whether this fall in security incidents is real. Marta wants me to sign off the IR retainer cut and Brackwater\u0027s renewal bonus. What is actually going on, and what should we do?\u0027",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Brackwater Sentinel Services, Monthly SOC Service Report, October (issued 6 Nov)",
+      "sourceType": "vendor-account",
+      "text": "Confirmed incidents (cases in category Incident\u2013Confirmed at month end): Mar 41, Apr 36, May 46, Jun 33, Jul 34, Aug 27 (migration month), Sep 14, Oct 12. Mean time to contain: Mar\u2013Jul average 3h05m; Sep 1h52m; Oct 1h47m. Containment within the 4-hour SLA: Sep 100%, Oct 100%. Commentary: \u0027The Tessaline auto-triage playbooks have removed low-fidelity escalations that previously inflated incident counts, and sector intelligence reports an 8% Q3 fall in commodity phishing. Corvane\u0027s threat exposure is materially lower.\u0027 Category definitions (Corvane runbook v3): Incident\u2013Confirmed = malicious activity confirmed by an analyst; Suspicious Activity\u2013Monitoring = activity not yet confirmed as malicious, kept under observation."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Email from Marta Lindqvist (CISO) to Owen Brekke (CFO), 10 Nov",
+      "sourceType": "leadership-account",
+      "text": "Subject: Q1 budget \u2013 security. Owen, the Tessaline move is paying off: confirmed incidents are down from about 38 a month to 12\u201314. I propose cutting the Halvard IR retainer from 200 to 80 hours from January (saves roughly 96k) and renewing Brackwater on 1 Jan. Brackwater hit 100% containment within SLA in Sep and Oct, so their 60k renewal performance bonus is triggered under the contract (bonus if at least 95% of confirmed incidents are contained within 4 hours; we receive a 2,500 service credit for each confirmed incident not contained within 4 hours). Can we sign off at Thursday\u0027s budget meeting? \u2014 Marta"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Change record CHG-2291, Corvane IT change board",
+      "sourceType": "change-record",
+      "text": "CHG-2291: SIEM and case platform migration, Ledgerline to Tessaline XDR. Implemented 2 Sep. Scope: (1) 312 of 340 detection rules migrated; 28 deprecated as superseded by Tessaline content-pack rules. (2) Auto-triage playbooks enabled. Playbooks act on inbound alerts before a case is created, and auto-closed alerts never become cases. (3) Bidirectional sync connector v4.1.7 between Tessaline and the Brackwater ticket portal. (4) Role mapping: the BSS-Integration role is granted cases:write (all fields) at Brackwater\u0027s request, \u0027for parity with Ledgerline\u0027. (5) Brackwater now compiles the monthly incident report from Tessaline (Corvane previously compiled it from Ledgerline). Risk rating: medium. Approved: M. Lindqvist."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Interview notes, Ilse Varga, senior security engineer (Corvane), 12 Nov",
+      "sourceType": "staff-account",
+      "text": "\u0027Alert volume feels about the same as before; the Brackwater analysts are as busy as ever.\u0027 She said the Suspicious Activity\u2013Monitoring queue in Tessaline has grown from about 40 open cases in August to about 95 now: \u0027Brackwater owns that queue; I haven\u0027t had time to look inside it.\u0027 She is uneasy that 28 rules were dropped in the migration. She also said Tessaline support had mentioned in passing \u0027a connector issue in 4.1.x that can mess with case categories\u0027. She did not know whether it applied to Corvane."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Tessaline SOC dashboard export, Corvane tenant, generated 11 Nov",
+      "sourceType": "telemetry",
+      "text": "Alerts ingested: Sep 2,884; Oct 3,012 (Ledgerline Mar\u2013Jul average 2,950). Alerts auto-closed by triage playbooks: Sep 1,912; Oct 1,980. Open cases by category at 31 Oct: Incident\u2013Confirmed 3; Suspicious Activity\u2013Monitoring 96; Informational 41. Widget note: the \u0027Incidents this month\u0027 tile counts the Incident\u2013Confirmed category only. Mean-time-to-contain tile: Sep 1h52m, Oct 1h47m."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Master services agreement with Brackwater, Schedule 3 (service levels)",
+      "source": "Corvane procurement contract file",
+      "sourceType": "document",
+      "text": "Master Services Agreement, Corvane\u2013Brackwater, Schedule 3 (Service Levels). 3.2: Brackwater shall contain each confirmed incident within 4 hours of case creation. 3.4: For each confirmed incident not contained within 4 hours, Brackwater credits Corvane 2,500. 3.6: A renewal performance bonus of 60,000 is payable if at least 95% of confirmed incidents in the six months before renewal are contained within 4 hours. 3.8: \u0027Confirmed incident\u0027 means a case in the Incident\u2013Confirmed category of Corvane\u0027s case platform. 3.9: Brackwater prepares monthly reporting from the case platform of record."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Tessaline auto-triage playbook statistics, September\u2013October",
+      "source": "Brackwater QA summary for the Corvane tenant",
+      "sourceType": "vendor-account",
+      "text": "Alerts auto-closed: Sep 1,912; Oct 1,980. Top closure reasons: impossible-travel alerts from corporate VPN egress (38%), approved admin tools flagged as hacktools (22%), duplicate alerts from overlapping rules (17%), other (23%). Brackwater QA re-checked a random 50 auto-closures per month and found 0 wrongly closed. Playbook version 1.3, unchanged since go-live. Closures are logged against the alert record only. No case record is created."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Medical Supply Chain ISAC quarterly threat summary, Q3",
+      "source": "Medical Supply Chain ISAC, members\u0027 edition",
+      "sourceType": "external-data",
+      "text": "Q3 summary for 64 member organisations. Reported commodity phishing campaigns against members fell 8% compared with Q2. Business email compromise reports rose 5%. Ransomware intrusion reports were flat. Credential-stuffing activity against customer portals rose modestly. Figures are member self-reports, not adjusted for changes in membership or reporting practice, and are not broken down by member size or sub-sector."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Tessaline case field-change audit export, 2 September\u201331 October",
+      "source": "Tessaline audit trail, pulled by Corvane IT on 12 Nov",
+      "sourceType": "system-record",
+      "text": "Cases reaching Incident\u2013Confirmed: Sep 37, Oct 36. Of these, 47 (Sep 23, Oct 24) were later changed to Suspicious Activity\u2013Monitoring; the remainder equal the reported 14 and 12. All 47 changes: actor svc-bss-integration, channel API, made 3h31m\u20133h42m after case open, each while the case carried the SLA-warning flag (raised at 3h30m if no containment timestamp exists). All 47 had analyst confirmation notes before the change (credential misuse 19, malware execution 15, data staging 8, other 5). None was linked or merged to another case. Cases that leave Incident\u2013Confirmed drop out of the containment-time and SLA metrics. None of the 47 has a containment timestamp, though notes on 11 describe containment steps. Ledgerline, Mar\u2013Jul: no post-confirmation category changes."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Tessaline security advisory TXA-2026-14",
+      "source": "Tessaline vendor customer portal, published 22 Aug",
+      "sourceType": "vendor-account",
+      "text": "Affected: Tessaline partner sync connector 4.1.0\u20134.1.8. Issue: when an SLA-warning event fires on a case, the connector may overwrite the case category with the partner-side category value at the next sync cycle (default interval 10 minutes). Impact: case categories in Tessaline may diverge from the values analysts set. Fixed in 4.1.9. Workaround: remove \u0027category\u0027 from the connector field map. Customers can confirm whether the connector wrote a given change by checking the source host and user-agent on API gateway entries."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Detection rule migration inventory, 340 Ledgerline rules",
+      "source": "Corvane detection engineering spreadsheet, 30 Aug",
+      "sourceType": "document",
+      "text": "All 340 Ledgerline rules were reviewed. 312 were migrated with their logic unchanged. 28 were deprecated, and each is mapped to a Tessaline content-pack rule judged to cover the same behaviour (mapping reviewed by Brackwater, not independently tested). Ledgerline did not record which rule raised each incident, so historical incident counts per rule are unavailable. The spreadsheet lists rule names, owners and replacement rule IDs."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Call notes with Brackwater account manager, 13 Nov",
+      "source": "Corvane procurement call notes",
+      "sourceType": "vendor-account",
+      "text": "Gareth Pell, Brackwater account manager, said the fall in incidents \u0027reflects the Tessaline automation doing its job.\u0027 Asked about the Suspicious Activity queue, he said analysts \u0027park\u0027 a confirmed case there when it is merged into a parent incident, to avoid double counting. He said any odd category values were \u0027probably that vendor connector bug; we flagged it to Tessaline in August.\u0027 He said Brackwater staff do not edit Corvane case categories outside the connector. He asked for the renewal and bonus to be confirmed before year end."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Tessaline platform availability and log-ingestion report, September\u2013October",
+      "source": "Tessaline vendor service report, Corvane tenant",
+      "sourceType": "telemetry",
+      "text": "Tenant availability 99.96%, with one 34-minute maintenance window on 19 Oct. Median ingestion lag 41 seconds; 99th percentile 6 minutes. No dropped-event alarms were recorded. All 23 of 23 configured log sources are ingesting. Parser error rate is 0.02%, unchanged since go-live. Report is generated automatically by the vendor and covers platform health only, not detection content."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "EDR sensor coverage report, Corvane estate, 31 October",
+      "source": "Corvane endpoint management console",
+      "sourceType": "system-record",
+      "text": "Managed endpoints: 4,212. Sensors reporting in the last 24 hours: 4,087 (97.0%). 125 are offline, 98 of which are warehouse handheld terminals awaiting a firmware update. Monthly coverage from March to July ranged from 96.4% to 97.3%. No change to the sensor version or policy since June."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Tessaline go-live retrospective",
+      "source": "Corvane PMO retrospective document, 30 Sep",
+      "sourceType": "prior-report",
+      "text": "Went well: rule migration on schedule; analysts productive within a week. Issues: the connector field map was left at the vendor default to meet the go-live date. Ledgerline locked the category field once a case reached Incident\u2013Confirmed; Tessaline has no equivalent lock (logged as low risk, action owner TBD). Report generation was handed to Brackwater to save Corvane effort. Open action: apply connector 4.1.9 \u0027when convenient\u0027."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Tessaline API gateway request log for the Brackwater integration token, 2 September\u201331 October",
+      "source": "Tessaline API gateway, pulled by Corvane IT on 12 Nov",
+      "sourceType": "log",
+      "text": "Token svc-bss-integration. Source bss-sync-01 (Brackwater connector host; user-agent TessalineConnector/4.1.7): 18,204 requests. PATCH fields written: status, comments, assignee. Category writes: 0. Source bss-jump-02 (Brackwater analyst jump host; user-agent python-requests/2.31): 3,906 requests, first seen 9 Sep 08:14. It repeats GET /cases?category=incident-confirmed\u0026sla_warning=true about every 5 minutes. PATCH /cases/{id}/category: 47, each 1\u201312 minutes after that case first appeared in a GET result. Every case returned by those queries was later patched. No requests from other hosts."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Brackwater shift rota for the Corvane account, September\u2013October",
+      "source": "Brackwater service delivery",
+      "sourceType": "document",
+      "text": "A four-person day team (07:00\u201319:00) and a two-person night team. The shift lead rotates weekly among three named senior analysts. All Corvane-account staff reach the tenant through Brackwater jump hosts bss-jump-01 and bss-jump-02. The rota lists names, shift times and on-call phone numbers only. There are no activity records."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Security awareness phishing-simulation results, Q1\u2013Q3",
+      "source": "Corvane HR and IT awareness programme",
+      "sourceType": "system-record",
+      "text": "Simulated phishing click rate: Q1 9.1%, Q2 7.4%, Q3 5.8%. Report-to-security rate: Q1 21%, Q2 26%, Q3 31%. Mandatory annual training completion was 94% by 30 June. Simulations use the same template difficulty tier each quarter and go to all office-based staff. Warehouse staff without email are excluded."
+    },
+    {
+      "id": "C14",
+      "stage": "S1",
+      "title": "Board risk committee minutes extract, 21 October",
+      "source": "Corvane company secretary",
+      "sourceType": "document",
+      "text": "The CISO reported that \u0027incident volumes have fallen by more than half since the Tessaline migration\u0027 and credited the new platform\u0027s automation. The committee noted the update and asked for the IR retainer to be reviewed in the Q1 budget. No questions about incident definitions or reporting method were minuted. Next review: January meeting."
+    },
+    {
+      "id": "C15",
+      "stage": "S1",
+      "title": "Tessaline XDR invoice INV-77120, Q3",
+      "source": "Corvane accounts payable",
+      "sourceType": "financial-record",
+      "text": "Addressed to Corvane finance. Platform subscription (2,000 GB/day tier): 184,000. Professional services, migration: 46,500. Partner sync connector licence: 6,000. Total 236,500. Payment terms 30 days. The subscription next renews on 1 September next year. No credit notes or disputes on file."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The new platform\u0027s automated triage is filtering out escalations that used to be counted as incidents but were not genuine, which explains the fall in reported incidents."
+      },
+      {
+        "id": "H2",
+        "text": "Detection rules lost or deprecated in the migration have stopped some attacks from being detected, which explains the fall in reported incidents."
+      },
+      {
+        "id": "H3",
+        "text": "Cases that met the incident definition are being deliberately moved into a category the report does not count, which explains the fall in reported incidents."
+      },
+      {
+        "id": "H4",
+        "text": "Genuine malicious activity directed at the company has decreased, which explains the fall in reported incidents."
+      },
+      {
+        "id": "H5",
+        "text": "A fault in the new platform or its integration configuration is changing case categories without anyone intending it, which explains the fall in reported incidents."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Auto-triage playbooks enabled at the Tessaline go-live",
+        "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "Deprecation of 28 detection rules during the migration",
+        "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Cases moved out of Incident\u2013Confirmed after confirmation",
+        "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Auto-triage playbooks reducing analyst workload",
+        "to": "Lower reported mean time to contain in Sep\u2013Oct",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Approve the CISO\u0027s proposal to cut the Halvard IR retainer from 200 to 80 hours from January."
+      },
+      {
+        "id": "A2",
+        "text": "Reinstate as incidents any cases moved out of Incident\u2013Confirmed after confirmation, have the in-house team and the IR retainer verify containment on each, and remove category-edit rights from the Brackwater integration role."
+      },
+      {
+        "id": "A3",
+        "text": "Invoice Brackwater the contractual 2,500 service credit for every case moved out of Incident\u2013Confirmed after confirmation."
+      },
+      {
+        "id": "A4",
+        "text": "Ask Brackwater for a written explanation of the queue growth and any category changes before deciding on the January renewal."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "I1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "I14",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "runId": "pilot2__A_GENERAL__OD2-DEV2-NOCONC__haiku-low__t1",
+  "phase": "pilot2",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV2-NOCONC",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C15",
+    "X3": "C3",
+    "X4": "C10",
+    "X5": "C6",
+    "X6": "C13",
+    "X7": "C5",
+    "X8": "C11",
+    "X9": "C2",
+    "X10": "C12",
+    "X11": "C14",
+    "X12": "C9",
+    "X13": "C7",
+    "X14": "C4",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X12",
+    "X5",
+    "X9"
+  ],
+  "reads": [
+    "C9",
+    "C6",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__A_GENERAL__OD2-DEV2-NOCONC__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17982,
+    "cacheCreationTokens": 7694,
+    "outputTokens": 3029,
+    "thinkingTokens": 1775,
+    "costUsd": 0.00323372,
+    "durationMs": 17966,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-NOCONC\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X5\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X8\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:45,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022X5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022X5\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022Most of the rise is probably a recording change, not proof that the rota caused more falls. Before the switch, paper forms missed falls: a handover check found three clear unreported falls in six weeks, and the rise is mostly in no-harm and \\\u0022found on floor\\\u0022 falls. Night falls also look higher, but Q2 night times were partly guessed, and no pre-pilot call-bell data exists. Whether the rota or a shift toward frailer residents adds to the rise is still unknown. The falls rates are inside historical control limits, so this is not yet a clear signal.\\n\\nI\u0027m moderately confident in the recording finding, less so in the rest. Do not reverse the rota or halt the rollout yet, and do not issue warnings to night carers or withdraw the app, since that would remove better data.\\n\\nNext: present falls as rates with the reporting change marked, start sampling night call-bell times at both homes, check resident mix and medication changes, and take the rollout decision at a dated late-January review using Q4 data.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:41:28.9613174Z",
+    "finishedAt": "2026-11-17T14:41:47.8222194Z",
+    "output": {
+      "caseId": "OD2-DEV2-NOCONC",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X5",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "supported",
+          "confidence": 60,
+          "evidenceIds": [
+            "X12",
+            "E2",
+            "E4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5",
+            "X8",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "unknown",
+          "confidence": 45,
+          "evidenceIds": [
+            "X9",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E1",
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X12",
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "X5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "X5",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "Most of the rise is probably a recording change, not proof that the rota caused more falls. Before the switch, paper forms missed falls: a handover check found three clear unreported falls in six weeks, and the rise is mostly in no-harm and \u0022found on floor\u0022 falls. Night falls also look higher, but Q2 night times were partly guessed, and no pre-pilot call-bell data exists. Whether the rota or a shift toward frailer residents adds to the rise is still unknown. The falls rates are inside historical control limits, so this is not yet a clear signal.\n\nI\u0027m moderately confident in the recording finding, less so in the rest. Do not reverse the rota or halt the rollout yet, and do not issue warnings to night carers or withdraw the app, since that would remove better data.\n\nNext: present falls as rates with the reporting change marked, start sampling night call-bell times at both homes, check resident mix and medication changes, and take the rollout decision at a dated late-January review using Q4 data."
+    }
+  }
+}

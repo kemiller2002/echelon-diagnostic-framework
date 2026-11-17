@@ -1,0 +1,223 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CHANGE-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C13",
+    "X3": "C9",
+    "X4": "C1",
+    "X5": "C4",
+    "X6": "C12",
+    "X7": "C6",
+    "X8": "C10",
+    "X9": "C2",
+    "X10": "C3",
+    "X11": "C14",
+    "X12": "C5",
+    "X13": "C11",
+    "X14": "C7"
+  },
+  "readLabels": [
+    "X12",
+    "X7"
+  ],
+  "reads": [
+    "C5",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 38623,
+    "cacheCreationTokens": 41221,
+    "outputTokens": 62651,
+    "thinkingTokens": 60171,
+    "costUsd": 0.7952723,
+    "durationMs": 429578,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-max__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-max__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CHANGE-1\u0022,\u0022methodChoice\u0022:\u0022Standard-depth EDF analysis (EDF-1). Collected X12 first (churn split by price cohort, connector and seat band, which works as a natural experiment on price), then X7 (connector error logs and engineering notes, for mechanism and the status of the Tallymarsh log). Stopped at the 2-item limit. Items I02 and I04 use only evidence at or before stage S1 (E1\u2013E5).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:52,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022,\u0022E5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I03\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I07\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:91,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I09\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:63,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The rise in cancellations is not a pricing problem; it comes from the Quillbook connection.\\n\\nQuillbook retired its old invoice interface on 30 March. Since then our connector has dropped or doubled invoices for 1,212 of 1,900 Quillbook-linked accounts. 34% of those have cancelled, against 8% of Quillbook accounts with no recorded failure. Quillbook-linked churn roughly tripled whether or not the price was locked (5.9% vs 6.2%), while accounts without a connector stayed flat at about 1.9%, even though most had the same price rise and app update. Finance\u0027s \\\u0022bigger increase, more churn\\\u0022 pattern reflects that larger accounts use Quillbook more.\\n\\nRecommend:\\n- Don\u0027t reverse the price: it costs about $220k a month and won\u0027t fix this.\\n- Keep the duplicate-invoice hold; it has kept 3,870 duplicates out of customers\u0027 books.\\n- Make the Quillbook fix (three to four weeks, unscheduled) the top engineering job, and contact every Quillbook-linked account, cancelled ones included, to correct invoices.\\n- Make the health panel count warning-level events, and raise sync-ticket severity.\\n- Read the unreviewed Tallymarsh log before any rebuild.\\n\\nHigh confidence on Quillbook over price; Tallymarsh and slow support\u0027s role remain open.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:44:50.6012788Z",
+    "finishedAt": "2026-11-17T16:52:01.1077304Z",
+    "output": {
+      "caseId": "OD2-HO-CHANGE-1",
+      "methodChoice": "Standard-depth EDF analysis (EDF-1). Collected X12 first (churn split by price cohort, connector and seat band, which works as a natural experiment on price), then X7 (connector error logs and engineering notes, for mechanism and the status of the Tallymarsh log). Stopped at the 2-item limit. Items I02 and I04 use only evidence at or before stage S1 (E1\u2013E5).",
+      "answers": [
+        {
+          "itemId": "I01",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I02",
+          "answer": "unknown",
+          "confidence": 52,
+          "evidenceIds": [
+            "E3",
+            "E2",
+            "E5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I03",
+          "answer": "supported",
+          "confidence": 95,
+          "evidenceIds": [
+            "X12",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I04",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I05",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I06",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "E5",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I07",
+          "answer": "contradicted",
+          "confidence": 91,
+          "evidenceIds": [
+            "E4",
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I08",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I09",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 63,
+          "evidenceIds": [
+            "X12",
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The rise in cancellations is not a pricing problem; it comes from the Quillbook connection.\n\nQuillbook retired its old invoice interface on 30 March. Since then our connector has dropped or doubled invoices for 1,212 of 1,900 Quillbook-linked accounts. 34% of those have cancelled, against 8% of Quillbook accounts with no recorded failure. Quillbook-linked churn roughly tripled whether or not the price was locked (5.9% vs 6.2%), while accounts without a connector stayed flat at about 1.9%, even though most had the same price rise and app update. Finance\u0027s \u0022bigger increase, more churn\u0022 pattern reflects that larger accounts use Quillbook more.\n\nRecommend:\n- Don\u0027t reverse the price: it costs about $220k a month and won\u0027t fix this.\n- Keep the duplicate-invoice hold; it has kept 3,870 duplicates out of customers\u0027 books.\n- Make the Quillbook fix (three to four weeks, unscheduled) the top engineering job, and contact every Quillbook-linked account, cancelled ones included, to correct invoices.\n- Make the health panel count warning-level events, and raise sync-ticket severity.\n- Read the unreviewed Tallymarsh log before any rebuild.\n\nHigh confidence on Quillbook over price; Tallymarsh and slow support\u0027s role remain open."
+    }
+  }
+}

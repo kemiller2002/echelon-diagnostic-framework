@@ -1,0 +1,211 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-OBVWRONG",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C11",
+    "X3": "C10",
+    "X4": "C5",
+    "X5": "C2",
+    "X6": "C3",
+    "X7": "C1",
+    "X8": "C6",
+    "X9": "C12",
+    "X10": "C9",
+    "X11": "C4",
+    "X12": "C8"
+  },
+  "readLabels": [
+    "X6",
+    "X8",
+    "X10",
+    "X12",
+    "X11"
+  ],
+  "reads": [
+    "C3",
+    "C6",
+    "C9",
+    "C8",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20409,
+    "cacheCreationTokens": 11074,
+    "outputTokens": 2315,
+    "thinkingTokens": 321,
+    "costUsd": 0.0694989,
+    "durationMs": 19076,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-OBVWRONG\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022IT-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022IT-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022IT-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022IT-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-R1\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022IT-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022IT-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022IT-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022IT-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X8\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The overrun mostly comes from ending the after-hours closing contract, not from the hiring freeze. From 1 April, closing at 41 sites moved to maintenance staff as call-backs with a 3-hour minimum. Call-back pay rose from $38k to $289k. 1,962 call-backs carry the closing code, and none are in Summit Hill, which kept its contract. Regular holdover hours rose only 1.5%, so vacancies and the hot summer don\u0027t explain the jump. Eastgate has just 1 vacancy yet shows one of the largest call-back increases. Internal Audit checked the fraud allegation against lock logs and found no padding, so don\u0027t discipline the two named employees. Restore contracted closing (extension or re-tender) and track call-back spend. The contract saved $96k but call-backs cost roughly $250k more. Don\u0027t impose an overtime cap: crews would stop taking closings, which the liability coverage requires. The favoritism claim in Eastgate is unproven, because sign-up sheets were discarded. Keep and review the sheets, and make the sign-up fair, before any action against the supervisor. The injury link to overtime is plausible but unproven. Match claims to individual hours. Granting the eleven-position exemption wouldn\u0027t fix the main driver.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:15.1549282Z",
+    "finishedAt": "2026-11-17T14:27:36.4610504Z",
+    "output": {
+      "caseId": "OD2-DEV-OBVWRONG",
+      "answers": [
+        {
+          "itemId": "IT-H1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "E3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "IT-H2",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "IT-H3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-H4",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "IT-H5",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-R1",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "IT-R2",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "IT-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "IT-A1",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6",
+            "X8",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E6",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "IT-A3",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-A4",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X8",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The overrun mostly comes from ending the after-hours closing contract, not from the hiring freeze. From 1 April, closing at 41 sites moved to maintenance staff as call-backs with a 3-hour minimum. Call-back pay rose from $38k to $289k. 1,962 call-backs carry the closing code, and none are in Summit Hill, which kept its contract. Regular holdover hours rose only 1.5%, so vacancies and the hot summer don\u0027t explain the jump. Eastgate has just 1 vacancy yet shows one of the largest call-back increases. Internal Audit checked the fraud allegation against lock logs and found no padding, so don\u0027t discipline the two named employees. Restore contracted closing (extension or re-tender) and track call-back spend. The contract saved $96k but call-backs cost roughly $250k more. Don\u0027t impose an overtime cap: crews would stop taking closings, which the liability coverage requires. The favoritism claim in Eastgate is unproven, because sign-up sheets were discarded. Keep and review the sheets, and make the sign-up fair, before any action against the supervisor. The injury link to overtime is plausible but unproven. Match claims to individual hours. Granting the eleven-position exemption wouldn\u0027t fix the main driver."
+    }
+  }
+}

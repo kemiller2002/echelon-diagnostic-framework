@@ -1,0 +1,810 @@
+{
+  "label": "OD2-HO-NOCONC-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7719,
+  "cacheCreationTokens": 4533,
+  "outputTokens": 52830,
+  "thinkingTokens": 40891,
+  "costUsd": 1.0944238,
+  "durationMs": 508677,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-NOCONC-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-NOCONC-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022NOCONC\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022ratequote\u0027s 5xx rate ticks up in the week of a release\u0022,\u0022setting\u0022:\u0022Brindlemoor Freight runs an internal pricing service called ratequote. It returns shipping quotes to the customer booking web app, to the partner-sync integration jobs and to internal reporting. It handles about 2.1 million requests a week behind an internal load balancer and is owned by the Pricing Platform team. The team\u0027s error metric is the share of requests that return an HTTP 5xx status. Over 24 pods, the service reads from a quote cache and falls back to a read replica of the pricing database. It also calls an upstream tariff-rates service owned by another team.\u0022,\u0022presentingRequest\u0022:\u0022On Tuesday 3 November 2026 the Director of Platform Engineering asked two questions: did release v4.18 cause last week\u0027s rise in ratequote\u0027s 5xx rate, and should it be rolled back today? You are asked what, if anything, explains the rise and what the team should do.\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Marguerite Osei-Lund, Director of Platform Engineering, to the Pricing Platform team, Tue 3 Nov 2026\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: ratequote errors. \u0027ratequote\u0027s 5xx rate went from 0.31% to 0.41% last week. That is a 34% jump, and it happened right after v4.18 shipped on Tuesday. Dario\u0027s rollout numbers show the new pods erroring at almost twice the rate of the old ones, so I think we know what happened. I want v4.18 rolled back today. Someone in the channel also suggested muting all of ratequote\u0027s 5xx alerting, burn-rate page included, for a month until things settle. I\u0027m open to that if the noise is distracting people.\u0027\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Export of dashboard \u0027ratequote / errors\u0027, default four-week view, taken Mon 2 Nov\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Source: internal load balancer access logs. Weekly 5xx rate, weeks starting Monday: 5 Oct 0.29%; 12 Oct 0.32%; 19 Oct 0.31% (6,410 of 2,086,000 requests); 26 Oct 0.41% (8,690 of 2,112,000). Request volume in the week of 26 Oct was 1.2% above the prior week. Seven-day error-budget burn: 0.82x. Note added by SRE Fen Achterberg: \u0027I recounted 5xx lines directly from the raw load balancer log files for both weeks and got 6,402 and 8,677. The small gaps are late-shipped log batches. Nobody has edited the dashboard query since March.\u0027\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Release record RQ-4.18, filed by release engineer Dario Kestrel\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Deployed Tue 27 Oct as a rolling update. Started 14:10, completed 15:02 with all 24 pods on v4.18. Contents: HTTP client library fetchwell bumped from 5.2 to 5.4; new optional \u0027surcharge_breakdown\u0027 response field behind a flag (flag off); removal of the unused /v1/legacy-quote endpoint. Rollout observation (my note): \u0027During the rollout I compared 5xx on v4.18 pods with v4.17 pods. v4.18: 0.52% (31 of 5,960 requests). v4.17: 0.30% (22 of 7,330). Same minutes, same traffic. That looks like the new version to me, and my guess is the fetchwell bump.\u0027\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Change calendar, ratequote and dependencies, 26 Oct\u20131 Nov\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Tue 27 Oct 14:10: ratequote v4.18 (RQ-4.18). Wed 28 Oct 09:30: ratequote\u0027s read replica moved from host class m-std to host class m-dense (DB-2291). The previous hosts are kept until 20 Nov as a fallback. No load balancer, gateway or dashboard changes recorded. Not on the calendar: partner-sync\u0027s month-end reconciliation. The partner-sync team runs it \u0027around the last two business days of the month\u0027, which would be Thu 29\u2013Fri 30 Oct this month, and it normally accounts for about 18% of ratequote requests. Partner-sync has not confirmed when it ran this time.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Pricing Platform service-level policy, revision 4 (January 2026), extract\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Objective: 99.5% of ratequote requests succeed in each calendar month, giving an error budget of 0.5%. Paging: the burn-rate page fires when the 7-day budget burn exceeds 2x. A warning ticket opens when the 1-hour 5xx rate exceeds 0.6%. Weekly review: a week\u0027s 5xx rate is investigated as an incident if it lies above the upper edge of the normal band (the mean plus two standard deviations of the preceding 26 weekly rates), or if the burn-rate page fired. Otherwise the week is noted at ops review and no action is taken.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Booking analytics and client SDK metrics, weeks of 19 and 26 Oct\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Quote-to-booking completion in the customer web app was 41.0% in the week of 19 Oct and 41.2% in the week of 26 Oct. The ratequote client SDK used by the web app and by partner-sync retries once on any 5xx after 200 ms. Retry success was 98.7% and 98.6% for the two weeks. Requests still failing after retry: 83 and 122. Customer support logged no quote-related complaints in either week.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Code diff summary, ratequote v4.17 \u2192 v4.18\u0022,\u0022source\u0022:\u0022Source repository, compare view, summarised by the Pricing Platform tech lead\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u002247 files changed. fetchwell 5.2 \u2192 5.4 is a lock-file change only. ratequote still sets its own connect timeout (300 ms) and read timeout (800 ms) explicitly in config, unchanged. \u0027surcharge_breakdown\u0027 adds new serializer code that runs only when flag quote.surcharge_breakdown is on; the flag was off for all callers from 27 Oct to 1 Nov. The /v1/legacy-quote handler was deleted; gateway logs show no calls to it since July. Two log messages were reworded. Nothing changed in the cache, database access or retry code.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022ratequote application error log, 5xx counts by class, 19 Oct\u20131 Nov\u0022,\u0022source\u0022:\u0022Application log aggregation, query run by SRE on 3 Nov\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Counts for 19\u201325 Oct \u2192 26 Oct\u20131 Nov. 504 timeout (request exceeded 800 ms): 4,530 \u2192 6,480. 503 shed under load: 610 \u2192 700. 500 unhandled exception: 1,262 \u2192 1,497; the top signatures in both weeks are \u0027TariffNotFound race\u0027 and \u0027NullCurrencyCode\u0027, both present since spring. 502 bad gateway: 8 \u2192 13. No exception signature appears in the second week that is missing from the first. A 504 is logged the same way whether the slow call went to the read replica or to the tariff-rates service, so the log cannot tell them apart.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Read replica metrics, 28 Sep\u20131 Nov\u0022,\u0022source\u0022:\u0022Database monitoring, ratequote-db-ro, with DBA comment\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022The host class changed on Wed 28 Oct at 09:30. Read latency p50 stayed at 4\u20135 ms throughout. Read latency p99 by week: 28 Sep 39 ms; 5 Oct 35; 12 Oct 37; 19 Oct 36; week of 26 Oct 41 (38 before the move, 42 after). Replication lag stayed under 1 s throughout. Peak CPU was 46% on the old hosts and 39% on the new ones. Connection errors: none. DBA comment: \u0027Over the summer, p99 on the old hosts ranged from 33 to 44 ms by week. The new class should be faster, but I can\u0027t tell from this whether it is.\u0027\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with partner-sync team lead\u0022,\u0022source\u0022:\u0022Interview notes, Ilse Marrow, partner-sync lead, 3 Nov\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027Month-end reconciliation re-quotes every open partner shipment, so it puts heavy load on ratequote for a few hours. It usually runs on the last two business days. This month a partner asked us to wait until their data landed, and I really don\u0027t know whether it ran Thursday\u2013Friday or slipped to Monday 2 Nov. Our job-runner logs are only kept for seven days, and the run summary goes to an inbox nobody archives. We also don\u0027t tag our ratequote calls separately from the other partner jobs.\u0027\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Follow-up interview with the v4.18 release engineer\u0022,\u0022source\u0022:\u0022Interview notes, Dario Kestrel, release engineer, 3 Nov\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027I stand by the comparison: same minutes, same traffic, and the v4.18 pods were worse. I didn\u0027t look at older rollouts because there wasn\u0027t time. The fetchwell bump is the only change that touches the network path, so it\u0027s the obvious suspect. A rollback takes about 50 minutes, and nothing anyone depends on is in v4.18 yet, because the new field is still flagged off. I don\u0027t see the downside of rolling back.\u0027\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Weekly 5xx rate export, 27 Apr\u20131 Nov, with ops-review notes\u0022,\u0022source\u0022:\u0022Long-range export from dashboard \u0027ratequote / errors\u0027, with ops-review notes\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Preceding 26 weeks (week starting; %): 27 Apr 0.36; 4 May 0.33; 11 May 0.44; 18 May 0.31; 25 May 0.29; 1 Jun 0.38; 8 Jun 0.35; 15 Jun 0.47; 22 Jun 0.40; 29 Jun 0.34; 6 Jul 0.31; 13 Jul 0.51; 20 Jul 0.37; 27 Jul 0.30; 3 Aug 0.33; 10 Aug 0.45; 17 Aug 0.26; 24 Aug 0.39; 31 Aug 0.30; 7 Sep 0.36; 14 Sep 0.28; 21 Sep 0.33; 28 Sep 0.43; 5 Oct 0.29; 12 Oct 0.32; 19 Oct 0.31. Mean 0.354; standard deviation 0.064; upper band edge 0.482. Week of 26 Oct: 0.411. Ops-review notes: the weeks of 11 May, 13 Jul and 10 Aug were investigated. No fault was found in any of them, and each following week was below 0.40.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Error dashboard query definition and edit history\u0022,\u0022source\u0022:\u0022Dashboard configuration store\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Query: count of load balancer access-log lines with status 500\u2013599 for host ratequote.internal, divided by all lines for that host, grouped by week starting Monday. Edit history: created 14 Jan 2025; last edited 9 Mar 2026 (colour change only). The data source has not changed since creation. Log-shipping lag alarms in the last eight weeks: two, both under 20 minutes, on 7 Oct and 30 Oct.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022fetchwell 5.3/5.4 release notes and pull-request review thread\u0022,\u0022source\u0022:\u0022Library maintainers\u0027 release notes and ratequote pull request 1184 review comments\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022fetchwell 5.3 notes: \u0027idle connection eviction default changed from 90 s to 30 s\u0027; \u0027fixes rare double-close on cancelled requests\u0027. 5.4 notes: \u0027TLS session cache size increased\u0027. PR 1184 review: a reviewer asked whether the eviction change matters. The author replied: \u0027should be fine, our pool is busy enough that connections rarely go idle.\u0027 No test was run for this. ratequote uses fetchwell only for its calls to the upstream tariff-rates service.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Error-budget report, October 2026\u0022,\u0022source\u0022:\u0022SLO reporting job, generated 2 Nov\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022ratequote, October 2026. Requests: 9.21 million. Failed (5xx): 30,880. Success: 99.66% against a 99.5% objective. Monthly error budget consumed: 67%. Highest 7-day burn in the month: 0.84x, for the window ending 31 Oct. Burn-rate page fired: no. Budget remaining at month end: 33%.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Per-pod 5xx and cache metrics for the last five rollouts\u0022,\u0022source\u0022:\u0022Pod-level metrics store, query run by SRE on 3 Nov\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Each rollout was a rolling update of 24 pods taking about 50 minutes. 5xx rate during the rollout, new pods vs old pods: v4.15 (8 Sep) 0.49% vs 0.31%; v4.16 (22 Sep) 0.58% vs 0.33%; config-only redeploy of the unchanged v4.16 image (6 Oct) 0.55% vs 0.29%; v4.17 (13 Oct) 0.47% vs 0.32%; v4.18 (27 Oct) 0.52% vs 0.30%. Quote-cache hit ratio on new pods is under 20% in their first 10 minutes and about 90% by minute 40. Old pods hold about 93%. Cache misses go to the read replica, and the extra 5xx on new pods are 504 timeouts. Extra errors from this warm-up: 10\u201320 per rollout. Once a rollout completes no old pods remain, so pods of the same age running different versions have never been compared.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Customer support tickets tagged quote or pricing, 1 Sep\u20131 Nov\u0022,\u0022source\u0022:\u0022Support desk export\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u002214 tickets in total, 0\u20133 per week, none in the weeks of 19 or 26 Oct. Subjects: disputed fuel surcharge (6), quote expired before booking (4), currency display (3), \u0027quote page slow\u0027 (1, on 15 Sep). No ticket mentions an error message from the quote service.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022tariff-rates service incident history, 1 Sep\u20131 Nov\u0022,\u0022source\u0022:\u0022Incident register of the team that owns tariff-rates\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022One incident in the period: 15 Sep, 11:02\u201311:20, elevated latency after a configuration push, resolved by revert. No incidents or changes recorded from 19 Oct to 1 Nov. Weekly p99 response time to callers ranged from 210 to 260 ms over the period; it was 244 ms in the week of 26 Oct.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022ratequote alert history, 4 May\u20131 Nov\u0022,\u0022source\u0022:\u0022Alerting system export\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Burn-rate page: did not fire at any point from 4 May to 1 Nov. Warning tickets (1-hour 5xx rate above 0.6%): 4 in the week of 19 Oct and 9 in the week of 26 Oct. On-call closed all nine from the week of 26 Oct as \u0027transient, no action\u0027. The alert configuration was last changed in January 2026, when policy revision 4 took effect.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Staging load-test results for v4.17 and v4.18\u0022,\u0022source\u0022:\u0022Performance test reports with test owner\u0027s note\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Run A, 12 Oct, v4.17: 400 requests per second for 30 minutes, 5xx 0.35%. Run B, 26 Oct, v4.18: same profile, stopped at minute 11 when the staging replica was reclaimed by another team, 5xx 0.38% over the partial run. Staging uses a stubbed tariff-rates service with injected latency and a smaller replica. Test owner\u0027s note: \u0027Run B is partial and isn\u0027t comparable with Run A. I haven\u0027t rerun it.\u0027\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022Release v4.18 introduced a fault that raised ratequote\u0027s 5xx rate in the week of 26 Oct.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Moving the read replica to a new host class raised ratequote\u0027s 5xx rate in the week of 26 Oct.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022ratequote\u0027s 5xx rate in the week of 26 Oct is within the variation the service shows in ordinary weeks.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022The rise is an artefact of a change in how the error dashboard counts 5xx responses.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022Heavier partner-sync month-end traffic raised ratequote\u0027s 5xx rate in the week of 26 Oct.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Release v4.18 deployed on 27 Oct\u0022,\u0022to\u0022:\u0022Higher weekly 5xx rate in the week of 26 Oct\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022A pod being newly started during a rollout\u0022,\u0022to\u0022:\u0022Higher 5xx rate on that pod during the rollout\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Higher weekly 5xx rate in the week of 26 Oct\u0022,\u0022to\u0022:\u0022Fewer completed bookings in the customer web app\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Read replica moved to a new host class on 28 Oct\u0022,\u0022to\u0022:\u0022Higher weekly 5xx rate in the week of 26 Oct\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R5\u0022,\u0022from\u0022:\u0022Partner-sync month-end reconciliation run\u0022,\u0022to\u0022:\u0022Higher weekly 5xx rate in the week of 26 Oct\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Roll ratequote back to v4.17 today and hold v4.18 until the cause of the rise is found.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Make no corrective change: record the week at ops review as within the normal band, leave alerting as it is, and apply the standard weekly check to the following week.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Mute all ratequote 5xx alerting, including the burn-rate page, for 30 days until the rate settles.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Move the read replica back to the previous host class.\u0022},{\u0022id\u0022:\u0022A5\u0022,\u0022text\u0022:\u0022Open an incident and assign an engineer to investigate last week\u0027s errors before the next ops review.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-R5\u0022,\u0022refId\u0022:\u0022R5\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022refId\u0022:\u0022A5\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-2\u0022,\u0022groundTruthNarrative\u0022:\u0022ratequote\u0027s 5xx rate rose from 0.31% to 0.41% in the week of 26 Oct. Three changes fall in that week: release v4.18, a move of the read replica to new hosts, and possibly partner-sync\u0027s month-end reconciliation. The default four-week dashboard view makes 0.41% look like an outlier. Over the preceding 26 weeks, though, the weekly rate ranged from 0.26% to 0.51%, and five of those weeks were higher than this one. The policy band edge is 0.482%, so the week is in band. Three earlier in-band upticks were investigated and no fault was found in any of them. The release engineer\u0027s comparison (new pods 0.52% vs old pods 0.30%) is the same new-pod excess seen in every recent rollout, including a config-only redeploy with no code change. It comes from cold caches on newly started pods and adds 10\u201320 errors per rollout. It says nothing about v4.18, and pods of the same age running different versions have never been compared. Nothing in the evidence separates the release, the replica move, partner traffic or ordinary variation; each stays live but unestablished. Users were not affected: client retries absorbed the errors and booking completion held. The team\u0027s own policy, the budget burn of 0.82x and the history together support recording the week and taking no corrective action. Rolling back or moving the replica back would be premature, and muting the alerting would be harmful.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C10\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C10\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022,\u0022confounded\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The only direct evidence for the release is E3\u0027s new-vs-old pod comparison. C10 shows the same excess in every rollout, including a config-only redeploy of an unchanged image, and ties it to cache warm-up. So that comparison does not discriminate, and no same-age comparison exists. The fetchwell eviction change (C8) remains a plausible but untested mechanism, and C1/C14 neither confirm nor exclude it. An in-band week (C6) fits a small real effect as well as no effect at all, so it does not count against H1 either. The hypothesis is live but unestablished.\u0022},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022alternative-cause\u0022],\u0022rationale\u0022:\u0022The replica moved in the same week (E4). Replica p99 rose slightly after the move but stayed inside the summer\u0027s range, with no errors or lag (C3). 504s cannot be attributed to the replica rather than tariff-rates (C2). Nothing confirms or excludes the move.\u0022},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022C6\u0022,\u0022C9\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022nonexistent-problem\u0022,\u0022base-rate\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022By the policy\u0027s own definition (E5), the normal band is the mean plus two standard deviations of the preceding 26 weeks: 0.354 \u002B 2\u00D70.064 = 0.482%. The week\u0027s 0.411% is inside it. Five of the prior 26 weeks were higher, and the three similar weeks that were investigated turned up no fault (C6). The four-week view in E2 hides this.\u0022},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C7\u0022],\u0022tags\u0022:[\u0022artefact-check\u0022],\u0022rationale\u0022:\u0022A recount from the raw load balancer logs matches the dashboard for both weeks, apart from small late-shipping gaps, and the query has not been edited since March (E2). No dashboard changes are on the calendar (E4), and C7 confirms this. The rise is real in the counts.\u0022},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C2\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022unverifiable\u0022,\u0022alternative-cause\u0022],\u0022rationale\u0022:\u0022It is not even established that the reconciliation ran during the week (E4; C4 says it may have slipped to 2 Nov, logs are gone and calls are untagged). Total volume was nearly flat. The claim is neither supported nor excluded.\u0022},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C10\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C8\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022confounded\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022The release and the higher weekly rate fall in the same week, so they co-occur. The only comparison that seemed to isolate the release is explained by new-pod warm-up common to all rollouts (C10). Two other changes, plus ordinary weekly variation (C6), are confounded with it. Nothing counts against the link itself, so it is not contradicted. It is not causal either.\u0022},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C10\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C5\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022mechanism\u0022,\u0022natural-experiment\u0022],\u0022rationale\u0022:\u0022Across five rollouts, new pods show elevated 5xx while their cache hit ratio climbs from under 20% to about 90%. The excess errors are 504 timeouts on cache misses that go to the replica. The config-only redeploy of an unchanged image shows the same excess, which rules out code changes as the rival. Temporal order, mechanism, covariation and a natural experiment are all present.\u0022},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E6\u0022],\u0022allowedEvidence\u0022:[\u0022E6\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022impact-check\u0022],\u0022rationale\u0022:\u0022Booking completion did not fall (41.0% \u2192 41.2%) even though the 5xx rate rose. The SDK retry absorbs about 98.6% of 5xx, only 122 requests failed after retry, and there were no complaints (E6, C11). The evidence counts against this link.\u0022},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022confounded\u0022],\u0022rationale\u0022:\u0022The replica move and the higher weekly rate co-occur in the same week (E2, E4). Replica metrics show no errors, and latency stays within the historical range (C3). The logs cannot attribute the 504s (C2). Co-occurrence is shown; causation is not, and nothing counts against the link.\u0022},{\u0022itemId\u0022:\u0022I-R5\u0022,\u0022expected\u0022:\u0022unknown\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022unverifiable\u0022],\u0022rationale\u0022:\u0022Whether the reconciliation ran within the week is unconfirmed (E4) and cannot now be established (C4). So even co-occurrence with the higher rate is not shown.\u0022},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C10\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C5\u0022,\u0022C6\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022premature-fix\u0022],\u0022rationale\u0022:\u0022A rollback would be the right fix if H1 were confirmed. It is cheap and reversible: v4.18 contains nothing callers depend on (C1, C5), and a rollout adds only 10\u201320 warm-up errors (C10). But the evidence that seemed to implicate v4.18 is the warm-up effect (C10), and the week is in band (C6). Committing to the fix now is not justified.\u0022},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022no-intervention\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The week is inside the policy band (C6) and the burn of 0.82x is below the 2x page threshold (E2, E5). Users were not affected (E6), and earlier similar weeks resolved with no fault found (C6). Under the team\u0027s own rule this is a \u0027note and take no action\u0027 week, and keeping alerting as it is means a real shift would still be caught.\u0022},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022suppresses-information\u0022],\u0022rationale\u0022:\u0022Muting all alerting, including the burn-rate page (E5), switches off the protection against an SLO breach for 30 days. That is damaging whether the rise is a fault (H1, H2, H5) or noise (H3), and the alerts are not causing a burden: the page has never fired and the warnings were closed as transient (C13).\u0022},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E4\u0022],\u0022allowedEvidence\u0022:[\u0022E4\u0022,\u0022C3\u0022],\u0022tags\u0022:[\u0022premature-fix\u0022],\u0022rationale\u0022:\u0022Moving the replica back would help if H2 were confirmed, and it is reversible because the old hosts are kept until 20 Nov (E4). But H2 is unestablished (C3 shows nothing abnormal) and the week is in band, so acting now is not justified.\u0022},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E5\u0022,\u0022C6\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022low-yield-investigation\u0022],\u0022rationale\u0022:\u0022Investigating does no damage and is a reasonable response to doubt, but it is not among the best actions. Policy reserves incident investigations for out-of-band weeks (E5). Three earlier investigations of similar weeks found nothing (C6). No same-age version comparison exists in last week\u0027s data (C10), so a look back is unlikely to settle anything.\u0022},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C9\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022no-intervention\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022The top-ranked action is A2, the decision that no intervention is warranted. That decision is fully supported: the week is in band by the policy\u0027s own measure (E5, C6), burn is below 2x (E2), and users were not affected (E6). It does not depend on resolving which, if any, of the candidate causes was at work.\u0022}],\u0022discriminatingReads\u0022:[\u0022C6\u0022,\u0022C10\u0022],\u0022lowValueReads\u0022:[\u0022C7\u0022,\u0022C9\u0022,\u0022C11\u0022,\u0022C12\u0022,\u0022C13\u0022,\u0022C14\u0022],\u0022optimalReadPath\u0022:[\u0022C6\u0022,\u0022C10\u0022],\u0022authoringNotes\u0022:\u0022Arithmetic check. The 26 weekly values in C6 sum to 9.21: mean 0.3542, sample SD 0.0638, upper edge 0.482. 6,410/2,086,000 = 0.307% and 8,690/2,112,000 = 0.411%. The C2 class counts sum to 6,410 and 8,690. Burn 0.411/0.5 = 0.82x. 30,880/9.21M = 0.335%, i.e. 67% of budget. v4.18 warm-up excess is (0.52\u22120.30)% \u00D7 5,960 \u2248 13 errors.\\n\\nTraps. (1) The four-week dashboard view (E2) and the Director\u0027s framing (E1) make 0.41% look abnormal; C6 counters this. (2) The concurrent pod comparison (E3, reinforced by the interested release engineer in C5) looks like a controlled test of v4.18; C10 shows it is new-pod cache warm-up seen in every rollout, including a no-code redeploy.\\n\\nRead paths. With only C6, an analyst can settle H3, A2 and SUFF but would likely still read the release as causal. With only C10, they neutralise the release claim but cannot apply the policy band. No other item supplies the 26-week band or the cross-rollout pod data. The distractors (C1, C2, C3, C4, C5, C8, C14) keep H1, H2 and H5 live without settling them. C7, C9, C11, C12 and C13 only confirm what the initial file already shows.\\n\\nR1 and R4 are keyed association-only because the evidence shows same-week co-occurrence, which the stated definition counts. R5 is unknown because the reconciliation\u0027s timing is itself unestablished.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:02:46.5759666Z",
+  "finishedAt": "2026-11-17T15:11:16.2202430Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-NOCONC-2",
+      "split": "heldout",
+      "benchmarkClass": "NOCONC",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "ratequote\u0027s 5xx rate ticks up in the week of a release",
+      "setting": "Brindlemoor Freight runs an internal pricing service called ratequote. It returns shipping quotes to the customer booking web app, to the partner-sync integration jobs and to internal reporting. It handles about 2.1 million requests a week behind an internal load balancer and is owned by the Pricing Platform team. The team\u0027s error metric is the share of requests that return an HTTP 5xx status. Over 24 pods, the service reads from a quote cache and falls back to a read replica of the pricing database. It also calls an upstream tariff-rates service owned by another team.",
+      "presentingRequest": "On Tuesday 3 November 2026 the Director of Platform Engineering asked two questions: did release v4.18 cause last week\u0027s rise in ratequote\u0027s 5xx rate, and should it be rolled back today? You are asked what, if anything, explains the rise and what the team should do.",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Email from Marguerite Osei-Lund, Director of Platform Engineering, to the Pricing Platform team, Tue 3 Nov 2026",
+          "sourceType": "leadership-account",
+          "text": "Subject: ratequote errors. \u0027ratequote\u0027s 5xx rate went from 0.31% to 0.41% last week. That is a 34% jump, and it happened right after v4.18 shipped on Tuesday. Dario\u0027s rollout numbers show the new pods erroring at almost twice the rate of the old ones, so I think we know what happened. I want v4.18 rolled back today. Someone in the channel also suggested muting all of ratequote\u0027s 5xx alerting, burn-rate page included, for a month until things settle. I\u0027m open to that if the noise is distracting people.\u0027"
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Export of dashboard \u0027ratequote / errors\u0027, default four-week view, taken Mon 2 Nov",
+          "sourceType": "telemetry",
+          "text": "Source: internal load balancer access logs. Weekly 5xx rate, weeks starting Monday: 5 Oct 0.29%; 12 Oct 0.32%; 19 Oct 0.31% (6,410 of 2,086,000 requests); 26 Oct 0.41% (8,690 of 2,112,000). Request volume in the week of 26 Oct was 1.2% above the prior week. Seven-day error-budget burn: 0.82x. Note added by SRE Fen Achterberg: \u0027I recounted 5xx lines directly from the raw load balancer log files for both weeks and got 6,402 and 8,677. The small gaps are late-shipped log batches. Nobody has edited the dashboard query since March.\u0027"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Release record RQ-4.18, filed by release engineer Dario Kestrel",
+          "sourceType": "change-record",
+          "text": "Deployed Tue 27 Oct as a rolling update. Started 14:10, completed 15:02 with all 24 pods on v4.18. Contents: HTTP client library fetchwell bumped from 5.2 to 5.4; new optional \u0027surcharge_breakdown\u0027 response field behind a flag (flag off); removal of the unused /v1/legacy-quote endpoint. Rollout observation (my note): \u0027During the rollout I compared 5xx on v4.18 pods with v4.17 pods. v4.18: 0.52% (31 of 5,960 requests). v4.17: 0.30% (22 of 7,330). Same minutes, same traffic. That looks like the new version to me, and my guess is the fetchwell bump.\u0027"
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Change calendar, ratequote and dependencies, 26 Oct\u20131 Nov",
+          "sourceType": "change-record",
+          "text": "Tue 27 Oct 14:10: ratequote v4.18 (RQ-4.18). Wed 28 Oct 09:30: ratequote\u0027s read replica moved from host class m-std to host class m-dense (DB-2291). The previous hosts are kept until 20 Nov as a fallback. No load balancer, gateway or dashboard changes recorded. Not on the calendar: partner-sync\u0027s month-end reconciliation. The partner-sync team runs it \u0027around the last two business days of the month\u0027, which would be Thu 29\u2013Fri 30 Oct this month, and it normally accounts for about 18% of ratequote requests. Partner-sync has not confirmed when it ran this time."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Pricing Platform service-level policy, revision 4 (January 2026), extract",
+          "sourceType": "document",
+          "text": "Objective: 99.5% of ratequote requests succeed in each calendar month, giving an error budget of 0.5%. Paging: the burn-rate page fires when the 7-day budget burn exceeds 2x. A warning ticket opens when the 1-hour 5xx rate exceeds 0.6%. Weekly review: a week\u0027s 5xx rate is investigated as an incident if it lies above the upper edge of the normal band (the mean plus two standard deviations of the preceding 26 weekly rates), or if the burn-rate page fired. Otherwise the week is noted at ops review and no action is taken."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Booking analytics and client SDK metrics, weeks of 19 and 26 Oct",
+          "sourceType": "system-record",
+          "text": "Quote-to-booking completion in the customer web app was 41.0% in the week of 19 Oct and 41.2% in the week of 26 Oct. The ratequote client SDK used by the web app and by partner-sync retries once on any 5xx after 200 ms. Retry success was 98.7% and 98.6% for the two weeks. Requests still failing after retry: 83 and 122. Customer support logged no quote-related complaints in either week."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Code diff summary, ratequote v4.17 \u2192 v4.18",
+          "source": "Source repository, compare view, summarised by the Pricing Platform tech lead",
+          "sourceType": "change-record",
+          "text": "47 files changed. fetchwell 5.2 \u2192 5.4 is a lock-file change only. ratequote still sets its own connect timeout (300 ms) and read timeout (800 ms) explicitly in config, unchanged. \u0027surcharge_breakdown\u0027 adds new serializer code that runs only when flag quote.surcharge_breakdown is on; the flag was off for all callers from 27 Oct to 1 Nov. The /v1/legacy-quote handler was deleted; gateway logs show no calls to it since July. Two log messages were reworded. Nothing changed in the cache, database access or retry code."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "ratequote application error log, 5xx counts by class, 19 Oct\u20131 Nov",
+          "source": "Application log aggregation, query run by SRE on 3 Nov",
+          "sourceType": "log",
+          "text": "Counts for 19\u201325 Oct \u2192 26 Oct\u20131 Nov. 504 timeout (request exceeded 800 ms): 4,530 \u2192 6,480. 503 shed under load: 610 \u2192 700. 500 unhandled exception: 1,262 \u2192 1,497; the top signatures in both weeks are \u0027TariffNotFound race\u0027 and \u0027NullCurrencyCode\u0027, both present since spring. 502 bad gateway: 8 \u2192 13. No exception signature appears in the second week that is missing from the first. A 504 is logged the same way whether the slow call went to the read replica or to the tariff-rates service, so the log cannot tell them apart."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Read replica metrics, 28 Sep\u20131 Nov",
+          "source": "Database monitoring, ratequote-db-ro, with DBA comment",
+          "sourceType": "telemetry",
+          "text": "The host class changed on Wed 28 Oct at 09:30. Read latency p50 stayed at 4\u20135 ms throughout. Read latency p99 by week: 28 Sep 39 ms; 5 Oct 35; 12 Oct 37; 19 Oct 36; week of 26 Oct 41 (38 before the move, 42 after). Replication lag stayed under 1 s throughout. Peak CPU was 46% on the old hosts and 39% on the new ones. Connection errors: none. DBA comment: \u0027Over the summer, p99 on the old hosts ranged from 33 to 44 ms by week. The new class should be faster, but I can\u0027t tell from this whether it is.\u0027"
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Interview with partner-sync team lead",
+          "source": "Interview notes, Ilse Marrow, partner-sync lead, 3 Nov",
+          "sourceType": "staff-account",
+          "text": "\u0027Month-end reconciliation re-quotes every open partner shipment, so it puts heavy load on ratequote for a few hours. It usually runs on the last two business days. This month a partner asked us to wait until their data landed, and I really don\u0027t know whether it ran Thursday\u2013Friday or slipped to Monday 2 Nov. Our job-runner logs are only kept for seven days, and the run summary goes to an inbox nobody archives. We also don\u0027t tag our ratequote calls separately from the other partner jobs.\u0027"
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Follow-up interview with the v4.18 release engineer",
+          "source": "Interview notes, Dario Kestrel, release engineer, 3 Nov",
+          "sourceType": "staff-account",
+          "text": "\u0027I stand by the comparison: same minutes, same traffic, and the v4.18 pods were worse. I didn\u0027t look at older rollouts because there wasn\u0027t time. The fetchwell bump is the only change that touches the network path, so it\u0027s the obvious suspect. A rollback takes about 50 minutes, and nothing anyone depends on is in v4.18 yet, because the new field is still flagged off. I don\u0027t see the downside of rolling back.\u0027"
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Weekly 5xx rate export, 27 Apr\u20131 Nov, with ops-review notes",
+          "source": "Long-range export from dashboard \u0027ratequote / errors\u0027, with ops-review notes",
+          "sourceType": "telemetry",
+          "text": "Preceding 26 weeks (week starting; %): 27 Apr 0.36; 4 May 0.33; 11 May 0.44; 18 May 0.31; 25 May 0.29; 1 Jun 0.38; 8 Jun 0.35; 15 Jun 0.47; 22 Jun 0.40; 29 Jun 0.34; 6 Jul 0.31; 13 Jul 0.51; 20 Jul 0.37; 27 Jul 0.30; 3 Aug 0.33; 10 Aug 0.45; 17 Aug 0.26; 24 Aug 0.39; 31 Aug 0.30; 7 Sep 0.36; 14 Sep 0.28; 21 Sep 0.33; 28 Sep 0.43; 5 Oct 0.29; 12 Oct 0.32; 19 Oct 0.31. Mean 0.354; standard deviation 0.064; upper band edge 0.482. Week of 26 Oct: 0.411. Ops-review notes: the weeks of 11 May, 13 Jul and 10 Aug were investigated. No fault was found in any of them, and each following week was below 0.40."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Error dashboard query definition and edit history",
+          "source": "Dashboard configuration store",
+          "sourceType": "system-record",
+          "text": "Query: count of load balancer access-log lines with status 500\u2013599 for host ratequote.internal, divided by all lines for that host, grouped by week starting Monday. Edit history: created 14 Jan 2025; last edited 9 Mar 2026 (colour change only). The data source has not changed since creation. Log-shipping lag alarms in the last eight weeks: two, both under 20 minutes, on 7 Oct and 30 Oct."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "fetchwell 5.3/5.4 release notes and pull-request review thread",
+          "source": "Library maintainers\u0027 release notes and ratequote pull request 1184 review comments",
+          "sourceType": "document",
+          "text": "fetchwell 5.3 notes: \u0027idle connection eviction default changed from 90 s to 30 s\u0027; \u0027fixes rare double-close on cancelled requests\u0027. 5.4 notes: \u0027TLS session cache size increased\u0027. PR 1184 review: a reviewer asked whether the eviction change matters. The author replied: \u0027should be fine, our pool is busy enough that connections rarely go idle.\u0027 No test was run for this. ratequote uses fetchwell only for its calls to the upstream tariff-rates service."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Error-budget report, October 2026",
+          "source": "SLO reporting job, generated 2 Nov",
+          "sourceType": "system-record",
+          "text": "ratequote, October 2026. Requests: 9.21 million. Failed (5xx): 30,880. Success: 99.66% against a 99.5% objective. Monthly error budget consumed: 67%. Highest 7-day burn in the month: 0.84x, for the window ending 31 Oct. Burn-rate page fired: no. Budget remaining at month end: 33%."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Per-pod 5xx and cache metrics for the last five rollouts",
+          "source": "Pod-level metrics store, query run by SRE on 3 Nov",
+          "sourceType": "telemetry",
+          "text": "Each rollout was a rolling update of 24 pods taking about 50 minutes. 5xx rate during the rollout, new pods vs old pods: v4.15 (8 Sep) 0.49% vs 0.31%; v4.16 (22 Sep) 0.58% vs 0.33%; config-only redeploy of the unchanged v4.16 image (6 Oct) 0.55% vs 0.29%; v4.17 (13 Oct) 0.47% vs 0.32%; v4.18 (27 Oct) 0.52% vs 0.30%. Quote-cache hit ratio on new pods is under 20% in their first 10 minutes and about 90% by minute 40. Old pods hold about 93%. Cache misses go to the read replica, and the extra 5xx on new pods are 504 timeouts. Extra errors from this warm-up: 10\u201320 per rollout. Once a rollout completes no old pods remain, so pods of the same age running different versions have never been compared."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Customer support tickets tagged quote or pricing, 1 Sep\u20131 Nov",
+          "source": "Support desk export",
+          "sourceType": "customer-account",
+          "text": "14 tickets in total, 0\u20133 per week, none in the weeks of 19 or 26 Oct. Subjects: disputed fuel surcharge (6), quote expired before booking (4), currency display (3), \u0027quote page slow\u0027 (1, on 15 Sep). No ticket mentions an error message from the quote service."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "tariff-rates service incident history, 1 Sep\u20131 Nov",
+          "source": "Incident register of the team that owns tariff-rates",
+          "sourceType": "system-record",
+          "text": "One incident in the period: 15 Sep, 11:02\u201311:20, elevated latency after a configuration push, resolved by revert. No incidents or changes recorded from 19 Oct to 1 Nov. Weekly p99 response time to callers ranged from 210 to 260 ms over the period; it was 244 ms in the week of 26 Oct."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "ratequote alert history, 4 May\u20131 Nov",
+          "source": "Alerting system export",
+          "sourceType": "system-record",
+          "text": "Burn-rate page: did not fire at any point from 4 May to 1 Nov. Warning tickets (1-hour 5xx rate above 0.6%): 4 in the week of 19 Oct and 9 in the week of 26 Oct. On-call closed all nine from the week of 26 Oct as \u0027transient, no action\u0027. The alert configuration was last changed in January 2026, when policy revision 4 took effect."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Staging load-test results for v4.17 and v4.18",
+          "source": "Performance test reports with test owner\u0027s note",
+          "sourceType": "system-record",
+          "text": "Run A, 12 Oct, v4.17: 400 requests per second for 30 minutes, 5xx 0.35%. Run B, 26 Oct, v4.18: same profile, stopped at minute 11 when the staging replica was reclaimed by another team, 5xx 0.38% over the partial run. Staging uses a stubbed tariff-rates service with injected latency and a smaller replica. Test owner\u0027s note: \u0027Run B is partial and isn\u0027t comparable with Run A. I haven\u0027t rerun it.\u0027"
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "Release v4.18 introduced a fault that raised ratequote\u0027s 5xx rate in the week of 26 Oct."
+          },
+          {
+            "id": "H2",
+            "text": "Moving the read replica to a new host class raised ratequote\u0027s 5xx rate in the week of 26 Oct."
+          },
+          {
+            "id": "H3",
+            "text": "ratequote\u0027s 5xx rate in the week of 26 Oct is within the variation the service shows in ordinary weeks."
+          },
+          {
+            "id": "H4",
+            "text": "The rise is an artefact of a change in how the error dashboard counts 5xx responses."
+          },
+          {
+            "id": "H5",
+            "text": "Heavier partner-sync month-end traffic raised ratequote\u0027s 5xx rate in the week of 26 Oct."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Release v4.18 deployed on 27 Oct",
+            "to": "Higher weekly 5xx rate in the week of 26 Oct",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "A pod being newly started during a rollout",
+            "to": "Higher 5xx rate on that pod during the rollout",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Higher weekly 5xx rate in the week of 26 Oct",
+            "to": "Fewer completed bookings in the customer web app",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Read replica moved to a new host class on 28 Oct",
+            "to": "Higher weekly 5xx rate in the week of 26 Oct",
+            "relation": "causes"
+          },
+          {
+            "id": "R5",
+            "from": "Partner-sync month-end reconciliation run",
+            "to": "Higher weekly 5xx rate in the week of 26 Oct",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Roll ratequote back to v4.17 today and hold v4.18 until the cause of the rise is found."
+          },
+          {
+            "id": "A2",
+            "text": "Make no corrective change: record the week at ops review as within the normal band, leave alerting as it is, and apply the standard weekly check to the following week."
+          },
+          {
+            "id": "A3",
+            "text": "Mute all ratequote 5xx alerting, including the burn-rate page, for 30 days until the rate settles."
+          },
+          {
+            "id": "A4",
+            "text": "Move the read replica back to the previous host class."
+          },
+          {
+            "id": "A5",
+            "text": "Open an incident and assign an engineer to investigate last week\u0027s errors before the next ops review."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "I-H1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-R5",
+          "refId": "R5",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "refId": "A5",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-NOCONC-2",
+      "groundTruthNarrative": "ratequote\u0027s 5xx rate rose from 0.31% to 0.41% in the week of 26 Oct. Three changes fall in that week: release v4.18, a move of the read replica to new hosts, and possibly partner-sync\u0027s month-end reconciliation. The default four-week dashboard view makes 0.41% look like an outlier. Over the preceding 26 weeks, though, the weekly rate ranged from 0.26% to 0.51%, and five of those weeks were higher than this one. The policy band edge is 0.482%, so the week is in band. Three earlier in-band upticks were investigated and no fault was found in any of them. The release engineer\u0027s comparison (new pods 0.52% vs old pods 0.30%) is the same new-pod excess seen in every recent rollout, including a config-only redeploy with no code change. It comes from cold caches on newly started pods and adds 10\u201320 errors per rollout. It says nothing about v4.18, and pods of the same age running different versions have never been compared. Nothing in the evidence separates the release, the replica move, partner traffic or ordinary variation; each stays live but unestablished. Users were not affected: client retries absorbed the errors and booking completion held. The team\u0027s own policy, the budget burn of 0.82x and the history together support recording the week and taking no corrective action. Rolling back or moving the replica back would be premature, and muting the alerting would be harmful.",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "expected": "unknown",
+          "weight": 3,
+          "requiredEvidence": [
+            "E3",
+            "C10"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "C1",
+            "C2",
+            "C5",
+            "C6",
+            "C8",
+            "C10",
+            "C14"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal",
+            "confounded",
+            "central"
+          ],
+          "rationale": "The only direct evidence for the release is E3\u0027s new-vs-old pod comparison. C10 shows the same excess in every rollout, including a config-only redeploy of an unchanged image, and ties it to cache warm-up. So that comparison does not discriminate, and no same-age comparison exists. The fetchwell eviction change (C8) remains a plausible but untested mechanism, and C1/C14 neither confirm nor exclude it. An in-band week (C6) fits a small real effect as well as no effect at all, so it does not count against H1 either. The hypothesis is live but unestablished."
+        },
+        {
+          "itemId": "I-H2",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C2",
+            "C3",
+            "C6"
+          ],
+          "tags": [
+            "confounded",
+            "alternative-cause"
+          ],
+          "rationale": "The replica moved in the same week (E4). Replica p99 rose slightly after the move but stayed inside the summer\u0027s range, with no errors or lag (C3). 504s cannot be attributed to the replica rather than tariff-rates (C2). Nothing confirms or excludes the move."
+        },
+        {
+          "itemId": "I-H3",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "C6",
+            "C9",
+            "C13"
+          ],
+          "tags": [
+            "nonexistent-problem",
+            "base-rate",
+            "central"
+          ],
+          "rationale": "By the policy\u0027s own definition (E5), the normal band is the mean plus two standard deviations of the preceding 26 weeks: 0.354 \u002B 2\u00D70.064 = 0.482%. The week\u0027s 0.411% is inside it. Five of the prior 26 weeks were higher, and the three similar weeks that were investigated turned up no fault (C6). The four-week view in E2 hides this."
+        },
+        {
+          "itemId": "I-H4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C7"
+          ],
+          "tags": [
+            "artefact-check"
+          ],
+          "rationale": "A recount from the raw load balancer logs matches the dashboard for both weeks, apart from small late-shipping gaps, and the query has not been edited since March (E2). No dashboard changes are on the calendar (E4), and C7 confirms this. The rise is real in the counts."
+        },
+        {
+          "itemId": "I-H5",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C2",
+            "C4"
+          ],
+          "tags": [
+            "unverifiable",
+            "alternative-cause"
+          ],
+          "rationale": "It is not even established that the reconciliation ran during the week (E4; C4 says it may have slipped to 2 Nov, logs are gone and calls are untagged). Total volume was nearly flat. The claim is neither supported nor excluded."
+        },
+        {
+          "itemId": "I-R1",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "E3",
+            "C10"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "E4",
+            "C1",
+            "C5",
+            "C6",
+            "C8",
+            "C10"
+          ],
+          "tags": [
+            "misleading-signal",
+            "confounded",
+            "leadership-narrative"
+          ],
+          "rationale": "The release and the higher weekly rate fall in the same week, so they co-occur. The only comparison that seemed to isolate the release is explained by new-pod warm-up common to all rollouts (C10). Two other changes, plus ordinary weekly variation (C6), are confounded with it. Nothing counts against the link itself, so it is not contradicted. It is not causal either."
+        },
+        {
+          "itemId": "I-R2",
+          "expected": "causal",
+          "weight": 2,
+          "requiredEvidence": [
+            "C10"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C5",
+            "C10"
+          ],
+          "tags": [
+            "mechanism",
+            "natural-experiment"
+          ],
+          "rationale": "Across five rollouts, new pods show elevated 5xx while their cache hit ratio climbs from under 20% to about 90%. The excess errors are 504 timeouts on cache misses that go to the replica. The config-only redeploy of an unchanged image shows the same excess, which rules out code changes as the rival. Temporal order, mechanism, covariation and a natural experiment are all present."
+        },
+        {
+          "itemId": "I-R3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "E6"
+          ],
+          "allowedEvidence": [
+            "E6",
+            "C11"
+          ],
+          "tags": [
+            "impact-check"
+          ],
+          "rationale": "Booking completion did not fall (41.0% \u2192 41.2%) even though the 5xx rate rose. The SDK retry absorbs about 98.6% of 5xx, only 122 requests failed after retry, and there were no complaints (E6, C11). The evidence counts against this link."
+        },
+        {
+          "itemId": "I-R4",
+          "expected": "association-only",
+          "weight": 1,
+          "requiredEvidence": [
+            "E2",
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C2",
+            "C3",
+            "C6"
+          ],
+          "tags": [
+            "confounded"
+          ],
+          "rationale": "The replica move and the higher weekly rate co-occur in the same week (E2, E4). Replica metrics show no errors, and latency stays within the historical range (C3). The logs cannot attribute the 504s (C2). Co-occurrence is shown; causation is not, and nothing counts against the link."
+        },
+        {
+          "itemId": "I-R5",
+          "expected": "unknown",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C4"
+          ],
+          "tags": [
+            "unverifiable"
+          ],
+          "rationale": "Whether the reconciliation ran within the week is unconfirmed (E4) and cannot now be established (C4). So even co-occurrence with the higher rate is not shown."
+        },
+        {
+          "itemId": "I-A1",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C10"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "C1",
+            "C5",
+            "C6",
+            "C10"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "premature-fix"
+          ],
+          "rationale": "A rollback would be the right fix if H1 were confirmed. It is cheap and reversible: v4.18 contains nothing callers depend on (C1, C5), and a rollout adds only 10\u201320 warm-up errors (C10). But the evidence that seemed to implicate v4.18 is the warm-up effect (C10), and the week is in band (C6). Committing to the fix now is not justified."
+        },
+        {
+          "itemId": "I-A2",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "E6",
+            "C6",
+            "C9",
+            "C10",
+            "C13"
+          ],
+          "tags": [
+            "no-intervention",
+            "central"
+          ],
+          "rationale": "The week is inside the policy band (C6) and the burn of 0.82x is below the 2x page threshold (E2, E5). Users were not affected (E6), and earlier similar weeks resolved with no fault found (C6). Under the team\u0027s own rule this is a \u0027note and take no action\u0027 week, and keeping alerting as it is means a real shift would still be caught."
+        },
+        {
+          "itemId": "I-A3",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "C13"
+          ],
+          "tags": [
+            "protective-control",
+            "suppresses-information"
+          ],
+          "rationale": "Muting all alerting, including the burn-rate page (E5), switches off the protection against an SLO breach for 30 days. That is damaging whether the rise is a fault (H1, H2, H5) or noise (H3), and the alerts are not causing a burden: the page has never fired and the warnings were closed as transient (C13)."
+        },
+        {
+          "itemId": "I-A4",
+          "expected": "premature",
+          "weight": 1,
+          "requiredEvidence": [
+            "E4"
+          ],
+          "allowedEvidence": [
+            "E4",
+            "C3"
+          ],
+          "tags": [
+            "premature-fix"
+          ],
+          "rationale": "Moving the replica back would help if H2 were confirmed, and it is reversible because the old hosts are kept until 20 Nov (E4). But H2 is unestablished (C3 shows nothing abnormal) and the week is in band, so acting now is not justified."
+        },
+        {
+          "itemId": "I-A5",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "E5",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E5",
+            "C6",
+            "C10"
+          ],
+          "tags": [
+            "low-yield-investigation"
+          ],
+          "rationale": "Investigating does no damage and is a reasonable response to doubt, but it is not among the best actions. Policy reserves incident investigations for out-of-band weeks (E5). Three earlier investigations of similar weeks found nothing (C6). No same-age version comparison exists in last week\u0027s data (C10), so a look back is unlikely to settle anything."
+        },
+        {
+          "itemId": "I-SUFF",
+          "expected": "sufficient",
+          "weight": 3,
+          "requiredEvidence": [
+            "E5",
+            "E6",
+            "C6"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E5",
+            "E6",
+            "C6",
+            "C9",
+            "C10"
+          ],
+          "tags": [
+            "no-intervention",
+            "central"
+          ],
+          "rationale": "The top-ranked action is A2, the decision that no intervention is warranted. That decision is fully supported: the week is in band by the policy\u0027s own measure (E5, C6), burn is below 2x (E2), and users were not affected (E6). It does not depend on resolving which, if any, of the candidate causes was at work."
+        }
+      ],
+      "discriminatingReads": [
+        "C6",
+        "C10"
+      ],
+      "lowValueReads": [
+        "C7",
+        "C9",
+        "C11",
+        "C12",
+        "C13",
+        "C14"
+      ],
+      "optimalReadPath": [
+        "C6",
+        "C10"
+      ],
+      "authoringNotes": "Arithmetic check. The 26 weekly values in C6 sum to 9.21: mean 0.3542, sample SD 0.0638, upper edge 0.482. 6,410/2,086,000 = 0.307% and 8,690/2,112,000 = 0.411%. The C2 class counts sum to 6,410 and 8,690. Burn 0.411/0.5 = 0.82x. 30,880/9.21M = 0.335%, i.e. 67% of budget. v4.18 warm-up excess is (0.52\u22120.30)% \u00D7 5,960 \u2248 13 errors.\n\nTraps. (1) The four-week dashboard view (E2) and the Director\u0027s framing (E1) make 0.41% look abnormal; C6 counters this. (2) The concurrent pod comparison (E3, reinforced by the interested release engineer in C5) looks like a controlled test of v4.18; C10 shows it is new-pod cache warm-up seen in every rollout, including a no-code redeploy.\n\nRead paths. With only C6, an analyst can settle H3, A2 and SUFF but would likely still read the release as causal. With only C10, they neutralise the release claim but cannot apply the policy band. No other item supplies the 26-week band or the cross-rollout pod data. The distractors (C1, C2, C3, C4, C5, C8, C14) keep H1, H2 and H5 live without settling them. C7, C9, C11, C12 and C13 only confirm what the initial file already shows.\n\nR1 and R4 are keyed association-only because the evidence shows same-week co-occurrence, which the stated definition counts. R5 is unknown because the reconciliation\u0027s timing is itself unestablished."
+    }
+  }
+}

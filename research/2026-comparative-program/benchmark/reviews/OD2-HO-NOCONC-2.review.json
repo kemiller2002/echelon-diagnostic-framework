@@ -1,0 +1,154 @@
+{
+  "caseId": "OD2-HO-NOCONC-2",
+  "blindAgreement": "16/16",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I-H1",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "The rollout comparison showing new pods erroring more (E3, C5) also appears in every earlier rollout, including the config-only redeploy, and is explained by cache warm-up (C10). The diff shows no relevant code change (C1), and the extra errors are only more 504s with no new error signatures (C2). However, the fetchwell idle-eviction change was never tested (C8), so H1 cannot be ruled out."
+      },
+      {
+        "itemId": "I-H2",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "After the move, replica p99 was 42 ms against 38 ms before. That sits inside the summer range of 33\u201344 ms, with lower CPU and no connection errors (C3). The 504 log cannot tell replica timeouts from tariff-rates timeouts (C2), so the evidence neither confirms nor excludes H2."
+      },
+      {
+        "itemId": "I-H3",
+        "answer": "supported",
+        "confidence": 85,
+        "justification": "The week\u0027s rate of 0.411% is below the 0.482% upper band edge of the preceding 26 weeks (C6, E5). Three earlier, higher weeks were investigated and nothing was found. The burn-rate page did not fire and the monthly SLO was met (C9, C13)."
+      },
+      {
+        "itemId": "I-H4",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "The dashboard query and data source are unchanged; the only edit was a colour change in March (C7). The SRE\u0027s recount from raw load balancer logs reproduces the same rise, with small gaps from late log batches (E2)."
+      },
+      {
+        "itemId": "I-H5",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "Nobody knows whether the reconciliation ran on 29\u201330 Oct or slipped to 2 Nov. Its job logs have expired and its calls are not tagged separately (C4, E4), and 503 load-shedding rose only modestly (C2)."
+      },
+      {
+        "itemId": "I-R1",
+        "answer": "association-only",
+        "confidence": 55,
+        "justification": "The release fell in the higher week (E3, E4), but the per-pod gap is a warm-up effect seen in every rollout (C10), and earlier release weeks were not elevated (C6). So there is co-occurrence without causal support."
+      },
+      {
+        "itemId": "I-R2",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "New pods had higher 5xx in all five rollouts, including the config-only redeploy of an unchanged image, which acts as a natural experiment. The mechanism is shown: a cold cache sends misses to the replica, producing 504s. The effect fades as the hit ratio recovers (C10)."
+      },
+      {
+        "itemId": "I-R3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Booking completion went from 41.0% to 41.2%. The SDK retry recovered about 98.6% of 5xx errors, and no quote complaints were logged (E6, C11)."
+      },
+      {
+        "itemId": "I-R4",
+        "answer": "association-only",
+        "confidence": 55,
+        "justification": "The replica move happened in the higher week (E4), but its p99 and CPU metrics stay within historical ranges and the logs cannot attribute the 504s (C3, C2)."
+      },
+      {
+        "itemId": "I-R5",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "It cannot even be shown that the reconciliation ran in the week of 26 Oct, and its traffic cannot be separated out (C4, E4)."
+      },
+      {
+        "itemId": "I-A1",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "The case for rollback rests on a rollout comparison that is confounded by cache warm-up (C10, E3), and the diff gives no mechanism (C1). Rolling back would only be justified if H1 were confirmed, and the week sits within the normal band (C6)."
+      },
+      {
+        "itemId": "I-A2",
+        "answer": "preferred",
+        "confidence": 80,
+        "justification": "Policy says a week within the band, with no burn-rate page, is noted at ops review and no action is taken (E5). The rate of 0.411% is below 0.482% (C6), there was no customer impact (E6, C11), and the budget is healthy (C9)."
+      },
+      {
+        "itemId": "I-A3",
+        "answer": "harmful",
+        "confidence": 92,
+        "justification": "Muting the burn-rate page would switch off the main protective control for a month, even though the alerts are not noisy: the page never fired (C13, E5)."
+      },
+      {
+        "itemId": "I-A4",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "There is no evidence the new host class is worse (C3). Reverting could be right only if H2 were confirmed, and the old hosts stay available until 20 Nov (E4)."
+      },
+      {
+        "itemId": "I-A5",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "An investigation is reasonable but not called for by policy for a week within the band (E5). The three earlier, higher weeks were investigated and nothing was found (C6), and the key discriminating evidence has gone (C4, C2)."
+      },
+      {
+        "itemId": "I-SUFF",
+        "answer": "sufficient",
+        "confidence": 70,
+        "justification": "The decision to make no corrective change and apply the standard weekly check is well supported by the band calculation (C6), the policy (E5), the absence of customer impact (E6) and the healthy error budget (C9), even though the specific cause is still unresolved."
+      }
+    ],
+    "ambiguousItems": [
+      "I-R1: association-only vs unknown \u2014 the release co-occurs with the higher week, but the rise is within ordinary variation, so whether any association exists is debatable",
+      "I-R4: association-only vs unknown, for the same reason as R1",
+      "I-A5: acceptable vs premature \u2014 policy does not call for an incident, but a light investigation is not unreasonable",
+      "I-H1: unknown vs contradicted \u2014 the warm-up explanation (C10) removes the main evidence for a release fault, but the untested fetchwell eviction change (C8) keeps H1 open",
+      "I-A1: premature vs harmful \u2014 rolling back costs little (C5), but it acts on a confounded comparison and would itself cause warm-up errors (C10)"
+    ],
+    "caseProblems": [
+      "No serious problems. The figures are internally consistent: C2 class counts add to the E2 totals (6,410 and 8,690), the C6 mean, SD and band check out, and C9\u0027s budget and E2\u0027s burn rate agree.",
+      "Minor: E2 gives the seven-day burn as 0.82x for the week of 26 Oct\u20131 Nov, while C9 gives the highest burn as 0.84x for the window ending 31 Oct. This is plausible because the windows differ, but could look inconsistent.",
+      "The C10 title (\u0027Per-pod 5xx and cache metrics for the last five rollouts\u0027) hints mildly at the warm-up explanation, but it is not a strong leak."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I-R1",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The answer semantics define association-only as the two conditions co-occurring or correlating in the evidence, and unknown as evidence too thin to show even that. The co-occurrence is established. v4.18 shipped on 27 Oct (E3, E4). The week of 26 Oct really was higher than the week before (0.31% to 0.41%), and the raw-log recount in E2 and the query history in C7 rule out a counting artefact. \u0027Within ordinary variation\u0027 (C6) means the rise needs no special cause. It does not undo the fact that the two events happened in the same week, so the \u0027association is debatable\u0027 objection does not fit the stated definition. Nothing counts against the link: C1, C2 and C14 do not exclude a fetchwell effect, and C8 supplies an untested mechanism. So contradicted is out. Causal is also out, because C10 explains the only isolating comparison as warm-up seen in every rollout, and the replica move and partner traffic are confounded with the release. The key also stays consistent with R5, which is keyed unknown because there co-occurrence itself is unestablished (C4). Association-only is the single answer the definitions support.",
+        "fix": "No change needed. Optionally, the edge definition could say explicitly that a single same-period co-occurrence counts as association even when the size of the change is within normal variation."
+      },
+      {
+        "itemId": "I-R4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The reasoning is the same as for R1. The replica moved on Wed 28 Oct, inside the week whose rate really was higher (E2, E4), so co-occurrence is shown. C3 adds a little covariation: replica p99 went from 38 ms before the move to 42 ms after, though still within the summer\u0027s range. Nothing counts against the link. C3 shows no errors and no lag, but the log cannot tell replica 504s from tariff-rates 504s (C2), so contradicted is not supported. Nothing establishes causation. Association-only follows directly from the stated definition, and unknown would require that co-occurrence was not shown, which is not the case here.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "I-A5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Opening an incident and assigning an engineer is an evidence-gathering step, not a fix that depends on one hypothesis. It causes no harm: it does not suppress information, disable a control or punish anyone. It is also not among the best actions. Policy reserves incidents for weeks outside the band or weeks where the burn-rate page fired (E5). The week is in band (C6), three earlier similar investigations found nothing (C6), and the comparison that would settle the version question (same-age pods on different versions) does not exist in last week\u0027s data (C10). That makes it a low-yield but reasonable response to the Director\u0027s doubt, which is what acceptable means. Premature is defined as an action that would be right if an unconfirmed hypothesis were confirmed but that commits too early. That fits commitments such as a rollback (A1) or moving the replica back (A4), but it fits a look-back investigation poorly: confirming H1 would call for a fix, not for this investigation. Premature is a stretch, so acceptable is the uniquely best fit.",
+        "fix": "No change needed. To close off the premature reading completely, the action definitions could state that non-committal investigation steps are graded preferred, acceptable or harmful, and that premature is reserved for actions that commit to a hypothesis."
+      },
+      {
+        "itemId": "I-H1",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Contradicted would need evidence that counts against H1. What C10 does is remove E3\u0027s support: the new-pod excess shows up in every rollout, including a config-only redeploy. Taking away the evidence for a claim is not the same as evidence against it. The rest of the record leaves a plausible path open. C8 shows that fetchwell 5.3 cut the idle-eviction default from 90 s to 30 s, untested, on the tariff-rates call path. 504s, which cannot be attributed to a source (C2), make up most of the week\u0027s increase (\u002B1,950 of \u002B2,280). C1 shows that timeouts and the cache, database and retry code are unchanged, but it does not cover library defaults. C14 is not comparable. H3 (within normal variation) being supported does not exclude H1 either, because a small real effect is also consistent with an in-band week. The evidence does not discriminate, so H1 is live but unestablished, which is the definition of unknown.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "I-A1",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Harmful means likely to worsen outcomes, suppress information, punish the wrong party or disable a protective control. Rolling back does none of these to any meaningful degree. It takes about 50 minutes, nothing callers depend on is in v4.18 (C1, C5), and the warm-up cost is about 10\u201320 errors that the 98.6% SDK retry success largely absorbs (C10, E6). That is negligible against a weekly volume of about 2.1M requests. A rollback would even give some information about H1. It would be the right fix if H1 were confirmed, but H1 is unknown: the comparison behind it is confounded by warm-up (C10) and the week is in band (C6). That is exactly the premature definition. The point that it \u0027acts on a confounded comparison\u0027 is an argument for premature, not for harmful.",
+        "fix": "No change needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

@@ -1,0 +1,217 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-ADVERS-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-ADVERS-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C3",
+    "X3": "C4",
+    "X4": "C6",
+    "X5": "C14",
+    "X6": "C8",
+    "X7": "C11",
+    "X8": "C15",
+    "X9": "C12",
+    "X10": "C2",
+    "X11": "C10",
+    "X12": "C1",
+    "X13": "C5",
+    "X14": "C7",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X13",
+    "X11"
+  ],
+  "reads": [
+    "C5",
+    "C10"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-ADVERS-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22332,
+    "cacheCreationTokens": 11804,
+    "outputTokens": 1796,
+    "thinkingTokens": 53,
+    "costUsd": 0.0674212,
+    "durationMs": 12106,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-ADVERS-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-ADVERS-1__sonnet-medium__t2/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-ADVERS-1__sonnet-medium__t2/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-1\u0022,\u0022methodChoice\u0022:\u0022D (competing hypotheses) with careful reasoning: several rival causes, and the key question is which evidence discriminates between them and whether the certificates can be trusted.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X13\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022Pellacott\u0027s valves built in 2026 are the problem, and the paperwork that made Pellacott look good can\u0027t be trusted. An independent contractor found the leak-test rig tagged out of service since January, with no VA-220 test program on the other rigs. The 2026 certificates repeat four value sequences that also appear in 2025 certificates. The quality lab found that 11% of never-installed 2026 Pellacott valves leak at the seat. Only 1 in 100 of the 2025 Pellacott valves leaked, and none of Durrant-Hale\u0027s did. Claim rates for Pellacott 2026 valves are about the same across new and legacy installers and across firmware 4.1 and 4.2. Installers and firmware are therefore not the cause. Pellacott\u0027s score rose because the score rewarded complete-looking certificates. I\u0027m confident about this (about 90%). What I can\u0027t tell yet is whether the new seal or the new Line 3 caused the defect, and whether other suppliers\u0027 records are also unreliable. Next: do not release the six held lots on fresh certificates. Quarantine 2026-built Pellacott stock and suspend dock-to-stock. Run your own helium testing, and use Durrant-Hale to cover supply. Drop the installer remediation and chargeback plan. Require rig logs or witnessed tests in SupplierPath, and spot-check other suppliers.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:37:50.0897687Z",
+    "finishedAt": "2026-11-17T16:38:03.1005719Z",
+    "output": {
+      "caseId": "OD2-HO-ADVERS-1",
+      "methodChoice": "D (competing hypotheses) with careful reasoning: several rival causes, and the key question is which evidence discriminates between them and whether the certificates can be trusted.",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X11",
+            "X13",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X13",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X11",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "SUFF",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X11",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "Pellacott\u0027s valves built in 2026 are the problem, and the paperwork that made Pellacott look good can\u0027t be trusted. An independent contractor found the leak-test rig tagged out of service since January, with no VA-220 test program on the other rigs. The 2026 certificates repeat four value sequences that also appear in 2025 certificates. The quality lab found that 11% of never-installed 2026 Pellacott valves leak at the seat. Only 1 in 100 of the 2025 Pellacott valves leaked, and none of Durrant-Hale\u0027s did. Claim rates for Pellacott 2026 valves are about the same across new and legacy installers and across firmware 4.1 and 4.2. Installers and firmware are therefore not the cause. Pellacott\u0027s score rose because the score rewarded complete-looking certificates. I\u0027m confident about this (about 90%). What I can\u0027t tell yet is whether the new seal or the new Line 3 caused the defect, and whether other suppliers\u0027 records are also unreliable. Next: do not release the six held lots on fresh certificates. Quarantine 2026-built Pellacott stock and suspend dock-to-stock. Run your own helium testing, and use Durrant-Hale to cover supply. Drop the installer remediation and chargeback plan. Require rig logs or witnessed tests in SupplierPath, and spot-check other suppliers."
+    }
+  }
+}

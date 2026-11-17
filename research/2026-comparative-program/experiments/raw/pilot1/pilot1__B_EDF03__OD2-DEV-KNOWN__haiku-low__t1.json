@@ -1,0 +1,231 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-KNOWN__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-KNOWN",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C4",
+    "X3": "C9",
+    "X4": "C6",
+    "X5": "C7",
+    "X6": "C11",
+    "X7": "C1",
+    "X8": "C12",
+    "X9": "C3",
+    "X10": "C5",
+    "X11": "C8",
+    "X12": "C10"
+  },
+  "readLabels": [
+    "X1",
+    "X10",
+    "X2",
+    "X7",
+    "X11",
+    "X5"
+  ],
+  "reads": [
+    "C2",
+    "C5",
+    "C4",
+    "C1",
+    "C8",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-KNOWN__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33840,
+    "cacheCreationTokens": 11213,
+    "outputTokens": 2990,
+    "thinkingTokens": 1456,
+    "costUsd": 0.0040768,
+    "durationMs": 18218,
+    "numTurns": 9,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-KNOWN\u0022,\u0022methodChoice\u0022:\u0022EDF-2 style analysis, limited to 5 catalogue items (X1, X10, X2, X7, X11, X5 read; X2, X7, X11 and X5 used, X1 and X10 central)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022,\u0022E1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X1\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X10\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The turnaround rise is concentrated in one step. Claims in the $2,500\u2013$10,000 band now wait about 16 days for approval, up from under 1 day, while investigation and intake times are essentially unchanged. The cause is the 1 April cut in adjuster authority from $10,000 to $2,500, made as an audit fix. That change routed these claims to three team leads, and the change record says the workload impact was never assessed. The hail surge had ended by July, and the Quillfast indexing data is no slower than the old provider, so neither explains the lasting delay. Senior adjuster losses did not slow investigation. Complaint growth is partly a logging change, so treat it as a symptom only. Confidence is good, though the \\\u0022team leads can\u0027t keep up\\\u0022 part is inferred. Next: add temporary approval capacity for that band under audit oversight, keeping second review and tracking approval time weekly. Do not restore the $10,000 limit, do not discipline team leads, and do not make the $2,500 limit permanent or fund posts before Audit\u0027s December re-test.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:28:14.7863082Z",
+    "finishedAt": "2026-11-17T14:28:34.0301857Z",
+    "output": {
+      "caseId": "OD2-DEV-KNOWN",
+      "methodChoice": "EDF-2 style analysis, limited to 5 catalogue items (X1, X10, X2, X7, X11, X5 read; X2, X7, X11 and X5 used, X1 and X10 central)",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "supported",
+          "confidence": 82,
+          "evidenceIds": [
+            "X1",
+            "X10",
+            "E1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X1",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X2",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S-H5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X5",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X1",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X7",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "preferred",
+          "confidence": 72,
+          "evidenceIds": [
+            "X1",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X1",
+            "X10",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The turnaround rise is concentrated in one step. Claims in the $2,500\u2013$10,000 band now wait about 16 days for approval, up from under 1 day, while investigation and intake times are essentially unchanged. The cause is the 1 April cut in adjuster authority from $10,000 to $2,500, made as an audit fix. That change routed these claims to three team leads, and the change record says the workload impact was never assessed. The hail surge had ended by July, and the Quillfast indexing data is no slower than the old provider, so neither explains the lasting delay. Senior adjuster losses did not slow investigation. Complaint growth is partly a logging change, so treat it as a symptom only. Confidence is good, though the \u0022team leads can\u0027t keep up\u0022 part is inferred. Next: add temporary approval capacity for that band under audit oversight, keeping second review and tracking approval time weekly. Do not restore the $10,000 limit, do not discipline team leads, and do not make the $2,500 limit permanent or fund posts before Audit\u0027s December re-test."
+    }
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "id": "OD2-DEV-MISLEAD",
+  "split": "dev",
+  "benchmarkClass": "MISLEAD",
+  "domain": "technical",
+  "title": "Checkout payment failures after the v4.12 release",
+  "setting": "Fernhollow Outfitters is a fictional online outdoor-gear retailer. Its checkout service, checkout-api (16 pods), sends card payments to an external gateway, Quillmark Payments, using API credentials. Since 3 March, roughly one payment attempt in 27 has failed, and the failures come and go. A new checkout release (v4.12) went out that morning, and a spring promotion started the same day. Engineering wants to roll the release back, and Finance wants a revenue-impact figure for the board.",
+  "presentingRequest": "The Head of Engineering asks: what is causing the intermittent payment failures since 3 March, should we approve the full rollback of checkout-api v4.12, and what should we do now?",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Incident ticket INC-4471, checkout on-call",
+      "sourceType": "system-record",
+      "text": "INC-4471 opened 3 March 11:20 by paging alert checkout_payment_failure_rate (rule: 30-minute failure rate at least 2% AND at least 40 failed attempts). Daily payment-attempt failure rate, checkout-api: 28 Feb 0.4%, 1 Mar 0.4%, 2 Mar 0.5%, 3 Mar 3.4%, 4 Mar 3.9%, 5 Mar 3.6%, 6 Mar 3.8%. All new failures carry error code PAYMENT_UPSTREAM_REJECTED. On-call summary: \u0027Intermittent. A customer fails, retries a few minutes later, often succeeds.\u0027 No pod restarts and no gateway timeouts recorded."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "Email from Dara Okonjo, Engineering Manager, Checkout, 6 March",
+      "sourceType": "manager-account",
+      "text": "Subject: INC-4471, we know what this is. v4.12 shipped 3 March at 10:40 and the alert fired forty minutes later. The failure rate went from half a percent to nearly four overnight and has stayed there. v4.12 replaced our gateway HTTP client and connection-pool settings, which is exactly the code path that\u0027s failing. Quillmark\u0027s status page is green, so it isn\u0027t them. I want approval to roll the whole fleet back to v4.11 tonight and freeze checkout releases until we\u0027ve rewritten the client. Dara"
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Release notes, checkout-api v4.12 (CHG-2214)",
+      "sourceType": "change-record",
+      "text": "checkout-api v4.12, deployed 3 March 10:40, CHG-2214, approved by Engineering CAB. Changes: (1) Gateway client moved to a new HTTP library; connection pool size raised from 50 to 64. (2) Error handling: every non-2xx response from the payment gateway now maps to one code, PAYMENT_UPSTREAM_REJECTED. The raw upstream status is no longer logged at INFO level. The customer message is unchanged: \u0027Your card was declined. Please try another card or try again.\u0027 (3) Security: partial card numbers previously written to debug logs are now masked, closing audit finding SEC-2291 (remediation deadline 13 March). A rollback to v4.11 reverts all three changes."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Quillmark Payments status page capture and support ticket TS-90412",
+      "sourceType": "vendor-account",
+      "text": "Quillmark status page, captured 6 March 08:00: \u0027All systems operational\u0027 for Authorisation API, Search API and Merchant Dashboard on every day from 1 to 6 March; no incidents posted. Support ticket TS-90412, Quillmark reply of 5 March: \u0027We see no platform-wide incidents during the period. Our records show your requests are reaching us. Please review your integration and confirm you are handling all documented response codes.\u0027"
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Email from Priya Halvorsen, CFO, 6 March",
+      "sourceType": "leadership-account",
+      "text": "Gross online revenue for the week to 6 March is down 9% on the prior week. The prior week did include the final days of Winter Clearance, which ended 1 March, and Spring Trail Sale launched on 3 March, but I\u0027m clear in my mind that the checkout failures are what cost us. I need a figure for the board pack on Monday, and I expect us to restate the Q1 forecast on the back of it."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Customer Care lead Tomasz Reyes, notes for INC-4471 bridge call, 5 March",
+      "sourceType": "staff-account",
+      "text": "238 customer contacts since 3 March about declined cards. Most say the decline came \u0027out of nowhere\u0027 and that a retry a few minutes later worked. Eleven customers phoned their bank. In nine of those cases the bank said it had no record of any authorisation attempt at the time of the failure. Agents have been advising customers to try a different card."
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Canary rollback test results, CHG-2231, 5 March 12:00\u201318:00",
+      "source": "Checkout platform team",
+      "sourceType": "change-record",
+      "text": "CHG-2231 canary, 5 March 12:00\u201318:00. 8 of 16 checkout-api pods rolled back to v4.11; the load balancer split traffic evenly. Results: v4.11 pods had 9,412 payment attempts with 351 failures (3.7%). v4.12 pods had 9,388 attempts with 338 failures (3.6%). v4.11 pods still log the raw gateway status. Of their 351 failures, 341 were HTTP 429 \u0027Too Many Requests\u0027 and 10 were HTTP 402 card declines. Connection-pool saturation was 0% on both versions. The canary was reverted at 18:05 because v4.11 lacks the SEC-2291 card-number masking."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "checkout-api pod resource and connection-pool metrics, 1\u20136 March",
+      "source": "Platform monitoring",
+      "sourceType": "telemetry",
+      "text": "checkout-api, 16 pods, 1\u20136 March. CPU utilisation 22\u201341% at daily peaks, with no change after 3 March. Memory flat at about 1.1 GB per pod. Gateway connection-pool utilisation peaked at 31% (pool size 64 after v4.12, 50 before). p99 gateway call latency was 430 ms before the release and 410 ms after. Zero socket timeouts and zero connection-refused errors in the period. No autoscaling events."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Per-minute payment failure counts, 3\u20136 March",
+      "source": "Checkout analytics",
+      "sourceType": "telemetry",
+      "text": "Per-minute failed payment attempts, 3\u20136 March. The first cluster was 3 March 09:00\u201309:03 (14 failures out of 61 attempts), followed by clusters at 09:15, 09:30, 09:45, 10:00, 10:15 and 10:30. All of these came before the 10:40 deploy, and morning volume stayed below the alert\u0027s minimum count until 11:20. Across 3\u20136 March, 93% of failures fall in minutes :00\u2013:03, :15\u2013:18, :30\u2013:33 and :45\u2013:48 between 09:00 and 21:00. Outside those minutes the failure rate is 0.4%. No clusters overnight. On 6 March 13:00\u201315:00, during a scheduled finance ERP maintenance window, no clusters occurred. They resumed at 15:00."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "Quillmark API usage report for credential fernhollow-prod-01, 1\u20136 March",
+      "source": "Quillmark account team",
+      "sourceType": "vendor-account",
+      "text": "Prepared 6 March. Credential fernhollow-prod-01. Rate limit: 300 requests/minute per credential, all endpoints combined. 1\u20132 March: /v2/payments peaked at 52/min; /v2/transactions/search near zero in the daytime, with one nightly run at 02:00 (about 1,900 calls over 9 minutes). From 3 March 09:00: /v2/transactions/search bursts of 360\u2013430/min in the first 3\u20134 minutes of each quarter hour, 09:00\u201321:00, user-agent \u0027settle-recon/2.3\u0027. /v2/payments steady at 30\u201358/min. HTTP 429 responses: 0 on 1\u20132 March; 4,980\u20136,310 per day on 3\u20136 March, all within burst minutes, header X-RateLimit-Scope: credential. Issuer declines steady at 0.3\u20130.4% of payments. Temporary limit increases take 3\u20135 business days and are chargeable."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Finance Systems change log, February\u2013March",
+      "source": "Finance Systems team",
+      "sourceType": "change-record",
+      "text": "FIN-CHG-0187. Raised by Finance Systems (owner L. Marchetti); approved by the Finance Systems lead on 27 February. \u0027Settlement reconciliation job settle-recon: schedule changed from nightly 02:00 to every 15 minutes, 09:00\u201321:00, effective 3 March, to support same-day payout reporting requested by Treasury.\u0027 Gateway credential: existing fernhollow-prod-01, shared with checkout. Rollback: revert the scheduler cron entry; takes effect from the next run. Note: Finance Systems changes are tracked in this log and were not submitted to the Engineering CAB."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Marketing performance report, Spring Trail Sale, 3\u20136 March",
+      "source": "Digital marketing team",
+      "sourceType": "document",
+      "text": "Spring Trail Sale, 3\u20136 March, compared with the prior week (24\u201327 Feb, the closing days of Winter Clearance). Sessions up 24%, and 61% of the extra sessions came from a new display-ad campaign. Site conversion rate fell from 3.1% to 2.5%. Average order value fell from \u00A374 to \u00A368. Clearance week had included a final-days \u0027extra 20% off\u0027 push. The report does not break revenue down by checkout outcome."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "Interview with the engineer who built the v4.12 gateway client",
+      "source": "Interview notes, Sana Oyelaran, senior engineer, 6 March",
+      "sourceType": "staff-account",
+      "text": "Sana Oyelaran, author of the new gateway client: \u0027We load-tested the client at three times last year\u0027s peak in staging against Quillmark\u0027s sandbox and saw no errors. The pool change was conservative, from 50 to 64. Collapsing the error codes was a product request so customers see one consistent message. I\u0027d be surprised if it\u0027s the client, but I can\u0027t prove that from staging results alone.\u0027"
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "3-D Secure challenge and fraud-screening statistics, 24 Feb\u20136 March",
+      "source": "Payments risk team",
+      "sourceType": "telemetry",
+      "text": "Daily 3-D Secure challenge rate 11.2\u201312.1% of card payments, 24 Feb\u20136 March, no step change. Challenge completion rate 88\u201390%. In-house fraud-screen rejections 0.2% of attempts every day. No fraud rule changes deployed in the period. Fraud-screen rejections surface to customers under a separate error code, FRAUD_HOLD, which does not appear in INC-4471."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Sample of 50 Customer Care tickets, 3\u20136 March",
+      "source": "Customer Care",
+      "sourceType": "customer-account",
+      "text": "Random sample of 50 tickets tagged \u0027payment\u0027 from 3\u20136 March. 44 mention a declined card. 31 customers completed the order on a later retry, 6 said they abandoned, and 7 were unclear. 3 complained of duplicate charges; all were verified as pending authorisations released within 48 hours. Several customers mention the sale price as their reason for persisting."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "Peer review record for the v4.12 gateway client change (PR #1187)",
+      "source": "Source control system",
+      "sourceType": "document",
+      "text": "PR #1187, merged 2 March. Two approvals. 412 unit tests and 38 integration tests passed. Reviewer comment: \u0027Error mapping simplification loses upstream status detail. Accepted per product request.\u0027 Second reviewer: \u0027Pool sizing fine. Retry policy unchanged: one retry on timeout only, none on HTTP error responses.\u0027 No open review threads at merge."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Internal audit finding SEC-2291 and remediation correspondence",
+      "source": "Internal Audit",
+      "sourceType": "document",
+      "text": "SEC-2291, raised 9 February: checkout-api debug logs contained partial card numbers (more than first six and last four digits) for about 0.8% of requests, retained for 30 days in the central log store. Remediation deadline 13 March. Audit memo: \u0027Any regression after remediation must be reported to the acquiring bank within 5 business days.\u0027 Status: closed by v4.12 on 3 March, pending audit verification."
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Gateway TLS certificate, DNS and egress firewall change history, January\u2013March",
+      "source": "Platform team",
+      "sourceType": "change-record",
+      "text": "Quillmark gateway endpoint certificate last rotated 14 January; next rotation due 14 July. No DNS changes for api.quillmark.example in February or March. Egress firewall and NAT rules for checkout-api unchanged since 20 February. No proxy or service-mesh changes in the period. No TLS handshake errors in checkout-api logs, 1\u20136 March."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "A defect in checkout-api v4.12 (the new gateway HTTP client or its connection-pool settings) is causing the rise in payment failures."
+      },
+      {
+        "id": "H2",
+        "text": "Quillmark is throttling Fernhollow\u0027s shared gateway credential because the finance settlement-reconciliation job\u0027s quarter-hourly search bursts push it over its per-credential rate limit, and checkout payment calls are rejected as a result."
+      },
+      {
+        "id": "H3",
+        "text": "A real rise in card issuers declining payments (for example tighter issuer fraud rules) is driving the rise in failures."
+      },
+      {
+        "id": "H4",
+        "text": "A platform-wide degradation at Quillmark, affecting its merchants generally, is causing the failures."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Deployment of checkout-api v4.12 on 3 March at 10:40",
+        "to": "Rise in checkout payment failure rate from about 0.4% to about 3.7%",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "settle-recon moved to a 15-minute daytime schedule on the shared credential fernhollow-prod-01 (FIN-CHG-0187)",
+        "to": "Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01",
+        "to": "Customers seeing \u0027card declined\u0027 failures at checkout",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Rise in checkout payment failure rate since 3 March",
+        "to": "9% week-on-week fall in gross online revenue for the week to 6 March",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Roll the full checkout-api fleet back to v4.11 tonight and freeze checkout releases until the gateway client is rewritten."
+      },
+      {
+        "id": "A2",
+        "text": "Revert settle-recon to its nightly schedule (or pause its daytime runs) now, then watch the 429 rate and payment failure rate to confirm recovery, and give the job its own credential before any future daytime schedule."
+      },
+      {
+        "id": "A3",
+        "text": "Tell the board the payment incident caused the 9% week-on-week revenue fall and restate the Q1 revenue forecast on that basis."
+      },
+      {
+        "id": "A4",
+        "text": "Ask Quillmark for a temporary increase in the rate limit for credential fernhollow-prod-01."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q5",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q6",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q7",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q8",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q9",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

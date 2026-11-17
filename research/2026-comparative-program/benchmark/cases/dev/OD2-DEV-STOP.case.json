@@ -1,0 +1,397 @@
+{
+  "id": "OD2-DEV-STOP",
+  "split": "dev",
+  "benchmarkClass": "STOP",
+  "domain": "technical",
+  "title": "The night nightly_fin_load finished late",
+  "setting": "Brindlecomb Wholesale, a fictional food-service distributor, runs a cloud data warehouse on the shared tier of a fictional provider, Corvane Cloud Data. Its nightly batch job, nightly_fin_load, starts at 01:30 UTC, extracts the day\u0027s orders, merges them into the staging table stage_orders, then builds 14 reporting models (marts) that feed the finance margin dashboards. The job must finish by 06:00 UTC; a deadline check then marks dashboards \u0027load incomplete\u0027 and pages on-call. The run of Thursday 22 October 2026 finished at 07:02 UTC. All times are UTC.",
+  "presentingRequest": "The VP of Data \u0026 Analytics has asked Platform Reliability to confirm why the 22 October run missed its window and to sign off on corrective actions today. He has proposed his own explanation and three actions, and wants an answer before approving any changes.",
+  "initialEvidence": [
+    {
+      "id": "E1",
+      "stage": "S1",
+      "source": "Email from Hollis Grange, VP Data \u0026 Analytics, to Platform Reliability, 22 Oct 08:12",
+      "sourceType": "leadership-account",
+      "text": "Subject: Last night\u0027s load. nightly_fin_load finished at 07:02, an hour past the 06:00 window. That\u0027s our first miss this year. Corvane posted a performance incident on our region overnight (we\u0027re on their shared tier), and we added customer_ltv to the job last week, so my read is platform trouble on top of extra load. I want to move us to the next Corvane tier, pull customer_ltv out of the job until it\u0027s proven safe, and switch off the \u0027load incomplete\u0027 banner, because the CFO saw it at 06:58 and thought the numbers were broken. Please confirm the diagnosis today so I can sign these off."
+    },
+    {
+      "id": "E2",
+      "stage": "S1",
+      "source": "nightly_fin_load run log, run_id 20261022-0130",
+      "sourceType": "log",
+      "text": "01:30:02 run START\n01:30:02 extract_orders START\n02:05:11 extract_orders OK (35m09s; 30-run median 34m)\n02:05:12 merge_stage_orders START\n02:05:12 merge_stage_orders WAIT lock relation=stage_orders mode=ExclusiveLock blocked_by=pid 48812\n04:18:52 merge_stage_orders lock acquired (waited 2h13m40s)\n04:46:30 merge_stage_orders OK (executing 27m38s; 30-run median 27m)\n04:46:31 build_marts START (14 models incl. customer_ltv)\n06:00:00 DEADLINE CHECK run incomplete -\u003E dashboard banner set; page sent to on-call\n07:02:15 build_marts OK (2h15m44s; 30-run median 2h09m)\n07:02:15 run OK total 5h32m13s\nNote: job has no lock-wait alert configured; the 06:00 deadline check is its only alert."
+    },
+    {
+      "id": "E3",
+      "stage": "S1",
+      "source": "Corvane warehouse session and lock record, 22 Oct 00:00\u201307:30",
+      "sourceType": "system-record",
+      "text": "pid 48812: user d.varga, role analytics_eng, app_name \u0027q3_restate.sh\u0027, session start 00:58:10. Statement: UPDATE stage_orders SET margin_adj = ... WHERE order_date BETWEEN \u00272026-07-01\u0027 AND \u00272026-09-30\u0027. Single transaction; committed 04:18:51; 9,412,006 rows affected. ExclusiveLock on stage_orders held 00:58:14\u201304:18:51. Waiters on this lock: pid 48990 (user svc_nightly, merge_stage_orders) 02:05:12\u201304:18:52. No other blocked sessions or lock waits recorded on the cluster between 00:00 and 07:30."
+    },
+    {
+      "id": "E4",
+      "stage": "S1",
+      "source": "Change record CHG-3317",
+      "sourceType": "change-record",
+      "text": "Title: Q3 margin restatement backfill on stage_orders. Requester and implementer: D. Varga (Analytics Engineering). Approved by change board 20 Oct. Approved window: Thu 22 Oct 13:00\u201317:00. Estimated runtime: 3h18m (dry run on a staging copy, 15 Oct, took 3h18m). Stakeholders: Finance Reporting. nightly_fin_load owner listed as stakeholder: No. Implementer note, 20 Oct 17:44: \u0027Script queued, will kick off at 1:00 Thursday.\u0027 Related: CHG-3240 (Sept, D. Varga, backfill of stage_returns) approved for and run at 02:00. Status: Implemented. Implementer availability: on annual leave 21 Oct\u20132 Nov; not yet contacted about this run."
+    },
+    {
+      "id": "E5",
+      "stage": "S1",
+      "source": "Job telemetry summary, nightly_fin_load runs 22 Sep\u201321 Oct (30 runs)",
+      "sourceType": "telemetry",
+      "text": "Total runtime: median 3h10m, range 2h52m\u20133h41m; latest finish 05:11. No lock waits over 2 minutes in any run. Monday-morning runs (4; they load Saturday and Sunday orders): mean 3h34m, mean 5.6M rows extracted. Other runs: mean 3h06m, mean 3.9M rows. The weekly storage snapshot runs Mondays 02:00\u201302:40. customer_ltv joined build_marts from the 15 Oct run: 17\u201321 min per run across 7 runs; total runtime median 3h08m before, 3h13m after. 22 Oct run: 4.08M rows extracted (Thursday median 4.01M); customer_ltv took 19m."
+    },
+    {
+      "id": "E6",
+      "stage": "S1",
+      "source": "Corvane public status page, incident CV-8812",
+      "sourceType": "vendor-account",
+      "text": "CV-8812 (Resolved). Degraded query performance, shared-tier clusters, eu-west region. Began 02:52 UTC, resolved 03:37 UTC, 22 Oct. Customers may have seen higher latency for queries submitted during this period. Dedicated-tier clusters were not affected. Cause: storage-node rebalancing following a hardware replacement. No data loss. We apologise for the inconvenience."
+    },
+    {
+      "id": "E7",
+      "stage": "S1",
+      "source": "Interview note, Amara Szell, Finance Reporting Lead, 22 Oct 10:30",
+      "sourceType": "staff-account",
+      "text": "\u0027The banner went up at 06:00 saying today\u0027s load was incomplete and figures were as of 21 October. It\u0027s the only reason we didn\u0027t put Wednesday\u0027s margins into the 07:30 flash pack as Thursday\u0027s. We held the pack and sent it at 07:25 once the load had finished. The CFO asked about the banner and was fine once we explained. Separately, the retention team builds its 08:00 call list from customer_ltv every morning. When the model was missing during testing on 9 October they couldn\u0027t run their calls that day.\u0027"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "C1",
+      "stage": "S1",
+      "title": "Warehouse query history for user svc_nightly, 22 Oct run",
+      "source": "Corvane query history export",
+      "sourceType": "system-record",
+      "text": "Statements for run 20261022-0130. extract_orders: 6 statements, 01:30:02\u201302:05:11. merge_stage_orders: MERGE INTO stage_orders submitted 02:05:12, state \u0027waiting: lock\u0027 until 04:18:52, executing 04:18:52\u201304:46:30. build_marts: 14 model statements 04:46:31\u201307:02:15, each within \u00B18% of its 30-run median; customer_ltv 19m02s. No retries, no errors, no statements cancelled."
+    },
+    {
+      "id": "C2",
+      "stage": "S1",
+      "title": "Corvane post-incident report for CV-8812",
+      "source": "Corvane customer success, emailed 24 Oct",
+      "sourceType": "vendor-account",
+      "text": "Storage-node rebalancing in eu-west shared tier, 02:52\u201303:37 UTC on 22 Oct. Queries submitted during the window saw median latency up 22% and p95 up 41%. Statements already running at the start of the window saw little impact, as their data blocks were already cached on compute nodes. No queries failed. Remediation: rebalancing will now be throttled outside customer peak hours."
+    },
+    {
+      "id": "C3",
+      "stage": "S1",
+      "title": "Source extract row counts by table, 1\u201322 Oct",
+      "source": "Extract audit table",
+      "sourceType": "system-record",
+      "text": "Daily rows extracted from the order system, by table. orders_header 22 Oct: 412,300 (Thursday median 405,900). order_lines 22 Oct: 3.61M (Thursday median 3.55M). returns 22 Oct: 58,200 (Thursday median 57,400). Monday extracts (5, 12, 19 Oct) run 1.38\u20131.47\u00D7 the following Thursday. No table on 22 Oct was more than 3% above its Thursday median."
+    },
+    {
+      "id": "C4",
+      "stage": "S1",
+      "title": "customer_ltv pull request and review thread, 12\u201314 Oct",
+      "source": "Analytics repository",
+      "sourceType": "document",
+      "text": "PR #884 \u0027Add customer_ltv mart\u0027. Reads marts.customer_orders and marts.customer_payments; writes only marts.customer_ltv. Incremental rebuild of the last 400 days. Reviewer note, 13 Oct: \u0027Benchmarked on prod-sized copy at 18 min; placed after customer_payments in build_marts.\u0027 Approved by two reviewers; merged 14 Oct 16:20. No changes to stage tables or merge logic."
+    },
+    {
+      "id": "C5",
+      "stage": "S1",
+      "title": "Cluster CPU and memory telemetry, 22 Oct 00:00\u201308:00",
+      "source": "Corvane cluster metrics",
+      "sourceType": "telemetry",
+      "text": "CPU utilisation: 00:58\u201302:05 38\u201348%; 02:05\u201304:19 21\u201329%; 04:19\u201304:46 41\u201346%; 04:46\u201307:02 55\u201370%; after 07:02 under 5%. Memory under 60% throughout. Between 02:52 and 03:37 CPU stayed within \u00B13 points of its level either side. The 04:46\u201307:02 profile matches the median Thursday build_marts profile for September\u2013October."
+    },
+    {
+      "id": "C6",
+      "stage": "S1",
+      "title": "Backfill script q3_restate.sh and its repository history",
+      "source": "Analytics repository",
+      "sourceType": "document",
+      "text": "q3_restate.sh: opens one session and runs a single UPDATE on stage_orders inside one transaction; no batching, no lock timeout set. Commits: 16 Oct \u0027q3 restate dry-run tweaks\u0027; 20 Oct 16:58 \u0027q3 restate: final\u0027. README: \u0027Run via at(1) on analytics-host-2.\u0027 No cron or scheduler entry exists in the repository. Platform note: the at queue on analytics-host-2 is not retained after a job runs."
+    },
+    {
+      "id": "C7",
+      "stage": "S1",
+      "title": "nightly_fin_load runtime history, 1 Jul\u201321 Sep",
+      "source": "Job telemetry archive",
+      "sourceType": "telemetry",
+      "text": "82 runs. Median 3h05m; range 2h48m\u20133h44m; latest finish 05:14. Monday-morning runs mean 3h31m (mean 5.5M rows); other runs mean 3h03m (mean 3.8M rows). Weekly storage snapshot ran every Monday 02:00 in this period. No runs exceeded the 06:00 deadline; no lock waits over 2 minutes recorded."
+    },
+    {
+      "id": "C8",
+      "stage": "S1",
+      "title": "Finance dashboard access log, 22 Oct 05:30\u201309:00",
+      "source": "BI platform audit log",
+      "sourceType": "system-record",
+      "text": "Margin dashboard: 41 views between 06:00 and 07:05, all served with the \u0027load incomplete \u2014 figures as of 21 Oct\u0027 banner. Accounts include cfo.office at 06:58 and fin.reporting (6 views). Banner cleared 07:02:40. 63 views 07:05\u201309:00. No exports of the dashboard between 06:00 and 07:02."
+    },
+    {
+      "id": "C9",
+      "stage": "S1",
+      "title": "Upstream order-system file landing times, 15\u201322 Oct",
+      "source": "File transfer log",
+      "sourceType": "log",
+      "text": "Nightly order extract files landed in the warehouse landing bucket at: 15 Oct 01:11, 16 Oct 01:09, 17 Oct 01:14, 18 Oct 01:08, 19 Oct 01:17, 20 Oct 01:10, 21 Oct 01:13, 22 Oct 01:12. All files passed checksum validation. No late or resent files."
+    },
+    {
+      "id": "C10",
+      "stage": "S1",
+      "title": "On-call pager and chat log, 22 Oct 06:00\u201307:10",
+      "source": "Incident tooling",
+      "sourceType": "log",
+      "text": "06:00 page: nightly_fin_load deadline missed. 06:04 on-call (J. Tamsin): \u0027build_marts on model 9 of 14, step times look normal. merge logged a long lock wait earlier. Corvane status shows an incident overnight, probably that.\u0027 06:06: \u0027Nothing blocked now, letting it run.\u0027 07:02 job OK. 07:04: \u0027Resolved, will hand to day team.\u0027 No sessions killed; no changes made."
+    },
+    {
+      "id": "C11",
+      "stage": "S1",
+      "title": "Interview with the change board chair, 23 Oct",
+      "source": "Interview note, R. Okafor-Lind, Change Board chair",
+      "sourceType": "manager-account",
+      "text": "\u0027We approved CHG-3317 for 13:00 Thursday. Our checklist for warehouse changes asks for a business stakeholder but not the owner of any batch job using the same tables, so nobody from the nightly side saw it. I didn\u0027t spot the 1:00 note. I can\u0027t tell you whether Varga meant one in the afternoon or one in the morning. People write it both ways, and Varga\u0027s last backfill was approved for overnight.\u0027"
+    },
+    {
+      "id": "C12",
+      "stage": "S1",
+      "title": "Storage snapshot schedule and run log, Sept\u2013Oct",
+      "source": "Corvane backup configuration export",
+      "sourceType": "system-record",
+      "text": "Policy \u0027weekly-full\u0027: Mondays 02:00 UTC, full-cluster snapshot. Runs: 28 Sep 02:00\u201302:39, 5 Oct 02:00\u201302:41, 12 Oct 02:00\u201302:37, 19 Oct 02:00\u201302:38. All completed successfully. No snapshot scheduled or run on 22 Oct. No change to the policy since March."
+    },
+    {
+      "id": "C13",
+      "stage": "S1",
+      "title": "Corvane service agreement and SLA schedule",
+      "source": "Procurement contract file",
+      "sourceType": "document",
+      "text": "Brindlecomb subscribes to Corvane shared tier, eu-west, 3-year term from February 2025. SLA: 99.5% monthly availability; service credits apply to unavailability only, not to performance degradation. Next tier (\u0027dedicated\u0027): about 2.3\u00D7 current monthly cost, 30-day migration lead time. No credits were claimed in 2026."
+    }
+  ],
+  "candidates": {
+    "hypotheses": [
+      {
+        "id": "H1",
+        "text": "The 22 Oct overrun was caused by the Q3 restatement backfill (pid 48812) holding an exclusive lock on stage_orders, which blocked the nightly merge step for over two hours."
+      },
+      {
+        "id": "H2",
+        "text": "Growth in order data volume pushed the 22 Oct run beyond its window."
+      },
+      {
+        "id": "H3",
+        "text": "Adding the customer_ltv model to the nightly job slowed the 22 Oct run enough to cause the overrun."
+      },
+      {
+        "id": "H4",
+        "text": "Corvane\u0027s regional performance incident (CV-8812) caused the 22 Oct overrun."
+      },
+      {
+        "id": "H5",
+        "text": "The backfill ran overnight because the implementer meant 13:00 but scheduled or wrote the start as \u00271:00\u0027, and did not deliberately choose an overnight run."
+      }
+    ],
+    "edges": [
+      {
+        "id": "R1",
+        "from": "Backfill transaction holding an exclusive lock on stage_orders, 00:58\u201304:18",
+        "to": "merge_stage_orders waiting 2h13m40s for the lock",
+        "relation": "causes"
+      },
+      {
+        "id": "R2",
+        "from": "merge_stage_orders lock wait of 2h13m40s",
+        "to": "run finishing at 07:02, past the 06:00 deadline",
+        "relation": "causes"
+      },
+      {
+        "id": "R3",
+        "from": "Corvane incident CV-8812, 02:52\u201303:37",
+        "to": "run finishing at 07:02, past the 06:00 deadline",
+        "relation": "causes"
+      },
+      {
+        "id": "R4",
+        "from": "Weekly Monday 02:00 storage snapshot",
+        "to": "Longer Monday-morning nightly_fin_load runtimes",
+        "relation": "causes"
+      }
+    ],
+    "actions": [
+      {
+        "id": "A1",
+        "text": "Make the nightly_fin_load owner a mandatory reviewer for any change that writes to tables the job uses, bar such writes between 01:00 and 06:00 unless that owner signs off, and add an alert when a nightly step waits on a lock for more than 15 minutes."
+      },
+      {
+        "id": "A2",
+        "text": "Record a disciplinary finding against D. Varga for running the backfill outside its approved window."
+      },
+      {
+        "id": "A3",
+        "text": "Remove customer_ltv from the nightly job until it is proven safe."
+      },
+      {
+        "id": "A4",
+        "text": "Switch off the \u0027load incomplete\u0027 banner on the finance dashboards."
+      }
+    ]
+  },
+  "scoredItems": [
+    {
+      "itemId": "Q1",
+      "refId": "H1",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q2",
+      "refId": "H2",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q3",
+      "refId": "H3",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q4",
+      "refId": "H4",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q5",
+      "refId": "H5",
+      "type": "hypothesis",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "supported",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q6",
+      "refId": "R1",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q7",
+      "refId": "R2",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q8",
+      "refId": "R3",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q9",
+      "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "refId": "A1",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "refId": "A2",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "refId": "A3",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "refId": "A4",
+      "type": "action",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "preferred",
+        "acceptable",
+        "premature",
+        "harmful"
+      ]
+    },
+    {
+      "itemId": "Q14",
+      "refId": "SUFF",
+      "type": "sufficiency",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "sufficient",
+        "insufficient"
+      ]
+    }
+  ]
+}

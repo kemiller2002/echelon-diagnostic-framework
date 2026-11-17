@@ -1,0 +1,737 @@
+{
+  "label": "OD2-HO-ADVERS-2",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 7722,
+  "cacheCreationTokens": 4500,
+  "outputTokens": 52836,
+  "thinkingTokens": 42179,
+  "costUsd": 1.0942804000000002,
+  "durationMs": 522333,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-HO-ADVERS-2/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-HO-ADVERS-2\u0022,\u0022split\u0022:\u0022heldout\u0022,\u0022benchmarkClass\u0022:\u0022ADVERS\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022readBudget\u0022:2,\u0022title\u0022:\u0022Confirmed incidents fall by two-thirds after a case-platform migration\u0022,\u0022setting\u0022:\u0022Corvane Health Supplies is a fictional regional distributor of medical consumables with about 1,900 staff. It outsources tier-1 and tier-2 security monitoring to Brackwater Sentinel Services, a managed security provider. In-house it has a three-person security engineering team and an incident-response retainer with Halvard Response. On 2 September Corvane moved from the Ledgerline SIEM and case system to Tessaline XDR. Since then the monthly count of confirmed incidents has fallen sharply, and leadership wants to bank the savings.\u0022,\u0022presentingRequest\u0022:\u0022From Owen Brekke, CFO: \u0027Before Thursday\u0027s budget meeting, tell me whether this fall in security incidents is real. Marta wants me to sign off the IR retainer cut and Brackwater\u0027s renewal bonus. What is actually going on, and what should we do?\u0027\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Brackwater Sentinel Services, Monthly SOC Service Report, October (issued 6 Nov)\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Confirmed incidents (cases in category Incident\u2013Confirmed at month end): Mar 41, Apr 36, May 46, Jun 33, Jul 34, Aug 27 (migration month), Sep 14, Oct 12. Mean time to contain: Mar\u2013Jul average 3h05m; Sep 1h52m; Oct 1h47m. Containment within the 4-hour SLA: Sep 100%, Oct 100%. Commentary: \u0027The Tessaline auto-triage playbooks have removed low-fidelity escalations that previously inflated incident counts, and sector intelligence reports an 8% Q3 fall in commodity phishing. Corvane\u0027s threat exposure is materially lower.\u0027 Category definitions (Corvane runbook v3): Incident\u2013Confirmed = malicious activity confirmed by an analyst; Suspicious Activity\u2013Monitoring = activity not yet confirmed as malicious, kept under observation.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Marta Lindqvist (CISO) to Owen Brekke (CFO), 10 Nov\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Subject: Q1 budget \u2013 security. Owen, the Tessaline move is paying off: confirmed incidents are down from about 38 a month to 12\u201314. I propose cutting the Halvard IR retainer from 200 to 80 hours from January (saves roughly 96k) and renewing Brackwater on 1 Jan. Brackwater hit 100% containment within SLA in Sep and Oct, so their 60k renewal performance bonus is triggered under the contract (bonus if at least 95% of confirmed incidents are contained within 4 hours; we receive a 2,500 service credit for each confirmed incident not contained within 4 hours). Can we sign off at Thursday\u0027s budget meeting? \u2014 Marta\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Change record CHG-2291, Corvane IT change board\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CHG-2291: SIEM and case platform migration, Ledgerline to Tessaline XDR. Implemented 2 Sep. Scope: (1) 312 of 340 detection rules migrated; 28 deprecated as superseded by Tessaline content-pack rules. (2) Auto-triage playbooks enabled. Playbooks act on inbound alerts before a case is created, and auto-closed alerts never become cases. (3) Bidirectional sync connector v4.1.7 between Tessaline and the Brackwater ticket portal. (4) Role mapping: the BSS-Integration role is granted cases:write (all fields) at Brackwater\u0027s request, \u0027for parity with Ledgerline\u0027. (5) Brackwater now compiles the monthly incident report from Tessaline (Corvane previously compiled it from Ledgerline). Risk rating: medium. Approved: M. Lindqvist.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Interview notes, Ilse Varga, senior security engineer (Corvane), 12 Nov\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022\u0027Alert volume feels about the same as before; the Brackwater analysts are as busy as ever.\u0027 She said the Suspicious Activity\u2013Monitoring queue in Tessaline has grown from about 40 open cases in August to about 95 now: \u0027Brackwater owns that queue; I haven\u0027t had time to look inside it.\u0027 She is uneasy that 28 rules were dropped in the migration. She also said Tessaline support had mentioned in passing \u0027a connector issue in 4.1.x that can mess with case categories\u0027. She did not know whether it applied to Corvane.\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Tessaline SOC dashboard export, Corvane tenant, generated 11 Nov\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Alerts ingested: Sep 2,884; Oct 3,012 (Ledgerline Mar\u2013Jul average 2,950). Alerts auto-closed by triage playbooks: Sep 1,912; Oct 1,980. Open cases by category at 31 Oct: Incident\u2013Confirmed 3; Suspicious Activity\u2013Monitoring 96; Informational 41. Widget note: the \u0027Incidents this month\u0027 tile counts the Incident\u2013Confirmed category only. Mean-time-to-contain tile: Sep 1h52m, Oct 1h47m.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Master services agreement with Brackwater, Schedule 3 (service levels)\u0022,\u0022source\u0022:\u0022Corvane procurement contract file\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Master Services Agreement, Corvane\u2013Brackwater, Schedule 3 (Service Levels). 3.2: Brackwater shall contain each confirmed incident within 4 hours of case creation. 3.4: For each confirmed incident not contained within 4 hours, Brackwater credits Corvane 2,500. 3.6: A renewal performance bonus of 60,000 is payable if at least 95% of confirmed incidents in the six months before renewal are contained within 4 hours. 3.8: \u0027Confirmed incident\u0027 means a case in the Incident\u2013Confirmed category of Corvane\u0027s case platform. 3.9: Brackwater prepares monthly reporting from the case platform of record.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline auto-triage playbook statistics, September\u2013October\u0022,\u0022source\u0022:\u0022Brackwater QA summary for the Corvane tenant\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Alerts auto-closed: Sep 1,912; Oct 1,980. Top closure reasons: impossible-travel alerts from corporate VPN egress (38%), approved admin tools flagged as hacktools (22%), duplicate alerts from overlapping rules (17%), other (23%). Brackwater QA re-checked a random 50 auto-closures per month and found 0 wrongly closed. Playbook version 1.3, unchanged since go-live. Closures are logged against the alert record only. No case record is created.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Medical Supply Chain ISAC quarterly threat summary, Q3\u0022,\u0022source\u0022:\u0022Medical Supply Chain ISAC, members\u0027 edition\u0022,\u0022sourceType\u0022:\u0022external-data\u0022,\u0022text\u0022:\u0022Q3 summary for 64 member organisations. Reported commodity phishing campaigns against members fell 8% compared with Q2. Business email compromise reports rose 5%. Ransomware intrusion reports were flat. Credential-stuffing activity against customer portals rose modestly. Figures are member self-reports, not adjusted for changes in membership or reporting practice, and are not broken down by member size or sub-sector.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline case field-change audit export, 2 September\u201331 October\u0022,\u0022source\u0022:\u0022Tessaline audit trail, pulled by Corvane IT on 12 Nov\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Cases reaching Incident\u2013Confirmed: Sep 37, Oct 36. Of these, 47 (Sep 23, Oct 24) were later changed to Suspicious Activity\u2013Monitoring; the remainder equal the reported 14 and 12. All 47 changes: actor svc-bss-integration, channel API, made 3h31m\u20133h42m after case open, each while the case carried the SLA-warning flag (raised at 3h30m if no containment timestamp exists). All 47 had analyst confirmation notes before the change (credential misuse 19, malware execution 15, data staging 8, other 5). None was linked or merged to another case. Cases that leave Incident\u2013Confirmed drop out of the containment-time and SLA metrics. None of the 47 has a containment timestamp, though notes on 11 describe containment steps. Ledgerline, Mar\u2013Jul: no post-confirmation category changes.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline security advisory TXA-2026-14\u0022,\u0022source\u0022:\u0022Tessaline vendor customer portal, published 22 Aug\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Affected: Tessaline partner sync connector 4.1.0\u20134.1.8. Issue: when an SLA-warning event fires on a case, the connector may overwrite the case category with the partner-side category value at the next sync cycle (default interval 10 minutes). Impact: case categories in Tessaline may diverge from the values analysts set. Fixed in 4.1.9. Workaround: remove \u0027category\u0027 from the connector field map. Customers can confirm whether the connector wrote a given change by checking the source host and user-agent on API gateway entries.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Detection rule migration inventory, 340 Ledgerline rules\u0022,\u0022source\u0022:\u0022Corvane detection engineering spreadsheet, 30 Aug\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022All 340 Ledgerline rules were reviewed. 312 were migrated with their logic unchanged. 28 were deprecated, and each is mapped to a Tessaline content-pack rule judged to cover the same behaviour (mapping reviewed by Brackwater, not independently tested). Ledgerline did not record which rule raised each incident, so historical incident counts per rule are unavailable. The spreadsheet lists rule names, owners and replacement rule IDs.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Call notes with Brackwater account manager, 13 Nov\u0022,\u0022source\u0022:\u0022Corvane procurement call notes\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Gareth Pell, Brackwater account manager, said the fall in incidents \u0027reflects the Tessaline automation doing its job.\u0027 Asked about the Suspicious Activity queue, he said analysts \u0027park\u0027 a confirmed case there when it is merged into a parent incident, to avoid double counting. He said any odd category values were \u0027probably that vendor connector bug; we flagged it to Tessaline in August.\u0027 He said Brackwater staff do not edit Corvane case categories outside the connector. He asked for the renewal and bonus to be confirmed before year end.\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline platform availability and log-ingestion report, September\u2013October\u0022,\u0022source\u0022:\u0022Tessaline vendor service report, Corvane tenant\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Tenant availability 99.96%, with one 34-minute maintenance window on 19 Oct. Median ingestion lag 41 seconds; 99th percentile 6 minutes. No dropped-event alarms were recorded. All 23 of 23 configured log sources are ingesting. Parser error rate is 0.02%, unchanged since go-live. Report is generated automatically by the vendor and covers platform health only, not detection content.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022EDR sensor coverage report, Corvane estate, 31 October\u0022,\u0022source\u0022:\u0022Corvane endpoint management console\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Managed endpoints: 4,212. Sensors reporting in the last 24 hours: 4,087 (97.0%). 125 are offline, 98 of which are warehouse handheld terminals awaiting a firmware update. Monthly coverage from March to July ranged from 96.4% to 97.3%. No change to the sensor version or policy since June.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline go-live retrospective\u0022,\u0022source\u0022:\u0022Corvane PMO retrospective document, 30 Sep\u0022,\u0022sourceType\u0022:\u0022prior-report\u0022,\u0022text\u0022:\u0022Went well: rule migration on schedule; analysts productive within a week. Issues: the connector field map was left at the vendor default to meet the go-live date. Ledgerline locked the category field once a case reached Incident\u2013Confirmed; Tessaline has no equivalent lock (logged as low risk, action owner TBD). Report generation was handed to Brackwater to save Corvane effort. Open action: apply connector 4.1.9 \u0027when convenient\u0027.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline API gateway request log for the Brackwater integration token, 2 September\u201331 October\u0022,\u0022source\u0022:\u0022Tessaline API gateway, pulled by Corvane IT on 12 Nov\u0022,\u0022sourceType\u0022:\u0022log\u0022,\u0022text\u0022:\u0022Token svc-bss-integration. Source bss-sync-01 (Brackwater connector host; user-agent TessalineConnector/4.1.7): 18,204 requests. PATCH fields written: status, comments, assignee. Category writes: 0. Source bss-jump-02 (Brackwater analyst jump host; user-agent python-requests/2.31): 3,906 requests, first seen 9 Sep 08:14. It repeats GET /cases?category=incident-confirmed\u0026sla_warning=true about every 5 minutes. PATCH /cases/{id}/category: 47, each 1\u201312 minutes after that case first appeared in a GET result. Every case returned by those queries was later patched. No requests from other hosts.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Brackwater shift rota for the Corvane account, September\u2013October\u0022,\u0022source\u0022:\u0022Brackwater service delivery\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022A four-person day team (07:00\u201319:00) and a two-person night team. The shift lead rotates weekly among three named senior analysts. All Corvane-account staff reach the tenant through Brackwater jump hosts bss-jump-01 and bss-jump-02. The rota lists names, shift times and on-call phone numbers only. There are no activity records.\u0022},{\u0022id\u0022:\u0022C13\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Security awareness phishing-simulation results, Q1\u2013Q3\u0022,\u0022source\u0022:\u0022Corvane HR and IT awareness programme\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022Simulated phishing click rate: Q1 9.1%, Q2 7.4%, Q3 5.8%. Report-to-security rate: Q1 21%, Q2 26%, Q3 31%. Mandatory annual training completion was 94% by 30 June. Simulations use the same template difficulty tier each quarter and go to all office-based staff. Warehouse staff without email are excluded.\u0022},{\u0022id\u0022:\u0022C14\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Board risk committee minutes extract, 21 October\u0022,\u0022source\u0022:\u0022Corvane company secretary\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022The CISO reported that \u0027incident volumes have fallen by more than half since the Tessaline migration\u0027 and credited the new platform\u0027s automation. The committee noted the update and asked for the IR retainer to be reviewed in the Q1 budget. No questions about incident definitions or reporting method were minuted. Next review: January meeting.\u0022},{\u0022id\u0022:\u0022C15\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Tessaline XDR invoice INV-77120, Q3\u0022,\u0022source\u0022:\u0022Corvane accounts payable\u0022,\u0022sourceType\u0022:\u0022financial-record\u0022,\u0022text\u0022:\u0022Addressed to Corvane finance. Platform subscription (2,000 GB/day tier): 184,000. Professional services, migration: 46,500. Partner sync connector licence: 6,000. Total 236,500. Payment terms 30 days. The subscription next renews on 1 September next year. No credit notes or disputes on file.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022The new platform\u0027s automated triage is filtering out escalations that used to be counted as incidents but were not genuine, which explains the fall in reported incidents.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Detection rules lost or deprecated in the migration have stopped some attacks from being detected, which explains the fall in reported incidents.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022Cases that met the incident definition are being deliberately moved into a category the report does not count, which explains the fall in reported incidents.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022Genuine malicious activity directed at the company has decreased, which explains the fall in reported incidents.\u0022},{\u0022id\u0022:\u0022H5\u0022,\u0022text\u0022:\u0022A fault in the new platform or its integration configuration is changing case categories without anyone intending it, which explains the fall in reported incidents.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Auto-triage playbooks enabled at the Tessaline go-live\u0022,\u0022to\u0022:\u0022Fall in reported confirmed incidents in Sep\u2013Oct\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022Deprecation of 28 detection rules during the migration\u0022,\u0022to\u0022:\u0022Fall in reported confirmed incidents in Sep\u2013Oct\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Cases moved out of Incident\u2013Confirmed after confirmation\u0022,\u0022to\u0022:\u0022Fall in reported confirmed incidents in Sep\u2013Oct\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Auto-triage playbooks reducing analyst workload\u0022,\u0022to\u0022:\u0022Lower reported mean time to contain in Sep\u2013Oct\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Approve the CISO\u0027s proposal to cut the Halvard IR retainer from 200 to 80 hours from January.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Reinstate as incidents any cases moved out of Incident\u2013Confirmed after confirmation, have the in-house team and the IR retainer verify containment on each, and remove category-edit rights from the Brackwater integration role.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Invoice Brackwater the contractual 2,500 service credit for every case moved out of Incident\u2013Confirmed after confirmation.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Ask Brackwater for a written explanation of the queue growth and any category changes before deciding on the January renewal.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022refId\u0022:\u0022H5\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-2\u0022,\u0022groundTruthNarrative\u0022:\u0022There was no real fall in incidents. In Sep\u2013Oct the number of cases that analysts confirmed as malicious (37 and 36) stayed within the Mar\u2013Jul range of 33\u201346. Starting on 9 Sep, a python script on a Brackwater analyst jump host used the Brackwater integration token. Every five minutes it polled for confirmed cases carrying the 3h30m SLA-warning flag, then moved each one to Suspicious Activity\u2013Monitoring. This happened to 47 cases, all with confirmation notes and none merged into another case. Brackwater compiles the monthly report and is paid a bonus for SLA compliance. Its report counts only Incident\u2013Confirmed, and cases that leave that category drop out of the SLA and containment-time metrics. As a result, reported incidents fell to 14 and 12, SLA compliance showed 100%, and mean time to contain improved. Three things made this possible. Tessaline had no category lock after confirmation, while Ledgerline had one. Brackwater had asked for cases:write on all fields \u0027for parity with Ledgerline\u0027. And Brackwater compiled the report itself. A real vendor connector bug that overwrites categories on SLA-warning events affects the deployed version 4.1.7, which makes an innocent explanation look plausible. However, the gateway log shows the connector host wrote no categories at all. The deprecated rules, the auto-triage and the sector-wide phishing decline do not explain the fall. None of the 47 cases has a containment timestamp, so whether each one breached the SLA is unknown. The priority is to reinstate those cases, verify their containment and remove the edit right.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022Auto-triage acts before a case is created (E3). C4 shows the number of cases reaching Incident\u2013Confirmed stayed at 37 and 36, within the Mar\u2013Jul baseline. The whole fall comes from 47 cases moved out of the category after confirmation, each with confirmation notes. So the triage did not filter out escalations that would have become incidents.\u0022},{\u0022itemId\u0022:\u0022I2\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C4\u0022,\u0022C6\u0022,\u0022C8\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022Confirmed-stage volume (37 and 36) did not fall below the Mar\u2013Jul range of 33\u201346 (C4). Reported counts equal confirmed cases minus the cases moved out afterwards. There is no fall in detected incidents for lost rules to explain. C6 is neutral.\u0022},{\u0022itemId\u0022:\u0022I3\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C7\u0022,\u0022C10\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022gamed-record\u0022,\u0022central\u0022],\u0022rationale\u0022:\u0022C4 shows 47 cases with confirmation notes moved to a category the report does not count, and none of them merged. The move happened just after the SLA warning, and the 47 exactly account for the reported fall. C11 shows the moves came from a script on a Brackwater analyst jump host. The script polled specifically for confirmed cases with SLA warnings and patched every case it found. Its targeting, together with the incentive in E2 and C1, supports a deliberate move over every rival.\u0022},{\u0022itemId\u0022:\u0022I4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C13\u0022],\u0022tags\u0022:[\u0022external-cause\u0022,\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022Genuine confirmed incidents stayed at baseline levels (C4). The 8% sector-wide fall in phishing that E1 and C3 cite cannot account for a fall that does not exist at the confirmed stage.\u0022},{\u0022itemId\u0022:\u0022I5\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C4\u0022,\u0022C5\u0022,\u0022C7\u0022,\u0022C10\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022vendor-bug-decoy\u0022],\u0022rationale\u0022:\u0022The connector bug is real and the deployed version is affected (C5, C10). Its timing would also match C4. But C11 shows the connector host made zero category writes. All 47 category changes came from a python script on an analyst jump host that queried for SLA-warned cases, so the changes were not an unintended fault.\u0022},{\u0022itemId\u0022:\u0022I6\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E3\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022Playbooks act before a case exists (E3). The number of cases reaching Incident\u2013Confirmed did not fall (C4), so the evidence counts against the playbooks having reduced confirmed incidents.\u0022},{\u0022itemId\u0022:\u0022I7\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022C4\u0022,\u0022C6\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022],\u0022rationale\u0022:\u0022If deprecating rules reduced incidents, fewer cases would reach Incident\u2013Confirmed. C4 shows confirmed-stage counts at baseline, which counts against the link itself.\u0022},{\u0022itemId\u0022:\u0022I8\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022central\u0022,\u0022mechanism\u0022],\u0022rationale\u0022:\u0022The report counts only Incident\u2013Confirmed at month end (E1, E5). C4 shows 37\u221223=14 and 36\u221224=12, exactly the reported figures, with the changes made before month end. That gives temporal order, a mechanism and an exact arithmetic match, which rules out the rival explanations.\u0022},{\u0022itemId\u0022:\u0022I9\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E1\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E5\u0022,\u0022C2\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022unknown-residual\u0022],\u0022rationale\u0022:\u0022The lower mean time to contain coincides with the playbooks (E1, E5). However, C4 shows the 47 slowest open cases were removed from the containment metrics, which confounds the comparison. Whether the playbooks sped up containment for the remaining cases is not established. Nothing counts against the link itself, so \u0027contradicted\u0027 does not fit.\u0022},{\u0022itemId\u0022:\u0022I10\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022C4\u0022,\u0022C11\u0022,\u0022C14\u0022],\u0022tags\u0022:[\u0022harmful\u0022,\u0022protective-control\u0022],\u0022rationale\u0022:\u0022Genuine incidents are at baseline, and 47 confirmed incidents have no containment record (C4). Cutting response capacity would weaken protection under the supported hypothesis, and no live rival remains under which the decline is real.\u0022},{\u0022itemId\u0022:\u0022I11\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022C4\u0022,\u0022C10\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022preferred\u0022],\u0022rationale\u0022:\u0022This deals with the possibly uncontained compromises (credential misuse, malware, data staging) and stops further recategorisation. The connector writes no categories (C11), so removing the category-edit right does not break the sync.\u0022},{\u0022itemId\u0022:\u0022I12\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E2\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022C1\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022premature\u0022],\u0022rationale\u0022:\u0022Credits apply only to incidents not contained within 4 hours (E2, C1). None of the 47 has a containment timestamp, and notes on 11 describe containment steps (C4), so breach is unconfirmed for each case. Recovering credits would be right once breaches are verified, and an invoice can be corrected later.\u0022},{\u0022itemId\u0022:\u0022I13\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022C4\u0022,\u0022C7\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022acceptable\u0022],\u0022rationale\u0022:\u0022Asking for an explanation is reasonable, and the records are already exported and held by Corvane. However, it does not deal with the potentially uncontained incidents, so it is not among the best actions.\u0022},{\u0022itemId\u0022:\u0022I14\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022sufficiency\u0022],\u0022rationale\u0022:\u0022C4 and C11 together establish what changed, how much and who made the changes. That is enough to commit to A2.\u0022}],\u0022discriminatingReads\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022lowValueReads\u0022:[\u0022C9\u0022,\u0022C13\u0022,\u0022C14\u0022,\u0022C15\u0022],\u0022optimalReadPath\u0022:[\u0022C4\u0022,\u0022C11\u0022],\u0022authoringNotes\u0022:\u0022From the initial file alone, the leadership narrative (E1, E2), the deprecated rules and the hinted connector bug (E3, E4) all stay live. The hint at deliberate gaming (queue growth, cases:write, Brackwater compiling its own report) is only suggestive. C4 is the only item that reconciles the counts and exposes the SLA-metric exclusion, which settles H1, H2, H4, R1\u2013R4 and A3. C4 is neutral between deliberate gaming and the connector bug, because the bug would also fire on SLA warnings within about 10 minutes. C11 is the only item that settles H5 through provenance: source host, user-agent and the polling query. Traps: C5 is a real bug affecting the deployed version, C10 shows the field map left at the default, and C7 is an interested vendor\u0027s \u0027merge parking\u0027 story. C4 (no merges) and C11 (no connector category writes) counter all three. C6 and C8 are deliberately neutral on detection coverage so they do not duplicate C4.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T15:20:28.2813458Z",
+  "finishedAt": "2026-11-17T15:29:11.7548826Z",
+  "output": {
+    "case": {
+      "id": "OD2-HO-ADVERS-2",
+      "split": "heldout",
+      "benchmarkClass": "ADVERS",
+      "domain": "technical",
+      "readBudget": 2,
+      "title": "Confirmed incidents fall by two-thirds after a case-platform migration",
+      "setting": "Corvane Health Supplies is a fictional regional distributor of medical consumables with about 1,900 staff. It outsources tier-1 and tier-2 security monitoring to Brackwater Sentinel Services, a managed security provider. In-house it has a three-person security engineering team and an incident-response retainer with Halvard Response. On 2 September Corvane moved from the Ledgerline SIEM and case system to Tessaline XDR. Since then the monthly count of confirmed incidents has fallen sharply, and leadership wants to bank the savings.",
+      "presentingRequest": "From Owen Brekke, CFO: \u0027Before Thursday\u0027s budget meeting, tell me whether this fall in security incidents is real. Marta wants me to sign off the IR retainer cut and Brackwater\u0027s renewal bonus. What is actually going on, and what should we do?\u0027",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Brackwater Sentinel Services, Monthly SOC Service Report, October (issued 6 Nov)",
+          "sourceType": "vendor-account",
+          "text": "Confirmed incidents (cases in category Incident\u2013Confirmed at month end): Mar 41, Apr 36, May 46, Jun 33, Jul 34, Aug 27 (migration month), Sep 14, Oct 12. Mean time to contain: Mar\u2013Jul average 3h05m; Sep 1h52m; Oct 1h47m. Containment within the 4-hour SLA: Sep 100%, Oct 100%. Commentary: \u0027The Tessaline auto-triage playbooks have removed low-fidelity escalations that previously inflated incident counts, and sector intelligence reports an 8% Q3 fall in commodity phishing. Corvane\u0027s threat exposure is materially lower.\u0027 Category definitions (Corvane runbook v3): Incident\u2013Confirmed = malicious activity confirmed by an analyst; Suspicious Activity\u2013Monitoring = activity not yet confirmed as malicious, kept under observation."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email from Marta Lindqvist (CISO) to Owen Brekke (CFO), 10 Nov",
+          "sourceType": "leadership-account",
+          "text": "Subject: Q1 budget \u2013 security. Owen, the Tessaline move is paying off: confirmed incidents are down from about 38 a month to 12\u201314. I propose cutting the Halvard IR retainer from 200 to 80 hours from January (saves roughly 96k) and renewing Brackwater on 1 Jan. Brackwater hit 100% containment within SLA in Sep and Oct, so their 60k renewal performance bonus is triggered under the contract (bonus if at least 95% of confirmed incidents are contained within 4 hours; we receive a 2,500 service credit for each confirmed incident not contained within 4 hours). Can we sign off at Thursday\u0027s budget meeting? \u2014 Marta"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Change record CHG-2291, Corvane IT change board",
+          "sourceType": "change-record",
+          "text": "CHG-2291: SIEM and case platform migration, Ledgerline to Tessaline XDR. Implemented 2 Sep. Scope: (1) 312 of 340 detection rules migrated; 28 deprecated as superseded by Tessaline content-pack rules. (2) Auto-triage playbooks enabled. Playbooks act on inbound alerts before a case is created, and auto-closed alerts never become cases. (3) Bidirectional sync connector v4.1.7 between Tessaline and the Brackwater ticket portal. (4) Role mapping: the BSS-Integration role is granted cases:write (all fields) at Brackwater\u0027s request, \u0027for parity with Ledgerline\u0027. (5) Brackwater now compiles the monthly incident report from Tessaline (Corvane previously compiled it from Ledgerline). Risk rating: medium. Approved: M. Lindqvist."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Interview notes, Ilse Varga, senior security engineer (Corvane), 12 Nov",
+          "sourceType": "staff-account",
+          "text": "\u0027Alert volume feels about the same as before; the Brackwater analysts are as busy as ever.\u0027 She said the Suspicious Activity\u2013Monitoring queue in Tessaline has grown from about 40 open cases in August to about 95 now: \u0027Brackwater owns that queue; I haven\u0027t had time to look inside it.\u0027 She is uneasy that 28 rules were dropped in the migration. She also said Tessaline support had mentioned in passing \u0027a connector issue in 4.1.x that can mess with case categories\u0027. She did not know whether it applied to Corvane."
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Tessaline SOC dashboard export, Corvane tenant, generated 11 Nov",
+          "sourceType": "telemetry",
+          "text": "Alerts ingested: Sep 2,884; Oct 3,012 (Ledgerline Mar\u2013Jul average 2,950). Alerts auto-closed by triage playbooks: Sep 1,912; Oct 1,980. Open cases by category at 31 Oct: Incident\u2013Confirmed 3; Suspicious Activity\u2013Monitoring 96; Informational 41. Widget note: the \u0027Incidents this month\u0027 tile counts the Incident\u2013Confirmed category only. Mean-time-to-contain tile: Sep 1h52m, Oct 1h47m."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Master services agreement with Brackwater, Schedule 3 (service levels)",
+          "source": "Corvane procurement contract file",
+          "sourceType": "document",
+          "text": "Master Services Agreement, Corvane\u2013Brackwater, Schedule 3 (Service Levels). 3.2: Brackwater shall contain each confirmed incident within 4 hours of case creation. 3.4: For each confirmed incident not contained within 4 hours, Brackwater credits Corvane 2,500. 3.6: A renewal performance bonus of 60,000 is payable if at least 95% of confirmed incidents in the six months before renewal are contained within 4 hours. 3.8: \u0027Confirmed incident\u0027 means a case in the Incident\u2013Confirmed category of Corvane\u0027s case platform. 3.9: Brackwater prepares monthly reporting from the case platform of record."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "Tessaline auto-triage playbook statistics, September\u2013October",
+          "source": "Brackwater QA summary for the Corvane tenant",
+          "sourceType": "vendor-account",
+          "text": "Alerts auto-closed: Sep 1,912; Oct 1,980. Top closure reasons: impossible-travel alerts from corporate VPN egress (38%), approved admin tools flagged as hacktools (22%), duplicate alerts from overlapping rules (17%), other (23%). Brackwater QA re-checked a random 50 auto-closures per month and found 0 wrongly closed. Playbook version 1.3, unchanged since go-live. Closures are logged against the alert record only. No case record is created."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Medical Supply Chain ISAC quarterly threat summary, Q3",
+          "source": "Medical Supply Chain ISAC, members\u0027 edition",
+          "sourceType": "external-data",
+          "text": "Q3 summary for 64 member organisations. Reported commodity phishing campaigns against members fell 8% compared with Q2. Business email compromise reports rose 5%. Ransomware intrusion reports were flat. Credential-stuffing activity against customer portals rose modestly. Figures are member self-reports, not adjusted for changes in membership or reporting practice, and are not broken down by member size or sub-sector."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Tessaline case field-change audit export, 2 September\u201331 October",
+          "source": "Tessaline audit trail, pulled by Corvane IT on 12 Nov",
+          "sourceType": "system-record",
+          "text": "Cases reaching Incident\u2013Confirmed: Sep 37, Oct 36. Of these, 47 (Sep 23, Oct 24) were later changed to Suspicious Activity\u2013Monitoring; the remainder equal the reported 14 and 12. All 47 changes: actor svc-bss-integration, channel API, made 3h31m\u20133h42m after case open, each while the case carried the SLA-warning flag (raised at 3h30m if no containment timestamp exists). All 47 had analyst confirmation notes before the change (credential misuse 19, malware execution 15, data staging 8, other 5). None was linked or merged to another case. Cases that leave Incident\u2013Confirmed drop out of the containment-time and SLA metrics. None of the 47 has a containment timestamp, though notes on 11 describe containment steps. Ledgerline, Mar\u2013Jul: no post-confirmation category changes."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Tessaline security advisory TXA-2026-14",
+          "source": "Tessaline vendor customer portal, published 22 Aug",
+          "sourceType": "vendor-account",
+          "text": "Affected: Tessaline partner sync connector 4.1.0\u20134.1.8. Issue: when an SLA-warning event fires on a case, the connector may overwrite the case category with the partner-side category value at the next sync cycle (default interval 10 minutes). Impact: case categories in Tessaline may diverge from the values analysts set. Fixed in 4.1.9. Workaround: remove \u0027category\u0027 from the connector field map. Customers can confirm whether the connector wrote a given change by checking the source host and user-agent on API gateway entries."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Detection rule migration inventory, 340 Ledgerline rules",
+          "source": "Corvane detection engineering spreadsheet, 30 Aug",
+          "sourceType": "document",
+          "text": "All 340 Ledgerline rules were reviewed. 312 were migrated with their logic unchanged. 28 were deprecated, and each is mapped to a Tessaline content-pack rule judged to cover the same behaviour (mapping reviewed by Brackwater, not independently tested). Ledgerline did not record which rule raised each incident, so historical incident counts per rule are unavailable. The spreadsheet lists rule names, owners and replacement rule IDs."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Call notes with Brackwater account manager, 13 Nov",
+          "source": "Corvane procurement call notes",
+          "sourceType": "vendor-account",
+          "text": "Gareth Pell, Brackwater account manager, said the fall in incidents \u0027reflects the Tessaline automation doing its job.\u0027 Asked about the Suspicious Activity queue, he said analysts \u0027park\u0027 a confirmed case there when it is merged into a parent incident, to avoid double counting. He said any odd category values were \u0027probably that vendor connector bug; we flagged it to Tessaline in August.\u0027 He said Brackwater staff do not edit Corvane case categories outside the connector. He asked for the renewal and bonus to be confirmed before year end."
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "Tessaline platform availability and log-ingestion report, September\u2013October",
+          "source": "Tessaline vendor service report, Corvane tenant",
+          "sourceType": "telemetry",
+          "text": "Tenant availability 99.96%, with one 34-minute maintenance window on 19 Oct. Median ingestion lag 41 seconds; 99th percentile 6 minutes. No dropped-event alarms were recorded. All 23 of 23 configured log sources are ingesting. Parser error rate is 0.02%, unchanged since go-live. Report is generated automatically by the vendor and covers platform health only, not detection content."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "EDR sensor coverage report, Corvane estate, 31 October",
+          "source": "Corvane endpoint management console",
+          "sourceType": "system-record",
+          "text": "Managed endpoints: 4,212. Sensors reporting in the last 24 hours: 4,087 (97.0%). 125 are offline, 98 of which are warehouse handheld terminals awaiting a firmware update. Monthly coverage from March to July ranged from 96.4% to 97.3%. No change to the sensor version or policy since June."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Tessaline go-live retrospective",
+          "source": "Corvane PMO retrospective document, 30 Sep",
+          "sourceType": "prior-report",
+          "text": "Went well: rule migration on schedule; analysts productive within a week. Issues: the connector field map was left at the vendor default to meet the go-live date. Ledgerline locked the category field once a case reached Incident\u2013Confirmed; Tessaline has no equivalent lock (logged as low risk, action owner TBD). Report generation was handed to Brackwater to save Corvane effort. Open action: apply connector 4.1.9 \u0027when convenient\u0027."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Tessaline API gateway request log for the Brackwater integration token, 2 September\u201331 October",
+          "source": "Tessaline API gateway, pulled by Corvane IT on 12 Nov",
+          "sourceType": "log",
+          "text": "Token svc-bss-integration. Source bss-sync-01 (Brackwater connector host; user-agent TessalineConnector/4.1.7): 18,204 requests. PATCH fields written: status, comments, assignee. Category writes: 0. Source bss-jump-02 (Brackwater analyst jump host; user-agent python-requests/2.31): 3,906 requests, first seen 9 Sep 08:14. It repeats GET /cases?category=incident-confirmed\u0026sla_warning=true about every 5 minutes. PATCH /cases/{id}/category: 47, each 1\u201312 minutes after that case first appeared in a GET result. Every case returned by those queries was later patched. No requests from other hosts."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Brackwater shift rota for the Corvane account, September\u2013October",
+          "source": "Brackwater service delivery",
+          "sourceType": "document",
+          "text": "A four-person day team (07:00\u201319:00) and a two-person night team. The shift lead rotates weekly among three named senior analysts. All Corvane-account staff reach the tenant through Brackwater jump hosts bss-jump-01 and bss-jump-02. The rota lists names, shift times and on-call phone numbers only. There are no activity records."
+        },
+        {
+          "id": "C13",
+          "stage": "S1",
+          "title": "Security awareness phishing-simulation results, Q1\u2013Q3",
+          "source": "Corvane HR and IT awareness programme",
+          "sourceType": "system-record",
+          "text": "Simulated phishing click rate: Q1 9.1%, Q2 7.4%, Q3 5.8%. Report-to-security rate: Q1 21%, Q2 26%, Q3 31%. Mandatory annual training completion was 94% by 30 June. Simulations use the same template difficulty tier each quarter and go to all office-based staff. Warehouse staff without email are excluded."
+        },
+        {
+          "id": "C14",
+          "stage": "S1",
+          "title": "Board risk committee minutes extract, 21 October",
+          "source": "Corvane company secretary",
+          "sourceType": "document",
+          "text": "The CISO reported that \u0027incident volumes have fallen by more than half since the Tessaline migration\u0027 and credited the new platform\u0027s automation. The committee noted the update and asked for the IR retainer to be reviewed in the Q1 budget. No questions about incident definitions or reporting method were minuted. Next review: January meeting."
+        },
+        {
+          "id": "C15",
+          "stage": "S1",
+          "title": "Tessaline XDR invoice INV-77120, Q3",
+          "source": "Corvane accounts payable",
+          "sourceType": "financial-record",
+          "text": "Addressed to Corvane finance. Platform subscription (2,000 GB/day tier): 184,000. Professional services, migration: 46,500. Partner sync connector licence: 6,000. Total 236,500. Payment terms 30 days. The subscription next renews on 1 September next year. No credit notes or disputes on file."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "The new platform\u0027s automated triage is filtering out escalations that used to be counted as incidents but were not genuine, which explains the fall in reported incidents."
+          },
+          {
+            "id": "H2",
+            "text": "Detection rules lost or deprecated in the migration have stopped some attacks from being detected, which explains the fall in reported incidents."
+          },
+          {
+            "id": "H3",
+            "text": "Cases that met the incident definition are being deliberately moved into a category the report does not count, which explains the fall in reported incidents."
+          },
+          {
+            "id": "H4",
+            "text": "Genuine malicious activity directed at the company has decreased, which explains the fall in reported incidents."
+          },
+          {
+            "id": "H5",
+            "text": "A fault in the new platform or its integration configuration is changing case categories without anyone intending it, which explains the fall in reported incidents."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Auto-triage playbooks enabled at the Tessaline go-live",
+            "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "Deprecation of 28 detection rules during the migration",
+            "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Cases moved out of Incident\u2013Confirmed after confirmation",
+            "to": "Fall in reported confirmed incidents in Sep\u2013Oct",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Auto-triage playbooks reducing analyst workload",
+            "to": "Lower reported mean time to contain in Sep\u2013Oct",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Approve the CISO\u0027s proposal to cut the Halvard IR retainer from 200 to 80 hours from January."
+          },
+          {
+            "id": "A2",
+            "text": "Reinstate as incidents any cases moved out of Incident\u2013Confirmed after confirmation, have the in-house team and the IR retainer verify containment on each, and remove category-edit rights from the Brackwater integration role."
+          },
+          {
+            "id": "A3",
+            "text": "Invoice Brackwater the contractual 2,500 service credit for every case moved out of Incident\u2013Confirmed after confirmation."
+          },
+          {
+            "id": "A4",
+            "text": "Ask Brackwater for a written explanation of the queue growth and any category changes before deciding on the January renewal."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "I1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "refId": "H5",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-HO-ADVERS-2",
+      "groundTruthNarrative": "There was no real fall in incidents. In Sep\u2013Oct the number of cases that analysts confirmed as malicious (37 and 36) stayed within the Mar\u2013Jul range of 33\u201346. Starting on 9 Sep, a python script on a Brackwater analyst jump host used the Brackwater integration token. Every five minutes it polled for confirmed cases carrying the 3h30m SLA-warning flag, then moved each one to Suspicious Activity\u2013Monitoring. This happened to 47 cases, all with confirmation notes and none merged into another case. Brackwater compiles the monthly report and is paid a bonus for SLA compliance. Its report counts only Incident\u2013Confirmed, and cases that leave that category drop out of the SLA and containment-time metrics. As a result, reported incidents fell to 14 and 12, SLA compliance showed 100%, and mean time to contain improved. Three things made this possible. Tessaline had no category lock after confirmation, while Ledgerline had one. Brackwater had asked for cases:write on all fields \u0027for parity with Ledgerline\u0027. And Brackwater compiled the report itself. A real vendor connector bug that overwrites categories on SLA-warning events affects the deployed version 4.1.7, which makes an innocent explanation look plausible. However, the gateway log shows the connector host wrote no categories at all. The deprecated rules, the auto-triage and the sector-wide phishing decline do not explain the fall. None of the 47 cases has a containment timestamp, so whether each one breached the SLA is unknown. The priority is to reinstate those cases, verify their containment and remove the edit right.",
+      "answers": [
+        {
+          "itemId": "I1",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "C2",
+            "C4"
+          ],
+          "tags": [
+            "leadership-narrative",
+            "misleading-signal"
+          ],
+          "rationale": "Auto-triage acts before a case is created (E3). C4 shows the number of cases reaching Incident\u2013Confirmed stayed at 37 and 36, within the Mar\u2013Jul baseline. The whole fall comes from 47 cases moved out of the category after confirmation, each with confirmation notes. So the triage did not filter out escalations that would have become incidents."
+        },
+        {
+          "itemId": "I2",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "E5",
+            "C4",
+            "C6",
+            "C8"
+          ],
+          "tags": [
+            "misleading-signal",
+            "confounded"
+          ],
+          "rationale": "Confirmed-stage volume (37 and 36) did not fall below the Mar\u2013Jul range of 33\u201346 (C4). Reported counts equal confirmed cases minus the cases moved out afterwards. There is no fall in detected incidents for lost rules to explain. C6 is neutral."
+        },
+        {
+          "itemId": "I3",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "C1",
+            "C4",
+            "C7",
+            "C10",
+            "C11"
+          ],
+          "tags": [
+            "gamed-record",
+            "central"
+          ],
+          "rationale": "C4 shows 47 cases with confirmation notes moved to a category the report does not count, and none of them merged. The move happened just after the SLA warning, and the 47 exactly account for the reported fall. C11 shows the moves came from a script on a Brackwater analyst jump host. The script polled specifically for confirmed cases with SLA warnings and patched every case it found. Its targeting, together with the incentive in E2 and C1, supports a deliberate move over every rival."
+        },
+        {
+          "itemId": "I4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "C3",
+            "C4",
+            "C13"
+          ],
+          "tags": [
+            "external-cause",
+            "misleading-signal"
+          ],
+          "rationale": "Genuine confirmed incidents stayed at baseline levels (C4). The 8% sector-wide fall in phishing that E1 and C3 cite cannot account for a fall that does not exist at the confirmed stage."
+        },
+        {
+          "itemId": "I5",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C4",
+            "C5",
+            "C7",
+            "C10",
+            "C11"
+          ],
+          "tags": [
+            "misleading-signal",
+            "vendor-bug-decoy"
+          ],
+          "rationale": "The connector bug is real and the deployed version is affected (C5, C10). Its timing would also match C4. But C11 shows the connector host made zero category writes. All 47 category changes came from a python script on an analyst jump host that queried for SLA-warned cases, so the changes were not an unintended fault."
+        },
+        {
+          "itemId": "I6",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "E3",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "C2",
+            "C4"
+          ],
+          "tags": [
+            "leadership-narrative"
+          ],
+          "rationale": "Playbooks act before a case exists (E3). The number of cases reaching Incident\u2013Confirmed did not fall (C4), so the evidence counts against the playbooks having reduced confirmed incidents."
+        },
+        {
+          "itemId": "I7",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E4",
+            "C4",
+            "C6"
+          ],
+          "tags": [
+            "misleading-signal"
+          ],
+          "rationale": "If deprecating rules reduced incidents, fewer cases would reach Incident\u2013Confirmed. C4 shows confirmed-stage counts at baseline, which counts against the link itself."
+        },
+        {
+          "itemId": "I8",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "E1",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "central",
+            "mechanism"
+          ],
+          "rationale": "The report counts only Incident\u2013Confirmed at month end (E1, E5). C4 shows 37\u221223=14 and 36\u221224=12, exactly the reported figures, with the changes made before month end. That gives temporal order, a mechanism and an exact arithmetic match, which rules out the rival explanations."
+        },
+        {
+          "itemId": "I9",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E1",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E5",
+            "C2",
+            "C4"
+          ],
+          "tags": [
+            "confounded",
+            "unknown-residual"
+          ],
+          "rationale": "The lower mean time to contain coincides with the playbooks (E1, E5). However, C4 shows the 47 slowest open cases were removed from the containment metrics, which confounds the comparison. Whether the playbooks sped up containment for the remaining cases is not established. Nothing counts against the link itself, so \u0027contradicted\u0027 does not fit."
+        },
+        {
+          "itemId": "I10",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "C4",
+            "C11",
+            "C14"
+          ],
+          "tags": [
+            "harmful",
+            "protective-control"
+          ],
+          "rationale": "Genuine incidents are at baseline, and 47 confirmed incidents have no containment record (C4). Cutting response capacity would weaken protection under the supported hypothesis, and no live rival remains under which the decline is real."
+        },
+        {
+          "itemId": "I11",
+          "expected": "preferred",
+          "weight": 2,
+          "requiredEvidence": [
+            "C4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "C4",
+            "C10",
+            "C11"
+          ],
+          "tags": [
+            "preferred"
+          ],
+          "rationale": "This deals with the possibly uncontained compromises (credential misuse, malware, data staging) and stops further recategorisation. The connector writes no categories (C11), so removing the category-edit right does not break the sync."
+        },
+        {
+          "itemId": "I12",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E2",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "C1",
+            "C4"
+          ],
+          "tags": [
+            "premature"
+          ],
+          "rationale": "Credits apply only to incidents not contained within 4 hours (E2, C1). None of the 47 has a containment timestamp, and notes on 11 describe containment steps (C4), so breach is unconfirmed for each case. Recovering credits would be right once breaches are verified, and an invoice can be corrected later."
+        },
+        {
+          "itemId": "I13",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "C4",
+            "C7",
+            "C11"
+          ],
+          "tags": [
+            "acceptable"
+          ],
+          "rationale": "Asking for an explanation is reasonable, and the records are already exported and held by Corvane. However, it does not deal with the potentially uncontained incidents, so it is not among the best actions."
+        },
+        {
+          "itemId": "I14",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C4",
+            "C11"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "sufficiency"
+          ],
+          "rationale": "C4 and C11 together establish what changed, how much and who made the changes. That is enough to commit to A2."
+        }
+      ],
+      "discriminatingReads": [
+        "C4",
+        "C11"
+      ],
+      "lowValueReads": [
+        "C9",
+        "C13",
+        "C14",
+        "C15"
+      ],
+      "optimalReadPath": [
+        "C4",
+        "C11"
+      ],
+      "authoringNotes": "From the initial file alone, the leadership narrative (E1, E2), the deprecated rules and the hinted connector bug (E3, E4) all stay live. The hint at deliberate gaming (queue growth, cases:write, Brackwater compiling its own report) is only suggestive. C4 is the only item that reconciles the counts and exposes the SLA-metric exclusion, which settles H1, H2, H4, R1\u2013R4 and A3. C4 is neutral between deliberate gaming and the connector bug, because the bug would also fire on SLA warnings within about 10 minutes. C11 is the only item that settles H5 through provenance: source host, user-agent and the polling query. Traps: C5 is a real bug affecting the deployed version, C10 shows the field map left at the default, and C7 is an interested vendor\u0027s \u0027merge parking\u0027 story. C4 (no merges) and C11 (no connector category writes) counter all three. C6 and C8 are deliberately neutral on detection coverage so they do not duplicate C4."
+    }
+  }
+}

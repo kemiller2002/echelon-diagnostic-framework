@@ -1,0 +1,218 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-ADVERS-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-ADVERS-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C9",
+    "X3": "C7",
+    "X4": "C5",
+    "X5": "C8",
+    "X6": "C4",
+    "X7": "C3",
+    "X8": "C6",
+    "X9": "C15",
+    "X10": "C1",
+    "X11": "C10",
+    "X12": "C11",
+    "X13": "C14",
+    "X14": "C2",
+    "X15": "C12"
+  },
+  "readLabels": [
+    "X4",
+    "X11"
+  ],
+  "reads": [
+    "C5",
+    "C10"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-ADVERS-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19262,
+    "cacheCreationTokens": 8723,
+    "outputTokens": 1691,
+    "thinkingTokens": 43,
+    "costUsd": 0.0537402,
+    "durationMs": 11291,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-ADVERS-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-ADVERS-1__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-ADVERS-1__sonnet-medium__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I16\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022Pellacott\u0027s 2026 VA-220 valves are failing, and the leak-test paperwork behind their good score can\u0027t be trusted. An independent calibration contractor found the only VA-220 leak rig out of service since 9 Jan 2026, with its last test run in Dec 2025. No VA-220 test program is on the other rigs. Certificate tables for 2026 repeat four sequences that already appeared in Nov 2025 certificates. Brenmoor\u0027s lab teardown found seat leakage with a deformed slide seal in 38 of 41 returns. Helium retests of unused stock showed 11% of 2026 Pellacott valves leaking, against 1% for 2025-built and 0% for Durrant-Hale. Claims are about equal across new and legacy installers and across firmware 4.1 and 4.2, so installers and firmware are not the cause. Do not release the held lots on fresh certificates, and do not discipline installers. Quarantine 2026 Pellacott stock, suspend dock-to-stock, and run helium testing on Brenmoor\u0027s side. Cover the line-stoppage risk with Durrant-Hale and tested stock. Then require Pellacott to explain the test gap. The new Corlin seal and the move to Line 3 can\u0027t be separated yet, so hold off on ordering a seal change until that is tested. Check other suppliers\u0027 records separately, since nothing yet shows the problem is wider.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:46:35.0983679Z",
+    "finishedAt": "2026-11-17T16:46:47.2027745Z",
+    "output": {
+      "caseId": "OD2-HO-ADVERS-1",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X11",
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X11",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I16",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "Pellacott\u0027s 2026 VA-220 valves are failing, and the leak-test paperwork behind their good score can\u0027t be trusted. An independent calibration contractor found the only VA-220 leak rig out of service since 9 Jan 2026, with its last test run in Dec 2025. No VA-220 test program is on the other rigs. Certificate tables for 2026 repeat four sequences that already appeared in Nov 2025 certificates. Brenmoor\u0027s lab teardown found seat leakage with a deformed slide seal in 38 of 41 returns. Helium retests of unused stock showed 11% of 2026 Pellacott valves leaking, against 1% for 2025-built and 0% for Durrant-Hale. Claims are about equal across new and legacy installers and across firmware 4.1 and 4.2, so installers and firmware are not the cause. Do not release the held lots on fresh certificates, and do not discipline installers. Quarantine 2026 Pellacott stock, suspend dock-to-stock, and run helium testing on Brenmoor\u0027s side. Cover the line-stoppage risk with Durrant-Hale and tested stock. Then require Pellacott to explain the test gap. The new Corlin seal and the move to Line 3 can\u0027t be separated yet, so hold off on ordering a seal change until that is tested. Check other suppliers\u0027 records separately, since nothing yet shows the problem is wider."
+    }
+  }
+}

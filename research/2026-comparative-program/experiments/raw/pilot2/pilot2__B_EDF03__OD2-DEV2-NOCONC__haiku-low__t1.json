@@ -1,0 +1,223 @@
+{
+  "runId": "pilot2__B_EDF03__OD2-DEV2-NOCONC__haiku-low__t1",
+  "phase": "pilot2",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV2-NOCONC",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C3",
+    "X2": "C12",
+    "X3": "C5",
+    "X4": "C6",
+    "X5": "C13",
+    "X6": "C14",
+    "X7": "C7",
+    "X8": "C15",
+    "X9": "C8",
+    "X10": "C10",
+    "X11": "C4",
+    "X12": "C1",
+    "X13": "C2",
+    "X14": "C9",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X14",
+    "X4",
+    "X13"
+  ],
+  "reads": [
+    "C9",
+    "C6",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__B_EDF03__OD2-DEV2-NOCONC__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33229,
+    "cacheCreationTokens": 13706,
+    "outputTokens": 4102,
+    "thinkingTokens": 1521,
+    "costUsd": 0.005125290000000001,
+    "durationMs": 23900,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022__unparsedToolInput\u0022:{\u0022raw\u0022:\u0022{\\\u0022caseId\\\u0022: \\\u0022OD2-DEV2-NOCONC\\\u0022, \\\u0022methodChoice\\\u0022: \\\u0022EDF-2 diagnostic sequence, with evidence collection limited to X14, X4 and X13 (3 of 3 allowed).\\\u0022, \\\u0022answers\\\u0022: [{\\\u0022itemId\\\u0022:\\\u0022Q01\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:60,\\\u0022evidenceIds\\\u0022:[\\\u0022E3\\\u0022,\\\u0022X4\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q02\\\u0022,\\\u0022answer\\\u0022:\\\u0022supported\\\u0022,\\\u0022confidence\\\u0022:60,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022E4\\\u0022,\\\u0022E2\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022supported\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q03\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:65,\\\u0022evidenceIds\\\u0022:[\\\u0022E5\\\u0022,\\\u0022X13\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q04\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:55,\\\u0022evidenceIds\\\u0022:[\\\u0022X13\\\u0022,\\\u0022X14\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q05\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022E5\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q06\\\u0022,\\\u0022answer\\\u0022:\\\u0022association-only\\\u0022,\\\u0022confidence\\\u0022:50,\\\u0022evidenceIds\\\u0022:[\\\u0022E1\\\u0022,\\\u0022E2\\\u0022,\\\u0022E4\\\u0022,\\\u0022X14\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022association-only\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q07\\\u0022,\\\u0022answer\\\u0022:\\\u0022association-only\\\u0022,\\\u0022confidence\\\u0022:55,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022E4\\\u0022,\\\u0022E2\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022association-only\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q08\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:65,\\\u0022evidenceIds\\\u0022:[\\\u0022E5\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q09\\\u0022,\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022,\\\u0022confidence\\\u0022:70,\\\u0022evidenceIds\\\u0022:[\\\u0022X4\\\u0022,\\\u0022E3\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022unknown\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q10\\\u0022,\\\u0022answer\\\u0022:\\\u0022premature\\\u0022,\\\u0022confidence\\\u0022:60,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022X13\\\u0022,\\\u0022X4\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022premature\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q11\\\u0022,\\\u0022answer\\\u0022:\\\u0022preferred\\\u0022,\\\u0022confidence\\\u0022:65,\\\u0022evidenceIds\\\u0022:[\\\u0022X13\\\u0022,\\\u0022X14\\\u0022,\\\u0022X4\\\u0022,\\\u0022E2\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022preferred\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q12\\\u0022,\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022X13\\\u0022,\\\u0022E3\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q13\\\u0022,\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022,\\\u0022confidence\\\u0022:70,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022X4\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022harmful\\\u0022},{\\\u0022itemId\\\u0022:\\\u0022Q14\\\u0022,\\\u0022answer\\\u0022:\\\u0022insufficient\\\u0022,\\\u0022confidence\\\u0022:75,\\\u0022evidenceIds\\\u0022:[\\\u0022X14\\\u0022,\\\u0022X4\\\u0022,\\\u0022X13\\\u0022],\\\u0022}\\\u0022],\\\u0022answer\\\u0022:\\\u0022insufficient\\\u0022}], \\\u0022brief\\\u0022: \\\u0022Most of the rise looks like better recording, not proof that the night rota caused more falls. The incident app went live on 1 July, and the paper-form cross-check found falls that were never written up. Most of the extra Q3 falls are minor or found on the floor, while falls needing GP or hospital care went only from 2 to 3. The rota effect\u0022,\u0022len\u0022:2768}}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-NOCONC\u0022,\u0022methodChoice\u0022:\u0022EDF-2 sequence; collected X14, X4, X13 (3 of 3 allowed).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X14\u0022,\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X13\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X4\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022Most of the rise probably reflects better recording, not proof that the night rota caused more falls. The incident app went live on 1 July, and a cross-check of paper forms found falls that were never written up. Most of the extra Q3 falls are minor or found on the floor, while falls needing GP or hospital care only went from 2 to 3. The rota effect is untested: there is no pre-June response-time data, no resident-mix data, and no prescribing data. Both homes\u0027 Q3 rates sit within their historical ranges. I am moderately sure recording change is a major part of the story, but not sure how much. Do not reverse the rota or halt the rollout on this evidence, and do not give staff warnings. Next: keep the pilot under its pause criteria, show falls as rates with the reporting change marked, start sampling night call-bell response times now, and take the rollout decision at a dated late-January review using Q4 data. Do not withdraw the app. Resident mix and medication changes still need checking.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:40:07.9475752Z",
+    "finishedAt": "2026-11-17T14:40:39.4646383Z",
+    "output": {
+      "caseId": "OD2-DEV2-NOCONC",
+      "methodChoice": "EDF-2 sequence; collected X14, X4, X13 (3 of 3 allowed).",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "supported",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X13",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "E4",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "X14",
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "X13",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "X14",
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X13",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X14",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X4",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "Most of the rise probably reflects better recording, not proof that the night rota caused more falls. The incident app went live on 1 July, and a cross-check of paper forms found falls that were never written up. Most of the extra Q3 falls are minor or found on the floor, while falls needing GP or hospital care only went from 2 to 3. The rota effect is untested: there is no pre-June response-time data, no resident-mix data, and no prescribing data. Both homes\u0027 Q3 rates sit within their historical ranges. I am moderately sure recording change is a major part of the story, but not sure how much. Do not reverse the rota or halt the rollout on this evidence, and do not give staff warnings. Next: keep the pilot under its pause criteria, show falls as rates with the reporting change marked, start sampling night call-bell response times now, and take the rollout decision at a dated late-January review using Q4 data. Do not withdraw the app. Resident mix and medication changes still need checking."
+    }
+  }
+}

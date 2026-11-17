@@ -1,0 +1,213 @@
+{
+  "runId": "pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1",
+  "phase": "pilot2",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV2-CONTRA",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C12",
+    "X3": "C1",
+    "X4": "C14",
+    "X5": "C2",
+    "X6": "C11",
+    "X7": "C7",
+    "X8": "C15",
+    "X9": "C6",
+    "X10": "C3",
+    "X11": "C4",
+    "X12": "C5",
+    "X13": "C8",
+    "X14": "C13",
+    "X15": "C9",
+    "X16": "C16"
+  },
+  "readLabels": [
+    "X3",
+    "X10",
+    "X4"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C14"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20580,
+    "cacheCreationTokens": 10443,
+    "outputTokens": 1932,
+    "thinkingTokens": 172,
+    "costUsd": 0.063162,
+    "durationMs": 13374,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot2__B_EDF03__OD2-DEV2-CONTRA__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV2-CONTRA\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The October shortfalls were not caused by your data. The platform\u0027s tamper-proof audit trail shows that on 22 October an Ardentra consultant applied a standard night-shift template to the night premium rule. It was logged as a label-only change, but it also moved the premium start time from 20:00 to 22:00. Internal audit recalculated pay for all 158 night workers. 147 were underpaid, and each shortfall equals the premium for the 20:00\u201322:00 hours. The 11 workers on 22:00\u201306:00 shifts were paid correctly. Re-running October with the start time set back to 20:00 gave correct pay for all 158. Flagged data records were no more likely to be underpaid than unflagged ones. Ardentra\u0027s account therefore doesn\u0027t hold up. Don\u0027t suspend the HR team, and don\u0027t pay for a re-cleanse. Before 24 November, have Ardentra restore the 20:00 start time, verify it by re-running October, and pay all 147 underpaid staff in an off-cycle payment. Challenge Ardentra on the change log and on clause 14.3. The drop in night overtime cover has two possible causes, the pay shortfall and the rota trial, and the evidence doesn\u0027t separate them. Fixing the pay will help. Decide on pausing the trial after that. I\u0027m fairly confident in this diagnosis.\u0022,\u0022methodChoice\u0022:\u0022EDF sequence, 3 evidence items (X3, X10, X4)\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:41:25.0869901Z",
+    "finishedAt": "2026-11-17T14:41:39.5779609Z",
+    "output": {
+      "caseId": "OD2-DEV2-CONTRA",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The October shortfalls were not caused by your data. The platform\u0027s tamper-proof audit trail shows that on 22 October an Ardentra consultant applied a standard night-shift template to the night premium rule. It was logged as a label-only change, but it also moved the premium start time from 20:00 to 22:00. Internal audit recalculated pay for all 158 night workers. 147 were underpaid, and each shortfall equals the premium for the 20:00\u201322:00 hours. The 11 workers on 22:00\u201306:00 shifts were paid correctly. Re-running October with the start time set back to 20:00 gave correct pay for all 158. Flagged data records were no more likely to be underpaid than unflagged ones. Ardentra\u0027s account therefore doesn\u0027t hold up. Don\u0027t suspend the HR team, and don\u0027t pay for a re-cleanse. Before 24 November, have Ardentra restore the 20:00 start time, verify it by re-running October, and pay all 147 underpaid staff in an off-cycle payment. Challenge Ardentra on the change log and on clause 14.3. The drop in night overtime cover has two possible causes, the pay shortfall and the rota trial, and the evidence doesn\u0027t separate them. Fixing the pay will help. Decide on pausing the trial after that. I\u0027m fairly confident in this diagnosis.",
+      "methodChoice": "EDF sequence, 3 evidence items (X3, X10, X4)"
+    }
+  }
+}
