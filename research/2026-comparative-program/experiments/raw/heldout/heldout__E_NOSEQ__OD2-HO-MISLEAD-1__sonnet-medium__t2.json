@@ -1,0 +1,204 @@
+{
+  "runId": "heldout__E_NOSEQ__OD2-HO-MISLEAD-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "E_NOSEQ",
+  "caseId": "OD2-HO-MISLEAD-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C6",
+    "X3": "C5",
+    "X4": "C12",
+    "X5": "C4",
+    "X6": "C9",
+    "X7": "C7",
+    "X8": "C2",
+    "X9": "C3",
+    "X10": "C10",
+    "X11": "C14",
+    "X12": "C13",
+    "X13": "C8",
+    "X14": "C1",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X8",
+    "X14"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOSEQ__OD2-HO-MISLEAD-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20109,
+    "cacheCreationTokens": 9539,
+    "outputTokens": 1892,
+    "thinkingTokens": 366,
+    "costUsd": 0.0590989,
+    "durationMs": 13555,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSEQ__OD2-HO-MISLEAD-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSEQ__OD2-HO-MISLEAD-1__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOSEQ__OD2-HO-MISLEAD-1__sonnet-medium__t2/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X14\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X14\u0022]}],\u0022brief\u0022:\u0022The evidence points mainly at the October 2025 scholarship cut, not the Admissions Office. Applications and admits rose and admit quality held, so the applicant pool wasn\u0027t the problem. Yield fell only in the tiers whose awards were cut (Dean\u0027s $14k to $9k, yield 45% to 32%; Merit $9k to $5k, 45% to 32%). Presidential awards were unchanged and yield was flat, and so was yield for students with no merit award. Early-action admits were handled on the old system and on time, yet their yield fell by about the same amount as regular decision (45.2% to 37.8% versus 39.0% to 31.5%). That makes the slow portal turnaround an unlikely main driver, though it was real and may have lost individual students. I\u0027m fairly confident, but the data doesn\u0027t separate price from delay within each tier. Don\u0027t replace the director on this basis. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a monthly-reported turnaround target and restore reader capacity. Hold off on rebuilding the portal\u0027s upload module until the missing-transcript claim is checked.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:33:29.7869574Z",
+    "finishedAt": "2026-11-17T16:33:44.4206478Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8",
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X8",
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "X14",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 72,
+          "evidenceIds": [
+            "E2",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X14"
+          ]
+        }
+      ],
+      "brief": "The evidence points mainly at the October 2025 scholarship cut, not the Admissions Office. Applications and admits rose and admit quality held, so the applicant pool wasn\u0027t the problem. Yield fell only in the tiers whose awards were cut (Dean\u0027s $14k to $9k, yield 45% to 32%; Merit $9k to $5k, 45% to 32%). Presidential awards were unchanged and yield was flat, and so was yield for students with no merit award. Early-action admits were handled on the old system and on time, yet their yield fell by about the same amount as regular decision (45.2% to 37.8% versus 39.0% to 31.5%). That makes the slow portal turnaround an unlikely main driver, though it was real and may have lost individual students. I\u0027m fairly confident, but the data doesn\u0027t separate price from delay within each tier. Don\u0027t replace the director on this basis. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a monthly-reported turnaround target and restore reader capacity. Hold off on rebuilding the portal\u0027s upload module until the missing-transcript claim is checked."
+    }
+  }
+}

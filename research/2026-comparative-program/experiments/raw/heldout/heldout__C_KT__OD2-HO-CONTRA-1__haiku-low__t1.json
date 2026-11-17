@@ -1,0 +1,228 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-CONTRA-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C9",
+    "X3": "C4",
+    "X4": "C14",
+    "X5": "C13",
+    "X6": "C2",
+    "X7": "C15",
+    "X8": "C11",
+    "X9": "C5",
+    "X10": "C6",
+    "X11": "C3",
+    "X12": "C8",
+    "X13": "C1",
+    "X14": "C7",
+    "X15": "C10"
+  },
+  "readLabels": [
+    "X6",
+    "X2"
+  ],
+  "reads": [
+    "C2",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-CONTRA-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18742,
+    "cacheCreationTokens": 7909,
+    "outputTokens": 3080,
+    "thinkingTokens": 1690,
+    "costUsd": 0.0033098199999999998,
+    "durationMs": 17185,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe Problem Analysis and Decision Analysis, with Potential Problem Analysis for the chosen path. Collected X6 (crane ledger) and X2 (RFI audit trail).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022,\u0022E5\u0022,\u0022E4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X6\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022,\u0022E4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X6\u0022,\u0022E3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X2\u0022,\u0022E2\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The main cause of the slip appears to be Callerby\u0027s own decision to move the tower crane to the Kestrel warehouse from late October 2025 to late March 2026. The frame and crew stood idle during that period, and the crane\u0027s transfer records show no transfer request forms, approved only by the regional office. The architect\u0027s answers were prompt (median 4 working days, 62 of 64 within the contract period), and most of the drafted claim\u0027s \\\u0022late\\\u0022 RFIs sat in Callerby\u0027s own draft status before submission. The owner\u0027s change orders may have contributed, but the evidence does not yet show how much.\\n\\nI am fairly confident about the crane and the architect findings, less so about the change-order share.\\n\\nNext steps: do not submit the 1 December claim as drafted, since its main grounds are contradicted. Commission an independent forensic delay analysis now, and ask the claims advisers to restate the claim without the RFI and crane-free grounds. Keep the superintendent\u0027s disclosure to Halden\u0027s clerk of works in place, and review the crane transfer approval through the proper governance process rather than through the incentive scheme or disciplinary action. Seek legal advice before any response to Halden\u0027s deductions.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:19:37.2942070Z",
+    "finishedAt": "2026-11-17T16:19:55.1962070Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "methodChoice": "Kepner-Tregoe Problem Analysis and Decision Analysis, with Potential Problem Analysis for the chosen path. Collected X6 (crane ledger) and X2 (RFI audit trail).",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E2",
+            "E5",
+            "E4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 50,
+          "evidenceIds": [
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E5",
+            "E6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "unknown",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "E6",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "X6",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X6",
+            "E2",
+            "E4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X2",
+            "X6",
+            "E3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X6",
+            "X2",
+            "E2",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The main cause of the slip appears to be Callerby\u0027s own decision to move the tower crane to the Kestrel warehouse from late October 2025 to late March 2026. The frame and crew stood idle during that period, and the crane\u0027s transfer records show no transfer request forms, approved only by the regional office. The architect\u0027s answers were prompt (median 4 working days, 62 of 64 within the contract period), and most of the drafted claim\u0027s \u0022late\u0022 RFIs sat in Callerby\u0027s own draft status before submission. The owner\u0027s change orders may have contributed, but the evidence does not yet show how much.\n\nI am fairly confident about the crane and the architect findings, less so about the change-order share.\n\nNext steps: do not submit the 1 December claim as drafted, since its main grounds are contradicted. Commission an independent forensic delay analysis now, and ask the claims advisers to restate the claim without the RFI and crane-free grounds. Keep the superintendent\u0027s disclosure to Halden\u0027s clerk of works in place, and review the crane transfer approval through the proper governance process rather than through the incentive scheme or disciplinary action. Seek legal advice before any response to Halden\u0027s deductions."
+    }
+  }
+}

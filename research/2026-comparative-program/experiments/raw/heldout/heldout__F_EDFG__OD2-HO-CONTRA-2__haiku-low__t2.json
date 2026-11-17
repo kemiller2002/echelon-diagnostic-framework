@@ -1,0 +1,220 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-CONTRA-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-CONTRA-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C1",
+    "X3": "C8",
+    "X4": "C5",
+    "X5": "C6",
+    "X6": "C4",
+    "X7": "C3",
+    "X8": "C12",
+    "X9": "C7",
+    "X10": "C14",
+    "X11": "C9",
+    "X12": "C13",
+    "X13": "C15",
+    "X14": "C11",
+    "X15": "C10"
+  },
+  "readLabels": [
+    "X14",
+    "X5"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-CONTRA-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 35407,
+    "cacheCreationTokens": 11530,
+    "outputTokens": 3405,
+    "thinkingTokens": 1755,
+    "costUsd": 0.00436337,
+    "durationMs": 20398,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with evidence collection limited to X14 and X5 (2 of 2 items)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X5\u0022,\u0022E6\u0022]}],\u0022brief\u0022:\u0022The jump in chilled write-offs is mostly a dock problem, not a Haverlow or refrigeration problem. Since the night receiving team was cut from six to four on 27 July, pallets wait about 3 hours 50 minutes between unloading and reaching a chamber, up from 44 minutes. They sit in unrefrigerated staging at 15\u201317\u00B0C. Night write-offs rose to about 3% across all suppliers, including Pellridge and own-label, while day shift barely moved. Haverlow\u0027s trailers arrived at 2.4\u20133.5\u00B0C on independent telemetry, and the chambers held 2\u20134\u00B0C, so a Haverlow chargeback and volume move would punish the wrong party. Confidence is moderate-to-good. The main gaps are that no claim-level data tests the Corriebank credit rise, and the arrival-temperature finding rests on load-level pairs for four loads. Next: restore the night team to six, set a maximum dock-to-chamber time monitored weekly, and reconcile a sample of Corriebank claims. Hold the Haverlow chargeback and do not remove the receiving probe.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:40:56.4253415Z",
+    "finishedAt": "2026-11-17T16:41:17.7706432Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-2",
+      "methodChoice": "EDF-2 with evidence collection limited to X14 and X5 (2 of 2 items)",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 75,
+          "evidenceIds": [
+            "X5",
+            "X14",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X5",
+            "X14",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "X14",
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X14",
+            "X5",
+            "E6"
+          ]
+        }
+      ],
+      "brief": "The jump in chilled write-offs is mostly a dock problem, not a Haverlow or refrigeration problem. Since the night receiving team was cut from six to four on 27 July, pallets wait about 3 hours 50 minutes between unloading and reaching a chamber, up from 44 minutes. They sit in unrefrigerated staging at 15\u201317\u00B0C. Night write-offs rose to about 3% across all suppliers, including Pellridge and own-label, while day shift barely moved. Haverlow\u0027s trailers arrived at 2.4\u20133.5\u00B0C on independent telemetry, and the chambers held 2\u20134\u00B0C, so a Haverlow chargeback and volume move would punish the wrong party. Confidence is moderate-to-good. The main gaps are that no claim-level data tests the Corriebank credit rise, and the arrival-temperature finding rests on load-level pairs for four loads. Next: restore the night team to six, set a maximum dock-to-chamber time monitored weekly, and reconcile a sample of Corriebank claims. Hold the Haverlow chargeback and do not remove the receiving probe."
+    }
+  }
+}

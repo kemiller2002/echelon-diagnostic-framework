@@ -1,0 +1,211 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-CROSS-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C13",
+    "X3": "C1",
+    "X4": "C5",
+    "X5": "C9",
+    "X6": "C8",
+    "X7": "C14",
+    "X8": "C11",
+    "X9": "C6",
+    "X10": "C4",
+    "X11": "C3",
+    "X12": "C12",
+    "X13": "C7",
+    "X14": "C15",
+    "X15": "C2"
+  },
+  "readLabels": [
+    "X3",
+    "X15"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-CROSS-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33601,
+    "cacheCreationTokens": 10364,
+    "outputTokens": 2756,
+    "thinkingTokens": 1350,
+    "costUsd": 0.0037876099999999994,
+    "durationMs": 18392,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with evidence limited to initial evidence plus X3 and X15 (2-item cap reached).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X15\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022The rise in delayed alarm responses on 5 East is most likely caused by a software change on the alert relay server, not by agency nurses or by the monitor update. On 12 August the relay was moved to new hardware. The change record shows that 11 of 14 forwarding rules were silently skipped during import, including a 15-second hold-off for SpO2 alarms and repeat-suppression. Phone notifications per nurse roughly doubled in Pods A-C from 12 August. Pod D, whose rules were deferred, stayed flat. Bedside alarm volume did not change, and agency share was similar in Pod D, which did not see a rise. I am fairly confident in this, though the logs record dispatch to the phone system, not receipt by a handset, and I did not check wireless coverage or sick leave links. Next steps: restore the original forwarding rules with Clinical Engineering validation, and track notifications and acknowledgement times weekly. Do not cap agency use or discipline nurses, and do not switch off phone forwarding of SpO2 alarms.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:22:01.3902409Z",
+    "finishedAt": "2026-11-17T16:22:20.5262551Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "EDF-2 with evidence limited to initial evidence plus X3 and X15 (2-item cap reached).",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X3",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X15",
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 78,
+          "evidenceIds": [
+            "X15",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "X15",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X15",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X15",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "The rise in delayed alarm responses on 5 East is most likely caused by a software change on the alert relay server, not by agency nurses or by the monitor update. On 12 August the relay was moved to new hardware. The change record shows that 11 of 14 forwarding rules were silently skipped during import, including a 15-second hold-off for SpO2 alarms and repeat-suppression. Phone notifications per nurse roughly doubled in Pods A-C from 12 August. Pod D, whose rules were deferred, stayed flat. Bedside alarm volume did not change, and agency share was similar in Pod D, which did not see a rise. I am fairly confident in this, though the logs record dispatch to the phone system, not receipt by a handset, and I did not check wireless coverage or sick leave links. Next steps: restore the original forwarding rules with Clinical Engineering validation, and track notifications and acknowledgement times weekly. Do not cap agency use or discipline nurses, and do not switch off phone forwarding of SpO2 alarms."
+    }
+  }
+}

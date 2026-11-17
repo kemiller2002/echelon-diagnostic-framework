@@ -1,0 +1,228 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-STOP-2__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-STOP-2",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C3",
+    "X3": "C12",
+    "X4": "C14",
+    "X5": "C5",
+    "X6": "C7",
+    "X7": "C11",
+    "X8": "C13",
+    "X9": "C8",
+    "X10": "C4",
+    "X11": "C2",
+    "X12": "C1",
+    "X13": "C6",
+    "X14": "C10",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X5",
+    "X10"
+  ],
+  "reads": [
+    "C5",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-STOP-2__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18626,
+    "cacheCreationTokens": 8101,
+    "outputTokens": 3371,
+    "thinkingTokens": 2016,
+    "costUsd": 0.0034925600000000005,
+    "durationMs": 18373,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-STOP-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022X5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022X10\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X10\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X5\u0022,\u0022X10\u0022,\u0022E3\u0022]}],\u0022brief\u0022:\u0022The evidence points to a single chance QC flag on Analyzer B, not a systematic potassium fault. The Level 2 mean is unchanged after the reagent lot change (5.81 before, 5.80 after). Across 546 QC measurements there were no other rule violations, and the repeat passed. Analyzer A re-runs of the held samples and 20 flagged results agree with B within 0.10 mmol/L. External quality results for Analyzer B are acceptable in all three recent cycles, and the vendor reports no other lot-related potassium shifts. Staffing did not cause missed QC: all 182 scheduled runs were completed.\\n\\nThe Ward 6 high potassiums are not explained by the analyzer. Seven of the 14 high results were run on Analyzer A, and the delayed sample transport during the tube outage is the more likely factor, though this is an association I have not confirmed.\\n\\nI am moderately confident. Do not widen the limits or recall all results since 9 November. Return Analyzer B to service with an extra Level 2 check each shift for a week. Do not sign off that the event is confirmed as a sampling fault. Investigate the Ward 6 transport delays and ask for repeat samples on the 14 high results.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:15:02.8897767Z",
+    "finishedAt": "2026-11-17T16:15:22.0180747Z",
+    "output": {
+      "caseId": "OD2-HO-STOP-2",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "X5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "X10",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "premature",
+          "confidence": 50,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "harmful",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "preferred",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "X10",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "X5",
+            "X10",
+            "E3"
+          ]
+        }
+      ],
+      "brief": "The evidence points to a single chance QC flag on Analyzer B, not a systematic potassium fault. The Level 2 mean is unchanged after the reagent lot change (5.81 before, 5.80 after). Across 546 QC measurements there were no other rule violations, and the repeat passed. Analyzer A re-runs of the held samples and 20 flagged results agree with B within 0.10 mmol/L. External quality results for Analyzer B are acceptable in all three recent cycles, and the vendor reports no other lot-related potassium shifts. Staffing did not cause missed QC: all 182 scheduled runs were completed.\n\nThe Ward 6 high potassiums are not explained by the analyzer. Seven of the 14 high results were run on Analyzer A, and the delayed sample transport during the tube outage is the more likely factor, though this is an association I have not confirmed.\n\nI am moderately confident. Do not widen the limits or recall all results since 9 November. Return Analyzer B to service with an extra Level 2 check each shift for a week. Do not sign off that the event is confirmed as a sampling fault. Investigate the Ward 6 transport delays and ask for repeat samples on the 14 high results."
+    }
+  }
+}

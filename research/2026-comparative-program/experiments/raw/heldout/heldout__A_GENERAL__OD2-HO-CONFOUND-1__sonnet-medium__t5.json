@@ -1,0 +1,193 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-CONFOUND-1__sonnet-medium__t5",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-CONFOUND-1",
+  "trial": 5,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C14",
+    "X3": "C3",
+    "X4": "C1",
+    "X5": "C4",
+    "X6": "C11",
+    "X7": "C6",
+    "X8": "C8",
+    "X9": "C5",
+    "X10": "C12",
+    "X11": "C10",
+    "X12": "C2",
+    "X13": "C9",
+    "X14": "C7",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X4",
+    "X12"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-CONFOUND-1__sonnet-medium__t5",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17473,
+    "cacheCreationTokens": 6815,
+    "outputTokens": 1519,
+    "thinkingTokens": 41,
+    "costUsd": 0.0442093,
+    "durationMs": 10499,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONFOUND-1__sonnet-medium__t5/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONFOUND-1__sonnet-medium__t5/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONFOUND-1__sonnet-medium__t5/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONFOUND-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022The gap is mostly a tenure effect, not a location effect. Promotion policy requires 18 months in level. Only 32% of remote staff meet that, against 74% of office staff, because remote hiring only opened widely in July 2024 and most remote staff are recent hires. Among eligible people, the rates are about the same: office 21.1%, remote 20.0%. Nomination rates (28.6% vs 28.2%) and approval rates (74% vs 71%) are also similar. Remote staff don\u0027t leave more often, and the gap shows up in every job family, so neither attrition nor job mix explains it. Caveat: only 110 remote staff are eligible, so a real difference of a few points can\u0027t be ruled out. Visibility and stretch-work differences are plausible (managers\u0027 comments) but unmeasured. Don\u0027t announce the three-day office rule. It targets the wrong cause, and it would hit about 180 staff hired on home-based contracts who live far from an office. Instead, report promotion rates for eligible staff only, and re-check this at the FY2027 cycle. Meanwhile, collect data on stretch-assignment allocation, and tell remote staff how the promotion criteria work.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:35:13.4314400Z",
+    "finishedAt": "2026-11-17T16:35:24.8589676Z",
+    "output": {
+      "caseId": "OD2-HO-CONFOUND-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "The gap is mostly a tenure effect, not a location effect. Promotion policy requires 18 months in level. Only 32% of remote staff meet that, against 74% of office staff, because remote hiring only opened widely in July 2024 and most remote staff are recent hires. Among eligible people, the rates are about the same: office 21.1%, remote 20.0%. Nomination rates (28.6% vs 28.2%) and approval rates (74% vs 71%) are also similar. Remote staff don\u0027t leave more often, and the gap shows up in every job family, so neither attrition nor job mix explains it. Caveat: only 110 remote staff are eligible, so a real difference of a few points can\u0027t be ruled out. Visibility and stretch-work differences are plausible (managers\u0027 comments) but unmeasured. Don\u0027t announce the three-day office rule. It targets the wrong cause, and it would hit about 180 staff hired on home-based contracts who live far from an office. Instead, report promotion rates for eligible staff only, and re-check this at the FY2027 cycle. Meanwhile, collect data on stretch-assignment allocation, and tell remote staff how the promotion criteria work."
+    }
+  }
+}

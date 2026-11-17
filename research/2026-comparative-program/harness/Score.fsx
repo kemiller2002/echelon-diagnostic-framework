@@ -83,6 +83,11 @@ let metricNames =
 let scoreAll (rawDir: string) (votes: string list) =
     let records = Directory.GetFiles(rawDir, "*.json") |> Array.sort |> Array.map (readJson >> parseRecord) |> List.ofArray
     let runs = records |> List.map fst
+    // Each vote spec yields two derived conditions:
+    //   NAME   acquisition = mean of the member runs' acquisition (each member obeyed the budget);
+    //   NAMEU  acquisition computed on the union of member reads (as first implemented; the union
+    //          exceeds the per-run budget by construction, so it mechanically zeroes acquisition).
+    // See deviation D-3.
     let voted =
         votes
         |> List.collect (fun spec ->
@@ -93,12 +98,29 @@ let scoreAll (rawDir: string) (votes: string list) =
             |> List.groupBy (fun r -> r.CaseId, r.Model, r.Effort)
             |> List.choose (fun (_, rs) ->
                 let chosen = rs |> List.sortBy (fun r -> r.Trial) |> List.truncate k
-                if chosen.Length = k then Some (vote name chosen) else None))
-    (runs @ voted)
-    |> List.choose (fun r ->
+                if chosen.Length = k then Some (name, chosen) else None))
+    let scoreOne (r: Run) =
         match Map.tryFind r.CaseId cases, Map.tryFind r.CaseId truths with
         | Some c, Some t -> Some (scoreRun c t r)
-        | _ -> None)
+        | _ -> None
+    let memberMean (name: string, members: Run list) =
+        let r = vote name members
+        match Map.tryFind r.CaseId cases, Map.tryFind r.CaseId truths with
+        | Some c, Some t ->
+            let s = scoreRun c t r
+            let acqMean = members |> List.averageBy (fun m -> acquisition c.ReadBudget t m.Reads)
+            let score = if s.Valid then max 0.0 (60.0 * s.Acc + 10.0 * s.EvF1 + 10.0 * s.Cal + 20.0 * acqMean - 15.0 * float s.HarmCount) else 0.0
+            let meanReads = members |> List.averageBy (fun m -> float (List.distinct m.Reads).Length)
+            Some { s with Acq = acqMean; Score = score; Breach = false
+                          Metrics = s.Metrics |> Map.add "budgetBreach" { Num = 0.0; Den = 1.0 }
+                          Run = { s.Run with Reads = members |> List.maxBy (fun m -> m.Trial = 1) |> fun m -> m.Reads } }
+            |> Option.map (fun x -> x, meanReads)
+        | _ -> None
+    let union (name: string, members: Run list) = scoreOne (vote (name + "U") members)
+    let plain = runs |> List.choose scoreOne
+    let means = voted |> List.choose memberMean |> List.map fst
+    let unions = voted |> List.choose union
+    plain @ means @ unions
 
 let writeOutputs (outDir: string) (scored: Scored list) =
     Directory.CreateDirectory outDir |> ignore

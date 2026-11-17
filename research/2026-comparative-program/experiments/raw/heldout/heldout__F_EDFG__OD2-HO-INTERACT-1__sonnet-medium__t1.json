@@ -1,0 +1,192 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-INTERACT-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-INTERACT-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C8",
+    "X3": "C3",
+    "X4": "C14",
+    "X5": "C12",
+    "X6": "C11",
+    "X7": "C6",
+    "X8": "C9",
+    "X9": "C1",
+    "X10": "C15",
+    "X11": "C10",
+    "X12": "C2",
+    "X13": "C4",
+    "X14": "C13",
+    "X15": "C5"
+  },
+  "readLabels": [
+    "X9",
+    "X12"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-INTERACT-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20601,
+    "cacheCreationTokens": 10131,
+    "outputTokens": 1852,
+    "thinkingTokens": 328,
+    "costUsd": 0.0611161,
+    "durationMs": 13696,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__F_EDFG__OD2-HO-INTERACT-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__F_EDFG__OD2-HO-INTERACT-1__sonnet-medium__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__F_EDFG__OD2-HO-INTERACT-1__sonnet-medium__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022The rejects come from one specific combination: Arnholt resin dried in Press 5\u0027s dryer (D5), which has been running wet. Press 5 with Arnholt rejects about 10% of parts on both shifts. Press 5 with Quillan is about 0.9%. Press 7 with either resin is under 1%. Arnholt arrives wetter than Quillan, and D5 can\u0027t dry it enough. The same Arnholt lot dried in a good portable dryer gave 0.8% rejects. The second shift looks worse only because all its VX runs on Press 5. New and experienced operators perform identically, so don\u0027t discipline the six new operators. Dropping Arnholt isn\u0027t needed either.\\n\\nNext steps this week: repair D5 (heater and desiccant) and verify it reaches \u221240 \u00B0C. Restore the alarm limit. Keep Arnholt off D5 until then, by sending it to Press 7 or drying it in a verified dryer. Add a feed-throat moisture check for every resin lot. Ask Arnholt why its resin arrives wetter than Quillan. I\u0027m fairly confident in the main diagnosis. The one open question is whether storing resin in the north annex adds moisture. Every Arnholt sample came from the annex, so that is untested. Don\u0027t pay for outside storage until it is checked.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:15:16.7168764Z",
+    "finishedAt": "2026-11-17T16:15:31.4150479Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-1",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X9",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "The rejects come from one specific combination: Arnholt resin dried in Press 5\u0027s dryer (D5), which has been running wet. Press 5 with Arnholt rejects about 10% of parts on both shifts. Press 5 with Quillan is about 0.9%. Press 7 with either resin is under 1%. Arnholt arrives wetter than Quillan, and D5 can\u0027t dry it enough. The same Arnholt lot dried in a good portable dryer gave 0.8% rejects. The second shift looks worse only because all its VX runs on Press 5. New and experienced operators perform identically, so don\u0027t discipline the six new operators. Dropping Arnholt isn\u0027t needed either.\n\nNext steps this week: repair D5 (heater and desiccant) and verify it reaches \u221240 \u00B0C. Restore the alarm limit. Keep Arnholt off D5 until then, by sending it to Press 7 or drying it in a verified dryer. Add a feed-throat moisture check for every resin lot. Ask Arnholt why its resin arrives wetter than Quillan. I\u0027m fairly confident in the main diagnosis. The one open question is whether storing resin in the north annex adds moisture. Every Arnholt sample came from the annex, so that is untested. Don\u0027t pay for outside storage until it is checked."
+    }
+  }
+}

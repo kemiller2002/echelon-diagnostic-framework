@@ -1,0 +1,229 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-NOCONC-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-NOCONC-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C9",
+    "X3": "C14",
+    "X4": "C11",
+    "X5": "C2",
+    "X6": "C10",
+    "X7": "C13",
+    "X8": "C7",
+    "X9": "C1",
+    "X10": "C3",
+    "X11": "C6",
+    "X12": "C5",
+    "X13": "C8",
+    "X14": "C4"
+  },
+  "readLabels": [
+    "X11",
+    "X6"
+  ],
+  "reads": [
+    "C6",
+    "C10"
+  ],
+  "violations": [
+    "/tmp/claude-0/-home-claude-632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__F_EDFG__OD2-HO-NOCONC-2__sonnet-medium__t1/task.md"
+  ],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-NOCONC-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 25909,
+    "cacheCreationTokens": 10419,
+    "outputTokens": 1630,
+    "thinkingTokens": 74,
+    "costUsd": 0.060582899999999995,
+    "durationMs": 11487,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude-632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__F_EDFG__OD2-HO-NOCONC-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-R5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X6\u0022,\u0022E5\u0022,\u0022E2\u0022]}],\u0022brief\u0022:\u0022Last week\u0027s 5xx rate (0.41%) is inside the service\u0027s normal range. Over the previous 26 weeks it averaged 0.354%, and the upper edge of the normal band is 0.482%. Three earlier weeks were higher (0.51%, 0.47%, 0.45%), and investigating them found nothing. The burn-rate page did not fire (0.82x against a 2x threshold). Under your own policy this week is noted at ops review and no action is taken. The dashboard counts match raw logs, so this is not a counting artefact. The finding that new pods error at almost twice the rate of old ones is a rollout warm-up effect. It appears in every recent rollout, including a config-only redeploy, and it accounts for only 10\u201320 extra errors. It doesn\u0027t show a fault in v4.18. Customer bookings were flat and there were no complaints. I would not roll back, and I would not mute alerting, since that removes the protection that would catch a real problem. I\u0027d keep the replica fallback hosts in place and apply the standard check to next week. I\u0027m fairly confident, but I did not rule out the replica move or partner-sync month-end traffic as small contributors. If next week\u0027s rate is above the band, investigate then.\u0022,\u0022methodChoice\u0022:\u0022Collected X11 (normal band) and X6 (rollout warm-up baseline) as the most discriminating items.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:45:06.0287486Z",
+    "finishedAt": "2026-11-17T16:45:18.4093632Z",
+    "output": {
+      "caseId": "OD2-HO-NOCONC-2",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-R5",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 55,
+          "evidenceIds": [
+            "X6",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X11",
+            "X6",
+            "E5",
+            "E2"
+          ]
+        }
+      ],
+      "brief": "Last week\u0027s 5xx rate (0.41%) is inside the service\u0027s normal range. Over the previous 26 weeks it averaged 0.354%, and the upper edge of the normal band is 0.482%. Three earlier weeks were higher (0.51%, 0.47%, 0.45%), and investigating them found nothing. The burn-rate page did not fire (0.82x against a 2x threshold). Under your own policy this week is noted at ops review and no action is taken. The dashboard counts match raw logs, so this is not a counting artefact. The finding that new pods error at almost twice the rate of old ones is a rollout warm-up effect. It appears in every recent rollout, including a config-only redeploy, and it accounts for only 10\u201320 extra errors. It doesn\u0027t show a fault in v4.18. Customer bookings were flat and there were no complaints. I would not roll back, and I would not mute alerting, since that removes the protection that would catch a real problem. I\u0027d keep the replica fallback hosts in place and apply the standard check to next week. I\u0027m fairly confident, but I did not rule out the replica move or partner-sync month-end traffic as small contributors. If next week\u0027s rate is above the band, investigate then.",
+      "methodChoice": "Collected X11 (normal band) and X6 (rollout warm-up baseline) as the most discriminating items."
+    }
+  }
+}

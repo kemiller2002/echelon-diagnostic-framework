@@ -1,0 +1,219 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-KNOWN-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C13",
+    "X3": "C10",
+    "X4": "C5",
+    "X5": "C4",
+    "X6": "C8",
+    "X7": "C3",
+    "X8": "C2",
+    "X9": "C9",
+    "X10": "C15",
+    "X11": "C6",
+    "X12": "C1",
+    "X13": "C7",
+    "X14": "C12",
+    "X15": "C14"
+  },
+  "readLabels": [
+    "X12",
+    "X8"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-KNOWN-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21905,
+    "cacheCreationTokens": 11481,
+    "outputTokens": 1755,
+    "thinkingTokens": 35,
+    "costUsd": 0.0656765,
+    "durationMs": 11832,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-KNOWN-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-KNOWN-1__sonnet-medium__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-KNOWN-1__sonnet-medium__t1/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022D (competing hypotheses): several rival causes with discriminating evidence available in logs and telemetry.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022The Android login drop is almost certainly not caused by release 6.14. At 10:38 UTC on 3 March, Corvane auto-updated its edge rules. A new rule, AUTO-LIB-17, blocks any password-login request that uses the nettle-http library with no edge session cookie. That describes every Android app version, because the app uses nettle-http for all API calls. The rule returns a 403. It has blocked about 9,700 requests a day, from roughly 41,300 app installs, 92% of which had logged in successfully before. The failures began within a minute of the rule going live, on every app version and every OS version, whether or not the March security patch was installed. iOS, web and quick-unlock never match the rule. So the rollback of 6.14, the OS patch, the screen redesign, the auth token change and credential stuffing don\u0027t explain the drop. I\u0027m quite confident (about 90%). Next: ask Corvane to switch AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits, lockouts and other rules on. Then confirm in telemetry that password success recovers. Don\u0027t roll back 6.14. Don\u0027t raise bot sensitivity. Don\u0027t exclude blocked attempts from the KPI, because those are real customers.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:15:28.1154690Z",
+    "finishedAt": "2026-11-17T16:15:40.8649830Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "D (competing hypotheses): several rival causes with discriminating evidence available in logs and telemetry.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X8",
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X8",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 94,
+          "evidenceIds": [
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X12",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X8",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X8",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "The Android login drop is almost certainly not caused by release 6.14. At 10:38 UTC on 3 March, Corvane auto-updated its edge rules. A new rule, AUTO-LIB-17, blocks any password-login request that uses the nettle-http library with no edge session cookie. That describes every Android app version, because the app uses nettle-http for all API calls. The rule returns a 403. It has blocked about 9,700 requests a day, from roughly 41,300 app installs, 92% of which had logged in successfully before. The failures began within a minute of the rule going live, on every app version and every OS version, whether or not the March security patch was installed. iOS, web and quick-unlock never match the rule. So the rollback of 6.14, the OS patch, the screen redesign, the auth token change and credential stuffing don\u0027t explain the drop. I\u0027m quite confident (about 90%). Next: ask Corvane to switch AUTO-LIB-17 to log-only on the mobile password path, keeping rate limits, lockouts and other rules on. Then confirm in telemetry that password success recovers. Don\u0027t roll back 6.14. Don\u0027t raise bot sensitivity. Don\u0027t exclude blocked attempts from the KPI, because those are real customers."
+    }
+  }
+}

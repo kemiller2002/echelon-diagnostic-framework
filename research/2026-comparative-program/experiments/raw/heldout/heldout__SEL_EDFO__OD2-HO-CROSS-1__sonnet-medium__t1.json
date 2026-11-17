@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C3",
+    "X3": "C2",
+    "X4": "C12",
+    "X5": "C11",
+    "X6": "C10",
+    "X7": "C5",
+    "X8": "C6",
+    "X9": "C7",
+    "X10": "C8",
+    "X11": "C14",
+    "X12": "C9",
+    "X13": "C4",
+    "X14": "C1",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X3",
+    "X14"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22496,
+    "cacheCreationTokens": 11998,
+    "outputTokens": 1742,
+    "thinkingTokens": 82,
+    "costUsd": 0.0676736,
+    "durationMs": 12253,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CROSS-1__sonnet-medium__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022Specification of the problem (is/is-not by pod, time, nurse group), then competing-hypothesis comparison, with a check of who produced each source\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X14\u0022]}],\u0022brief\u0022:\u0022The rise in delayed alarm responses is most likely caused by the 12 August move of the alert relay server, not by agency nurses. The import skipped 11 of 14 forwarding rules. These included the 15-second hold-off for brief oxygen dips, suppression of repeats, and routing of probe-off alarms to the charge phone only. IT\u0027s smoke test checked only two beds and passed. Pods A-C now send about twice as many phone notifications per nurse (79-86 versus 37-39 per shift) and acknowledgement times doubled. Pod D, still on the old server, shows no change. Bedside alarm volume was flat, so acuity and the monitor update (23-24 September) don\u0027t explain it. Incident rates rose equally for core, agency and new-graduate nurses, so nurse experience is not the driver. The extra sick leave is probably from the viral season, though alarm overload may add to it. Do not approve the agency cap or the performance reviews. They would punish the wrong people and discourage reporting. Restore the 14 rules after Clinical Engineering validates them, with committee sign-off. Then track notifications per nurse and acknowledgement times weekly. Do not turn off phone forwarding of SpO2 or technical alarms. Wireless coverage is unlikely to be the cause, but the unit\u0027s reports that Room 14 phones don\u0027t ring are unexplained and worth a check. I\u0027m fairly confident in this diagnosis.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:51:16.6025144Z",
+    "finishedAt": "2026-11-17T16:51:29.7062704Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "Specification of the problem (is/is-not by pod, time, nurse group), then competing-hypothesis comparison, with a check of who produced each source",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 95,
+          "evidenceIds": [
+            "X3",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X3",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X14",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X14",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "X14"
+          ]
+        }
+      ],
+      "brief": "The rise in delayed alarm responses is most likely caused by the 12 August move of the alert relay server, not by agency nurses. The import skipped 11 of 14 forwarding rules. These included the 15-second hold-off for brief oxygen dips, suppression of repeats, and routing of probe-off alarms to the charge phone only. IT\u0027s smoke test checked only two beds and passed. Pods A-C now send about twice as many phone notifications per nurse (79-86 versus 37-39 per shift) and acknowledgement times doubled. Pod D, still on the old server, shows no change. Bedside alarm volume was flat, so acuity and the monitor update (23-24 September) don\u0027t explain it. Incident rates rose equally for core, agency and new-graduate nurses, so nurse experience is not the driver. The extra sick leave is probably from the viral season, though alarm overload may add to it. Do not approve the agency cap or the performance reviews. They would punish the wrong people and discourage reporting. Restore the 14 rules after Clinical Engineering validates them, with committee sign-off. Then track notifications per nurse and acknowledgement times weekly. Do not turn off phone forwarding of SpO2 or technical alarms. Wireless coverage is unlikely to be the cause, but the unit\u0027s reports that Room 14 phones don\u0027t ring are unexplained and worth a check. I\u0027m fairly confident in this diagnosis."
+    }
+  }
+}

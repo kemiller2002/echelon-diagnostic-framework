@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-OBVWRONG-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-OBVWRONG-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C12",
+    "X3": "C3",
+    "X4": "C4",
+    "X5": "C13",
+    "X6": "C7",
+    "X7": "C14",
+    "X8": "C16",
+    "X9": "C8",
+    "X10": "C2",
+    "X11": "C11",
+    "X12": "C1",
+    "X13": "C10",
+    "X14": "C5",
+    "X15": "C6",
+    "X16": "C15"
+  },
+  "readLabels": [
+    "X1"
+  ],
+  "reads": [
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-OBVWRONG-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21211,
+    "cacheCreationTokens": 10268,
+    "outputTokens": 3867,
+    "thinkingTokens": 1773,
+    "costUsd": 0.00419981,
+    "durationMs": 23696,
+    "numTurns": 4,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-2\u0022,\u0022methodChoice\u0022:\u0022EDF diagnostic sequence with Diagnostic Calibration not used; two catalogue items collected (X1 only, one needed).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022X1\u0022],\u0022reasoning\u0022:\u0022Handler change does not explain the bags that fail tag reading; Brackwater-stock tags handled the same days read fine. Handling may still matter after diversion, but it is not the primary driver.\u0022},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X1\u0022],\u0022reasoning\u0022:\u0022Fennick-stock Corvane tags failed at 11.8% vs 1.5% for Brackwater stock on the same arrays; the 14-16 Oct Brackwater switch showed 1.6% failures.\u0022},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E4\u0022],\u0022reasoning\u0022:\u0022Evening bank added two departures, but lateral times were unchanged and no evidence measures evening compression. Not tested.\u0022},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022],\u0022reasoning\u0022:\u0022Transfer and Pelion tags on the same arrays stayed at about 1.3-1.4%, and Brackwater tags read normally, so the scanners are not the cause.\u0022},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E5\u0022],\u0022reasoning\u0022:\u0022Stock versus printer heat setting cannot be separated; the engineer\u0027s note says images cannot tell which. The Fennick certificate (X6) was not collected.\u0022},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022X1\u0022],\u0022reasoning\u0022:\u0022Timing matches, but the handling mechanism is not shown and the read-failure data point to tags, not handlers.\u0022},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X1\u0022],\u0022reasoning\u0022:\u0022Same printers and days: Fennick tags failed about 12% vs 1.6% on Brackwater; the switch precedes the rise and equipment is ruled out, though media versus printer settings remains open.\u0022},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X1\u0022],\u0022reasoning\u0022:\u0022Diversion explains the rise mechanically, but missed flights for diverted bags are not directly measured (X4 not collected).\u0022},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022],\u0022reasoning\u0022:\u0022Jam tickets rose at the same time as the stock change, but the kiosk cleaning schedule also changed, so the stock is not isolated.\u0022},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X1\u0022,\u0022E3\u0022],\u0022reasoning\u0022:\u0022The data point to tags, not the handler. Withholding fees and issuing a breach notice would penalise the wrong party and hide the real cause.\u0022},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E5\u0022],\u0022reasoning\u0022:\u0022Reversible, cheap, supported by the Brackwater test (1.6% failures), and it tests the stock-versus-setting question. Brackwater stock is valid to 31 Dec with about five weeks held.\u0022},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022],\u0022reasoning\u0022:\u0022A defect claim is only sensible if stock is confirmed defective; the printer heat setting is not yet excluded.\u0022},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X1\u0022],\u0022reasoning\u0022:\u0022Adding encode capacity treats the diversion symptom and is low-risk, but it is not among the best actions.\u0022},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E5\u0022],\u0022reasoning\u0022:\u0022Enough to take the reversible step of returning to Brackwater stock and testing; further investigation would not change that step. Stock-versus-setting questions remain for the defect claim.\u0022}],\u0022brief\u0022:\u0022The rise is most likely caused by the new Fennick Labels tag stock, not by Tessaly\u0027s handling and not by the airport\u0027s scanners. Corvane tags printed on Fennick stock fail the automatic tag reader about 12% of the time, against about 1.5% for the old Brackwater stock, and the airport\u0027s readers handled other tags normally on the same arrays. The 14\u201316 October period, when counters used Brackwater stock, also read cleanly. I am fairly confident in this, but I have not separated a faulty tag batch from wrong printer heat settings, and I have not tested whether the evening schedule adds to it. Next: switch counters and kiosks back to Brackwater stock now, which is reversible and tests the cause. Do not issue the breach notice or withhold Tessaly\u0027s fee on this evidence, since that would penalise the wrong party. Hold the Fennick defect claim until printer settings are checked against the manufacturer\u0027s bulletin.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:25:46.3146439Z",
+    "finishedAt": "2026-11-17T16:26:11.0847627Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-2",
+      "methodChoice": "EDF diagnostic sequence with Diagnostic Calibration not used; two catalogue items collected (X1 only, one needed).",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E4",
+            "X1"
+          ],
+          "reasoning": "Handler change does not explain the bags that fail tag reading; Brackwater-stock tags handled the same days read fine. Handling may still matter after diversion, but it is not the primary driver."
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5",
+            "X1"
+          ],
+          "reasoning": "Fennick-stock Corvane tags failed at 11.8% vs 1.5% for Brackwater stock on the same arrays; the 14-16 Oct Brackwater switch showed 1.6% failures."
+        },
+        {
+          "itemId": "I3",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E4"
+          ],
+          "reasoning": "Evening bank added two departures, but lateral times were unchanged and no evidence measures evening compression. Not tested."
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1"
+          ],
+          "reasoning": "Transfer and Pelion tags on the same arrays stayed at about 1.3-1.4%, and Brackwater tags read normally, so the scanners are not the cause."
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1",
+            "E5"
+          ],
+          "reasoning": "Stock versus printer heat setting cannot be separated; the engineer\u0027s note says images cannot tell which. The Fennick certificate (X6) was not collected."
+        },
+        {
+          "itemId": "I6",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E4",
+            "X1"
+          ],
+          "reasoning": "Timing matches, but the handling mechanism is not shown and the read-failure data point to tags, not handlers."
+        },
+        {
+          "itemId": "I7",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X1"
+          ],
+          "reasoning": "Same printers and days: Fennick tags failed about 12% vs 1.6% on Brackwater; the switch precedes the rise and equipment is ruled out, though media versus printer settings remains open."
+        },
+        {
+          "itemId": "I8",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X1"
+          ],
+          "reasoning": "Diversion explains the rise mechanically, but missed flights for diverted bags are not directly measured (X4 not collected)."
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5"
+          ],
+          "reasoning": "Jam tickets rose at the same time as the stock change, but the kiosk cleaning schedule also changed, so the stock is not isolated."
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E6",
+            "X1",
+            "E3"
+          ],
+          "reasoning": "The data point to tags, not the handler. Withholding fees and issuing a breach notice would penalise the wrong party and hide the real cause."
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X1",
+            "E5"
+          ],
+          "reasoning": "Reversible, cheap, supported by the Brackwater test (1.6% failures), and it tests the stock-versus-setting question. Brackwater stock is valid to 31 Dec with about five weeks held."
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1"
+          ],
+          "reasoning": "A defect claim is only sensible if stock is confirmed defective; the printer heat setting is not yet excluded."
+        },
+        {
+          "itemId": "I13",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "E1",
+            "X1"
+          ],
+          "reasoning": "Adding encode capacity treats the diversion symptom and is low-risk, but it is not among the best actions."
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1",
+            "E5"
+          ],
+          "reasoning": "Enough to take the reversible step of returning to Brackwater stock and testing; further investigation would not change that step. Stock-versus-setting questions remain for the defect claim."
+        }
+      ],
+      "brief": "The rise is most likely caused by the new Fennick Labels tag stock, not by Tessaly\u0027s handling and not by the airport\u0027s scanners. Corvane tags printed on Fennick stock fail the automatic tag reader about 12% of the time, against about 1.5% for the old Brackwater stock, and the airport\u0027s readers handled other tags normally on the same arrays. The 14\u201316 October period, when counters used Brackwater stock, also read cleanly. I am fairly confident in this, but I have not separated a faulty tag batch from wrong printer heat settings, and I have not tested whether the evening schedule adds to it. Next: switch counters and kiosks back to Brackwater stock now, which is reversible and tests the cause. Do not issue the breach notice or withhold Tessaly\u0027s fee on this evidence, since that would penalise the wrong party. Hold the Fennick defect claim until printer settings are checked against the manufacturer\u0027s bulletin."
+    }
+  }
+}

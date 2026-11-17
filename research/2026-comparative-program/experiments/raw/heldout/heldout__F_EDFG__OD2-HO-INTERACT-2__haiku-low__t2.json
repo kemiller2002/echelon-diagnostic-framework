@@ -1,0 +1,221 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-INTERACT-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-INTERACT-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C3",
+    "X3": "C5",
+    "X4": "C11",
+    "X5": "C13",
+    "X6": "C4",
+    "X7": "C7",
+    "X8": "C6",
+    "X9": "C1",
+    "X10": "C8",
+    "X11": "C2",
+    "X12": "C12",
+    "X13": "C14",
+    "X14": "C9",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X11",
+    "X7"
+  ],
+  "reads": [
+    "C2",
+    "C7"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-INTERACT-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33835,
+    "cacheCreationTokens": 10518,
+    "outputTokens": 3034,
+    "thinkingTokens": 1676,
+    "costUsd": 0.00395975,
+    "durationMs": 18098,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-2\u0022,\u0022methodChoice\u0022:\u0022EDF analysis; collected X11 and X7 (2 of 2 items).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidence\u0022:\u0022\u0022,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X7\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X11\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X11\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The drop is not mainly the app or the renewal. Volunteers fell sharply at Dock Street and Westgate, where the app went live in April and the coordinator post was cut on 1 May. Those two sites lost regulars steadily, while Millbrook (app but kept coordinator) held nearly steady and Quarry Lane (coordinator cut but no app) also stayed flat. The renewal applied at all four sites, so it cannot explain the difference. The booking records show the mechanism: without a coordinator, staff stopped booking regulars into their usual slots, and 88% of those who lost their slot are now inactive. I am fairly confident in this pattern, but the 61-person callback sample and the mixed-site data leave some uncertainty. Next: restore weekly-slot booking at Dock Street and Westgate now (reversible, low cost), and phone lapsed regulars. Do not suspend the background-check rule, which the county and insurer require. Do not cancel RotaWeave on 30 September, since the evidence does not show it is the cause and cancelling would cost $14,000 and lose attendance data. Remove nobody from the figures. Re-check at 60 days.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:05:23.8800024Z",
+    "finishedAt": "2026-11-17T16:05:42.7017287Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-2",
+      "methodChoice": "EDF analysis; collected X11 and X7 (2 of 2 items).",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidence": "",
+          "evidenceIds": [
+            "X11",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "X7",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5",
+            "E1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "X11",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "E5",
+            "X11",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 55,
+          "evidenceIds": [
+            "X11",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The drop is not mainly the app or the renewal. Volunteers fell sharply at Dock Street and Westgate, where the app went live in April and the coordinator post was cut on 1 May. Those two sites lost regulars steadily, while Millbrook (app but kept coordinator) held nearly steady and Quarry Lane (coordinator cut but no app) also stayed flat. The renewal applied at all four sites, so it cannot explain the difference. The booking records show the mechanism: without a coordinator, staff stopped booking regulars into their usual slots, and 88% of those who lost their slot are now inactive. I am fairly confident in this pattern, but the 61-person callback sample and the mixed-site data leave some uncertainty. Next: restore weekly-slot booking at Dock Street and Westgate now (reversible, low cost), and phone lapsed regulars. Do not suspend the background-check rule, which the county and insurer require. Do not cancel RotaWeave on 30 September, since the evidence does not show it is the cause and cancelling would cost $14,000 and lose attendance data. Remove nobody from the figures. Re-check at 60 days."
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-medium__t3",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 3,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C14",
+    "X3": "C13",
+    "X4": "C7",
+    "X5": "C6",
+    "X6": "C15",
+    "X7": "C2",
+    "X8": "C12",
+    "X9": "C11",
+    "X10": "C5",
+    "X11": "C9",
+    "X12": "C1",
+    "X13": "C10",
+    "X14": "C8",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X7",
+    "X12"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-medium__t3",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20321,
+    "cacheCreationTokens": 9907,
+    "outputTokens": 1768,
+    "thinkingTokens": 48,
+    "costUsd": 0.059352100000000005,
+    "durationMs": 11861,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-medium__t3/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-medium__t3/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-medium__t3/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022The drop is almost certainly not caused by Android 6.14 or the OS patch. On 3 March at 10:38 UTC, Corvane\u0027s automatic rule-pack update added a rule (AUTO-LIB-17) that blocks password requests from our networking library (nettle-http) when there is no edge session cookie. Blocks began at 10:41, and the same minute the Android password failures began, on every app version and OS version. Quick-unlock, iOS and web are untouched. About 41,000 blocked installs, 92% of them with a recent successful login, look like real customers, not bots. Password success fell from 96% to 8%. The origin server\u0027s error rates are unchanged, so the auth-service change is not implicated. Android 6.14 is only about 5% of traffic and fails at the same rate as older versions, so a rollback would not help.\\n\\nNext steps: ask Corvane today to set the AUTO-LIB-17 rules to log-only on the mobile password path, keeping the other protections on. Then confirm in telemetry that password success recovers. Don\u0027t roll back 6.14, don\u0027t raise bot sensitivity, and don\u0027t exclude blocked attempts from the KPI. Review how vendor rule updates are tested. Confidence is high. The call-volume link is plausible but unproven, since fee notices also drove calls.\u0022,\u0022methodChoice\u0022:\u0022EDF\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:15:22.0192287Z",
+    "finishedAt": "2026-11-17T16:15:34.8650291Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 95,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X12",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "The drop is almost certainly not caused by Android 6.14 or the OS patch. On 3 March at 10:38 UTC, Corvane\u0027s automatic rule-pack update added a rule (AUTO-LIB-17) that blocks password requests from our networking library (nettle-http) when there is no edge session cookie. Blocks began at 10:41, and the same minute the Android password failures began, on every app version and OS version. Quick-unlock, iOS and web are untouched. About 41,000 blocked installs, 92% of them with a recent successful login, look like real customers, not bots. Password success fell from 96% to 8%. The origin server\u0027s error rates are unchanged, so the auth-service change is not implicated. Android 6.14 is only about 5% of traffic and fails at the same rate as older versions, so a rollback would not help.\n\nNext steps: ask Corvane today to set the AUTO-LIB-17 rules to log-only on the mobile password path, keeping the other protections on. Then confirm in telemetry that password success recovers. Don\u0027t roll back 6.14, don\u0027t raise bot sensitivity, and don\u0027t exclude blocked attempts from the KPI. Review how vendor rule updates are tested. Confidence is high. The call-volume link is plausible but unproven, since fee notices also drove calls.",
+      "methodChoice": "EDF"
+    }
+  }
+}

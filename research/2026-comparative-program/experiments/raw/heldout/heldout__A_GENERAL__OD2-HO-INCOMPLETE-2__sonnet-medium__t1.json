@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-INCOMPLETE-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-INCOMPLETE-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C10",
+    "X3": "C3",
+    "X4": "C7",
+    "X5": "C15",
+    "X6": "C2",
+    "X7": "C1",
+    "X8": "C11",
+    "X9": "C14",
+    "X10": "C8",
+    "X11": "C6",
+    "X12": "C13",
+    "X13": "C12",
+    "X14": "C4",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X7",
+    "X5"
+  ],
+  "reads": [
+    "C1",
+    "C15"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-INCOMPLETE-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 27692,
+    "cacheCreationTokens": 7000,
+    "outputTokens": 2074,
+    "thinkingTokens": 445,
+    "costUsd": 0.0515252,
+    "durationMs": 15067,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-INCOMPLETE-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-INCOMPLETE-2__sonnet-medium__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-INCOMPLETE-2__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INCOMPLETE-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X5\u0022]}],\u0022brief\u0022:\u0022The departures are concentrated on one matter, not spread across the group. Eight of the 11 associates on Kestrel resigned, against 1 of 13 who never worked on it. Other groups are at normal levels, and the firm-wide hours target applied to all of them, so neither a general market effect nor the target change explains this. Pay applies equally to Kestrel and non-Kestrel associates, yet almost only Kestrel people left, so pay looks unlikely to be the main driver. The survey comments point to heavy workload and to harsh feedback from supervisors.\\n\\nWhat I can\u0027t tell you is whether the workload or Dorian Faulk\u0027s supervision is the cause. All 11 Kestrel associates report to him, and he supervises no one else, so the two can\u0027t be separated with the records I have. The farewell emails told me nothing. Confidence is moderate to high on \\\u0022not pay, not the target, not ordinary market movement\\\u0022 and low on workload versus supervision.\\n\\nNext steps: don\u0027t pay the \u00A312k retention payment or close the review. Commission the roughly \u00A39k confidential external interviews, designed to separate workload from supervision. Ask the interviewer to cover current Kestrel associates as well as leavers. Start tracking matter and supervising partner in attrition reporting. Hold off on moving supervision or hiring contract reviewers until the interviews report, because the document-review phase ends in December.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:51:41.4787388Z",
+    "finishedAt": "2026-11-17T16:51:57.5487642Z",
+    "output": {
+      "caseId": "OD2-HO-INCOMPLETE-2",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "contradicted",
+          "confidence": 55,
+          "evidenceIds": [
+            "X7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "insufficient",
+          "confidence": 78,
+          "evidenceIds": [
+            "X7",
+            "X5"
+          ]
+        }
+      ],
+      "brief": "The departures are concentrated on one matter, not spread across the group. Eight of the 11 associates on Kestrel resigned, against 1 of 13 who never worked on it. Other groups are at normal levels, and the firm-wide hours target applied to all of them, so neither a general market effect nor the target change explains this. Pay applies equally to Kestrel and non-Kestrel associates, yet almost only Kestrel people left, so pay looks unlikely to be the main driver. The survey comments point to heavy workload and to harsh feedback from supervisors.\n\nWhat I can\u0027t tell you is whether the workload or Dorian Faulk\u0027s supervision is the cause. All 11 Kestrel associates report to him, and he supervises no one else, so the two can\u0027t be separated with the records I have. The farewell emails told me nothing. Confidence is moderate to high on \u0022not pay, not the target, not ordinary market movement\u0022 and low on workload versus supervision.\n\nNext steps: don\u0027t pay the \u00A312k retention payment or close the review. Commission the roughly \u00A39k confidential external interviews, designed to separate workload from supervision. Ask the interviewer to cover current Kestrel associates as well as leavers. Start tracking matter and supervising partner in attrition reporting. Hold off on moving supervision or hiring contract reviewers until the interviews report, because the document-review phase ends in December."
+    }
+  }
+}

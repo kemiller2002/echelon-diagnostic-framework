@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-CROSS-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C6",
+    "X3": "C13",
+    "X4": "C5",
+    "X5": "C15",
+    "X6": "C14",
+    "X7": "C4",
+    "X8": "C2",
+    "X9": "C9",
+    "X10": "C1",
+    "X11": "C7",
+    "X12": "C3",
+    "X13": "C11",
+    "X14": "C10",
+    "X15": "C12"
+  },
+  "readLabels": [
+    "X8",
+    "X10"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-CROSS-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28294,
+    "cacheCreationTokens": 7609,
+    "outputTokens": 2800,
+    "thinkingTokens": 1535,
+    "costUsd": 0.00320554,
+    "durationMs": 17460,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022methodChoice\u0022:\u0022Collected X8 (relay change configuration comparison) and X10 (relay message log by pod), the two most discriminating items; did not use the remaining catalogue items.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X10\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The alarm delays most likely come from the server change on 12 August, not from staffing or the monitor update. The clinical alert relay was moved to new hardware, and 11 of its 14 forwarding rules were silently skipped during import. Those rules held back brief SpO2 alarms, suppressed repeat notifications and routed technical alarms to one phone. Since then, phone notifications per nurse have roughly doubled in Pods A-C, and delayed responses rose there. Pod D still runs on the old server and did not change, even though its agency share is similar. Bedside alarm volume and acuity did not step up, and the September software update shows no step in alarms. I am fairly confident, not certain: the log records dispatch, not receipt by handset. Next steps: do not approve the agency cap or the reviews, and do not stop phone forwarding of SpO2 alarms. Have Clinical Engineering restore the 11 missing rules with clinical validation, then track notifications and acknowledgement times weekly, including Pod D as a control.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:34:23.9871857Z",
+    "finishedAt": "2026-11-17T16:34:42.1351317Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "methodChoice": "Collected X8 (relay change configuration comparison) and X10 (relay message log by pod), the two most discriminating items; did not use the remaining catalogue items.",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "X10",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X8",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The alarm delays most likely come from the server change on 12 August, not from staffing or the monitor update. The clinical alert relay was moved to new hardware, and 11 of its 14 forwarding rules were silently skipped during import. Those rules held back brief SpO2 alarms, suppressed repeat notifications and routed technical alarms to one phone. Since then, phone notifications per nurse have roughly doubled in Pods A-C, and delayed responses rose there. Pod D still runs on the old server and did not change, even though its agency share is similar. Bedside alarm volume and acuity did not step up, and the September software update shows no step in alarms. I am fairly confident, not certain: the log records dispatch, not receipt by handset. Next steps: do not approve the agency cap or the reviews, and do not stop phone forwarding of SpO2 alarms. Have Clinical Engineering restore the 11 missing rules with clinical validation, then track notifications and acknowledgement times weekly, including Pod D as a control."
+    }
+  }
+}

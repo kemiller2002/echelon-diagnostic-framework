@@ -1,0 +1,218 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CROSS-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CROSS-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C11",
+    "X3": "C4",
+    "X4": "C15",
+    "X5": "C1",
+    "X6": "C14",
+    "X7": "C9",
+    "X8": "C12",
+    "X9": "C8",
+    "X10": "C2",
+    "X11": "C5",
+    "X12": "C13",
+    "X13": "C3",
+    "X14": "C10",
+    "X15": "C6"
+  },
+  "readLabels": [
+    "X5",
+    "X10"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CROSS-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20075,
+    "cacheCreationTokens": 9696,
+    "outputTokens": 2643,
+    "thinkingTokens": 1375,
+    "costUsd": 0.0034620500000000004,
+    "durationMs": 14978,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022,\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E2\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X5\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022,\u0022E5\u0022,\u0022E2\u0022]}],\u0022brief\u0022:\u0022The strongest explanation is the 12 August relay server move. The new server carries only 3 of the 14 forwarding rules; the other 11 were skipped by the import tool, which logged a warning but reported success. Without the repeat-suppression and SpO2 hold-off rules, phone notifications per nurse roughly doubled on Pods A-C from 12 August, and acknowledgement slowed from about 34 s to 71 s. Pod D still uses the old server and shows no rise, even though its agency share is similar. Bedside alarm volume was flat, so the rise is not driven by acuity or the monitor update. I am fairly confident (about 80%) in this, though the logs record dispatch to the phone system, not receipt, and I have not confirmed nurse sick-leave effects. Next steps: restore the full rule set with Clinical Engineering validation and track notifications and acknowledgement times weekly. Do not approve the agency cap or performance reviews; the pod pattern points to the system, not the nurses. Do not stop SpO2 or technical alarms reaching phones.\u0022,\u0022methodChoice\u0022:\u0022Collected X5 and X10 (2 items).\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:46:54.0377778Z",
+    "finishedAt": "2026-11-17T16:47:09.8598175Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-1",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X5",
+            "E2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X5",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X5",
+            "E6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X5",
+            "E6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X5",
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 60,
+          "evidenceIds": [
+            "X5",
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X5",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E2",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "X5",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X10",
+            "X5",
+            "E5",
+            "E2"
+          ]
+        }
+      ],
+      "brief": "The strongest explanation is the 12 August relay server move. The new server carries only 3 of the 14 forwarding rules; the other 11 were skipped by the import tool, which logged a warning but reported success. Without the repeat-suppression and SpO2 hold-off rules, phone notifications per nurse roughly doubled on Pods A-C from 12 August, and acknowledgement slowed from about 34 s to 71 s. Pod D still uses the old server and shows no rise, even though its agency share is similar. Bedside alarm volume was flat, so the rise is not driven by acuity or the monitor update. I am fairly confident (about 80%) in this, though the logs record dispatch to the phone system, not receipt, and I have not confirmed nurse sick-leave effects. Next steps: restore the full rule set with Clinical Engineering validation and track notifications and acknowledgement times weekly. Do not approve the agency cap or performance reviews; the pod pattern points to the system, not the nurses. Do not stop SpO2 or technical alarms reaching phones.",
+      "methodChoice": "Collected X5 and X10 (2 items)."
+    }
+  }
+}

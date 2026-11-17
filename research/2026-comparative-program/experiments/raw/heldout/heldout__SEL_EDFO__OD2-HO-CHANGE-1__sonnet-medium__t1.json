@@ -1,0 +1,213 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-CHANGE-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-CHANGE-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C5",
+    "X3": "C14",
+    "X4": "C12",
+    "X5": "C2",
+    "X6": "C11",
+    "X7": "C1",
+    "X8": "C4",
+    "X9": "C7",
+    "X10": "C13",
+    "X11": "C9",
+    "X12": "C8",
+    "X13": "C10",
+    "X14": "C3"
+  },
+  "readLabels": [
+    "X2",
+    "X1"
+  ],
+  "reads": [
+    "C5",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-CHANGE-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22460,
+    "cacheCreationTokens": 11963,
+    "outputTokens": 1783,
+    "thinkingTokens": 45,
+    "costUsd": 0.06794,
+    "durationMs": 12276,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CHANGE-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CHANGE-1__sonnet-medium__t1/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-CHANGE-1__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CHANGE-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe IS/IS NOT localization (by connector, price cohort, seat band), then competing-hypotheses weighing, with a source-provenance check on the CFO memo and the health panel.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I03\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I05\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I07\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X2\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I09\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X2\u0022]}],\u0022brief\u0022:\u0022The cancellation rise is not mainly a pricing problem. It is concentrated in accounts connected to Quillbook. Their monthly churn went from about 2% to about 6%, and it is the same for price-locked Founders accounts and repriced accounts. Accounts with no connector, which are most of the base, are flat at about 1.9% whatever the seat count. The seat-size pattern in the finance analysis arises because Quillbook accounts are larger. Quillbook retired its old invoice interface on 30 March. Since then the connector has silently dropped or duplicated 58,300 invoices across 1,212 accounts. 34% of those accounts have cancelled, against 8% of accounts with no recorded failure. The health panel counts only ERROR, so these WARN events were never seen. Support is also slow, but that looks like a side effect.\\n\\nRecommendation: don\u0027t roll back the price, which would cost about $220k a month and wouldn\u0027t fix this. Don\u0027t switch off the duplicate-invoice hold, because it has kept 3,870 duplicates out of customers\u0027 books. Make the Quillbook v3 migration (3\u20134 weeks) the top engineering priority. Contact every Quillbook account, including those that cancelled, to correct their invoices. Make the health panel count WARN events. Review the Tallymarsh log before committing a rebuild; its churn change is within normal variation. Confidence is fairly high, though this is observational data.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:25:32.2450717Z",
+    "finishedAt": "2026-11-17T16:25:45.8008958Z",
+    "output": {
+      "caseId": "OD2-HO-CHANGE-1",
+      "methodChoice": "Kepner-Tregoe IS/IS NOT localization (by connector, price cohort, seat band), then competing-hypotheses weighing, with a source-provenance check on the CFO memo and the health panel.",
+      "answers": [
+        {
+          "itemId": "I01",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I02",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I03",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X1",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I04",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I05",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X2",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I06",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I07",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X2",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I08",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I09",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 82,
+          "evidenceIds": [
+            "X1",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X1",
+            "X2"
+          ]
+        }
+      ],
+      "brief": "The cancellation rise is not mainly a pricing problem. It is concentrated in accounts connected to Quillbook. Their monthly churn went from about 2% to about 6%, and it is the same for price-locked Founders accounts and repriced accounts. Accounts with no connector, which are most of the base, are flat at about 1.9% whatever the seat count. The seat-size pattern in the finance analysis arises because Quillbook accounts are larger. Quillbook retired its old invoice interface on 30 March. Since then the connector has silently dropped or duplicated 58,300 invoices across 1,212 accounts. 34% of those accounts have cancelled, against 8% of accounts with no recorded failure. The health panel counts only ERROR, so these WARN events were never seen. Support is also slow, but that looks like a side effect.\n\nRecommendation: don\u0027t roll back the price, which would cost about $220k a month and wouldn\u0027t fix this. Don\u0027t switch off the duplicate-invoice hold, because it has kept 3,870 duplicates out of customers\u0027 books. Make the Quillbook v3 migration (3\u20134 weeks) the top engineering priority. Contact every Quillbook account, including those that cancelled, to correct their invoices. Make the health panel count WARN events. Review the Tallymarsh log before committing a rebuild; its churn change is within normal variation. Confidence is fairly high, though this is observational data."
+    }
+  }
+}

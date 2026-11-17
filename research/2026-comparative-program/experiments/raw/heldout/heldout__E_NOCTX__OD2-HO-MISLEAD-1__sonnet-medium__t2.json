@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__E_NOCTX__OD2-HO-MISLEAD-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "E_NOCTX",
+  "caseId": "OD2-HO-MISLEAD-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C9",
+    "X3": "C14",
+    "X4": "C8",
+    "X5": "C2",
+    "X6": "C10",
+    "X7": "C13",
+    "X8": "C6",
+    "X9": "C12",
+    "X10": "C1",
+    "X11": "C5",
+    "X12": "C4",
+    "X13": "C15",
+    "X14": "C11",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X5",
+    "X10"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__E_NOCTX__OD2-HO-MISLEAD-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19876,
+    "cacheCreationTokens": 9247,
+    "outputTokens": 1625,
+    "thinkingTokens": 82,
+    "costUsd": 0.0552376,
+    "durationMs": 11567,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTX__OD2-HO-MISLEAD-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTX__OD2-HO-MISLEAD-1__sonnet-medium__t2/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__E_NOCTX__OD2-HO-MISLEAD-1__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:68,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The evidence points mainly to the revised merit scholarship schedule, not the Admissions Office. Yield fell only in the tiers whose awards were cut: Dean\u0027s went from 45.2% to 31.9%, and Merit from 44.9% to 32.3%. Presidential awards were unchanged and yield held at about 36%. The no-award group held at about 37\u201338%. That pattern rules out a general softening in demand. The applicant pool was larger and as strong as before, so it was not the cause. Early-action yield also fell, from 45.2% to 37.8%. Those students got decisions on time under the old system, so the slow portal is not the main driver. Slower regular-decision turnaround is real, but it does not explain the yield drop. I\u0027m fairly confident in this (about 80%). I could not separate the schedule\u0027s effect from other factors by round within tier. The missing-document problem is unverified. Next steps: don\u0027t replace the director on this basis. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a monthly-reported decision-turnaround target. Hold off on the vendor rebuild until the document problem is checked.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:12:24.0973370Z",
+    "finishedAt": "2026-11-17T16:12:36.7330706Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 68,
+          "evidenceIds": [
+            "X10",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X5",
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X5",
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 72,
+          "evidenceIds": [
+            "E2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X5",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The evidence points mainly to the revised merit scholarship schedule, not the Admissions Office. Yield fell only in the tiers whose awards were cut: Dean\u0027s went from 45.2% to 31.9%, and Merit from 44.9% to 32.3%. Presidential awards were unchanged and yield held at about 36%. The no-award group held at about 37\u201338%. That pattern rules out a general softening in demand. The applicant pool was larger and as strong as before, so it was not the cause. Early-action yield also fell, from 45.2% to 37.8%. Those students got decisions on time under the old system, so the slow portal is not the main driver. Slower regular-decision turnaround is real, but it does not explain the yield drop. I\u0027m fairly confident in this (about 80%). I could not separate the schedule\u0027s effect from other factors by round within tier. The missing-document problem is unverified. Next steps: don\u0027t replace the director on this basis. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a monthly-reported decision-turnaround target. Hold off on the vendor rebuild until the document problem is checked."
+    }
+  }
+}

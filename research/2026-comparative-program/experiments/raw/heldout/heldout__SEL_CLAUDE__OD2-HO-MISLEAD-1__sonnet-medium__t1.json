@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-MISLEAD-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-MISLEAD-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C9",
+    "X3": "C8",
+    "X4": "C13",
+    "X5": "C2",
+    "X6": "C10",
+    "X7": "C4",
+    "X8": "C5",
+    "X9": "C3",
+    "X10": "C14",
+    "X11": "C6",
+    "X12": "C12",
+    "X13": "C11",
+    "X14": "C1",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X5",
+    "X14"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-MISLEAD-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21725,
+    "cacheCreationTokens": 11042,
+    "outputTokens": 1663,
+    "thinkingTokens": 29,
+    "costUsd": 0.0629825,
+    "durationMs": 11447,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-1__sonnet-medium__t1/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-MISLEAD-1__sonnet-medium__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-MISLEAD-1\u0022,\u0022methodChoice\u0022:\u0022D (competing hypotheses): the case has several rival causes, and the two evidence items I chose split them cleanly.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X14\u0022]}],\u0022brief\u0022:\u0022The enrolment drop is mostly a yield problem, and it is concentrated where the scholarship cuts were made. Applications and admits rose, so the applicant pool is not the cause. Yield held steady for Presidential awards (unchanged) and for students with no merit award. It fell about 13 points in the Dean\u0027s tier (award cut from $14,000 to $9,000) and about 12 points in the Merit tier (award cut from $9,000 to $5,000). Those two tiers account for nearly all of the 330-student loss. Early-action students, whose decisions came on time on the old system, lost about 7 points of yield, while regular-decision students lost about 7.5. The portal delay therefore doesn\u0027t explain the drop, though it likely hurt some individual students such as the one in the counsellor\u0027s email. I\u0027m fairly confident in the scholarship cut as the main cause. I can\u0027t say how much the delay contributed, or whether the portal lost documents. Don\u0027t replace the director on this evidence. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a turnaround target for regular-decision files and restore the merit-review reader posts. Hold off on a vendor rebuild until the missing-document claim is checked.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:37:06.3269172Z",
+    "finishedAt": "2026-11-17T16:37:18.8369171Z",
+    "output": {
+      "caseId": "OD2-HO-MISLEAD-1",
+      "methodChoice": "D (competing hypotheses): the case has several rival causes, and the two evidence items I chose split them cleanly.",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X14",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5",
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 82,
+          "evidenceIds": [
+            "X5",
+            "E5",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "X14",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "E2",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "X5",
+            "X14"
+          ]
+        }
+      ],
+      "brief": "The enrolment drop is mostly a yield problem, and it is concentrated where the scholarship cuts were made. Applications and admits rose, so the applicant pool is not the cause. Yield held steady for Presidential awards (unchanged) and for students with no merit award. It fell about 13 points in the Dean\u0027s tier (award cut from $14,000 to $9,000) and about 12 points in the Merit tier (award cut from $9,000 to $5,000). Those two tiers account for nearly all of the 330-student loss. Early-action students, whose decisions came on time on the old system, lost about 7 points of yield, while regular-decision students lost about 7.5. The portal delay therefore doesn\u0027t explain the drop, though it likely hurt some individual students such as the one in the counsellor\u0027s email. I\u0027m fairly confident in the scholarship cut as the main cause. I can\u0027t say how much the delay contributed, or whether the portal lost documents. Don\u0027t replace the director on this evidence. Take a proposal to the finance committee to restore awards in the Dean\u0027s and Merit tiers, with the revenue trade-off modelled, before award letters go out. Also set a turnaround target for regular-decision files and restore the merit-review reader posts. Hold off on a vendor rebuild until the missing-document claim is checked."
+    }
+  }
+}

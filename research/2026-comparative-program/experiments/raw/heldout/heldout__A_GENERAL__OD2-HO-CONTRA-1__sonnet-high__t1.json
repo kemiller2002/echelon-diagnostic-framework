@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-CONTRA-1__sonnet-high__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C7",
+    "X3": "C13",
+    "X4": "C2",
+    "X5": "C5",
+    "X6": "C10",
+    "X7": "C11",
+    "X8": "C3",
+    "X9": "C4",
+    "X10": "C15",
+    "X11": "C8",
+    "X12": "C6",
+    "X13": "C14",
+    "X14": "C1",
+    "X15": "C12"
+  },
+  "readLabels": [
+    "X9",
+    "X1"
+  ],
+  "reads": [
+    "C4",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-CONTRA-1__sonnet-high__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28616,
+    "cacheCreationTokens": 7748,
+    "outputTokens": 2690,
+    "thinkingTokens": 1110,
+    "costUsd": 0.0607696,
+    "durationMs": 19783,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-1__sonnet-high__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-1__sonnet-high__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-1__sonnet-high__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X1\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X1\u0022,\u0022E6\u0022]}],\u0022brief\u0022:\u0022The evidence says the Corran Valley delay was mainly Callerby\u0027s own doing. The independent lender\u0027s surveyor reports that level 3\u20134 steel was on site and erection was due to start on 21 October 2025. Callerby then dismantled the tower crane for another company project. No frame erection took place until the crane came back in April 2026. CO-09 was small: four beams on level 2, issued on 6 November, after the crane had gone. They were installed in December with a hired mobile crane. The other change orders are fit-out work with float. The RFI platform\u0027s tamper-proof audit trail shows the architect answered 62 of 64 requests on time. 39 of the 41 requests the claim calls late sat in Callerby\u0027s own draft status. The drafted claim is therefore contradicted, and its fee structure rewards recovery. Do not submit it as drafted: that risks a false claim. Do not discipline the superintendent, who only answered a direct question truthfully. Withdraw the claim and take legal advice on settling the final account, keeping any narrow, genuinely supportable item. Review how the crane transfer was approved and whether the Kestrel incentive influenced it. The incentive link is not established, so don\u0027t suspend the scheme yet. I\u0027m fairly confident in the cause. I\u0027m less sure of the exact settlement terms.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:28:17.7365571Z",
+    "finishedAt": "2026-11-17T16:28:38.2503326Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X9",
+            "E5",
+            "E6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 60,
+          "evidenceIds": [
+            "X9",
+            "X1",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "X9",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 72,
+          "evidenceIds": [
+            "X9",
+            "X1",
+            "E6"
+          ]
+        }
+      ],
+      "brief": "The evidence says the Corran Valley delay was mainly Callerby\u0027s own doing. The independent lender\u0027s surveyor reports that level 3\u20134 steel was on site and erection was due to start on 21 October 2025. Callerby then dismantled the tower crane for another company project. No frame erection took place until the crane came back in April 2026. CO-09 was small: four beams on level 2, issued on 6 November, after the crane had gone. They were installed in December with a hired mobile crane. The other change orders are fit-out work with float. The RFI platform\u0027s tamper-proof audit trail shows the architect answered 62 of 64 requests on time. 39 of the 41 requests the claim calls late sat in Callerby\u0027s own draft status. The drafted claim is therefore contradicted, and its fee structure rewards recovery. Do not submit it as drafted: that risks a false claim. Do not discipline the superintendent, who only answered a direct question truthfully. Withdraw the claim and take legal advice on settling the final account, keeping any narrow, genuinely supportable item. Review how the crane transfer was approved and whether the Kestrel incentive influenced it. The incentive link is not established, so don\u0027t suspend the scheme yet. I\u0027m fairly confident in the cause. I\u0027m less sure of the exact settlement terms."
+    }
+  }
+}

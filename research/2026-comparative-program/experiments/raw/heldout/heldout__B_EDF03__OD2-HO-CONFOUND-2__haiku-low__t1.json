@@ -1,0 +1,227 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CONFOUND-2__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CONFOUND-2",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C15",
+    "X2": "C10",
+    "X3": "C6",
+    "X4": "C3",
+    "X5": "C5",
+    "X6": "C12",
+    "X7": "C7",
+    "X8": "C2",
+    "X9": "C13",
+    "X10": "C9",
+    "X11": "C4",
+    "X12": "C8",
+    "X13": "C14",
+    "X14": "C11",
+    "X15": "C1"
+  },
+  "readLabels": [
+    "X15",
+    "X8"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CONFOUND-2__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 32773,
+    "cacheCreationTokens": 9993,
+    "outputTokens": 3023,
+    "thinkingTokens": 1619,
+    "costUsd": 0.00383863,
+    "durationMs": 17408,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONFOUND-2\u0022,\u0022methodChoice\u0022:\u0022Collected X15 (crash rates by build, flag state, device tier) and X8 (top crash clusters by build, with app-store console cross-check). Two items used, the maximum.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E4\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X8\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022The crash gap is driven by build 7.4.0, not by the Tiled Canvas flag. Flagged users crash at 2.10% and the random flag-off holdout at 1.98%, a difference of 0.12 points whose interval includes zero. The 7.4.0 rate was already about 2% on 2\u20133 Sep, before the flag ramp. Device mix is the same across groups. The top 7.4.0 crash cluster (41% of events) is a native crash in the Pixelda 3.1 HEIF decoder, which 7.3.2 does not ship, and the app-store console independently shows the same gap. The sync-service deploy does not explain it, since 7.3.2 stayed flat. Confidence is moderate-to-good. The flag\u0027s small effect is not fully excluded, and the decoder crash\u0027s exact screen is not recorded. Next: do not turn the flag off as a fix or close the incident. Hold the 7.4.0 rollout at 25%, and get a fix or Pixelda rollback prioritised. Keep the flag holdout running as planned.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:48:28.5475729Z",
+    "finishedAt": "2026-11-17T16:48:46.6622555Z",
+    "output": {
+      "caseId": "OD2-HO-CONFOUND-2",
+      "methodChoice": "Collected X15 (crash rates by build, flag state, device tier) and X8 (top crash clusters by build, with app-store console cross-check). Two items used, the maximum.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15",
+            "E4",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X8",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X8",
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "E4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "R4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15",
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X8",
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "X15",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X8",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "X8",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "The crash gap is driven by build 7.4.0, not by the Tiled Canvas flag. Flagged users crash at 2.10% and the random flag-off holdout at 1.98%, a difference of 0.12 points whose interval includes zero. The 7.4.0 rate was already about 2% on 2\u20133 Sep, before the flag ramp. Device mix is the same across groups. The top 7.4.0 crash cluster (41% of events) is a native crash in the Pixelda 3.1 HEIF decoder, which 7.3.2 does not ship, and the app-store console independently shows the same gap. The sync-service deploy does not explain it, since 7.3.2 stayed flat. Confidence is moderate-to-good. The flag\u0027s small effect is not fully excluded, and the decoder crash\u0027s exact screen is not recorded. Next: do not turn the flag off as a fix or close the incident. Hold the 7.4.0 rollout at 25%, and get a fix or Pixelda rollback prioritised. Keep the flag holdout running as planned."
+    }
+  }
+}

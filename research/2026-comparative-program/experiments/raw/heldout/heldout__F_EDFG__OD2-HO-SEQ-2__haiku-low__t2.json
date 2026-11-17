@@ -1,0 +1,214 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-SEQ-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-SEQ-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C3",
+    "X3": "C10",
+    "X4": "C15",
+    "X5": "C12",
+    "X6": "C7",
+    "X7": "C11",
+    "X8": "C5",
+    "X9": "C1",
+    "X10": "C14",
+    "X11": "C6",
+    "X12": "C2",
+    "X13": "C9",
+    "X14": "C8",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X9",
+    "X12"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-SEQ-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 30092,
+    "cacheCreationTokens": 13945,
+    "outputTokens": 2639,
+    "thinkingTokens": 1295,
+    "costUsd": 0.00441022,
+    "durationMs": 16945,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-SEQ-2\u0022,\u0022methodChoice\u0022:\u0022EDF diagnostic sequence with two collected items: X9 (printer job records) and X12 (ERP shelf-life audit trail).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022]}],\u0022brief\u0022:\u0022The wrong expiry dates were not caused by operators or by the firmware upgrade. The printer job log shows that from 4 Oct 22:10 PackBridge sent a 36-month shelf life for Veltranol instead of 24, and the printers printed exactly what they received. No operator overrode any of the 47 jobs. The source is an ERP change made on 3 Oct under CC-309 (entered as 36 months, valid from March 2027). PackBridge appears to have used that not-yet-valid value, which contradicts the vendor\u0027s account. Line 1 day-shift lots by permanent staff were also affected, so the director\u0027s plan, which blames agency staff, is wrong and would not fix this. I am fairly confident in this, though the vendor\u0027s behaviour is not yet explained. Next: put the Veltranol record back to 24 and hold all lots packed since 4 Oct, add a second-person check of expiry against the batch record, and do not remove operators or switch off the camera. Check the other products changed in October (HX-15-30 and MR-05-14) against their printed dates before acting on them. Ask the vendor to explain the valid-from behaviour.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:53:38.1938186Z",
+    "finishedAt": "2026-11-17T15:53:55.9637101Z",
+    "output": {
+      "caseId": "OD2-HO-SEQ-2",
+      "methodChoice": "EDF diagnostic sequence with two collected items: X9 (printer job records) and X12 (ERP shelf-life audit trail).",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "E3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E2",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X12",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X9",
+            "X12"
+          ]
+        }
+      ],
+      "brief": "The wrong expiry dates were not caused by operators or by the firmware upgrade. The printer job log shows that from 4 Oct 22:10 PackBridge sent a 36-month shelf life for Veltranol instead of 24, and the printers printed exactly what they received. No operator overrode any of the 47 jobs. The source is an ERP change made on 3 Oct under CC-309 (entered as 36 months, valid from March 2027). PackBridge appears to have used that not-yet-valid value, which contradicts the vendor\u0027s account. Line 1 day-shift lots by permanent staff were also affected, so the director\u0027s plan, which blames agency staff, is wrong and would not fix this. I am fairly confident in this, though the vendor\u0027s behaviour is not yet explained. Next: put the Veltranol record back to 24 and hold all lots packed since 4 Oct, add a second-person check of expiry against the batch record, and do not remove operators or switch off the camera. Check the other products changed in October (HX-15-30 and MR-05-14) against their printed dates before acting on them. Ask the vendor to explain the valid-from behaviour."
+    }
+  }
+}

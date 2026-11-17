@@ -1,0 +1,199 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-SEQ-1__sonnet-medium__t3",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-SEQ-1",
+  "trial": 3,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C2",
+    "X3": "C11",
+    "X4": "C10",
+    "X5": "C1",
+    "X6": "C6",
+    "X7": "C15",
+    "X8": "C13",
+    "X9": "C12",
+    "X10": "C5",
+    "X11": "C3",
+    "X12": "C8",
+    "X13": "C14",
+    "X14": "C9",
+    "X15": "C7"
+  },
+  "readLabels": [
+    "X6",
+    "X14"
+  ],
+  "reads": [
+    "C6",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-SEQ-1__sonnet-medium__t3",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18035,
+    "cacheCreationTokens": 7660,
+    "outputTokens": 1929,
+    "thinkingTokens": 366,
+    "costUsd": 0.0517455,
+    "durationMs": 13905,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-SEQ-1__sonnet-medium__t3/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-SEQ-1__sonnet-medium__t3/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-SEQ-1__sonnet-medium__t3/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-SEQ-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]}],\u0022brief\u0022:\u0022Don\u0027t discipline drivers or retrain everyone. The evidence points to contaminated brake fluid, not driving, the hills or the new pads. Northfield Motor Services serviced 13 Eastgate vans while the in-house bay was closed, and 11 of them used fluid from one old bulk drum with a missing cap. Two vans that came back on 24 Sep tested at 152\u00B0C and 149\u00B0C boiling point, against 255\u00B0C for sealed stock. That is water-contaminated fluid, which can vaporise on long descents and give a soft pedal. The 11 vans using that drum match the 11 complaint vans, and Northfield\u0027s own warning on 25 Sep went unanswered. The same drivers had no complaints in other vans on the same hills. Calder Road vans with the same Tessaro pads had no problems. The two Northfield vans with new-drum fluid had no complaints. Next steps: pull all 13 Northfield-serviced vans (LK-209 is already parked), test the fluid, renew it from sealed stock, and return them to service. Tell drivers that reports were right and that nobody will be disciplined for them. Ask Northfield to confirm which drum each van got. I\u0027m fairly sure of this. The pad squeal link is unproven because fresh pads may squeal anyway. Hold off on switching suppliers until there is a clean comparison.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:27:26.2442534Z",
+    "finishedAt": "2026-11-17T16:27:41.0881868Z",
+    "output": {
+      "caseId": "OD2-HO-SEQ-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 95,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 50,
+          "evidenceIds": [
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        }
+      ],
+      "brief": "Don\u0027t discipline drivers or retrain everyone. The evidence points to contaminated brake fluid, not driving, the hills or the new pads. Northfield Motor Services serviced 13 Eastgate vans while the in-house bay was closed, and 11 of them used fluid from one old bulk drum with a missing cap. Two vans that came back on 24 Sep tested at 152\u00B0C and 149\u00B0C boiling point, against 255\u00B0C for sealed stock. That is water-contaminated fluid, which can vaporise on long descents and give a soft pedal. The 11 vans using that drum match the 11 complaint vans, and Northfield\u0027s own warning on 25 Sep went unanswered. The same drivers had no complaints in other vans on the same hills. Calder Road vans with the same Tessaro pads had no problems. The two Northfield vans with new-drum fluid had no complaints. Next steps: pull all 13 Northfield-serviced vans (LK-209 is already parked), test the fluid, renew it from sealed stock, and return them to service. Tell drivers that reports were right and that nobody will be disciplined for them. Ask Northfield to confirm which drum each van got. I\u0027m fairly sure of this. The pad squeal link is unproven because fresh pads may squeal anyway. Hold off on switching suppliers until there is a clean comparison."
+    }
+  }
+}

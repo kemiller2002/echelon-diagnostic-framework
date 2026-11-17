@@ -1,0 +1,224 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CONTRA-1__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CONTRA-1",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C3",
+    "X2": "C1",
+    "X3": "C15",
+    "X4": "C8",
+    "X5": "C10",
+    "X6": "C5",
+    "X7": "C9",
+    "X8": "C2",
+    "X9": "C6",
+    "X10": "C4",
+    "X11": "C11",
+    "X12": "C7",
+    "X13": "C13",
+    "X14": "C14",
+    "X15": "C12"
+  },
+  "readLabels": [
+    "X7",
+    "X8"
+  ],
+  "reads": [
+    "C9",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CONTRA-1__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20218,
+    "cacheCreationTokens": 9493,
+    "outputTokens": 3097,
+    "thinkingTokens": 1727,
+    "costUsd": 0.0036498800000000003,
+    "durationMs": 17809,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022X8\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X8\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X7\u0022,\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022X7\u0022,\u0022X8\u0022]}],\u0022brief\u0022:\u0022The evidence points mainly to Callerby\u0027s own decision. The tower crane was taken off Corran Valley from late October 2025 and sent to Kestrel, and the frame work stalled with it. The architect was not the cause: the RFI audit trail shows 62 of 64 answers within the contract period, and 39 of the 41 \\\u0022late\\\u0022 RFIs sat in Callerby\u0027s own drafts for 9 to 47 days. Whether the owner\u0027s change order CO-09 also held the frame is still unresolved, and the crane transfer has no signed transfer forms. Do not submit the 26-week claim as drafted on 1 December; it blames the owner for delays the records do not support, and it is at risk of being false. Do not discipline the superintendent for answering the clerk of works truthfully. Do not withdraw the claim yet either. Next, commission an independent forensic delay analysis, using the RFI audit trail and the plant ledger, to test the CO-09 question. Confidence is moderate. The deadline is tight, so ask Halden for a short extension if the analysis cannot finish in time.\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with evidence X7 and X8 collected\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:08:35.0733267Z",
+    "finishedAt": "2026-11-17T16:08:53.5584494Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-1",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "X8",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "causal",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E5",
+            "E6",
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X8",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3",
+            "X7",
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "insufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "X7",
+            "X8"
+          ]
+        }
+      ],
+      "brief": "The evidence points mainly to Callerby\u0027s own decision. The tower crane was taken off Corran Valley from late October 2025 and sent to Kestrel, and the frame work stalled with it. The architect was not the cause: the RFI audit trail shows 62 of 64 answers within the contract period, and 39 of the 41 \u0022late\u0022 RFIs sat in Callerby\u0027s own drafts for 9 to 47 days. Whether the owner\u0027s change order CO-09 also held the frame is still unresolved, and the crane transfer has no signed transfer forms. Do not submit the 26-week claim as drafted on 1 December; it blames the owner for delays the records do not support, and it is at risk of being false. Do not discipline the superintendent for answering the clerk of works truthfully. Do not withdraw the claim yet either. Next, commission an independent forensic delay analysis, using the RFI audit trail and the plant ledger, to test the CO-09 question. Confidence is moderate. The deadline is tight, so ask Halden for a short extension if the analysis cannot finish in time.",
+      "methodChoice": "EDF-2 with evidence X7 and X8 collected"
+    }
+  }
+}

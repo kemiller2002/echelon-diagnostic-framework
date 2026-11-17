@@ -1,0 +1,205 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-OBVWRONG-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-OBVWRONG-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C12",
+    "X3": "C10",
+    "X4": "C6",
+    "X5": "C8",
+    "X6": "C11",
+    "X7": "C15",
+    "X8": "C13",
+    "X9": "C9",
+    "X10": "C14",
+    "X11": "C3",
+    "X12": "C1",
+    "X13": "C5",
+    "X14": "C4",
+    "X15": "C7"
+  },
+  "readLabels": [
+    "X1",
+    "X11"
+  ],
+  "reads": [
+    "C2",
+    "C3"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-OBVWRONG-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 21762,
+    "cacheCreationTokens": 11280,
+    "outputTokens": 1797,
+    "thinkingTokens": 83,
+    "costUsd": 0.06527820000000001,
+    "durationMs": 12314,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-OBVWRONG-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-OBVWRONG-1__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-OBVWRONG-1__sonnet-medium__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-1\u0022,\u0022methodChoice\u0022:\u0022D (competing hypotheses) with careful reasoning: the competing explanations needed to be separated by discriminating evidence, namely the client and ISP breakdown and the release config.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The Kestria buffering is almost certainly caused by the smart-TV app 5.2 release, not the new CDN. The release lowered the player\u0027s startup buffer from 10 s to 4 s and let it switch up in quality after 2 s buffered. It went live in Kestria first, on 9 Oct, the same day as the CDN cutover. Rebuffering on 5.2 TVs is about 5.9% on every ISP. Every other client on the same CDN and ISPs sits at 0.6\u20130.7%. Employee test TVs in another market, served by the old CDN, showed 5.7% on 5.2 versus 0.6% on 5.1 before launch. The fix for that test was deferred. Handball viewing and ISP congestion don\u0027t fit the pattern. Recommendation: don\u0027t send the breach notice, withhold fees or move traffic back. That would punish the wrong party and leave the problem in place. Instead, revert Kestria to the old streaming settings (abr_v2 is a server-side remote-config profile, roughly an hour to take effect). Hold the 20 Nov wider rollout, and keep the rebuffering alert on. Then add app version and device breakdowns to monitoring. Hold the free-month offer until you\u0027ve confirmed how much of the cancellation rise comes from buffering, since the 1 Oct price rise is also a likely factor. I\u0027m confident in the main finding. The cancellation link is unproven.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:55:53.3171775Z",
+    "finishedAt": "2026-11-17T15:56:06.5597718Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-1",
+      "methodChoice": "D (competing hypotheses) with careful reasoning: the competing explanations needed to be separated by discriminating evidence, namely the client and ISP breakdown and the release config.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X1",
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "E3",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 95,
+          "evidenceIds": [
+            "X1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 93,
+          "evidenceIds": [
+            "X11",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 70,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The Kestria buffering is almost certainly caused by the smart-TV app 5.2 release, not the new CDN. The release lowered the player\u0027s startup buffer from 10 s to 4 s and let it switch up in quality after 2 s buffered. It went live in Kestria first, on 9 Oct, the same day as the CDN cutover. Rebuffering on 5.2 TVs is about 5.9% on every ISP. Every other client on the same CDN and ISPs sits at 0.6\u20130.7%. Employee test TVs in another market, served by the old CDN, showed 5.7% on 5.2 versus 0.6% on 5.1 before launch. The fix for that test was deferred. Handball viewing and ISP congestion don\u0027t fit the pattern. Recommendation: don\u0027t send the breach notice, withhold fees or move traffic back. That would punish the wrong party and leave the problem in place. Instead, revert Kestria to the old streaming settings (abr_v2 is a server-side remote-config profile, roughly an hour to take effect). Hold the 20 Nov wider rollout, and keep the rebuffering alert on. Then add app version and device breakdowns to monitoring. Hold the free-month offer until you\u0027ve confirmed how much of the cancellation rise comes from buffering, since the 1 Oct price rise is also a likely factor. I\u0027m confident in the main finding. The cancellation link is unproven."
+    }
+  }
+}

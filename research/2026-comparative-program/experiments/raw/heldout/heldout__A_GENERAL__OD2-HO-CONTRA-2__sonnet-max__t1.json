@@ -1,0 +1,227 @@
+{
+  "runId": "heldout__A_GENERAL__OD2-HO-CONTRA-2__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-HO-CONTRA-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C10",
+    "X3": "C9",
+    "X4": "C15",
+    "X5": "C2",
+    "X6": "C4",
+    "X7": "C8",
+    "X8": "C12",
+    "X9": "C7",
+    "X10": "C3",
+    "X11": "C6",
+    "X12": "C5",
+    "X13": "C1",
+    "X14": "C14",
+    "X15": "C13"
+  },
+  "readLabels": [
+    "X1",
+    "X11"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__A_GENERAL__OD2-HO-CONTRA-2__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 42638,
+    "cacheCreationTokens": 53642,
+    "outputTokens": 69038,
+    "thinkingTokens": 66746,
+    "costUsd": 0.9092277999999999,
+    "durationMs": 476827,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-2__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-2__sonnet-max__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__A_GENERAL__OD2-HO-CONTRA-2__sonnet-max__t1/evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CONTRA-2\u0022,\u0022methodChoice\u0022:\u0022Collected X1 (scan timings and write-off rates by receiving shift) first, to test the DC-handling explanation directly with the unchanged day shift as a comparison. Then collected X11 (independent trailer telematics) to test the Haverlow-temperature claim. Stopped at two items.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:91,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:91,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E3\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:86,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:87,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E1\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:97,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X11\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X11\u0022,\u0022E5\u0022,\u0022E6\u0022]}],\u0022brief\u0022:\u0022Most of the jump is spoilage inside Brackenford, not Haverlow\u0027s fault. About \u00A315,700 of the \u00A318,400 weekly rise is DC-stage write-offs. Since the 27 July Phase 2 cut (night receiving six to four), night chilled pallets wait a median 3 h 52 min to reach a chamber (was 44 min) on an unrefrigerated dock averaging 15\u201317\u00B0C. Night write-offs rose from 0.6% to 2.9% of lots; the day shift stayed flat. Trailer telematics show Haverlow product at 2.4\u20133.5\u00B0C when doors opened; the 6.6\u20137.9\u00B0C probe readings were keyed about 3.5 hours after unloading finished. Pellridge and own-label night lots spoil at the same rate; their day lots are normal. Chambers are fine.\\n\\nNext: withdraw the Haverlow chargeback and drop the volume move; restore six night operatives (its \u00A32,300/week saving is far smaller than the losses) and set a maximum dock-to-chamber time, tracked weekly from scan data. Keep the night probe.\\n\\nCredits (about \u00A32,700 of the rise): Corriebank\u0027s looser claim rules may explain some, but it\u0027s unproven; other customers\u0027 credits also rose. Get Corriebank\u0027s claim-level data and check a sample against lots and shifts before changing terms.\\n\\nConfidence: about 90% on the dock cause; moderate on credits.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:34:11.7480365Z",
+    "finishedAt": "2026-11-17T16:42:09.9311470Z",
+    "output": {
+      "caseId": "OD2-HO-CONTRA-2",
+      "methodChoice": "Collected X1 (scan timings and write-off rates by receiving shift) first, to test the DC-handling explanation directly with the unchanged day shift as a comparison. Then collected X11 (independent trailer telematics) to test the Haverlow-temperature claim. Stopped at two items.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X11",
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 91,
+          "evidenceIds": [
+            "X1",
+            "X11",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 94,
+          "evidenceIds": [
+            "E6",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 91,
+          "evidenceIds": [
+            "X11",
+            "E3",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7",
+            "E1",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "E5",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 86,
+          "evidenceIds": [
+            "X1",
+            "X11",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 87,
+          "evidenceIds": [
+            "X11",
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X1",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7",
+            "E1",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "acceptable",
+          "confidence": 75,
+          "evidenceIds": [
+            "E7",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 97,
+          "evidenceIds": [
+            "E3",
+            "X11",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "X11",
+            "E5",
+            "E6"
+          ]
+        }
+      ],
+      "brief": "Most of the jump is spoilage inside Brackenford, not Haverlow\u0027s fault. About \u00A315,700 of the \u00A318,400 weekly rise is DC-stage write-offs. Since the 27 July Phase 2 cut (night receiving six to four), night chilled pallets wait a median 3 h 52 min to reach a chamber (was 44 min) on an unrefrigerated dock averaging 15\u201317\u00B0C. Night write-offs rose from 0.6% to 2.9% of lots; the day shift stayed flat. Trailer telematics show Haverlow product at 2.4\u20133.5\u00B0C when doors opened; the 6.6\u20137.9\u00B0C probe readings were keyed about 3.5 hours after unloading finished. Pellridge and own-label night lots spoil at the same rate; their day lots are normal. Chambers are fine.\n\nNext: withdraw the Haverlow chargeback and drop the volume move; restore six night operatives (its \u00A32,300/week saving is far smaller than the losses) and set a maximum dock-to-chamber time, tracked weekly from scan data. Keep the night probe.\n\nCredits (about \u00A32,700 of the rise): Corriebank\u0027s looser claim rules may explain some, but it\u0027s unproven; other customers\u0027 credits also rose. Get Corriebank\u0027s claim-level data and check a sample against lots and shifts before changing terms.\n\nConfidence: about 90% on the dock cause; moderate on credits."
+    }
+  }
+}

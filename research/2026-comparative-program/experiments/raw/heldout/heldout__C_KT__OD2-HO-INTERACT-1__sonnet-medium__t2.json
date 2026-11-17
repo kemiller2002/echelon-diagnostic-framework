@@ -1,0 +1,196 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-INTERACT-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-INTERACT-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C5",
+    "X3": "C12",
+    "X4": "C1",
+    "X5": "C3",
+    "X6": "C11",
+    "X7": "C2",
+    "X8": "C13",
+    "X9": "C4",
+    "X10": "C15",
+    "X11": "C10",
+    "X12": "C7",
+    "X13": "C9",
+    "X14": "C14",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X4",
+    "X7"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-INTERACT-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18677,
+    "cacheCreationTokens": 8186,
+    "outputTokens": 1776,
+    "thinkingTokens": 195,
+    "costUsd": 0.052383700000000005,
+    "durationMs": 11866,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-1__sonnet-medium__t2/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-INTERACT-1__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The rejects come from one combination: Arnholt resin run through dryer D5 on Press 5. D5\u0027s dew point has drifted to about \u221216 to \u221219 \u00B0C, and Arnholt arrives wetter (0.27\u20130.33% at the dryer inlet) than Quillan (0.11\u20130.14%). Through D5 it reaches the press at about 0.25\u20130.31%, above the 0.20% limit. That causes splay and latch cracks. Press 5 on Arnholt rejects about 9.9%. Press 5 on Quillan rejects 0.9%. Press 7 on Arnholt rejects 0.8%. The same Arnholt lot dried in a good portable dryer gave 0.8%, against 10.4% through D5. The new operators are not the cause: they perform the same as experienced staff on each resin, and second shift looks worse only because all second-shift VX runs on Press 5. Don\u0027t discipline them, and don\u0027t drop Arnholt. One caveat: all Arnholt samples came from the north annex, so I can\u0027t say whether storage conditions explain the wetter inlet resin. Next steps: repair D5 (heater and desiccant) and verify \u221240 \u00B0C. Restore the alarm limit that was loosened in week 31. Keep Arnholt off D5 until then. Add a moisture check on every resin lot. Answer the 8D with this. Check annex storage separately and cheaply, with a conditioned-storage sample, before spending on renting space.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:08:00.0695671Z",
+    "finishedAt": "2026-11-17T16:08:12.7296723Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-1",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The rejects come from one combination: Arnholt resin run through dryer D5 on Press 5. D5\u0027s dew point has drifted to about \u221216 to \u221219 \u00B0C, and Arnholt arrives wetter (0.27\u20130.33% at the dryer inlet) than Quillan (0.11\u20130.14%). Through D5 it reaches the press at about 0.25\u20130.31%, above the 0.20% limit. That causes splay and latch cracks. Press 5 on Arnholt rejects about 9.9%. Press 5 on Quillan rejects 0.9%. Press 7 on Arnholt rejects 0.8%. The same Arnholt lot dried in a good portable dryer gave 0.8%, against 10.4% through D5. The new operators are not the cause: they perform the same as experienced staff on each resin, and second shift looks worse only because all second-shift VX runs on Press 5. Don\u0027t discipline them, and don\u0027t drop Arnholt. One caveat: all Arnholt samples came from the north annex, so I can\u0027t say whether storage conditions explain the wetter inlet resin. Next steps: repair D5 (heater and desiccant) and verify \u221240 \u00B0C. Restore the alarm limit that was loosened in week 31. Keep Arnholt off D5 until then. Add a moisture check on every resin lot. Answer the 8D with this. Check annex storage separately and cheaply, with a conditioned-storage sample, before spending on renting space."
+    }
+  }
+}

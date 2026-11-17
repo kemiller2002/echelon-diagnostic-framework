@@ -1,0 +1,203 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-NOCONC-1__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-NOCONC-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C11",
+    "X3": "C5",
+    "X4": "C10",
+    "X5": "C7",
+    "X6": "C6",
+    "X7": "C13",
+    "X8": "C3",
+    "X9": "C1",
+    "X10": "C12",
+    "X11": "C2",
+    "X12": "C14",
+    "X13": "C15",
+    "X14": "C9",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X4",
+    "X7"
+  ],
+  "reads": [
+    "C10",
+    "C13"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-NOCONC-1__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18533,
+    "cacheCreationTokens": 7864,
+    "outputTokens": 1650,
+    "thinkingTokens": 86,
+    "costUsd": 0.0498213,
+    "durationMs": 11638,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-NOCONC-1__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-NOCONC-1__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__C_KT__OD2-HO-NOCONC-1__sonnet-medium__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-NOCONC-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S1\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022S4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022S6\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S7\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S9\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:40,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022,\u0022E4\u0022]}],\u0022brief\u0022:\u0022Store 14\u0027s shrink rise (1.5% to 2.3%) is currently unproven as a real loss increase. The figures are interim estimates from partial cycle counts, with an error of roughly \u00B10.6 points per quarter. Across the chain, about half of stores that showed two consecutive rises were not confirmed by the year-end count. Store 14\u0027s full-count shrink was 1.5\u20131.8% in FY2023\u2013FY2025. The rise is spread across all departments, and the sales mix hasn\u0027t shifted, so mix doesn\u0027t explain it. The shoplifting log counts are not reliable evidence of growth, because the incident app launched chain-wide on 1 April and recorded incidents roughly doubled everywhere while chain shrink stayed at 1.6%. The ethics-line tip was checked on CCTV and showed bale runs on the closing checklist, so it gives no basis to suspend anyone. Neighbouring stores without self-checkout don\u0027t show the same rise, which keeps self-checkout possible, but nothing yet separates it from other causes. Recommendation: keep store 14 in the 7 December full count and don\u0027t drop it, as Regional Operations proposes. Hold off on the guard, pulling the lanes, and any personnel action until the count result is compared with the interim figures. If the count confirms a real rise, then investigate self-checkout, theft and other causes using department and item-level data.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:24:39.2235443Z",
+    "finishedAt": "2026-11-17T16:24:52.1716238Z",
+    "output": {
+      "caseId": "OD2-HO-NOCONC-1",
+      "answers": [
+        {
+          "itemId": "S1",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E2",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S2",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S3",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "S4",
+          "answer": "unknown",
+          "confidence": 50,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "S6",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E1",
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S7",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E2",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S8",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S9",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "acceptable",
+          "confidence": 40,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "E5",
+            "E4"
+          ]
+        }
+      ],
+      "brief": "Store 14\u0027s shrink rise (1.5% to 2.3%) is currently unproven as a real loss increase. The figures are interim estimates from partial cycle counts, with an error of roughly \u00B10.6 points per quarter. Across the chain, about half of stores that showed two consecutive rises were not confirmed by the year-end count. Store 14\u0027s full-count shrink was 1.5\u20131.8% in FY2023\u2013FY2025. The rise is spread across all departments, and the sales mix hasn\u0027t shifted, so mix doesn\u0027t explain it. The shoplifting log counts are not reliable evidence of growth, because the incident app launched chain-wide on 1 April and recorded incidents roughly doubled everywhere while chain shrink stayed at 1.6%. The ethics-line tip was checked on CCTV and showed bale runs on the closing checklist, so it gives no basis to suspend anyone. Neighbouring stores without self-checkout don\u0027t show the same rise, which keeps self-checkout possible, but nothing yet separates it from other causes. Recommendation: keep store 14 in the 7 December full count and don\u0027t drop it, as Regional Operations proposes. Hold off on the guard, pulling the lanes, and any personnel action until the count result is compared with the interim figures. If the count confirms a real rise, then investigate self-checkout, theft and other causes using department and item-level data."
+    }
+  }
+}

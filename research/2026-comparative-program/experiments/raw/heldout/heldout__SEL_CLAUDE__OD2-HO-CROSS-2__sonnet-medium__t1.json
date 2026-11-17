@@ -1,0 +1,211 @@
+{
+  "runId": "heldout__SEL_CLAUDE__OD2-HO-CROSS-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_CLAUDE",
+  "caseId": "OD2-HO-CROSS-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C6",
+    "X2": "C9",
+    "X3": "C12",
+    "X4": "C15",
+    "X5": "C3",
+    "X6": "C7",
+    "X7": "C11",
+    "X8": "C5",
+    "X9": "C4",
+    "X10": "C2",
+    "X11": "C1",
+    "X12": "C14",
+    "X13": "C10",
+    "X14": "C13",
+    "X15": "C8"
+  },
+  "readLabels": [
+    "X7",
+    "X1"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_CLAUDE__OD2-HO-CROSS-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22120,
+    "cacheCreationTokens": 11658,
+    "outputTokens": 1770,
+    "thinkingTokens": 35,
+    "costUsd": 0.066556,
+    "durationMs": 12727,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CROSS-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CROSS-2__sonnet-medium__t1/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_CLAUDE__OD2-HO-CROSS-2__sonnet-medium__t1/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-2\u0022,\u0022methodChoice\u0022:\u0022Combination of C and D: compare IS/IS NOT across containers and test the five rival causes against the evidence, because the cause is a single clean discriminating factor.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022The rejections were most likely caused by our own paperwork, not by the fungicide, the Lower Serra growers or Meridane. When Meridane bookings moved to the new Tallis system, the mandarin product record was copied from the avocado record, so every Meridane container was sent with a 7.0\u00B0C setting instead of our 4.0\u00B0C specification. The carrier\u0027s units held that setting within 0.4\u00B0C. All five Meridane containers with 7.0\u00B0C were rejected, with 9\u201314% decay. All four containers at 4.0\u00B0C passed, including Pellacor-treated ones and a Meridane one with the old fungicide. K3 was rejected with old-stock fungicide, and the 4.0\u00B0C Coastway containers carried Pellacor fruit and passed. That rules out the fungicide. Lower Serra fruit was worse within rejected containers, but it was never compared in accepted ones, so that link is unproven.\\nNext steps: fix the temperature in the mandarin product record now. Have Meridane reset the container at sea and the one queued for 10 Oct. Add a check of reefer settings against the product specification before each submission. Do not suspend Lower Serra, do not file the claim against Meridane, and do not go back to the old fungicide. Hold off on penalising the contractor until responsibility is reviewed, since our own sign-off also missed the error. Independent loggers are useful but secondary.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:18:25.8701551Z",
+    "finishedAt": "2026-11-17T16:18:39.5195779Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-2",
+      "methodChoice": "Combination of C and D: compare IS/IS NOT across containers and test the five rival causes against the evidence, because the cause is a single clean discriminating factor.",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X1",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X7",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 94,
+          "evidenceIds": [
+            "X7",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "preferred",
+          "confidence": 96,
+          "evidenceIds": [
+            "X7",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 92,
+          "evidenceIds": [
+            "X7",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "The rejections were most likely caused by our own paperwork, not by the fungicide, the Lower Serra growers or Meridane. When Meridane bookings moved to the new Tallis system, the mandarin product record was copied from the avocado record, so every Meridane container was sent with a 7.0\u00B0C setting instead of our 4.0\u00B0C specification. The carrier\u0027s units held that setting within 0.4\u00B0C. All five Meridane containers with 7.0\u00B0C were rejected, with 9\u201314% decay. All four containers at 4.0\u00B0C passed, including Pellacor-treated ones and a Meridane one with the old fungicide. K3 was rejected with old-stock fungicide, and the 4.0\u00B0C Coastway containers carried Pellacor fruit and passed. That rules out the fungicide. Lower Serra fruit was worse within rejected containers, but it was never compared in accepted ones, so that link is unproven.\nNext steps: fix the temperature in the mandarin product record now. Have Meridane reset the container at sea and the one queued for 10 Oct. Add a check of reefer settings against the product specification before each submission. Do not suspend Lower Serra, do not file the claim against Meridane, and do not go back to the old fungicide. Hold off on penalising the contractor until responsibility is reviewed, since our own sign-off also missed the error. Independent loggers are useful but secondary."
+    }
+  }
+}

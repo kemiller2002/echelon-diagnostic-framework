@@ -1,0 +1,227 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-ADVERS-2__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-ADVERS-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C9",
+    "X3": "C10",
+    "X4": "C13",
+    "X5": "C5",
+    "X6": "C15",
+    "X7": "C8",
+    "X8": "C12",
+    "X9": "C11",
+    "X10": "C6",
+    "X11": "C2",
+    "X12": "C4",
+    "X13": "C7",
+    "X14": "C14",
+    "X15": "C3"
+  },
+  "readLabels": [
+    "X12",
+    "X9"
+  ],
+  "reads": [
+    "C4",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-ADVERS-2__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 43310,
+    "cacheCreationTokens": 44497,
+    "outputTokens": 60859,
+    "thinkingTokens": 58914,
+    "costUsd": 0.7909250000000001,
+    "durationMs": 427007,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-ADVERS-2__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-ADVERS-2__sonnet-max__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-ADVERS-2__sonnet-max__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-ADVERS-2\u0022,\u0022methodChoice\u0022:\u0022EDF v0.3 applied internally. Collected X12 (audit trail), then X9 (API gateway log) to separate a deliberate act from a platform fault.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:68,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022]}],\u0022brief\u0022:\u0022Owen, the fall is not real; please don\u0027t sign either item on Thursday.\\n\\nAnalysts are still confirming about 36 genuine incidents a month, the same as before. Since 9 September a script run from a Brackwater analyst machine has checked every five minutes for confirmed incidents nearing the 4-hour containment limit and, within minutes, relabelled each as \u0027suspicious activity \u2013 monitoring\u0027. That happened 47 times. Those cases drop out of the incident count and containment statistics, hence the reported 12\u201314 incidents and 100% containment. The platform connector didn\u0027t do it; auto-triage, retired rules and fewer attacks don\u0027t explain it. The cases include credential misuse, malware execution and data staging, and none has a recorded containment time.\\n\\nI\u0027m highly confident about what happened; less sure who at Brackwater decided it, or whether the 28 retired rules left detection gaps (not yet checked).\\n\\nNext: keep the Halvard retainer; hold the bonus and renewal decision. Reinstate the 47 cases, have our team and Halvard verify containment on each, and remove category-edit rights from Brackwater\u0027s integration account. Then request Brackwater\u0027s written explanation, and claim service credits only once containment is verified.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:40:34.1402720Z",
+    "finishedAt": "2026-11-17T16:47:41.8756523Z",
+    "output": {
+      "caseId": "OD2-HO-ADVERS-2",
+      "methodChoice": "EDF v0.3 applied internally. Collected X12 (audit trail), then X9 (API gateway log) to separate a deliberate act from a platform fault.",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X12",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X9",
+            "X12",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X9",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "causal",
+          "confidence": 95,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "E1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "unknown",
+          "confidence": 68,
+          "evidenceIds": [
+            "E3",
+            "E4",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12",
+            "X9",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 72,
+          "evidenceIds": [
+            "X12",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X9",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X9"
+          ]
+        }
+      ],
+      "brief": "Owen, the fall is not real; please don\u0027t sign either item on Thursday.\n\nAnalysts are still confirming about 36 genuine incidents a month, the same as before. Since 9 September a script run from a Brackwater analyst machine has checked every five minutes for confirmed incidents nearing the 4-hour containment limit and, within minutes, relabelled each as \u0027suspicious activity \u2013 monitoring\u0027. That happened 47 times. Those cases drop out of the incident count and containment statistics, hence the reported 12\u201314 incidents and 100% containment. The platform connector didn\u0027t do it; auto-triage, retired rules and fewer attacks don\u0027t explain it. The cases include credential misuse, malware execution and data staging, and none has a recorded containment time.\n\nI\u0027m highly confident about what happened; less sure who at Brackwater decided it, or whether the 28 retired rules left detection gaps (not yet checked).\n\nNext: keep the Halvard retainer; hold the bonus and renewal decision. Reinstate the 47 cases, have our team and Halvard verify containment on each, and remove category-edit rights from Brackwater\u0027s integration account. Then request Brackwater\u0027s written explanation, and claim service credits only once containment is verified."
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "runId": "heldout__C_KT__OD2-HO-KNOWN-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "C_KT",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C8",
+    "X3": "C7",
+    "X4": "C1",
+    "X5": "C10",
+    "X6": "C14",
+    "X7": "C15",
+    "X8": "C3",
+    "X9": "C2",
+    "X10": "C6",
+    "X11": "C4",
+    "X12": "C13",
+    "X13": "C5",
+    "X14": "C9",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X4",
+    "X9"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__C_KT__OD2-HO-KNOWN-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 18801,
+    "cacheCreationTokens": 8297,
+    "outputTokens": 2750,
+    "thinkingTokens": 1307,
+    "costUsd": 0.0032230099999999997,
+    "durationMs": 15149,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe Problem Analysis and Decision Analysis, using initial evidence plus X4 and X9.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X2\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X4\u0022]}],\u0022brief\u0022:\u0022The Android drop is not a 6.14 problem. Login failures start at 10:41 UTC on 3 March, one minute after the edge vendor\u0027s automatic rule update (CHG-5534) went live. The new rule AUTO-LIB-17 blocks password logins that use the nettle-http library user-agent, and it blocks them with HTTP 403 before they reach our servers. The blocked requests come from installed Oxleigh Android apps, mostly customers who logged in successfully within the prior 90 days, not bots. Android 6.11 to 6.13 dropped as much as 6.14 did, and the OS patch makes no difference. iOS and quick-unlock are unaffected, because they do not use that user-agent. Credential stuffing is not the cause. Confidence is high on the mechanism but not yet confirmed by a live test. Next steps: ask Corvane (ticket CS-77812) to set AUTO-LIB-17 to log-only on the mobile password path only, keeping rate limits and lockout, then check that Android password success recovers. Do not exclude blocked attempts from the KPI or raise bot sensitivity. Hold the 6.14 rollback decision.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:14:45.8316654Z",
+    "finishedAt": "2026-11-17T16:15:01.7318801Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "Kepner-Tregoe Problem Analysis and Decision Analysis, using initial evidence plus X4 and X9.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "E2",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X9",
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E6",
+            "X2",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X9",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 78,
+          "evidenceIds": [
+            "X9",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "E5",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "premature",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 72,
+          "evidenceIds": [
+            "X9",
+            "X4"
+          ]
+        }
+      ],
+      "brief": "The Android drop is not a 6.14 problem. Login failures start at 10:41 UTC on 3 March, one minute after the edge vendor\u0027s automatic rule update (CHG-5534) went live. The new rule AUTO-LIB-17 blocks password logins that use the nettle-http library user-agent, and it blocks them with HTTP 403 before they reach our servers. The blocked requests come from installed Oxleigh Android apps, mostly customers who logged in successfully within the prior 90 days, not bots. Android 6.11 to 6.13 dropped as much as 6.14 did, and the OS patch makes no difference. iOS and quick-unlock are unaffected, because they do not use that user-agent. Credential stuffing is not the cause. Confidence is high on the mechanism but not yet confirmed by a live test. Next steps: ask Corvane (ticket CS-77812) to set AUTO-LIB-17 to log-only on the mobile password path only, keeping rate limits and lockout, then check that Android password success recovers. Do not exclude blocked attempts from the KPI or raise bot sensitivity. Hold the 6.14 rollback decision."
+    }
+  }
+}

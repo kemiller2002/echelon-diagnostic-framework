@@ -1,0 +1,229 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-max__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "max",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C11",
+    "X3": "C3",
+    "X4": "C15",
+    "X5": "C7",
+    "X6": "C1",
+    "X7": "C5",
+    "X8": "C8",
+    "X9": "C6",
+    "X10": "C13",
+    "X11": "C9",
+    "X12": "C12",
+    "X13": "C14",
+    "X14": "C2",
+    "X15": "C4"
+  },
+  "readLabels": [
+    "X6",
+    "X14"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-max__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "max",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 40670,
+    "cacheCreationTokens": 24194,
+    "outputTokens": 46471,
+    "thinkingTokens": 44210,
+    "costUsd": 0.565569,
+    "durationMs": 312177,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-max__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-max__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-KNOWN-1__sonnet-max__t1/evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022Applied the framework\u0027s diagnostic sequence internally: outcome, observable signals, candidate origins, propagation paths, evidence quality, intervention options and sufficiency. Collected two catalogue items, X6 (Android outcomes split by app version, OS version and outcome category) and X14 (edge event log). Stopped at those two.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:91,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:86,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:58,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:87,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022,\u0022X6\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:58,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X14\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X6\u0022]}],\u0022brief\u0022:\u0022Priya, release 6.14 is not the cause. Corvane\u0027s automatic rule update, live at 10:38 UTC on 3 March, added a rule blocking password logins from the \u0027nettle-http\u0027 library that every Android app version uses. The first block came at 10:41, exactly when failures began, on all app and Android versions at once. 6.14 was only 5-10% of attempts, and patched and unpatched phones fail equally. Daily blocks match failed password attempts. The blocked requests came from 41,300 real installs (92% with earlier successful logins), not bots. iOS, web and quick-unlock are untouched; the authentication change came later.\\n\\nNext: ask Corvane today to set the new rules to log-only on the mobile password-login path, keeping rate limits, lockout and other rules on, then confirm Android password success returns to about 96%. Don\u0027t roll back 6.14, raise bot sensitivity, or drop blocked attempts from the KPI; those are real customers. Ask Corvane for advance notice and testing of rule updates. Whether this explains the 18% call rise is unproven; fee notices overlap.\\n\\nConfidence: about 90%.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:09:34.2681802Z",
+    "finishedAt": "2026-11-17T16:14:47.1240629Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "Applied the framework\u0027s diagnostic sequence internally: outcome, observable signals, candidate origins, propagation paths, evidence quality, intervention options and sufficiency. Collected two catalogue items, X6 (Android outcomes split by app version, OS version and outcome category) and X14 (edge event log). Stopped at those two.",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X14",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 91,
+          "evidenceIds": [
+            "X14",
+            "E5",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 86,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 82,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 58,
+          "evidenceIds": [
+            "E6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 87,
+          "evidenceIds": [
+            "X14",
+            "E5",
+            "X6",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 93,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 58,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "X6",
+            "X14"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "X6"
+          ]
+        }
+      ],
+      "brief": "Priya, release 6.14 is not the cause. Corvane\u0027s automatic rule update, live at 10:38 UTC on 3 March, added a rule blocking password logins from the \u0027nettle-http\u0027 library that every Android app version uses. The first block came at 10:41, exactly when failures began, on all app and Android versions at once. 6.14 was only 5-10% of attempts, and patched and unpatched phones fail equally. Daily blocks match failed password attempts. The blocked requests came from 41,300 real installs (92% with earlier successful logins), not bots. iOS, web and quick-unlock are untouched; the authentication change came later.\n\nNext: ask Corvane today to set the new rules to log-only on the mobile password-login path, keeping rate limits, lockout and other rules on, then confirm Android password success returns to about 96%. Don\u0027t roll back 6.14, raise bot sensitivity, or drop blocked attempts from the KPI; those are real customers. Ask Corvane for advance notice and testing of rule updates. Whether this explains the 18% call rise is unproven; fee notices overlap.\n\nConfidence: about 90%."
+    }
+  }
+}

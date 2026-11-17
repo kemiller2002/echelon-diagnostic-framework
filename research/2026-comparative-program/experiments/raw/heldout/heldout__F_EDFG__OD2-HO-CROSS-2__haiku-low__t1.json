@@ -1,0 +1,218 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-CROSS-2__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-CROSS-2",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C8",
+    "X2": "C15",
+    "X3": "C7",
+    "X4": "C11",
+    "X5": "C9",
+    "X6": "C12",
+    "X7": "C5",
+    "X8": "C2",
+    "X9": "C1",
+    "X10": "C10",
+    "X11": "C6",
+    "X12": "C4",
+    "X13": "C13",
+    "X14": "C3",
+    "X15": "C14"
+  },
+  "readLabels": [
+    "X4",
+    "X11"
+  ],
+  "reads": [
+    "C11",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-CROSS-2__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20935,
+    "cacheCreationTokens": 10551,
+    "outputTokens": 2764,
+    "thinkingTokens": 1452,
+    "costUsd": 0.0037021499999999995,
+    "durationMs": 15542,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CROSS-2\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with two evidence items collected (X4, X11)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022]}],\u0022brief\u0022:\u0022The rejections were most likely caused by a wrong temperature setting, not by the fungicide, the growers, or the carrier\u0027s equipment. When the Tallis documentation system was set up for Meridane bookings, the mandarin product record was copied from an avocado record and kept the avocado carriage temperature of 7.0\u00B0C instead of the 4.0\u00B0C mandarin specification. Every rejected container (K3, K4, K6, K8, K9) was set to 7\u00B0C; every accepted one was at 4\u00B0C, including containers on the new fungicide. The carrier\u0027s units held the setpoint, so its claim is not a refrigeration failure. I am fairly confident in this, though the Lower Serra link is not settled.\\n\\nNext steps: correct PRD-MAND-01 to 4.0\u00B0C now, and ask Meridane to reset the container at sea and the one queued for 10 Oct. Check any later sailings. Hold the cargo claim and do not suspend Lower Serra growers or change fungicide on this evidence. Add independent temperature loggers while the fix is verified.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:43:32.8278233Z",
+    "finishedAt": "2026-11-17T16:43:49.2010920Z",
+    "output": {
+      "caseId": "OD2-HO-CROSS-2",
+      "methodChoice": "EDF-2 with two evidence items collected (X4, X11)",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X11",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X11",
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X11",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "acceptable",
+          "confidence": 70,
+          "evidenceIds": [
+            "X11",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X11"
+          ]
+        }
+      ],
+      "brief": "The rejections were most likely caused by a wrong temperature setting, not by the fungicide, the growers, or the carrier\u0027s equipment. When the Tallis documentation system was set up for Meridane bookings, the mandarin product record was copied from an avocado record and kept the avocado carriage temperature of 7.0\u00B0C instead of the 4.0\u00B0C mandarin specification. Every rejected container (K3, K4, K6, K8, K9) was set to 7\u00B0C; every accepted one was at 4\u00B0C, including containers on the new fungicide. The carrier\u0027s units held the setpoint, so its claim is not a refrigeration failure. I am fairly confident in this, though the Lower Serra link is not settled.\n\nNext steps: correct PRD-MAND-01 to 4.0\u00B0C now, and ask Meridane to reset the container at sea and the one queued for 10 Oct. Check any later sailings. Hold the cargo claim and do not suspend Lower Serra growers or change fungicide on this evidence. Add independent temperature loggers while the fix is verified."
+    }
+  }
+}

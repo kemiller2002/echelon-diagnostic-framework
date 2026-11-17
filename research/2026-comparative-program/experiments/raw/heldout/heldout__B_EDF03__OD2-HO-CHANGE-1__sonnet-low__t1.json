@@ -1,0 +1,210 @@
+{
+  "runId": "heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-low__t1",
+  "phase": "heldout",
+  "condition": "B_EDF03",
+  "caseId": "OD2-HO-CHANGE-1",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C11",
+    "X3": "C10",
+    "X4": "C5",
+    "X5": "C2",
+    "X6": "C9",
+    "X7": "C13",
+    "X8": "C7",
+    "X9": "C14",
+    "X10": "C1",
+    "X11": "C4",
+    "X12": "C8",
+    "X13": "C6",
+    "X14": "C3"
+  },
+  "readLabels": [
+    "X4",
+    "X13"
+  ],
+  "reads": [
+    "C5",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20079,
+    "cacheCreationTokens": 9567,
+    "outputTokens": 1609,
+    "thinkingTokens": 0,
+    "costUsd": 0.05637790000000001,
+    "durationMs": 10563,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-low__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-low__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__B_EDF03__OD2-HO-CHANGE-1__sonnet-low__t1/evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-CHANGE-1\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:72,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I03\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I06\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I07\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I09\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I15\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X4\u0022]}],\u0022brief\u0022:\u0022The rise in cancellations is mainly caused by a fault in the Quillbook connector, not by the price rise. Quillbook retired its old invoice interface on 30 March. Since then the connector has silently dropped or duplicated invoices, and 58,300 invoices have been affected. About 34% of affected accounts have cancelled, against 8% of unaffected ones. Quillbook-connected accounts\u0027 churn roughly tripled whether they were repriced (2.0% to 6.2%) or price-locked Founders (1.9% to 5.9%). Accounts with no connector show almost no change (1.8% to 1.9%), whatever their seat count. The finance seat-band pattern is explained by larger accounts being more likely to use Quillbook. The failures are logged as warnings, so the health panel doesn\u0027t show them. Slow support responses probably add to the damage, but that is not shown to be causal. Recommended next steps: make the v3 fix (3\u20134 weeks) the top engineering priority, and contact every Quillbook account, including those that have cancelled, to correct their invoices. Keep the duplicate-invoice hold on. Don\u0027t reverse the price rise, and don\u0027t start the Tallymarsh rebuild until its log has been reviewed. Confidence is high, with the Tallymarsh log unreviewed.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:42:54.3105400Z",
+    "finishedAt": "2026-11-17T16:43:05.6740032Z",
+    "output": {
+      "caseId": "OD2-HO-CHANGE-1",
+      "answers": [
+        {
+          "itemId": "I01",
+          "answer": "contradicted",
+          "confidence": 72,
+          "evidenceIds": [
+            "X4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I02",
+          "answer": "supported",
+          "confidence": 55,
+          "evidenceIds": [
+            "E1",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I03",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I04",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I05",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I06",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I07",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X13",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I08",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I09",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X13",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 92,
+          "evidenceIds": [
+            "X13",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "premature",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I15",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X13",
+            "X4"
+          ]
+        }
+      ],
+      "brief": "The rise in cancellations is mainly caused by a fault in the Quillbook connector, not by the price rise. Quillbook retired its old invoice interface on 30 March. Since then the connector has silently dropped or duplicated invoices, and 58,300 invoices have been affected. About 34% of affected accounts have cancelled, against 8% of unaffected ones. Quillbook-connected accounts\u0027 churn roughly tripled whether they were repriced (2.0% to 6.2%) or price-locked Founders (1.9% to 5.9%). Accounts with no connector show almost no change (1.8% to 1.9%), whatever their seat count. The finance seat-band pattern is explained by larger accounts being more likely to use Quillbook. The failures are logged as warnings, so the health panel doesn\u0027t show them. Slow support responses probably add to the damage, but that is not shown to be causal. Recommended next steps: make the v3 fix (3\u20134 weeks) the top engineering priority, and contact every Quillbook account, including those that have cancelled, to correct their invoices. Keep the duplicate-invoice hold on. Don\u0027t reverse the price rise, and don\u0027t start the Tallymarsh rebuild until its log has been reviewed. Confidence is high, with the Tallymarsh log unreviewed."
+    }
+  }
+}

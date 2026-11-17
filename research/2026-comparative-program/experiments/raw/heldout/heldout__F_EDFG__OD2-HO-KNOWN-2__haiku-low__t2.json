@@ -1,0 +1,212 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-KNOWN-2__haiku-low__t2",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-KNOWN-2",
+  "trial": 2,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C1",
+    "X3": "C12",
+    "X4": "C9",
+    "X5": "C13",
+    "X6": "C6",
+    "X7": "C3",
+    "X8": "C14",
+    "X9": "C11",
+    "X10": "C8",
+    "X11": "C5",
+    "X12": "C10",
+    "X13": "C4",
+    "X14": "C7",
+    "X15": "C15"
+  },
+  "readLabels": [
+    "X6",
+    "X9"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-KNOWN-2__haiku-low__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20598,
+    "cacheCreationTokens": 10028,
+    "outputTokens": 2488,
+    "thinkingTokens": 1168,
+    "costUsd": 0.0034561799999999997,
+    "durationMs": 14791,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-2\u0022,\u0022methodChoice\u0022:\u0022EDF-2 with evidence limited to X6 and X9 (2 of 2 collected)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S01\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022S02\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S04\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S06\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S07\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S09\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022S14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X9\u0022,\u0022E2\u0022]}],\u0022brief\u0022:\u0022The main cause of the FCR drop looks like the Finance credit-limit change FC-0417, which went live on 14 April. It cut the in-call credit limit from \u00A3100 to \u00A325, so billing calls that previously settled on the spot are now automatically referred to Billing Resolution. Billing referrals jumped from 7% to 54% in the same week FCR fell. Referred calls resolve only about a third of the time, while non-referred calls stay at 82%. The April intake is not the cause: its FCR (66%) matches tenured staff (67%), and the drop began before the IVR change. The tariff rise and workload are less clear. Customer Operations was not consulted on FC-0417, and the complaints rise follows the FCR fall but is not proven to be caused by it. I am reasonably confident about the referral mechanism, less so about the exact size of each factor. Next: run a limited pilot of a revised in-call credit authority with post-call sampling on two teams for six weeks, and hold off on the performance plans and on the wider rollout until the pilot reports. Do not put the April intake on performance plans.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:45:03.8123889Z",
+    "finishedAt": "2026-11-17T16:45:19.5256759Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-2",
+      "methodChoice": "EDF-2 with evidence limited to X6 and X9 (2 of 2 collected)",
+      "answers": [
+        {
+          "itemId": "S01",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "S02",
+          "answer": "supported",
+          "confidence": 75,
+          "evidenceIds": [
+            "X9",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S03",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S04",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S05",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S06",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X9",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S07",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S08",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S09",
+          "answer": "association-only",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X9",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "E6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X9",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S13",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "S14",
+          "answer": "sufficient",
+          "confidence": 65,
+          "evidenceIds": [
+            "X6",
+            "X9",
+            "E2"
+          ]
+        }
+      ],
+      "brief": "The main cause of the FCR drop looks like the Finance credit-limit change FC-0417, which went live on 14 April. It cut the in-call credit limit from \u00A3100 to \u00A325, so billing calls that previously settled on the spot are now automatically referred to Billing Resolution. Billing referrals jumped from 7% to 54% in the same week FCR fell. Referred calls resolve only about a third of the time, while non-referred calls stay at 82%. The April intake is not the cause: its FCR (66%) matches tenured staff (67%), and the drop began before the IVR change. The tariff rise and workload are less clear. Customer Operations was not consulted on FC-0417, and the complaints rise follows the FCR fall but is not proven to be caused by it. I am reasonably confident about the referral mechanism, less so about the exact size of each factor. Next: run a limited pilot of a revised in-call credit authority with post-call sampling on two teams for six weeks, and hold off on the performance plans and on the wider rollout until the pilot reports. Do not put the April intake on performance plans."
+    }
+  }
+}

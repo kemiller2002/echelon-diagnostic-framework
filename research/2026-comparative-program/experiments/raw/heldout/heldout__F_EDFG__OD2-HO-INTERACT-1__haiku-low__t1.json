@@ -1,0 +1,200 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-INTERACT-1__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-INTERACT-1",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C12",
+    "X2": "C3",
+    "X3": "C5",
+    "X4": "C8",
+    "X5": "C6",
+    "X6": "C14",
+    "X7": "C2",
+    "X8": "C4",
+    "X9": "C10",
+    "X10": "C7",
+    "X11": "C11",
+    "X12": "C15",
+    "X13": "C13",
+    "X14": "C1",
+    "X15": "C9"
+  },
+  "readLabels": [
+    "X7",
+    "X14"
+  ],
+  "reads": [
+    "C2",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-INTERACT-1__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 33588,
+    "cacheCreationTokens": 10220,
+    "outputTokens": 2437,
+    "thinkingTokens": 1140,
+    "costUsd": 0.00359918,
+    "durationMs": 14924,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X14.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-INTERACT-1\u0022,\u0022methodChoice\u0022:\u0022EDF with two evidence items: X7 (independent moisture and dew-point measurements) and X14 (MES reject breakdown by press, supplier, shift, operator group)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X7\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X14\u0022,\u0022E1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-R4\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X14\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X14\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X14\u0022]}],\u0022brief\u0022:\u0022The rejects are caused by the drying step, not by the new operators or by the new resin alone. Arnholt resin dried in D5 runs at about 10% rejects, while the same resin dried in a good portable dryer gives 0.8%, which is the normal baseline. Quillan resin through D5 stays at about 0.9%. D5 is not drying properly: its dew point is about \u221216 to \u221219 \u00B0C instead of \u221240 \u00B0C, and someone raised its alarm limit in week 31 to stop the alarms. The new second-shift operators run at the same reject rate as experienced operators on the same press and resin, so disciplining them would not fix anything and would be unfair to them. Dropping Arnholt would also not fix it. I am fairly confident in this. The main gap is that Arnholt was stored in the unconditioned north annex, which may add moisture, so that is worth checking but is not the main fix. This week: repair D5\u0027s heater and desiccant, restore its original alarm limit, and verify the dew point before any Arnholt goes through it. Until then, route Arnholt to Press 7 or a verified dryer, and add a moisture check on each VX resin lot.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:03:34.0359015Z",
+    "finishedAt": "2026-11-17T16:03:49.6659533Z",
+    "output": {
+      "caseId": "OD2-HO-INTERACT-1",
+      "methodChoice": "EDF with two evidence items: X7 (independent moisture and dew-point measurements) and X14 (MES reject breakdown by press, supplier, shift, operator group)",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "X7",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X14",
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7",
+            "X14",
+            "E1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "causal",
+          "confidence": 78,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-R4",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "X14",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X14",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "acceptable",
+          "confidence": 65,
+          "evidenceIds": [
+            "X7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "X14"
+          ]
+        }
+      ],
+      "brief": "The rejects are caused by the drying step, not by the new operators or by the new resin alone. Arnholt resin dried in D5 runs at about 10% rejects, while the same resin dried in a good portable dryer gives 0.8%, which is the normal baseline. Quillan resin through D5 stays at about 0.9%. D5 is not drying properly: its dew point is about \u221216 to \u221219 \u00B0C instead of \u221240 \u00B0C, and someone raised its alarm limit in week 31 to stop the alarms. The new second-shift operators run at the same reject rate as experienced operators on the same press and resin, so disciplining them would not fix anything and would be unfair to them. Dropping Arnholt would also not fix it. I am fairly confident in this. The main gap is that Arnholt was stored in the unconditioned north annex, which may add moisture, so that is worth checking but is not the main fix. This week: repair D5\u0027s heater and desiccant, restore its original alarm limit, and verify the dew point before any Arnholt goes through it. Until then, route Arnholt to Press 7 or a verified dryer, and add a moisture check on each VX resin lot."
+    }
+  }
+}

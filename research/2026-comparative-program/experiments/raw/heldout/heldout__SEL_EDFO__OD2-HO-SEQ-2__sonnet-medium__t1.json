@@ -1,0 +1,202 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-SEQ-2__sonnet-medium__t1",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-SEQ-2",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C9",
+    "X3": "C4",
+    "X4": "C1",
+    "X5": "C13",
+    "X6": "C15",
+    "X7": "C3",
+    "X8": "C5",
+    "X9": "C6",
+    "X10": "C7",
+    "X11": "C12",
+    "X12": "C14",
+    "X13": "C8",
+    "X14": "C10",
+    "X15": "C2"
+  },
+  "readLabels": [
+    "X4",
+    "X15"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-SEQ-2__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22563,
+    "cacheCreationTokens": 12134,
+    "outputTokens": 2055,
+    "thinkingTokens": 394,
+    "costUsd": 0.07135430000000001,
+    "durationMs": 15191,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-SEQ-2__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-SEQ-2__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-SEQ-2__sonnet-medium__t1/evidence/X15.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-SEQ-2\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe specification (IS/IS NOT on timing, line, shift), then competing-hypotheses weighing, with a provenance check on the director\u0027s and vendor\u0027s accounts\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022I-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-H3\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022I-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-R3\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-A1\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022I-A2\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X15\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-A3\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]},{\u0022itemId\u0022:\u0022I-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X15\u0022]},{\u0022itemId\u0022:\u0022I-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022I-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X15\u0022]}],\u0022brief\u0022:\u0022This is not an operator problem. The printer job records show every Veltranol job from 4 Oct onward was sent to the printer with a 36-month shelf life. No operator overrides occurred, and the printer printed exactly what it received. Jobs before 4 Oct, including ones after the firmware change and run by agency operators, were correct. The cause was an ERP edit on 3 Oct for Veltranol, a 36-month value with a valid-from date of March 2027. The current value is still 24. Despite that date, the value reached the printers within a day. That contradicts the vendor\u0027s statement that future values cannot reach the line. Two permanent-staff day-shift lots on Line 1 are also affected and are sitting in the warehouse. The camera passed everything because it only checks against the job data.\\n\\nThe director\u0027s plan would punish the wrong people and leave the fault in place. Don\u0027t do it.\\n\\nNext: reset the Veltranol record, extend the hold to every Veltranol lot packed since 4 Oct (including the two Line 1 lots), add a second-person check of printed expiry against the batch record at each setup, and inspect other products edited in October. Two other products have future-dated edits and are unchecked. Also have the vendor and IT explain how PackBridge picked up a future-dated value. Keep the camera check on.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T15:53:41.6990139Z",
+    "finishedAt": "2026-11-17T15:53:57.7935694Z",
+    "output": {
+      "caseId": "OD2-HO-SEQ-2",
+      "methodChoice": "Kepner-Tregoe specification (IS/IS NOT on timing, line, shift), then competing-hypotheses weighing, with a provenance check on the director\u0027s and vendor\u0027s accounts",
+      "answers": [
+        {
+          "itemId": "I-H1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "I-H2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-H3",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "I-H4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-H5",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "X15",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I-R1",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-R3",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-A1",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X4",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "I-A2",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X15",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-A3",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        },
+        {
+          "itemId": "I-A4",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X15"
+          ]
+        },
+        {
+          "itemId": "I-A5",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E4",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "I-SUFF",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "X15"
+          ]
+        }
+      ],
+      "brief": "This is not an operator problem. The printer job records show every Veltranol job from 4 Oct onward was sent to the printer with a 36-month shelf life. No operator overrides occurred, and the printer printed exactly what it received. Jobs before 4 Oct, including ones after the firmware change and run by agency operators, were correct. The cause was an ERP edit on 3 Oct for Veltranol, a 36-month value with a valid-from date of March 2027. The current value is still 24. Despite that date, the value reached the printers within a day. That contradicts the vendor\u0027s statement that future values cannot reach the line. Two permanent-staff day-shift lots on Line 1 are also affected and are sitting in the warehouse. The camera passed everything because it only checks against the job data.\n\nThe director\u0027s plan would punish the wrong people and leave the fault in place. Don\u0027t do it.\n\nNext: reset the Veltranol record, extend the hold to every Veltranol lot packed since 4 Oct (including the two Line 1 lots), add a second-person check of printed expiry against the batch record at each setup, and inspect other products edited in October. Two other products have future-dated edits and are unchecked. Also have the vendor and IT explain how PackBridge picked up a future-dated value. Keep the camera check on."
+    }
+  }
+}

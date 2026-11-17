@@ -1,0 +1,209 @@
+{
+  "runId": "heldout__F_EDFG__OD2-HO-OBVWRONG-2__haiku-low__t1",
+  "phase": "heldout",
+  "condition": "F_EDFG",
+  "caseId": "OD2-HO-OBVWRONG-2",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C2",
+    "X3": "C12",
+    "X4": "C15",
+    "X5": "C9",
+    "X6": "C7",
+    "X7": "C3",
+    "X8": "C6",
+    "X9": "C10",
+    "X10": "C16",
+    "X11": "C8",
+    "X12": "C14",
+    "X13": "C4",
+    "X14": "C11",
+    "X15": "C1",
+    "X16": "C5"
+  },
+  "readLabels": [
+    "X5",
+    "X13"
+  ],
+  "reads": [
+    "C9",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__F_EDFG__OD2-HO-OBVWRONG-2__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 35031,
+    "cacheCreationTokens": 11382,
+    "outputTokens": 3686,
+    "thinkingTokens": 2237,
+    "costUsd": 0.0044705100000000005,
+    "durationMs": 22252,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X13.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-OBVWRONG-2\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022I1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E3\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E4\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022I4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022I7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I8\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022I10\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X13\u0022,\u0022X5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022I11\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022I13\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X13\u0022]},{\u0022itemId\u0022:\u0022I14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X5\u0022,\u0022X13\u0022]}],\u0022brief\u0022:\u0022The rise is not mainly a handling problem. Corvane bags that are auto-read by the tag arrays stayed flat at about 3.8 per 1,000 through September and October. The whole increase sits in bags whose tags could not be read and were sent to the manual encode desk. Those tags are the ones printed from Fennick stock, which started on 1 September. Counters that used the old Brackwater stock from stores on 14\u201316 October failed at 1.6%, while Fennick tags issued the same days failed at about 12%, on the same kiosks and counters. Pelion, which uses the same Tessaly crew pool, shows no rise. So a breach notice against Tessaly now would target the wrong party.\\n\\nConfidence is good that the tag stock is the trigger. Whether the Fennick stock is defective or just needs a different printer setting is not yet settled.\\n\\nNext: move counters and kiosks back to Brackwater stock now; it is valid to 31 December and about five weeks is on hand. Ask Fennick and the printer vendor to test the stock before any defect claim. Hold the breach notice until the stock is resolved. A temporary extra encode workstation in the evening bank may help the lateness.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:18:39.5207674Z",
+    "finishedAt": "2026-11-17T16:19:02.4863487Z",
+    "output": {
+      "caseId": "OD2-HO-OBVWRONG-2",
+      "answers": [
+        {
+          "itemId": "I1",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "E3",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X5",
+            "E5",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I3",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X13",
+            "E4",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "I4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X5",
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I5",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I6",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X13",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "I7",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I8",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I9",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E5",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "I10",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "X13",
+            "X5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "I11",
+          "answer": "preferred",
+          "confidence": 65,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X5",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "I13",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X13"
+          ]
+        },
+        {
+          "itemId": "I14",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X5",
+            "X13"
+          ]
+        }
+      ],
+      "brief": "The rise is not mainly a handling problem. Corvane bags that are auto-read by the tag arrays stayed flat at about 3.8 per 1,000 through September and October. The whole increase sits in bags whose tags could not be read and were sent to the manual encode desk. Those tags are the ones printed from Fennick stock, which started on 1 September. Counters that used the old Brackwater stock from stores on 14\u201316 October failed at 1.6%, while Fennick tags issued the same days failed at about 12%, on the same kiosks and counters. Pelion, which uses the same Tessaly crew pool, shows no rise. So a breach notice against Tessaly now would target the wrong party.\n\nConfidence is good that the tag stock is the trigger. Whether the Fennick stock is defective or just needs a different printer setting is not yet settled.\n\nNext: move counters and kiosks back to Brackwater stock now; it is valid to 31 December and about five weeks is on hand. Ask Fennick and the printer vendor to test the stock before any defect claim. Hold the breach notice until the stock is resolved. A temporary extra encode workstation in the evening bank may help the lateness."
+    }
+  }
+}

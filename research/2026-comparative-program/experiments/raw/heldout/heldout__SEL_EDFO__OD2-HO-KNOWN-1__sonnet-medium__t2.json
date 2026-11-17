@@ -1,0 +1,224 @@
+{
+  "runId": "heldout__SEL_EDFO__OD2-HO-KNOWN-1__sonnet-medium__t2",
+  "phase": "heldout",
+  "condition": "SEL_EDFO",
+  "caseId": "OD2-HO-KNOWN-1",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C4",
+    "X2": "C5",
+    "X3": "C2",
+    "X4": "C9",
+    "X5": "C7",
+    "X6": "C1",
+    "X7": "C13",
+    "X8": "C3",
+    "X9": "C14",
+    "X10": "C6",
+    "X11": "C8",
+    "X12": "C15",
+    "X13": "C12",
+    "X14": "C10",
+    "X15": "C11"
+  },
+  "readLabels": [
+    "X6",
+    "X3"
+  ],
+  "reads": [
+    "C1",
+    "C2"
+  ],
+  "violations": [],
+  "run": {
+    "label": "heldout__SEL_EDFO__OD2-HO-KNOWN-1__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 22691,
+    "cacheCreationTokens": 12306,
+    "outputTokens": 1940,
+    "thinkingTokens": 74,
+    "costUsd": 0.0709051,
+    "durationMs": 13490,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-KNOWN-1__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-KNOWN-1__sonnet-medium__t2/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/heldout__SEL_EDFO__OD2-HO-KNOWN-1__sonnet-medium__t2/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-HO-KNOWN-1\u0022,\u0022methodChoice\u0022:\u0022Kepner-Tregoe specification (IS/IS NOT), then competing-hypotheses weighing, with a source check on the interested parties\u0027 accounts\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:96,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-H5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-H6\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X3\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:95,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E4\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q-A4\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-A5\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X6\u0022]},{\u0022itemId\u0022:\u0022Q-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022]}],\u0022brief\u0022:\u0022The Android 6.14 release is not the cause, so a rollback would not help. The drop comes from a new Corvane edge rule, AUTO-LIB-17. It came in with the vendor\u0027s 3 March rule-pack update and went live at 10:38 UTC. It blocks Android password logins because the app\u0027s networking library, nettle-http, looks like an automation tool. Customers are being blocked with HTTP 403, and the first block was at 10:41 UTC.\\n\\nEvidence:\\n- The failures began within a minute on every app version, including versions that did not change.\\n- They hit every OS version, with or without the March security patch.\\n- Quick-unlock, iOS and web are unaffected.\\n- About 41,300 real installs were blocked, and 92% of them had logged in successfully before.\\n- Android password success fell from 96% to 8%.\\n\\nThe credential-stuffing theory and the 3 March token-lifetime change don\u0027t fit this pattern.\\n\\nNext steps:\\n1. Ask Corvane today to set that one rule to log-only on the Android password path. Keep rate limits, lockout and all other rules on.\\n2. Confirm in login telemetry that Android password success recovers.\\n3. Do not raise bot-protection sensitivity, and do not drop blocked attempts from the KPI. Doing either would hide the problem or block more customers.\\n4. Drop the rollback plan and let the 6.14 rollout continue, but watch the numbers by version.\\n5. The call-volume rise is partly the fee mailing, so treat the link to the login drop as unproven.\\n\\nI\u0027m confident in this diagnosis.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T16:23:08.4188724Z",
+    "finishedAt": "2026-11-17T16:23:22.8371622Z",
+    "output": {
+      "caseId": "OD2-HO-KNOWN-1",
+      "methodChoice": "Kepner-Tregoe specification (IS/IS NOT), then competing-hypotheses weighing, with a source check on the interested parties\u0027 accounts",
+      "answers": [
+        {
+          "itemId": "Q-H1",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X6",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q-H2",
+          "answer": "supported",
+          "confidence": 96,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-H4",
+          "answer": "contradicted",
+          "confidence": 92,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-H5",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-H6",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "X3",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R1",
+          "answer": "causal",
+          "confidence": 94,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q-R2",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-R3",
+          "answer": "association-only",
+          "confidence": 55,
+          "evidenceIds": [
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q-R4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "E5",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-A1",
+          "answer": "preferred",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-A2",
+          "answer": "harmful",
+          "confidence": 93,
+          "evidenceIds": [
+            "X3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q-A3",
+          "answer": "harmful",
+          "confidence": 95,
+          "evidenceIds": [
+            "X3",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q-A4",
+          "answer": "acceptable",
+          "confidence": 55,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-A5",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X6"
+          ]
+        },
+        {
+          "itemId": "Q-SUFF",
+          "answer": "sufficient",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3",
+            "X6"
+          ]
+        }
+      ],
+      "brief": "The Android 6.14 release is not the cause, so a rollback would not help. The drop comes from a new Corvane edge rule, AUTO-LIB-17. It came in with the vendor\u0027s 3 March rule-pack update and went live at 10:38 UTC. It blocks Android password logins because the app\u0027s networking library, nettle-http, looks like an automation tool. Customers are being blocked with HTTP 403, and the first block was at 10:41 UTC.\n\nEvidence:\n- The failures began within a minute on every app version, including versions that did not change.\n- They hit every OS version, with or without the March security patch.\n- Quick-unlock, iOS and web are unaffected.\n- About 41,300 real installs were blocked, and 92% of them had logged in successfully before.\n- Android password success fell from 96% to 8%.\n\nThe credential-stuffing theory and the 3 March token-lifetime change don\u0027t fit this pattern.\n\nNext steps:\n1. Ask Corvane today to set that one rule to log-only on the Android password path. Keep rate limits, lockout and all other rules on.\n2. Confirm in login telemetry that Android password success recovers.\n3. Do not raise bot-protection sensitivity, and do not drop blocked attempts from the KPI. Doing either would hide the problem or block more customers.\n4. Drop the rollback plan and let the 6.14 rollout continue, but watch the numbers by version.\n5. The call-volume rise is partly the fee mailing, so treat the link to the login drop as unproven.\n\nI\u0027m confident in this diagnosis."
+    }
+  }
+}
