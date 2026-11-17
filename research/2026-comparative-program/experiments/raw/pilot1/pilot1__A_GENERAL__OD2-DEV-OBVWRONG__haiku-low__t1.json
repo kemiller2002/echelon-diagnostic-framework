@@ -1,0 +1,215 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-OBVWRONG__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-OBVWRONG",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C10",
+    "X3": "C9",
+    "X4": "C2",
+    "X5": "C12",
+    "X6": "C6",
+    "X7": "C8",
+    "X8": "C7",
+    "X9": "C4",
+    "X10": "C11",
+    "X11": "C5",
+    "X12": "C3"
+  },
+  "readLabels": [
+    "X12",
+    "X6",
+    "X3",
+    "X7",
+    "X9"
+  ],
+  "reads": [
+    "C3",
+    "C6",
+    "C9",
+    "C8",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-OBVWRONG__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 28407,
+    "cacheCreationTokens": 8274,
+    "outputTokens": 3055,
+    "thinkingTokens": 1657,
+    "costUsd": 0.0034671700000000003,
+    "durationMs": 18236,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-OBVWRONG\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022IT-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidence\u0022:[],\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X12\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022IT-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022IT-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X12\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022IT-R3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E7\u0022]},{\u0022itemId\u0022:\u0022IT-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X12\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022IT-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022IT-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022IT-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X12\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022The overtime rise is mostly call-back pay for nightly closing, not vacancies or heat. Since the Kestrel closing contract lapsed on 31 March, maintenance staff have been paid call-backs to lock 41 Riverside, Eastgate and Millbrook sites; Summit Hill, which kept its contract, shows no spike. The Internal Audit review also found the claims by the two flagged employees matched lock logs, so the hotline allegation is not supported. Regular overtime barely moved, so the freeze explains little of the step change. Confidence is good on the closing link, moderate on the rest. The Eastgate favoritism claim is unproven. Next steps: restore contracted closing (or an equivalent) for the 41 sites and track call-back spending. Do not impose a blanket overtime cap or discipline the two employees, since that would leave gates and restrooms unlocked. Review the 3-hour minimum for short closing rounds. Fill vacancies on their own merits. Check Eastgate call-back assignment fairly. Workers\u0027 compensation claims cannot yet be tied to overtime, because hours worked were not recorded.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:02.9333848Z",
+    "finishedAt": "2026-11-17T14:26:22.5371001Z",
+    "output": {
+      "caseId": "OD2-DEV-OBVWRONG",
+      "answers": [
+        {
+          "itemId": "IT-H1",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidence": [],
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-H2",
+          "answer": "supported",
+          "confidence": 80,
+          "evidenceIds": [
+            "X6",
+            "X12",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "IT-H3",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "IT-H4",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-H5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "E6",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-R1",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X12",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-R2",
+          "answer": "causal",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X12",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "IT-R3",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X9",
+            "E7"
+          ]
+        },
+        {
+          "itemId": "IT-A1",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X6",
+            "X12",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "IT-A2",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "E6",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "IT-A3",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "IT-A4",
+          "answer": "premature",
+          "confidence": 55,
+          "evidenceIds": [
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-SUFF",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X6",
+            "X12",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "The overtime rise is mostly call-back pay for nightly closing, not vacancies or heat. Since the Kestrel closing contract lapsed on 31 March, maintenance staff have been paid call-backs to lock 41 Riverside, Eastgate and Millbrook sites; Summit Hill, which kept its contract, shows no spike. The Internal Audit review also found the claims by the two flagged employees matched lock logs, so the hotline allegation is not supported. Regular overtime barely moved, so the freeze explains little of the step change. Confidence is good on the closing link, moderate on the rest. The Eastgate favoritism claim is unproven. Next steps: restore contracted closing (or an equivalent) for the 41 sites and track call-back spending. Do not impose a blanket overtime cap or discipline the two employees, since that would leave gates and restrooms unlocked. Review the 3-hour minimum for short closing rounds. Fill vacancies on their own merits. Check Eastgate call-back assignment fairly. Workers\u0027 compensation claims cannot yet be tied to overtime, because hours worked were not recorded."
+    }
+  }
+}

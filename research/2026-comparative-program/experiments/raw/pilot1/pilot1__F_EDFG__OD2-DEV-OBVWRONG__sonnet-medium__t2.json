@@ -1,0 +1,211 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-OBVWRONG",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C7",
+    "X2": "C3",
+    "X3": "C11",
+    "X4": "C5",
+    "X5": "C9",
+    "X6": "C12",
+    "X7": "C8",
+    "X8": "C4",
+    "X9": "C10",
+    "X10": "C1",
+    "X11": "C2",
+    "X12": "C6"
+  },
+  "readLabels": [
+    "X2",
+    "X12",
+    "X5",
+    "X7",
+    "X8"
+  ],
+  "reads": [
+    "C3",
+    "C6",
+    "C9",
+    "C8",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20401,
+    "cacheCreationTokens": 11083,
+    "outputTokens": 2409,
+    "thinkingTokens": 371,
+    "costUsd": 0.0704741,
+    "durationMs": 17510,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X5.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-OBVWRONG\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022IT-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E3\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X12\u0022,\u0022X5\u0022]},{\u0022itemId\u0022:\u0022IT-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022IT-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X2\u0022]},{\u0022itemId\u0022:\u0022IT-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022IT-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X12\u0022]},{\u0022itemId\u0022:\u0022IT-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X5\u0022]},{\u0022itemId\u0022:\u0022IT-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X12\u0022,\u0022X5\u0022]}],\u0022brief\u0022:\u0022The overrun is mostly not caused by the hiring freeze. Regular holdover overtime hours rose only 1.5% (the rest of that line is the July wage increase). Call-back pay rose from $38k to $289k. About 1,960 of the call-backs are closing duties that started on 1 April, when the closing contract lapsed and maintenance staff took over nightly closing on 3-hour-minimum call-backs. They appear only in the three districts that lost the contract. Summit Hill kept its contract and barely moved. Eastgate has one vacancy and a near-doubled bill. Internal Audit matched the claims against lock logs and found no padding, so the hotline allegation is not supported. Weather is not a main driver. The July vacancy correlation is just two things that happened to rise together. Next steps: restore contracted closing for the 41 sites (or re-tender), and track call-back spending against the April\u2013September level. Don\u0027t cap overtime, because crews would stop taking call-backs and the closing, which liability coverage requires, wouldn\u0027t get done. Don\u0027t discipline anyone yet. Fairness of Eastgate call-back allocation is unproven, since the sign-up sheets were discarded. Start keeping those records and review how call-backs are spread. Injury-claim links to overtime remain unproven, so match claims to payroll hours. The vacancy exemption isn\u0027t justified by this evidence. Confidence is fairly high.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:31.4594597Z",
+    "finishedAt": "2026-11-17T14:27:49.6853981Z",
+    "output": {
+      "caseId": "OD2-DEV-OBVWRONG",
+      "answers": [
+        {
+          "itemId": "IT-H1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "E3",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-H2",
+          "answer": "supported",
+          "confidence": 92,
+          "evidenceIds": [
+            "X2",
+            "X12",
+            "X5"
+          ]
+        },
+        {
+          "itemId": "IT-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "IT-H4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X2"
+          ]
+        },
+        {
+          "itemId": "IT-H5",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-R1",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-R2",
+          "answer": "causal",
+          "confidence": 92,
+          "evidenceIds": [
+            "X2",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-R3",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E7",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "IT-A1",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-A2",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E6",
+            "X12"
+          ]
+        },
+        {
+          "itemId": "IT-A3",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "X5"
+          ]
+        },
+        {
+          "itemId": "IT-A4",
+          "answer": "harmful",
+          "confidence": 78,
+          "evidenceIds": [
+            "X7",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-SUFF",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "X2",
+            "X12",
+            "X5"
+          ]
+        }
+      ],
+      "brief": "The overrun is mostly not caused by the hiring freeze. Regular holdover overtime hours rose only 1.5% (the rest of that line is the July wage increase). Call-back pay rose from $38k to $289k. About 1,960 of the call-backs are closing duties that started on 1 April, when the closing contract lapsed and maintenance staff took over nightly closing on 3-hour-minimum call-backs. They appear only in the three districts that lost the contract. Summit Hill kept its contract and barely moved. Eastgate has one vacancy and a near-doubled bill. Internal Audit matched the claims against lock logs and found no padding, so the hotline allegation is not supported. Weather is not a main driver. The July vacancy correlation is just two things that happened to rise together. Next steps: restore contracted closing for the 41 sites (or re-tender), and track call-back spending against the April\u2013September level. Don\u0027t cap overtime, because crews would stop taking call-backs and the closing, which liability coverage requires, wouldn\u0027t get done. Don\u0027t discipline anyone yet. Fairness of Eastgate call-back allocation is unproven, since the sign-up sheets were discarded. Start keeping those records and review how call-backs are spread. Injury-claim links to overtime remain unproven, so match claims to payroll hours. The vacancy exemption isn\u0027t justified by this evidence. Confidence is fairly high."
+    }
+  }
+}

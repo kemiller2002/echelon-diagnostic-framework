@@ -1,0 +1,209 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-OBVWRONG",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C7",
+    "X3": "C10",
+    "X4": "C8",
+    "X5": "C12",
+    "X6": "C4",
+    "X7": "C9",
+    "X8": "C11",
+    "X9": "C6",
+    "X10": "C3",
+    "X11": "C2",
+    "X12": "C5"
+  },
+  "readLabels": [
+    "X10",
+    "X9",
+    "X7",
+    "X4",
+    "X6"
+  ],
+  "reads": [
+    "C3",
+    "C6",
+    "C9",
+    "C8",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 17634,
+    "cacheCreationTokens": 8268,
+    "outputTokens": 2058,
+    "thinkingTokens": 0,
+    "costUsd": 0.0554274,
+    "durationMs": 16274,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__A_GENERAL__OD2-DEV-OBVWRONG__sonnet-medium__t2/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-OBVWRONG\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022IT-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022IT-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022IT-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-R1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022IT-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022IT-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022IT-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022IT-A4\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X9\u0022,\u0022X7\u0022]}],\u0022brief\u0022:\u0022The overtime overrun is mostly not caused by the hiring freeze. Regular holdover overtime rose only about 5%, and that is mostly the July wage increase, since hours were up just 1.5%. Call-back pay rose from $38k to $289k. About 1,960 of the call-backs are closing duties that began on 1 April, the day the $96,000 night-closing contract lapsed. Summit Hill, which kept its contractor, saw almost no rise. Each 30\u201345 minute closing round is paid as three hours, so the contract\u0027s $96k saving cost far more in overtime. I\u0027m about 85% sure of this.\\nThe fraud allegation against two Riverside workers was checked against lock logs and not supported. Disciplining them would be wrong. The weather doesn\u0027t look like a main driver. The Eastgate favoritism complaint is plausible, since the same five or six people sign up and the sheets were discarded, but it isn\u0027t proven. The injury link to overtime is plausible but untested.\\nNext steps: restore contracted closing, or re-tender it, at the 41 sites. Track call-back spending against the April\u2013September level. Keep and review Eastgate sign-up sheets and rotate assignments. Match injury claims to payroll hours. Don\u0027t impose an overtime cap, because closing is required for liability coverage. Don\u0027t take disciplinary action yet. Present the hiring exemption separately, on its own merits.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:00.0726686Z",
+    "finishedAt": "2026-11-17T14:26:17.0553172Z",
+    "output": {
+      "caseId": "OD2-DEV-OBVWRONG",
+      "answers": [
+        {
+          "itemId": "IT-H1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-H2",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "IT-H3",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "IT-H4",
+          "answer": "contradicted",
+          "confidence": 60,
+          "evidenceIds": [
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-H5",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-R1",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X10",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-R2",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X10",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "IT-R3",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E7",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "IT-A1",
+          "answer": "preferred",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E6",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "IT-A3",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "IT-A4",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-SUFF",
+          "answer": "sufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "X9",
+            "X7"
+          ]
+        }
+      ],
+      "brief": "The overtime overrun is mostly not caused by the hiring freeze. Regular holdover overtime rose only about 5%, and that is mostly the July wage increase, since hours were up just 1.5%. Call-back pay rose from $38k to $289k. About 1,960 of the call-backs are closing duties that began on 1 April, the day the $96,000 night-closing contract lapsed. Summit Hill, which kept its contractor, saw almost no rise. Each 30\u201345 minute closing round is paid as three hours, so the contract\u0027s $96k saving cost far more in overtime. I\u0027m about 85% sure of this.\nThe fraud allegation against two Riverside workers was checked against lock logs and not supported. Disciplining them would be wrong. The weather doesn\u0027t look like a main driver. The Eastgate favoritism complaint is plausible, since the same five or six people sign up and the sheets were discarded, but it isn\u0027t proven. The injury link to overtime is plausible but untested.\nNext steps: restore contracted closing, or re-tender it, at the 41 sites. Track call-back spending against the April\u2013September level. Keep and review Eastgate sign-up sheets and rotate assignments. Match injury claims to payroll hours. Don\u0027t impose an overtime cap, because closing is required for liability coverage. Don\u0027t take disciplinary action yet. Present the hiring exemption separately, on its own merits."
+    }
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-OBVWRONG__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-OBVWRONG",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C10",
+    "X2": "C1",
+    "X3": "C5",
+    "X4": "C4",
+    "X5": "C12",
+    "X6": "C9",
+    "X7": "C2",
+    "X8": "C11",
+    "X9": "C8",
+    "X10": "C3",
+    "X11": "C6",
+    "X12": "C7"
+  },
+  "readLabels": [
+    "X10",
+    "X11",
+    "X9",
+    "X6"
+  ],
+  "reads": [
+    "C3",
+    "C6",
+    "C8",
+    "C9"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-OBVWRONG__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19917,
+    "cacheCreationTokens": 9851,
+    "outputTokens": 2243,
+    "thinkingTokens": 849,
+    "costUsd": 0.0032914700000000003,
+    "durationMs": 13939,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-OBVWRONG\u0022,\u0022methodChoice\u0022:\u0022EDF-1 style analysis; collected 4 of 5 allowed catalogue items (X10, X11, X9, X6).\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022IT-H1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E1\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022IT-H2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022IT-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022IT-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022IT-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-R1\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-R2\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022IT-R3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022IT-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022X11\u0022,\u0022X10\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022IT-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E6\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022IT-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022IT-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022IT-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X11\u0022,\u0022X6\u0022]}],\u0022brief\u0022:\u0022The overtime overrun is mostly call-back pay for nightly closing, not the hiring freeze. Call-back spending rose from $38k to $289k (April\u2013September). Almost 2,000 call-back entries are tagged as closing work, and none existed last year. The closing contract covering 41 Riverside, Eastgate and Millbrook sites expired 31 March and was moved onto maintenance staff on call-back. Summit Hill kept its contract and saw no rise. Regular holdover overtime was nearly flat (\u002B1.5% hours), which weakens the vacancy explanation. The auditors found the padded-claims allegation unsupported: logs matched the claimed sites. I am fairly confident in this, though the data is aggregated by district and I have no employee-level or weather data. Next: restore contracted closing or an equivalent in those districts and track call-back spending against the April\u2013September level. Do not impose a blanket overtime cap or discipline Riverside employees on the hotline complaint. Check the Eastgate sign-up allocation fairly through a proper review, and keep the freeze exemption as a separate staffing question.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:28:01.2017886Z",
+    "finishedAt": "2026-11-17T14:28:16.1027998Z",
+    "output": {
+      "caseId": "OD2-DEV-OBVWRONG",
+      "methodChoice": "EDF-1 style analysis; collected 4 of 5 allowed catalogue items (X10, X11, X9, X6).",
+      "answers": [
+        {
+          "itemId": "IT-H1",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E1",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "IT-H2",
+          "answer": "supported",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "IT-H3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "IT-H4",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "X10",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "IT-H5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X9",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-R1",
+          "answer": "association-only",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-R2",
+          "answer": "causal",
+          "confidence": 85,
+          "evidenceIds": [
+            "X11",
+            "X10",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "IT-R3",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E7",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "IT-A1",
+          "answer": "preferred",
+          "confidence": 82,
+          "evidenceIds": [
+            "X11",
+            "X10",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "IT-A2",
+          "answer": "harmful",
+          "confidence": 65,
+          "evidenceIds": [
+            "E6",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "IT-A3",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "IT-A4",
+          "answer": "premature",
+          "confidence": 80,
+          "evidenceIds": [
+            "X9",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "IT-SUFF",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X10",
+            "X11",
+            "X6"
+          ]
+        }
+      ],
+      "brief": "The overtime overrun is mostly call-back pay for nightly closing, not the hiring freeze. Call-back spending rose from $38k to $289k (April\u2013September). Almost 2,000 call-back entries are tagged as closing work, and none existed last year. The closing contract covering 41 Riverside, Eastgate and Millbrook sites expired 31 March and was moved onto maintenance staff on call-back. Summit Hill kept its contract and saw no rise. Regular holdover overtime was nearly flat (\u002B1.5% hours), which weakens the vacancy explanation. The auditors found the padded-claims allegation unsupported: logs matched the claimed sites. I am fairly confident in this, though the data is aggregated by district and I have no employee-level or weather data. Next: restore contracted closing or an equivalent in those districts and track call-back spending against the April\u2013September level. Do not impose a blanket overtime cap or discipline Riverside employees on the hotline complaint. Check the Eastgate sign-up allocation fairly through a proper review, and keep the freeze exemption as a separate staffing question."
+    }
+  }
+}

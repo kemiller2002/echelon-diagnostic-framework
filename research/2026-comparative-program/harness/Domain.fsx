@@ -35,7 +35,7 @@ let readJson (path: string) = JsonDocument.Parse(File.ReadAllText path).RootElem
 type Evidence = { Id: string; Stage: string; Title: string; Source: string; SourceType: string; Text: string }
 type Item = { ItemId: string; RefId: string; Kind: string; AsOfStage: string option; Allowed: string list }
 type Case =
-    { Id: string; Split: string; Class: string; Domain: string; Title: string; Setting: string; Request: string
+    { Id: string; Split: string; Class: string; Domain: string; ReadBudget: int; Title: string; Setting: string; Request: string
       Initial: Evidence list; Catalogue: Evidence list
       Hypotheses: (string * string) list; Edges: (string * string * string * string) list; Actions: (string * string) list
       Items: Item list }
@@ -59,6 +59,7 @@ let parseCase (e: JsonElement) : Case =
     let cands = prop "candidates" e
     let candList name f = cands |> Option.map (arr name >> List.map f) |> Option.defaultValue []
     { Id = strOr "" "id" e; Split = strOr "" "split" e; Class = strOr "" "benchmarkClass" e; Domain = strOr "" "domain" e
+      ReadBudget = num "readBudget" e |> Option.map int |> Option.defaultValue 5
       Title = strOr "" "title" e; Setting = strOr "" "setting" e; Request = strOr "" "presentingRequest" e
       Initial = arr "initialEvidence" e |> List.map parseEvidence
       Catalogue = arr "catalogue" e |> List.map parseEvidence
@@ -131,7 +132,9 @@ let validate (c: Case) (t: Truth) : string list =
       if List.length (List.distinct itemIds) <> List.length itemIds then yield "duplicate itemIds"
       if Set.ofList itemIds <> Set.ofList keyIds then yield sprintf "items and keys differ: %A" (Set.difference (Set.union (Set.ofList itemIds) (Set.ofList keyIds)) (Set.intersect (Set.ofList itemIds) (Set.ofList keyIds)))
       if not (between 4 7 c.Initial.Length) then yield sprintf "initial evidence count %d" c.Initial.Length
-      if not (between 10 14 c.Catalogue.Length) then yield sprintf "catalogue count %d" c.Catalogue.Length
+      let catLo, catHi = if c.ReadBudget <= 3 then 14, 16 else 10, 14
+      if not (between catLo catHi c.Catalogue.Length) then yield sprintf "catalogue count %d" c.Catalogue.Length
+      if c.ReadBudget <= 3 && not (List.contains c.Class [ "STOP"; "INCOMPLETE"; "NOCONC" ]) && not (between 2 3 t.Discriminating.Count) then yield sprintf "discriminating reads %d (need 2-3)" t.Discriminating.Count
       if not (between 4 6 c.Hypotheses.Length) then yield sprintf "hypothesis count %d" c.Hypotheses.Length
       if not (between 3 5 c.Edges.Length) then yield sprintf "edge count %d" c.Edges.Length
       if not (between 4 5 c.Actions.Length) then yield sprintf "action count %d" c.Actions.Length
@@ -172,8 +175,6 @@ type Run =
       InputTokens: int64; OutputTokens: int64; ThinkingTokens: int64; CacheReadTokens: int64; CacheCreationTokens: int64
       CostUsd: float; DurationMs: int64 }
 
-let budget = 5
-
 let parseAnswers (o: JsonElement) : Answer list =
     arr "answers" o
     |> List.map (fun a ->
@@ -195,7 +196,7 @@ let f1 (cited: Set<string>) (k: Key) =
     let r = if k.Required.IsEmpty then 1.0 else float (Set.intersect cited k.Required).Count / float k.Required.Count
     if p + r = 0.0 then 0.0 else 2.0 * p * r / (p + r)
 
-let acquisition (t: Truth) (reads: string list) =
+let acquisition (budget: int) (t: Truth) (reads: string list) =
     let distinct = reads |> List.distinct
     if distinct.Length > budget then 0.0
     else
@@ -221,8 +222,8 @@ let scoreRun (c: Case) (t: Truth) (run: Run) : Scored =
         else keys |> List.averageBy (fun k -> match lookup k with
                                               | Some a -> let y = if a.Answer = k.Expected then 1.0 else 0.0 in 1.0 - (a.Confidence - y) ** 2.0
                                               | None -> 0.0)
-    let breach = (run.Reads |> List.distinct |> List.length) > budget
-    let acq = acquisition t run.Reads
+    let breach = (run.Reads |> List.distinct |> List.length) > c.ReadBudget
+    let acq = acquisition c.ReadBudget t run.Reads
     let kind (k: Key) = Map.tryFind k.ItemId kindOf |> Option.defaultValue ""
     let of' pred hit = keys |> List.filter pred |> fun ks -> ratio (ks |> List.filter hit |> List.length |> float) (float ks.Length)
     let harmful = keys |> List.filter (fun k -> kind k = "action" && k.Expected = "harmful" && List.contains (given k) [ "preferred"; "acceptable" ])

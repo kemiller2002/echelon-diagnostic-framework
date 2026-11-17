@@ -24,9 +24,9 @@ let outputSchema =
 
 let systemPrompt = "You are a careful, independent diagnostic analyst. You follow the task instructions exactly."
 
-let instruction =
+let instruction (budget: int) =
     "This is an isolated, controlled diagnostic task. Use the Read tool on task.md in the current directory: it contains your complete task. "
-    + "After that you may read only the evidence files that task.md lists, at most 5 of them, and nothing else. "
+    + sprintf "After that you may read only the evidence files that task.md lists, at most %d of them, and nothing else. " budget
     + "Follow the task exactly and return your answer through the structured output tool."
 
 /// Stable 32-bit hash for seeding (string.GetHashCode is randomized per process).
@@ -62,7 +62,7 @@ let renderCase (c: Case) (labels: (string * string) list) =
     for e in c.Initial do
         line (sprintf "%s [stage %s] %s (%s): %s" e.Id e.Stage e.Source e.SourceType e.Text)
     line ""
-    line "EVIDENCE CATALOGUE (collect at most 5; read the file path to collect)"
+    line (sprintf "EVIDENCE CATALOGUE (collect at most %d; read the file path to collect)" c.ReadBudget)
     for (label, id) in labels do
         let e = Map.find id byId
         line (sprintf "%s [stage %s] %s - source: %s (%s) - file: evidence/%s.txt" label e.Stage e.Title e.Source e.SourceType label)
@@ -100,12 +100,12 @@ let prepare (workRoot: string) (rawDir: string) (phase: string) (cases: Map<stri
     let dir = Path.Combine(workRoot, "runs", id)
     if Directory.Exists dir then Directory.Delete(dir, true)
     Directory.CreateDirectory(Path.Combine(dir, "evidence")) |> ignore
-    let task = shared + "\n\n" + moduleText p.Condition + "\n\n" + renderCase c labels
+    let task = shared.Replace("{{BUDGET}}", string c.ReadBudget) + "\n\n" + moduleText p.Condition + "\n\n" + renderCase c labels
     File.WriteAllText(Path.Combine(dir, "task.md"), task)
     let byId = c.Catalogue |> List.map (fun e -> e.Id, e) |> Map.ofList
     for (label, cid) in labels do
         File.WriteAllText(Path.Combine(dir, "evidence", label + ".txt"), renderEvidence label (Map.find cid byId))
-    { Label = id; WorkDir = dir; Prompt = instruction; SystemPrompt = systemPrompt; Model = p.Model; Effort = p.Effort
+    { Label = id; WorkDir = dir; Prompt = instruction c.ReadBudget; SystemPrompt = systemPrompt; Model = p.Model; Effort = p.Effort
       Schema = outputSchema; TranscriptPath = Path.GetFullPath(Path.Combine(rawDir, "transcripts", id + ".jsonl")); TimeoutMinutes = 30 },
     labels
 
@@ -164,7 +164,7 @@ match fsi.CommandLineArgs |> Array.toList |> List.tail with
             { Condition = strOr "" "condition" r; CaseId = strOr "" "caseId" r
               Trial = num "trial" r |> Option.map int |> Option.defaultValue 1
               Model = strOr "claude-sonnet-5-5" "model" r; Effort = strOr "medium" "effort" r })
-    let cases = loadCases ([ "benchmark/cases/dev"; "benchmark/cases/heldout" ] |> List.filter Directory.Exists)
+    let cases = loadCases ([ "benchmark/cases/dev"; "benchmark/cases/dev2"; "benchmark/cases/heldout" ] |> List.filter Directory.Exists)
     Directory.CreateDirectory(Path.Combine(rawDir, "transcripts")) |> ignore
     let pending =
         planned

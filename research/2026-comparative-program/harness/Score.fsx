@@ -20,10 +20,10 @@ let loadMap dir pattern parse key =
     else Map.empty
 
 let cases =
-    [ "dev"; "heldout" ] |> List.map (fun s -> loadMap (sprintf "benchmark/cases/%s" s) "*.case.json" parseCase (fun (c: Case) -> c.Id))
+    [ "dev"; "dev2"; "heldout" ] |> List.map (fun s -> loadMap (sprintf "benchmark/cases/%s" s) "*.case.json" parseCase (fun (c: Case) -> c.Id))
     |> List.fold (fun acc m -> Map.fold (fun a k v -> Map.add k v a) acc m) Map.empty
 let truths =
-    [ "dev"; "heldout" ] |> List.map (fun s -> loadMap (sprintf "benchmark/truth/%s" s) "*.truth.json" parseTruth (fun (t: Truth) -> t.CaseId))
+    [ "dev"; "dev2"; "heldout" ] |> List.map (fun s -> loadMap (sprintf "benchmark/truth/%s" s) "*.truth.json" parseTruth (fun (t: Truth) -> t.CaseId))
     |> List.fold (fun acc m -> Map.fold (fun a k v -> Map.add k v a) acc m) Map.empty
 
 let tierOf (m: string) = if m.Contains "haiku" then "haiku" elif m.Contains "opus" then "opus" else "sonnet"

@@ -1,0 +1,120 @@
+{
+  "caseId": "OD2-DEV-KNOWN",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S-H1",
+        "answer": "supported",
+        "confidence": 92,
+        "justification": "C2 shows the whole rise sits in the $2,500\u2013$10,000 band\u0027s pending-approval stage (0.7\u219216.0 days) while other stages and bands are flat, and the weighted mean reproduces E1\u0027s ~18 days. C6 shows team-lead trays jumping from 38 to over 200 items a week after 1 April (C5, E6), with arrivals outpacing approvals and depth growing to 455."
+      },
+      {
+        "itemId": "S-H2",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "C1 shows CAT registrations at zero by July and new-claim volumes back to Q1 levels. C3 shows caseloads and overtime back to normal from June. C2 shows the under-$2,500 and over-$10,000 bands unchanged, so the surge cannot explain turnaround staying near 18 days."
+      },
+      {
+        "itemId": "S-H3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "E3 shows adjuster FTE restored to 24 from June, C3 shows normal caseloads and quality, and C2 shows investigation times unchanged in every band (for example 6.9\u21927.0 days)."
+      },
+      {
+        "itemId": "S-H4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "C4 shows Quillfast indexing faster than the legacy provider (median 3.9 vs 5.2 hours) with only the March outage. C2 shows intake/indexing time essentially flat in every band, and C11/C12 show no ongoing major incidents; E4\u0027s complaints are about viewer usability, not delays."
+      },
+      {
+        "itemId": "S-H5",
+        "answer": "unknown",
+        "confidence": 80,
+        "justification": "C7 says overpayment is not measured outside the December audit re-test (C5), and the 4.3% drop in severity is confounded by the roof-replacement claim mix, with no mix-adjusted comparison."
+      },
+      {
+        "itemId": "S-R1",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The authority change on 1 April (C5, E6) comes before the band-specific rise in pending approval (C2: 0.7\u219216.0 days), and the routing mechanism is shown in C6 tray volumes. The unaffected bands act as controls that rule out surge and staffing as alternatives."
+      },
+      {
+        "itemId": "S-R2",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "C1 shows surge claims and caseloads (C3) cleared by June, yet turnaround stayed high only in the band where authority changed (C2)."
+      },
+      {
+        "itemId": "S-R3",
+        "answer": "association-only",
+        "confidence": 70,
+        "justification": "Complaints rose alongside turnaround (E5), and C10 shows more customers mentioning speed. But the new logging module, broker-call capture and the new \u0027Delay\u0027 category (E5, C8) break comparability, so causation cannot be isolated."
+      },
+      {
+        "itemId": "S-R4",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "C2 shows investigation-stage times essentially unchanged in all bands (3.5\u21923.6, 6.9\u21927.0, 12.8\u219213.1 days), and E3/C3 show capacity restored from June."
+      },
+      {
+        "itemId": "S-A1",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "It targets the approval bottleneck shown in C2/C6 while keeping the second-review control that audit agreed in C5, and it adds monitoring."
+      },
+      {
+        "itemId": "S-A2",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "It switches off an interim control agreed with audit for a High-rated overpayment finding (C5), bypassing Internal Audit before the December re-test."
+      },
+      {
+        "itemId": "S-A3",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "The team leads are absorbing a workload created by a design change approved without a workload assessment (C5 CR-0331). They review quickly (9-minute median) and log heavy overtime (C6), so this punishes the wrong party."
+      },
+      {
+        "itemId": "S-A4",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "C5 says permanent thresholds and related resourcing are to be set only after the December audit re-test, and the overpayment benefit is unmeasured (C7)."
+      },
+      {
+        "itemId": "S-SUFF",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "C2, C6 and C5 identify the bottleneck by stage and by band and rule out the rival causes (C1, C3, C4), which is enough to commit to an approval-capacity intervention such as A1."
+      }
+    ],
+    "ambiguousItems": [
+      "S-R3: association-only vs unknown, because the change in complaint logging (E5, C8) could be argued to undermine even the association; C10 gives some independent support for association.",
+      "S-A4: premature vs harmful; locking in a permanent standard before the audit re-test could be seen as pre-empting the audit, but it keeps the control in place, so premature fits better."
+    ],
+    "caseProblems": [
+      "Minor headcount inconsistency: E4 says 38 Property Claims staff, but the setting lists 24 adjusters, 3 team leads and 1 manager (28). This is plausible only if support staff are counted, which is not stated.",
+      "C2 is very decisive: a band-and-stage breakdown that reproduces the E1 mean almost exactly makes the case easy once it is read. This is realistic for an ops analyst extract, though, and its title does not reveal the answer.",
+      "Naming mismatch: E6 says \u0027Audit action CLM-26-03\u0027 while C5 says IA-26-03. This is plausibly an internal action reference versus the report number, but it could confuse a solver."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S-R3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The edge\u0027s target is the rise in formal complaints *logged* from April. E1 and E5 show that logged complaints (about 31 a month to about 74) rose in the same months as turnaround (about 9.9 to about 18 days). That meets the rubric\u0027s low bar for association-only: the two co-occur in the evidence. \u0027Unknown\u0027 requires the evidence to be insufficient even to show association, and that is not the case here. The logging change on 1 April (E5), together with C8\u0027s broker calls, storm disputes and unchecked coding, is a rival explanation for why logged complaints rose. It blocks a causal reading and rules out a like-for-like comparison, but it does not erase the co-occurrence. C8\u0027s own numbers point the same way: removing the 64 broker-call complaints still leaves about 53 a month against about 31 before. C10 is independent of the logging change and shows customers mentioning speed more often (12% to 29%), which further supports association. So causal is ruled out by the measurement confound, unknown is ruled out by the documented co-occurrence, and association-only is the single defensible answer.",
+        "fix": "No change needed. Optional clarification: in the key rationale, state that the edge concerns the logged complaint count, which did co-occur with longer turnaround; the logging change only blocks a causal inference."
+      },
+      {
+        "itemId": "S-A4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A4 does not meet any of the rubric\u0027s \u0027harmful\u0027 triggers. It keeps the protective second review rather than disabling it, and it adds approval capacity, which targets the established mechanism. It does not suppress information, because the December re-test still goes ahead, and it does not punish the wrong party. Its weakness is timing. C5 explicitly says permanent thresholds and related resourcing are to be set only after the Internal Audit re-test. Whether the $2,500 limit actually reduces overpayments (H5) is still unknown. A4 would be right if the re-test confirmed the benefit, which is exactly the rubric\u0027s definition of \u0027premature\u0027. \u0027Acceptable\u0027 is also ruled out, because C5\u0027s explicit deferral makes committing now unjustified, not merely second-best. \u0027Harmful\u0027 would need the action to be likely to worsen outcomes, and nothing in the evidence shows that a permanent post plus a kept control would do so.",
+        "fix": "No change needed. Optional clarification: add a sentence to the key rationale saying A4 is not harmful because it keeps the control and adds capacity; its only flaw is that it pre-empts the re-test that C5 requires."
+      }
+    ]
+  },
+  "needsRevision": false
+}

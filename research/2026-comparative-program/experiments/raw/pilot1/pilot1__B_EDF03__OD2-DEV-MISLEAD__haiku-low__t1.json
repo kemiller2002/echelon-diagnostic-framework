@@ -1,0 +1,212 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-MISLEAD__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-MISLEAD",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C2",
+    "X3": "C7",
+    "X4": "C3",
+    "X5": "C6",
+    "X6": "C10",
+    "X7": "C4",
+    "X8": "C9",
+    "X9": "C11",
+    "X10": "C8",
+    "X11": "C5",
+    "X12": "C12"
+  },
+  "readLabels": [
+    "X7",
+    "X4",
+    "X1"
+  ],
+  "reads": [
+    "C4",
+    "C3",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-MISLEAD__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 32507,
+    "cacheCreationTokens": 9955,
+    "outputTokens": 2712,
+    "thinkingTokens": 1226,
+    "costUsd": 0.0036728700000000004,
+    "durationMs": 16835,
+    "numTurns": 6,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022methodChoice\u0022:\u0022EDF diagnostic sequence; collected X7, X4, X1 (3 of 5 items)\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022X4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022X1\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E1\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E1\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022E6\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022The failures are mostly not caused by the v4.12 release. Since 3 March, failures come in tight clusters at the start of every quarter hour between 09:00 and 21:00. Those clusters match bursts from a finance reconciliation job (settle-recon) that began running every 15 minutes on the same Quillmark API key as checkout. Quillmark\u0027s logs show about 5,000 to 6,000 rate-limit (429) rejections a day, all scoped to that key. The failures started at 09:00, before the 10:40 deploy. A canary test found v4.11 and v4.12 pods failing at the same rate, and 341 of 351 v4.11 failures were 429s. I am fairly confident in this. Next: move settle-recon back to its nightly schedule or pause its daytime runs, then watch the 429 rate. Give the job its own credential before any future daytime schedule. Do not roll back v4.12 yet: it would not fix this and would remove the card masking required by SEC-2291 by 13 March. Do not tell the board the outage caused the 9% revenue drop; the Winter Clearance ending and the Spring Trail Sale launch are equally plausible explanations, so restate the forecast only after a proper revenue analysis.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:38.8911454Z",
+    "finishedAt": "2026-11-17T14:27:56.5615183Z",
+    "output": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "methodChoice": "EDF diagnostic sequence; collected X7, X4, X1 (3 of 5 items)",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E1",
+            "E3",
+            "X4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "X1",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "E1",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X7",
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "E1",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 65,
+          "evidenceIds": [
+            "X1",
+            "E6",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E5",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "X9",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 70,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "The failures are mostly not caused by the v4.12 release. Since 3 March, failures come in tight clusters at the start of every quarter hour between 09:00 and 21:00. Those clusters match bursts from a finance reconciliation job (settle-recon) that began running every 15 minutes on the same Quillmark API key as checkout. Quillmark\u0027s logs show about 5,000 to 6,000 rate-limit (429) rejections a day, all scoped to that key. The failures started at 09:00, before the 10:40 deploy. A canary test found v4.11 and v4.12 pods failing at the same rate, and 341 of 351 v4.11 failures were 429s. I am fairly confident in this. Next: move settle-recon back to its nightly schedule or pause its daytime runs, then watch the 429 rate. Give the job its own credential before any future daytime schedule. Do not roll back v4.12 yet: it would not fix this and would remove the card masking required by SEC-2291 by 13 March. Do not tell the board the outage caused the 9% revenue drop; the Winter Clearance ending and the Spring Trail Sale launch are equally plausible explanations, so restate the forecast only after a proper revenue analysis."
+    }
+  }
+}

@@ -138,7 +138,7 @@ let review (split: string) (workRoot: string) (ids: string list) =
         bad |> List.iter (fun r -> printfn "   %s %s: %s" (strOr "" "itemId" r) (strOr "" "ruling" r) (let s = strOr "" "explanation" r in if s.Length > 160 then s.Substring(0, 160) else s))
 
 let revise (split: string) (workRoot: string) (ids: string list) =
-    let assignments = readJson "benchmark/authoring/assignments.json" |> arr split |> List.map (fun a -> strOr "" "id" a, a) |> Map.ofList
+    let assignments = [ "benchmark/authoring/assignments.json"; "benchmark/authoring/assignments-amendment-01.json" ] |> List.filter File.Exists |> List.collect (fun p -> readJson p |> arr split) |> List.map (fun a -> strOr "" "id" a, a) |> Map.ofList
     let contract = File.ReadAllText "benchmark/authoring/authoring-contract.md"
     let chosen =
         caseIds split ids

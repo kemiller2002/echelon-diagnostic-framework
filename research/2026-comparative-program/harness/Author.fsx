@@ -30,7 +30,9 @@ let authorSchema =
     """{"type":"object","properties":{"case":{"type":"object"},"truth":{"type":"object"}},"required":["case","truth"]}"""
 
 let assignments (split: string) =
-    (readJson "benchmark/authoring/assignments.json") |> arr split
+    [ "benchmark/authoring/assignments.json"; "benchmark/authoring/assignments-amendment-01.json" ]
+    |> List.filter File.Exists
+    |> List.collect (fun p -> readJson p |> arr split)
 
 let authorSpec (workRoot: string) (split: string) (a: JsonElement) : RunSpec =
     let id = strOr "" "id" a

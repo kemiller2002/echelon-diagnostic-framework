@@ -1,0 +1,222 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-KNOWN",
+  "trial": 1,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C9",
+    "X2": "C10",
+    "X3": "C1",
+    "X4": "C2",
+    "X5": "C4",
+    "X6": "C7",
+    "X7": "C3",
+    "X8": "C12",
+    "X9": "C5",
+    "X10": "C8",
+    "X11": "C11",
+    "X12": "C6"
+  },
+  "readLabels": [
+    "X4",
+    "X12",
+    "X9",
+    "X6",
+    "X3"
+  ],
+  "reads": [
+    "C2",
+    "C6",
+    "C5",
+    "C7",
+    "C1"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20437,
+    "cacheCreationTokens": 11276,
+    "outputTokens": 2140,
+    "thinkingTokens": 60,
+    "costUsd": 0.0685597,
+    "durationMs": 17912,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-KNOWN__sonnet-medium__t1/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-KNOWN\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022S-H1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-H2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S-H3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S-H4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S-H5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-R1\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-R2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022S-R3\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E1\u0022]},{\u0022itemId\u0022:\u0022S-R4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022S-A1\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-A2\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-A3\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:92,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022S-A4\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X6\u0022]},{\u0022itemId\u0022:\u0022S-SUFF\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X12\u0022,\u0022X9\u0022]}],\u0022brief\u0022:\u0022Turnaround doubled mainly because of an approval bottleneck, not a shortage of adjusters or the imaging switch. On 1 April, as an interim audit control, adjuster authority dropped from $10,000 to $2,500. All $2,500\u2013$10,000 settlements, about 53% of closures, now go to three team leads. The change was approved with no workload assessment. Those claims now wait 16 days for approval, up from 0.7. Their total time rose from 10.4 to 26.0 days. Other stages, and claims under $2,500 or over $10,000, are essentially unchanged. The approval trays hold 455 items and are still growing. The team leads are working overtime and approving about 66 items each per week. The hail surge had passed by June. Adjuster staffing was back to 24 by June. Imaging and investigation times barely moved. So contract adjusters and a switch back to the old imaging provider would not fix this. I\u0027m fairly confident in this. What is unknown is whether the tighter control actually cuts overpayments. Finance has no mix-adjusted measure, and the audit re-test is in December. Next step: keep the second review on every claim in the band, but add approval capacity with Internal Audit. Examples are certified senior adjusters as second approvers, or moving other team-lead duties elsewhere. Track the approval wait weekly. Don\u0027t discipline the team leads. Don\u0027t drop the control unilaterally. Don\u0027t make the $2,500 limit permanent until the audit re-test.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:19.6927820Z",
+    "finishedAt": "2026-11-17T14:26:38.6357876Z",
+    "output": {
+      "caseId": "OD2-DEV-KNOWN",
+      "answers": [
+        {
+          "itemId": "S-H1",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-H2",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S-H3",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S-H4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S-H5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X6",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-R1",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-R2",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "X3",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "S-R3",
+          "answer": "association-only",
+          "confidence": 65,
+          "evidenceIds": [
+            "E5",
+            "E1"
+          ]
+        },
+        {
+          "itemId": "S-R4",
+          "answer": "contradicted",
+          "confidence": 78,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "S-A1",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-A2",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-A3",
+          "answer": "harmful",
+          "confidence": 92,
+          "evidenceIds": [
+            "X12",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "S-A4",
+          "answer": "premature",
+          "confidence": 85,
+          "evidenceIds": [
+            "X9",
+            "X6"
+          ]
+        },
+        {
+          "itemId": "S-SUFF",
+          "answer": "sufficient",
+          "confidence": 85,
+          "evidenceIds": [
+            "X4",
+            "X12",
+            "X9"
+          ]
+        }
+      ],
+      "brief": "Turnaround doubled mainly because of an approval bottleneck, not a shortage of adjusters or the imaging switch. On 1 April, as an interim audit control, adjuster authority dropped from $10,000 to $2,500. All $2,500\u2013$10,000 settlements, about 53% of closures, now go to three team leads. The change was approved with no workload assessment. Those claims now wait 16 days for approval, up from 0.7. Their total time rose from 10.4 to 26.0 days. Other stages, and claims under $2,500 or over $10,000, are essentially unchanged. The approval trays hold 455 items and are still growing. The team leads are working overtime and approving about 66 items each per week. The hail surge had passed by June. Adjuster staffing was back to 24 by June. Imaging and investigation times barely moved. So contract adjusters and a switch back to the old imaging provider would not fix this. I\u0027m fairly confident in this. What is unknown is whether the tighter control actually cuts overpayments. Finance has no mix-adjusted measure, and the audit re-test is in December. Next step: keep the second review on every claim in the band, but add approval capacity with Internal Audit. Examples are certified senior adjusters as second approvers, or moving other team-lead duties elsewhere. Track the approval wait weekly. Don\u0027t discipline the team leads. Don\u0027t drop the control unilaterally. Don\u0027t make the $2,500 limit permanent until the audit re-test."
+    }
+  }
+}

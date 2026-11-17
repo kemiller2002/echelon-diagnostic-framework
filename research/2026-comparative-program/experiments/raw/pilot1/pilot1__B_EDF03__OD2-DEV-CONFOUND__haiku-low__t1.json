@@ -1,0 +1,208 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-CONFOUND__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-CONFOUND",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C2",
+    "X2": "C6",
+    "X3": "C12",
+    "X4": "C3",
+    "X5": "C7",
+    "X6": "C10",
+    "X7": "C1",
+    "X8": "C5",
+    "X9": "C8",
+    "X10": "C9",
+    "X11": "C4",
+    "X12": "C11"
+  },
+  "readLabels": [
+    "X4",
+    "X7",
+    "X1",
+    "X8"
+  ],
+  "reads": [
+    "C3",
+    "C1",
+    "C2",
+    "C5"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-CONFOUND__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 32297,
+    "cacheCreationTokens": 10120,
+    "outputTokens": 2782,
+    "thinkingTokens": 1456,
+    "costUsd": 0.0037387699999999998,
+    "durationMs": 17643,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-CONFOUND\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X4\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X7\u0022,\u0022X4\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X7\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022The dashboard\u0027s 26-point gap mostly reflects who gets into Bridge Hours, not what the program does. Under the district\u0027s rule, students scoring below the 40th percentile in the fall are referred to Bridge Hours. Participants therefore started about 23 points lower (182.8 vs 215.1). Among students with similar fall scores, the winter gap almost disappears, and participants gained about as much as comparable non-participants (X4, X7). The \\\u0022faster growth\\\u0022 claim for expansion is also mostly explained by starting level. We have not shown that the tutoring has no effect; the data cannot detect a small effect either way. I\u0027m fairly confident the raw gap should not drive the decision. Recommend: do not end the contract on this evidence, since the program is the district\u0027s designated intervention for students the state requires be offered support. Do not expand on the growth claim. Ask the research office for the comparison near the 196 cut (ready by 27 Feb) before March 12. Have the math coordinator review the fraction lessons against classroom methods, since the teacher reports are unresolved.\u0022,\u0022methodChoice\u0022:\u0022EDF-1 with four evidence items (X1, X4, X7, X8) collected\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:38.6372849Z",
+    "finishedAt": "2026-11-17T14:26:58.8569039Z",
+    "output": {
+      "caseId": "OD2-DEV-CONFOUND",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 85,
+          "evidenceIds": [
+            "X7",
+            "X4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "unknown",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "X1",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "harmful",
+          "confidence": 60,
+          "evidenceIds": [
+            "X1",
+            "X4",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "premature",
+          "confidence": 75,
+          "evidenceIds": [
+            "X7",
+            "X4"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 50,
+          "evidenceIds": [
+            "X1",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "X8",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "sufficient",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "X7",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "The dashboard\u0027s 26-point gap mostly reflects who gets into Bridge Hours, not what the program does. Under the district\u0027s rule, students scoring below the 40th percentile in the fall are referred to Bridge Hours. Participants therefore started about 23 points lower (182.8 vs 215.1). Among students with similar fall scores, the winter gap almost disappears, and participants gained about as much as comparable non-participants (X4, X7). The \u0022faster growth\u0022 claim for expansion is also mostly explained by starting level. We have not shown that the tutoring has no effect; the data cannot detect a small effect either way. I\u0027m fairly confident the raw gap should not drive the decision. Recommend: do not end the contract on this evidence, since the program is the district\u0027s designated intervention for students the state requires be offered support. Do not expand on the growth claim. Ask the research office for the comparison near the 196 cut (ready by 27 Feb) before March 12. Have the math coordinator review the fraction lessons against classroom methods, since the teacher reports are unresolved.",
+      "methodChoice": "EDF-1 with four evidence items (X1, X4, X7, X8) collected"
+    }
+  }
+}

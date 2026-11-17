@@ -1,0 +1,206 @@
+{
+  "runId": "pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "F_EDFG",
+  "caseId": "OD2-DEV-CONFOUND",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C1",
+    "X2": "C8",
+    "X3": "C12",
+    "X4": "C7",
+    "X5": "C6",
+    "X6": "C4",
+    "X7": "C11",
+    "X8": "C10",
+    "X9": "C3",
+    "X10": "C2",
+    "X11": "C5",
+    "X12": "C9"
+  },
+  "readLabels": [
+    "X1",
+    "X9",
+    "X10",
+    "X6"
+  ],
+  "reads": [
+    "C1",
+    "C3",
+    "C2",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20216,
+    "cacheCreationTokens": 10441,
+    "outputTokens": 1846,
+    "thinkingTokens": 0,
+    "costUsd": 0.0622576,
+    "durationMs": 15473,
+    "numTurns": 7,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2/evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2/evidence/X9.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__F_EDFG__OD2-DEV-CONFOUND__sonnet-medium__t2/evidence/X6.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-CONFOUND\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X6\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X10\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X1\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X9\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X10\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022acceptable\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X9\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X9\u0022]}],\u0022brief\u0022:\u0022The 26-point gap mostly reflects who gets into Bridge Hours, not what the program does. District rules send every student below the 40th percentile on the fall test into it. In September, participants averaged 182.8 and everyone else 215.1. Students at similar fall scores ended up with almost the same winter scores whether or not they attended (differences under about one point, in both directions). So the dashboard doesn\u0027t show harm. Northgate\u0027s growth claim doesn\u0027t show benefit either. Low scorers gain more regardless of enrollment, so the faster growth is expected. The data can\u0027t detect a small effect either way. I\u0027m fairly confident (about 85%) in this reading. Don\u0027t end the contract on the raw chart. Don\u0027t expand it or open enrollment on the growth claim. Opening enrollment would also drop the district\u0027s required referral list. Before March 12, replace the raw chart with the like-for-like comparison, and ask the research office for the students-just-either-side-of-the-cutoff analysis due 27 Feb. Link attendance to scores. Have the math coordinator observe sessions and check the fraction-method conflict a teacher reported. Consider a short renewal with an evaluation condition. Don\u0027t cut the program without a board-designated replacement, since the state rule requires an intervention.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:27:09.5996141Z",
+    "finishedAt": "2026-11-17T14:27:25.9038182Z",
+    "output": {
+      "caseId": "OD2-DEV-CONFOUND",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "X1",
+            "X9",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "E3",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "X1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 88,
+          "evidenceIds": [
+            "X10",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "unknown",
+          "confidence": 75,
+          "evidenceIds": [
+            "X6",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X9",
+            "X10",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "premature",
+          "confidence": 85,
+          "evidenceIds": [
+            "X1",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 90,
+          "evidenceIds": [
+            "X9",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X10",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "acceptable",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X9"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "insufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "X9"
+          ]
+        }
+      ],
+      "brief": "The 26-point gap mostly reflects who gets into Bridge Hours, not what the program does. District rules send every student below the 40th percentile on the fall test into it. In September, participants averaged 182.8 and everyone else 215.1. Students at similar fall scores ended up with almost the same winter scores whether or not they attended (differences under about one point, in both directions). So the dashboard doesn\u0027t show harm. Northgate\u0027s growth claim doesn\u0027t show benefit either. Low scorers gain more regardless of enrollment, so the faster growth is expected. The data can\u0027t detect a small effect either way. I\u0027m fairly confident (about 85%) in this reading. Don\u0027t end the contract on the raw chart. Don\u0027t expand it or open enrollment on the growth claim. Opening enrollment would also drop the district\u0027s required referral list. Before March 12, replace the raw chart with the like-for-like comparison, and ask the research office for the students-just-either-side-of-the-cutoff analysis due 27 Feb. Link attendance to scores. Have the math coordinator observe sessions and check the fraction-method conflict a teacher reported. Consider a short renewal with an evaluation condition. Don\u0027t cut the program without a board-designated replacement, since the state rule requires an intervention."
+    }
+  }
+}

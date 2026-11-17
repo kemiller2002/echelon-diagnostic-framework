@@ -1,0 +1,244 @@
+{
+  "runId": "pilot1__A_GENERAL__OD2-DEV-INCOMPLETE__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "A_GENERAL",
+  "caseId": "OD2-DEV-INCOMPLETE",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C13",
+    "X2": "C4",
+    "X3": "C3",
+    "X4": "C7",
+    "X5": "C11",
+    "X6": "C5",
+    "X7": "C1",
+    "X8": "C2",
+    "X9": "C9",
+    "X10": "C10",
+    "X11": "C6",
+    "X12": "C12",
+    "X13": "C14",
+    "X14": "C8"
+  },
+  "readLabels": [
+    "X8",
+    "X3",
+    "X4",
+    "X11",
+    "X2"
+  ],
+  "reads": [
+    "C2",
+    "C3",
+    "C7",
+    "C6",
+    "C4"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__A_GENERAL__OD2-DEV-INCOMPLETE__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 8,
+    "cacheReadTokens": 29937,
+    "cacheCreationTokens": 8686,
+    "outputTokens": 2277,
+    "thinkingTokens": 759,
+    "costUsd": 0.00317587,
+    "durationMs": 14577,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X4.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X11.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-INCOMPLETE\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E4\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X11\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X3\u0022,\u0022X6\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022,\u0022X3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X11\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022E4\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022X8\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022X4\u0022,\u0022X11\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022The rise in missed appointments at Corrie Lane is real and is not explained by the bus cut, staff behaviour, or recording errors. Eastgate, on the same bus route and with a similar patient mix, stayed flat at about 8%. Corrie Lane\u0027s own rate was about 8% a year earlier. Front-desk day-before calls are steady (about 91% of listed patients still called, versus 93% before). Miscoding explains only about half a point of the 13.4%. The most likely driver is the Tidewell configuration: the reminder moved from 48 hours to 7 days before, and booking lead times rose from about 19 to about 50 days. I cannot yet tell which of these two changes matters more, because the data cannot link booking lead time or reminder timing to individual outcomes. I am fairly confident about what is not the cause, and less sure about the mechanism. Next steps: run the planned 8-week split test of the reminder offset and get the vendor\u0027s appointment-level extract. Do not discipline front-desk staff, stop reporting the DNA rate, or change everything at once before the test. Confidence in the mechanism is moderate.\u0022,\u0022methodChoice\u0022:\u0022Collected 5 items: X8, X3, X4, X11, X2.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:37.5761702Z",
+    "finishedAt": "2026-11-17T14:26:53.8536124Z",
+    "output": {
+      "caseId": "OD2-DEV-INCOMPLETE",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E4",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "X4",
+            "E3",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X2",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X11",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X3",
+            "X6",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "contradicted",
+          "confidence": 80,
+          "evidenceIds": [
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "X4",
+            "X11",
+            "X3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X11"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "X4",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "X2",
+            "E4",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 75,
+          "evidenceIds": [
+            "X8",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "insufficient",
+          "confidence": 80,
+          "evidenceIds": [
+            "X4",
+            "X11",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "The rise in missed appointments at Corrie Lane is real and is not explained by the bus cut, staff behaviour, or recording errors. Eastgate, on the same bus route and with a similar patient mix, stayed flat at about 8%. Corrie Lane\u0027s own rate was about 8% a year earlier. Front-desk day-before calls are steady (about 91% of listed patients still called, versus 93% before). Miscoding explains only about half a point of the 13.4%. The most likely driver is the Tidewell configuration: the reminder moved from 48 hours to 7 days before, and booking lead times rose from about 19 to about 50 days. I cannot yet tell which of these two changes matters more, because the data cannot link booking lead time or reminder timing to individual outcomes. I am fairly confident about what is not the cause, and less sure about the mechanism. Next steps: run the planned 8-week split test of the reminder offset and get the vendor\u0027s appointment-level extract. Do not discipline front-desk staff, stop reporting the DNA rate, or change everything at once before the test. Confidence in the mechanism is moderate.",
+      "methodChoice": "Collected 5 items: X8, X3, X4, X11, X2."
+    }
+  }
+}

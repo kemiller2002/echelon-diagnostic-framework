@@ -1,0 +1,209 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-STOP__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-STOP",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C3",
+    "X2": "C10",
+    "X3": "C11",
+    "X4": "C4",
+    "X5": "C5",
+    "X6": "C7",
+    "X7": "C8",
+    "X8": "C6",
+    "X9": "C2",
+    "X10": "C1",
+    "X11": "C9",
+    "X12": "C13",
+    "X13": "C12"
+  },
+  "readLabels": [
+    "X8",
+    "X3"
+  ],
+  "reads": [
+    "C6",
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-STOP__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20543,
+    "cacheCreationTokens": 9612,
+    "outputTokens": 1686,
+    "thinkingTokens": 53,
+    "costUsd": 0.0573743,
+    "durationMs": 16298,
+    "numTurns": 5,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-STOP__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-STOP__sonnet-medium__t2/evidence/X8.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__B_EDF03__OD2-DEV-STOP__sonnet-medium__t2/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-STOP\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:93,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:94,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022,\u0022X8\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E5\u0022,\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E7\u0022,\u0022E2\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:82,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022X3\u0022]}],\u0022brief\u0022:\u0022The 22 Oct run missed its window because the Q3 restatement backfill held an exclusive lock on stage_orders from 00:58 to 04:18. The nightly merge waited 2h13m for that lock. Every other step ran at its normal duration. The change was approved for 13:00\u201317:00, but the implementer\u0027s note said \\\u00221:00 Thursday\\\u0022. The change board\u0027s checklist didn\u0027t include the nightly job\u0027s owner, so nobody on the nightly side saw it.\\n\\nYour three proposals address causes the evidence doesn\u0027t support. The Corvane incident (02:52\u201303:37) fell inside the lock wait, and the run\u0027s step times were normal. customer_ltv adds about 19 minutes and the 22 Oct row volume was normal. Moving up a tier or pulling customer_ltv wouldn\u0027t have prevented this. The retention team also depends on customer_ltv. Switching off the banner would be a mistake. It kept Finance from publishing stale margins as current.\\n\\nNext steps:\\n- Make the nightly job\u0027s owner a required reviewer for changes to tables the job uses.\\n- Bar writes to those tables between 01:00 and 06:00 unless that owner signs off.\\n- Add a lock-wait alert at 15 minutes.\\n- Require a lock timeout and batching in backfill scripts.\\n- Don\u0027t discipline anyone yet. Whether \\\u00221:00\\\u0022 was a typo or intentional is unproven, and the process gap is plain. Ask Varga when they return.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:17.5701457Z",
+    "finishedAt": "2026-11-17T14:26:34.6908844Z",
+    "output": {
+      "caseId": "OD2-DEV-STOP",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 93,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E5",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "E6",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 70,
+          "evidenceIds": [
+            "E4",
+            "X3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 94,
+          "evidenceIds": [
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 90,
+          "evidenceIds": [
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 88,
+          "evidenceIds": [
+            "E2",
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "E4",
+            "X3",
+            "X8"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 80,
+          "evidenceIds": [
+            "E5",
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E7",
+            "E2"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 82,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "X3"
+          ]
+        }
+      ],
+      "brief": "The 22 Oct run missed its window because the Q3 restatement backfill held an exclusive lock on stage_orders from 00:58 to 04:18. The nightly merge waited 2h13m for that lock. Every other step ran at its normal duration. The change was approved for 13:00\u201317:00, but the implementer\u0027s note said \u00221:00 Thursday\u0022. The change board\u0027s checklist didn\u0027t include the nightly job\u0027s owner, so nobody on the nightly side saw it.\n\nYour three proposals address causes the evidence doesn\u0027t support. The Corvane incident (02:52\u201303:37) fell inside the lock wait, and the run\u0027s step times were normal. customer_ltv adds about 19 minutes and the 22 Oct row volume was normal. Moving up a tier or pulling customer_ltv wouldn\u0027t have prevented this. The retention team also depends on customer_ltv. Switching off the banner would be a mistake. It kept Finance from publishing stale margins as current.\n\nNext steps:\n- Make the nightly job\u0027s owner a required reviewer for changes to tables the job uses.\n- Bar writes to those tables between 01:00 and 06:00 unless that owner signs off.\n- Add a lock-wait alert at 15 minutes.\n- Require a lock timeout and batching in backfill scripts.\n- Don\u0027t discipline anyone yet. Whether \u00221:00\u0022 was a typo or intentional is unproven, and the process gap is plain. Ask Varga when they return."
+    }
+  }
+}

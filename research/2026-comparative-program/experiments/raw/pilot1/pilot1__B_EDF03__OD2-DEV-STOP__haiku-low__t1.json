@@ -1,0 +1,207 @@
+{
+  "runId": "pilot1__B_EDF03__OD2-DEV-STOP__haiku-low__t1",
+  "phase": "pilot1",
+  "condition": "B_EDF03",
+  "caseId": "OD2-DEV-STOP",
+  "trial": 1,
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "labelMap": {
+    "X1": "C11",
+    "X2": "C4",
+    "X3": "C7",
+    "X4": "C9",
+    "X5": "C12",
+    "X6": "C5",
+    "X7": "C2",
+    "X8": "C1",
+    "X9": "C13",
+    "X10": "C3",
+    "X11": "C10",
+    "X12": "C8",
+    "X13": "C6"
+  },
+  "readLabels": [
+    "X1"
+  ],
+  "reads": [
+    "C11"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__B_EDF03__OD2-DEV-STOP__haiku-low__t1",
+    "ok": true,
+    "error": null,
+    "model": "claude-haiku-5-5",
+    "effort": "low",
+    "reportedModels": [
+      "claude-haiku-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 20509,
+    "cacheCreationTokens": 9179,
+    "outputTokens": 2906,
+    "thinkingTokens": 1724,
+    "costUsd": 0.00349449,
+    "durationMs": 16991,
+    "numTurns": 4,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022evidence/X1.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-STOP\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022answer\u0022:\u0022supported\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022answer\u0022:\u0022causal\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E6\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:50,\u0022evidenceIds\u0022:[\u0022E5\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X1\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:70,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022E1\u0022,\u0022E7\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022sufficient\u0022,\u0022confidence\u0022:75,\u0022evidenceIds\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022X1\u0022]}],\u0022brief\u0022:\u0022The 22 Oct run missed its window mainly because a Q3 margin restatement backfill (user d.varga, pid 48812) held an exclusive lock on stage_orders from 00:58 to 04:18. The nightly merge waited 2h13m for that lock, and the run finished at 07:02. Without the wait, the run would have finished around 04:40, based on the usual runtime. The evidence does not support the other explanations: order volume was normal, customer_ltv took 19 minutes as usual, and the Corvane incident ended at 03:37, after the lock was already holding the merge. The backfill was approved for 13:00, but its start was written as \\\u00221:00\\\u0022. Whether that was a typo or a choice is unresolved. I\u0027m fairly confident about the lock cause. Next steps: do not switch off the \u0027load incomplete\u0027 banner, and do not remove customer_ltv. Add a lock-wait alert and require the nightly job owner\u0027s review for writes to shared tables. Confirm the backfill\u0027s intended time with d.varga when he returns on 2 Nov before any disciplinary decision.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:26:17.0571500Z",
+    "finishedAt": "2026-11-17T14:26:34.8033070Z",
+    "output": {
+      "caseId": "OD2-DEV-STOP",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "answer": "supported",
+          "confidence": 90,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "E2",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "answer": "contradicted",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "answer": "unknown",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "answer": "causal",
+          "confidence": 80,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "answer": "contradicted",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E6"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "answer": "association-only",
+          "confidence": 50,
+          "evidenceIds": [
+            "E5"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 70,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E4",
+            "X1"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "harmful",
+          "confidence": 70,
+          "evidenceIds": [
+            "E1",
+            "E5",
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 90,
+          "evidenceIds": [
+            "E1",
+            "E7"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "sufficient",
+          "confidence": 75,
+          "evidenceIds": [
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "X1"
+          ]
+        }
+      ],
+      "brief": "The 22 Oct run missed its window mainly because a Q3 margin restatement backfill (user d.varga, pid 48812) held an exclusive lock on stage_orders from 00:58 to 04:18. The nightly merge waited 2h13m for that lock, and the run finished at 07:02. Without the wait, the run would have finished around 04:40, based on the usual runtime. The evidence does not support the other explanations: order volume was normal, customer_ltv took 19 minutes as usual, and the Corvane incident ended at 03:37, after the lock was already holding the merge. The backfill was approved for 13:00, but its start was written as \u00221:00\u0022. Whether that was a typo or a choice is unresolved. I\u0027m fairly confident about the lock cause. Next steps: do not switch off the \u0027load incomplete\u0027 banner, and do not remove customer_ltv. Add a lock-wait alert and require the nightly job owner\u0027s review for writes to shared tables. Confirm the backfill\u0027s intended time with d.varga when he returns on 2 Nov before any disciplinary decision."
+    }
+  }
+}

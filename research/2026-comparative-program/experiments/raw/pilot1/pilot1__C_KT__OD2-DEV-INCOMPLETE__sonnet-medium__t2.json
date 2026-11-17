@@ -1,0 +1,237 @@
+{
+  "runId": "pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2",
+  "phase": "pilot1",
+  "condition": "C_KT",
+  "caseId": "OD2-DEV-INCOMPLETE",
+  "trial": 2,
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "labelMap": {
+    "X1": "C5",
+    "X2": "C7",
+    "X3": "C3",
+    "X4": "C11",
+    "X5": "C12",
+    "X6": "C8",
+    "X7": "C6",
+    "X8": "C14",
+    "X9": "C13",
+    "X10": "C10",
+    "X11": "C9",
+    "X12": "C2",
+    "X13": "C4",
+    "X14": "C1"
+  },
+  "readLabels": [
+    "X3",
+    "X12",
+    "X2",
+    "X10",
+    "X7"
+  ],
+  "reads": [
+    "C3",
+    "C2",
+    "C7",
+    "C10",
+    "C6"
+  ],
+  "violations": [],
+  "run": {
+    "label": "pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2",
+    "ok": true,
+    "error": null,
+    "model": "claude-sonnet-5-5",
+    "effort": "medium",
+    "reportedModels": [
+      "claude-sonnet-5-5"
+    ],
+    "inputTokens": 6,
+    "cacheReadTokens": 19111,
+    "cacheCreationTokens": 9779,
+    "outputTokens": 2260,
+    "thinkingTokens": 220,
+    "costUsd": 0.0636391,
+    "durationMs": 16128,
+    "numTurns": 8,
+    "toolCalls": [
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/task.md\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/evidence/X3.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/evidence/X12.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/evidence/X2.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/evidence/X10.txt\u0022}"
+      },
+      {
+        "name": "Read",
+        "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/runs/pilot1__C_KT__OD2-DEV-INCOMPLETE__sonnet-medium__t2/evidence/X7.txt\u0022}"
+      },
+      {
+        "name": "StructuredOutput",
+        "input": "{\u0022caseId\u0022:\u0022OD2-DEV-INCOMPLETE\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q01\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X7\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q02\u0022,\u0022answer\u0022:\u0022unknown\u0022,\u0022confidence\u0022:55,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q03\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:90,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q04\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q05\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q06\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022E5\u0022,\u0022X3\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q07\u0022,\u0022answer\u0022:\u0022association-only\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X10\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q08\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q09\u0022,\u0022answer\u0022:\u0022contradicted\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022X12\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022answer\u0022:\u0022preferred\u0022,\u0022confidence\u0022:80,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X2\u0022,\u0022X7\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:60,\u0022evidenceIds\u0022:[\u0022E3\u0022,\u0022X7\u0022,\u0022X2\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022answer\u0022:\u0022premature\u0022,\u0022confidence\u0022:65,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X10\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:88,\u0022evidenceIds\u0022:[\u0022E4\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q14\u0022,\u0022answer\u0022:\u0022harmful\u0022,\u0022confidence\u0022:85,\u0022evidenceIds\u0022:[\u0022X12\u0022,\u0022X3\u0022]},{\u0022itemId\u0022:\u0022Q15\u0022,\u0022answer\u0022:\u0022insufficient\u0022,\u0022confidence\u0022:78,\u0022evidenceIds\u0022:[\u0022X2\u0022,\u0022X7\u0022,\u0022X10\u0022]}],\u0022brief\u0022:\u0022The rise in missed appointments looks real and is tied to the Tidewell change. It is not a bus problem, a seasonal effect or a counting artefact. Eastgate, which kept the old system, stayed at about 8% and shares the bus route. Corrie Lane was about 8% in the same months a year earlier. A clinical audit found miscoded records add only about 0.5 points to the rate. The front-desk calls were only ever for the minor-procedures list. Nothing shows they stopped, so written warnings would punish the wrong people. Hiding the figure from the board would also be wrong.\\n\\nTwo changes took effect on the same day. Reminders moved from 48 hours to 7 days before the appointment. Booking lead time went from a median of about 19 days to about 52. The data can\u0027t separate them. Every template and every specialty changed together, and we can\u0027t link outcomes to lead time. I\u0027m unsure which is the larger driver, and both may contribute.\\n\\nNext step: run the 8-week test with a 48-hour reminder on a random half of templates. The vendor can make that change within two working days. Order the appointment-level extract now. Report the DNA rate to the board with this explanation. Don\u0027t revert the booking horizon or switch every template yet.\u0022}"
+      }
+    ],
+    "startedAt": "2026-11-17T14:25:42.5732978Z",
+    "finishedAt": "2026-11-17T14:26:02.0345852Z",
+    "output": {
+      "caseId": "OD2-DEV-INCOMPLETE",
+      "answers": [
+        {
+          "itemId": "Q01",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X7",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q02",
+          "answer": "unknown",
+          "confidence": 55,
+          "evidenceIds": [
+            "E3",
+            "X2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q03",
+          "answer": "contradicted",
+          "confidence": 90,
+          "evidenceIds": [
+            "X12",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q04",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q05",
+          "answer": "contradicted",
+          "confidence": 65,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q06",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "E5",
+            "X3",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q07",
+          "answer": "association-only",
+          "confidence": 60,
+          "evidenceIds": [
+            "X2",
+            "X10",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q08",
+          "answer": "contradicted",
+          "confidence": 85,
+          "evidenceIds": [
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q09",
+          "answer": "contradicted",
+          "confidence": 88,
+          "evidenceIds": [
+            "X12"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "answer": "preferred",
+          "confidence": 80,
+          "evidenceIds": [
+            "E3",
+            "X2",
+            "X7"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "answer": "premature",
+          "confidence": 60,
+          "evidenceIds": [
+            "E3",
+            "X7",
+            "X2"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "answer": "premature",
+          "confidence": 65,
+          "evidenceIds": [
+            "X2",
+            "X10"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "answer": "harmful",
+          "confidence": 88,
+          "evidenceIds": [
+            "E4",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q14",
+          "answer": "harmful",
+          "confidence": 85,
+          "evidenceIds": [
+            "X12",
+            "X3"
+          ]
+        },
+        {
+          "itemId": "Q15",
+          "answer": "insufficient",
+          "confidence": 78,
+          "evidenceIds": [
+            "X2",
+            "X7",
+            "X10"
+          ]
+        }
+      ],
+      "brief": "The rise in missed appointments looks real and is tied to the Tidewell change. It is not a bus problem, a seasonal effect or a counting artefact. Eastgate, which kept the old system, stayed at about 8% and shares the bus route. Corrie Lane was about 8% in the same months a year earlier. A clinical audit found miscoded records add only about 0.5 points to the rate. The front-desk calls were only ever for the minor-procedures list. Nothing shows they stopped, so written warnings would punish the wrong people. Hiding the figure from the board would also be wrong.\n\nTwo changes took effect on the same day. Reminders moved from 48 hours to 7 days before the appointment. Booking lead time went from a median of about 19 days to about 52. The data can\u0027t separate them. Every template and every specialty changed together, and we can\u0027t link outcomes to lead time. I\u0027m unsure which is the larger driver, and both may contribute.\n\nNext step: run the 8-week test with a 48-hour reminder on a random half of templates. The vendor can make that change within two working days. Order the appointment-level extract now. Report the DNA rate to the board with this explanation. Don\u0027t revert the booking horizon or switch every template yet."
+    }
+  }
+}
