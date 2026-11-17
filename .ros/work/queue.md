@@ -20,4 +20,4 @@
 | WI-0011 | Upgrade Limen from 0.7.1 to 0.9.0 (echelon-current) | complete |  | medium |
 | WI-0012 | WI-0012 | complete |  |  |
 | WI-0013 | EDF-IMPROVEMENT-2026-001: EDF framework improvement research (organizational diagnosis validity, causal accuracy, interventions, efficiency, ablation, Clarity integration) | blocked | research,edf,benchmark | high |
-| WI-0014 | EDF-COMPARATIVE-2026-002: comparative framework evaluation and deep experimental validation (inventory, OD2 harder benchmark, compute/persuasiveness/adaptive-selection tracks, v0.3 component ablation) | ready | research, edf, benchmark | high |
+| WI-0014 | EDF-COMPARATIVE-2026-002: comparative framework evaluation and deep experimental validation (inventory, OD2 harder benchmark, compute/persuasiveness/adaptive-selection tracks, v0.3 component ablation) | complete | research, edf, benchmark | high |
