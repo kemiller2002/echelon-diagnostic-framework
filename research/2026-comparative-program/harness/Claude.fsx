@@ -141,7 +141,15 @@ let run (spec: RunSpec) : Async<RunResult> =
         p.StandardInput.Close()
         let outTask = p.StandardOutput.ReadToEndAsync()
         let errTask = p.StandardError.ReadToEndAsync()
-        let finishedInTime = p.WaitForExit(TimeSpan.FromMinutes(float spec.TimeoutMinutes))
+        // Wait asynchronously: a blocking WaitForExit starves the thread pool when many runs are queued.
+        use cts = new System.Threading.CancellationTokenSource(TimeSpan.FromMinutes(float spec.TimeoutMinutes))
+        let! finishedInTime =
+            async {
+                try
+                    do! p.WaitForExitAsync(cts.Token) |> Async.AwaitTask
+                    return true
+                with _ -> return false
+            }
         if not finishedInTime then killQuietly p
         let! stdout = Async.AwaitTask outTask
         let! stderr = Async.AwaitTask errTask
