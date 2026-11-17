@@ -122,6 +122,9 @@ let private args (spec: RunSpec) =
       "--output-format"; "stream-json"
       "--verbose" ]
 
+let private killQuietly (p: Process) =
+    try p.Kill(true) with _ -> ()
+
 /// Effectful edge: run one isolated session and preserve its transcript.
 let run (spec: RunSpec) : Async<RunResult> =
     async {
@@ -139,7 +142,7 @@ let run (spec: RunSpec) : Async<RunResult> =
         let outTask = p.StandardOutput.ReadToEndAsync()
         let errTask = p.StandardError.ReadToEndAsync()
         let finishedInTime = p.WaitForExit(TimeSpan.FromMinutes(float spec.TimeoutMinutes))
-        if not finishedInTime then (try p.Kill(true) with _ -> ())
+        if not finishedInTime then killQuietly p
         let! stdout = Async.AwaitTask outTask
         let! stderr = Async.AwaitTask errTask
         let finished = DateTime.UtcNow
@@ -153,20 +156,21 @@ let run (spec: RunSpec) : Async<RunResult> =
 /// Run many specs with bounded concurrency, preserving input order.
 let runAll (concurrency: int) (onDone: RunResult -> unit) (specs: RunSpec list) : RunResult list =
     let gate = new System.Threading.SemaphoreSlim(concurrency)
-    specs
-    |> List.map (fun s ->
+    let safeRun (s: RunSpec) =
+        async {
+            try return! run s
+            with ex -> return { interpret s DateTime.UtcNow DateTime.UtcNow -2 ex.Message [] with Error = Some ex.Message }
+        }
+    let guarded (s: RunSpec) =
         async {
             do! gate.WaitAsync() |> Async.AwaitTask
-            try
-                let! r =
-                    async {
-                        try return! run s
-                        with ex -> return { interpret s DateTime.UtcNow DateTime.UtcNow -2 ex.Message [] with Error = Some ex.Message }
-                    }
-                onDone r
-                return r
-            finally gate.Release() |> ignore
-        })
+            let! r = safeRun s
+            gate.Release() |> ignore
+            onDone r
+            return r
+        }
+    specs
+    |> List.map guarded
     |> Async.Parallel
     |> Async.RunSynchronously
     |> List.ofArray

@@ -1,0 +1,353 @@
+{
+  "caseId": "OD2-DEV-INCOMPLETE",
+  "groundTruthNarrative": "The rise in missed appointments at Corrie Lane is real and tied to the Tidewell go-live. Billing shows attended visits fell by about 5 points. The remapped \u0027late \u2013 not seen\u0027 code accounts for at most 0.3 points, and a chart audit confirms DNA coding is accurate. The sister site, Eastgate, shares the same bus route and the same seasons and stayed flat; Corrie Lane\u0027s own figures for the same months a year earlier were also flat. The route 14 cuts affected evenings and Sundays only, outside clinic hours. Front-desk calls were only ever for the minor-procedures list, and they continued at the same rate after go-live. So the director\u0027s account and the manager\u0027s two explanations all fail. On 3 March two plausible mechanisms changed together across every template and specialty: the near-date 48-hour SMS was replaced by a 7-day reminder, and median booking lead time rose from about 19 to about 52 days. No available data separates them. Booking timestamps are not reportable. Cutover-period outcomes are 61% complete and the paper lists were destroyed. SMS receipts cannot be joined to appointments. The patient survey did not ask about either factor. Both mechanisms remain live and unestablished. Each candidate fix has a known cost: the 7-day reminder supports about 130 slot refills a month, and the recall list depends on clerk staffing. Committing clinic-wide is therefore not justified yet. A randomized split of reminder offsets across templates, which the vendor can configure at no charge, plus the vendor\u0027s appointment-level extract, would settle the question.",
+  "answers": [
+    {
+      "itemId": "Q01",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C3",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "incomplete",
+        "misleading-signal",
+        "confounded"
+      ],
+      "rationale": "The reminder change happened on the same day as the lead-time change, across every template and specialty (E3, C10). Patient complaints (E5) and staff reports (E4) name the reminder, but they also name long lead times, and they are anecdotes. There is no appointment-level data linking reminder timing or lead time to outcomes (C6, C7), and the cutover weeks cannot be reconstructed (C8). The evidence does not favour H1 over H2."
+    },
+    {
+      "itemId": "Q02",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C3",
+        "C7",
+        "C8",
+        "C9",
+        "C10"
+      ],
+      "tags": [
+        "central",
+        "incomplete",
+        "confounded"
+      ],
+      "rationale": "Lead time lengthened sharply when the near-date reminder was removed (E3, C7). No breakdown of outcome by lead time exists (C7). The monthly variation in median lead time and DNA rate is within noise (E2). Rises across appointment types cannot be compared because lead time by type is not held (C10). The survey\u0027s \u0027forgot\u0027 answers fit both mechanisms (C9). The evidence does not favour H2 over H1."
+    },
+    {
+      "itemId": "Q03",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E6",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "misleading-signal",
+        "manager-narrative",
+        "nonexistent-problem-trap"
+      ],
+      "rationale": "Billable attended visits, which are generated independently of the scheduler\u0027s outcome code, fell from 91.6% to 86.6% of booked-on-day appointments. The remapping can account for at most 0.3 points (C1). The chart audit finds DNA codes about 96.5% accurate (C2)."
+    },
+    {
+      "itemId": "Q04",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E6",
+        "C3",
+        "C5",
+        "C9"
+      ],
+      "tags": [
+        "external-cause",
+        "misleading-signal"
+      ],
+      "rationale": "Eastgate, on the same bus route with an overlapping catchment and the same months, stayed at about 8%. Corrie Lane\u0027s own May\u2013Aug 2025 rate was also about 8% (C3). The bus cuts fall outside clinic hours (C5), and transport accounts for only 9% of surveyed DNAs (C9)."
+    },
+    {
+      "itemId": "Q05",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C4",
+        "C13"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "wrong-party"
+      ],
+      "rationale": "The telephony log shows outbound calls stable at about 90 a week and minor-procedures list coverage at 91\u201393% in both periods. There was only a temporary dip during cutover in March, before the post-period used for the DNA comparison (C4). Calls were only ever required for the procedures list (C4, E4)."
+    },
+    {
+      "itemId": "Q06",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C3",
+        "C6",
+        "C8",
+        "C9",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "confounded",
+        "over-claim-trap"
+      ],
+      "rationale": "Removal of the 48-hour SMS co-occurs with the step rise (E2, E3). C3 rules out external rivals, but the main rival, the simultaneous lead-time change, is not ruled out. No data can separate the two (C6, C8), so causation is not established."
+    },
+    {
+      "itemId": "Q07",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C3",
+        "C7",
+        "C8",
+        "C9",
+        "C10"
+      ],
+      "tags": [
+        "confounded",
+        "over-claim-trap"
+      ],
+      "rationale": "Median lead time rose from about 19 to about 52 days at the same time as the DNA step (E3, C7). That shows co-occurrence, but the change is collinear with the reminder change, and no breakdown of outcome by lead time exists (C7)."
+    },
+    {
+      "itemId": "Q08",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C3",
+        "C5",
+        "C9"
+      ],
+      "tags": [
+        "external-cause"
+      ],
+      "rationale": "Eastgate on the same route did not rise (C3). Daytime weekday service was unchanged (C5)."
+    },
+    {
+      "itemId": "Q09",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "misleading-signal",
+        "measurement"
+      ],
+      "rationale": "Late-not-seen made up 0.3% of appointments before the change, compared with a recorded rise of 5.3 points. Attended visits fell by 5 points (C1). The audit found only 2% of DNA codes were late arrivals (C2)."
+    },
+    {
+      "itemId": "Q10",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "C6",
+        "C7",
+        "C8",
+        "C11",
+        "C12"
+      ],
+      "tags": [
+        "evidence-gathering",
+        "incomplete"
+      ],
+      "rationale": "The two leading mechanisms cannot be separated with existing data. Offsets can be set per template at no charge within two days (E3, C11), so a randomized split across templates isolates the reminder effect with booking practice held constant. The vendor extract (C7) supplies the missing lead-time data. Half the sessions get the candidate fix immediately."
+    },
+    {
+      "itemId": "Q11",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C11",
+        "C12"
+      ],
+      "tags": [
+        "premature",
+        "tempting-fix"
+      ],
+      "rationale": "This would be right if H1 were confirmed, but H1 is unestablished. Only one reminder offset is allowed per template (E3, C11), so switching gives up the 7-day reminder\u0027s early-cancellation benefit of about 130 refilled slots a month (C12). Switching every template also removes the comparison needed to learn which mechanism operates."
+    },
+    {
+      "itemId": "Q12",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C7",
+        "C12"
+      ],
+      "tags": [
+        "premature"
+      ],
+      "rationale": "This would be right if H2 were confirmed, but H2 is unestablished. Reverting is costly and depends on recall clerk staffing (C12). The 2025 backlog came from a vacancy that has since been filled, so the change is not clearly harmful, only uncommitted."
+    },
+    {
+      "itemId": "Q13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C4"
+      ],
+      "tags": [
+        "harmful",
+        "punish-wrong-party",
+        "leadership-narrative"
+      ],
+      "rationale": "The call logs show the required calls continued at the same rate (C4). Warnings would punish staff for something that did not happen and would distract from the actual change."
+    },
+    {
+      "itemId": "Q14",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E6",
+        "C1",
+        "C2"
+      ],
+      "tags": [
+        "harmful",
+        "suppress-information"
+      ],
+      "rationale": "Only March\u2013April data are unreliable (E2, C8). The May\u2013Aug DNA figures are confirmed by independent billing (C1) and the chart audit (C2). Pausing the metric would hide an accurate signal of a real fall in attendance, and the manager\u0027s stated motive is to make the figures look better."
+    },
+    {
+      "itemId": "Q15",
+      "expected": "insufficient",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C3",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "tags": [
+        "central",
+        "incomplete",
+        "sufficiency"
+      ],
+      "rationale": "The problem is real (C1, C3), so \u0027do nothing\u0027 is not warranted. The two candidate fixes target different, non-separable mechanisms, and each has a known cost (C12). Committing to either clinic-wide is not justified until a test or the extract discriminates between them."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+  ],
+  "lowValueReads": [
+    "C13",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C3",
+    "C4"
+  ],
+  "authoringNotes": "The initial file leans toward the reminder explanation: three of four patient complaints mention it, and the front-desk lead raises it first. The director\u0027s front-desk-call story and the manager\u0027s counting-artefact and bus stories are the planted traps. C1, C3 and C4 dispose of all three traps. C2 and C5 are corroborating alternatives. Items C6\u2013C11 are the reads an analyst would naturally request to separate H1 from H2: delivery logs, the lead-time breakdown, the cutover weekly trend, the patient survey, and the type and specialty split. Each is written so it cannot discriminate. Receipts are not joinable to appointments, booking timestamps are not reportable, cutover outcomes are 61% complete and the paper lists are destroyed, the survey asked neither question, and lead time by type is not held. Opt-out flags were not migrated, which closes the \u0027letter-only patients\u0027 natural experiment. Legacy appointments were never booked more than 42 days ahead and the post-period is entirely Tidewell-booked, so there is no overlap for lead-time stratification. Monthly variation is flagged as noise. The vendor\u0027s view is interested (contract renewal) and only adds feasibility detail already present in E3. One offset per template creates a real trade-off, which makes A2 premature and A1\u0027s randomized split feasible. Fictional names: Hollins Vale Hospitals, Corrie Lane, Eastgate, Tidewell, Osterline Systems, Vale Transit."
+}

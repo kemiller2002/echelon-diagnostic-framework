@@ -85,6 +85,23 @@ let parseTruth (e: JsonElement) : Truth =
       LowValue = strList "lowValueReads" e |> Set.ofList
       OptimalPath = strList "optimalReadPath" e }
 
+// ---------- Class definitions (shared by authoring and revision) ----------
+let classDefinitions =
+    Map.ofList
+        [ "KNOWN", "single root cause that is findable: decisive evidence sits in one or two catalogue items among plausible distractors."
+          "INTERACT", "interacting causes: neither cause alone is sufficient, and each alone looks contradicted by a contrast case; single-cause fixes are premature."
+          "MISLEAD", "misleading evidence: the initial file contains a salient but misleading signal that only a catalogue item counters."
+          "INCOMPLETE", "decisive evidence absent: no catalogue item discriminates the two leading hypotheses, so both stay unknown and SUFF is insufficient; an evidence-gathering action is preferred."
+          "CONTRA", "contradictory sources: accounts disagree, and independence and provenance resolve which to trust; an interested party's account is contradicted by an independent record."
+          "NOCONC", "no reliable conclusion: noise, base rates or normal variation explain the signal as well as any cause; most hypotheses unknown, edges association-only or unknown, and either SUFF insufficient or 'no intervention warranted' preferred."
+          "SEQ", "sequential investigation: the discriminating second catalogue item can only be identified after reading the first; the optimal path is a specific two-step sequence."
+          "OBVWRONG", "the obvious diagnosis is wrong: the obvious cause fits the initial file perfectly but a contrast case refutes it, and a less salient cause is supported."
+          "CHANGE", "changing conditions: stage-S2 evidence reverses a stage-S1 conclusion; include asOfStage S1 items whose answers differ from the final answers."
+          "STOP", "stop early: the initial file already suffices for every item; catalogue items add nothing; SUFF is sufficient and reading zero or one item is optimal."
+          "CROSS", "cross-domain: the mechanism spans two domains, and the cause lies outside the domain that shows the symptom."
+          "ADVERS", "strategic or deceptive actor: a record or account is gamed or fabricated, and a provenance clue exposes it."
+          "CONFOUND", "hidden confounder: a strong correlation is driven by a third factor that the catalogue reveals; the tempting edge is association-only and the confounder hypothesis is supported." ]
+
 // ---------- Structural validation (pure) ----------
 let bannedPhrases =
     // "Clarity" and plain "is not" are ordinary English, so only the framework-specific forms are banned.

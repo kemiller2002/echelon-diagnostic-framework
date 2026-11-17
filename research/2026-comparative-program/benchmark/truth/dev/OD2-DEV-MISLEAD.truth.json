@@ -1,0 +1,298 @@
+{
+  "caseId": "OD2-DEV-MISLEAD",
+  "groundTruthNarrative": "The failures are caused by Fernhollow\u0027s own Finance Systems team, not by the v4.12 release. Under FIN-CHG-0187, the settlement-reconciliation job settle-recon moved from one nightly run to runs every 15 minutes between 09:00 and 21:00, starting 3 March. The job uses the same Quillmark credential as checkout. Each run sends 360\u2013430 search requests per minute for 3\u20134 minutes. That exceeds the credential\u0027s 300-per-minute limit, so Quillmark returns HTTP 429 to whatever calls arrive during those minutes, including checkout payment calls. The change was logged only in Finance\u0027s own change log, so Engineering never saw it. The v4.12 release went out at 10:40 the same day, and the alert fired at 11:20 only because morning volume was below the alert\u0027s minimum count. That timing made the release look guilty. v4.12 did make diagnosis harder: it collapses all upstream errors into one code and stops logging the raw status. But a half-fleet canary showed identical failure rates on v4.11 and v4.12, and failures started at 09:00, before the deploy. Rolling back would also undo the SEC-2291 card-number masking. Issuer declines are flat, and the 429s are scoped to Fernhollow\u0027s credential, so neither issuer behaviour nor a Quillmark-wide outage explains the failures. The 9% revenue fall coincides with the incident, but the end of a clearance sale and a change in traffic mix confound it, so its size cannot yet be attributed. Reverting the job\u0027s schedule is a quick config change. It is the best next step and is justified by the evidence now.",
+  "answers": [
+    {
+      "itemId": "Q1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C7",
+        "C10"
+      ],
+      "tags": [
+        "misleading-signal",
+        "manager-narrative",
+        "coincident-change",
+        "intervention-result"
+      ],
+      "rationale": "The initial file points strongly at v4.12: the same-day deploy, the alert 40 minutes later, and the manager\u0027s claim. In the canary (C1), half the fleet ran v4.11 and the failure rates were the same (3.7% vs 3.6%), and pool saturation was 0%. C4 shows failures (429s) starting at 09:00, before the 10:40 deploy, while payment call volume was unchanged. The release cannot explain the rise."
+    },
+    {
+      "itemId": "Q2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "E6",
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "tags": [
+        "hidden-cause",
+        "cross-team-change",
+        "shared-resource"
+      ],
+      "rationale": "C1 shows 97% of failures are HTTP 429. C4 shows the credential\u0027s limit is 300 per minute, and settle-recon search bursts of 360\u2013430 per minute began 3 March 09:00 in each quarter hour. All 429s fall in those burst minutes and are scoped to the credential. C5 documents the schedule change and the shared credential. E1 (intermittent, retry succeeds) and E6 (banks saw no attempt) fit this account."
+    },
+    {
+      "itemId": "Q3",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1",
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "C1",
+        "C4",
+        "C8"
+      ],
+      "tags": [
+        "plausible-rival",
+        "customer-facing-message"
+      ],
+      "rationale": "The customer message says \u0027card declined\u0027, but in C1 only 10 of 351 failures are issuer declines (HTTP 402). C4 shows issuer declines flat at 0.3\u20130.4%. In E6, banks report no authorisation attempt at all."
+    },
+    {
+      "itemId": "Q4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C1",
+        "C4"
+      ],
+      "tags": [
+        "vendor-account",
+        "external-cause"
+      ],
+      "rationale": "The vendor\u0027s status page (E4) is a self-interested source on its own. But C4 shows the 429s carry X-RateLimit-Scope: credential, occur only when Fernhollow\u0027s own credential exceeds its limit, and were zero before Fernhollow\u0027s call pattern changed. The failures follow Fernhollow\u0027s own request volume, not a platform-wide fault."
+    },
+    {
+      "itemId": "Q5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "C1",
+        "C3",
+        "C4"
+      ],
+      "tags": [
+        "misleading-signal",
+        "temporal-coincidence",
+        "intervention-result"
+      ],
+      "rationale": "The deploy and the rise are close in time, but the canary rollback (C1) is a direct test, and it showed no difference between versions. C4 (and C3 if read) place the onset at 09:00, before the deploy. The link is contradicted, not just unproven."
+    },
+    {
+      "itemId": "Q6",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "tags": [
+        "hidden-cause",
+        "mechanism",
+        "natural-experiment"
+      ],
+      "rationale": "Timing: the change took effect 3 March 09:00 (C5), exactly when the bursts and 429s begin (C4). Mechanism: a per-credential limit of 300/min is exceeded by bursts of 360\u2013430/min. Covariation: 429s occur only in burst minutes and were zero beforehand. Rival ruled out: payment call volume is unchanged and the release is excluded by C1. C3\u0027s maintenance-window pause, when no clusters occurred, adds a natural experiment but is not needed."
+    },
+    {
+      "itemId": "Q7",
+      "expected": "causal",
+      "weight": 1,
+      "requiredEvidence": [
+        "C1",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "E6",
+        "C1",
+        "C4"
+      ],
+      "tags": [
+        "mechanism"
+      ],
+      "rationale": "On v4.11 pods, 341 of 351 customer-facing failures are directly HTTP 429 responses (C1). E3 shows that all non-2xx responses surface to the customer as \u0027Your card was declined\u0027. Taken together, the mechanism and the direct one-to-one mapping establish the link."
+    },
+    {
+      "itemId": "Q8",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "E6",
+        "C6",
+        "C9"
+      ],
+      "tags": [
+        "confounded",
+        "leadership-narrative"
+      ],
+      "rationale": "The failures and the revenue fall happen in the same week, so they are associated. But the comparison week included the closing days of Winter Clearance, and a promotion changed traffic mix and order value in the same week (E5, C6). Many failed customers succeeded on retry (E1, E6). The evidence does not separate the incident\u0027s contribution from these confounders, so causation is not established. Nothing contradicts some contribution either."
+    },
+    {
+      "itemId": "Q9",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C4",
+        "C11"
+      ],
+      "tags": [
+        "protective-control",
+        "misleading-signal",
+        "wrong-fix"
+      ],
+      "rationale": "The canary showed rollback does not reduce failures (C1). A rollback would also remove the SEC-2291 card-number masking (E3), re-exposing card data in logs and triggering an acquirer notification (C11). The release freeze adds cost with no benefit. Before C1 this action might look preferred."
+    },
+    {
+      "itemId": "Q10",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "tags": [
+        "targeted-fix",
+        "reversible"
+      ],
+      "rationale": "This addresses the established cause directly. C5 says the revert takes effect from the next run. It is cheap and reversible, and the 429 rate gives an immediate check that it worked. A separate credential prevents a repeat."
+    },
+    {
+      "itemId": "Q11",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E5",
+        "E6",
+        "C6",
+        "C9"
+      ],
+      "tags": [
+        "premature-attribution",
+        "leadership-narrative",
+        "confounded"
+      ],
+      "rationale": "This would be right if the failures were shown to cause the 9% fall (R4). That link is only an association, confounded by the clearance-sale comparison and the promotion. Committing a board statement and a forecast restatement now is not justified."
+    },
+    {
+      "itemId": "Q12",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "C4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "C4",
+        "C5"
+      ],
+      "tags": [
+        "symptom-relief"
+      ],
+      "rationale": "A higher limit would relieve the throttling, so the request is reasonable. But C4 says it takes 3\u20135 business days and costs money, while reverting the schedule works from the next run (C5). It leaves the job\u0027s burst pattern and the shared credential in place, so it is not among the best actions."
+    },
+    {
+      "itemId": "Q13",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "tags": [
+        "decision-readiness"
+      ],
+      "rationale": "The canary result, the vendor usage data and the finance change record together establish the cause and rule out the main rival. They are enough to commit to reverting the job\u0027s schedule and to reject the rollback. The revenue attribution is still open, but it does not affect the operational decision."
+    }
+  ],
+  "discriminatingReads": [
+    "C1",
+    "C3",
+    "C4",
+    "C5"
+  ],
+  "lowValueReads": [
+    "C7",
+    "C9",
+    "C10",
+    "C12"
+  ],
+  "optimalReadPath": [
+    "C1",
+    "C4",
+    "C5"
+  ],
+  "authoringNotes": "Misleading signal: the v4.12 deploy at 10:40 on 3 March, the alert at 11:20, and the manager\u0027s confident email (E2). Initial-file hints against it are subtle: E3 says raw upstream status is no longer logged, E4 tells Fernhollow to \u0027handle all documented response codes\u0027, and in E6 banks saw no authorisation attempt. The counter-evidence is C1 (canary: identical failure rates, failures are 429s), with C3 and C4 as independent support (onset at 09:00, before the deploy). C5 reveals the cross-team change that the Engineering change board never saw. C3 is an alternative discriminating read (timing plus the pause in the maintenance window) that can stand in for C5 for H2/R2, though only C5 names the shared credential and the quick revert. C2 and C8 are reasonable requests that bear on rivals but do not change answers. C6 and C11 reinforce R4 and A1 respectively. Reviewer checks: A4 is not \u0027preferred\u0027 because C4 gives a 3\u20135 business-day lead time and a cost, against an immediate revert. A3 is \u0027premature\u0027, not \u0027harmful\u0027, because it hinges on the unestablished R4. R4 is \u0027association-only\u0027, not \u0027unknown\u0027, because co-occurrence is clearly shown in E5. H4 is \u0027contradicted\u0027 on the basis of credential-scoped 429s that track Fernhollow\u0027s own volume, not the vendor\u0027s status page alone. All names, numbers and organisations are fictional."
+}

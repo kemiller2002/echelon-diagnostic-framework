@@ -1,0 +1,299 @@
+{
+  "caseId": "OD2-DEV-STOP",
+  "groundTruthNarrative": "The 22 October run of nightly_fin_load overran because an approved but mistimed backfill (CHG-3317) ran a single UPDATE transaction on stage_orders from 00:58 to 04:18. It held an exclusive lock that blocked merge_stage_orders from 02:05:12 until 04:18:52, one second after the backfill committed. All the run\u0027s steps executed in their normal times: extract 35m, merge 27m38s, build_marts 2h15m. Without the 2h13m40s lock wait the run would have finished at about 04:49, well inside the window. Order volume was normal (4.08M vs a Thursday median of 4.01M). customer_ltv took 19 minutes, in line with its previous seven runs. Corvane\u0027s incident (02:52\u201303:37) came while the merge was idle and waiting. The backfill itself ran 3h20m41s against a 3h18m dry run, so the incident did not meaningfully extend the lock. The process gap is that the change board does not involve the batch owner, and the job has no lock-wait alert. Nobody can yet say whether Varga meant \u00271:00\u0027 as 13:00 or deliberately ran it overnight: Varga is on leave, and the evidence fits both readings. The banner did its job and stopped stale margins going into the flash pack. The retention team depends on customer_ltv. The initial file is enough for every item, and no catalogue item changes any answer.",
+  "answers": [
+    {
+      "itemId": "Q1",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C1",
+        "C5"
+      ],
+      "tags": [
+        "central",
+        "stop-early"
+      ],
+      "rationale": "E2 shows the merge blocked by pid 48812 from 02:05:12 to 04:18:52. E3 identifies pid 48812 as the backfill UPDATE, which committed at 04:18:51, and lists no other blocked sessions. Every step\u0027s executing time was normal, so the wait accounts for the overrun."
+    },
+    {
+      "itemId": "Q2",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1",
+        "C3"
+      ],
+      "tags": [
+        "misleading-signal",
+        "leadership-narrative"
+      ],
+      "rationale": "E5: 4.08M rows on 22 Oct against a Thursday median of 4.01M. E2: extract, merge execution and build_marts durations were all near their medians. Volume did not drive the overrun."
+    },
+    {
+      "itemId": "Q3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1",
+        "C4"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "misleading-signal"
+      ],
+      "rationale": "customer_ltv took 19m on 22 Oct, within its 17\u201321m range over the seven earlier runs, all of which finished on time. It adds about 5 minutes to the median, nowhere near a 62-minute overrun. build_marts ran 2h15m against a 2h09m median."
+    },
+    {
+      "itemId": "Q4",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E4",
+        "E6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E6",
+        "C2",
+        "C5"
+      ],
+      "tags": [
+        "external-cause",
+        "misleading-signal",
+        "leadership-narrative"
+      ],
+      "rationale": "The incident (02:52\u201303:37) fell entirely inside the merge\u0027s lock wait, when the job was not executing. Every step that ran outside that period took its normal time. The blocking backfill ran 3h20m41s against its 3h18m dry-run estimate, so the incident did not meaningfully prolong the lock."
+    },
+    {
+      "itemId": "Q5",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E3",
+        "C6",
+        "C11"
+      ],
+      "tags": [
+        "unknown",
+        "attribution"
+      ],
+      "rationale": "The approved window was 13:00 and the note said \u00271:00 Thursday\u0027, which fits a 12-hour slip. But Varga\u0027s previous backfill was approved for and run overnight, which fits a deliberate choice. Varga has not been contacted, and no record shows the intent. The catalogue (C6, C11) does not settle it either."
+    },
+    {
+      "itemId": "Q6",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1"
+      ],
+      "tags": [
+        "central",
+        "mechanism"
+      ],
+      "rationale": "The lock record names the backfill as the blocker, and the wait began when the merge requested the lock. The merge acquired the lock one second after the backfill committed. This gives the mechanism, the timing and the identity of the blocker directly."
+    },
+    {
+      "itemId": "Q7",
+      "expected": "causal",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "C1"
+      ],
+      "tags": [
+        "mechanism"
+      ],
+      "rationale": "The steps executed in normal times, so the run would have ended at about 04:49 without the 2h13m40s wait. With the wait it ended at 07:02. The wait alone explains why the run went past 06:00."
+    },
+    {
+      "itemId": "Q8",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E6",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E6",
+        "C2",
+        "C5"
+      ],
+      "tags": [
+        "external-cause",
+        "misleading-signal"
+      ],
+      "rationale": "The incident overlapped only the idle lock wait. The blocking backfill finished close to its estimated runtime, and the steps that executed did so at normal speed. The evidence counts against any link to the late finish."
+    },
+    {
+      "itemId": "Q9",
+      "expected": "association-only",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C7",
+        "C12"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "Monday runs are longer, and the snapshot runs on Mondays, so the two co-occur. But Monday runs also load about 1.4\u00D7 the rows. No evidence separates the snapshot from volume, so causation is not established. C7 and C12 repeat the same confounded pattern."
+    },
+    {
+      "itemId": "Q10",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "C6",
+        "C10",
+        "C11"
+      ],
+      "tags": [
+        "central",
+        "process-gap"
+      ],
+      "rationale": "This targets the established mechanism directly. The batch owner was not a stakeholder (E4), writes overlapped the batch window (E3), and the only alert was the 06:00 deadline check (E2). It works whatever the implementer intended."
+    },
+    {
+      "itemId": "Q11",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C11"
+      ],
+      "tags": [
+        "premature",
+        "attribution"
+      ],
+      "rationale": "A finding could be justified if the deviation was deliberate (H5 false). But intent is unestablished and Varga has not been heard. The change board process also allowed the conflict, so committing now is not justified."
+    },
+    {
+      "itemId": "Q12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E5",
+        "E7",
+        "C4"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "harmful"
+      ],
+      "rationale": "customer_ltv played no part in the overrun (H3 is contradicted, so this is not merely premature). The retention team depends on it every morning (E7), so removing it would worsen outcomes for no benefit."
+    },
+    {
+      "itemId": "Q13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E7"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E7",
+        "C8"
+      ],
+      "tags": [
+        "protective-control",
+        "harmful"
+      ],
+      "rationale": "The banner stopped stale margins going into the 07:30 flash pack (E7). Switching it off would disable a protective control and hide information."
+    },
+    {
+      "itemId": "Q14",
+      "expected": "sufficient",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "tags": [
+        "stop-early",
+        "central"
+      ],
+      "rationale": "The initial file establishes the mechanism and rules out the rival explanations, which is enough to commit to A1 now. The remaining unknown (implementer intent) affects only the personnel action, not the fix."
+    }
+  ],
+  "discriminatingReads": [],
+  "lowValueReads": [
+    "C3",
+    "C7",
+    "C8",
+    "C9",
+    "C12",
+    "C13"
+  ],
+  "optimalReadPath": [],
+  "authoringNotes": "STOP case. The traps are the VP\u0027s two-cause story (E1), the vendor incident landing during the outage window (E6), and the new model added the week before. All three are dismissed by careful reading of E2, E3, E4 and E5: the steps executed in normal times, the wait began and ended at the same moments as the backfill\u0027s lock, and the backfill ran within 3 minutes of its dry-run estimate. Catalogue items are confirmatory or peripheral. C2 says already-running statements were little affected, which is consistent with the backfill\u0027s near-estimate runtime. C6 and C11 deliberately leave H5 open: the at queue is not retained, and the chair cannot say what Varga meant. No catalogue item separates snapshot from volume for R4: there is no step-level Monday breakdown and no paused-snapshot period. Upgrading to the next Corvane tier (raised in E1) is deliberately not a scored action, to avoid a preferred/acceptable/harmful ambiguity. Dates check out: 22 Oct 2026 is a Thursday, and 28 Sep and 5, 12 and 19 Oct are Mondays. Arithmetic: 01:30:02 to 07:02:15 = 5h32m13s, and 00:58:10 to 04:18:51 = 3h20m41s."
+}

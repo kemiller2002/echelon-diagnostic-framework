@@ -1,0 +1,697 @@
+{
+  "label": "OD2-DEV-MISLEAD",
+  "ok": true,
+  "error": null,
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "reportedModels": [
+    "claude-opus-5-5"
+  ],
+  "inputTokens": 4,
+  "cacheReadTokens": 4331,
+  "cacheCreationTokens": 7263,
+  "outputTokens": 28248,
+  "thinkingTokens": 18015,
+  "costUsd": 0.6239462,
+  "durationMs": 281652,
+  "numTurns": 3,
+  "toolCalls": [
+    {
+      "name": "Read",
+      "input": "{\u0022file_path\u0022:\u0022/tmp/claude-0/-home-claude/632e1abf-15a1-57e7-8528-fcfc7b34796c/scratchpad/od2work/author/OD2-DEV-MISLEAD/task.md\u0022}"
+    },
+    {
+      "name": "StructuredOutput",
+      "input": "{\u0022case\u0022:{\u0022id\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022split\u0022:\u0022dev\u0022,\u0022benchmarkClass\u0022:\u0022MISLEAD\u0022,\u0022domain\u0022:\u0022technical\u0022,\u0022title\u0022:\u0022Checkout payment failures after the v4.12 release\u0022,\u0022setting\u0022:\u0022Fernhollow Outfitters is a fictional online outdoor-gear retailer. Its checkout service, checkout-api (16 pods), sends card payments to an external gateway, Quillmark Payments, using API credentials. Since 3 March, roughly one payment attempt in 27 has failed, and the failures come and go. A new checkout release (v4.12) went out that morning, and a spring promotion started the same day. Engineering wants to roll the release back, and Finance wants a revenue-impact figure for the board.\u0022,\u0022presentingRequest\u0022:\u0022The Head of Engineering asks: what is causing the intermittent payment failures since 3 March, should we approve the full rollback of checkout-api v4.12, and what should we do now?\u0022,\u0022initialEvidence\u0022:[{\u0022id\u0022:\u0022E1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Incident ticket INC-4471, checkout on-call\u0022,\u0022sourceType\u0022:\u0022system-record\u0022,\u0022text\u0022:\u0022INC-4471 opened 3 March 11:20 by paging alert checkout_payment_failure_rate (rule: 30-minute failure rate at least 2% AND at least 40 failed attempts). Daily payment-attempt failure rate, checkout-api: 28 Feb 0.4%, 1 Mar 0.4%, 2 Mar 0.5%, 3 Mar 3.4%, 4 Mar 3.9%, 5 Mar 3.6%, 6 Mar 3.8%. All new failures carry error code PAYMENT_UPSTREAM_REJECTED. On-call summary: \u0027Intermittent. A customer fails, retries a few minutes later, often succeeds.\u0027 No pod restarts and no gateway timeouts recorded.\u0022},{\u0022id\u0022:\u0022E2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Dara Okonjo, Engineering Manager, Checkout, 6 March\u0022,\u0022sourceType\u0022:\u0022manager-account\u0022,\u0022text\u0022:\u0022Subject: INC-4471, we know what this is. v4.12 shipped 3 March at 10:40 and the alert fired forty minutes later. The failure rate went from half a percent to nearly four overnight and has stayed there. v4.12 replaced our gateway HTTP client and connection-pool settings, which is exactly the code path that\u0027s failing. Quillmark\u0027s status page is green, so it isn\u0027t them. I want approval to roll the whole fleet back to v4.11 tonight and freeze checkout releases until we\u0027ve rewritten the client. Dara\u0022},{\u0022id\u0022:\u0022E3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Release notes, checkout-api v4.12 (CHG-2214)\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022checkout-api v4.12, deployed 3 March 10:40, CHG-2214, approved by Engineering CAB. Changes: (1) Gateway client moved to a new HTTP library; connection pool size raised from 50 to 64. (2) Error handling: every non-2xx response from the payment gateway now maps to one code, PAYMENT_UPSTREAM_REJECTED. The raw upstream status is no longer logged at INFO level. The customer message is unchanged: \u0027Your card was declined. Please try another card or try again.\u0027 (3) Security: partial card numbers previously written to debug logs are now masked, closing audit finding SEC-2291 (remediation deadline 13 March). A rollback to v4.11 reverts all three changes.\u0022},{\u0022id\u0022:\u0022E4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Quillmark Payments status page capture and support ticket TS-90412\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Quillmark status page, captured 6 March 08:00: \u0027All systems operational\u0027 for Authorisation API, Search API and Merchant Dashboard on every day from 1 to 6 March; no incidents posted. Support ticket TS-90412, Quillmark reply of 5 March: \u0027We see no platform-wide incidents during the period. Our records show your requests are reaching us. Please review your integration and confirm you are handling all documented response codes.\u0027\u0022},{\u0022id\u0022:\u0022E5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Email from Priya Halvorsen, CFO, 6 March\u0022,\u0022sourceType\u0022:\u0022leadership-account\u0022,\u0022text\u0022:\u0022Gross online revenue for the week to 6 March is down 9% on the prior week. The prior week did include the final days of Winter Clearance, which ended 1 March, and Spring Trail Sale launched on 3 March, but I\u0027m clear in my mind that the checkout failures are what cost us. I need a figure for the board pack on Monday, and I expect us to restate the Q1 forecast on the back of it.\u0022},{\u0022id\u0022:\u0022E6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022source\u0022:\u0022Customer Care lead Tomasz Reyes, notes for INC-4471 bridge call, 5 March\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022238 customer contacts since 3 March about declined cards. Most say the decline came \u0027out of nowhere\u0027 and that a retry a few minutes later worked. Eleven customers phoned their bank. In nine of those cases the bank said it had no record of any authorisation attempt at the time of the failure. Agents have been advising customers to try a different card.\u0022}],\u0022catalogue\u0022:[{\u0022id\u0022:\u0022C1\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Canary rollback test results, CHG-2231, 5 March 12:00\u201318:00\u0022,\u0022source\u0022:\u0022Checkout platform team\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022CHG-2231 canary, 5 March 12:00\u201318:00. 8 of 16 checkout-api pods rolled back to v4.11; the load balancer split traffic evenly. Results: v4.11 pods had 9,412 payment attempts with 351 failures (3.7%). v4.12 pods had 9,388 attempts with 338 failures (3.6%). v4.11 pods still log the raw gateway status. Of their 351 failures, 341 were HTTP 429 \u0027Too Many Requests\u0027 and 10 were HTTP 402 card declines. Connection-pool saturation was 0% on both versions. The canary was reverted at 18:05 because v4.11 lacks the SEC-2291 card-number masking.\u0022},{\u0022id\u0022:\u0022C2\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022checkout-api pod resource and connection-pool metrics, 1\u20136 March\u0022,\u0022source\u0022:\u0022Platform monitoring\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022checkout-api, 16 pods, 1\u20136 March. CPU utilisation 22\u201341% at daily peaks, with no change after 3 March. Memory flat at about 1.1 GB per pod. Gateway connection-pool utilisation peaked at 31% (pool size 64 after v4.12, 50 before). p99 gateway call latency was 430 ms before the release and 410 ms after. Zero socket timeouts and zero connection-refused errors in the period. No autoscaling events.\u0022},{\u0022id\u0022:\u0022C3\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Per-minute payment failure counts, 3\u20136 March\u0022,\u0022source\u0022:\u0022Checkout analytics\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Per-minute failed payment attempts, 3\u20136 March. The first cluster was 3 March 09:00\u201309:03 (14 failures out of 61 attempts), followed by clusters at 09:15, 09:30, 09:45, 10:00, 10:15 and 10:30. All of these came before the 10:40 deploy, and morning volume stayed below the alert\u0027s minimum count until 11:20. Across 3\u20136 March, 93% of failures fall in minutes :00\u2013:03, :15\u2013:18, :30\u2013:33 and :45\u2013:48 between 09:00 and 21:00. Outside those minutes the failure rate is 0.4%. No clusters overnight. On 6 March 13:00\u201315:00, during a scheduled finance ERP maintenance window, no clusters occurred. They resumed at 15:00.\u0022},{\u0022id\u0022:\u0022C4\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Quillmark API usage report for credential fernhollow-prod-01, 1\u20136 March\u0022,\u0022source\u0022:\u0022Quillmark account team\u0022,\u0022sourceType\u0022:\u0022vendor-account\u0022,\u0022text\u0022:\u0022Prepared 6 March. Credential fernhollow-prod-01. Rate limit: 300 requests/minute per credential, all endpoints combined. 1\u20132 March: /v2/payments peaked at 52/min; /v2/transactions/search near zero in the daytime, with one nightly run at 02:00 (about 1,900 calls over 9 minutes). From 3 March 09:00: /v2/transactions/search bursts of 360\u2013430/min in the first 3\u20134 minutes of each quarter hour, 09:00\u201321:00, user-agent \u0027settle-recon/2.3\u0027. /v2/payments steady at 30\u201358/min. HTTP 429 responses: 0 on 1\u20132 March; 4,980\u20136,310 per day on 3\u20136 March, all within burst minutes, header X-RateLimit-Scope: credential. Issuer declines steady at 0.3\u20130.4% of payments. Temporary limit increases take 3\u20135 business days and are chargeable.\u0022},{\u0022id\u0022:\u0022C5\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Finance Systems change log, February\u2013March\u0022,\u0022source\u0022:\u0022Finance Systems team\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022FIN-CHG-0187. Raised by Finance Systems (owner L. Marchetti); approved by the Finance Systems lead on 27 February. \u0027Settlement reconciliation job settle-recon: schedule changed from nightly 02:00 to every 15 minutes, 09:00\u201321:00, effective 3 March, to support same-day payout reporting requested by Treasury.\u0027 Gateway credential: existing fernhollow-prod-01, shared with checkout. Rollback: revert the scheduler cron entry; takes effect from the next run. Note: Finance Systems changes are tracked in this log and were not submitted to the Engineering CAB.\u0022},{\u0022id\u0022:\u0022C6\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Marketing performance report, Spring Trail Sale, 3\u20136 March\u0022,\u0022source\u0022:\u0022Digital marketing team\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022Spring Trail Sale, 3\u20136 March, compared with the prior week (24\u201327 Feb, the closing days of Winter Clearance). Sessions up 24%, and 61% of the extra sessions came from a new display-ad campaign. Site conversion rate fell from 3.1% to 2.5%. Average order value fell from \u00A374 to \u00A368. Clearance week had included a final-days \u0027extra 20% off\u0027 push. The report does not break revenue down by checkout outcome.\u0022},{\u0022id\u0022:\u0022C7\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Interview with the engineer who built the v4.12 gateway client\u0022,\u0022source\u0022:\u0022Interview notes, Sana Oyelaran, senior engineer, 6 March\u0022,\u0022sourceType\u0022:\u0022staff-account\u0022,\u0022text\u0022:\u0022Sana Oyelaran, author of the new gateway client: \u0027We load-tested the client at three times last year\u0027s peak in staging against Quillmark\u0027s sandbox and saw no errors. The pool change was conservative, from 50 to 64. Collapsing the error codes was a product request so customers see one consistent message. I\u0027d be surprised if it\u0027s the client, but I can\u0027t prove that from staging results alone.\u0027\u0022},{\u0022id\u0022:\u0022C8\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u00223-D Secure challenge and fraud-screening statistics, 24 Feb\u20136 March\u0022,\u0022source\u0022:\u0022Payments risk team\u0022,\u0022sourceType\u0022:\u0022telemetry\u0022,\u0022text\u0022:\u0022Daily 3-D Secure challenge rate 11.2\u201312.1% of card payments, 24 Feb\u20136 March, no step change. Challenge completion rate 88\u201390%. In-house fraud-screen rejections 0.2% of attempts every day. No fraud rule changes deployed in the period. Fraud-screen rejections surface to customers under a separate error code, FRAUD_HOLD, which does not appear in INC-4471.\u0022},{\u0022id\u0022:\u0022C9\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Sample of 50 Customer Care tickets, 3\u20136 March\u0022,\u0022source\u0022:\u0022Customer Care\u0022,\u0022sourceType\u0022:\u0022customer-account\u0022,\u0022text\u0022:\u0022Random sample of 50 tickets tagged \u0027payment\u0027 from 3\u20136 March. 44 mention a declined card. 31 customers completed the order on a later retry, 6 said they abandoned, and 7 were unclear. 3 complained of duplicate charges; all were verified as pending authorisations released within 48 hours. Several customers mention the sale price as their reason for persisting.\u0022},{\u0022id\u0022:\u0022C10\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Peer review record for the v4.12 gateway client change (PR #1187)\u0022,\u0022source\u0022:\u0022Source control system\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022PR #1187, merged 2 March. Two approvals. 412 unit tests and 38 integration tests passed. Reviewer comment: \u0027Error mapping simplification loses upstream status detail. Accepted per product request.\u0027 Second reviewer: \u0027Pool sizing fine. Retry policy unchanged: one retry on timeout only, none on HTTP error responses.\u0027 No open review threads at merge.\u0022},{\u0022id\u0022:\u0022C11\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Internal audit finding SEC-2291 and remediation correspondence\u0022,\u0022source\u0022:\u0022Internal Audit\u0022,\u0022sourceType\u0022:\u0022document\u0022,\u0022text\u0022:\u0022SEC-2291, raised 9 February: checkout-api debug logs contained partial card numbers (more than first six and last four digits) for about 0.8% of requests, retained for 30 days in the central log store. Remediation deadline 13 March. Audit memo: \u0027Any regression after remediation must be reported to the acquiring bank within 5 business days.\u0027 Status: closed by v4.12 on 3 March, pending audit verification.\u0022},{\u0022id\u0022:\u0022C12\u0022,\u0022stage\u0022:\u0022S1\u0022,\u0022title\u0022:\u0022Gateway TLS certificate, DNS and egress firewall change history, January\u2013March\u0022,\u0022source\u0022:\u0022Platform team\u0022,\u0022sourceType\u0022:\u0022change-record\u0022,\u0022text\u0022:\u0022Quillmark gateway endpoint certificate last rotated 14 January; next rotation due 14 July. No DNS changes for api.quillmark.example in February or March. Egress firewall and NAT rules for checkout-api unchanged since 20 February. No proxy or service-mesh changes in the period. No TLS handshake errors in checkout-api logs, 1\u20136 March.\u0022}],\u0022candidates\u0022:{\u0022hypotheses\u0022:[{\u0022id\u0022:\u0022H1\u0022,\u0022text\u0022:\u0022A defect in checkout-api v4.12 (the new gateway HTTP client or its connection-pool settings) is causing the rise in payment failures.\u0022},{\u0022id\u0022:\u0022H2\u0022,\u0022text\u0022:\u0022Quillmark is throttling Fernhollow\u0027s shared gateway credential because the finance settlement-reconciliation job\u0027s quarter-hourly search bursts push it over its per-credential rate limit, and checkout payment calls are rejected as a result.\u0022},{\u0022id\u0022:\u0022H3\u0022,\u0022text\u0022:\u0022A real rise in card issuers declining payments (for example tighter issuer fraud rules) is driving the rise in failures.\u0022},{\u0022id\u0022:\u0022H4\u0022,\u0022text\u0022:\u0022A platform-wide degradation at Quillmark, affecting its merchants generally, is causing the failures.\u0022}],\u0022edges\u0022:[{\u0022id\u0022:\u0022R1\u0022,\u0022from\u0022:\u0022Deployment of checkout-api v4.12 on 3 March at 10:40\u0022,\u0022to\u0022:\u0022Rise in checkout payment failure rate from about 0.4% to about 3.7%\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R2\u0022,\u0022from\u0022:\u0022settle-recon moved to a 15-minute daytime schedule on the shared credential fernhollow-prod-01 (FIN-CHG-0187)\u0022,\u0022to\u0022:\u0022Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R3\u0022,\u0022from\u0022:\u0022Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01\u0022,\u0022to\u0022:\u0022Customers seeing \u0027card declined\u0027 failures at checkout\u0022,\u0022relation\u0022:\u0022causes\u0022},{\u0022id\u0022:\u0022R4\u0022,\u0022from\u0022:\u0022Rise in checkout payment failure rate since 3 March\u0022,\u0022to\u0022:\u00229% week-on-week fall in gross online revenue for the week to 6 March\u0022,\u0022relation\u0022:\u0022causes\u0022}],\u0022actions\u0022:[{\u0022id\u0022:\u0022A1\u0022,\u0022text\u0022:\u0022Roll the full checkout-api fleet back to v4.11 tonight and freeze checkout releases until the gateway client is rewritten.\u0022},{\u0022id\u0022:\u0022A2\u0022,\u0022text\u0022:\u0022Revert settle-recon to its nightly schedule (or pause its daytime runs) now, then watch the 429 rate and payment failure rate to confirm recovery, and give the job its own credential before any future daytime schedule.\u0022},{\u0022id\u0022:\u0022A3\u0022,\u0022text\u0022:\u0022Tell the board the payment incident caused the 9% week-on-week revenue fall and restate the Q1 revenue forecast on that basis.\u0022},{\u0022id\u0022:\u0022A4\u0022,\u0022text\u0022:\u0022Ask Quillmark for a temporary increase in the rate limit for credential fernhollow-prod-01.\u0022}]},\u0022scoredItems\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022refId\u0022:\u0022H1\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022refId\u0022:\u0022H2\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022refId\u0022:\u0022H3\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022refId\u0022:\u0022H4\u0022,\u0022type\u0022:\u0022hypothesis\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022supported\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022refId\u0022:\u0022R1\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022refId\u0022:\u0022R2\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022refId\u0022:\u0022R3\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022refId\u0022:\u0022R4\u0022,\u0022type\u0022:\u0022edge\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022causal\u0022,\u0022association-only\u0022,\u0022contradicted\u0022,\u0022unknown\u0022]},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022refId\u0022:\u0022A1\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022refId\u0022:\u0022A2\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022refId\u0022:\u0022A3\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022refId\u0022:\u0022A4\u0022,\u0022type\u0022:\u0022action\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022preferred\u0022,\u0022acceptable\u0022,\u0022premature\u0022,\u0022harmful\u0022]},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022refId\u0022:\u0022SUFF\u0022,\u0022type\u0022:\u0022sufficiency\u0022,\u0022asOfStage\u0022:null,\u0022allowedAnswers\u0022:[\u0022sufficient\u0022,\u0022insufficient\u0022]}]},\u0022truth\u0022:{\u0022caseId\u0022:\u0022OD2-DEV-MISLEAD\u0022,\u0022groundTruthNarrative\u0022:\u0022The failures are caused by Fernhollow\u0027s own Finance Systems team, not by the v4.12 release. Under FIN-CHG-0187, the settlement-reconciliation job settle-recon moved from one nightly run to runs every 15 minutes between 09:00 and 21:00, starting 3 March. The job uses the same Quillmark credential as checkout. Each run sends 360\u2013430 search requests per minute for 3\u20134 minutes. That exceeds the credential\u0027s 300-per-minute limit, so Quillmark returns HTTP 429 to whatever calls arrive during those minutes, including checkout payment calls. The change was logged only in Finance\u0027s own change log, so Engineering never saw it. The v4.12 release went out at 10:40 the same day, and the alert fired at 11:20 only because morning volume was below the alert\u0027s minimum count. That timing made the release look guilty. v4.12 did make diagnosis harder: it collapses all upstream errors into one code and stops logging the raw status. But a half-fleet canary showed identical failure rates on v4.11 and v4.12, and failures started at 09:00, before the deploy. Rolling back would also undo the SEC-2291 card-number masking. Issuer declines are flat, and the 429s are scoped to Fernhollow\u0027s credential, so neither issuer behaviour nor a Quillmark-wide outage explains the failures. The 9% revenue fall coincides with the incident, but the end of a clearance sale and a change in traffic mix confound it, so its size cannot yet be attributed. Reverting the job\u0027s schedule is a quick config change. It is the best next step and is justified by the evidence now.\u0022,\u0022answers\u0022:[{\u0022itemId\u0022:\u0022Q1\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C2\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C7\u0022,\u0022C10\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022manager-narrative\u0022,\u0022coincident-change\u0022,\u0022intervention-result\u0022],\u0022rationale\u0022:\u0022The initial file points strongly at v4.12: the same-day deploy, the alert 40 minutes later, and the manager\u0027s claim. In the canary (C1), half the fleet ran v4.11 and the failure rates were the same (3.7% vs 3.6%), and pool saturation was 0%. C4 shows failures (429s) starting at 09:00, before the 10:40 deploy, while payment call volume was unchanged. The release cannot explain the rise.\u0022},{\u0022itemId\u0022:\u0022Q2\u0022,\u0022expected\u0022:\u0022supported\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E4\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022hidden-cause\u0022,\u0022cross-team-change\u0022,\u0022shared-resource\u0022],\u0022rationale\u0022:\u0022C1 shows 97% of failures are HTTP 429. C4 shows the credential\u0027s limit is 300 per minute, and settle-recon search bursts of 360\u2013430 per minute began 3 March 09:00 in each quarter hour. All 429s fall in those burst minutes and are scoped to the credential. C5 documents the schedule change and the shared credential. E1 (intermittent, retry succeeds) and E6 (banks saw no attempt) fit this account.\u0022},{\u0022itemId\u0022:\u0022Q3\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E3\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C8\u0022],\u0022tags\u0022:[\u0022plausible-rival\u0022,\u0022customer-facing-message\u0022],\u0022rationale\u0022:\u0022The customer message says \u0027card declined\u0027, but in C1 only 10 of 351 failures are issuer declines (HTTP 402). C4 shows issuer declines flat at 0.3\u20130.4%. In E6, banks report no authorisation attempt at all.\u0022},{\u0022itemId\u0022:\u0022Q4\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E4\u0022,\u0022C1\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022vendor-account\u0022,\u0022external-cause\u0022],\u0022rationale\u0022:\u0022The vendor\u0027s status page (E4) is a self-interested source on its own. But C4 shows the 429s carry X-RateLimit-Scope: credential, occur only when Fernhollow\u0027s own credential exceeds its limit, and were zero before Fernhollow\u0027s call pattern changed. The failures follow Fernhollow\u0027s own request volume, not a platform-wide fault.\u0022},{\u0022itemId\u0022:\u0022Q5\u0022,\u0022expected\u0022:\u0022contradicted\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022misleading-signal\u0022,\u0022temporal-coincidence\u0022,\u0022intervention-result\u0022],\u0022rationale\u0022:\u0022The deploy and the rise are close in time, but the canary rollback (C1) is a direct test, and it showed no difference between versions. C4 (and C3 if read) place the onset at 09:00, before the deploy. The link is contradicted, not just unproven.\u0022},{\u0022itemId\u0022:\u0022Q6\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022hidden-cause\u0022,\u0022mechanism\u0022,\u0022natural-experiment\u0022],\u0022rationale\u0022:\u0022Timing: the change took effect 3 March 09:00 (C5), exactly when the bursts and 429s begin (C4). Mechanism: a per-credential limit of 300/min is exceeded by bursts of 360\u2013430/min. Covariation: 429s occur only in burst minutes and were zero beforehand. Rival ruled out: payment call volume is unchanged and the release is excluded by C1. C3\u0027s maintenance-window pause, when no clusters occurred, adds a natural experiment but is not needed.\u0022},{\u0022itemId\u0022:\u0022Q7\u0022,\u0022expected\u0022:\u0022causal\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E3\u0022,\u0022E6\u0022,\u0022C1\u0022,\u0022C4\u0022],\u0022tags\u0022:[\u0022mechanism\u0022],\u0022rationale\u0022:\u0022On v4.11 pods, 341 of 351 customer-facing failures are directly HTTP 429 responses (C1). E3 shows that all non-2xx responses surface to the customer as \u0027Your card was declined\u0027. Taken together, the mechanism and the direct one-to-one mapping establish the link.\u0022},{\u0022itemId\u0022:\u0022Q8\u0022,\u0022expected\u0022:\u0022association-only\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022confounded\u0022,\u0022leadership-narrative\u0022],\u0022rationale\u0022:\u0022The failures and the revenue fall happen in the same week, so they are associated. But the comparison week included the closing days of Winter Clearance, and a promotion changed traffic mix and order value in the same week (E5, C6). Many failed customers succeeded on retry (E1, E6). The evidence does not separate the incident\u0027s contribution from these confounders, so causation is not established. Nothing contradicts some contribution either.\u0022},{\u0022itemId\u0022:\u0022Q9\u0022,\u0022expected\u0022:\u0022harmful\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022E3\u0022],\u0022allowedEvidence\u0022:[\u0022E2\u0022,\u0022E3\u0022,\u0022C1\u0022,\u0022C4\u0022,\u0022C11\u0022],\u0022tags\u0022:[\u0022protective-control\u0022,\u0022misleading-signal\u0022,\u0022wrong-fix\u0022],\u0022rationale\u0022:\u0022The canary showed rollback does not reduce failures (C1). A rollback would also remove the SEC-2291 card-number masking (E3), re-exposing card data in logs and triggering an acquirer notification (C11). The release freeze adds cost with no benefit. Before C1 this action might look preferred.\u0022},{\u0022itemId\u0022:\u0022Q10\u0022,\u0022expected\u0022:\u0022preferred\u0022,\u0022weight\u0022:3,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022targeted-fix\u0022,\u0022reversible\u0022],\u0022rationale\u0022:\u0022This addresses the established cause directly. C5 says the revert takes effect from the next run. It is cheap and reversible, and the 429 rate gives an immediate check that it worked. A separate credential prevents a repeat.\u0022},{\u0022itemId\u0022:\u0022Q11\u0022,\u0022expected\u0022:\u0022premature\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022E5\u0022],\u0022allowedEvidence\u0022:[\u0022E1\u0022,\u0022E5\u0022,\u0022E6\u0022,\u0022C6\u0022,\u0022C9\u0022],\u0022tags\u0022:[\u0022premature-attribution\u0022,\u0022leadership-narrative\u0022,\u0022confounded\u0022],\u0022rationale\u0022:\u0022This would be right if the failures were shown to cause the 9% fall (R4). That link is only an association, confounded by the clearance-sale comparison and the promotion. Committing a board statement and a forecast restatement now is not justified.\u0022},{\u0022itemId\u0022:\u0022Q12\u0022,\u0022expected\u0022:\u0022acceptable\u0022,\u0022weight\u0022:1,\u0022requiredEvidence\u0022:[\u0022C4\u0022,\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022symptom-relief\u0022],\u0022rationale\u0022:\u0022A higher limit would relieve the throttling, so the request is reasonable. But C4 says it takes 3\u20135 business days and costs money, while reverting the schedule works from the next run (C5). It leaves the job\u0027s burst pattern and the shared credential in place, so it is not among the best actions.\u0022},{\u0022itemId\u0022:\u0022Q13\u0022,\u0022expected\u0022:\u0022sufficient\u0022,\u0022weight\u0022:2,\u0022requiredEvidence\u0022:[\u0022C1\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022allowedEvidence\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022tags\u0022:[\u0022decision-readiness\u0022],\u0022rationale\u0022:\u0022The canary result, the vendor usage data and the finance change record together establish the cause and rule out the main rival. They are enough to commit to reverting the job\u0027s schedule and to reject the rollback. The revenue attribution is still open, but it does not affect the operational decision.\u0022}],\u0022discriminatingReads\u0022:[\u0022C1\u0022,\u0022C3\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022lowValueReads\u0022:[\u0022C7\u0022,\u0022C9\u0022,\u0022C10\u0022,\u0022C12\u0022],\u0022optimalReadPath\u0022:[\u0022C1\u0022,\u0022C4\u0022,\u0022C5\u0022],\u0022authoringNotes\u0022:\u0022Misleading signal: the v4.12 deploy at 10:40 on 3 March, the alert at 11:20, and the manager\u0027s confident email (E2). Initial-file hints against it are subtle: E3 says raw upstream status is no longer logged, E4 tells Fernhollow to \u0027handle all documented response codes\u0027, and in E6 banks saw no authorisation attempt. The counter-evidence is C1 (canary: identical failure rates, failures are 429s), with C3 and C4 as independent support (onset at 09:00, before the deploy). C5 reveals the cross-team change that the Engineering change board never saw. C3 is an alternative discriminating read (timing plus the pause in the maintenance window) that can stand in for C5 for H2/R2, though only C5 names the shared credential and the quick revert. C2 and C8 are reasonable requests that bear on rivals but do not change answers. C6 and C11 reinforce R4 and A1 respectively. Reviewer checks: A4 is not \u0027preferred\u0027 because C4 gives a 3\u20135 business-day lead time and a cost, against an immediate revert. A3 is \u0027premature\u0027, not \u0027harmful\u0027, because it hinges on the unestablished R4. R4 is \u0027association-only\u0027, not \u0027unknown\u0027, because co-occurrence is clearly shown in E5. H4 is \u0027contradicted\u0027 on the basis of credential-scoped 429s that track Fernhollow\u0027s own volume, not the vendor\u0027s status page alone. All names, numbers and organisations are fictional.\u0022}}"
+    }
+  ],
+  "startedAt": "2026-11-17T14:13:02.0496424Z",
+  "finishedAt": "2026-11-17T14:17:44.4422338Z",
+  "output": {
+    "case": {
+      "id": "OD2-DEV-MISLEAD",
+      "split": "dev",
+      "benchmarkClass": "MISLEAD",
+      "domain": "technical",
+      "title": "Checkout payment failures after the v4.12 release",
+      "setting": "Fernhollow Outfitters is a fictional online outdoor-gear retailer. Its checkout service, checkout-api (16 pods), sends card payments to an external gateway, Quillmark Payments, using API credentials. Since 3 March, roughly one payment attempt in 27 has failed, and the failures come and go. A new checkout release (v4.12) went out that morning, and a spring promotion started the same day. Engineering wants to roll the release back, and Finance wants a revenue-impact figure for the board.",
+      "presentingRequest": "The Head of Engineering asks: what is causing the intermittent payment failures since 3 March, should we approve the full rollback of checkout-api v4.12, and what should we do now?",
+      "initialEvidence": [
+        {
+          "id": "E1",
+          "stage": "S1",
+          "source": "Incident ticket INC-4471, checkout on-call",
+          "sourceType": "system-record",
+          "text": "INC-4471 opened 3 March 11:20 by paging alert checkout_payment_failure_rate (rule: 30-minute failure rate at least 2% AND at least 40 failed attempts). Daily payment-attempt failure rate, checkout-api: 28 Feb 0.4%, 1 Mar 0.4%, 2 Mar 0.5%, 3 Mar 3.4%, 4 Mar 3.9%, 5 Mar 3.6%, 6 Mar 3.8%. All new failures carry error code PAYMENT_UPSTREAM_REJECTED. On-call summary: \u0027Intermittent. A customer fails, retries a few minutes later, often succeeds.\u0027 No pod restarts and no gateway timeouts recorded."
+        },
+        {
+          "id": "E2",
+          "stage": "S1",
+          "source": "Email from Dara Okonjo, Engineering Manager, Checkout, 6 March",
+          "sourceType": "manager-account",
+          "text": "Subject: INC-4471, we know what this is. v4.12 shipped 3 March at 10:40 and the alert fired forty minutes later. The failure rate went from half a percent to nearly four overnight and has stayed there. v4.12 replaced our gateway HTTP client and connection-pool settings, which is exactly the code path that\u0027s failing. Quillmark\u0027s status page is green, so it isn\u0027t them. I want approval to roll the whole fleet back to v4.11 tonight and freeze checkout releases until we\u0027ve rewritten the client. Dara"
+        },
+        {
+          "id": "E3",
+          "stage": "S1",
+          "source": "Release notes, checkout-api v4.12 (CHG-2214)",
+          "sourceType": "change-record",
+          "text": "checkout-api v4.12, deployed 3 March 10:40, CHG-2214, approved by Engineering CAB. Changes: (1) Gateway client moved to a new HTTP library; connection pool size raised from 50 to 64. (2) Error handling: every non-2xx response from the payment gateway now maps to one code, PAYMENT_UPSTREAM_REJECTED. The raw upstream status is no longer logged at INFO level. The customer message is unchanged: \u0027Your card was declined. Please try another card or try again.\u0027 (3) Security: partial card numbers previously written to debug logs are now masked, closing audit finding SEC-2291 (remediation deadline 13 March). A rollback to v4.11 reverts all three changes."
+        },
+        {
+          "id": "E4",
+          "stage": "S1",
+          "source": "Quillmark Payments status page capture and support ticket TS-90412",
+          "sourceType": "vendor-account",
+          "text": "Quillmark status page, captured 6 March 08:00: \u0027All systems operational\u0027 for Authorisation API, Search API and Merchant Dashboard on every day from 1 to 6 March; no incidents posted. Support ticket TS-90412, Quillmark reply of 5 March: \u0027We see no platform-wide incidents during the period. Our records show your requests are reaching us. Please review your integration and confirm you are handling all documented response codes.\u0027"
+        },
+        {
+          "id": "E5",
+          "stage": "S1",
+          "source": "Email from Priya Halvorsen, CFO, 6 March",
+          "sourceType": "leadership-account",
+          "text": "Gross online revenue for the week to 6 March is down 9% on the prior week. The prior week did include the final days of Winter Clearance, which ended 1 March, and Spring Trail Sale launched on 3 March, but I\u0027m clear in my mind that the checkout failures are what cost us. I need a figure for the board pack on Monday, and I expect us to restate the Q1 forecast on the back of it."
+        },
+        {
+          "id": "E6",
+          "stage": "S1",
+          "source": "Customer Care lead Tomasz Reyes, notes for INC-4471 bridge call, 5 March",
+          "sourceType": "staff-account",
+          "text": "238 customer contacts since 3 March about declined cards. Most say the decline came \u0027out of nowhere\u0027 and that a retry a few minutes later worked. Eleven customers phoned their bank. In nine of those cases the bank said it had no record of any authorisation attempt at the time of the failure. Agents have been advising customers to try a different card."
+        }
+      ],
+      "catalogue": [
+        {
+          "id": "C1",
+          "stage": "S1",
+          "title": "Canary rollback test results, CHG-2231, 5 March 12:00\u201318:00",
+          "source": "Checkout platform team",
+          "sourceType": "change-record",
+          "text": "CHG-2231 canary, 5 March 12:00\u201318:00. 8 of 16 checkout-api pods rolled back to v4.11; the load balancer split traffic evenly. Results: v4.11 pods had 9,412 payment attempts with 351 failures (3.7%). v4.12 pods had 9,388 attempts with 338 failures (3.6%). v4.11 pods still log the raw gateway status. Of their 351 failures, 341 were HTTP 429 \u0027Too Many Requests\u0027 and 10 were HTTP 402 card declines. Connection-pool saturation was 0% on both versions. The canary was reverted at 18:05 because v4.11 lacks the SEC-2291 card-number masking."
+        },
+        {
+          "id": "C2",
+          "stage": "S1",
+          "title": "checkout-api pod resource and connection-pool metrics, 1\u20136 March",
+          "source": "Platform monitoring",
+          "sourceType": "telemetry",
+          "text": "checkout-api, 16 pods, 1\u20136 March. CPU utilisation 22\u201341% at daily peaks, with no change after 3 March. Memory flat at about 1.1 GB per pod. Gateway connection-pool utilisation peaked at 31% (pool size 64 after v4.12, 50 before). p99 gateway call latency was 430 ms before the release and 410 ms after. Zero socket timeouts and zero connection-refused errors in the period. No autoscaling events."
+        },
+        {
+          "id": "C3",
+          "stage": "S1",
+          "title": "Per-minute payment failure counts, 3\u20136 March",
+          "source": "Checkout analytics",
+          "sourceType": "telemetry",
+          "text": "Per-minute failed payment attempts, 3\u20136 March. The first cluster was 3 March 09:00\u201309:03 (14 failures out of 61 attempts), followed by clusters at 09:15, 09:30, 09:45, 10:00, 10:15 and 10:30. All of these came before the 10:40 deploy, and morning volume stayed below the alert\u0027s minimum count until 11:20. Across 3\u20136 March, 93% of failures fall in minutes :00\u2013:03, :15\u2013:18, :30\u2013:33 and :45\u2013:48 between 09:00 and 21:00. Outside those minutes the failure rate is 0.4%. No clusters overnight. On 6 March 13:00\u201315:00, during a scheduled finance ERP maintenance window, no clusters occurred. They resumed at 15:00."
+        },
+        {
+          "id": "C4",
+          "stage": "S1",
+          "title": "Quillmark API usage report for credential fernhollow-prod-01, 1\u20136 March",
+          "source": "Quillmark account team",
+          "sourceType": "vendor-account",
+          "text": "Prepared 6 March. Credential fernhollow-prod-01. Rate limit: 300 requests/minute per credential, all endpoints combined. 1\u20132 March: /v2/payments peaked at 52/min; /v2/transactions/search near zero in the daytime, with one nightly run at 02:00 (about 1,900 calls over 9 minutes). From 3 March 09:00: /v2/transactions/search bursts of 360\u2013430/min in the first 3\u20134 minutes of each quarter hour, 09:00\u201321:00, user-agent \u0027settle-recon/2.3\u0027. /v2/payments steady at 30\u201358/min. HTTP 429 responses: 0 on 1\u20132 March; 4,980\u20136,310 per day on 3\u20136 March, all within burst minutes, header X-RateLimit-Scope: credential. Issuer declines steady at 0.3\u20130.4% of payments. Temporary limit increases take 3\u20135 business days and are chargeable."
+        },
+        {
+          "id": "C5",
+          "stage": "S1",
+          "title": "Finance Systems change log, February\u2013March",
+          "source": "Finance Systems team",
+          "sourceType": "change-record",
+          "text": "FIN-CHG-0187. Raised by Finance Systems (owner L. Marchetti); approved by the Finance Systems lead on 27 February. \u0027Settlement reconciliation job settle-recon: schedule changed from nightly 02:00 to every 15 minutes, 09:00\u201321:00, effective 3 March, to support same-day payout reporting requested by Treasury.\u0027 Gateway credential: existing fernhollow-prod-01, shared with checkout. Rollback: revert the scheduler cron entry; takes effect from the next run. Note: Finance Systems changes are tracked in this log and were not submitted to the Engineering CAB."
+        },
+        {
+          "id": "C6",
+          "stage": "S1",
+          "title": "Marketing performance report, Spring Trail Sale, 3\u20136 March",
+          "source": "Digital marketing team",
+          "sourceType": "document",
+          "text": "Spring Trail Sale, 3\u20136 March, compared with the prior week (24\u201327 Feb, the closing days of Winter Clearance). Sessions up 24%, and 61% of the extra sessions came from a new display-ad campaign. Site conversion rate fell from 3.1% to 2.5%. Average order value fell from \u00A374 to \u00A368. Clearance week had included a final-days \u0027extra 20% off\u0027 push. The report does not break revenue down by checkout outcome."
+        },
+        {
+          "id": "C7",
+          "stage": "S1",
+          "title": "Interview with the engineer who built the v4.12 gateway client",
+          "source": "Interview notes, Sana Oyelaran, senior engineer, 6 March",
+          "sourceType": "staff-account",
+          "text": "Sana Oyelaran, author of the new gateway client: \u0027We load-tested the client at three times last year\u0027s peak in staging against Quillmark\u0027s sandbox and saw no errors. The pool change was conservative, from 50 to 64. Collapsing the error codes was a product request so customers see one consistent message. I\u0027d be surprised if it\u0027s the client, but I can\u0027t prove that from staging results alone.\u0027"
+        },
+        {
+          "id": "C8",
+          "stage": "S1",
+          "title": "3-D Secure challenge and fraud-screening statistics, 24 Feb\u20136 March",
+          "source": "Payments risk team",
+          "sourceType": "telemetry",
+          "text": "Daily 3-D Secure challenge rate 11.2\u201312.1% of card payments, 24 Feb\u20136 March, no step change. Challenge completion rate 88\u201390%. In-house fraud-screen rejections 0.2% of attempts every day. No fraud rule changes deployed in the period. Fraud-screen rejections surface to customers under a separate error code, FRAUD_HOLD, which does not appear in INC-4471."
+        },
+        {
+          "id": "C9",
+          "stage": "S1",
+          "title": "Sample of 50 Customer Care tickets, 3\u20136 March",
+          "source": "Customer Care",
+          "sourceType": "customer-account",
+          "text": "Random sample of 50 tickets tagged \u0027payment\u0027 from 3\u20136 March. 44 mention a declined card. 31 customers completed the order on a later retry, 6 said they abandoned, and 7 were unclear. 3 complained of duplicate charges; all were verified as pending authorisations released within 48 hours. Several customers mention the sale price as their reason for persisting."
+        },
+        {
+          "id": "C10",
+          "stage": "S1",
+          "title": "Peer review record for the v4.12 gateway client change (PR #1187)",
+          "source": "Source control system",
+          "sourceType": "document",
+          "text": "PR #1187, merged 2 March. Two approvals. 412 unit tests and 38 integration tests passed. Reviewer comment: \u0027Error mapping simplification loses upstream status detail. Accepted per product request.\u0027 Second reviewer: \u0027Pool sizing fine. Retry policy unchanged: one retry on timeout only, none on HTTP error responses.\u0027 No open review threads at merge."
+        },
+        {
+          "id": "C11",
+          "stage": "S1",
+          "title": "Internal audit finding SEC-2291 and remediation correspondence",
+          "source": "Internal Audit",
+          "sourceType": "document",
+          "text": "SEC-2291, raised 9 February: checkout-api debug logs contained partial card numbers (more than first six and last four digits) for about 0.8% of requests, retained for 30 days in the central log store. Remediation deadline 13 March. Audit memo: \u0027Any regression after remediation must be reported to the acquiring bank within 5 business days.\u0027 Status: closed by v4.12 on 3 March, pending audit verification."
+        },
+        {
+          "id": "C12",
+          "stage": "S1",
+          "title": "Gateway TLS certificate, DNS and egress firewall change history, January\u2013March",
+          "source": "Platform team",
+          "sourceType": "change-record",
+          "text": "Quillmark gateway endpoint certificate last rotated 14 January; next rotation due 14 July. No DNS changes for api.quillmark.example in February or March. Egress firewall and NAT rules for checkout-api unchanged since 20 February. No proxy or service-mesh changes in the period. No TLS handshake errors in checkout-api logs, 1\u20136 March."
+        }
+      ],
+      "candidates": {
+        "hypotheses": [
+          {
+            "id": "H1",
+            "text": "A defect in checkout-api v4.12 (the new gateway HTTP client or its connection-pool settings) is causing the rise in payment failures."
+          },
+          {
+            "id": "H2",
+            "text": "Quillmark is throttling Fernhollow\u0027s shared gateway credential because the finance settlement-reconciliation job\u0027s quarter-hourly search bursts push it over its per-credential rate limit, and checkout payment calls are rejected as a result."
+          },
+          {
+            "id": "H3",
+            "text": "A real rise in card issuers declining payments (for example tighter issuer fraud rules) is driving the rise in failures."
+          },
+          {
+            "id": "H4",
+            "text": "A platform-wide degradation at Quillmark, affecting its merchants generally, is causing the failures."
+          }
+        ],
+        "edges": [
+          {
+            "id": "R1",
+            "from": "Deployment of checkout-api v4.12 on 3 March at 10:40",
+            "to": "Rise in checkout payment failure rate from about 0.4% to about 3.7%",
+            "relation": "causes"
+          },
+          {
+            "id": "R2",
+            "from": "settle-recon moved to a 15-minute daytime schedule on the shared credential fernhollow-prod-01 (FIN-CHG-0187)",
+            "to": "Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01",
+            "relation": "causes"
+          },
+          {
+            "id": "R3",
+            "from": "Quillmark returning HTTP 429 rate-limit responses to fernhollow-prod-01",
+            "to": "Customers seeing \u0027card declined\u0027 failures at checkout",
+            "relation": "causes"
+          },
+          {
+            "id": "R4",
+            "from": "Rise in checkout payment failure rate since 3 March",
+            "to": "9% week-on-week fall in gross online revenue for the week to 6 March",
+            "relation": "causes"
+          }
+        ],
+        "actions": [
+          {
+            "id": "A1",
+            "text": "Roll the full checkout-api fleet back to v4.11 tonight and freeze checkout releases until the gateway client is rewritten."
+          },
+          {
+            "id": "A2",
+            "text": "Revert settle-recon to its nightly schedule (or pause its daytime runs) now, then watch the 429 rate and payment failure rate to confirm recovery, and give the job its own credential before any future daytime schedule."
+          },
+          {
+            "id": "A3",
+            "text": "Tell the board the payment incident caused the 9% week-on-week revenue fall and restate the Q1 revenue forecast on that basis."
+          },
+          {
+            "id": "A4",
+            "text": "Ask Quillmark for a temporary increase in the rate limit for credential fernhollow-prod-01."
+          }
+        ]
+      },
+      "scoredItems": [
+        {
+          "itemId": "Q1",
+          "refId": "H1",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q2",
+          "refId": "H2",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q3",
+          "refId": "H3",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q4",
+          "refId": "H4",
+          "type": "hypothesis",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "supported",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q5",
+          "refId": "R1",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q6",
+          "refId": "R2",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q7",
+          "refId": "R3",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q8",
+          "refId": "R4",
+          "type": "edge",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "causal",
+            "association-only",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        {
+          "itemId": "Q9",
+          "refId": "A1",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q10",
+          "refId": "A2",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q11",
+          "refId": "A3",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q12",
+          "refId": "A4",
+          "type": "action",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "preferred",
+            "acceptable",
+            "premature",
+            "harmful"
+          ]
+        },
+        {
+          "itemId": "Q13",
+          "refId": "SUFF",
+          "type": "sufficiency",
+          "asOfStage": null,
+          "allowedAnswers": [
+            "sufficient",
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    "truth": {
+      "caseId": "OD2-DEV-MISLEAD",
+      "groundTruthNarrative": "The failures are caused by Fernhollow\u0027s own Finance Systems team, not by the v4.12 release. Under FIN-CHG-0187, the settlement-reconciliation job settle-recon moved from one nightly run to runs every 15 minutes between 09:00 and 21:00, starting 3 March. The job uses the same Quillmark credential as checkout. Each run sends 360\u2013430 search requests per minute for 3\u20134 minutes. That exceeds the credential\u0027s 300-per-minute limit, so Quillmark returns HTTP 429 to whatever calls arrive during those minutes, including checkout payment calls. The change was logged only in Finance\u0027s own change log, so Engineering never saw it. The v4.12 release went out at 10:40 the same day, and the alert fired at 11:20 only because morning volume was below the alert\u0027s minimum count. That timing made the release look guilty. v4.12 did make diagnosis harder: it collapses all upstream errors into one code and stops logging the raw status. But a half-fleet canary showed identical failure rates on v4.11 and v4.12, and failures started at 09:00, before the deploy. Rolling back would also undo the SEC-2291 card-number masking. Issuer declines are flat, and the 429s are scoped to Fernhollow\u0027s credential, so neither issuer behaviour nor a Quillmark-wide outage explains the failures. The 9% revenue fall coincides with the incident, but the end of a clearance sale and a change in traffic mix confound it, so its size cannot yet be attributed. Reverting the job\u0027s schedule is a quick config change. It is the best next step and is justified by the evidence now.",
+      "answers": [
+        {
+          "itemId": "Q1",
+          "expected": "contradicted",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C7",
+            "C10"
+          ],
+          "tags": [
+            "misleading-signal",
+            "manager-narrative",
+            "coincident-change",
+            "intervention-result"
+          ],
+          "rationale": "The initial file points strongly at v4.12: the same-day deploy, the alert 40 minutes later, and the manager\u0027s claim. In the canary (C1), half the fleet ran v4.11 and the failure rates were the same (3.7% vs 3.6%), and pool saturation was 0%. C4 shows failures (429s) starting at 09:00, before the 10:40 deploy, while payment call volume was unchanged. The release cannot explain the rise."
+        },
+        {
+          "itemId": "Q2",
+          "expected": "supported",
+          "weight": 3,
+          "requiredEvidence": [
+            "C1",
+            "C4",
+            "C5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E4",
+            "E6",
+            "C1",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "hidden-cause",
+            "cross-team-change",
+            "shared-resource"
+          ],
+          "rationale": "C1 shows 97% of failures are HTTP 429. C4 shows the credential\u0027s limit is 300 per minute, and settle-recon search bursts of 360\u2013430 per minute began 3 March 09:00 in each quarter hour. All 429s fall in those burst minutes and are scoped to the credential. C5 documents the schedule change and the shared credential. E1 (intermittent, retry succeeds) and E6 (banks saw no attempt) fit this account."
+        },
+        {
+          "itemId": "Q3",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1",
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E3",
+            "E6",
+            "C1",
+            "C4",
+            "C8"
+          ],
+          "tags": [
+            "plausible-rival",
+            "customer-facing-message"
+          ],
+          "rationale": "The customer message says \u0027card declined\u0027, but in C1 only 10 of 351 failures are issuer declines (HTTP 402). C4 shows issuer declines flat at 0.3\u20130.4%. In E6, banks report no authorisation attempt at all."
+        },
+        {
+          "itemId": "Q4",
+          "expected": "contradicted",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E4",
+            "C1",
+            "C4"
+          ],
+          "tags": [
+            "vendor-account",
+            "external-cause"
+          ],
+          "rationale": "The vendor\u0027s status page (E4) is a self-interested source on its own. But C4 shows the 429s carry X-RateLimit-Scope: credential, occur only when Fernhollow\u0027s own credential exceeds its limit, and were zero before Fernhollow\u0027s call pattern changed. The failures follow Fernhollow\u0027s own request volume, not a platform-wide fault."
+        },
+        {
+          "itemId": "Q5",
+          "expected": "contradicted",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E2",
+            "E3",
+            "C1",
+            "C3",
+            "C4"
+          ],
+          "tags": [
+            "misleading-signal",
+            "temporal-coincidence",
+            "intervention-result"
+          ],
+          "rationale": "The deploy and the rise are close in time, but the canary rollback (C1) is a direct test, and it showed no difference between versions. C4 (and C3 if read) place the onset at 09:00, before the deploy. The link is contradicted, not just unproven."
+        },
+        {
+          "itemId": "Q6",
+          "expected": "causal",
+          "weight": 3,
+          "requiredEvidence": [
+            "C4",
+            "C5"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "hidden-cause",
+            "mechanism",
+            "natural-experiment"
+          ],
+          "rationale": "Timing: the change took effect 3 March 09:00 (C5), exactly when the bursts and 429s begin (C4). Mechanism: a per-credential limit of 300/min is exceeded by bursts of 360\u2013430/min. Covariation: 429s occur only in burst minutes and were zero beforehand. Rival ruled out: payment call volume is unchanged and the release is excluded by C1. C3\u0027s maintenance-window pause, when no clusters occurred, adds a natural experiment but is not needed."
+        },
+        {
+          "itemId": "Q7",
+          "expected": "causal",
+          "weight": 1,
+          "requiredEvidence": [
+            "C1",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E3",
+            "E6",
+            "C1",
+            "C4"
+          ],
+          "tags": [
+            "mechanism"
+          ],
+          "rationale": "On v4.11 pods, 341 of 351 customer-facing failures are directly HTTP 429 responses (C1). E3 shows that all non-2xx responses surface to the customer as \u0027Your card was declined\u0027. Taken together, the mechanism and the direct one-to-one mapping establish the link."
+        },
+        {
+          "itemId": "Q8",
+          "expected": "association-only",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "E6",
+            "C6",
+            "C9"
+          ],
+          "tags": [
+            "confounded",
+            "leadership-narrative"
+          ],
+          "rationale": "The failures and the revenue fall happen in the same week, so they are associated. But the comparison week included the closing days of Winter Clearance, and a promotion changed traffic mix and order value in the same week (E5, C6). Many failed customers succeeded on retry (E1, E6). The evidence does not separate the incident\u0027s contribution from these confounders, so causation is not established. Nothing contradicts some contribution either."
+        },
+        {
+          "itemId": "Q9",
+          "expected": "harmful",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "E3"
+          ],
+          "allowedEvidence": [
+            "E2",
+            "E3",
+            "C1",
+            "C4",
+            "C11"
+          ],
+          "tags": [
+            "protective-control",
+            "misleading-signal",
+            "wrong-fix"
+          ],
+          "rationale": "The canary showed rollback does not reduce failures (C1). A rollback would also remove the SEC-2291 card-number masking (E3), re-exposing card data in logs and triggering an acquirer notification (C11). The release freeze adds cost with no benefit. Before C1 this action might look preferred."
+        },
+        {
+          "itemId": "Q10",
+          "expected": "preferred",
+          "weight": 3,
+          "requiredEvidence": [
+            "C4",
+            "C5"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "targeted-fix",
+            "reversible"
+          ],
+          "rationale": "This addresses the established cause directly. C5 says the revert takes effect from the next run. It is cheap and reversible, and the 429 rate gives an immediate check that it worked. A separate credential prevents a repeat."
+        },
+        {
+          "itemId": "Q11",
+          "expected": "premature",
+          "weight": 2,
+          "requiredEvidence": [
+            "E5"
+          ],
+          "allowedEvidence": [
+            "E1",
+            "E5",
+            "E6",
+            "C6",
+            "C9"
+          ],
+          "tags": [
+            "premature-attribution",
+            "leadership-narrative",
+            "confounded"
+          ],
+          "rationale": "This would be right if the failures were shown to cause the 9% fall (R4). That link is only an association, confounded by the clearance-sale comparison and the promotion. Committing a board statement and a forecast restatement now is not justified."
+        },
+        {
+          "itemId": "Q12",
+          "expected": "acceptable",
+          "weight": 1,
+          "requiredEvidence": [
+            "C4",
+            "C5"
+          ],
+          "allowedEvidence": [
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "symptom-relief"
+          ],
+          "rationale": "A higher limit would relieve the throttling, so the request is reasonable. But C4 says it takes 3\u20135 business days and costs money, while reverting the schedule works from the next run (C5). It leaves the job\u0027s burst pattern and the shared credential in place, so it is not among the best actions."
+        },
+        {
+          "itemId": "Q13",
+          "expected": "sufficient",
+          "weight": 2,
+          "requiredEvidence": [
+            "C1",
+            "C4",
+            "C5"
+          ],
+          "allowedEvidence": [
+            "C1",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "tags": [
+            "decision-readiness"
+          ],
+          "rationale": "The canary result, the vendor usage data and the finance change record together establish the cause and rule out the main rival. They are enough to commit to reverting the job\u0027s schedule and to reject the rollback. The revenue attribution is still open, but it does not affect the operational decision."
+        }
+      ],
+      "discriminatingReads": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "lowValueReads": [
+        "C7",
+        "C9",
+        "C10",
+        "C12"
+      ],
+      "optimalReadPath": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "authoringNotes": "Misleading signal: the v4.12 deploy at 10:40 on 3 March, the alert at 11:20, and the manager\u0027s confident email (E2). Initial-file hints against it are subtle: E3 says raw upstream status is no longer logged, E4 tells Fernhollow to \u0027handle all documented response codes\u0027, and in E6 banks saw no authorisation attempt. The counter-evidence is C1 (canary: identical failure rates, failures are 429s), with C3 and C4 as independent support (onset at 09:00, before the deploy). C5 reveals the cross-team change that the Engineering change board never saw. C3 is an alternative discriminating read (timing plus the pause in the maintenance window) that can stand in for C5 for H2/R2, though only C5 names the shared credential and the quick revert. C2 and C8 are reasonable requests that bear on rivals but do not change answers. C6 and C11 reinforce R4 and A1 respectively. Reviewer checks: A4 is not \u0027preferred\u0027 because C4 gives a 3\u20135 business-day lead time and a cost, against an immediate revert. A3 is \u0027premature\u0027, not \u0027harmful\u0027, because it hinges on the unestablished R4. R4 is \u0027association-only\u0027, not \u0027unknown\u0027, because co-occurrence is clearly shown in E5. H4 is \u0027contradicted\u0027 on the basis of credential-scoped 429s that track Fernhollow\u0027s own volume, not the vendor\u0027s status page alone. All names, numbers and organisations are fictional."
+    }
+  }
+}
