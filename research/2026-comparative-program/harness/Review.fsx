@@ -131,7 +131,9 @@ let review (split: string) (workRoot: string) (ids: string list) =
         rec'.["adjudication"] <- (Map.tryFind id adjudications |> Option.bind (fun r -> r.Output) |> Option.map box |> Option.toObj)
         let rulings = Map.tryFind id adjudications |> Option.bind (fun r -> r.Output) |> Option.map (arr "rulings") |> Option.defaultValue []
         let bad = rulings |> List.filter (fun r -> strOr "" "ruling" r <> "key-uniquely-defensible")
-        rec'.["needsRevision"] <- not bad.IsEmpty
+        let structural = validate c t
+        rec'.["structuralProblems"] <- structural
+        rec'.["needsRevision"] <- not bad.IsEmpty || not structural.IsEmpty
         Directory.CreateDirectory "benchmark/reviews" |> ignore
         File.WriteAllText(sprintf "benchmark/reviews/%s.review.json" id, JsonSerializer.Serialize(rec', JsonSerializerOptions(WriteIndented = true)))
         printfn "%s blind agreement %d/%d; rulings needing revision: %d" id (t.Keys.Length - diffs.Length) t.Keys.Length bad.Length
