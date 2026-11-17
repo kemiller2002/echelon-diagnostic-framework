@@ -37,3 +37,11 @@ claims. A plausible mechanism is not evidence that it operates.
 - Everything else is **untested** or **inconclusive**.
 - If accuracy is at ceiling, M3, M4 and M8 may be untestable. The report will
   say so rather than read a null as refutation.
+
+## Results (added after held-out analysis, 2026-11-17)
+
+Outcomes for each mechanism are in `../REPORT.md` § Mechanisms. In summary: M1, M3,
+M5 and M8 are refuted for this benchmark. M4 is untestable because of the floor.
+M7, M9 (for EDF) and M11 are not supported. **M10 is supported**: compute beats
+structure per dollar. KT + ACH showed the added-noise pattern M9 anticipated, with
+test–retest 0.911 against 0.963 for no framework.

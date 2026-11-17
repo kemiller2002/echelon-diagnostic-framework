@@ -14,7 +14,7 @@ Decision rule (preregistration §4): material advantage = Δ ≥ +5 and CI > 0; 
 | H5d | Control Points + Ranking | B_EDF03@sonnet-medium − E_NOCTRL@sonnet-medium | 24 | -0.63 [-3.92, 1.77] | **inconclusive** | -0.17 [-3.60, 2.55] | -2.29 [-6.94, 2.01] |
 | H5e | Diagnostic Sufficiency | B_EDF03@sonnet-medium − E_NOSUFF@sonnet-medium | 24 | -1.31 [-4.74, 0.85] | **inconclusive** | -1.40 [-4.95, 0.86] | -0.83 [-4.72, 2.22] |
 | H6 | Sequence | B_EDF03@sonnet-medium − E_NOSEQ@sonnet-medium | 24 | -0.35 [-3.39, 2.01] | **inconclusive** | -0.33 [-3.23, 1.89] | +0.21 [-4.44, 5.21] |
-| H7a | vote-of-5 (no framework) vs EDF | A_VOTE5@sonnet-medium − B_EDF03@sonnet-medium | 24 | -1.48 [-5.45, 3.07] | **inconclusive** | +2.19 [-0.26, 5.78] | -17.92 [-33.75, -3.61] |
+| H7a | vote-of-5 (no framework) vs EDF | A_VOTE5@sonnet-medium − B_EDF03@sonnet-medium | 24 | +1.91 [-0.51, 5.47] | **inconclusive** | +2.19 [-0.26, 5.78] | -1.00 [-5.47, 3.64] |
 | H9a | Claude-selected method vs KT | SEL_CLAUDE@sonnet-medium − C_KT@sonnet-medium | 24 | +0.52 [-1.11, 2.43] | **practically equivalent** | +0.69 [-1.15, 2.85] | +0.42 [-2.92, 3.96] |
 | H9b | EDF orchestrator vs EDF | SEL_EDFO@sonnet-medium − B_EDF03@sonnet-medium | 24 | +0.31 [-3.51, 4.78] | **inconclusive** | +1.14 [-1.86, 5.43] | -2.71 [-10.69, 4.24] |
 | H11-H1 | Haiku: EDF vs no framework | B_EDF03@haiku-low − A_GENERAL@haiku-low | 24 | -2.08 [-4.72, 0.24] | **inconclusive** | -1.09 [-3.09, 0.78] | -4.79 [-13.12, 2.71] |

@@ -63,6 +63,16 @@ Runs: 1128. Bootstrap: seed 20261117, 10,000 resamples over cases (trials averag
 | B_EDF03@sonnet-medium − A_GENERAL@sonnet-medium | acq | 24 | 0.010 | [-0.036, 0.055] | 5/2/17 |
 | B_EDF03@sonnet-medium − A_GENERAL@sonnet-medium | reads | 24 | -0.025 | [-0.083, 0.008] | 1/1/22 |
 | B_EDF03@sonnet-medium − A_GENERAL@sonnet-medium | costUsd | 24 | 0.009 | [0.007, 0.010] | 23/1/0 |
+| B_EDF03@sonnet-medium − C_KT@sonnet-medium | score | 24 | 0.113 | [-3.046, 2.576] | 13/11/0 |
+| B_EDF03@sonnet-medium − C_KT@sonnet-medium | acc | 24 | -0.001 | [-0.031, 0.022] | 8/8/8 |
+| B_EDF03@sonnet-medium − C_KT@sonnet-medium | acq | 24 | 0.015 | [-0.030, 0.060] | 4/1/19 |
+| B_EDF03@sonnet-medium − C_KT@sonnet-medium | reads | 24 | -0.021 | [-0.083, 0.021] | 1/1/22 |
+| B_EDF03@sonnet-medium − C_KT@sonnet-medium | costUsd | 24 | 0.005 | [0.004, 0.006] | 22/2/0 |
+| F_EDFG@sonnet-medium − B_EDF03@sonnet-medium | score | 24 | 0.948 | [-2.106, 5.162] | 13/11/0 |
+| F_EDFG@sonnet-medium − B_EDF03@sonnet-medium | acc | 24 | 0.017 | [-0.011, 0.059] | 9/7/8 |
+| F_EDFG@sonnet-medium − B_EDF03@sonnet-medium | acq | 24 | -0.018 | [-0.083, 0.042] | 3/4/17 |
+| F_EDFG@sonnet-medium − B_EDF03@sonnet-medium | reads | 24 | -0.028 | [-0.111, 0.056] | 1/3/20 |
+| F_EDFG@sonnet-medium − B_EDF03@sonnet-medium | costUsd | 24 | 0.003 | [0.002, 0.005] | 24/0/0 |
 
 ## Test–retest (item agreement between trials 1 and 2)
 
