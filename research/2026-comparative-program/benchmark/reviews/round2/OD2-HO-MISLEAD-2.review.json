@@ -1,0 +1,136 @@
+{
+  "caseId": "OD2-HO-MISLEAD-2",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S-H1",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "In C6, the latency jump in each cell lines up with FC-7710 and not with when 5.8 arrived: aps-2 and all eu-w cells degraded before 5.8 reached them, aps-3 ran 5.8 without FC-7710 and stayed at 91\u219294 ms, and rolling euw-1 back to 5.7 left p99 unchanged (291\u2192297\u2192293)."
+      },
+      {
+        "itemId": "S-H2",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "In C6, every cell that got FC-7710 crossed 150 ms within 2\u201315 minutes of the push, and aps-3, which skipped it, did not; C11 shows the mechanism: compaction threads went 2\u21926, disk use 41\u219297%, read queue wait 9\u2192205 ms and node-side GET service time 61\u2192262 ms, which matches the 271 ms storage-fetch span in C5."
+      },
+      {
+        "itemId": "S-H3",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "GET traffic grew only 6%, gradually over a week (E6), while latency jumped overnight in step with each cell\u0027s config push (C6); aps-3 grew 7% with no regression (C6), and Orrin does not read its migrated data (C9)."
+      },
+      {
+        "itemId": "S-H4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Gateway-to-storage round-trip time was unchanged at 0.4\u20130.6 ms everywhere, and the retransmit problem was limited to us-e spine-2 from 02:10 to 04:50 (E5, C7); the latency increase is fully explained by node-side service time, which excludes the network (C11)."
+      },
+      {
+        "itemId": "S-R1",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "5.8 arrival times do not match latency onset in aps-2 or eu-w (C6), aps-3 runs 5.8 with no regression (C6), and the euw-1 rollback test had no effect (C6)."
+      },
+      {
+        "itemId": "S-R2",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "FC-7710 tripled compaction threads (C8); compaction\u0027s share of disk bytes rose 38\u219271% and disk use passed 90% within 5 minutes of the push in each cell (C11), and the order of events, the mechanism and the cell-by-cell timing all agree."
+      },
+      {
+        "itemId": "S-R3",
+        "answer": "causal",
+        "confidence": 75,
+        "justification": "Disk read queue wait (9\u2192205 ms) and node-side GET service time (61\u2192262 ms) rose together in every cell, matching the timing in C6 and the storage-fetch span in C5; the aps-3 cell without the push and the failed gateway rollback (C6) rule out the main competing explanation."
+      },
+      {
+        "itemId": "S-R4",
+        "answer": "association-only",
+        "confidence": 70,
+        "justification": "The backlog grew from 3.1% to 11.2% after Orrin\u0027s writes began on 30 Oct, but a lifecycle-expiry sweep from 29 Oct to 1 Nov also created compaction work, and the job that attributes backlog growth to a source does not report until 10 Nov (C11)."
+      },
+      {
+        "itemId": "S-A1",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "Rolling euw-1 back to 5.7 did not reduce latency (C6), and a fleet-wide rollback would reopen the SEC-2291 replay weakness and put the 30 Nov audit deadline at risk (E3, C10)."
+      },
+      {
+        "itemId": "S-A2",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "This targets the supported cause (C6, C11), takes effect within 5 minutes per cell (C8), and the one-cell canary confirms the effect while backlog is monitored; backlog is now 4% and would stay below 15% at 2 threads (C11)."
+      },
+      {
+        "itemId": "S-A3",
+        "answer": "premature",
+        "confidence": 70,
+        "justification": "Orrin\u0027s contribution to the backlog has not been attributed yet (C11, report due 10 Nov), and backlog has already fallen to 4.0%, so throttling a customer now is not justified, though it could become useful later."
+      },
+      {
+        "itemId": "S-A4",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "Pausing compaction for one to two weeks could push backlog past 15% at up to about 2 points per day from 4% (C11), which brings read amplification and the risk of disks filling up (E4); that disables a protective control."
+      },
+      {
+        "itemId": "S-A5",
+        "answer": "acceptable",
+        "confidence": 65,
+        "justification": "The CPU increase from 5.8 is known and within limits (E3, C4 shows peak 52% and no queuing), so profiling it is a reasonable low-cost follow-up but does not help with the incident."
+      },
+      {
+        "itemId": "S-SUFF",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "The per-cell timing, the aps-3 control and the rollback test (C6), plus the storage-node mechanism (C11), are enough to commit to a staged revert of FC-7710 (A2), which can be reversed quickly (C8)."
+      }
+    ],
+    "ambiguousItems": [
+      "S-R3: causal vs association-only \u2014 there was no direct intervention on disk saturation itself; the causal call rests on the aps-3 natural experiment for FC-7710 plus the mediator metrics.",
+      "S-R4: association-only vs unknown \u2014 the only evidence linking Orrin\u0027s writes to backlog growth is timing, and a competing source (the lifecycle sweep) overlaps it.",
+      "S-A3: premature vs acceptable \u2014 the contract allows rate limiting and Orrin said pacing is fine, so the cost is low.",
+      "S-A5: acceptable vs premature \u2014 it is unrelated to the incident but harmless."
+    ],
+    "caseProblems": [
+      "The presenting request says at most two items may be collected, but the reviewer is told no limit applies, so this instruction is inconsistent for the reviewer.",
+      "The C6 title (\u0027with deployment and configuration timestamps\u0027) and the C11 content (\u002711 cells with FC-7710\u0027) signal fairly strongly that the config push is the discriminating factor; C6 alone nearly settles the case, including a convenient built-in rollback test and a control cell.",
+      "The aps-3 skip reason (\u0027hardware unchanged\u0027) is written conveniently to pre-empt the obvious confounder \u2014 mildly artificial.",
+      "Small inconsistency: E4 says the change was pushed \u0027on the evening of 2 Nov\u0027 (ticket filed 18:20), but C6 shows it was applied 23:38\u201323:52; this is plausible but not explained."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S-R3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The task\u0027s own definition of causal accepts temporal order plus mechanism plus covariation with the main rival ruled out. All three are met. (1) Temporal order: C11 says disk utilisation crossed 90% within 5 minutes of the push in each cell, and C6 shows p99 onset 2\u201313 minutes after each push. (2) Mechanism with matching size: disk read queue wait rose by 196 ms (9\u2192205), node-side service time (which excludes network) rose by 201 ms (61\u2192262), and fleet p99 rose by about 205 ms. Queue wait is a direct part of node service time, so the extra latency is accounted for almost entirely by waiting on saturated disks. (3) Rivals excluded: C6 rules out gateway 5.8 through the aps-3 natural experiment (5.8 present, no push, no regression) and the euw-1 rollback test. E5 and C11 (time measured on the node) rule out the network, and E6/C6 rule out traffic growth (aps-3 had \u002B7% traffic and no regression). The objection that nobody intervened on saturation directly does not hold, because the definition does not require an intervention. \u0027Association-only\u0027 would ignore the matching decomposition and the excluded rivals.",
+        "fix": "none"
+      },
+      {
+        "itemId": "S-R4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 means the evidence cannot even show association. Here the evidence does show co-occurrence. Orrin\u0027s writes began 30 Oct (E6, C9, C11), the backlog grew from 3.1% to 11.2% over the same window (C11), PUT traffic rose 14% (E6), and the mechanism is plausible (about 18 TB/day of new writes creates compaction work). The definition of association-only explicitly includes \u0027co-occur\u0027, so this meets the bar. Causation is not established: the lifecycle-expiry sweep overlaps in time and also creates compaction work, and C11 says the backlog growth is not yet attributed by source. That rules out \u0027causal\u0027. Nothing counts against the link, so \u0027contradicted\u0027 does not apply. That leaves association-only as the single fitting label. The overlap with the sweep is exactly why the link is not causal, not a reason to call it unknown.",
+        "fix": "none"
+      },
+      {
+        "itemId": "S-A3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A3 is worth doing only if Orrin\u0027s writes drive the backlog (R4), and R4 is only an association with an unexcluded rival (the sweep). That is the definition of premature. The revised C11 also removes the case for pacing now as a cheap hedge. The backlog is 4.0% and falling at 6 threads, so no growth needs slowing yet. Even after A2 restores 2 threads, the worst-case projection says the backlog cannot reach 15% before 13 Nov. The attribution job reports on 10 Nov, which leaves time to confirm R4 and still give the 24-hour contractual notice before any danger. The \u0027acceptable\u0027 argument (low cost, the contract allows it, the customer agreed) explains why A3 is not harmful. It does not make A3 justified now: constraining a customer on an unconfirmed attribution, with no urgency, is committing before the evidence is in. Premature is the only label that fits.",
+        "fix": "none"
+      },
+      {
+        "itemId": "S-A5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Premature needs the action\u0027s value to depend on a hypothesis that is still unconfirmed. A5 does not. The CPU increase is already established (E3 lists it as a known effect, C4 measures 34%\u219240%), and profiling it is useful for capacity planning whatever caused the incident. Its value also does not depend on H1, and H1 is contradicted anyway. A5 is low cost and does not weaken any protective control, so it is not harmful. It does nothing to resolve the incident, so it is not among the best actions (not preferred). The remaining label, acceptable, is the only defensible one.",
+        "fix": "none"
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

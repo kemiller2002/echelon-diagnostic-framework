@@ -1,0 +1,322 @@
+{
+  "caseId": "OD2-HO-INCOMPLETE-1",
+  "groundTruthNarrative": "The chiller-plant electricity growth is real. The utility revenue meter rose by the same amount, non-chiller loads are flat, the weather was milder and the March setpoint trial was reversed within three days. What the evidence cannot settle is whether the plant became less efficient or started serving more load. The dashboard\u0027s 15% efficiency loss is built on header flowmeter FT-201. That meter had an open drift work order before the comparison, was last verified in 2022, and since 2 April 2026 has run on a replacement converter with a default calibration factor and no wet check. Delivered cooling is therefore unknown in both years. Separately, because the dedicated Building F chiller was delayed, the project tied a heat exchanger of up to 400 kW into the central loop. It serves both the relocated presses\u0027 mould temperature units and the production-hall air-handling coils, loads that were never on the central loop in Building C. The production manager did not know this. Presses moved across in three phases from April to June, as the growth ramped, but nobody knows how much heat the exchanger carries: there is no heat meter and no valve trend. The vendor\u0027s fouling claim rests on one CH-1 approach reading from an interested party, and that reading is not load-matched. No catalogue item separates efficiency loss from load growth, so the right move is a short, independently verified measurement campaign before spending on cleaning or capital work.",
+  "answers": [
+    {
+      "itemId": "S1",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E6",
+        "C6",
+        "C11",
+        "C3",
+        "C4",
+        "C7",
+        "C9",
+        "C12",
+        "C14",
+        "C5"
+      ],
+      "tags": [
+        "central",
+        "misleading-signal",
+        "invalid-instrument",
+        "vendor-interest"
+      ],
+      "rationale": "The initial file seems to support H1. The dashboard shows kWe/kWr up 15% with flat delivered cooling, and the vendor and shift lead agree. C6 shows that delivered cooling comes from FT-201. That meter drifted \u00B115% before the baseline year, was last verified in 2022, and was re-converted in April 2026 with a default factor and no verification, so the efficiency metric is unreliable in both periods. The remaining support is one CH-1 approach reading from an interested vendor. It is compared with a start-up value at unknown load, and the vendor admits approach rises with load. Nothing contradicts efficiency loss either. CH-1 and CH-3 have not been opened since February 2025, and CH-2\u0027s late-October brushing recorded no tube condition (C7, C3). The absence of charge loss (C14) rules out only one mechanism. The claim is live but unestablished."
+    },
+    {
+      "itemId": "S2",
+      "expected": "unknown",
+      "weight": 3,
+      "requiredEvidence": [
+        "E4",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E4",
+        "E6",
+        "C5",
+        "C6",
+        "C8",
+        "C9",
+        "C11",
+        "C13"
+      ],
+      "tags": [
+        "central",
+        "manager-account-wrong",
+        "hidden-change",
+        "confounded"
+      ],
+      "rationale": "From the initial file, H2 looks contradicted: the production manager says nothing was added to the loop, and the dashboard shows flat cooling. C11 shows the manager is wrong. HX-F1, up to 400 kW, was tied into the central header and serves both the mould temperature units and the Building F hall air-handling coils. In Building C, neither load was on the central loop. The presses moved in phases that line up with the April\u2013June ramp. The extra plant power is about 42 kWe on average, which at roughly 0.18\u20130.19 kWe/kW would need about 220 kW of transfer. That is within HX-F1\u0027s capacity, and press electricity cannot cap it, because the hall coils also remove heat from outdoor air and the building. But the transfer is not shown: there is no heat meter or valve trend, the 450 kW design figure includes a future bay, and FT-201 is unreliable (C6). Flat production and flat non-chiller electricity (C8, C13) do not rule out new chilled-water heat. Since the size of the added load is unknown and the efficiency rival is not excluded, H2 is live but not established."
+    },
+    {
+      "itemId": "S3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C1",
+        "C13",
+        "C6"
+      ],
+      "tags": [
+        "misleading-signal",
+        "metering-confusion"
+      ],
+      "rationale": "The utility revenue meter rose by 218 MWh, the same as the MCC-4 increase, while site-minus-MCC-4 stayed flat at 2,108 \u2192 2,110 MWh (E1). C1 adds an unchanged meter and a passed accuracy test. The FT-201 problem in C6 affects the cooling-delivered figure, not electricity, so an analyst who reads C6 and concludes that \u0027the growth is a meter problem\u0027 is mistaken."
+    },
+    {
+      "itemId": "S4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "C2",
+        "C9"
+      ],
+      "tags": [
+        "external-cause"
+      ],
+      "rationale": "Cooling degree-days were 2% lower and mean wet-bulb 0.3 K lower in 2026 (E1). C2 confirms this, with fewer high wet-bulb hours. Milder weather cannot explain a 15\u201320% rise."
+    },
+    {
+      "itemId": "S5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "C10",
+        "E1"
+      ],
+      "tags": [
+        "misleading-signal",
+        "change-record"
+      ],
+      "rationale": "The setpoint was lowered on 14 March and restored on 17 March, and no further changes were made. The supply temperature averaged 7.1 \u00B0C in Apr\u2013Oct 2026 against 7.0 \u00B0C in 2025 (E5). The growth runs from April to October, when the setpoint was at its normal value. C10\u0027s audit confirms this."
+    },
+    {
+      "itemId": "S6",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C6",
+        "C7",
+        "C11",
+        "C12",
+        "C14"
+      ],
+      "tags": [
+        "invalid-instrument",
+        "misleading-signal"
+      ],
+      "rationale": "The only measure of a decline in efficiency is the FT-201-based dashboard, which C6 invalidates. Its numerator is the MCC-4 electricity itself, so it rises with electricity partly by construction. The consultant\u0027s memo (C12) simply repeats it. The vendor\u0027s approach reading measures condenser approach, not efficiency, and is not load-matched. The evidence does not show that the \u0027from\u0027 condition occurred at all, so it cannot show it co-occurring with the growth. With HX-F1\u0027s added hall and tool load unbounded (C11), the growth cannot be assigned to efficiency by elimination either. \u0027Causal\u0027, the initial-file reading, is not justified."
+    },
+    {
+      "itemId": "S7",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E4",
+        "C5",
+        "C6",
+        "C11",
+        "C13"
+      ],
+      "tags": [
+        "hidden-change",
+        "confounded",
+        "timing-coincidence"
+      ],
+      "rationale": "C11 documents an added heat connection to the central loop (tool cooling plus hall air-handling coils, previously off the loop), and its phased loading (Apr, May, Jun) matches the ramp in E1, so the two co-occur and covary. It is not causal: the commissioning record shows only \u0027flow observed\u0027, the valve position and heat transfer were never measured, and the main rival (efficiency decline, possibly from fouling that builds up over the same months) has not been ruled out. Nothing counts against the link, and the hall-coil load is not capped by press electricity, so \u0027contradicted\u0027 is wrong. The manager\u0027s denial (E4) is refuted by C11."
+    },
+    {
+      "itemId": "S8",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5",
+        "E1"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E1",
+        "C10"
+      ],
+      "tags": [
+        "change-record"
+      ],
+      "rationale": "The setpoint change lasted 14\u201317 March and was reversed. The supply temperature during the growth period matched the prior year (E5). Growth was \u002B2% in March and only rose from April onward (E1). The link fails on timing and mechanism."
+    },
+    {
+      "itemId": "S9",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C3",
+        "C6",
+        "C7"
+      ],
+      "tags": [
+        "vendor-interest",
+        "unverified-claim"
+      ],
+      "rationale": "The treatment contractor change is documented, but a decline in efficiency is not established (C6 invalidates the metric). No condenser surface condition has been recorded since February 2025: CH-1 and CH-3 have not been opened, and CH-2\u0027s October brushing did not note the tubes (C7). C3 is ambiguous: one stuck blowdown valve and a slightly positive scaling index, with no inspection. The evidence cannot even show the two co-occurring."
+    },
+    {
+      "itemId": "S10",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E2",
+        "E4",
+        "C7"
+      ],
+      "tags": [
+        "evidence-gathering"
+      ],
+      "rationale": "Both leading explanations remain live because cooling delivered and branch loads are not measured reliably. Verified header flow, branch heat logging (which would capture HX-F1) and per-chiller power directly separate efficiency loss from load growth. The campaign is cheap and quick, and it does not disturb production."
+    },
+    {
+      "itemId": "S11",
+      "expected": "premature",
+      "weight": 2,
+      "requiredEvidence": [
+        "E3",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C3",
+        "C6",
+        "C7",
+        "C11",
+        "C12"
+      ],
+      "tags": [
+        "vendor-interest",
+        "premature-commitment"
+      ],
+      "rationale": "If condenser fouling were confirmed, brushing would clearly help. It is not confirmed: the efficiency metric is invalid (C6) and the vendor\u0027s evidence is one reading that is not load-matched. If load growth is the explanation, brushing is money spent about three months ahead of the February 2027 contract interval (C7), and part of it goes on CH-2, which was brushed in late October. That is wasteful but does no lasting damage. Committing to it now as the corrective action is not justified."
+    },
+    {
+      "itemId": "S12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "C15"
+      ],
+      "tags": [
+        "protective-control",
+        "production-risk"
+      ],
+      "rationale": "The process needs 7 \u00B0C supply. At 8.5 \u00B0C in 2024 the site had scrap spikes and missed deliveries (E4), and line 3 already complains at about 7.6 \u00B0C (C15). Raising the setpoint to 9 \u00B0C damages production whether the growth comes from efficiency loss or load growth. It would also distort the baseline that any measurement campaign depends on."
+    },
+    {
+      "itemId": "S13",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "C7"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "C6",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "evidence-gathering",
+        "partial"
+      ],
+      "rationale": "Opening a waterbox during an outage that is already planned is cheap, commits nothing and is reasonable. But C7 shows that the only single-chiller outage before February 2027 is CH-2\u0027s, on 8\u201310 December, and CH-2\u0027s tubes were brushed on 24\u201327 October. A December look would show only about six weeks of deposit on a freshly cleaned unit. It would say little about CH-1, the unit the vendor measured, or CH-3, which have not been opened since February 2025. It also cannot measure or rule out the HX-F1 load growth. It is therefore reasonable but clearly weaker than A1, and not among the best next actions."
+    },
+    {
+      "itemId": "S14",
+      "expected": "insufficient",
+      "weight": 3,
+      "requiredEvidence": [
+        "C6",
+        "C11"
+      ],
+      "allowedEvidence": [
+        "C6",
+        "C11",
+        "E2",
+        "E3",
+        "E4",
+        "C3",
+        "C7"
+      ],
+      "tags": [
+        "central",
+        "incomplete-evidence"
+      ],
+      "rationale": "Any substantive step needs to know which explanation is true: condenser cleaning or a service contract if efficiency has declined, or bringing forward AC-F1 or rebalancing HX-F1 if load has grown. No item in the catalogue separates the two. The evidence is therefore insufficient to commit, and the only justified next step is to gather evidence."
+    }
+  ],
+  "discriminatingReads": [
+    "C6",
+    "C11"
+  ],
+  "lowValueReads": [
+    "C1",
+    "C2",
+    "C4",
+    "C13",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C6",
+    "C11"
+  ],
+  "authoringNotes": "Initial-file trap: the dashboard (E2), the vendor (E3) and the shift lead (E6) together point to efficiency loss, while the production manager (E4) and the dashboard\u0027s flat cooling appear to rule out load growth. A reader of the initial file alone will probably mark H1 supported, H2 contradicted, R1 causal, A2 preferred or acceptable, and SUFF sufficient. C6 alone removes the instrument behind the efficiency claim (H1 and R1 become unknown). C11 alone reveals the undisclosed HX-F1 tie-in (H2 becomes unknown, R2 association-only). Neither file\u0027s content appears anywhere else in the catalogue. C11 does not record where the tie-in sits relative to FT-201, so readers cannot use the flat dashboard cooling to infer HX-F1\u0027s load. No item gives chilled-water \u0394T, refrigerant pressures, condenser-water flow or a heat meter, so readers cannot rebuild either the load or the lift. Revision 1: (a) C11 now states that HX-F1 serves the hall air-handling coils as well as the mould temperature units, and that in Building C neither load was on the central loop. Press electricity in C13 therefore no longer caps HX-F1\u0027s heat, which removes the energy-balance argument for \u0027H2 contradicted\u0027. The note that the 450 kW design figure includes a future press bay stops readers taking design capacity as actual load. (b) C7 now records that CH-2, the only unit with an outage before February 2027, was brushed on 24\u201327 Oct 2026 with no tube condition recorded. That makes A4\u0027s inspection weakly informative and leaves \u0027acceptable\u0027 as the only defensible answer for S13. Under the INCOMPLETE convention, S13 is keyed on the whole catalogue. The October brushing comes after the Apr\u2013Oct comparison window, so it creates no natural experiment that bears on H1. (c) C15 entries are now in date order. Confirmatory distractors: C1, C2, C10, C13, C14. Ambiguous distractors that look decisive but are not: C3 (treatment), C5 (staging on motor current, which rises with both more load and more compressor work), C9 (tower fan speed rises with both) and C12 (the consultant repeats the dashboard). Monthly growth keeps rising into October. This fits progressive fouling, and it also fits an added load on a falling seasonal base, so the pattern does not separate the two. Arithmetic check: \u002B216 MWh over 5,136 h \u2248 42 kWe \u2248 220\u2013230 kW of cooling at 0.18\u20130.19 kWe/kW. That is within HX-F1\u0027s 400 kW maximum and plausible for tool plus hall cooling, but it is not demonstrated. Reviewer check: H3 is a deliberate trap for readers who conflate the FT-201 cooling-meter fault with electricity metering."
+}

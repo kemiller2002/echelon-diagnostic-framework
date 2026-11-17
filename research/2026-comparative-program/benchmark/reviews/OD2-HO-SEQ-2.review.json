@@ -1,0 +1,128 @@
+{
+  "caseId": "OD2-HO-SEQ-2",
+  "blindAgreement": "14/14",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I-H1",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "C1 shows override = N on all 47 jobs and the printed string identical to the PackBridge payload. Two faulty jobs were set up by permanent day-shift staff on Line 1, and agency-run jobs from 30 Sep to 3 Oct were correct (C1, C9)."
+      },
+      {
+        "itemId": "I-H2",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "C1 shows every printed expiry exactly matched the payload, and 4 jobs after the 28 Sep firmware change printed correctly. The faulty values were already in the payload, with SHELF_LIFE_M = 36 (C1, C5)."
+      },
+      {
+        "itemId": "I-H3",
+        "answer": "supported",
+        "confidence": 93,
+        "justification": "From 4 Oct the payload carried SHELF_LIFE_M = 36 and a 12-month-late expiry before any operator action (C1). This followed the ERP entry of 36 on 3 Oct with valid-from 01 Mar 2027, which PackBridge evidently read despite USE_VALID_FROM = Y (C2, C8)."
+      },
+      {
+        "itemId": "I-H4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "All 30 Veltranol jobs from 2 Jun to 3 Oct had SHELF_LIFE_M = 24 and expiries that matched the batch record (C1). That counters the QA manager\u0027s suspicion in E6."
+      },
+      {
+        "itemId": "I-H5",
+        "answer": "unknown",
+        "confidence": 70,
+        "justification": "C2 shows two other products (HX-15-30, MR-05-14) were given future-dated shelf-life values on 20 Oct, so they are exposed to the same mechanism. C2 explicitly excludes packing history and no printer data for those products is in evidence, so this is live but unestablished."
+      },
+      {
+        "itemId": "I-R1",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Agency operators set up 3 correct Line 3 night jobs from 30 Sep to 3 Oct, faulty jobs also occurred on Line 1 day shift with permanent staff, and no overrides occurred (C1, C4, C9). The Line 3 nights clustering is coincidental with the product schedule."
+      },
+      {
+        "itemId": "I-R2",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Correct expiries were printed after the firmware change, and every printed string matched its payload (C1). The fault onset tracks the ERP edit rather than the 28 Sep upgrade (C2)."
+      },
+      {
+        "itemId": "I-R3",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The ERP value of 36 was entered 3 Oct 16:42 under CC-309 and the first wrong job ran 4 Oct 22:10 (C2, C1). Payloads then carried 36 on every line and shift, operator and firmware rivals are excluded (C1), and CC-309 skipped downstream testing (C11, C15)."
+      },
+      {
+        "itemId": "I-A1",
+        "answer": "harmful",
+        "confidence": 92,
+        "justification": "The evidence clears the agency operators (C1, C9). Disciplining them punishes the wrong party and leaves the master-data/PackBridge cause active, so further mislabelled lots would follow (C2, C8)."
+      },
+      {
+        "itemId": "I-A2",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "A2 removes the active data cause (C2), contains all affected lots (C1 Line 1 warehouse lots and C7 hand-booked lots), adds an independent check that the camera cannot give (E4, C10), and targets the other future-dated records (C2)."
+      },
+      {
+        "itemId": "I-A3",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "Reconciling 12 months of lots site-wide is a reasonable scope check because PackBridge has run since Mar 2025 (C8) and earlier future-dated edits are not covered by C2. However, C1 shows the fault starting in October, so this is broader and slower than the targeted containment in A2."
+      },
+      {
+        "itemId": "I-A4",
+        "answer": "premature",
+        "confidence": 80,
+        "justification": "Other products are not confirmed affected (C2 has no packing history), and HX-15-30\u0027s change would shorten rather than extend expiry. Blanket over-labelling on assumption is not justified until printer records are checked."
+      },
+      {
+        "itemId": "I-A5",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "The camera correctly checks that the print matches the job data and catches truncated or smudged codes, rejecting 412 truncated cartons (C6, E4). Switching it off disables a working protective control and would not fix the data fault."
+      },
+      {
+        "itemId": "I-SUFF",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "C1, C2 and C8 together establish the data-path cause and rule out operator and firmware causes, which is enough to commit to A2\u0027s correction and containment."
+      }
+    ],
+    "ambiguousItems": [
+      "I-A3: acceptable vs premature. C1 bounds the Veltranol fault to October, but PackBridge\u0027s apparent disregard of valid-from dates may predate the C2 window (live since Mar 2025), so a broader look is partly justified.",
+      "I-H5: unknown vs supported. The same mechanism plausibly hit MR-05-14 and HX-15-30, but no packing evidence is given.",
+      "I-R1: contradicted vs association-only. Faulty jobs cluster on Line 3 nights, but C1 directly counters a causal link."
+    ],
+    "caseProblems": [
+      "C1 and C2 together leave no uncertainty, so the case is close to deterministic. Only the hidden PackBridge defect (USE_VALID_FROM = Y yet the future value was read) is left unexplained, and it contradicts the vendor statement in E5 without any explanation being offered.",
+      "C2\u0027s line \u0027the existing value of 24 ... is still the value in effect today\u0027 practically gives away H3/R3.",
+      "A2 says \u0027reset records so only the current value can be read\u0027, which presumes the mechanism. That is fine, but it is the only action written in detailed, well-scoped terms, which cues it as the correct answer."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I-A3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A3 is a review of past lots. It commits to no corrective step that rests on an unconfirmed hypothesis, so \u0027premature\u0027 does not fit well. The rubric reserves that label for committing to an action that would only be right if a live hypothesis were confirmed, as A4 does with over-labelling. The flag correctly notes that C2 only covers 1 Sep to 10 Nov. PackBridge has been live since Mar 2025, and future-dated values entered before Sep 2026 have not been ruled out. That makes a broader look partly justified, which supports \u0027acceptable\u0027 rather than \u0027premature\u0027. A3 is still slower and less targeted than A2, which acts on the confirmed cause, contains the stock and inspects the specific at-risk products. So A3 is not \u0027preferred\u0027. One flaw in the key: its rationale says C1 and C2 \u0027bound the fault to jobs created after the October edits\u0027, which overstates the reach of C2\u0027s date window. The label stands, but the rationale needs correcting.",
+        "fix": "Correct the I-A3 rationale. Replace \u0027C1 and C2 bound the fault to jobs created after the October edits\u0027 with: \u0027C1 shows Veltranol jobs were correct from Jun to 3 Oct, and C2 shows the only future-dated values in Sep\u2013Nov are the October CC-309 edits. Earlier future-dated values before Sep 2026 are not excluded, so a broad review is reasonable diligence. But it is slower and less targeted than A2, which inspects the specific at-risk products.\u0027 Optionally, extend C2\u0027s window back to the PackBridge go-live (14 Mar 2025) with \u0027no other future-dated SHELF_LIFE_M entries\u0027. That would remove the residual argument altogether."
+      },
+      {
+        "itemId": "I-H5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "C2 shows that HX-15-30 and MR-05-14 received future-dated values on 20 Oct, so the same exposure is plausible. But C2 explicitly says packing history is not included, and C4 leaves out the product schedule. No item in the catalogue shows that either product was packed after 20 Oct, or that its cartons carry wrong dates. It is also not established why PackBridge ignored valid-from despite USE_VALID_FROM = Y (C8), so it cannot be assumed the same behaviour applies to every product. The lack of complaints means nothing, because Kestrel buys only Veltranol (E1). A plausible mechanism without evidence of exposure leaves the claim live but unestablished, which is the definition of \u0027unknown\u0027. \u0027Supported\u0027 would require evidence that the products were packed with wrong dates, and none exists.",
+        "fix": "No change to the key is needed. To remove any temptation to infer exposure, add one sentence to C2 or C4: \u0027Packing of HX-15-30 and MR-05-14 since 20 Oct has not been checked; both are campaign-packed and their schedule is held in the planning system.\u0027"
+      },
+      {
+        "itemId": "I-R1",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The evidence actively counts against a causal link, so this is more than a correlation that falls short of causation. C1 shows override = N on all 47 jobs, and the printed string matches the payload in every job, so the payload was wrong before any operator acted. Agency operators on Line 3 nights ran correct jobs from 30 Sep to 3 Oct, and permanent day-shift staff on Line 1 produced faulty lots on 21 and 29 Oct. The checks operators were supposed to make compare the printer screen against a work-order printout that also comes from PackBridge (E4), so better checking would not have caught the error. The clustering on night shifts is a scheduling confound. When the proposed mechanism is ruled out and the effect appears without the supposed cause, the rubric\u0027s answer is \u0027contradicted\u0027, not \u0027association-only\u0027.",
+        "fix": "None needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

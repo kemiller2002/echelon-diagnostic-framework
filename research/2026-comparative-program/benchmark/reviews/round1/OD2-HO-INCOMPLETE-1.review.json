@@ -1,0 +1,134 @@
+{
+  "caseId": "OD2-HO-INCOMPLETE-1",
+  "blindAgreement": "13/14",
+  "weightedBlindAgreement": 0.9629629629629629,
+  "disagreements": [
+    {
+      "itemId": "S13",
+      "key": "acceptable",
+      "blind": "preferred"
+    }
+  ],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "S1",
+        "answer": "unknown",
+        "confidence": 65,
+        "justification": "The only measure of efficiency loss is a ratio built on FT-201 flow. That meter was re-ranged with a default factor and never wet-verified from 2 Apr 2026 (C6), the same month the ratio starts rising (E2). The consultant memo did not validate instruments (C12). The Kestrel approach reading has no matching start-up load (E3), and there are no high-condenser-pressure events (C4), so the decline is neither shown nor ruled out."
+      },
+      {
+        "itemId": "S2",
+        "answer": "unknown",
+        "confidence": 55,
+        "justification": "An undocumented interim heat exchanger, HX-F1 (up to 400 kW), was tied into the header as presses moved on 8 Apr, 13 May and 10 Jun (C11). That matches the Apr\u2013Jun ramp (E1), the doubling of CH-3 run-hours (C5) and the higher tower approach and fan speed (C9). However, HX-F1 has no heat meter and FT-201 is unreliable (C6), so the extra load cannot be quantified and separated from efficiency loss."
+      },
+      {
+        "itemId": "S3",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "The utility revenue meter rose by 218 MWh, which matches the submeter rise (E1, C1). The revenue meter is independently tested and its CT ratio is unchanged (C1), and the rest of the site is flat (C13), so the electricity rise is real."
+      },
+      {
+        "itemId": "S4",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "In 2026, cooling degree-days, wet-bulb and hours above 20 \u00B0C wet-bulb were all lower than in 2025, and the station data are clean (E1, C2)."
+      },
+      {
+        "itemId": "S5",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "The setpoint was lowered for only 3 days in March and then restored (E5, C10). Mean supply temperature was 7.1 \u00B0C, and the 20 Oct audit confirms SP-CHW is 7.0 \u00B0C (C10)."
+      },
+      {
+        "itemId": "S6",
+        "answer": "unknown",
+        "confidence": 50,
+        "justification": "Electricity growth is clearly shown (E1, C1). The efficiency decline it is linked to comes only from a ratio whose denominator relies on an unverified flowmeter (C6, E2, C12), so even a real association is not established."
+      },
+      {
+        "itemId": "S7",
+        "answer": "association-only",
+        "confidence": 55,
+        "justification": "HX-F1 was connected in phases that line up in time with the stepwise growth (C11, E1). Plant-side signs of higher load also co-occur (C5, C9). Without a heat meter, a valve trend or verified header flow (C6, C11), its causal contribution is not demonstrated."
+      },
+      {
+        "itemId": "S8",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "The setpoint change lasted 14\u201317 Mar and was reversed with no later changes (E5, C10). The growth sits in Apr\u2013Oct, when supply temperature was normal (E5)."
+      },
+      {
+        "itemId": "S9",
+        "answer": "unknown",
+        "confidence": 60,
+        "justification": "Cycles of concentration were raised, a blowdown valve stuck in March, and the scaling index was slightly positive in Jul\u2013Aug (C3). However, no waterbox has been opened since Feb 2025 (C7). The vendor\u0027s fouling inference rests on an approach reading with no comparable baseline load (E3)."
+      },
+      {
+        "itemId": "S10",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "Verifying FT-201, metering branches such as HX-F1, and logging per-chiller power directly separates efficiency loss from added load. Those are the two unresolved gaps (C6, C11, C5)."
+      },
+      {
+        "itemId": "S11",
+        "answer": "premature",
+        "confidence": 80,
+        "justification": "Fouling is unconfirmed: the vendor evidence is weak (E3), there are no condenser-pressure events (C4), the last brushing found only a light deposit (C7), and brushing is not due until Feb 2027 (C7). A credible load explanation also exists (C11)."
+      },
+      {
+        "itemId": "S12",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "Production needs a 7 \u00B0C supply. An earlier drift to 8.5 \u00B0C caused scrap and missed deliveries (E4), and line 3 already complains of warm water at about 7.6 \u00B0C (C15)."
+      },
+      {
+        "itemId": "S13",
+        "answer": "preferred",
+        "confidence": 65,
+        "justification": "The CH-2 outage on 8\u201310 Dec allows a waterbox to be opened for a visual check at almost no cost (C7). This directly tests the fouling claim (E3, R4)."
+      },
+      {
+        "itemId": "S14",
+        "answer": "insufficient",
+        "confidence": 80,
+        "justification": "The cooling-delivered measure is invalid after the 2 Apr converter swap (C6), and the HX-F1 load is unmetered (C11). Neither condenser brushing nor isolating HX-F1 can be committed to on the current evidence."
+      }
+    ],
+    "ambiguousItems": [
+      "S2: the HX-F1 timing match plus tower and staging signals (C11, C5, C9) could be read as \u0027supported\u0027 over H1, because H1 rests mainly on the invalid FT-201 ratio.",
+      "S6: \u0027association-only\u0027 is also defensible, since the dashboard ratio and electricity rise together (E2). That covariation is partly built in, because the ratio is calculated from the same electricity.",
+      "S13: \u0027acceptable\u0027 is also defensible, because one visual inspection tells you little about the other units."
+    ],
+    "caseProblems": [
+      "C15 logbook entries are out of date order (11 Jul listed after 29 Jul). This is minor.",
+      "C5: staging is triggered by motor current, so more chillers running fits both lower efficiency and added load. That makes C5 less discriminating than it may be meant to be.",
+      "Building C\u0027s original cooling arrangement is never described. Whether moving to HX-F1 is truly new load on the central plant, or load shifted from it, has to be inferred."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "S13",
+        "ruling": "ambiguous",
+        "explanation": "A4 is an evidence-gathering step with almost no cost. The CH-2 outage on 8\u201310 Dec is already booked, and the planner confirms a waterbox can be opened in that window (C7). It commits nothing and directly tests the only physical mechanism the vendor proposes for the \u20AC38,400 decision the director has to make. All three condensers share the same tower water and the new treatment regime (C3), and they have been brushed together on the same cycle (C7), so CH-2\u0027s tubes are a reasonable stand-in for the others. That weakens the key\u0027s \u0027covers one of three chillers\u0027 argument. The definitions also allow more than one action to be \u0027preferred\u0027 (\u0027among the best\u0027), and A4 complements A1 rather than competing with it. So \u0027preferred\u0027 is a defensible answer. The key\u0027s \u0027acceptable\u0027 is also defensible: A4 cannot measure or rule out load growth, it tests only one mechanism of efficiency loss, and on its own it does not separate H1 from H2 the way A1 does. Two answers survive, so the key is not uniquely defensible.",
+        "fix": "Make the CH-2 inspection clearly less informative. Add one sentence to C7: \u0027CH-2 condenser was brushed separately in August 2026 during a tube-leak repair; CH-1 and CH-3 have not been opened since February 2025.\u0027 A CH-2 visual check then says little about fouling on the units the vendor is worried about, which leaves \u0027acceptable\u0027 as the only defensible answer. Alternatively, keep the evidence as it is and change the key to \u0027preferred\u0027, with \u0027acceptable\u0027 removed by stating in C7 that the condensers share one water circuit and treatment, so any one unit represents all three."
+      },
+      {
+        "itemId": "S2",
+        "ruling": "ambiguous",
+        "explanation": "The flagged rival, \u0027supported\u0027, is not defensible. C11 shows that HX-F1 exists and that the press relocation timing matches the ramp, but it records only \u0027flow observed\u0027, with no heat meter and no valve trend. C5 (staging on motor current) and C9 (tower fan speed and approach) rise with both extra load and extra compressor work, and condenser-water flow is not metered, so neither establishes how big the load is. However, the catalogue contains an energy-balance bound that the key misses, and it makes \u0027contradicted\u0027 defensible. Heat that the mould-temperature units send into chilled water comes from press electrical input. C13 puts all moulding at 405 MWh over Apr\u2013Oct 2026 (5,136 h), about 79 kW on average. Building F held about 81% of press-days, so roughly 64 kW. The key\u0027s own arithmetic needs about 220 kW of extra transfer to explain the \u002B42 kWe. Even if every kW of Building F press power ended up in chilled water, HX-F1 could explain only about 12 kWe, under a third of the growth. Non-chiller site load is flat and the weather was milder, so no other source of added load is documented. A careful analyst could therefore conclude that the evidence counts against H2 as \u0027the explanation\u0027 of the growth. Both \u0027unknown\u0027 (the key) and \u0027contradicted\u0027 are defensible. The same problem weakens S7\u0027s \u0027association-only\u0027 rationale, because the size of the link is capped well below what the growth requires.",
+        "fix": "Remove the electrical bound on HX-F1\u0027s load by adding a load that ambient conditions drive. Amend C11\u0027s change note CN-14 to read: \u0027...interim arrangement: plate heat exchanger HX-F1 tied into the central chilled-water header, maximum transfer 400 kW, serving the mould temperature units and the Building F production-hall air-handling coils (both originally on AC-F1\u0027s 450 kW design basis).\u0027 HX-F1\u0027s heat then is no longer capped by press electricity, the 220 kW requirement stays within plausible range but unmeasured, and \u0027unknown\u0027 is again the only defensible answer. The alternative is to scale C13\u0027s moulding consumption so that Building F press power is comfortably above 220 kW, but that would mean rebalancing the site totals in E1 and C1."
+      },
+      {
+        "itemId": "S6",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Association-only\u0027 needs evidence that the \u0027from\u0027 condition, a decline in chiller efficiency, actually occurred alongside the growth. The only series showing efficiency falling as electricity rises is the E2 dashboard ratio. Its numerator is the MCC-4 electricity itself, so it rises with electricity partly by construction. Its denominator comes from FT-201, which C6 shows had an open \u00B115% drift work order before the baseline year, was last verified in 2022, and has run since April 2026 on a default calibration factor with no wet check. That co-movement is therefore not independent evidence that the two co-occur. C12 just repeats the dashboard. The vendor\u0027s single CH-1 approach reading (E3) is not load-matched and is compared with a start-up value taken at unknown load, so it does not show efficiency falling over the growth period. C4 (no high-condenser-pressure warnings) and C14 (no refrigerant loss) give no positive sign of degradation. Unlike R2, where C11 documents that the \u0027from\u0027 condition exists and lines up with the ramp, nothing valid shows that R1\u0027s \u0027from\u0027 condition occurred at all. \u0027Unknown\u0027, meaning the evidence is insufficient even to show association, is the only defensible answer. (The energy-balance point raised under S2 might suggest indirectly that efficiency fell, but that is an inference by elimination, not observed co-occurrence, and the S2 fix removes it.)",
+        "fix": "No change needed."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

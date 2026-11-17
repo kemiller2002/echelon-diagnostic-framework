@@ -75,7 +75,7 @@
       "title": "Tessaline case field-change audit export, 2 September\u201331 October",
       "source": "Tessaline audit trail, pulled by Corvane IT on 12 Nov",
       "sourceType": "system-record",
-      "text": "Cases reaching Incident\u2013Confirmed: Sep 37, Oct 36. Of these, 47 (Sep 23, Oct 24) were later changed to Suspicious Activity\u2013Monitoring; the remainder equal the reported 14 and 12. All 47 changes: actor svc-bss-integration, channel API, made 3h31m\u20133h42m after case open, each while the case carried the SLA-warning flag (raised at 3h30m if no containment timestamp exists). All 47 had analyst confirmation notes before the change (credential misuse 19, malware execution 15, data staging 8, other 5). None was linked or merged to another case. Cases that leave Incident\u2013Confirmed drop out of the containment-time and SLA metrics. None of the 47 has a containment timestamp, though notes on 11 describe containment steps. Ledgerline, Mar\u2013Jul: no post-confirmation category changes."
+      "text": "Cases reaching Incident\u2013Confirmed: Sep 37, Oct 36. Of these, 47 (Sep 23, Oct 24) were later changed to Suspicious Activity\u2013Monitoring. All 47 changes: actor svc-bss-integration, channel API, made 3h31m\u20133h42m after case open, each while the case carried the SLA-warning flag (raised at 3h30m if no containment timestamp exists). All 47 had analyst confirmation notes before the change (credential misuse 19, malware execution 15, data staging 8, other 5). None was linked or merged to another case. Cases that leave Incident\u2013Confirmed drop out of the containment-time and SLA metrics. None of the 47 has a containment timestamp, though notes on 11 describe containment steps. Mean time to contain for cases contained within 3h30m of opening: Ledgerline Mar\u2013Jul 1h51m; Tessaline Sep\u2013Oct 1h50m. Ledgerline, Mar\u2013Jul: no post-confirmation category changes."
     },
     {
       "id": "C5",
@@ -213,6 +213,12 @@
         "from": "Auto-triage playbooks reducing analyst workload",
         "to": "Lower reported mean time to contain in Sep\u2013Oct",
         "relation": "causes"
+      },
+      {
+        "id": "R5",
+        "from": "Deprecation of 28 detection rules during the migration",
+        "to": "Malicious activity going undetected since 2 Sep",
+        "relation": "causes"
       }
     ],
     "actions": [
@@ -329,6 +335,18 @@
     {
       "itemId": "I9",
       "refId": "R4",
+      "type": "edge",
+      "asOfStage": null,
+      "allowedAnswers": [
+        "causal",
+        "association-only",
+        "contradicted",
+        "unknown"
+      ]
+    },
+    {
+      "itemId": "I15",
+      "refId": "R5",
       "type": "edge",
       "asOfStage": null,
       "allowedAnswers": [

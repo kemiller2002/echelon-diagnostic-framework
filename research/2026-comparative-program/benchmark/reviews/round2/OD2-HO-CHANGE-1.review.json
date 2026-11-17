@@ -1,0 +1,135 @@
+{
+  "caseId": "OD2-HO-CHANGE-1",
+  "blindAgreement": "15/15",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I01",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "C5 shows that within each connector group, Founders accounts with the price lock churned at nearly the same rate as repriced accounts (Quillbook 5.9% vs 6.2%; no connector 1.8% vs 1.9%), and repriced no-connector accounts barely moved in any seat band. The E3 seat-band \u0027dose-response\u0027 is explained by Quillbook accounts being larger (5.6 vs 2.6 seats)."
+      },
+      {
+        "itemId": "I02",
+        "answer": "supported",
+        "confidence": 55,
+        "justification": "Using S1 evidence only, the timing matches the price rise, and the size of the uplift matches the forecast in C3 (0.6\u20131.0 points). E3 shows a seat-band gradient, E2 and C2 show price answers rising from 31% to 49%, E5 rules out seasonality, and C4 shows the app complaints fading. The sync signal in E4 is suggestive but not linked to cancellations."
+      },
+      {
+        "itemId": "I03",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "In C5, Quillbook-connected churn rose from about 2% to about 6% whatever the pricing cohort. C6 dates the failure mechanism to the v2 retirement on 30 March and shows 34% churn among affected accounts against 8% among unaffected ones. C12 and C13 explain why monitoring missed it."
+      },
+      {
+        "itemId": "I04",
+        "answer": "unknown",
+        "confidence": 60,
+        "justification": "At S1 the only signals are sync tickets rising from 30 to 70 a week with missing or doubled invoices, and slower responses for accounts that cancelled (E4), plus a few free-text mentions (C2). Nothing yet ties connector use to cancellation rates."
+      },
+      {
+        "itemId": "I05",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "The Tallymarsh cells in C5 are small, and their changes are within normal variation. The Tallymarsh log has not been reviewed and it is not on the health panel (C6, C13), though two July cancellations cited missing invoices."
+      },
+      {
+        "itemId": "I06",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "E5 shows April\u2013July churn of 1.7% in 2024 and 1.9% in 2025, against 2.4\u20133.1% in 2026. C5 shows the rise is confined to Quillbook-connected accounts, which seasonality would not produce."
+      },
+      {
+        "itemId": "I07",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The forced 5.0 update reached every account (E5), yet no-connector accounts churned at an unchanged rate (C5). App ratings recovered after 5.0.2 (C4), mobile tickets are flat (C7), and churn kept rising into June and July (E6)."
+      },
+      {
+        "itemId": "I08",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Within each connector stratum, price-locked and repriced cohorts show the same churn change, and the no-connector seat bands are flat (C5). This counts against a causal price effect, despite E1 and E3."
+      },
+      {
+        "itemId": "I09",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The evidence covers temporal order (v2 retired 30 March), a mechanism (silent false successes and double posts, C6, confirmed by C12), covariation within Quillbook accounts (34% vs 8% churn, C6), and the price rival ruled out by the Founders comparison in C5."
+      },
+      {
+        "itemId": "I10",
+        "answer": "association-only",
+        "confidence": 75,
+        "justification": "Accounts that cancelled had slower first responses (26h vs 7h, E4). But sync tickets escalate to Tier 2 with a 38h median (C7), so slow responses are confounded with the underlying sync failure."
+      },
+      {
+        "itemId": "I11",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "This targets the established cause (C5, C6). The fix takes three to four weeks and Quillbook has offered an engineer (C12). Reaching affected and lapsed accounts addresses the harm to customers\u0027 books."
+      },
+      {
+        "itemId": "I12",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "The hold has kept 3,870 duplicates out of customers\u0027 books (C6). Switching it off removes a protective control and would put more corrupted invoices into customers\u0027 accounts."
+      },
+      {
+        "itemId": "I13",
+        "answer": "harmful",
+        "confidence": 72,
+        "justification": "C5 shows price is not driving churn, so the rollback would give up about $220k a month (E6) for no retention gain and would take attention away from the real cause."
+      },
+      {
+        "itemId": "I14",
+        "answer": "premature",
+        "confidence": 70,
+        "justification": "Tallymarsh involvement is unconfirmed (C5 small cells, unreviewed log, C6). Reviewing the existing log is a cheaper first step before committing a team to a rebuild, although the work would not touch anything else (E6)."
+      },
+      {
+        "itemId": "I15",
+        "answer": "sufficient",
+        "confidence": 82,
+        "justification": "The cohort comparison in C5, the mechanism and affected-vs-unaffected churn in C6, and the vendor confirmation in C12 are enough to commit now to making the Quillbook repair and customer remediation (A1) the priority."
+      }
+    ],
+    "ambiguousItems": [
+      "I02: at S1, \u0027supported\u0027 and \u0027unknown\u0027 are both defensible. The E3 gradient is confounded by account size, and \u0027not worth the cost\u0027 in E2 mixes price with value, but C3\u0027s forecast matches the April\u2013May uplift.",
+      "I13: \u0027harmful\u0027 vs \u0027premature\u0027. Once H1 is contradicted, \u0027harmful\u0027 fits best, but some may read the rollback as merely premature.",
+      "I14: \u0027premature\u0027 vs \u0027acceptable\u0027. The rebuild is isolated and low-risk to other work, but reviewing the Tallymarsh log first is clearly cheaper."
+    ],
+    "caseProblems": [
+      "The C5 title (\u0027...by pricing cohort, accounting connector...\u0027) signals the decisive stratification, a mild hint.",
+      "C6 openly lists the cancellation split between affected and unaffected accounts (34% vs 8%), which makes it very decisive on its own.",
+      "C3\u0027s forecast churn uplift (0.6\u20131.0 points for two to three months) closely matches the observed April\u2013May uplift. This strengthens the S1 case for price and may be an intended trap, but the coincidence feels engineered.",
+      "The numbers are otherwise internally consistent: in C5/C6, about 467 Quillbook cancellations over four months works out to about 6.1% a month, and the weighted totals reproduce the overall churn in E5."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I02",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "I limited this to S1 evidence (E1\u2013E5, C1\u2013C4). At that stage, price is better supported than every rival:\n- **Timing:** churn rose in the first two months after the 1 April increase.\n- **Seasonality ruled out:** E5 shows the usual April\u2013July rate is 1.7\u20131.9%.\n- **Survey shift:** price-citers rose from 31% to 49% (about 97 a month against about 30). That excess roughly matches the excess of about 70 cancellations a month. \u0027Product problems or bugs\u0027 stayed flat at 6\u20137%.\n- **Dose-response:** E3 shows churn rising with the dollar increase among repriced accounts only.\n- **Forecast match:** C3 models a 0.6\u20131.0 point uplift. That exactly matches the observed April (\u002B0.6) and May (\u002B1.0) rises over the 1.8% Q1 rate.\n- **Rivals at S1:** H5 is fading (E4, C4), H4 is contradicted, and H2 is only a ticket count with a workaround and no link to cancellations.\n\nThe flag says the E3 gradient is confounded by account size. But no S1 item says Quillbook accounts are larger or links connector use to cancellations; that only appears in C5 at S2. The flag\u0027s other point, that \u0027not worth the cost\u0027 mixes price with value, is real. Still, it does not shift the balance away from price, because the bugs category stayed flat and C2\u0027s free text is dominated by price. \u0027Unknown\u0027 would require that the S1 evidence does not discriminate between H1 and its rivals, and here it does. A careful analyst limited to S1 would rank H1 as supported. The S2 reversal is the intended trap, not a sign that the key is ambiguous.",
+        "fix": "No change required. Optional hardening: add one clause to E3\u0027s analyst comment saying that seat count was not cross-tabbed against connector use. This keeps the confound unexposed but flags the gradient as unadjusted, and does not change the S1 answer."
+      },
+      {
+        "itemId": "I13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Premature\u0027 means the action could be right if a still-unconfirmed hypothesis were confirmed. A3 depends only on H1. H1 is not unconfirmed; C5 contradicts it as a natural experiment:\n- Price-locked Quillbook accounts rose from 1.9% to 5.9%, and repriced Quillbook accounts from 2.0% to 6.2%.\n- Unconnected accounts stayed flat in both cohorts and in every seat band.\n\nE6 shows the rollback gives up about $220k a month. There is no plausible churn benefit under H2 or under H3, the only live rival. Giving up revenue for nothing is a worsened outcome, which is the definition of \u0027harmful\u0027. No live hypothesis would make A3 right, so \u0027premature\u0027 does not fit the stated semantics.",
+        "fix": "No change required."
+      },
+      {
+        "itemId": "I14",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "E6 states that A4 is proposed \u0027in case it is affected too\u0027. So it depends entirely on H3, which is live but unestablished:\n- C5: the Tallymarsh rise is within noise at about seven cancellations a month.\n- C6: the Tallymarsh log has not been reviewed, and two July cancellations cited missing invoices.\n- C13: Tallymarsh is not on the health panel.\n\nThis matches the definition of \u0027premature\u0027 almost word for word: it could be right if H3 were confirmed, but committing now is not justified. The flag argues for \u0027acceptable\u0027 because the work is isolated and low-risk. But low risk is exactly why the answer is \u0027premature\u0027 rather than \u0027harmful\u0027. Isolation does not make the rebuild a reasonable commitment before H3 is checked, especially when reviewing the existing log is a much cheaper way to resolve H3 first. Nothing in the evidence shows the rebuild is worthwhile regardless of H3, for example because the Tallymarsh interface is being retired. So \u0027acceptable\u0027 has no independent support.",
+        "fix": "No change required. Optional hardening: add one sentence to C6 or E6 saying the Tallymarsh connector uses a currently supported interface and has no other known defects. This rules out the reading that a rebuild is worthwhile regardless of H3."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

@@ -1,0 +1,128 @@
+{
+  "caseId": "OD2-HO-STOP-2",
+  "blindAgreement": "15/15",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I-H1",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Patient re-runs on Analyzer A agreed within allowable difference (mean \u002B0.02, E3), the moving median was stable (E3), there were no multi-rule violations and other levels passed (E1, E2), calibrations passed (C2), and EQA was acceptable (C5), all of which count against a systematic fault."
+      },
+      {
+        "itemId": "I-H2",
+        "answer": "contradicted",
+        "confidence": 87,
+        "justification": "QC means were unchanged across the lot change at all levels (Level 2 5.81 before vs 5.80 after, E2), calibrator recovery after the change was on target (C2), the CoA is clean and the vendor has no other reports (C3, C4), and patient comparison with the old-lot Analyzer A agreed (E3)."
+      },
+      {
+        "itemId": "I-H3",
+        "answer": "supported",
+        "confidence": 82,
+        "justification": "The immediate repeat passed (E1), adjacent levels and Na/Cl passed (E1), no other Westgard violations were recorded (E2), patient data were concordant (E3), and the pattern matches four prior isolated 1-3s events with no recurrence (C11)."
+      },
+      {
+        "itemId": "I-H4",
+        "answer": "unknown",
+        "confidence": 75,
+        "justification": "The ISE line cannot detect partial aspirations, so a short sample cannot be excluded or confirmed (E6, C4, C1), and a chance 1-3s flag at the expected 0.3% rate is an equally good explanation (E2)."
+      },
+      {
+        "itemId": "I-H5",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "All 182 scheduled QC runs were completed and logged with timestamps and operator IDs (E2), all runs on 9-11 Nov were within 15 minutes of schedule (E6), and the rota shows QC duty was assigned to competent staff despite the short staffing (C7, C8)."
+      },
+      {
+        "itemId": "I-R1",
+        "answer": "contradicted",
+        "confidence": 83,
+        "justification": "QC means after the lot change matched those before (E2), post-change calibrations passed (C2), and B-vs-A patient comparisons agreed (E3), so there was no lot-related shift to cause the excursion."
+      },
+      {
+        "itemId": "I-R2",
+        "answer": "causal",
+        "confidence": 92,
+        "justification": "Rule QC-HOLD-K is configured to hold results on a 1-3s violation (C13), and it fired 2 seconds after the failed Level 2 result (E1)."
+      },
+      {
+        "itemId": "I-R3",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The high Ward 6 results were split 7/7 between Analyzers A and B (E5), and Analyzer B patient results agreed with Analyzer A (E3), so Analyzer B measurement does not explain the excess."
+      },
+      {
+        "itemId": "I-R4",
+        "answer": "association-only",
+        "confidence": 72,
+        "justification": "11 of the 14 high results had collection-to-receipt times over 3 h, against 17 of 47 others, coinciding with the tube outage (E5, C10, C12), and delayed processing is a plausible mechanism, but the renal overflow patients are an unexcluded confounder (E5, C12, C15) and no repeats have been done."
+      },
+      {
+        "itemId": "I-A1",
+        "answer": "preferred",
+        "confidence": 80,
+        "justification": "The investigation found concordant patient re-runs, a stable moving median, a passing repeat and no other rule violations (E1, E2, E3, C1, C2), consistent with a chance or isolated excursion, so returning B to service and closing with no amendments is justified."
+      },
+      {
+        "itemId": "I-A2",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "No lot or analyzer shift is evidenced (E2, E3, C2, C3), and re-testing about 2,900 results would require recollecting every patient (E3), imposing large unnecessary burden on patients."
+      },
+      {
+        "itemId": "I-A3",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "The flag rate matches expectation (E2, C11), and the quality committee rejected widening because it would reduce detection of real shifts at sigma 4.1 (C14), so this would disable a protective control."
+      },
+      {
+        "itemId": "I-A4",
+        "answer": "premature",
+        "confidence": 78,
+        "justification": "A sampling disturbance cannot be confirmed or excluded (E6, C4), so recording it as the confirmed cause and changing the procedure is not justified."
+      },
+      {
+        "itemId": "I-A5",
+        "answer": "acceptable",
+        "confidence": 62,
+        "justification": "Extra Level 2 QC is low-cost reassurance after a single excursion but is not required, because the evidence already shows no shift (E2, E3, C11) and the vendor recommends no action unless violations recur (C4)."
+      },
+      {
+        "itemId": "I-SUFF",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "Concordant patient comparisons, stable QC means and moving medians, clean calibration and event logs, and a history of identical benign events (E2, E3, C1, C2, C11) are sufficient to commit to returning Analyzer B to service without amendments."
+      }
+    ],
+    "ambiguousItems": [
+      "I-A5: a short period of extra Level 2 QC could be argued as \u0027preferred\u0027 (cheap reassurance alongside A1) or \u0027acceptable\u0027.",
+      "I-R4: the stronger time-to-receipt split plus the known mechanism could arguably support \u0027causal\u0027, but the renal overflow confounder has not been excluded, so \u0027association-only\u0027 is the safer answer."
+    ],
+    "caseProblems": [
+      "C5 says EQA cycle 2026-7 samples were received on 16 Nov, after the director\u0027s 12 Nov request, so the timeline does not fit.",
+      "C4 and C12 are dated 13 Nov, after the 12 Nov request; this is plausible as later catalogue collection but worth noting.",
+      "None of the candidate actions addresses the Ward 6 clinical issue (advising repeat samples and checking specimen handling during the tube outage), even though this is arguably the most important next step.",
+      "The C3 title (\u0027...ISE reagent lot introduced on 9 Nov\u0027) and the C14 content give strong cues but do not directly leak the scored answers."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I-A5",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The blind solver gave no answer for this item, so there is no competing answer to weigh. The judgement is made on the evidence alone. \u0027Preferred\u0027 means among the best next actions. The routine schedule already runs all three QC levels every 4 h, about six Level 2 checks a day, and all 182 of 182 scheduled runs were completed (E2). One extra Level 2 run per shift adds little detection on top of that. The 1-3s flag rate is the expected chance rate (E2), and patient comparisons show no effect (E3). Four earlier isolated 1-3s events were closed without extra QC, and none recurred within 30 days (C11). The vendor recommends no further action unless more violations occur (C4). Each extra measurement also carries its own 0.3% false-rejection chance. So A5 is reasonable, cheap and harmless, but it is not among the best actions. A1 is the clear best action. \u0027Acceptable\u0027 is the defensible answer. \u0027Preferred\u0027 would need evidence of real residual risk that routine QC cannot catch, and the case does not provide it. The undetectable sampling glitch (H4) is caught no better by one extra Level 2 run than by the routine runs.",
+        "fix": "No change required. Optional hardening: add one sentence to the QC plan note in E2: \u0027After a single 1-3s with passing adjacent levels, passing repeat and acceptable patient comparison, the routine schedule resumes; no additional QC runs are required.\u0027 This makes explicit that A5 is optional rather than best practice."
+      },
+      {
+        "itemId": "I-R4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The blind solver gave no answer, so the judgement is made on the evidence alone. E5 shows a clear association: 11 of the 14 high results had collection-to-receipt times over 3 h, against 17 of the 47 other results. The cluster also coincides with the tube outage that began on 10 Nov. Delayed processing raising potassium is a known mechanism. But the rubric defines \u0027causal\u0027 as requiring the main rival to be ruled out, and here it is not. Four renal overflow patients arrived on 10 Nov, the same day the tube outage started, so case mix and transport delay change together. Nobody knows which of the high results came from the overflow patients (C12). No repeat samples were taken (E5, C12), and the consultant herself says some results may be genuine (C15). The within-period delay split partly argues against a case-mix explanation. It does not exclude it, because the overflow patients\u0027 samples could themselves have had the longest waits. No catalogue item resolves this (C10, C12, C15). So \u0027association-only\u0027 is the only answer consistent with the rubric. \u0027Causal\u0027 fails the rival-exclusion requirement, and \u0027unknown\u0027 or \u0027contradicted\u0027 would ignore a clear covariation.",
+        "fix": "No change required. Optional hardening: add a line to E5 or C12 making explicit that the patient identities, and so the renal-overflow share of the 14 high results, cannot be determined from the LIS query. This removes any reading that the within-period delay split already controls for case mix."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

@@ -1,6 +1,6 @@
 {
   "caseId": "OD2-HO-ADVERS-1",
-  "groundTruthNarrative": "From 12 January 2026 Pellacott built VA-220 valves with a new Corlin seal on a new Line 3. Its only VA-220 leak rig, LT-04, had failed on 9 January and logged no test after 18 December 2025. Rather than stop shipments, Pellacott issued 2026 certificates citing LT-04 with per-piece values copied from November 2025 tables. Because these fabricated records were complete and showed 100% pass, Pellacott\u0027s SupplierPath test-record component rose from 58 to 100. That rise lifted its score from 70 to 89 and triggered automatic dock-to-stock, which removed Brenmoor\u0027s last receiving check. Brenmoor\u0027s own helium retest found 11% of never-installed 2026-built Pellacott valves leaking at the seat, against about 1% of 2025-built and none of Durrant-Hale\u0027s. Teardowns of returned valves show the same seat defect with braze joints intact. Claim rates are the same for legacy and new installers and for firmware 4.1 and 4.2, and they stay at baseline whenever Durrant-Hale valves are fitted. The new-installer pattern seen by field service is confounded by build year. Whether the seal compound or Line 3 assembly creates the defect cannot be separated. Whether other suppliers\u0027 records are also unreal is open. The right step is containment, with Brenmoor running its own tests.",
+  "groundTruthNarrative": "From 12 January 2026 Pellacott built VA-220 valves with a new Corlin seal on a new Line 3. Its only VA-220 leak rig, LT-04, had failed on 9 January and logged no test after 18 December 2025. Rather than stop shipments, Pellacott issued 2026 certificates citing LT-04 with per-piece values copied from November 2025 tables. Because these fabricated records were complete and showed 100% pass, Pellacott\u0027s SupplierPath test-record component rose from 58 to 100. That rise lifted its score from 70 to 89 and triggered automatic dock-to-stock, which removed Brenmoor\u0027s last receiving check. Brenmoor\u0027s own helium retest found 11% of never-installed 2026-built Pellacott valves leaking at the seat, against about 1% of 2025-built and none of Durrant-Hale\u0027s. Teardowns of returned valves show the same seat defect with braze joints intact. Claim rates, matched by unit serial, are the same for legacy and new installers and for firmware 4.1 and 4.2, and they stay at baseline whenever Durrant-Hale valves are fitted. The new-installer pattern seen by field service is confounded by build year. Whether the seal compound or Line 3 assembly creates the defect cannot be separated. Whether other suppliers\u0027 records are also unreal is open. The right step is containment, with Brenmoor running its own tests.",
   "answers": [
     {
       "itemId": "I1",
@@ -109,7 +109,7 @@
         "open-question",
         "scope"
       ],
-      "rationale": "E3 and C8 show test-record scores rising across the programme under the same unverified scoring incentive, so the claim is live. But no evidence checks any other supplier\u0027s rig logs or raw data, and no catalogue item settles it either way."
+      "rationale": "E3 and C8 show test-record scores rising across the programme under the same unverified scoring incentive, so the claim is live. But the rise fits legitimate paperwork completion equally well, no evidence checks any other supplier\u0027s rig logs or raw data, and no catalogue item settles it either way."
     },
     {
       "itemId": "I6",
@@ -127,7 +127,7 @@
         "mechanism",
         "covariation"
       ],
-      "rationale": "C5 gives the mechanism: the returned valves\u0027 seat leak matches the dominant claim code in E2. It shows the defect is present before installation and covaries with valve source and build year. It also rules out the main rivals (installers and firmware) by stratification."
+      "rationale": "C5 gives the mechanism: the returned valves\u0027 seat leak matches the dominant claim code in E2. It shows the defect is present before installation and covaries with valve source and build year. It also rules out the main rivals (installers and firmware) by serial-matched stratification."
     },
     {
       "itemId": "I7",
@@ -183,7 +183,7 @@
         "confounded",
         "association-only"
       ],
-      "rationale": "The seal change coincides with the defect onset (E4), and the defect sits in the slide seal (C5). But C5 states that the seal compound was not analysed and that the Corlin seal and the Line 3 assembly change are fully confounded. Causation by the seal source is therefore not established."
+      "rationale": "The seal change coincides with the defect onset (E4), and the defect sits in the slide seal (C5). But C5 states that the seal compound was not analysed and that the Corlin seal and the Line 3 assembly change are fully confounded. Causation by the seal source is therefore not established. The co-occurrence itself is clearly shown, so the answer is association-only rather than unknown."
     },
     {
       "itemId": "I10",
@@ -195,13 +195,14 @@
       "allowedEvidence": [
         "E3",
         "E6",
+        "C3",
         "C8",
         "C13"
       ],
       "tags": [
         "score-construction"
       ],
-      "rationale": "E3 gives the scoring formula. The test-record component, weighted 0.40, rose from 58 to 100, adding about 17 of the 19-point rise, while the other components moved only a few points. The link is mechanical."
+      "rationale": "E3 defines test-record conformance as the percentage of lot certificates that have complete per-piece values with every piece within the leak limit, so completeness and all-pass together are what the component scores. Pellacott\u0027s component, weighted 0.40, rose from 58 to 100 as its records became complete and all-pass (E3, E6, C3). That adds about 17 of the 19-point rise, while the audit and delivery components moved only a few points. The link is mechanical, fixed by the formula."
     },
     {
       "itemId": "I11",
@@ -301,7 +302,7 @@
       "tags": [
         "systemic-fix"
       ],
-      "rationale": "The scoring flaw is confirmed: E3 shows unverified self-reported records drove the score, and C10 shows those records were fabricated. Requiring verification is reasonable, but it takes effect next cycle and does nothing about defective stock now, so it is not among the best next actions."
+      "rationale": "The scoring flaw is confirmed: E3 shows unverified self-reported records drove the score, and C10 shows those records were fabricated. Requiring verification is a reasonable systemic fix, so A5 is not harmful or premature. But as worded, A5 explicitly leaves every other supplier\u0027s existing dock-to-stock grant in place, unverified, until the next scoring cycle closes (18 Dec 2026 per C8), while those grants rest on the same self-reported records that C10 shows can be fabricated. It also does nothing about the defective stock now. So it is reasonable but not among the best next actions."
     },
     {
       "itemId": "I16",
@@ -336,5 +337,5 @@
     "C5",
     "C10"
   ],
-  "authoringNotes": "The initial file points three ways: installers (VP, field service), firmware (field service) and the supplier (change notice, claim code). Pellacott\u0027s high audit score acts as a credibility trap. E6 quietly names rig LT-04, and E3 shows suspiciously perfect records after poor 2025 paperwork. C5 alone settles the defect, installer and firmware items, but leaves fabrication against honest test escape open because it did not replicate Pellacott\u0027s method. C10 alone settles fabrication (H3 contradicted) but not whether the defect predates installation or the installer and firmware rivals. C3, C13 and C9 hint at gaming (unwitnessed tests, a rebate incentive) but settle nothing. C2 and C6 keep the firmware and installer rivals alive without settling them. H5 stays unknown because no item examines other suppliers\u0027 raw data. A4 is premature because seal source and Line 3 are confounded in every 2026 sample."
+  "authoringNotes": "The initial file points three ways: installers (VP, field service), firmware (field service) and the supplier (change notice, claim code). Pellacott\u0027s high audit score acts as a credibility trap. E6 quietly names rig LT-04, and E3 shows suspiciously perfect records after poor 2025 paperwork. C5 alone settles the defect, installer and firmware items, but leaves fabrication against honest test escape open because it did not replicate Pellacott\u0027s method. C10 alone settles fabrication (H3 contradicted) but not whether the defect predates installation or the installer and firmware rivals. C3, C13 and C9 hint at gaming (unwitnessed tests, a rebate incentive) but settle nothing. C2 and C6 keep the firmware and installer rivals alive without settling them. H5 stays unknown because no item examines other suppliers\u0027 raw data. A4 is premature because seal source and Line 3 are confounded in every 2026 sample. Revision 1: E3 defines test-record conformance as complete per-piece values with every piece within the limit, and R5\u0027s cause node names the complete, all-pass records, so \u0027causal\u0027 is the only defensible answer for I10. Revision 2 (I15 ambiguity): A5\u0027s text now states that other suppliers\u0027 existing dock-to-stock grants remain in place, unverified, until the next scoring cycle closes, and C8 now gives that close date (18 Dec 2026). The gap is now part of the action, not just the rationale, so \u0027acceptable\u0027 is the only defensible key; A5 is still not harmful because it improves on the status quo and removes no existing control. A5 says \u0027other suppliers\u0027 so it does not conflict with A1\u0027s suspension of Pellacott. Minor clarity fixes: C5 item 3 now states that claims were matched to valve lot, installer and firmware by unit serial, which explains a split the E2 dashboard cannot make. C3 now notes that only paper calibration records were reviewed and the rigs were not inspected, so the \u0027in date\u0027 finding for LT-04 is consistent with C10."
 }

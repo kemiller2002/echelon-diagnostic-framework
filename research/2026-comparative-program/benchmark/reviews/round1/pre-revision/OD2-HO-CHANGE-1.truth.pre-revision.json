@@ -1,0 +1,348 @@
+{
+  "caseId": "OD2-HO-CHANGE-1",
+  "groundTruthNarrative": "Pellmore raised Crewlane\u0027s Standard price from $39 to $49 per seat on 1 April 2026. About 2,100 price-locked Founders accounts were exempt. Two days earlier, on 30 March, Quillbook retired the v2 invoice interface that Crewlane\u0027s Quillbook connector relied on. The connector\u0027s fallback route began returning \u0027success\u0027 without writing invoices, and retries sometimes posted duplicates. These events were logged at WARN, so the ERROR-only health panel stayed green. Support logged the ticket rise as Sev-3 because a manual re-sync existed. Customers whose books were wrong cancelled, and on a single-choice survey most picked \u0027Price / not worth the cost\u0027. Quillbook-connected accounts are larger (5.6 seats vs 2.6), so the finance team\u0027s dose-response by seat count reflected connector use, not price sensitivity. Cohort data shows Quillbook-connected churn tripled equally in repriced and price-locked accounts. Unconnected accounts stayed at baseline in both cohorts and in every seat band. Among Quillbook accounts, those with recorded failures cancelled at 34%, against 8% for those without. The price increase, the mobile release and seasonality did not drive the rise. Slow support co-occurs with cancellation but is confounded with the failures. Whether the separately logged Tallymarsh connector is also failing has not been established. The right step is to repair the Quillbook connector and contact affected accounts. Reversing the price or switching off the duplicate hold would cause damage.",
+  "answers": [
+    {
+      "itemId": "I01",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E5",
+        "E6",
+        "C2",
+        "C3",
+        "C5",
+        "C6",
+        "C9"
+      ],
+      "tags": [
+        "revision",
+        "leadership-narrative",
+        "misleading-signal"
+      ],
+      "rationale": "C5 provides a natural experiment. Unconnected repriced accounts moved only from 1.8% to 1.9%, the same change as unconnected Founders accounts (1.7% to 1.8%). Price-locked Quillbook accounts rose from 1.9% to 5.9%, almost the same as repriced Quillbook accounts (2.0% to 6.2%). The price increase makes no visible difference to cancellations, and the seat-band dose-response disappears among unconnected accounts. E6 also shows that retention discounts did not move the total."
+    },
+    {
+      "itemId": "I02",
+      "expected": "supported",
+      "weight": 2,
+      "requiredEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "tags": [
+        "revision",
+        "stage-s1",
+        "leadership-narrative"
+      ],
+      "rationale": "Using S1 evidence only: churn rose right after the 1 April increase, and prior years rule out seasonality (E5). The share citing price rose from 31% to 49% while \u0027Product problems or bugs\u0027 barely moved (E2). Finance shows a gradient by dollar increase (E3), and account managers report price pushback (E1). The mobile complaints had faded (E4), and sync tickets were Sev-3 with a workaround. On S1 evidence, price beats its rivals."
+    },
+    {
+      "itemId": "I03",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E6",
+        "E5",
+        "C5",
+        "C6",
+        "C7",
+        "C12",
+        "C13"
+      ],
+      "tags": [
+        "revision",
+        "central",
+        "hidden-failure"
+      ],
+      "rationale": "In C5, all of the excess churn sits in Quillbook-connected accounts, whatever their price cohort. C6 gives the mechanism: silent failures and duplicates from 30 March onwards. Within Quillbook accounts, those with recorded failures cancelled at 34%, against 8% (baseline) for those without. That rules out Quillbook users leaving for some other reason, such as a competitor."
+    },
+    {
+      "itemId": "I04",
+      "expected": "unknown",
+      "weight": 2,
+      "requiredEvidence": [
+        "E2",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "C2"
+      ],
+      "tags": [
+        "revision",
+        "stage-s1"
+      ],
+      "rationale": "At S1, sync tickets had roughly doubled to about 70 a week, with invoices missing or doubled (E4). That keeps H2 live. But the tickets were Sev-3 with a workaround, the tag covers both connectors, nothing linked cancellations to connector use, and the bugs category was flat (E2). The S1 evidence does not discriminate for or against H2."
+    },
+    {
+      "itemId": "I05",
+      "expected": "unknown",
+      "weight": 1,
+      "requiredEvidence": [
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "C5",
+        "C6",
+        "C7",
+        "C13"
+      ],
+      "tags": [
+        "live-rival",
+        "small-sample"
+      ],
+      "rationale": "In C5, the Tallymarsh cells rose slightly (1.8% to 2.5% and 1.6% to 2.1%), but the analyst notes this is within noise at about seven cancellations a month. C6 says the Tallymarsh log has not been reviewed, and two cancellations cited missing invoices. C13 confirms Tallymarsh is not on the health panel. The hypothesis is live but unestablished."
+    },
+    {
+      "itemId": "I06",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E5"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E1",
+        "E6",
+        "C5"
+      ],
+      "tags": [
+        "easy-rival"
+      ],
+      "rationale": "E5 shows the April\u2013July average at 1.7% in 2024 and 1.9% in 2025. In 2026 it was 2.4\u20133.1% against a Q1 rate of 1.8%. The rise is far outside the normal seasonal pattern."
+    },
+    {
+      "itemId": "I07",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "E5",
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "co-timed-change",
+        "misleading-signal"
+      ],
+      "rationale": "Every account received the forced 5.0 update (E5). Yet unconnected accounts stayed at baseline, including the 6\u002B seat band (C5), and Quillbook accounts with no recorded failure stayed at about baseline (C6). App ratings recovered by May (C4). If the app release were driving cancellations, they would have risen across the base."
+    },
+    {
+      "itemId": "I08",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C5",
+        "C6",
+        "C9"
+      ],
+      "tags": [
+        "revision",
+        "confounded",
+        "natural-experiment"
+      ],
+      "rationale": "The evidence counts against the link itself. Among accounts with the same connector status, repriced and price-locked accounts show the same change in churn. The E3 gradient came from the larger seat counts of Quillbook accounts, and it disappears within unconnected accounts in C5."
+    },
+    {
+      "itemId": "I09",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "C5",
+        "C6",
+        "C7",
+        "C12",
+        "C13"
+      ],
+      "tags": [
+        "central",
+        "mechanism",
+        "natural-experiment"
+      ],
+      "rationale": "The case for causation has four parts. Timing: failures began on 30 March and the churn rise followed (C6). Mechanism: invoices missing or duplicated in customers\u0027 books (C6). Covariation: 34% vs 8% within Quillbook accounts (C6), and Quillbook cells tripling while others stayed flat (C5). The main rival, price, is ruled out by the price-locked Quillbook cohort (C5)."
+    },
+    {
+      "itemId": "I10",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C5",
+        "C6",
+        "C7"
+      ],
+      "tags": [
+        "confounded"
+      ],
+      "rationale": "E4 shows that cancelled accounts waited longer (26h vs 7h). But accounting-sync tickets go to Tier 2, which is slower (38h in C7), and the accounts raising them are the ones with failures (C6). No evidence separates the wait from the failure, and nothing counts against the link itself. This is association only."
+    },
+    {
+      "itemId": "I11",
+      "expected": "preferred",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C5",
+        "C6",
+        "C7",
+        "C12"
+      ],
+      "tags": [
+        "best-action"
+      ],
+      "rationale": "This action addresses the established cause. The fix is estimated at three to four weeks but is unscheduled at Sev-3 (C6), and the vendor has offered engineering help (C12). Affected accounts are identifiable from the logs, so contacting them, including those who cancelled, is targeted and evidence-based."
+    },
+    {
+      "itemId": "I12",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C6",
+        "C7"
+      ],
+      "tags": [
+        "protective-control"
+      ],
+      "rationale": "The hold has kept 3,870 duplicate invoices out of customers\u0027 books (C6). Switching it off would post duplicates into customers\u0027 accounts, whichever hypothesis is true. It removes the symptom message but disables a protective control."
+    },
+    {
+      "itemId": "I13",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E6",
+        "C3",
+        "C5",
+        "C9"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "wrong-fix"
+      ],
+      "rationale": "C5 shows that price has no effect on cancellations. The rollback gives up about $220k a month (E6) without reducing churn. That holds under the supported hypothesis (H2) and under the only live rival (H3), so it worsens outcomes in every case."
+    },
+    {
+      "itemId": "I14",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E6",
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "E5",
+        "E6",
+        "C5",
+        "C6",
+        "C13"
+      ],
+      "tags": [
+        "premature-commitment",
+        "live-rival"
+      ],
+      "rationale": "If the Tallymarsh connector is failing (H3), a rebuild would clearly help. A separate team means no lasting damage if it is not (E6). But H3 is unestablished (C5 noise, C6 log unreviewed), and reviewing the existing log first is cheap. Committing six weeks of rebuild work now is not justified."
+    },
+    {
+      "itemId": "I15",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C5",
+        "C6"
+      ],
+      "allowedEvidence": [
+        "E5",
+        "E6",
+        "C5",
+        "C6"
+      ],
+      "tags": [
+        "decision-readiness"
+      ],
+      "rationale": "The top-ranked action (A1) depends only on H2, which C5 and C6 together establish. The unresolved Tallymarsh question does not affect it."
+    }
+  ],
+  "discriminatingReads": [
+    "C5",
+    "C6"
+  ],
+  "lowValueReads": [
+    "C1",
+    "C10",
+    "C11",
+    "C14"
+  ],
+  "optimalReadPath": [
+    "C5",
+    "C6"
+  ],
+  "authoringNotes": "The S1 trap is consistent price evidence: timing, the survey label \u0027Price / not worth the cost\u0027, a seat-count gradient in E3 confounded by the size of Quillbook accounts (E3 hints at the flaw by mixing locked accounts into the increase calculation), and the CFO\u0027s narrative. The mobile release is co-timed but fades. C5 alone settles that price has no effect (the price-locked cohort and the seat bands), so it decides H1, R1, H5 and A3. C6 alone supplies the mechanism, the timing, the failure-vs-no-failure contrast, the protective value of the duplicate hold, and the unscheduled fix, so it decides R2 (with C5), A1 and A2. Further traps: the vendor\u0027s interested \u0027no unusual errors\u0027 claim (C12), which C6 explains because the compatibility route returns success; the green health panel (C13), which C6 explains because WARN events are not counted; and retention-offer results with no holdout (C9). Tallymarsh stays deliberately unresolved to anchor the premature action. S1 items are answerable from S1 initial evidence only, because both optimal reads are S2. The S1 catalogue items (C1\u2013C4) are consistent with the S1 answers."
+}

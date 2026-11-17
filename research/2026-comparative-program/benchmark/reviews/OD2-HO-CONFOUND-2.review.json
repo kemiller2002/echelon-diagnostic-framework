@@ -1,0 +1,134 @@
+{
+  "caseId": "OD2-HO-CONFOUND-2",
+  "blindAgreement": "15/15",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "Q1",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "Within 7.4.0, the random flag-off holdout crashes at 1.98% against 2.10% with the flag on (\u002B0.12, CI \u22120.08 to \u002B0.32) (C1), and no top cluster contains canvas.tiles frames (C2), so flag code cannot explain the 2.8x gap in E1; at most a small residual effect remains."
+      },
+      {
+        "itemId": "Q2",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "7.4.0 crashes at about 2% from 2 Sep, before the flag ramp, against about 0.7% for 7.3.2 (C1); the top 7.4.0 cluster (41%) is a Pixelda 3.1 HEIF SIGSEGV that is absent from 7.3.2 (C2, E3); and the flag is gated to 7.4.0 (E4)."
+      },
+      {
+        "itemId": "Q3",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "The share of sessions on devices with 4 GB or less is 31% flag on, 30% holdout and 33% on 7.3.2, and the 7.4.0 vs 7.3.2 gap persists within each memory tier (C1)."
+      },
+      {
+        "itemId": "Q4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "The independent app-store console shows the same gap, 2.04% vs 0.69% (Tracewell 2.09% vs 0.70%), and lists libpixelda.so as first seen 2 Sep (C2), so the gap is not just new native-crash capture by Tracewell 5.0 (C11)."
+      },
+      {
+        "itemId": "Q5",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Weekly sessions per user (12.3/12.2/12.3) and median session length (6.1/6.0/5.8 min) are essentially the same for flag on, holdout and 7.3.2 (C1), which rules out the heavy-user explanation in E5."
+      },
+      {
+        "itemId": "Q6",
+        "answer": "association-only",
+        "confidence": 60,
+        "justification": "The raw association is large (E1), but in the randomized holdout the effect is small and not significant (\u002B0.12, CI \u22120.08 to \u002B0.32; memory kills likewise, C1), while a plausible memory mechanism remains (C4, C15), so causation is not established."
+      },
+      {
+        "itemId": "Q7",
+        "answer": "causal",
+        "confidence": 82,
+        "justification": "The rise starts with 7.4.0 on 2 Sep (C1); the build is offered to a random share of users (E3) and the groups are balanced on device and usage (C1); there is a specific new-library crash mechanism absent from 7.3.2 (C2); and the platform console confirms the gap (C2)."
+      },
+      {
+        "itemId": "Q8",
+        "answer": "causal",
+        "confidence": 88,
+        "justification": "The flag eligibility rule requires capability canvas.tiles.v1, which first shipped in 7.4.0 (E4, C10), so the build determines eligibility by design."
+      },
+      {
+        "itemId": "Q9",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "7.3.2 crash rates were unchanged after 9 Sep even though 7.3.2 clients also use zstd (C1, C3), and the steeper overall curve is explained by 7.4.0 adoption (C1)."
+      },
+      {
+        "itemId": "Q10",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "Turning the flag off would barely change crash rates (C1), the incident would be closed on the wrong cause, and 7.4.0\u0027s Pixelda crash (C2) would go to 100% of users, roughly tripling crash rates for everyone still on 7.3.2."
+      },
+      {
+        "itemId": "Q11",
+        "answer": "preferred",
+        "confidence": 85,
+        "justification": "The build, and specifically Pixelda 3.1\u0027s HEIF decode crash, drives the gap (C1, C2), so holding the rollout and fixing that cluster addresses the real cause."
+      },
+      {
+        "itemId": "Q12",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "A memory-kill effect is plausible (C4, C15) but not yet established in the field (C1 CI \u22120.02 to \u002B0.20), so requiring a rework now commits ahead of the evidence."
+      },
+      {
+        "itemId": "Q13",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "The analyst says widening the holdout would resolve the open flag memory-kill question about a week faster (C1); this is a reasonable way to gather evidence, but it is secondary to fixing the build crash (C2)."
+      },
+      {
+        "itemId": "Q14",
+        "answer": "harmful",
+        "confidence": 85,
+        "justification": "Rolling back to Tracewell 4.9 would remove native crash capture and hide the Pixelda SIGSEGV cluster (C2, C11), suppressing information; the console already provides the comparable figures."
+      },
+      {
+        "itemId": "Q15",
+        "answer": "sufficient",
+        "confidence": 80,
+        "justification": "The randomized holdout, the version and tier breakdowns (C1) and the cross-validated Pixelda cluster (C2) are enough to commit to holding the rollout and fixing the build (A2)."
+      }
+    ],
+    "ambiguousItems": [
+      "Q6: \u0027contradicted\u0027 is also defensible, because the randomized holdout shows no significant flag effect (C1); \u0027association-only\u0027 rests on the raw gap and the CI that still allows a few tenths.",
+      "Q13: \u0027preferred\u0027 is also defensible, because widening the holdout is cheap, saves about a week (C1) and settles the remaining open flag question alongside A2.",
+      "Q1: \u0027unknown\u0027 could be argued, since a small flag effect cannot be ruled out (C1), but the hypothesis claims the flag code is the source of the whole gap, which C1 contradicts."
+    ],
+    "caseProblems": [
+      "The presenting request limits collection to two items, but C1 alone settles almost every hypothesis (version split, holdout, device tiers and usage all in one item). It is very decisive and its title signals that it is the confound breakdown.",
+      "E3 says users install at their own pace, so 7.4.0 adoption is self-selected rather than randomized. The causal reading of R2 depends on C1\u0027s balance checks and C2\u0027s mechanism; this is fine, but it should be stated as intended.",
+      "The numbers are internally consistent: the E1 flag-off rate of 0.74% and the 16 Sep overall rate of 1.01% both reconcile with C1\u0027s holdout and 7.3.2 rates. No inconsistency found."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "Q1",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "H1 says code that runs only when the flag is on is the source of the flagged-vs-unflagged gap of 1.36 points (2.10% vs 0.74%). C1 contradicts this in two ways. First, the randomized flag-off holdout on the same build crashes at 1.98% against 2.10%, so at most about 0.32 points of the gap could come from the flag, even at the upper end of the interval. Second, 7.4.0 was already at 1.99% on 2\u20133 Sep, before any user had the flag. E4 explains the gap: the flag is confined to 7.4.0, so the comparison is really one build against the other. C2 adds that no top cluster has canvas.tiles frames. \u0027Unknown\u0027 would only fit a weaker claim, such as \u0027the flag adds some crashes\u0027. As written, H1 claims the flag is the source of the gap, and the evidence counts against that directly. \u0027Contradicted\u0027 is the only defensible answer.",
+        "fix": "No change needed."
+      },
+      {
+        "itemId": "Q6",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R1 claims only that enabling the flag raises a user\u0027s crash rate. It says nothing about how large the effect is. The association is clearly present (E1), so \u0027unknown\u0027 is out. Causation is not established. Most of the raw gap is explained by the build confounder (E4, C1), and the randomized within-build difference (\u002B0.12, CI \u22120.08 to \u002B0.32) does not reach significance. To argue \u0027contradicted\u0027, the evidence would have to count against the link. It does not. Both the crash and memory-kill point estimates are positive. The intervals include modest positive effects. The analyst says plainly that a few-tenths effect cannot yet be ruled out and that the test is still underpowered. C4 and C15 give a plausible memory-kill mechanism. An underpowered null with a positive point estimate and a plausible mechanism fails to confirm the link; it does not refute it. That leaves \u0027association-only\u0027 as the only fitting answer. The blind solver\u0027s \u0027contradicted\u0027 reading would only hold if R1 claimed the flag explains the cohort gap, and it does not.",
+        "fix": "No change needed. If extra robustness is wanted, R1\u0027s wording could add \u0027any increase in\u0027 (\u0027...causes any increase in crash-affected session rate\u0027). That would make clear the edge is about any effect, not the size of the gap."
+      },
+      {
+        "itemId": "Q13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The case was revised to settle this item. C1\u0027s analyst states that the existing 10% holdout will resolve a 0.2-point effect in about three more weeks, and that widening it would save only about one week. A4\u0027s two-week widening therefore buys roughly one week of earlier information. That information is not decision-critical. A2 (hold the build and fix the Pixelda crash) is justified whatever the small flag effect turns out to be. The memory risk already has a planned 7.5 mitigation (C4). A4 also takes the feature away from 20 more percentage points of eligible users. So A4 is reasonable and reversible, which makes \u0027acceptable\u0027 right. It is not \u0027harmful\u0027 or \u0027premature\u0027, and its small marginal value keeps it out of \u0027among the best next actions\u0027. Calling it \u0027preferred\u0027 would ignore C1\u0027s explicit statement of how little it adds. \u0027Preferred\u0027 is weakly arguable on the vague \u0027among the best\u0027 wording, but the evidence as revised clearly favours \u0027acceptable\u0027.",
+        "fix": "No change needed. To strengthen it further, C1\u0027s analyst note could add: \u0027and the answer would not change the hold-and-fix decision.\u0027"
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

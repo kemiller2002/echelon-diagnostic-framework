@@ -1,8 +1,8 @@
 ---
 id: EX-EDF-2026-OD2-PREREG
 title: OD2 preregistration — EDF vs baselines, components, compute, persuasiveness and method selection
-status: DRAFT (frozen when committed with prompt hashes, before any held-out run)
-version: 0.9.0
+status: FROZEN (committed with case, truth and prompt hashes before any held-out run)
+version: 1.0.0
 created: 2026-11-17
 work_item: WI-0014
 benchmark: benchmark/od2-benchmark-specification.md + amendment-01-after-dev-pilot.md + amendment-02-after-dev2-pilot.md (read budget 2)
@@ -17,6 +17,16 @@ EDF v0.3 change diagnostic outcomes relative to (a) no framework, (b) an
 established method, and (c) a combination of established methods? If so, which
 EDF components carry the effect? Is any effect one of accuracy, of efficiency,
 or of persuasiveness only?
+
+## 1a. Held-out set
+
+26 cases were authored (two per class). All 26 went through the blind-solve and
+adjudication review. Twelve were revised once and three twice. **Two cases were
+excluded** under amendment 1, rule 7, because the adjudicator still ruled keys
+ambiguous after two revision rounds: OD2-HO-CHANGE-2 and OD2-HO-INCOMPLETE-1. They
+are kept in `benchmark/excluded/`. Classes CHANGE and INCOMPLETE therefore have
+one held-out case each. **N = 24 cases.** Hashes: `benchmark/frozen-heldout.sha256`.
+The plan is 1,080 runs (`experiments/plans/heldout.json`).
 
 ## 2. Executors
 

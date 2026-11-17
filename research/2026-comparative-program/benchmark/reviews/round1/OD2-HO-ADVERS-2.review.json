@@ -1,0 +1,148 @@
+{
+  "caseId": "OD2-HO-ADVERS-2",
+  "blindAgreement": "13/14",
+  "weightedBlindAgreement": 0.9230769230769231,
+  "disagreements": [
+    {
+      "itemId": "I9",
+      "key": "association-only",
+      "blind": "contradicted"
+    }
+  ],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I1",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "Auto-closed alerts never become cases (E3, C2), and the number of cases that reached Incident\u2013Confirmed (37 in Sep, 36 in Oct, C4) is about the same as the Mar\u2013Jul average of about 38 (E1), so triage cannot explain the fall."
+      },
+      {
+        "itemId": "I2",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "The gross count of confirmed incidents did not change (C4). Ingestion and EDR coverage are steady (C8, C9). The whole fall is explained by the 47 recategorised cases, so lost rules are not what explains it, even though the cover from the 28 deprecated rules is untested (C6)."
+      },
+      {
+        "itemId": "I3",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "All 47 analyst-confirmed cases were moved to Monitoring by API. The changes came from the Brackwater analyst jump host using a python-requests script that polls for cases with the SLA warning, not from the connector. Each move happened just before the 4-hour SLA breach, and none was merged into another case (C4, C11, C12), which contradicts Brackwater\u0027s explanation (C7)."
+      },
+      {
+        "itemId": "I4",
+        "answer": "contradicted",
+        "confidence": 85,
+        "justification": "Alert volume is unchanged (E5, E4) and analysts still confirmed about 37 incidents a month (C4). The ISAC 8% phishing fall is weak, unadjusted self-report data (C3), and it could not account for a two-thirds drop."
+      },
+      {
+        "itemId": "I5",
+        "answer": "contradicted",
+        "confidence": 88,
+        "justification": "The advisory says connector writes can be identified by source host and user-agent (C5). The connector host made 0 category writes, and all 47 category changes came from bss-jump-02 using python-requests (C11)."
+      },
+      {
+        "itemId": "I6",
+        "answer": "contradicted",
+        "confidence": 82,
+        "justification": "Playbooks act before a case is created (E3, C2), and the confirmed-case count before recategorisation matches the baseline (C4, E1), so auto-triage did not cause the fall in reported confirmed incidents."
+      },
+      {
+        "itemId": "I7",
+        "answer": "contradicted",
+        "confidence": 72,
+        "justification": "The gross count of confirmed incidents is unchanged after the migration (C4 compared with E1), so rule deprecation does not account for the reported fall. Any effect it has on detection is untested (C6), but that is a separate question."
+      },
+      {
+        "itemId": "I8",
+        "answer": "causal",
+        "confidence": 92,
+        "justification": "The arithmetic is exact: 37\u221223=14 and 36\u221224=12 (C4, E1). The changes started after the migration, Ledgerline had no such changes and locked the category (C4, C10), and the mechanism is known (C11). The rival explanations are ruled out (C11, C5, C2)."
+      },
+      {
+        "itemId": "I9",
+        "answer": "contradicted",
+        "confidence": 80,
+        "justification": "The lower mean time to contain comes from selection. Cases still uncontained at the 3h30m SLA warning were removed from the metric (C4). Workload was not reduced: analysts are as busy as ever and alert volumes are unchanged (E4, E5)."
+      },
+      {
+        "itemId": "I10",
+        "answer": "harmful",
+        "confidence": 88,
+        "justification": "47 confirmed incidents, mostly credential misuse and malware, have no containment timestamp (C4). The real incident rate is unchanged, so cutting IR capacity on the basis of manipulated figures (E2, C14) would weaken a protective control."
+      },
+      {
+        "itemId": "I11",
+        "answer": "preferred",
+        "confidence": 90,
+        "justification": "This deals directly with the confirmed problem: it restores the true incident record, verifies containment on 47 possibly uncontained incidents (C4), and removes the write access that was misused (E3, C11, C10)."
+      },
+      {
+        "itemId": "I12",
+        "answer": "premature",
+        "confidence": 60,
+        "justification": "A credit claim is likely justified under C1 3.4/3.8, but the notes on 11 of the 47 cases describe containment steps (C4), so containment status should be verified first (as in A2) before invoicing for every case."
+      },
+      {
+        "itemId": "I13",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "Asking for a written explanation before the renewal decision is reasonable, but Brackwater has already given explanations that the logs refute (C7 compared with C4 and C11), so this adds little and should not replace A2."
+      },
+      {
+        "itemId": "I14",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The audit trail and gateway logs (C4, C11) firmly establish that confirmed incidents were recategorised after confirmation and leave them unverified, which is enough to commit to A2."
+      }
+    ],
+    "ambiguousItems": [
+      "I12: \u0027acceptable\u0027 is defensible because the credit is contractually supported under C1 3.4. \u0027Premature\u0027 is defensible because 11 of the 47 cases have containment notes and containment is unverified.",
+      "I13: \u0027acceptable\u0027 is defensible, but some may argue \u0027harmful\u0027 because it warns a party suspected of manipulation who still has cases:write access, or \u0027premature\u0027.",
+      "I7: \u0027unknown\u0027 is defensible because C6 notes that the 28 deprecated rules were never independently tested and no per-rule history exists. The gross counts suggest the deprecation did not cause the fall.",
+      "I3: \u0027deliberately\u0027 is attributed to an unidentified Brackwater analyst or script (C12 has no activity records). Intent is strongly implied but not directly proven."
+    ],
+    "caseProblems": [
+      "C5 conveniently spells out exactly how to tell connector writes from other writes (source host and user-agent), which almost hands over the C11 discriminator.",
+      "C4 states that \u0027the remainder equal the reported 14 and 12\u0027, which does the reconciliation for the solver.",
+      "C11\u0027s statement that \u0027every case returned by those queries was later patched\u0027 is very clean, and real logs would rarely be so tidy. It is also odd that a script starting on 9 Sep caught every SLA-warning case, with no misses in the first week.",
+      "E3\u0027s phrase \u0027at Brackwater\u0027s request\u0027 for cases:write and C10\u0027s note that the category lock is missing both strongly signal the answer."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I9",
+        "ruling": "key-wrong",
+        "explanation": "R4 claims that playbooks cut analyst workload and that this lowered reported mean time to contain (MTTC). The evidence counts against both parts of that claim. (1) The cause condition is contradicted directly. E4 says \u0027alert volume feels about the same; the Brackwater analysts are as busy as ever\u0027. E5 shows ingested alerts at baseline (2,884 and 3,012 against an average of 2,950). C4 shows the number of cases reaching Incident\u2013Confirmed (37 and 36) inside the Mar\u2013Jul range, so confirmed-case workload did not fall. (2) The effect is fully explained by selection. C4 says cases that leave Incident\u2013Confirmed drop out of the containment-time metric, and the 47 removed cases were exactly the ones still uncontained at 3h30m. That is 47 of 73 confirmed cases (64%), which points to containment that was no faster and possibly slower, not faster. The key\u0027s rationale says \u0027nothing counts against the link itself\u0027, but that overlooks E4, which the key leaves out of allowedEvidence. It is also inconsistent with I7. There the key rules \u0027contradicted\u0027 because the reported fall is an artefact of recategorisation, and the same reasoning applies here. \u0027Association-only\u0027 needs at least an established co-occurrence of workload reduction and lower MTTC, and the workload reduction itself is countered. \u0027Contradicted\u0027 is the better-supported answer.",
+        "fix": "Change the I9 expected answer to \u0027contradicted\u0027. Add E4 to requiredEvidence/allowedEvidence and rewrite the rationale: \u0027E4, E5 and C4 show that analyst workload did not fall: the analysts are as busy as ever, alert volumes are at baseline and confirmed-case counts are at baseline. The lower MTTC is produced by removing the 47 cases still uncontained at 3h30m from the metric (C4).\u0027 If the author prefers to keep \u0027association-only\u0027, a larger change is needed instead: remove the \u0027as busy as ever\u0027 statement from E4, and add evidence that analyst case workload actually fell after go-live."
+      },
+      {
+        "itemId": "I12",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "A3 invoices the credit for every one of the 47 moved cases. Under C1 3.4 the credit applies only to confirmed incidents not contained within 4 hours. C4 shows that none of the 47 has a containment timestamp, and the notes on 11 of them describe containment steps. So whether each case breached the SLA is unverified, and for some it is probably false. C1 3.8 also defines \u0027confirmed incident\u0027 by category membership, which leaves the contractual basis for the moved cases open to dispute until they are reinstated. A blanket invoice is right only once breaches are verified case by case, and A2 does exactly that verification. That fits \u0027premature\u0027 exactly. \u0027Acceptable\u0027 would mean claiming credits on all 47 now is reasonable, but it is not reasonable when 11 cases show signs of containment and none has verified containment times.",
+        "fix": ""
+      },
+      {
+        "itemId": "I13",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "Asking Brackwater for a written explanation is reasonable due process, but it does nothing about the possibly uncontained incidents or the open edit right, so it is not among the best actions. The \u0027harmful\u0027 argument depends on tipping off a suspected party. That risk is moot here. C7 shows Brackwater was already questioned about the queue and category changes on 13 Nov. C4 and C11 were already pulled and are held by Corvane, so the evidence cannot be suppressed. Asking for an explanation does not disable any control, and the access risk is dealt with separately by A2. \u0027Premature\u0027 does not fit either, because asking for an explanation does not depend on confirming any hypothesis. \u0027Acceptable\u0027 is the only answer that fits.",
+        "fix": ""
+      },
+      {
+        "itemId": "I7",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "R2 claims the rule deprecation caused the fall in reported confirmed incidents. C4 shows confirmed-stage counts (37 and 36) inside the Mar\u2013Jul baseline of 33\u201346. It also shows that the whole reported fall is exactly the 47 cases recategorised after confirmation (37\u221223=14, 36\u221224=12). If deprecation had caused the fall, fewer cases would reach confirmation, and they did not. So C4 is positive evidence against the link, not just a lack of evidence. C6\u0027s note that the rules were never independently tested bears on detection coverage in general, not on this edge. It cannot turn a fall that is fully explained by another mechanism into an undetermined one. \u0027Unknown\u0027 means the evidence is insufficient even to show association, and that does not hold when the evidence counts against the link. \u0027Contradicted\u0027 is the right answer, and it is consistent with I2.",
+        "fix": ""
+      },
+      {
+        "itemId": "I3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "H3 needs the moves to be deliberate. It does not need a named individual. C11 shows a python-requests script on a Brackwater analyst jump host, using the integration token. It polled specifically for confirmed cases with an SLA warning about every 5 minutes and patched the category of every case it returned. The connector host made 0 category writes. C4 shows that all 47 moved cases had confirmation notes and that none was merged, which rules out the \u0027merge parking\u0027 story in C7 and the connector bug. A script built to find and recategorise exactly the cases about to breach the SLA is deliberate by design. Combined with the incentive (E2, C1) and the self-compiled report (E3), the evidence supports H3 over every rival. \u0027Supported\u0027 only requires that the evidence favour the claim over its rivals, not proof of the individual\u0027s intent, so the unidentified operator does not make the answer \u0027unknown\u0027.",
+        "fix": ""
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": true
+}

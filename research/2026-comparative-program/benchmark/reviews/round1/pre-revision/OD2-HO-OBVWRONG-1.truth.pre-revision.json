@@ -1,0 +1,300 @@
+{
+  "caseId": "OD2-HO-OBVWRONG-1",
+  "groundTruthNarrative": "The Kestria buffering was caused by smart-TV app 5.2, not by the CDN migration. Two Kestria-only changes landed within hours of each other: the move to Tessaline (completed 04:10 on 9 Oct) and the forced 100% canary rollout of TV app 5.2 (from 06:00 on 9 Oct, with auto-updates over about 48 hours). The release digest wrongly said 5.2 was live in all markets. Store listings had been approved everywhere, but the server-side rollout gate was 0% outside Kestria. So the app looked ruled out and the CDN looked like the only Kestria-specific change. Per-client telemetry gives the contrast. Every Kestria session goes through Tessaline, yet web, mobile and TV 5.1 clients stayed at the 0.6\u20130.7% baseline on all three ISPs. Only TV 5.2 sessions stall (5.9%), and at the same rate on each ISP. The release record supplies the mechanism: the startup buffer was cut from 10 s to 4 s and up-switching was allowed after 2 s of buffer, which bought a faster start at the cost of stall margin. The same build also stalled at 5.7% on Corvane in an employee dogfood ring, but that ticket was deferred. The handball launch came after onset and caused no step. October cancellations rose too, but a 1 October price rise confounds that. The right move is to revert the abr_v2 profile for Kestria and hold the 20 November global stage. Blaming Tessaline would penalise a vendor that is not at fault and would not fix the stalls.",
+  "answers": [
+    {
+      "itemId": "Q1",
+      "expected": "contradicted",
+      "weight": 3,
+      "requiredEvidence": [
+        "E2",
+        "E3",
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E6",
+        "C1",
+        "C2",
+        "C3",
+        "C8",
+        "C9"
+      ],
+      "tags": [
+        "misleading-signal",
+        "leadership-narrative",
+        "contrast-case",
+        "confounded"
+      ]
+    },
+    {
+      "itemId": "Q2",
+      "expected": "supported",
+      "weight": 3,
+      "requiredEvidence": [
+        "E5",
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "E5",
+        "C2",
+        "C3",
+        "C14"
+      ],
+      "tags": [
+        "less-salient-cause",
+        "gamed-record",
+        "revision"
+      ]
+    },
+    {
+      "itemId": "Q3",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E6",
+        "C2",
+        "C4",
+        "C5",
+        "C9",
+        "C12"
+      ],
+      "tags": [
+        "contrast-case",
+        "rival"
+      ]
+    },
+    {
+      "itemId": "Q4",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "C2",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "timing",
+        "rival"
+      ]
+    },
+    {
+      "itemId": "Q5",
+      "expected": "contradicted",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E3",
+        "C1",
+        "C2",
+        "C3",
+        "C9"
+      ],
+      "tags": [
+        "misleading-signal",
+        "contrast-case"
+      ]
+    },
+    {
+      "itemId": "Q6",
+      "expected": "causal",
+      "weight": 3,
+      "requiredEvidence": [
+        "E3",
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C2",
+        "C3",
+        "C14"
+      ],
+      "tags": [
+        "mechanism",
+        "natural-experiment",
+        "replication"
+      ]
+    },
+    {
+      "itemId": "Q7",
+      "expected": "association-only",
+      "weight": 2,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "confounded",
+        "association-only"
+      ]
+    },
+    {
+      "itemId": "Q8",
+      "expected": "contradicted",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E6",
+        "C2",
+        "C7",
+        "C11"
+      ],
+      "tags": [
+        "timing"
+      ]
+    },
+    {
+      "itemId": "Q9",
+      "expected": "harmful",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E2",
+        "E4",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "tags": [
+        "leadership-narrative",
+        "punish-wrong-party"
+      ]
+    },
+    {
+      "itemId": "Q10",
+      "expected": "preferred",
+      "weight": 3,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C2",
+        "C3"
+      ],
+      "tags": [
+        "reversible-fix",
+        "urgent"
+      ]
+    },
+    {
+      "itemId": "Q11",
+      "expected": "premature",
+      "weight": 1,
+      "requiredEvidence": [
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E4",
+        "C4",
+        "C6"
+      ],
+      "tags": [
+        "premature",
+        "confounded"
+      ]
+    },
+    {
+      "itemId": "Q12",
+      "expected": "acceptable",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3"
+      ],
+      "allowedEvidence": [
+        "E1",
+        "E3",
+        "C2",
+        "C3"
+      ],
+      "tags": [
+        "monitoring-improvement"
+      ]
+    },
+    {
+      "itemId": "Q13",
+      "expected": "harmful",
+      "weight": 1,
+      "requiredEvidence": [
+        "E3",
+        "E4"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E4",
+        "C11"
+      ],
+      "tags": [
+        "protective-control",
+        "suppress-information"
+      ]
+    },
+    {
+      "itemId": "Q14",
+      "expected": "sufficient",
+      "weight": 2,
+      "requiredEvidence": [
+        "C2",
+        "C3"
+      ],
+      "allowedEvidence": [
+        "E3",
+        "E5",
+        "C2",
+        "C3",
+        "C14"
+      ],
+      "tags": [
+        "sufficiency"
+      ]
+    }
+  ],
+  "discriminatingReads": [
+    "C2",
+    "C3"
+  ],
+  "lowValueReads": [
+    "C7",
+    "C10",
+    "C12",
+    "C13",
+    "C15"
+  ],
+  "optimalReadPath": [
+    "C2",
+    "C3"
+  ],
+  "authoringNotes": "Initial file only: the CDN looks like the sole Kestria-specific change (E2, E1, E3). The VP and the engineer both blame it (E4, E6). E5 says TV 5.2 went to every market with no regressions, so with no other evidence an analyst would mark H1 supported, H2 contradicted, R1 causal or association-only, R2 contradicted or unknown, and A1 preferred. H3 is unknown at that point. H4 and R4 are already contradicted by timing: onset on 9 Oct, launch on 11 Oct, and no step on match nights in E3. R3 is association-only because of the 1 Oct price rise named in E4.\n\nWhat each read settles that no other item does. C2 is the only item that separates the CDN from the client: everything runs through Tessaline, and only TV 5.2 is elevated, on every ISP. That makes H1, H3 and R1 contradicted, and it provides the within-market covariation needed for H2. C2 alone still leaves R2 association-only, because E5 says 5.2 was global and C2 gives no mechanism and does not rule out self-selection of the TV 5.1 holdouts. C3 is the only item that shows the rollout gate (Kestria 100%, others 0%, which refutes E5), the ABR mechanism, the CDN-independent replication on Corvane (dogfood 5.7%), the remote-config revert path and the 20 Nov expansion date. Together these settle R2 as causal, A2 as preferred and SUFF as sufficient. C3 alone leaves H1 unknown because the two Kestria-only changes stay confounded. Pairs without C2 lose H1, H3 and R1. Pairs without C3 lose R2, A2 and SUFF.\n\nDistractors were kept non-decisive. C1 comes from the vendor, an interested party, and gives only a monthly average cache-hit figure. C5 covers one ISP and is ambiguous. C9 measures segment fetches, not playback. C6 has no quality option, so R3 stays association-only across the whole catalogue. A1 is harmful under the supported hypothesis, and every rival is contradicted. A3 would help if buffering-driven churn were confirmed and costs only a one-off if not. A5 disables a protective alert under any hypothesis. A4 is useful, but it is not the immediate fix."
+}

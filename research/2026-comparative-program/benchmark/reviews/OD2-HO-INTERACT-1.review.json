@@ -1,0 +1,115 @@
+{
+  "caseId": "OD2-HO-INTERACT-1",
+  "blindAgreement": "13/13",
+  "weightedBlindAgreement": 1,
+  "disagreements": [],
+  "blindSolution": {
+    "answers": [
+      {
+        "itemId": "I-H1",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "Arnholt lots run normally through D7/Press 7 (C1: 0.8%; E3 trial 0.7%), and the same Arnholt lot dried in PD-1 on Press 5 gave 0.8% rejects (C2), so the resin is not defective whichever dryer it goes through."
+      },
+      {
+        "itemId": "I-H2",
+        "answer": "contradicted",
+        "confidence": 92,
+        "justification": "Quillan resin dried in degraded D5 stays below the 0.20% limit (0.13\u20130.16%) and gives 0.9% rejects on Press 5 (C1, C2, E4), so D5 alone does not produce the rejects."
+      },
+      {
+        "itemId": "I-H3",
+        "answer": "supported",
+        "confidence": 90,
+        "justification": "Rejects are concentrated in the Press 5/Arnholt cell (9.9%) and normal in every other combination (C1). Arnholt leaves D5 at 0.25\u20130.31% moisture, above the limit (C2), and drying the same lot in PD-1 brought rejects back to 0.8% (C2)."
+      },
+      {
+        "itemId": "I-H4",
+        "answer": "contradicted",
+        "confidence": 93,
+        "justification": "In C1 the new hires and experienced operators have matching reject rates in every cell (9.9% vs 10.3% on Arnholt, 0.9% each on Quillan), and on Press 5 first shift matches second (9.7% vs 10.1%). The shift gap comes from all second-shift VX running on Press 5."
+      },
+      {
+        "itemId": "I-R1",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "Arnholt leaves D5 at 0.25\u20130.31% but leaves D7 at 0.07%, and the same lot dried in a \u221240 \u00B0C dryer measured 0.08% (C2). That fits D5\u0027s wet dew point and the dryer-fault mechanism (E4, C14, C6), which makes the link causal."
+      },
+      {
+        "itemId": "I-R2",
+        "answer": "causal",
+        "confidence": 85,
+        "justification": "The datasheet gives a mechanism (C2). In the PD-1 intervention the same Arnholt lot at 0.08% gave 0.8% rejects against 10.4% when wet from D5 (C2). Setpoints, tools and the fixture were unchanged (C9, C5, C13)."
+      },
+      {
+        "itemId": "I-R3",
+        "answer": "contradicted",
+        "confidence": 90,
+        "justification": "C1 shows no difference between new and experienced operators, and the new hires were trained and signed off (E5, C4)."
+      },
+      {
+        "itemId": "I-R4",
+        "answer": "association-only",
+        "confidence": 75,
+        "justification": "Arnholt arrives at the dryer inlet wetter (0.27\u20130.33%) and the annex is humid (C2, C7), but storage location is fully confounded with supplier: every Arnholt sample came from the annex, and no Arnholt has been held in conditioned storage (C2 caveat)."
+      },
+      {
+        "itemId": "I-A1",
+        "answer": "harmful",
+        "confidence": 90,
+        "justification": "The evidence clears the new operators (C1, C4, E5), so disciplining them punishes the wrong party and leaves the real cause untouched."
+      },
+      {
+        "itemId": "I-A2",
+        "answer": "preferred",
+        "confidence": 88,
+        "justification": "A2 targets the confirmed interaction (C1, C2). It follows the vendor\u0027s repair advice (C14), restores the alarm limit that CR-3107 widened (C12), contains the problem with routing that C2 and C1 show works, and adds monitoring."
+      },
+      {
+        "itemId": "I-A3",
+        "answer": "acceptable",
+        "confidence": 55,
+        "justification": "Routing would contain the rejects (C1 shows Press 7/Arnholt at 0.8%), but it leaves D5 degraded with its alarm widened to \u221215 \u00B0C against vendor advice (C14, C12). Quillan through D5 is already at 0.13\u20130.16% against a 0.20% limit (C2), so the margin is thin, and A3 is clearly worse than A2."
+      },
+      {
+        "itemId": "I-A4",
+        "answer": "premature",
+        "confidence": 75,
+        "justification": "The storage effect is confounded with supplier (C2 caveat), so the costly relocation rests on the unconfirmed R4. Drying properly already brings Arnholt to 0.07\u20130.08% (C2)."
+      },
+      {
+        "itemId": "I-SUFF",
+        "answer": "sufficient",
+        "confidence": 85,
+        "justification": "The stratified MES data (C1), the moisture measurements and the PD-1 intervention (C2) and the dryer fault records (E4, C6, C14) are enough to commit to A2 now."
+      }
+    ],
+    "ambiguousItems": [
+      "I-A3: could be \u0027harmful\u0027 (it leaves a disabled protective control, the \u221215 \u00B0C alarm, in place on a degrading dryer that Quillan also depends on) or \u0027acceptable\u0027 (it contains the rejects quickly); this depends on how \u0027leaving a disabled control as is\u0027 is treated.",
+      "I-R4: could be \u0027unknown\u0027 rather than \u0027association-only\u0027, because supplier and storage are perfectly confounded and there are no direct storage-moisture measurements."
+    ],
+    "caseProblems": [
+      "The PD-1 intervention in C2 is a single lot over a single day shift (2,400 parts). It is strong for a benchmark but thin for proving the claim in H3 that \u0027neither raises rejects on its own\u0027.",
+      "The C2 caveat makes R4 untestable in principle. That is fine if intended, but the case gives no data that could separate supplier from storage (for example, Arnholt CoA moisture at shipment).",
+      "The figures check out: the shift totals in E1 reconcile exactly with the C1 cell counts, and the catalogue titles do not leak the answers."
+    ]
+  },
+  "adjudication": {
+    "rulings": [
+      {
+        "itemId": "I-A3",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "The rubric calls an action \u0027harmful\u0027 when it is likely to worsen outcomes, suppress information, punish the wrong party, or disable a protective control. A3 meets none of these. The D5 alarm was relaxed in week 31 (E4, C12). A3 does not disable it; it only fails to restore it. Compared with the current state, A3 improves outcomes. C1 shows Arnholt on Press 7 at 0.8% and Quillan on Press 5 at 0.9%, and C2 shows Quillan leaving D5 at 0.13\u20130.16%, under the 0.20% limit. Those figures are consistent with E4: Press 5 ran Quillan at normal rejects from August to mid-September. D5\u0027s dew point has been roughly stable, at \u221215 to \u221220 \u00B0C since late July (E4) and \u221216 to \u221219 \u00B0C in weeks 41\u201342 (C2). No evidence shows it getting worse fast enough to push Quillan over the limit soon, so \u0027likely to worsen outcomes\u0027 is not established. A3 stops the rejects, so it is reasonable. It is clearly inferior to A2 because it leaves a thin margin, an overdue repair and a relaxed alarm against the vendor\u0027s advice (C14). That fits \u0027acceptable\u0027, not \u0027harmful\u0027. Failing to restore a control is a reason A3 is not \u0027preferred\u0027. It is not the same as actively disabling one.",
+        "fix": "No change required. Optional, to remove doubt: in the rubric\u0027s \u0027harmful\u0027 definition, say that leaving an already-relaxed control unrestored does not by itself count as disabling a protective control. Or reword A3 to \u0027leaving the D5 repair and alarm restoration for later\u0027."
+      },
+      {
+        "itemId": "I-R4",
+        "ruling": "key-uniquely-defensible",
+        "explanation": "\u0027Unknown\u0027 means the evidence is insufficient even to show association. C2 measures resin moisture at the dryer inlet, and every annex-held sample (Arnholt) reads 0.27\u20130.33% while every warehouse-held sample (Quillan) reads 0.11\u20130.14%. That is a clear observed co-occurrence between storage location and inlet moisture. It is not a gap in the evidence. The perfect confounding with supplier, plus C2\u0027s note that no Arnholt resin has been held in conditioned storage, means causation cannot be established. That is exactly the \u0027association-only\u0027 case. The flag\u0027s point about \u0027no direct storage-moisture measurements\u0027 is wrong: the dryer-inlet readings are moisture measurements, broken down by storage location. Confounding is a reason to deny \u0027causal\u0027, not a reason to deny association.",
+        "fix": "No change required."
+      }
+    ]
+  },
+  "structuralProblems": [],
+  "needsRevision": false
+}

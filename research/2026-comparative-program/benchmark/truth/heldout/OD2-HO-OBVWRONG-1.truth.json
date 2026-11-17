@@ -28,7 +28,8 @@
         "leadership-narrative",
         "contrast-case",
         "confounded"
-      ]
+      ],
+      "rationale": "All Kestria sessions run through Tessaline (E2, C2), yet every client except TV 5.2 stays at the pre-migration 0.6\u20130.7% baseline on every ISP (C2). A CDN fault would affect every client. The C3 dogfood result (5.7% on Corvane) adds to this."
     },
     {
       "itemId": "Q2",
@@ -51,7 +52,8 @@
         "less-salient-cause",
         "gamed-record",
         "revision"
-      ]
+      ],
+      "rationale": "Only TV 5.2 is elevated, at 5.9% (C2). C3 shows that the rollout gate put 5.2 at 100% in Kestria only, which refutes E5\u0027s \u0027all markets\u0027 claim. C3 also gives the ABR mechanism and a replication on another CDN."
     },
     {
       "itemId": "Q3",
@@ -71,7 +73,8 @@
       "tags": [
         "contrast-case",
         "rival"
-      ]
+      ],
+      "rationale": "Non-5.2 clients on each of the three ISPs stay at baseline, and 5.2 is equally bad on all of them (C2). ISP or interconnect congestion would not single out one app version."
     },
     {
       "itemId": "Q4",
@@ -90,7 +93,8 @@
       "tags": [
         "timing",
         "rival"
-      ]
+      ],
+      "rationale": "Rebuffering rose on 9\u201310 Oct, before the 11 Oct launch, and match nights show no further step (E3). C11 (\u0027no worse tonight\u0027) agrees."
     },
     {
       "itemId": "Q5",
@@ -110,7 +114,8 @@
       "tags": [
         "misleading-signal",
         "contrast-case"
-      ]
+      ],
+      "rationale": "Within the same CDN, non-5.2 clients did not degrade (C2), which counts against the link itself. The only reason the timing looked like a match is that it coincides with the 5.2 rollout (C3)."
     },
     {
       "itemId": "Q6",
@@ -132,7 +137,8 @@
         "mechanism",
         "natural-experiment",
         "replication"
-      ]
+      ],
+      "rationale": "The evidence gives temporal order (C3, E3), a mechanism (lowered buffer targets, C3), covariation within the same market, CDN and ISP with an auto-update-off 5.1 control group (C2), and replication on Corvane (C3)."
     },
     {
       "itemId": "Q7",
@@ -150,7 +156,8 @@
       "tags": [
         "confounded",
         "association-only"
-      ]
+      ],
+      "rationale": "Cancellations rose in October, the same month as the rebuffering (E3, E4), so the two are associated. The 1 Oct price rise (E4) confounds the link. C6 cannot attribute cancellations to quality because it has no quality option."
     },
     {
       "itemId": "Q8",
@@ -168,7 +175,8 @@
       ],
       "tags": [
         "timing"
-      ]
+      ],
+      "rationale": "Onset came before the launch, and match nights show no increment (E3), so the evidence counts against the link."
     },
     {
       "itemId": "Q9",
@@ -188,7 +196,8 @@
       "tags": [
         "leadership-narrative",
         "punish-wrong-party"
-      ]
+      ],
+      "rationale": "This would penalise a vendor that is not at fault. Every rival hypothesis is contradicted. Moving back to Corvane would not fix 5.2, which also stalls on Corvane (C3)."
     },
     {
       "itemId": "Q10",
@@ -207,7 +216,8 @@
       "tags": [
         "reversible-fix",
         "urgent"
-      ]
+      ],
+      "rationale": "It targets the established cause. The change is a per-market remote-config revert that takes effect within about an hour (C3), and it prevents the 20 Nov global stage from spreading the regression."
     },
     {
       "itemId": "Q11",
@@ -224,24 +234,28 @@
       "tags": [
         "premature",
         "confounded"
-      ]
+      ],
+      "rationale": "The offer would make sense if buffering-driven churn were confirmed. The price rise confounds that link, and a one-off offer does no lasting damage if the link turns out to be wrong."
     },
     {
       "itemId": "Q12",
       "expected": "acceptable",
       "weight": 1,
       "requiredEvidence": [
-        "E3"
+        "E3",
+        "C2"
       ],
       "allowedEvidence": [
         "E1",
         "E3",
         "C2",
-        "C3"
+        "C3",
+        "C11"
       ],
       "tags": [
         "monitoring-improvement"
-      ]
+      ],
+      "rationale": "Lack of per-client breakdowns helped hide the cause (E3, E1, C11), so A4 is worthwhile. But C2 says the change depends on the pipeline rebuild scheduled for Q1 2027 (about six weeks of work). It cannot affect the current incident or the 20 Nov decision, and ad hoc queries already provide the breakdown. So it is reasonable but not among the best next actions."
     },
     {
       "itemId": "Q13",
@@ -259,7 +273,8 @@
       "tags": [
         "protective-control",
         "suppress-information"
-      ]
+      ],
+      "rationale": "It disables a protective alert while a real regression is ongoing. This causes harm under every hypothesis."
     },
     {
       "itemId": "Q14",
@@ -278,7 +293,8 @@
       ],
       "tags": [
         "sufficiency"
-      ]
+      ],
+      "rationale": "C2\u0027s contrast, together with C3\u0027s mechanism, rollout gate and cross-CDN replication, is enough to commit to the reversible A2 revert now."
     }
   ],
   "discriminatingReads": [
@@ -296,5 +312,5 @@
     "C2",
     "C3"
   ],
-  "authoringNotes": "Initial file only: the CDN looks like the sole Kestria-specific change (E2, E1, E3). The VP and the engineer both blame it (E4, E6). E5 says TV 5.2 went to every market with no regressions, so with no other evidence an analyst would mark H1 supported, H2 contradicted, R1 causal or association-only, R2 contradicted or unknown, and A1 preferred. H3 is unknown at that point. H4 and R4 are already contradicted by timing: onset on 9 Oct, launch on 11 Oct, and no step on match nights in E3. R3 is association-only because of the 1 Oct price rise named in E4.\n\nWhat each read settles that no other item does. C2 is the only item that separates the CDN from the client: everything runs through Tessaline, and only TV 5.2 is elevated, on every ISP. That makes H1, H3 and R1 contradicted, and it provides the within-market covariation needed for H2. C2 alone still leaves R2 association-only, because E5 says 5.2 was global and C2 gives no mechanism and does not rule out self-selection of the TV 5.1 holdouts. C3 is the only item that shows the rollout gate (Kestria 100%, others 0%, which refutes E5), the ABR mechanism, the CDN-independent replication on Corvane (dogfood 5.7%), the remote-config revert path and the 20 Nov expansion date. Together these settle R2 as causal, A2 as preferred and SUFF as sufficient. C3 alone leaves H1 unknown because the two Kestria-only changes stay confounded. Pairs without C2 lose H1, H3 and R1. Pairs without C3 lose R2, A2 and SUFF.\n\nDistractors were kept non-decisive. C1 comes from the vendor, an interested party, and gives only a monthly average cache-hit figure. C5 covers one ISP and is ambiguous. C9 measures segment fetches, not playback. C6 has no quality option, so R3 stays association-only across the whole catalogue. A1 is harmful under the supported hypothesis, and every rival is contradicted. A3 would help if buffering-driven churn were confirmed and costs only a one-off if not. A5 disables a protective alert under any hypothesis. A4 is useful, but it is not the immediate fix."
+  "authoringNotes": "Initial file only: the CDN looks like the sole Kestria-specific change (E2, E1, E3). The VP and the engineer both blame it (E4, E6). E5 says TV 5.2 went to every market with no regressions, so with no other evidence an analyst would mark H1 supported, H2 contradicted, R1 causal or association-only, R2 contradicted or unknown, and A1 preferred. H3 is unknown at that point. H4 and R4 are already contradicted by timing: onset on 9 Oct, launch on 11 Oct, and no step on match nights in E3. R3 is association-only because of the 1 Oct price rise named in E4.\n\nWhat each read settles that no other item does. C2 is the only item that separates the CDN from the client: everything runs through Tessaline, and only TV 5.2 is elevated, on every ISP. That makes H1, H3 and R1 contradicted, and it provides the within-market covariation needed for H2. C2 also carries the data-engineering note that dashboard and alert breakdowns depend on a Q1 2027 pipeline rebuild, which settles A4 as acceptable rather than preferred. C2 alone still leaves R2 association-only, because E5 says 5.2 was global and C2 gives no mechanism and does not rule out self-selection of the TV 5.1 holdouts. C3 is the only item that shows the rollout gate (Kestria 100%, others 0%, which refutes E5), the ABR mechanism, the CDN-independent replication on Corvane (dogfood 5.7%), the remote-config revert path and the 20 Nov expansion date. Together these settle R2 as causal, A2 as preferred and SUFF as sufficient. C3 alone leaves H1 unknown because the two Kestria-only changes stay confounded. Pairs without C2 lose H1, H3, R1 and A4. Pairs without C3 lose R2, A2 and SUFF.\n\nRevision note: after review, a sentence was added to C2 saying that adding the breakdowns to the dashboard and alerts requires a Q1 2027 pipeline rebuild (about six weeks). A4 therefore cannot affect the current incident or the 20 Nov decision, and ad hoc queries already cover the immediate need. That makes \u0027acceptable\u0027 the only defensible key, and A2 remains the single preferred action. The Q7 ruling needed no change: E4 already places the cancellation rise in October, the same month as the rebuffering in E3.\n\nDistractors were kept non-decisive. C1 comes from the vendor, an interested party, and gives only a monthly average cache-hit figure. C5 covers one ISP and is ambiguous. C9 measures segment fetches, not playback. C6 has no quality option, so R3 stays association-only across the whole catalogue. A1 is harmful under the supported hypothesis, and every rival is contradicted. A3 would help if buffering-driven churn were confirmed and costs only a one-off if not. A5 disables a protective alert under any hypothesis."
 }
