@@ -21,3 +21,4 @@
 | WI-0012 | WI-0012 | complete |  |  |
 | WI-0013 | EDF-IMPROVEMENT-2026-001: EDF framework improvement research (organizational diagnosis validity, causal accuracy, interventions, efficiency, ablation, Clarity integration) | blocked | research,edf,benchmark | high |
 | WI-0014 | EDF-COMPARATIVE-2026-002: comparative framework evaluation and deep experimental validation (inventory, OD2 harder benchmark, compute/persuasiveness/adaptive-selection tracks, v0.3 component ablation) | complete | research, edf, benchmark | high |
+| WI-0015 | Apply OD2 findings to claim records: registries (EV-EDF-010/011, HY-EDF-004/008/010, new HY-EDF-011), evidence ledger, README and website claims; close EX-EDF-2026-A003 | ready |  | medium |

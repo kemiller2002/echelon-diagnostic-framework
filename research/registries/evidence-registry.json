@@ -1,6 +1,6 @@
 {
-  "version": "1.3.0",
-  "updated": "2026-09-22",
+  "version": "1.4.0",
+  "updated": "2026-11-19",
   "evidence": [
     {
       "id": "EV-EDF-001",
@@ -107,6 +107,32 @@
       ],
       "supports": "Under six synthetic held-out cases, EDF did not demonstrate a material semantic advantage over a strong matched-neutral structured prompt. Complete two-evaluator pairs showed +0.56 points versus a frozen +5 margin; post-hoc fence-strip sensitivity across all 12 pairs showed +0.21 points.",
       "limitations": "Original EX-EDF-001 required three analyzer families and remains incomplete. Three E2 outputs were schema-invalid due Markdown fences. Evaluator scores showed severe ceiling effects, especially E2. Results are bounded to these cases, models, prompts, and rubric."
+    },
+    {
+      "id": "EV-EDF-010",
+      "type": "preregistered-benchmark",
+      "title": "OD1 organizational-diagnosis benchmark (WI-0013)",
+      "paths": [
+        "research/2026-framework-improvement/experiments/baseline-results.md",
+        "research/2026-framework-improvement/experiments/scored/heldout/runs.csv",
+        "research/2026-framework-improvement/experiments/sequential-results.md"
+      ],
+      "supports": "On 12 held-out synthetic organizational cases with deterministic candidate-state scoring, EDF v0.3 did not materially outperform a general-purpose prompt (B - A +1.4 [-0.7, 3.1] Sonnet; -1.6 [-3.9, 0.9] Haiku) or Kepner-Tregoe + Nadler-Tushman (C - B -0.6 [-2.0, 0.7]). EDF exceeded a matched neutral protocol by +2.8 [0.8, 5.3] (Sonnet), below the preregistered +5 margin, because the neutral protocol underperformed the general prompt. EDF-0 vs full EDF was -2.1 [-3.9, -0.5] (non-inferiority inconclusive). Held-out scores were reproduced byte-identically from raw outputs on 2026-11-17.",
+      "limitations": "Claude-only analyzers, authors and graders; synthetic cases; recognition format near ceiling (condition means 87-96); 12 held-out cases, mostly one trial."
+    },
+    {
+      "id": "EV-EDF-011",
+      "type": "preregistered-benchmark",
+      "title": "OD2 hard diagnostic benchmark with evidence acquisition, component ablation, compute, persuasiveness and selection tracks (WI-0014)",
+      "paths": [
+        "research/2026-comparative-program/REPORT.md",
+        "research/2026-comparative-program/experiments/preregistration-OD2.md",
+        "research/2026-comparative-program/experiments/scored/heldout/verdicts.md",
+        "research/2026-comparative-program/experiments/scored/heldout-sensitivity/verdicts.md",
+        "research/2026-comparative-program/experiments/scored/heldout/tracks.md"
+      ],
+      "supports": "On 24 reviewed held-out synthetic cases (organizational, technical, cross-domain; 2-item evidence budget; 1,080 isolated runs with exact model ids), EDF v0.3 was practically equivalent (95% CI within +/-3) to a general-purpose prompt (+0.19 [-1.21, 1.45]), Kepner-Tregoe, and KT + ACH on Claude Sonnet 5.5 in the preregistered sensitivity analysis; the primary analysis was also null but wider. Removing System Context, Origin Network + Propagation, Control Points + Ranking, Diagnostic Sufficiency, or ordering was practically equivalent to the full specification; removing evidence evaluation was inconclusive. Decision gates, a value-of-information rule and an orchestration variant added nothing. A general prompt at higher reasoning effort beat EDF at medium effort by +4.42 [0.41, 9.36] at lower cost. Blind Claude-rated briefs showed no persuasion inflation. On Haiku 5.5, EDF scored -3.31 [-5.57, -1.42] versus Kepner-Tregoe.",
+      "limitations": "Claude-family models authored, reviewed, analyzed and rated; synthetic cases; recognition format with item accuracy about 0.92; no matched-neutral arm; no human analysts; deviations D-1 to D-3 disclosed in experiments/deviations-OD2.md."
     }
   ]
 }

@@ -16,4 +16,4 @@
 | UQ-11 | Duplicate or conflicting source metadata (Jun et al. 2018 vs 2019; Hulme 2023 vs 2024; unconfirmed titles) | Found after the literature merge | Primary-source verification; deduplicate `evidence/source-register.csv` | Low |
 | UQ-12 | Why does a generic long protocol hurt the smaller model so much (−7.0)? | Mechanism untested | Prompt-length and step-count dose-response experiment | Low |
 | UQ-13 | Clarity's value at the decision-record stage (ownership, reassessment, learning) | Not captured by item scoring | Longitudinal decision-quality study | Medium |
-| UQ-14 | A003 benchmark: Anthropic-authored cases missing, though the journal claims completion | Pre-existing repository inconsistency | Investigate and correct the A003 records | Low |
+| UQ-14 | A003 benchmark: Anthropic-authored cases missing, though the journal claims completion | Pre-existing repository inconsistency | **Closed 2026-11-19 (WI-0015):** A003 closed without execution; the gap is recorded in the A003 record rather than repaired | Low |
