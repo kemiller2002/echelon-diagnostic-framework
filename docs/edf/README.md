@@ -30,7 +30,7 @@ The current research record does **not** establish:
 - causal improvement from System Context;
 - better control points than matched alternatives;
 - evidence-sensitive updating;
-- superiority to natural analysis or matched neutral structure;
+- superiority to natural analysis or matched neutral structure (three preregistered benchmarks found none for language-model analyzers; see HY-EDF-011);
 - validated quantitative confidence;
 - routine-use speed or learnability.
 
@@ -45,7 +45,7 @@ Current claim state is maintained in:
 
 Complex outcomes can involve interacting contributors, and the most useful intervention point may differ from the nearest manifestation or earliest origin.
 
-EDF makes that model explicit. Whether EDF improves performance over simpler structured alternatives is an open empirical question, not an established fact.
+EDF makes that model explicit. For language-model analyzers, controlled benchmarks found that EDF does not improve diagnostic performance over simpler prompts or established methods. Whether it helps human analysts state, review, or challenge diagnoses is an open empirical question.
 
 ## v0.3 Workflow
 

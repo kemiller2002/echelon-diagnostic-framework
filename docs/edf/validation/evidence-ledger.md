@@ -1,7 +1,7 @@
 # Evidence Ledger
 
 Status: Current human-readable projection
-Updated: 2026-09-21
+Updated: 2026-11-19
 
 Purpose:
 Track the current evidence state of important EDF hypotheses without allowing historical summaries to outrank later contradictory evidence.
@@ -19,13 +19,14 @@ Canonical machine-readable sources:
 | HY-EDF-001 - EDF can organize failure and success narratives through a common field structure | Internal demonstration | Medium-High | Repository-authored cases repeatedly populate the same diagnostic grammar | Shared research process; descriptive applicability is not explanatory validity |
 | HY-EDF-002 - System Context improves semantic scope agreement beyond matched headings | Suggestive | Low-Medium | R1 cases are more explicitly scoped | No randomized ablation or matched-heading control |
 | HY-EDF-003 - VP v1.1 improves cross-executor reproducibility | Unsupported | Low | v1.1 changed the protocol and produced internally similar structures | No controlled v1.0 comparison and no independent executor study |
-| HY-EDF-004 - EDF improves control-point quality versus natural analysis | Suggestive | Low | Current cases often surface system-level controls | No blinded baseline scoring or intervention utility key |
+| HY-EDF-004 - EDF improves control-point quality versus natural analysis | Unsupported | Low | Authored cases often surface system-level controls; in blinded benchmarks EDF did not improve action accuracy (OD1), and removing Control Points + Ranking was practically equivalent (OD2) | Claude analyzers, synthetic cases; no human or real-intervention outcome |
 | HY-EDF-005 - EDF produces materially comparable semantic diagnoses under independent executor conditions | Unsupported | Low | No completed evidence | Independent-human and controlled multi-model studies are absent; historical R1 execution is also not fully reconstructable |
 | HY-EDF-006 - EDF updates proportionally as evidence changes | Unsupported | Low | Architecture and evidence packages exist | LRC-001 has not produced controlled completed runs |
 | HY-EDF-007 - Origin Network and Propagation are usefully distinct | Suggestive | Medium | One ablation plus repeated authored usage | Single direct ablation; no independent replication |
-| HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Open / unsupported | Low | EX-EDF-001 is preregistered and its experiment artifacts are frozen; no performance result exists | Confirmatory execution is blocked until real independent analyzer/evaluator bindings are frozen |
+| HY-EDF-008 - EDF adds semantic value beyond matched neutral structure | Unsupported | Low | EX-EDF-001 (two families) +0.56 [0.00, 1.39] and OD1 +2.8 [0.8, 5.3], both below the preregistered +5 margin | Ceiling effects; OD2 had no neutral arm |
 | HY-EDF-009 - Diagnostic topologies generalize | Suggestive | Low | Recurring patterns appear in selected cases | No held-out coding or external replication |
-| HY-EDF-010 - EDF-0 is fast and learnable for routine use | Unsupported | Low | Teaching examples show intended use only | No time-on-task or usability evidence |
+| HY-EDF-010 - EDF-0 is fast and learnable for routine use | Unsupported | Low | Teaching examples show intended use only; for Claude analyzers EDF-0 was -2.1 [-3.9, -0.5] versus full EDF (OD1) | No time-on-task or usability evidence |
+| HY-EDF-011 - EDF v0.3 improves language-model diagnosis over a general prompt or an established method | **Contradicted** | Low | Three preregistered benchmarks without material advantage; OD2 practical equivalence vs general prompt (+0.19 [-1.21, 1.45]), Kepner-Tregoe and KT + ACH; components removable; higher reasoning effort beat EDF at lower cost; Haiku: EDF -3.3 [-5.6, -1.4] vs KT | Claude-family analyzers, synthetic recognition-format cases; says nothing about human analysts |
 
 ## Interpretation Rules
 
@@ -62,14 +63,10 @@ A claim may move to a stronger state only when the new REP identifies:
 
 ## Next Evidence Priority
 
-The highest-information computational test is now implemented as `research/experiments/EX-EDF-001/`, based on the benchmark proposed in `research/analysis/non-human-next-experiments.md`.
+EX-EDF-001, OD1 (`research/2026-framework-improvement/`) and OD2 (`research/2026-comparative-program/`) have been executed. Their conclusions are recorded as EV-EDF-009, EV-EDF-010 and EV-EDF-011. The highest-information open tests are now:
 
-It must compare:
+1. **Human analysts** (UQ-02): does EDF help people reach, communicate, review or challenge a diagnosis? Measure reviewer error detection, inter-analyst agreement, and time to an actionable finding, with and without EDF.
+2. **Cross-provider replication** (UQ-01) of OD2 with non-Claude analyzers.
+3. **Open-generation** cases without a candidate list, to break the recognition-format ceiling.
 
-- natural analysis;
-- matched neutral structure;
-- EDF;
-
-with blind evaluation, multiple model families, immutable run bundles, negative-run retention, and cost instrumentation.
-
-Its existence is recorded as EV-EDF-008, which is procedural evidence only. HY-EDF-008 remains unsupported until the preregistered analyzer and evaluator runs are completed and reviewed.
+EX-EDF-2026-A003 is closed without execution; see `research/experiments/EX-EDF-2026-A003--construct-specific-stress-benchmark.md`.

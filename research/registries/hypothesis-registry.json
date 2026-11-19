@@ -1,6 +1,6 @@
 {
-  "version": "1.3.0",
-  "updated": "2026-09-22",
+  "version": "1.4.0",
+  "updated": "2026-11-19",
   "policy": "docs/framework-engineering/claim-and-confidence-policy.md",
   "hypotheses": [
     {
@@ -43,14 +43,16 @@
     {
       "id": "HY-EDF-004",
       "statement": "EDF improves control-point quality relative to natural analysis.",
-      "state": "suggestive",
+      "state": "unsupported",
       "confidence": "Low",
-      "publicState": "suggestive",
+      "publicState": "unsupported",
       "evidence": [
         "EV-EDF-001",
-        "EV-EDF-006"
+        "EV-EDF-006",
+        "EV-EDF-010",
+        "EV-EDF-011"
       ],
-      "boundary": "Current evidence is narrative and not scored against a blinded baseline."
+      "boundary": "Authored cases often surface system-level controls (internal demonstration). In two blinded, deterministically scored benchmarks, EDF did not improve action accuracy over a general prompt (OD1), and removing the Control Points and Ranking steps was practically equivalent to full EDF (OD2, +0.54 [-0.82, 1.97]). Bounded to Claude analyzers on synthetic recognition-format cases; human analysts and real intervention outcomes are untested."
     },
     {
       "id": "HY-EDF-005",
@@ -92,13 +94,14 @@
       "id": "HY-EDF-008",
       "statement": "EDF adds semantic value beyond a matched neutral structured prompt.",
       "state": "unsupported",
-      "confidence": "Low-Medium",
+      "confidence": "Low",
       "publicState": "unsupported",
       "evidence": [
         "EV-EDF-006",
-        "EV-EDF-009"
+        "EV-EDF-009",
+        "EV-EDF-010"
       ],
-      "boundary": "A blinded two-family benchmark did not show material incremental semantic value beyond a strong matched-neutral structured prompt on six synthetic cases. The registered two-family primary analysis was incomplete because 3 E2 responses were schema-invalid; complete-pair and post-hoc formatting sensitivities were both far below the frozen +5 margin. Severe evaluator ceiling effects limit discrimination. This does not rule out EDF value on harder cases or value from individual EDF constructs."
+      "boundary": "Two preregistered tests compared EDF with a matched neutral structured prompt. EX-EDF-001 (two families, six cases) found +0.56 [0.00, 1.39] against a frozen +5 margin; OD1 (Claude, 12 cases) found +2.8 [0.8, 5.3], below margin, driven by the neutral protocol underperforming a general prompt rather than EDF exceeding it. Neither met the promotion rule. OD2 had no neutral arm, but its component ablations were practically equivalent to the full specification. Ceiling effects limit all three; harder, open-generation, cross-provider and human tests remain."
     },
     {
       "id": "HY-EDF-009",
@@ -119,9 +122,10 @@
       "confidence": "Low",
       "publicState": "open",
       "evidence": [
-        "EV-EDF-005"
+        "EV-EDF-005",
+        "EV-EDF-010"
       ],
-      "boundary": "No time-on-task, learning-curve, or independent usability study has been completed."
+      "boundary": "No time-on-task, learning-curve or human usability evidence exists. For Claude analyzers, OD1 found EDF-0 -2.1 [-3.9, -0.5] versus full EDF v0.3, so non-inferiority was inconclusive. Model performance is not evidence of human speed or learnability."
     },
     {
       "id": "HY-EDF-2026-A011",
@@ -176,6 +180,19 @@
       "publicState": "open",
       "evidence": [],
       "boundary": "Preregistered for EX-EDF-2026-A003. No analyzer run has occurred; this is a pending construct-specific hypothesis."
+    },
+    {
+      "id": "HY-EDF-011",
+      "statement": "Applying EDF v0.3 as a reasoning procedure improves language-model diagnostic outcomes over a general-purpose prompt or an established diagnostic method.",
+      "state": "contradicted",
+      "confidence": "Low",
+      "publicState": "unsupported",
+      "evidence": [
+        "EV-EDF-009",
+        "EV-EDF-010",
+        "EV-EDF-011"
+      ],
+      "boundary": "Three preregistered benchmarks found no material advantage, and OD2 established practical equivalence (CI within +/-3 points) against a general prompt, Kepner-Tregoe and KT + ACH on Claude Sonnet 5.5; on Haiku 5.5 EDF underperformed Kepner-Tregoe. Increasing reasoning effort improved results more, at lower cost. Bounded to Claude-family analyzers (plus GPT-5.6 Sol in EX-EDF-001), synthetic cases and recognition-format scoring near ceiling. It does not address EDF as a format for human analysts, reviewers or communication."
     }
   ]
 }
